@@ -1,0 +1,31 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+
+parameters:
+
+php:
+	date.timezone: Europe/Prague
+	# zlib.output_compression: yes
+
+nette:
+	application:
+		errorPresenter: Error
+		mapping:
+			*: App\*Module\*Presenter
+
+	session:
+		expiration: 14 days
+
+services:
+	authenticator: Nette\Security\SimpleAuthenticator([martin: martin])
+	#authenticator: Model\GoogleAuth
+	google: Model\Google([id: %google.id%, secret: %google.secret%])
+	routerFactory: App\RouterFactory
+	router: @routerFactory::createRouter
+	- Model\Posts
+
+factories:

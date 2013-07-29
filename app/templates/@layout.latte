@@ -1,0 +1,86 @@
+{block |strip|trim}
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="{$robots}" n:ifset="$robots">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>{#title|striptags}BLOG{/#} | Martin Zlámal</title>
+
+	{control css}
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	{#head}{/#}
+	{#scripts}{control js}
+	{/#}
+</head>
+
+<body>
+	<script> document.body.className+=' js' </script>
+	<div class="container shadow hidden-print">
+		<div class="row">
+			<div class="col-lg-2 hidden-sm">
+				<a n:href="Homepage:">{!$qr}</a>
+				{*<a n:href="Homepage:"><div id="qr"></div></a>*}
+			</div>
+			<div class="col-lg-7">
+				<h1><a n:href="Homepage:">Martin <span>Zlá</span><span>mal</span></a></h1>
+			</div>
+			<div class="col-lg-3">
+				<script>
+					(function() {
+						var cx = '013792301403643983052:kf2qka8aiiq';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+								'//www.google.com/cse/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:search></gcse:search>
+				<div class="text-right">
+					<a href="https://plus.google.com/u/0/108269453578187886435?rel=author" target="_blank">G+</a>
+					&middot;
+					<a href="https://bitbucket.org/mrtnzlml" target="_blank">Bitbucket</a>
+					&middot;
+					<a n:href=":Homepage:rss" target="_blank">RSS</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container hidden-print main-nav" style="background:transparent;padding:0">
+		<ul class="nav nav-pills">
+			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:">home</a></li>
+			<li n:class="$presenter->isLinkCurrent('Single:about') ? active"><a n:href="Single:about">about</a></li>
+			<li n:class="$presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
+			<li n:class="$presenter->isLinkCurrent('Demo:') ? active"><a n:href="Demo:">demo</a></li>
+			{if $user->isLoggedIn()}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
+		</ul>
+	</div>
+
+	<div class="container shadow" style="padding: 20px 30px;">
+		<div n:foreach="$flashes as $flash" class="alert {$flash->type}">{$flash->message}</div>
+		{include #content}
+	</div>
+
+	<div class="container text-right hidden-print" style="background:transparent">
+		&copy; 2012 - <?php echo date("Y"); ?>&nbsp;<a n:href="Homepage:">Martin Zlámal</a> | {if $user->isLoggedIn()}<a href="{link Sign:out}">Odhlásit</a>{else}<a n:href="Sign:in" data-toggle="modal">Login</a>{/if}<br>
+		<a href="http://www.fresh-hosting.cz/" target="_blank">www.fresh-hosting.cz</a>
+	</div>
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39142238-1']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+</html>
+{/block}

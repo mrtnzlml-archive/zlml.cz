@@ -1,0 +1,64 @@
+{#content}
+
+<ul class="breadcrumb hidden-print">
+	<li><a n:href="Homepage:">home</a></li>
+	<li class="active" n:block="title">{$post->title}</li>
+</ul>
+
+<div class="page-header">
+	<h2>
+		{$post->title}
+		<small>{$post->date|date:'Y-m-d'}</small>
+		<div class="pull-right hidden-print">
+			<small>
+				<a href="javascript:window.print()">tisk</a>
+				<a n:href=":Admin:default $post->id" n:if="$user->isLoggedIn()">edit</a>
+			</small>
+		</div>
+	</h2>
+	{foreach $post->related('posts_tags') as $post_tag}
+		<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+	{/foreach}
+</div>
+
+<div class="row">
+	<div class="col-lg-10">
+		{!$body}
+	</div>
+	<div class="col-lg-2">
+		<canvas id="outline" class="visible-lg" width="150" height="400"></canvas>
+	</div>
+</div>
+
+<span class="badge badge-important hidden-print"><a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a></span>
+<span class="badge badge-info hidden-print"><a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a></span>
+<span class="badge badge-success hidden-print"><a href="http://twitter.com/share?text={$body|texy|striptags|truncate:80} {$url}&url={$url}" target="_blank">Twitter</a></span>
+
+<hr class="hidden-print">
+<h4 class="hidden-print">Mohlo by vás také zajímat:</h4>
+
+<div class="row hidden-print">
+	<div class="col-lg-4" n:foreach="$next as $n">
+		<div class="thumbnail" style="margin-bottom: 10px;">
+			<div class="caption">
+				<a n:href=":Single:article $n->id"><div class="caption">
+					<h3>{$n->title|truncate:30}</h3>
+					{foreach $n->related('posts_tags') as $post_tag}
+						<span class="label" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+					{/foreach}
+					<p>{$n->body|texy|striptags|truncate:300}</p>
+				</div></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="disqus_thread" class="hidden-print" style="padding: 20px 0"></div>
+<script type="text/javascript">
+var disqus_shortname = 'mrtnzlml';
+(function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+{/#}

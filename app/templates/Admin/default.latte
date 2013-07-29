@@ -1,0 +1,66 @@
+{var $robots = 'noindex'}
+{#content}
+
+<div class="row">
+	<div class="col-lg-3">
+		{include menu.latte}
+		<div class="well" style="max-width: 340px; padding: 8px 0;">
+			{foreach $tags as $tag}
+				<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
+			{/foreach}
+		</div>
+	</div>
+	<div class="col-lg-9">
+		{ifset $editace}
+			<h2>Editovat článek ({$editace})</h2>
+		{else}
+			<h2>Přidat nový článek</h2>
+		{/ifset}
+		{control newPost}
+		<script>
+			$(function(){
+				var editor = CodeMirror.fromTextArea(document.getElementById("editor"));
+				var timer = null;
+				$.get({link update!},{'title': $('.title').val(), 'body': editor.getValue(), 'tags': $('.tags').val()});
+				$('.CodeMirror, .text').live('keypress', function(e) {
+					if (timer) { window.clearTimeout(timer); }
+					timer = window.setTimeout( function() {
+						timer = null;
+						$.get({link update!},{'title': $('.title').val(), 'body': editor.getValue(), 'tags': $('.tags').val()});
+						e.preventDefault();
+					}, 1000 );
+				});
+			});
+		</script>
+	</div>
+</div>
+
+{snippet preview}
+<fieldset>
+<legend>RealTime náhled:</legend>
+	<div class="page-header">
+		<h2>
+			{ifset $title}
+				{$title}
+				<small>{date('Y-m-d')}</small>
+			{/ifset}
+		</h2>
+		{ifset $tags}
+			<span n:foreach="$tags as $tag" class="label">{$tag}&nbsp;</span>
+		{/ifset}
+	</div>
+	<div id="preview" n:if="isset($preview)">{!$preview}</div>
+</fieldset>
+{/snippet}
+
+{/#}
+
+{#scripts}
+{include #parent}
+<script src="{$basePath}/js/codemirror.js"></script>
+<script src="{$basePath}/js/jquery.nette.js"></script>
+{/#}
+
+{#head}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/codemirror.css">
+{/#}

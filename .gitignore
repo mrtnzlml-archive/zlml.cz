@@ -1,0 +1,16 @@
+log/*
+temp/*
+libs/*
+qrcache/*
+
+.idea/*
+
+!.gitignore
+!.htaccess
+!web.config
+
+app/config/config.local.neon
+
+!fshlTexy.php
+!phpqrcode.php
+!ZeminemOutputNamingConvention.php

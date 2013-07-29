@@ -1,0 +1,39 @@
+{var $robots = 'noindex'}
+{#content}
+
+<div class="row">
+	<div class="col-lg-3">
+		{include menu.latte}
+	</div>
+	<div class="col-lg-9">
+		<h2>Přehled článků</h2>
+		<table class="table">
+			{foreach $posts as $post}
+				<tr>
+					<td><a n:href=":Single:article $post->id">{$post->title}</a></td>
+					<td>
+						{foreach $post->related('posts_tags') as $post_tag}
+							<span class="label" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+						{/foreach}
+					</td>
+					<td>
+						<span style="color:grey"><abbr title="Date">{$post->date}</abbr></span><br>
+						<span style="color:grey"><abbr title="Release date">{$post->release_date}</abbr></span>
+					</td>
+					<td>
+						<div class="btn-group">
+							<a n:href=":Admin:default, id => $post->id" class="btn btn-info">Edit</a>
+							<!--<a class="btn">Hide</a>-->
+							<a n:href="delete! $post->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat článek?">Delete</a>
+						</div>
+					</td>
+				</tr>
+				<!--<tr>
+					<td colspan="4" style="border-top:none">{$post->body|texy|striptags|truncate:300}</td>
+				</tr>-->
+			{/foreach}
+		</table>
+	</div>
+</div>
+
+{/#}
