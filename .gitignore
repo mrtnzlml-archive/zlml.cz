@@ -1,7 +1,6 @@
 log/*
 temp/*
 libs/*
-qrcache/*
 
 .idea/*
 
@@ -12,5 +11,4 @@ qrcache/*
 app/config/config.local.neon
 
 !fshlTexy.php
-!phpqrcode.php
 !ZeminemOutputNamingConvention.php

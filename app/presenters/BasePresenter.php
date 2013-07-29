@@ -7,16 +7,6 @@ use Nette;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	public function beforeRender() {
-		$content = md5('http://www.zeminem.cz' . $this->link('this'));
-		$back_color = 0xFFFFFF;
-		$fore_color = 0x000000;
-		if (!is_file(__DIR__  . '/../../www/qrcache/' . $content . '.png')) { //QR se generuje pro každou URL jen jednou
-			\QRcode::png('' . $this->getHttpRequest()->getUrl(), __DIR__ . '/../../www/qrcache/' . $content . '.png', 'M', 4, 1, false, $back_color, $fore_color);
-		}
-		$this->template->qr = '<img src="' . $this->context->httpRequest->url->baseUrl . '/../qrcache/' . $content . '.png" width="100" height="100" style="margin:5px 0;" alt="QR Code">';
-	}
-
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
 		$texy = new \Texy();
@@ -51,7 +41,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$files->addFiles(array(
 			'jquery.js',
 			'bootstrap.js',
-			//'jquery.qrcode-0.6.0.js',
+			'jquery.qrcode-0.6.0.js',
 			'jquery.fracs-0.11.js',
 			'jquery.outline-0.11.js',
 			'netteForms.js',
