@@ -12,8 +12,14 @@ class SearchPresenter extends BasePresenter {
 		if($search === NULL) {
 			$this->template->error = 'Není co hledat!';
 		} else {
-			$this->template->search = $search;
-			$this->template->result = $this->posts->fulltextSearch($search);
+			$result = $this->posts->fulltextSearch($search);
+			if(count($result) == 0) {
+				$this->template->search = $search;
+				$this->template->error = 'Nic nebylo nalezeno';
+			} else {
+				$this->template->search = $search;
+				$this->template->result = $result;
+			}
 		}
 	}
 

@@ -49,7 +49,6 @@
 			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:">home</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:about') ? active"><a n:href="Single:about">about</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
-			<li n:class="$presenter->isLinkCurrent('Demo:') ? active"><a n:href="Demo:">demo</a></li>
 			{if $user->isLoggedIn()}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
 		</ul>
 	</div>

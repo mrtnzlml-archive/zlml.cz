@@ -189,7 +189,8 @@ class Posts extends Nette\Object {
 
 		return $this->sf->table('mirror_posts')
 			->where("MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where", $search)
-			->order("5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC", $search, $search);
+			->order("5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC", $search, $search)
+			->limit(50);
 	}
 
 	// Routers:

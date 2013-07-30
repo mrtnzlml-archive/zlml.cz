@@ -14,14 +14,15 @@ $(function(){
 		size: 107
 	});
 
-	$("#outline").fracs("outline", {
+	$("#outline, #outline2").fracs("outline", {
 		crop: true,
 		styles: [
 			{selector:"p",fillStyle:"rgb(230,230,230)"},
 			{selector:"pre",fillStyle:"rgb(200,200,200)"},
 			{selector:"a,h1,h2,h3,h4,h5,h6",fillStyle:"rgb(104,169,255)"},
 			{selector:"canvas",fillStyle:"rgb(108,196,46)"},
-			{selector:"blockquote, .thumbnail, #disqus_thread",fillStyle:"rgb(221,75,57)"}
+			{selector:"blockquote,.thumbnail,#disqus_thread",fillStyle:"rgb(221,75,57)"},
+			{selector:"table",fillStyle:"rgb(200,200,30)"}
 
 		],
 		viewportStyle:{fillStyle:"rgba(104,169,255,0.2)"},
@@ -33,13 +34,20 @@ $(function(){
 	}
 	$('#outline').affix({
 		offset: {
-			top: 350,
+			top: 351,
 			bottom: function () {
 				return (this.bottom = fixAffix);
 			}
 		}
 	})
 	$(window).scroll(fixAffix);
+
+	$('#outline2').affix({
+		offset: {
+			top: 264,
+			bottom: 100
+		}
+	})
 
 	var disqus_div = $("#disqus_thread");
 	if (disqus_div.size() > 0 ) {
