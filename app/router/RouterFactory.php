@@ -24,6 +24,7 @@ class RouterFactory {
 	public function createRouter() {
 		$router = new RouteList();
 		$router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
+		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
 		$router[] = new Route('[<paginator-page [0-9]+>]', 'Homepage:default');
 
 		//TODO: toto není moc OK (ale funkční)
