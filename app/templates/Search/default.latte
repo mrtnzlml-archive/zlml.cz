@@ -20,8 +20,7 @@
 					{/foreach*}
 				</h4>
 				<p>
-					{var highlight = strtoupper($search)}
-					{!$r->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:550|replaceRE:"#$search#i":"<span class='highlight'>$highlight</span>"}
+					{!$r->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:550|replaceRE:"#$search#i":"<span class='highlight'>$search</span>"}
 					&nbsp;<a n:href=":Single:article $r->id">přečtěte si více</a>
 				</p>
 			</div>

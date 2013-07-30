@@ -175,17 +175,16 @@ class Posts extends Nette\Object {
 	}
 
 	public function fulltextSearch($search) {
-		//$search = strtolower($search);
-
 		$where = "";
 		$ft_min_word_len = 4;
 		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
 		foreach ($matches[0] as $part) {
 			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
-				$regexp = "REGEXP '[[:<:]]" . addslashes($part) . "[[:>:]]'";
+				$regexp = "REGEXP '[[:<:]]" . addslashes(strtoupper($part)) . "[[:>:]]'";
 				$where .= " OR (title $regexp OR body $regexp)";
 			}
 		}
+		//TODO:
 		//$where .= " OR tag LIKE $search";
 
 		return $this->sf->table('mirror_posts')
