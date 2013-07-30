@@ -186,6 +186,7 @@ class Posts extends Nette\Object {
 				$where .= " OR (title $regexp OR body $regexp)";
 			}
 		}
+		//$where .= " OR tag LIKE $search";
 
 		return $this->sf->table('mirror_posts')
 			->where("MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where", $search)

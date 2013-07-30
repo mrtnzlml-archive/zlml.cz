@@ -1,6 +1,6 @@
 {#content}
 
-<ul class="breadcrumb hidden-print">
+<ul class="breadcrumb hidden-print hidden-sm">
 	<li><a n:href="Homepage:">home</a></li>
 	<li class="active" n:block="title">{$post->title}</li>
 </ul>
@@ -8,10 +8,10 @@
 <div class="page-header">
 	<h2>
 		{$post->title}
-		<small>{$post->date|date:'Y-m-d'}</small>
+		<small style="white-space:nowrap">{$post->date|date:'Y-m-d'}</small>
 		<div class="pull-right hidden-print">
 			<small>
-				<a href="javascript:window.print()">tisk</a>
+				<a href="javascript:window.print()" class="visible-lg">tisk&nbsp;<span class="glyphicon glyphicon-print"></span></a>
 				<a n:href=":Admin:default $post->id" n:if="$user->isLoggedIn()">edit</a>
 			</small>
 		</div>
@@ -21,7 +21,7 @@
 	{/foreach}
 </div>
 
-<div class="row">
+<div class="row" style="margin-bottom: 10px">
 	<div class="col-lg-10">
 		{!$body}
 	</div>
@@ -30,31 +30,44 @@
 	</div>
 </div>
 
-<span class="badge badge-important hidden-print"><a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a></span>
-<span class="badge badge-info hidden-print"><a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a></span>
-<span class="badge badge-success hidden-print"><a href="http://twitter.com/share?text={$body|texy|striptags|truncate:80} {$url}&url={$url}" target="_blank">Twitter</a></span>
+<div class="share hidden-print">
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-share-alt"></span>
+		<a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a>
+	</span>
+	<span class="label label-info">
+		<span class="glyphicon glyphicon-share-alt"></span>
+		<a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a>
+	</span>
+	<span class="label label-success">
+		<span class="glyphicon glyphicon-share-alt"></span>
+		<a href="http://twitter.com/share?text={$post->title}&url={$url}" target="_blank">Twitter</a>
+	</span>
+</div>
 
-<hr class="hidden-print load_disqus">
-<h4 class="hidden-print">Mohlo by vás také zajímat:</h4>
+<div id="bottom">
+	<hr class="hidden-print load_disqus">
+	<h4 class="hidden-print">Mohlo by vás také zajímat:</h4>
 
-<div class="row hidden-print">
-	<div class="col-lg-4" n:foreach="$next as $n">
-		<div class="thumbnail" style="margin-bottom: 10px;">
-			<div class="caption">
-				<a n:href=":Single:article $n->id"><div class="caption">
-					<h3>{$n->title|truncate:30}</h3>
-					{foreach $n->related('posts_tags') as $post_tag}
-						<span class="label" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
-					{/foreach}
-					<p>{$n->body|texy|striptags|truncate:300}</p>
-				</div></a>
+	<div class="row hidden-print">
+		<div class="col-lg-4" n:foreach="$next as $n">
+			<div class="thumbnail" style="margin-bottom: 10px;">
+				<div class="caption">
+					<a n:href=":Single:article $n->id"><div class="caption">
+						<h3>{$n->title|truncate:30}</h3>
+						{foreach $n->related('posts_tags') as $post_tag}
+							<span class="label" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+						{/foreach}
+						<p>{$n->body|texy|striptags|truncate:300}</p>
+					</div></a>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div id="disqus_thread" class="hidden-print" style="padding: 20px 0" data-disqus-shortname="mrtnzlml"></div>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	<div id="disqus_thread" class="hidden-print" style="padding: 20px 0" data-disqus-shortname="mrtnzlml"></div>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
 
 {/#}

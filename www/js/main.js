@@ -9,7 +9,7 @@ $(function(){
     });
 
 	$('#qr').qrcode({
-		text: 'http://www.zeminem.cz/',
+		text: document.URL,
 		radius: 0.5,
 		size: 107
 	});
@@ -28,14 +28,18 @@ $(function(){
 		viewportDragStyle:{fillStyle:"rgba(104,169,255,0.5)"}
 	});
 
+	var fixAffix = function() {
+		return $('#bottom').outerHeight(true) + $('.footer').outerHeight(true) + 40;
+	}
 	$('#outline').affix({
 		offset: {
 			top: 350,
 			bottom: function () {
-				return (this.bottom = $('#disqus_thread').outerHeight(true) + 800)
+				return (this.bottom = fixAffix);
 			}
 		}
 	})
+	$(window).scroll(fixAffix);
 
 	var disqus_div = $("#disqus_thread");
 	if (disqus_div.size() > 0 ) {

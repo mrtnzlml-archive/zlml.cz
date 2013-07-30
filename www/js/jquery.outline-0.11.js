@@ -191,7 +191,7 @@
 			},
 			init = function () {
 
-				$canvas.css('cursor', 'pointer').mousedown(onDragStart);
+				$canvas.css('cursor', 'pointer');//.mousedown(onDragStart);
 				$viewport.on('load resize scroll', draw);
 				draw();
 			};
