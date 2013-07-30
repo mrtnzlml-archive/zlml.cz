@@ -23,7 +23,7 @@ class HomepagePresenter extends BasePresenter {
 	}
 
 	public function renderRss() {
-		$this->template->posts = $this->posts->getAllPosts();
+		$this->template->posts = $this->posts->getAllPosts()->order('date DESC')->limit(50);
 	}
 
 }

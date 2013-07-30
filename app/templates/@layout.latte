@@ -26,20 +26,14 @@
 				<h1><a n:href="Homepage:">Martin <span>Zlá</span><span>mal</span></a></h1>
 			</div>
 			<div class="col-lg-3">
-				<script>
-					(function() {
-						var cx = '013792301403643983052:kf2qka8aiiq';
-						var gcse = document.createElement('script');
-						gcse.type = 'text/javascript';
-						gcse.async = true;
-						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-								'//www.google.com/cse/cse.js?cx=' + cx;
-						var s = document.getElementsByTagName('script')[0];
-						s.parentNode.insertBefore(gcse, s);
-					})();
-				</script>
-				<gcse:search></gcse:search>
-				<div class="text-right">
+				{form search, class => 'form-inline'}
+					<div class="row">
+						<div class="col-lg-12" style="margin-top: 10px;">
+							<input n:input="search" type="search" class="form-control" placeholder="Search">
+						</div>
+					</div>
+				{/form}
+				<div class="text-right" style="margin-top: 20px;">
 					<a href="https://plus.google.com/u/0/108269453578187886435?rel=author" target="_blank">G+</a>
 					&middot;
 					<a href="https://bitbucket.org/mrtnzlml" target="_blank">Bitbucket</a>

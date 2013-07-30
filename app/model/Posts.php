@@ -174,6 +174,24 @@ class Posts extends Nette\Object {
 		$this->sf->table('tags')->where('id = ?', $tag_id)->delete();
 	}
 
+	public function fulltextSearch($search) {
+		//$search = strtolower($search);
+
+		$where = "";
+		$ft_min_word_len = 4;
+		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
+		foreach ($matches[0] as $part) {
+			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
+				$regexp = "REGEXP '[[:<:]]" . addslashes($part) . "[[:>:]]'";
+				$where .= " OR (title $regexp OR body $regexp)";
+			}
+		}
+
+		return $this->sf->table('mirror_posts')
+			->where("MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where", $search)
+			->order("5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC", $search, $search);
+	}
+
 	// Routers:
 	//TODO: release_date bug => 404!
 	//Pokud někdo přistoupí na adresu zatím nezveřejněného, tak by to mělo vrátit 404

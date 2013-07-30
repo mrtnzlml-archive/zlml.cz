@@ -40,6 +40,7 @@ class RouterFactory {
 			),
 		));
 
+		$router[] = new Route('search[/<search>]', 'Search:default');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}

@@ -34,7 +34,7 @@
 <span class="badge badge-info hidden-print"><a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a></span>
 <span class="badge badge-success hidden-print"><a href="http://twitter.com/share?text={$body|texy|striptags|truncate:80} {$url}&url={$url}" target="_blank">Twitter</a></span>
 
-<hr class="hidden-print">
+<hr class="hidden-print load_disqus">
 <h4 class="hidden-print">Mohlo by vás také zajímat:</h4>
 
 <div class="row hidden-print">
@@ -53,11 +53,7 @@
 	</div>
 </div>
 
-<div id="disqus_thread" class="hidden-print" style="padding: 20px 0"></div>
-<script type="text/javascript">
-var disqus_shortname = 'mrtnzlml';
-(function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();
-</script>
+<div id="disqus_thread" class="hidden-print" style="padding: 20px 0" data-disqus-shortname="mrtnzlml"></div>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 

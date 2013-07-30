@@ -2,7 +2,7 @@
 
 {#content}
 
-<ul class="breadcrumb">
+<ul class="breadcrumb hidden-print">
 	<li><a n:href="Homepage:">home</a></li>
 	<li class="active">about</li>
 </ul>
@@ -10,21 +10,26 @@
 {*<img src="http://www.gravatar.com/avatar/{md5('mrtnzlml@gmail.com')}" class="img-polaroid">*}
 
 <div class="row">
-	<div class="col-lg-3 text-right">Osobní údaje</div>
-	<div class="col-lg-9">
-		<address>
+	<div class="col-lg-3 text-right visible-lg"><h3>Osobní údaje</h3></div>
+	<div class="col-lg-3 hidden-lg"><h3>Osobní údaje</h3></div>
+	<div class="col-lg-8">
+		<address style="margin-bottom: 0px;">
 			<strong>Martin Zlámal</strong><br>
 			Brnířov 118<br>
 			345 06 Kdyně<br>
 			<abbr title="Telefon">Tel:</abbr> +420 723 764 899
 		</address>
 	</div>
+	<div class="col-lg-1 visible-lg">
+		<a href="javascript:window.print()" style="font-size:20px;font-weight:bold">tisk</a>
+	</div>
 </div>
 <hr>
 <div class="row">
-	<div class="col-lg-3 text-right">Pracovní zkušenosti</div>
+	<div class="col-lg-3 text-right visible-lg"><h3>Pracovní zkušenosti</h3></div>
+	<div class="col-lg-3 hidden-lg"><h3>Pracovní zkušenosti</h3></div>
 	<div class="col-lg-9">
-		<h4 style="margin-top:0">Endora rádce</h4>
+		<h4>Endora rádce</h4>
 		<p>Podpora uživatelů Endora.cz na fóru podpory, rozšiřování služeb Endora.cz</p>
 
 		<h4>Technolog</h4>
@@ -33,9 +38,10 @@
 </div>
 <hr>
 <div class="row">
-	<div class="col-lg-3 text-right">Vzdělání, odborná příprava a kurzy</div>
+	<div class="col-lg-3 text-right visible-lg"><h3>Vzdělání, odborná příprava a kurzy</h3></div>
+	<div class="col-lg-3 hidden-lg"><h3>Vzdělání, odborná příprava a kurzy</h3></div>
 	<div class="col-lg-9">
-		<h4 style="margin-top:0">Vývoj webových aplikací v Nette Framework</h4>
+		<h4>Vývoj webových aplikací v Nette Framework</h4>
 		<p>Institut Školení PHP, Praha 2 (Česká republika)</p>
 
 		<h4>Maturita v oboru Automatizační technika</h4>
@@ -55,7 +61,8 @@
 </div>
 <hr>
 <div class="row">
-	<div class="col-lg-3 text-right">Počítačové dovednosti</div>
+	<div class="col-lg-3 text-right visible-lg"><h3>Počítačové dovednosti</h3></div>
+	<div class="col-lg-3 hidden-lg"><h3>Počítačové dovednosti</h3></div>
 	<div class="col-lg-9">
 		<p>
 			Výborná znalost internetového prostředí, dobrá znalost PHP5, MySQL, HTML/xHTML,
