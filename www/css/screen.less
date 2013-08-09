@@ -52,6 +52,10 @@ table { margin-bottom: 10px; }
 
 /* RECORDS */
 .r { background: #0000ff; height: 5px; width: 5px; position: absolute; opacity: 0.1; }
+@media (min-width: 768px) { #record { max-width: 728px; } }
+@media (min-width: 992px) { #record { max-width: 940px; } }
+@media (min-width: 1200px) { #record { max-width: 1170px; } }
+#record { margin: 0 auto; }
 
 .shadow { -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3); -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3); box-shadow: 0 3px 7px rgba(0,0,0,0.3); }
 
@@ -75,11 +79,6 @@ table { margin-bottom: 10px; }
   .container.shadow { padding: 10px 10px !important; }
   .main-nav > .nav > li > a { padding: 10px 15px; }
 }
-
-.record { margin: 0 auto; }
-@media (min-width: 768px) { .record { max-width: 728px; } }
-@media (min-width: 992px) { .record { max-width: 940px; } }
-@media (min-width: 1200px) { .record { max-width: 1170px; } }
 
 /* Common */
 .xlang { color: #ff0000; font-weight: bold; }
