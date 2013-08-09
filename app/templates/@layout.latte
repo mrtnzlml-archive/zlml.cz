@@ -17,7 +17,8 @@
 
 <body>
 	<script> document.body.className+=' js' </script>
-	<div class="container shadow hidden-print">
+	<div class="record">
+	<div class="container shadow hidden-print"><style>.record { position: relative; }</style>
 		<div class="row">
 			<div class="col-lg-2 visible-lg">
 				<a n:href="Homepage:"><div id="qr"></div></a>
@@ -49,6 +50,7 @@
 			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:">home</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:about') ? active"><a n:href="Single:about">about</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
+			<li><a id="showRecords">RECORDS</a></li>
 			{if $user->isLoggedIn()}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
 		</ul>
 	</div>
@@ -60,7 +62,8 @@
 
 	<div class="container text-right hidden-print footer" style="background:transparent">
 		&copy; 2012 - <?php echo date("Y"); ?>&nbsp;<a n:href="Homepage:">Martin Zlámal</a> <span class="glyphicon glyphicon-qrcode"></span> | {if $user->isLoggedIn()}<a href="{link Sign:out}">Odhlásit</a>{else}<a n:href="Sign:in" data-toggle="modal">Login</a>{/if}<br>
-		<a href="http://www.fresh-hosting.cz/" target="_blank">www.fresh-hosting.cz</a>
+		<a href="http://www.fresh-hosting.cz/" target="_blank">www.fresh-hosting.cz</a> | <a href="https://bitbucket.org/mrtnzlml/www.zeminem.cz/issues" target="_blank">Našli jste chybu?</a>
+	</div>
 	</div>
 
 	<script type="text/javascript">
@@ -72,6 +75,51 @@
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
+
+
+
+		///// POKUS /////
+		var paused = null;
+		var log = new Array();
+		$(".record").mousemove(function(event) {
+			if (!paused){
+				var x = event.pageX - this.offsetLeft;
+				var y = event.pageY - this.offsetTop;
+				log[x] = y;
+				paused = setTimeout(function(){ paused=null }, 10);
+			}
+		});
+
+		setInterval(
+			function(){
+				console.log(log);
+				$.get({link insertRecord!} + "&data="+log);
+				log = new Array();
+			}, 2500
+		);
+
+		$("#showRecords").click(function() {
+			$.get({link getRecords!}, function(payload) {
+				var element = null;
+				for (var i = 0; i < payload.pom.length; i++) {
+					element = payload.pom[i];
+					for(var j = 0; j < 2000; j++) {
+						if(element[j] != undefined) {
+							var newPoint = document.createElement("div");
+							newPoint.style.background = "blue";
+							newPoint.style.height = "5px";
+							newPoint.style.width = "5px";
+							newPoint.style.position = "absolute";
+							newPoint.style.top = element[j] + "px"; //Y
+							newPoint.style.left = j + "px"; //X
+							newPoint.style.opacity = "0.1";
+							var body = document.getElementsByClassName("record")[0];
+							body.appendChild(newPoint);
+						}
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>

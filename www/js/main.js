@@ -1,5 +1,7 @@
 $(function(){
 
+	$.nette.init();
+
     $('body').on('click', '[data-confirm]', function (e) {
         var question = $(this).data('confirm');
         if (!confirm(question)) {

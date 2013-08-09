@@ -64,6 +64,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			'jquery.fracs-0.11.js',
 			'jquery.outline-0.11.js',
 			'netteForms.js',
+			'nette.ajax.js',
 			'main.js',
 		));
 		$compiler = \WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
