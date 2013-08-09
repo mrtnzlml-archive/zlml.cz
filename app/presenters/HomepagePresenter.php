@@ -30,19 +30,14 @@ class HomepagePresenter extends BasePresenter {
 		$this->template->sitemap = $this->posts->getAllPosts();
 	}
 
-	///// POKUS /////
-
-	public function handleInsertRecord($data = NULL) {
-		if($data === NULL || empty($data)) {
-			$this->sendPayload();
-		} else {
-			$data = serialize(array_filter(explode(",", $data)));
-			$data = array(
-				'data' => $data,
-			);
-			$this->records->newRecord($data);
-			$this->sendPayload();
-		}
+	///// RECORDS /////
+	public function handleInsertRecord($data) {
+		$data = serialize(explode(",", $data));
+		$data = array(
+			'data' => $data,
+		);
+		$this->records->newRecord($data);
+		$this->sendPayload();
 	}
 
 	public function handleGetRecords() {
@@ -51,7 +46,7 @@ class HomepagePresenter extends BasePresenter {
 		foreach($records as $record) {
 			$data[] = unserialize($record->data);
 		}
-		$this->payload->pom = $data;
+		$this->payload->data = $data;
 		$this->sendPayload();
 	}
 
