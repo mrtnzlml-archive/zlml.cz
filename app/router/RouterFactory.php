@@ -23,7 +23,7 @@ class RouterFactory {
 	 */
 	public function createRouter() {
 		$pages = (int)count($this->posts->getAllPosts());
-		$range = range(1, ceil($pages/10));
+		$range = range(1, ceil($pages/8));
 		$paginator = implode('|', $range);
 
 		$router = new RouteList();
