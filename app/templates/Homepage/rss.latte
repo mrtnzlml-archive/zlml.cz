@@ -3,7 +3,7 @@
 
 <rss version="2.0">
 	<channel>
-		<title>Martin Zláml [BLOG]</title>
+		<title>Martin Zlámal [BLOG]</title>
 		<link>{link //:Homepage:default}</link>
 		<description>Nejnovější články na blogu.</description>
 		<language>cs</language>
@@ -11,7 +11,7 @@
 		<item n:foreach="$posts as $post">
 			<title>{$post->title}</title>
 			<link>{link //:Single:article $post->id}</link>
-			<description>{$post->body|texy|striptags}</description>
+			<description>{$post->body|texy}</description>
 		</item>
 	</channel>
 </rss>
