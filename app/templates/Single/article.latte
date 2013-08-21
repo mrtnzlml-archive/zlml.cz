@@ -16,8 +16,10 @@
 			</small>
 		</div>
 	</h2>
-	{foreach $post->related('posts_tags') as $post_tag}
-		<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+	{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
+		<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
+			<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+		</a>
 	{/foreach}
 </div>
 

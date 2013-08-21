@@ -184,7 +184,8 @@ class Posts extends Nette\Object {
 				$where .= " OR (title $regexp OR body $regexp)";
 			}
 		}
-		//TODO:
+
+		//TODO: tag search
 		//$where .= " OR tag LIKE $search";
 
 		return $this->sf->table('mirror_posts')
@@ -194,8 +195,6 @@ class Posts extends Nette\Object {
 	}
 
 	// Routers:
-	//TODO: release_date bug => 404!
-	//Pokud někdo přistoupí na adresu zatím nezveřejněného, tak by to mělo vrátit 404
 	public function getIdByUrl($url) {
 		$result = $this->sf->table('posts');
 		foreach ($result as $row) {

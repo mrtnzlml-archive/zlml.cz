@@ -4,11 +4,8 @@ namespace App;
 
 class SinglePresenter extends BasePresenter {
 
-	private $posts;
-
-	public function __construct(\Model\Posts $posts) {
-		$this->posts = $posts;
-	}
+	/** @var \Model\Posts @inject */
+	public $posts;
 
 	public function renderArticle($id) {
 		$texy = new \fshlTexy();
@@ -17,6 +14,9 @@ class SinglePresenter extends BasePresenter {
 		$texy->headingModule->top = 3; //start at H3
 
 		$result = $this->posts->getPostByID($id);
+		if ($result === FALSE) {
+			$this->error();
+		}
 		$this->template->post = $result;
 		$this->template->body = $texy->process($result->body);
 		$this->template->url = $this->getHttpRequest()->getUrl();
@@ -27,24 +27,24 @@ class SinglePresenter extends BasePresenter {
 		// 3 - náhodný
 		$next = array();
 		$tags = iterator_to_array($this->posts->getTagsByPostID($id));
-		foreach($tags as $tag) {
+		foreach ($tags as $tag) {
 			$posts = $this->posts->getPostsByTagID($tag->tag->id, $limit = 3);
-			if(!empty($posts)) {
-				foreach($posts as $post) {
-					if($post->id == $id) {
+			if (!empty($posts)) {
+				foreach ($posts as $post) {
+					if ($post->id == $id) {
 						continue;
-					} elseif(count($next) >= 3) {
+					} elseif (count($next) >= 3) {
 						break;
 					}
 					$next[] = $post;
 				}
 			}
 		}
-		if(count($next) < 3) {
-			foreach($this->posts->getPosts(6-count($next), 1) as $post) {
-				if($post->id == $id) {
+		if (count($next) < 3) {
+			foreach ($this->posts->getPosts(6 - count($next), 1) as $post) {
+				if ($post->id == $id) {
 					continue;
-				} elseif(count($next) >= 3) {
+				} elseif (count($next) >= 3) {
 					break;
 				}
 				$next[] = $post;

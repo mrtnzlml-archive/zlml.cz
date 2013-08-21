@@ -1,0 +1,38 @@
+{var $robots = "noindex, nofollow"}
+
+{#content}
+
+<h2 n:block="title">Články s tagem{ifset $search} "{$search}"{/ifset}</h2>
+{ifset $error}
+	<div class="alert alert-danger">
+		<strong>{$error}</strong>
+	</div>
+{/ifset}
+
+{ifset $result}
+	<div class="row">
+		<div class="col-lg-10">
+			{foreach $result as $r}
+				<div class="media">
+					<div class="media-body">
+						<h4 class="media-heading">
+							<a n:href=":Single:article $r->id">{$r->title}</a>
+							{*foreach $r->related('posts_tags') as $post_tag}
+								<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+							{/foreach*}
+						</h4>
+						<p>
+							{!$r->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:550|replaceRE:"#$search#i":"<span class='highlight'>$search</span>"}
+							&nbsp;<a n:href=":Single:article $r->id">přečtěte si více</a>
+						</p>
+					</div>
+				</div>
+			{/foreach}
+		</div>
+		<div class="col-lg-2">
+			<canvas id="outline2" class="visible-lg" width="150" height="400"></canvas>
+		</div>
+	</div>
+{/ifset}
+
+{/#}

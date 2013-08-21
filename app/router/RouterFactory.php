@@ -36,7 +36,7 @@ class RouterFactory {
 			'paginator-page' => 1
 		));
 
-		//TODO: toto není moc OK (ale funkční)
+		//TODO: toto není moc OK (ale funkční) - časem předělat na slug řešení
 		$router[] = new Route('<id>', array(
 			'presenter' => 'Single',
 			'action' => 'article',
@@ -51,6 +51,7 @@ class RouterFactory {
 		));
 
 		$router[] = new Route('search[/<search>]', 'Search:default');
+		$router[] = new Route('tag[/<search>]', 'Tag:default');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}

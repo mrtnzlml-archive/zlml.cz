@@ -8,18 +8,20 @@
 		<h3><a n:href=":Single:article $post->id">{$post->title}</a></h3>
 		{if $iterator->counter == 1}
 			<p>
-				{*dump iterator_to_array($post->related('posts_tags'))*}
-				{* TODO: array_multisort *}
-				{foreach $post->related('posts_tags') as $post_tag}
-					<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+				{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
+					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
+						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+					</a>
 				{/foreach}
 				{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:600}
 				&nbsp;<a n:href=":Single:article $post->id">přečtěte si více</a>
 			</p>
 		{else}
 			<p>
-				{foreach $post->related('posts_tags') as $post_tag}
-					<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+				{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
+					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
+						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+					</a>
 				{/foreach}
 				{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:250}
 				&nbsp;<a n:href=":Single:article $post->id">přečtěte si více</a>
