@@ -21,9 +21,7 @@ nette:
 		expiration: 14 days
 
 services:
-	authenticator: Nette\Security\SimpleAuthenticator([martin: martin])
-	#authenticator: Model\GoogleAuth
-	google: Model\Google([id: %google.id%, secret: %google.secret%])
+	authenticator: Model\Authenticator
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- Model\Posts

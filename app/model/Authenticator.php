@@ -18,8 +18,9 @@ use Nette\Utils\Strings;
  * Users authenticator.
  */
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator {
-	/** @var Nette\Database\Connection @inject */
-	public $database;
+
+	/** @var Nette\Database\SelectionFactory @inject */
+	public $sf;
 
 	/**
 	 * Performs an authentication.
@@ -28,7 +29,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 	 */
 	public function authenticate(array $credentials) {
 		list($username, $password) = $credentials;
-		$row = $this->database->table('users')->where('username', $username)->fetch();
+		$row = $this->sf->table('users')->where('username', $username)->fetch();
 
 		if (!$row) {
 			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
@@ -38,8 +39,9 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 		}
 
+		$row = \Nette\ArrayHash::from($row);
 		unset($row->password);
-		return new Nette\Security\Identity($row->id, $row->role, $row->toArray());
+		return new Nette\Security\Identity($row->id, $row->role, $row);
 	}
 
 	/**
