@@ -1,10 +1,10 @@
-<div class="well" style="max-width: 340px; padding: 8px 0;">
-	<ul class="nav nav-list">
-		<li class="nav-header">Články</li>
+<div class="well sidebar-nav">
+	<ul class="nav">
+		<li>Články</li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:default')?active"><a n:href=":Admin:default, id => NULL">Přidat nový článek</a></li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:prehled')?active"><a n:href=":Admin:prehled">Přehled článků</a></li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:tags')?active"><a n:href=":Admin:tags">Přehled tagů</a></li>
-		<li class="nav-header">Statistiky</li>
+		<li>Statistiky</li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:stats')?active"><a n:href=":Admin:stats">Přehled</a></li>
 	</ul>
 </div>

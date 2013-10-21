@@ -22,8 +22,8 @@ class fshlTexy extends Texy {
 			case 'HTML': $lexer = new \FSHL\Lexer\Html(); break;
 			//HtmlOnly lexer
 			case 'JAVA': $lexer = new \FSHL\Lexer\Java(); break;
-			//Javascript
-			//Minimal
+			case 'JAVASCRIPT': $lexer = new \FSHL\Lexer\Javascript(); break;
+			case 'NEON': $lexer = new \FSHL\Lexer\Neon(); break;
 			case 'PHP': $lexer = new \FSHL\Lexer\Php(); break;
 			case 'PYTHON': $lexer = new \FSHL\Lexer\Python(); break;
 			case 'SQL': $lexer = new \FSHL\Lexer\Sql(); break;

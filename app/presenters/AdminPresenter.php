@@ -62,8 +62,7 @@ class AdminPresenter extends BasePresenter {
 		//Alternative: http://tarruda.github.io/bootstrap-datetimepicker/
 		$form->addText('release', 'Datum zveřejnění:')
 			->setType('datetime-local'); //HTML5!
-		$form->addSubmit('save', 'Uložit a publikovat')
-			->setAttribute('class', 'btn btn-primary');
+		$form->addSubmit('save', 'Uložit a publikovat');
 		$form->onSuccess[] = $this->processPostSucceeded;
 		return $form;
 	}
@@ -90,13 +89,19 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleUpdate($title, $body, $tags) {
-		$texy = new \fshlTexy();
+		//TODO: nefunguje, proč?
+		/*$texy = new \fshlTexy();
 		$texy->addHandler('block', array($texy, 'blockHandler'));
 		$texy->tabWidth = 4;
 		$texy->headingModule->top = 3; //start at H3
 		$this->template->preview = $texy->process($body);
 		$this->template->title = $title;
-		$this->template->tags = array_unique(explode(', ', $tags));
+		$this->template->tagsPrew = array_unique(explode(', ', $tags));
+		if ($this->isAjax()) {
+			$this->invalidateControl('preview');
+		}*/
+		$this->template->preview = "Náhled";
+		$this->template->title = "Titulek";
 		if ($this->isAjax()) {
 			$this->invalidateControl('preview');
 		}
