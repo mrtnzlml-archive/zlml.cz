@@ -44,7 +44,32 @@
 		{/form}
 
 		<script>
-			$(function(){
+			$(function () {
+				var editor = CodeMirror.fromTextArea(document.getElementById("editor"));
+				var timer = null;
+				$.nette.ajax({
+					url: {link update!},
+					data: {
+						content: $('textarea').val()
+					}
+				});
+				$('textarea').live('keypress', function (e) {
+					if (timer) {
+						window.clearTimeout(timer);
+					}
+					timer = window.setTimeout(function () {
+						timer = null;
+						$.nette.ajax({
+							url: {link update!},
+							data: {
+								content: $('textarea').val()
+							}
+						});
+						e.preventDefault();
+					}, 1000);
+				});
+			});
+			{*$(function(){
 				var editor = CodeMirror.fromTextArea(document.getElementById("editor"));
 				var timer = null;
 				$.get({link update!},{'title': $('.title').val(), 'body': editor.getValue(), 'tags': $('.tags').val()});
@@ -56,11 +81,14 @@
 						e.preventDefault();
 					}, 1000 );
 				});
-			});
+			});*}
 		</script>
 	</div>
 </div>
 
+{*snippet preview}
+	{ifset $preview}{$preview}{/ifset}
+{/snippet*}
 {snippet preview}
 	<fieldset>
 	<legend>RealTime náhled:</legend>

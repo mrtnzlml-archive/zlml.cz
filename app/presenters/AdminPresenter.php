@@ -105,6 +105,15 @@ class AdminPresenter extends BasePresenter {
 		if ($this->isAjax()) {
 			$this->invalidateControl('preview');
 		}
+		/*
+		$texy = new \Texy();
+		$this->template->preview = \Nette\Utils\Html::el()->setHtml($texy->process($content));
+		if ($this->isAjax()) {
+			$this->invalidateControl('preview');
+		} else {
+			$this->redirect('this');
+		}
+		*/
 	}
 
 	public function handleDelete($id) {

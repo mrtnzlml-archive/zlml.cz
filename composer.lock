@@ -11,16 +11,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/texy.git",
-                "reference": "v2.3"
+                "reference": "79d0e1517363ab32edf2db8ec515e3dc84f50f0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/texy/zipball/v2.3",
-                "reference": "v2.3",
+                "url": "https://api.github.com/repos/dg/texy/zipball/79d0e1517363ab32edf2db8ec515e3dc84f50f0a",
+                "reference": "79d0e1517363ab32edf2db8ec515e3dc84f50f0a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.0.0"
+            },
+            "replace": {
+                "dg/texy": "self.version"
             },
             "require-dev": {
                 "nette/tester": "0.9.*"
@@ -56,7 +59,7 @@
                 "wiki",
                 "xhtml"
             ],
-            "time": "2013-07-19 22:05:37"
+            "time": "2013-10-16 20:01:41"
         },
         {
             "name": "janmarek/webloader",
@@ -156,18 +159,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/lessphp.git",
-                "reference": "v0.4.0"
+                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/v0.4.0",
-                "reference": "v0.4.0",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/bc4f33b4bfc889018ebe53611050729641b82dc6",
+                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6",
                 "shasum": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "0.4.x-dev"
                 }
             },
             "autoload": {
@@ -189,7 +192,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-08-09 17:09:19"
+            "time": "2013-10-17 16:23:00"
         },
         {
             "name": "linkorb/jsmin-php",
@@ -296,12 +299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "f36f5daab168925ccd1b4f7f35faa434be076dc6"
+                "reference": "39b480c311f9c88320ca4a343f864198fb65af52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/f36f5daab168925ccd1b4f7f35faa434be076dc6",
-                "reference": "f36f5daab168925ccd1b4f7f35faa434be076dc6",
+                "url": "https://api.github.com/repos/nette/nette/zipball/39b480c311f9c88320ca4a343f864198fb65af52",
+                "reference": "39b480c311f9c88320ca4a343f864198fb65af52",
                 "shasum": ""
             },
             "require": {
@@ -362,7 +365,7 @@
                 "neon",
                 "templating"
             ],
-            "time": "2013-08-20 15:31:16"
+            "time": "2013-10-15 22:07:48"
         },
         {
             "name": "srigi/nette-visualpaginator",
@@ -370,12 +373,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/srigi/nette-visualpaginator.git",
-                "reference": "v1.0.1"
+                "reference": "2098503c9dc82d0c2787ea66e749672c5f06f9d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/srigi/nette-visualpaginator/zipball/v1.0.1",
-                "reference": "v1.0.1",
+                "url": "https://api.github.com/repos/srigi/nette-visualpaginator/zipball/2098503c9dc82d0c2787ea66e749672c5f06f9d1",
+                "reference": "2098503c9dc82d0c2787ea66e749672c5f06f9d1",
                 "shasum": ""
             },
             "require": {
