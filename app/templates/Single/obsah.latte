@@ -1,0 +1,39 @@
+{#title}OBSAH{/#}
+
+{#content}
+
+<ul class="breadcrumb hidden-print">
+	<li><a n:href="Homepage:">home</a></li>
+	<li class="active">obsah</li>
+</ul>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-lg-10">
+		{var $last = ''}
+		{foreach $articles as $article}
+			{if strtoupper(substr($article->title, 0, 1)) === $last}
+				<a n:href=":Single:article $article->id" style="padding-left:2%">{$article->title}</a><br>
+			{else}
+				<h2>{strtoupper(substr($article->title, 0, 1))}</h2>
+				<a n:href=":Single:article $article->id" style="padding-left:2%">{$article->title}</a><br>
+				{? $last = strtoupper(substr($article->title, 0, 1))}
+			{/if}
+		{/foreach}
+	</div>
+	<div class="col-lg-2">
+		<canvas id="outline2" class="visible-lg" width="150" height="400"></canvas>
+	</div>
+</div>
+
+{*var $last = ''}
+{foreach $articles as $article}
+	{if strtoupper(substr($article->title, 0, 1)) === $last}
+		<a n:href=":Single:article $article->id" style="padding-left:2%">{$article->title}</a><br>
+	{else}
+		<h2>{strtoupper(substr($article->title, 0, 1))}</h2>
+		<a n:href=":Single:article $article->id" style="padding-left:2%">{$article->title}</a><br>
+		{? $last = strtoupper(substr($article->title, 0, 1))}
+	{/if}
+{/foreach*}
+
+{/#}
