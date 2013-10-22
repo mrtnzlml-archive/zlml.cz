@@ -27,6 +27,7 @@ class fshlTexy extends Texy {
 			case 'PHP': $lexer = new \FSHL\Lexer\Php(); break;
 			case 'PYTHON': $lexer = new \FSHL\Lexer\Python(); break;
 			case 'SQL': $lexer = new \FSHL\Lexer\Sql(); break;
+			case 'TEX': $lexer = new \FSHL\Lexer\Tex(); break;
 			case 'TEXY': $lexer = new \FSHL\Lexer\Texy(); break;
 			default: $lexer = new \FSHL\Lexer\Minimal();
 		}

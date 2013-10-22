@@ -12,3 +12,4 @@ app/config/config.local.neon
 
 !fshlTexy.php
 !ZeminemOutputNamingConvention.php
+!Tex.php
