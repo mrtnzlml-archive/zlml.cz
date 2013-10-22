@@ -7,6 +7,7 @@ class SearchPresenter extends BasePresenter {
 	/** @var \Model\Posts @inject */
 	public $posts;
 
+	//TODO: result nezná slug, takže na něj nelze odkázat
 	public function renderDefault($search = NULL) {
 
 		if($search === NULL) {

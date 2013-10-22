@@ -195,22 +195,8 @@ class Posts extends Nette\Object {
 	}
 
 	// Routers:
-	public function getIdByUrl($url) {
-		$result = $this->sf->table('posts');
-		foreach ($result as $row) {
-			if (Nette\Utils\Strings::webalize($row->title) === $url) {
-				return $row->id;
-			}
-		}
-	}
-
-	/**
-	 * @param $id
-	 * @return string
-	 */
-	public function getUrlById($id) {
-		$string = $this->sf->table('posts')->where('id = ?', $id)->fetch()->title;
-		return Nette\Utils\Strings::webalize($string);
+	public function getBySlug($slug) {
+		return $this->sf->table('posts')->where('slug = ?', $slug);
 	}
 
 }

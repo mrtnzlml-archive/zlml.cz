@@ -22,12 +22,12 @@ class RouterFactory {
 	 * @return \Nette\Application\IRouter
 	 */
 	public function createRouter() {
-		$pages = (int)count($this->posts->getAllPosts());
+		define('ITEMCOUNT', $this->posts->getAllPosts()->select('COUNT(*) AS itemCount')->fetch()->itemCount);
+		$pages = ITEMCOUNT;
 		$range = range(1, ceil($pages/8));
 		$paginator = implode('|', $range);
 
 		$router = new RouteList();
-		$router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
 		//$router[] = new Route('[<paginator-page [0-9]+>]', 'Homepage:default');
 		$router[] = new Route("[<paginator-page [$paginator]>]", array(
@@ -35,21 +35,7 @@ class RouterFactory {
 			'action' => 'default',
 			'paginator-page' => 1
 		));
-
-		//TODO: toto není moc OK (ale funkční) - časem předělat na slug řešení
-		$router[] = new Route('<id>', array(
-			'presenter' => 'Single',
-			'action' => 'article',
-			'id' => array(
-				Route::FILTER_IN => function ($url) {
-					return $this->posts->getIdByUrl($url);
-				},
-				Route::FILTER_OUT => function ($id) {
-					return $this->posts->getUrlById($id);
-				},
-			),
-		));
-
+		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('search[/<search>]', 'Search:default');
 		$router[] = new Route('tag[/<search>]', 'Tag:default');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');

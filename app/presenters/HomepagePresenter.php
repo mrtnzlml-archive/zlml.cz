@@ -9,14 +9,12 @@ class HomepagePresenter extends BasePresenter {
 
 	/** @var \Model\Posts @inject */
 	public $posts;
-	/** @var \Model\Records @inject */
-	public $records;
 
 	public function renderDefault() {
 		$vp = new \VisualPaginator($this, 'paginator');
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 8;
-		$paginator->itemCount = count($this->posts->getAllPosts());
+		$paginator->itemCount = ITEMCOUNT; //see RouterFactory.php
 
 		$posts = $this->posts->getPosts($paginator->itemsPerPage, $paginator->offset);
 		$this->template->posts = $posts;
@@ -28,26 +26,6 @@ class HomepagePresenter extends BasePresenter {
 
 	public function renderSitemap() {
 		$this->template->sitemap = $this->posts->getAllPosts();
-	}
-
-	///// RECORDS /////
-	public function handleInsertRecord($data) {
-		$data = serialize(explode(",", $data));
-		$data = array(
-			'data' => $data,
-		);
-		$this->records->newRecord($data);
-		$this->sendPayload();
-	}
-
-	public function handleGetRecords() {
-		$records = $this->records->getRecords();
-		$data = array();
-		foreach($records as $record) {
-			$data[] = unserialize($record->data);
-		}
-		$this->payload->data = $data;
-		$this->sendPayload();
 	}
 
 }

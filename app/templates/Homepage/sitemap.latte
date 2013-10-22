@@ -4,7 +4,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	{foreach $sitemap as $s}
 		<url>
-			<loc>{link //Single:article $s->id}</loc>
+			<loc>{link //Single:article $s->slug}</loc>
 		</url>
 	{/foreach}
 </urlset>

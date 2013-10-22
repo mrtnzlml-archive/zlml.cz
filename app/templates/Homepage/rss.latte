@@ -10,7 +10,7 @@
 
 		<item n:foreach="$posts as $post">
 			<title>{$post->title}</title>
-			<link>{link //:Single:article $post->id}</link>
+			<link>{link //:Single:article $post->slug}</link>
 			<description>{$post->body|texy}</description>
 		</item>
 	</channel>

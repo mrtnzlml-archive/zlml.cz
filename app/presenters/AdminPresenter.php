@@ -43,7 +43,7 @@ class AdminPresenter extends BasePresenter {
 		$form = new Nette\Application\UI\Form;
 		$form->addProtection();
 		$form->addText('title', 'Titulek:')
-			->setAttribute('class', 'form-control title')
+			->setAttribute('class', 'form-control')
 			->setValue(empty($this->value) ? '' : $this->value->title)
 			->setRequired('Je zapotřebí vyplnit titulek.');
 		$tags = array();
@@ -53,7 +53,7 @@ class AdminPresenter extends BasePresenter {
 			}
 		}
 		$form->addText('tags', 'Tagy:')
-			->setAttribute('class', 'form-control tags')
+			->setAttribute('class', 'form-control')
 			->setValue(implode(', ', $tags));
 		$form->addTextArea('editor', 'Body:')
 			->setHtmlId('editor')
@@ -71,49 +71,42 @@ class AdminPresenter extends BasePresenter {
 		$vals = $form->getValues();
 		if ($this->id) { // upravujeme záznam
 			try {
+				$this->posts->sf->connection->beginTransaction();
 				$this->posts->updatePost($vals->title, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release, $this->id);
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
+				$this->posts->sf->connection->commit();
 				$this->redirect('this');
 			} catch (\PDOException $exc) {
+				$this->posts->sf->connection->rollBack();
 				$this->flashMessage($exc->getMessage(), 'alert-error');
 			}
 		} else { // přidáváme záznam
 			try {
+				$this->posts->sf->connection->beginTransaction();
 				$this->posts->newPost($vals->title, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release);
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
+				$this->posts->sf->connection->commit();
 				$this->redirect('this');
 			} catch (\PDOException $exc) {
+				$this->posts->sf->connection->rollBack();
 				$this->flashMessage($exc->getMessage(), 'alert-error');
 			}
 		}
 	}
 
-	public function handleUpdate($title, $body, $tags) {
-		//TODO: nefunguje, proč?
-		/*$texy = new \fshlTexy();
+	public function handleUpdate($title, $content, $tags) {
+		$texy = new \fshlTexy();
 		$texy->addHandler('block', array($texy, 'blockHandler'));
 		$texy->tabWidth = 4;
 		$texy->headingModule->top = 3; //start at H3
-		$this->template->preview = $texy->process($body);
+		$this->template->preview = Nette\Utils\Html::el()->setHtml($texy->process($content));
 		$this->template->title = $title;
 		$this->template->tagsPrew = array_unique(explode(', ', $tags));
-		if ($this->isAjax()) {
-			$this->invalidateControl('preview');
-		}*/
-		$this->template->preview = "Náhled";
-		$this->template->title = "Titulek";
-		if ($this->isAjax()) {
-			$this->invalidateControl('preview');
-		}
-		/*
-		$texy = new \Texy();
-		$this->template->preview = \Nette\Utils\Html::el()->setHtml($texy->process($content));
 		if ($this->isAjax()) {
 			$this->invalidateControl('preview');
 		} else {
 			$this->redirect('this');
 		}
-		*/
 	}
 
 	public function handleDelete($id) {

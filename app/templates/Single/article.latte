@@ -56,7 +56,7 @@
 		<div class="col-lg-4" n:foreach="$next as $n">
 			<div class="thumbnail" style="margin-bottom: 10px;">
 				<div class="caption">
-					<a n:href=":Single:article $n->id"><div class="caption">
+					<a n:href=":Single:article $n->slug"><div class="caption">
 						<h3>{$n->title|truncate:30}</h3>
 						{foreach $n->related('posts_tags') as $post_tag}
 							<span class="label" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>

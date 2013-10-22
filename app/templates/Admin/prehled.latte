@@ -10,7 +10,7 @@
 		<table class="table">
 			{foreach $posts as $post}
 				<tr>
-					<td><a n:href=":Single:article $post->id">{$post->title}</a></td>
+					<td><a n:href=":Single:article $post->slug">{$post->title}</a></td>
 					<td>
 						{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
 							<span class="label" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>

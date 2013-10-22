@@ -25,6 +25,5 @@ services:
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- Model\Posts
-	- Model\Records
 
 factories:

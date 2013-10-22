@@ -1,12 +1,35 @@
-<div class="well sidebar-nav">
+<div class="col-lg-3 list-group">
+	<a href=":User:Webhosting:cron" class="$presenter->isLinkCurrent(':User:Webhosting:cron')?'list-group-item active':list-group-item">
+		<span class="badge">14</span>
+		<h4 class="list-group-item-heading">CRON</h4>
+		<p class="list-group-item-text">Nastavení opakujících se úloh.</p>
+	</a>
+	<a href=":User:Webhosting:databases" class="$presenter->isLinkCurrent(':User:Webhosting:databases')?'list-group-item active':list-group-item">
+		<span class="badge">10</span>
+		<h4 class="list-group-item-heading">Databáze domény</h4>
+		<p class="list-group-item-text">Nastavení uživatlů a databází.</p>
+	</a>
+	<a href=":User:Webhosting:ftp" class="$presenter->isLinkCurrent(':User:Webhosting:ftp')?'list-group-item active':list-group-item">
+		<span class="badge">5</span>
+		<h4 class="list-group-item-heading">FTP uživatelé domény</h4>
+		<p class="list-group-item-text">Nastavení FTP přístupu k doméně.</p>
+	</a>
+	<a href=":User:Webhosting:shell" class="$presenter->isLinkCurrent(':User:Webhosting:shell')?'list-group-item active':list-group-item">
+		<span class="badge">0</span>
+		<h4 class="list-group-item-heading">Shell uživatel</h4>
+		<p class="list-group-item-text">Nastavení shell přístupu k webu.</p>
+	</a>
+</div>
+
+{*<div class="well sidebar-nav">
 	<ul class="nav">
 		<li>Články</li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:default')?active"><a n:href=":Admin:default, id => NULL">Přidat nový článek</a></li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:prehled')?active"><a n:href=":Admin:prehled">Přehled článků</a></li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:tags')?active"><a n:href=":Admin:tags">Přehled tagů</a></li>
-		{*
+
 		<li>Statistiky</li>
 		<li n:class="$presenter->isLinkCurrent(':Admin:stats')?active"><a n:href=":Admin:stats">Přehled</a></li>
-		*}
+
 	</ul>
-</div>
+</div>*}

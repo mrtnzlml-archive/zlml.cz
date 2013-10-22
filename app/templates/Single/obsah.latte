@@ -14,7 +14,7 @@
 		{var $last = ''}
 		{foreach $articles as $article}
 			{if strtoupper(substr($article->title, 0, 1)) === $last}
-				<a n:href=":Single:article $article->id" style="padding-left:2%">{$article->title}</a>
+				<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
 				{foreach $article->related('posts_tags')->order('tag_id ASC') as $post_tag}
 					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
 						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
@@ -24,7 +24,7 @@
 			{else}
 				<hr n:if="!$iterator->first">
 				<h2>{strtoupper(substr($article->title, 0, 1))}</h2>
-				<a n:href=":Single:article $article->id" style="padding-left:2%">{$article->title}</a>
+				<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
 				{foreach $article->related('posts_tags')->order('tag_id ASC') as $post_tag}
 					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
 						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>

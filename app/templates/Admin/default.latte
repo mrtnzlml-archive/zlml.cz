@@ -2,14 +2,14 @@
 {#content}
 
 <div class="row">
-	<div class="col-lg-3">
-		{include menu.latte}
+	{include menu.latte}
+	{*<div class="col-lg-3">
 		<div class="well sidebar-nav">
 			{foreach $tags as $tag}
 				<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
 			{/foreach}
 		</div>
-	</div>
+	</div>*}
 	<div class="col-lg-9">
 		{ifset $editace}
 			<h2>Editovat článek ({$editace})</h2>
@@ -33,10 +33,10 @@
 				{label editor /}
 				{input editor, class => "form-control"}
 			</div>
-			{*<div class="row-fluid">
+			<div class="row-fluid">
 				{label release /}
 				{input release, class => "form-control"}
-			</div>*}
+			</div>
 			<div class="row-fluid">
 				{label save /}
 				{input save, class => "btn btn-primary form-control"}
@@ -50,10 +50,12 @@
 				$.nette.ajax({
 					url: {link update!},
 					data: {
-						content: $('textarea').val()
+						title: $('[name="title"]').val(),
+						content: editor.getValue(),
+						tags: $('[name="tags"]').val()
 					}
 				});
-				$('textarea').live('keypress', function (e) {
+				$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
 					if (timer) {
 						window.clearTimeout(timer);
 					}
@@ -62,41 +64,26 @@
 						$.nette.ajax({
 							url: {link update!},
 							data: {
-								content: $('textarea').val()
+								title: $('[name="title"]').val(),
+								content: editor.getValue(),
+								tags: $('[name="tags"]').val()
 							}
 						});
 						e.preventDefault();
 					}, 1000);
 				});
 			});
-			{*$(function(){
-				var editor = CodeMirror.fromTextArea(document.getElementById("editor"));
-				var timer = null;
-				$.get({link update!},{'title': $('.title').val(), 'body': editor.getValue(), 'tags': $('.tags').val()});
-				$('.CodeMirror, .text').live('keypress', function(e) {
-					if (timer) { window.clearTimeout(timer); }
-					timer = window.setTimeout( function() {
-						timer = null;
-						$.get({link update!},{'title': $('.title').val(), 'body': editor.getValue(), 'tags': $('.tags').val()});
-						e.preventDefault();
-					}, 1000 );
-				});
-			});*}
 		</script>
 	</div>
 </div>
 
-{*snippet preview}
-	{ifset $preview}{$preview}{/ifset}
-{/snippet*}
 {snippet preview}
 	<fieldset>
-	<legend>RealTime náhled:</legend>
+		<legend>RealTime náhled:</legend>
 		<div class="page-header">
 			<h2>
 				{ifset $title}
-					{$title}
-					<small>{date('Y-m-d')}</small>
+					{$title} <small>{date('Y-m-d')}</small>
 				{/ifset}
 			</h2>
 			{ifset $tagsPrew}

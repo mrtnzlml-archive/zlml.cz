@@ -16,7 +16,7 @@
 
 <body>
 	<script> document.body.className+=' js' </script>
-	<div id="record">
+
 	<div class="container shadow hidden-print"><style>.record { position: relative; }</style>
 		<div class="row">
 			<div class="col-lg-2 visible-lg">
@@ -60,11 +60,9 @@
 	</div>
 
 	<div class="container text-right hidden-print footer" style="background:transparent">
-		{if $user->isLoggedIn()}<button id="showRecords" type="button" class="pull-left btn btn-primary" data-toggle="button">Show mouse redords</button>{/if}
 		&copy; 2012 - <?php echo date("Y"); ?>&nbsp;<a n:href="Homepage:">Martin Zlámal</a> <span class="glyphicon glyphicon-qrcode"></span> | {if $user->isLoggedIn()}<a href="{link Sign:out}">Odhlásit</a>{else}<a n:href="Sign:in" data-toggle="modal">Login</a>{/if}<br>
 		<a href="http://www.fresh-hosting.cz/" target="_blank">www.fresh-hosting.cz</a> | <a href="https://bitbucket.org/mrtnzlml/www.zeminem.cz/issues" target="_blank">Našli jste chybu?</a>
 	</div>
-	</div> {* /.record *}
 
 	<script type="text/javascript">
 		var _gaq = _gaq || [];

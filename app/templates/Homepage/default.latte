@@ -5,7 +5,7 @@
 	{var $end = array(2, 5, 8)}
 	{if in_array($iterator->counter, $start)}<div class="row">{/if}
 	<div n:class="$iterator->counter == 1 ? col-lg-8 : col-lg-4">
-		<h3><a n:href=":Single:article $post->id">{$post->title}</a></h3>
+		<h3><a n:href=":Single:article $post->slug">{$post->title}</a></h3>
 		{if $iterator->counter == 1}
 			<p>
 				{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
@@ -14,7 +14,7 @@
 					</a>
 				{/foreach}
 				{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:600}
-				&nbsp;<a n:href=":Single:article $post->id">přečtěte si více</a>
+				&nbsp;<a n:href=":Single:article $post->slug">přečtěte si více</a>
 			</p>
 		{else}
 			<p>
@@ -24,7 +24,7 @@
 					</a>
 				{/foreach}
 				{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:250}
-				&nbsp;<a n:href=":Single:article $post->id">přečtěte si více</a>
+				&nbsp;<a n:href=":Single:article $post->slug">přečtěte si více</a>
 			</p>
 		{/if}
 	</div>
@@ -34,58 +34,3 @@
 <div class="row col-lg-12 text-center">
 	{control paginator}
 </div>
-
-{/#}
-
-
-
-
-
-{#scripts}
-{include #parent}
-<script type="text/javascript">
-$(function(){
-	var paused = null;
-	var log = [];
-	$("#record").mousemove(function(event) {
-		if (!paused){
-			var x = event.pageX - this.offsetLeft;
-			var y = event.pageY - this.offsetTop;
-			log.push(x + ":" + y);
-			paused = setTimeout(function(){ paused=null }, 1); // Check mousemove every 1ms (accurancy)
-		}
-	});
-
-	setInterval( function(){
-		if(log.length != 0) {
-			$.get({link insertRecord!} + "&data="+log);
-			log = [];
-		}
-	}, 2500); // Save every 2500ms (data chunks size)
-
-	$("#showRecords").click(function() {
-		$.get({link getRecords!}, function(payload) {
-			if($("#showRecords").hasClass('active')) {
-				var element = null;
-				for (var i = 0; i < payload.data.length; i++) {
-					element = payload.data[i];
-					for(var j = 0; j < element.length; j++) {
-						if(element[j] != undefined) {
-							var point = element[j].split(":")
-							var newPoint = document.createElement("div");
-							newPoint.className = "r";
-							newPoint.style.top = point[1] + "px"; //Y
-							newPoint.style.left = point[0] + "px"; //X
-							var body = document.getElementById("record");
-							body.appendChild(newPoint);
-						}
-					}
-				}
-			} else {
-				$(".r").remove();
-			}
-		});
-	});
-});
-</script>
-{/#}
