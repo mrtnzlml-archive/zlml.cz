@@ -19,9 +19,10 @@ class Posts extends Nette\Object {
 	 * @param $body
 	 * @param $release
 	 */
-	public function newPost($title, $tags, $body, $release) {
+	public function newPost($title, $slug, $tags, $body, $release) {
 		$data = array(
 			'title' => $title,
+			'slug' => Nette\Utils\Strings::webalize($slug),
 			'body' => $body,
 			'date' => new \DateTime(),
 			'release_date' => $release,
@@ -50,9 +51,10 @@ class Posts extends Nette\Object {
 	 * @param $release
 	 * @param $id
 	 */
-	public function updatePost($title, $tags, $body, $release, $id) {
+	public function updatePost($title, $slug, $tags, $body, $release, $id) {
 		$data = array(
 			'title' => $title,
+			'slug' => Nette\Utils\Strings::webalize($slug),
 			'body' => $body,
 			'release_date' => $release,
 		);

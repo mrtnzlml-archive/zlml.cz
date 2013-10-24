@@ -7,16 +7,12 @@ use Nette;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	//SELECT *
-	//FROM mirror_posts
-	//WHERE MATCH(title, body) AGAINST ('$search' IN BOOLEAN MODE)
-	//ORDER BY 5 * MATCH(title) AGAINST ('$search') + MATCH(body) AGAINST ('$search') DESC
-
 	protected function createComponentSearch() {
 		$form = new \Nette\Application\UI\Form;
 		$form->addText('search')
-			->setRequired('Vyplňte co chcete vyhledávat.');
-		$form->addSubmit('send', '');
+			->setRequired('Vyplňte co chcete vyhledávat.')
+			->setValue($this->getParameter('search'));
+		$form->addSubmit('send', 'Go!');
 		$form->onSuccess[] = $this->searchSucceeded;
 		return $form;
 	}

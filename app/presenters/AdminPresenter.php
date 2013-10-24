@@ -32,6 +32,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function renderPrehled() {
+		//TODO: bez ->where('release_date < NOW()'); !
 		$this->template->posts = $this->posts->getAllPosts()->order('date DESC');
 	}
 
@@ -43,9 +44,11 @@ class AdminPresenter extends BasePresenter {
 		$form = new Nette\Application\UI\Form;
 		$form->addProtection();
 		$form->addText('title', 'Titulek:')
-			->setAttribute('class', 'form-control')
 			->setValue(empty($this->value) ? '' : $this->value->title)
 			->setRequired('Je zapotřebí vyplnit titulek.');
+		$form->addText('slug', 'URL slug:')
+			->setValue(empty($this->value) ? '' : $this->value->slug)
+			->setRequired('Je zapotřebí vyplnit slug.');
 		$tags = array();
 		if($this->id) {
 			foreach($this->posts->getPostByID($this->id)->related('tags') as $a) {
@@ -59,9 +62,8 @@ class AdminPresenter extends BasePresenter {
 			->setHtmlId('editor')
 			->setValue(empty($this->value) ? '' : $this->value->body)
 			->setRequired('Je zapotřebí napsat nějaký text.');
-		//Alternative: http://tarruda.github.io/bootstrap-datetimepicker/
 		$form->addText('release', 'Datum zveřejnění:')
-			->setType('datetime-local'); //HTML5!
+			->setType('datetime-local'); //HTML5
 		$form->addSubmit('save', 'Uložit a publikovat');
 		$form->onSuccess[] = $this->processPostSucceeded;
 		return $form;
@@ -72,7 +74,7 @@ class AdminPresenter extends BasePresenter {
 		if ($this->id) { // upravujeme záznam
 			try {
 				$this->posts->sf->connection->beginTransaction();
-				$this->posts->updatePost($vals->title, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release, $this->id);
+				$this->posts->updatePost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release, $this->id);
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
 				$this->posts->sf->connection->commit();
 				$this->redirect('this');
@@ -83,7 +85,7 @@ class AdminPresenter extends BasePresenter {
 		} else { // přidáváme záznam
 			try {
 				$this->posts->sf->connection->beginTransaction();
-				$this->posts->newPost($vals->title, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release);
+				$this->posts->newPost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release);
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
 				$this->posts->sf->connection->commit();
 				$this->redirect('this');

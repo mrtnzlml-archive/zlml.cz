@@ -1,10 +1,10 @@
 <?php
 
 namespace App;
-use Nette;
+
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
-use Nette\Application\Routers\SimpleRouter;
+use Nette;
 
 
 /**
@@ -24,11 +24,12 @@ class RouterFactory {
 	public function createRouter() {
 		define('ITEMCOUNT', $this->posts->getAllPosts()->select('COUNT(*) AS itemCount')->fetch()->itemCount);
 		$pages = ITEMCOUNT;
-		$range = range(1, ceil($pages/8));
+		$range = range(1, ceil($pages / 8));
 		$paginator = implode('|', $range);
 
 		$router = new RouteList();
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
+		$router[] = new Route('admin/', 'Admin:default');
 		//$router[] = new Route('[<paginator-page [0-9]+>]', 'Homepage:default');
 		$router[] = new Route("[<paginator-page [$paginator]>]", array(
 			'presenter' => 'Homepage',

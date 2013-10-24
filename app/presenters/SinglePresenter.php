@@ -33,24 +33,23 @@ class SinglePresenter extends BasePresenter {
 		// 2 - podle data
 		// 3 - náhodný
 		$next = array();
-		//TODO: po novém routeru (slug) nefunguje
 		$tags = iterator_to_array($this->posts->getTagsByPostID($post->id));
 		foreach ($tags as $tag) {
-			$posts = $this->posts->getPostsByTagID($tag->tag->id, $limit = 3);
-			if (!empty($posts)) {
-				foreach ($posts as $post) {
-					if ($post->id == $post->id) {
+			$articles = $this->posts->getPostsByTagID($tag->tag->id, $limit = 3);
+			if (!empty($articles)) {
+				foreach ($articles as $article) {
+					if ($article->id == $post->id) {
 						continue;
 					} elseif (count($next) >= 3) {
 						break;
 					}
-					$next[] = $post;
+					$next[] = $article;
 				}
 			}
 		}
 		if (count($next) < 3) {
-			foreach ($this->posts->getPosts(6 - count($next), 1) as $post) {
-				if ($post->id == $post->id) {
+			foreach ($this->posts->getPosts(6 - count($next), 1) as $article) {
+				if ($article->id == $post->id) {
 					continue;
 				} elseif (count($next) >= 3) {
 					break;

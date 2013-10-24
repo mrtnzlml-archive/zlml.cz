@@ -29,7 +29,12 @@
 				{form search, class => 'form-inline'}
 					<div class="row">
 						<div class="col-lg-12" style="margin-top: 10px;">
-							<input n:input="search" type="search" class="form-control" placeholder="Search">
+							<div class="input-group">
+								<input n:input="search" type="search" class="form-control" placeholder="Search">
+								<span class="input-group-btn">
+									{input send, class => 'btn btn-default'}
+								</span>
+							</div>
 						</div>
 					</div>
 				{/form}

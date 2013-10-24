@@ -2,14 +2,14 @@
 {#content}
 
 <div class="row">
-	{include menu.latte}
-	{*<div class="col-lg-3">
+	<div class="col-lg-3">
+		{include menu.latte}
 		<div class="well sidebar-nav">
 			{foreach $tags as $tag}
 				<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
 			{/foreach}
 		</div>
-	</div>*}
+	</div>
 	<div class="col-lg-9">
 		{ifset $editace}
 			<h2>Editovat článek ({$editace})</h2>
@@ -21,26 +21,30 @@
 			<ul class="error" n:if="$form->allErrors">
 				<li n:foreach="$form->allErrors as $error">{$error}</li>
 			</ul>
-			<div class="row-fluid">
-				{label title /}
-				{input title, class => "form-control"}
+			<div class="row">
+				<div class="col-lg-6">
+					{label title /}
+					{input title, class => "form-control", data-slug-to => "slug"}
+				</div>
+				<div class="col-lg-6">
+					{label slug /}
+					{input slug, class => "form-control", id => "slug"}
+				</div>
 			</div>
-			<div class="row-fluid">
-				{label tags /}
-				{input tags, class => "form-control"}
+			<div class="row">
+				<div class="col-lg-6">
+					{label tags /}
+					{input tags, class => "form-control"}
+				</div>
+				<div class="col-lg-6">
+					{label release /}
+					{input release, class => "form-control"}
+				</div>
 			</div>
-			<div class="row-fluid">
-				{label editor /}
-				{input editor, class => "form-control"}
-			</div>
-			<div class="row-fluid">
-				{label release /}
-				{input release, class => "form-control"}
-			</div>
-			<div class="row-fluid">
-				{label save /}
-				{input save, class => "btn btn-primary form-control"}
-			</div>
+			{label editor /}
+			{input editor, class => "form-control"}
+			{label save /}
+			{input save, class => "btn btn-primary form-control"}
 		{/form}
 
 		<script>
