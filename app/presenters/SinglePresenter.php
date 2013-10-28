@@ -52,7 +52,7 @@ class SinglePresenter extends BasePresenter {
 					} elseif (count($next) >= 3) {
 						break;
 					}
-					$next[] = $post;
+					$next[] = $article;
 					$next = array_unique($next);
 				}
 			}
