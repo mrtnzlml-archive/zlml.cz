@@ -176,13 +176,17 @@ class Posts extends Nette\Object {
 		$this->sf->table('tags')->where('id = ?', $tag_id)->delete();
 	}
 
+	/**
+	 * @param $search string
+	 * @return Nette\Database\Table\Selection
+	 */
 	public function fulltextSearch($search) {
 		$where = "";
 		$ft_min_word_len = 4;
 		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
 		foreach ($matches[0] as $part) {
 			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
-				$regexp = "REGEXP '[[:<:]]" . addslashes(strtoupper($part)) . "[[:>:]]'";
+				$regexp = "REGEXP '[[:<:]]" . addslashes(mb_strtoupper($part, 'UTF-8')) . "[[:>:]]'";
 				$where .= " OR (title $regexp OR body $regexp)";
 			}
 		}
