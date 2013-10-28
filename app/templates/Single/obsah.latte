@@ -9,6 +9,7 @@
 	<li class="active">obsah</li>
 </ul>
 
+{cache expire => '+20 minutes'}
 <div class="row" style="margin-bottom: 10px">
 	<div class="col-lg-10">
 		{var $last = ''}
@@ -39,5 +40,6 @@
 		<canvas id="outline2" class="visible-lg" width="150" height="400"></canvas>
 	</div>
 </div>
+{/cache}
 
 {/#}
