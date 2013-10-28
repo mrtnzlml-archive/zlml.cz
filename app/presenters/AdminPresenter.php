@@ -40,6 +40,24 @@ class AdminPresenter extends BasePresenter {
 		$this->template->tags = $this->posts->getAllTags();
 	}
 
+	protected function createComponentColor() {
+		$form = new Nette\Application\UI\Form;
+		$form->addProtection();
+		foreach ($this->posts->getAllTags() as $tag) {
+			$form->addText('color' . $tag->id)
+				->setType('color')
+				->setValue('#' . $tag->color);
+		}
+		$form->addSubmit('send', 'Změnit barvu');
+		$form->onSuccess[] = $this->colorSucceeded;
+		return $form;
+	}
+
+	public function colorSucceeded($form) {
+		$vals = $form->getValues();
+		$this->flashMessage(preg_replace('<#>', '', $vals->color));
+	}
+
 	protected function createComponentNewPost() {
 		$form = new Nette\Application\UI\Form;
 		$form->addProtection();
@@ -50,8 +68,8 @@ class AdminPresenter extends BasePresenter {
 			->setValue(empty($this->value) ? '' : $this->value->slug)
 			->setRequired('Je zapotřebí vyplnit slug.');
 		$tags = array();
-		if($this->id) {
-			foreach($this->posts->getPostByID($this->id)->related('tags') as $a) {
+		if ($this->id) {
+			foreach ($this->posts->getPostByID($this->id)->related('tags') as $a) {
 				$tags[] = $this->posts->getTagByID($a->tag_id)->name;
 			}
 		}
@@ -136,7 +154,7 @@ class AdminPresenter extends BasePresenter {
 		try {
 			$this->posts->updateTagByID($tag_id, array('color' => $color));
 			$this->redirect('this');
-		} catch(\PDOException $exc) {
+		} catch (\PDOException $exc) {
 			$this->flashMessage($exc->getMessage(), 'alert-error');
 			$this->redirect('this');
 		}

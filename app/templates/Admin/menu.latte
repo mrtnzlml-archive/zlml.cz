@@ -1,19 +1,19 @@
 <div class="list-group">
-	<a n:href=":Admin:default, id => NULL" class="list-group-item" n:class="$presenter->isLinkCurrent(':Admin:default')?active">
+	<a n:href=":Admin:default, id => NULL" n:class="$presenter->isLinkCurrent(':Admin:default')?'list-group-item active':'list-group-item'">
 		{*<span class="badge">14</span>*}
 		<h4 class="list-group-item-heading">Přidat nový článek</h4>
-		<p class="list-group-item-text">...</p>
+		<p class="list-group-item-text">Napište nový článek</p>
 	</a>
 
-	<a n:href=":Admin:prehled" class="list-group-item" n:class="$presenter->isLinkCurrent(':Admin:prehled')?active">
+	<a n:href=":Admin:prehled" n:class="$presenter->isLinkCurrent(':Admin:prehled')?'list-group-item active':'list-group-item'">
 		{*<span class="badge">14</span>*}
 		<h4 class="list-group-item-heading">Přehled článků</h4>
-		<p class="list-group-item-text">...</p>
+		<p class="list-group-item-text">Podívejte se na starší články</p>
 	</a>
 
-	<a n:href=":Admin:tags" class="list-group-item" n:class="$presenter->isLinkCurrent(':Admin:tags')?active">
+	<a n:href=":Admin:tags" n:class="$presenter->isLinkCurrent(':Admin:tags')?'list-group-item active':'list-group-item'">
 		{*<span class="badge">14</span>*}
 		<h4 class="list-group-item-heading">Přehled tagů</h4>
-		<p class="list-group-item-text">...</p>
+		<p class="list-group-item-text">Prohlédněte si tagy</p>
 	</a>
 </div>
