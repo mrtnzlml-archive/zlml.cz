@@ -4,9 +4,6 @@ namespace App;
 
 class SinglePresenter extends BasePresenter {
 
-	/** @var \Model\Posts @inject */
-	public $posts;
-
 	public function renderObsah() {
 		$articles = $this->posts->getAllPosts()->order('title ASC');
 		$this->template->articles = $articles;

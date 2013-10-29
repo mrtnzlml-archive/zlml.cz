@@ -7,6 +7,9 @@ use Nette;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
+	/** @var \Model\Posts @inject */
+	public $posts;
+
 	protected function createComponentSearch() {
 		$form = new \Nette\Application\UI\Form;
 		$form->addText('search')
@@ -69,6 +72,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return \JSMin::minify($code);
 		});
 		return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+	}
+
+	public function handleRandom() {
+		$post = $this->posts->getAllPosts()->order('RAND()')->limit(1)->fetch();
+		$this->redirect('Single:article', $post->slug);
 	}
 
 }

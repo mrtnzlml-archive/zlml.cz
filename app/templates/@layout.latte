@@ -55,6 +55,7 @@
 			<li n:class="$presenter->isLinkCurrent('Single:about') ? active"><a n:href="Single:about">about</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:obsah') ? active"><a n:href="Single:obsah">obsah</a></li>
+			<li><a n:href="random!">random</a></li>
 			{if $user->isLoggedIn()}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
 		</ul>
 	</div>
