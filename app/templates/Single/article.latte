@@ -25,7 +25,9 @@
 
 <div class="row" style="margin-bottom: 10px">
 	<div class="col-lg-10">
-		{!$body}
+		<div id="columns">
+			{!$body}
+		</div>
 	</div>
 	<div class="col-lg-2">
 		<canvas id="outline" class="visible-lg" width="150" height="400"></canvas>
@@ -73,5 +75,11 @@
 		<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 	</div>
 </div>
+
+<script>
+	if(!document.getElementsByTagName('pre').length && window.innerWidth > 1200) {
+		$('#columns')[0].style.webkitColumnCount = 2;
+	}
+</script>
 
 {/#}
