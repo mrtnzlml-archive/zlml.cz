@@ -25,17 +25,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->redirect('Search:default', $vals->search);
 	}
 
+	/**
+	 * @param null $class
+	 * @return Nette\Templating\ITemplate
+	 */
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
 		$texy = new \Texy();
-		/*$texy->addHandler('phrase', function($invocation, $phrase, $content, $modifier, $link) {
-			$el = $invocation->proceed();
-			if ($el instanceof \TexyHtml && $el->getName() === 'a') {
-				$el->attrs['target'] = '_blank';
-			}
-			return $el;
-		});*/
 		$template->registerHelper('texy', callback($texy, 'process'));
+		$template->registerHelper('vlna', function($string) {
+			$string = preg_replace('<([^a-zA-Z0-9])([vszouai])\s([a-zA-Z0-9]{1,})>', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
+			return $string;
+		});
 		return $template;
 	}
 
