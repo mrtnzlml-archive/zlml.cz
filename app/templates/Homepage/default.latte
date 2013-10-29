@@ -7,7 +7,7 @@
 	<div n:class="$iterator->counter == 1 ? 'col-lg-8 col-md-8' : 'col-lg-4 col-md-4'">
 		<h3><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h3>
 		{if $iterator->counter == 1}
-			<p style="text-align:justify;-webkit-hyphens:auto;-moz-hyphens:auto;-ms-hyphens:auto;hyphens:auto;">
+			<p>
 				{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
 					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
 						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
@@ -17,7 +17,7 @@
 				&nbsp;<a n:href=":Single:article $post->slug">přečtěte si více</a>
 			</p>
 		{else}
-			<p style="text-align:justify;-webkit-hyphens:auto;-moz-hyphens:auto;-ms-hyphens:auto;hyphens:auto;">
+			<p>
 				{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
 					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
 						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
