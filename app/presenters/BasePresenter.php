@@ -14,13 +14,23 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/** @var \Model\Posts @inject */
 	public $posts;
+	/** @var \Nette\Http\Session @inject */
+	public $session;
 
 	public function beforeRender() {
 		parent::beforeRender();
 		if ($this->isAjax()) {
 			$this->invalidateControl('title');
+			$this->invalidateControl('menu');
+			$this->invalidateControl('flashes');
 			$this->invalidateControl('content');
 		}
+
+		$section = $this->session->getSection('experimental');
+		if ($section->experimental == NULL) {
+			$section->experimental = 'none';
+		}
+		$this->template->experimental = $section->experimental;
 	}
 
 	protected function createComponentSearch() {
@@ -101,6 +111,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	public function handleRandom() {
 		$post = $this->posts->getAllPosts()->order('RAND()')->limit(1)->fetch();
 		$this->redirect('Single:article', $post->slug);
+	}
+
+	public function handleExperimental() {
+		$section = $this->session->getSection('experimental');
+		if ($section->experimental == 'none') {
+			$section->experimental = 'all';
+			$this->flashMessage('Experimentální funkce zapnuty.', 'alert-info');
+		} else {
+			$section->experimental = 'none';
+			$this->flashMessage('Experimentální funkce vypnuty. Doporučuji obnovit stránku.', 'alert-info');
+		}
+		$this->redirect('this');
 	}
 
 }

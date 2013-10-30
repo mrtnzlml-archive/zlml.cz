@@ -1,6 +1,6 @@
 $(function () {
 
-	if ((window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
+	if ($('body').data('experimental') != 'none' && (window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
 		$.nette.ext('init').linkSelector = 'a';
 	}
 

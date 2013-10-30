@@ -14,7 +14,7 @@
 	{#scripts}{control js}{/#}
 </head>
 
-<body>
+<body data-experimental="{$experimental}">
 	<script> document.body.className+=' js' </script>
 
 	<div class="container shadow hidden-print"><style>.record { position: relative; }</style>
@@ -44,6 +44,12 @@
 					<a href="https://bitbucket.org/mrtnzlml" target="_blank">Bitbucket</a>
 					&middot;
 					<a n:href=":Homepage:rss" target="_blank">RSS</a>
+					<br>
+					{if $experimental == 'none'}
+						<a n:href="experimental!">Zapnout experimentální funkce</a>
+					{else}
+						<a n:href="experimental!">Vypnout experimentální funkce</a>
+					{/if}
 					{*<a n:href="this, lang => en">English</a>*}
 					{*<a n:href="this, lang => cs">Česky</a>*}
 				</div>
@@ -51,6 +57,7 @@
 		</div>
 	</div>
 
+	{snippet menu}
 	<div class="container hidden-print main-nav" style="background:transparent;padding:0">
 		<ul class="nav nav-pills">
 			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:">home</a></li>
@@ -61,9 +68,12 @@
 			{if $user->isLoggedIn()}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
 		</ul>
 	</div>
+	{/snippet}
 
 	<div class="container shadow" style="padding: 20px 30px;">
-		<div n:foreach="$flashes as $flash" class="alert {$flash->type}">{$flash->message}</div>
+		{snippet flashes}
+			<div n:foreach="$flashes as $flash" class="alert {$flash->type}">{$flash->message}</div>
+		{/snippet}
 		{snippet content}
 			{include #content}
 		{/snippet}
