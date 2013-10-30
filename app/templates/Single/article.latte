@@ -78,7 +78,7 @@
 </div>
 
 <script>
-	if(!document.getElementsByTagName('pre').length && window.innerWidth > 1200) {
+	if($('body').data('experimental') != 'none' && !document.getElementsByTagName('pre').length && window.innerWidth > 1200) {
 		$('#columns')[0].style.webkitColumnCount = 2;
 	}
 </script>
