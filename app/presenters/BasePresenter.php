@@ -15,6 +15,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/** @var \Model\Posts @inject */
 	public $posts;
 
+	public function beforeRender() {
+		parent::beforeRender();
+		if ($this->isAjax()) {
+			$this->invalidateControl('title');
+			$this->invalidateControl('content');
+		}
+	}
+
 	protected function createComponentSearch() {
 		$form = new \Nette\Application\UI\Form;
 		$form->addText('search')
@@ -38,7 +46,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$template = parent::createTemplate($class);
 		$texy = new \Texy();
 		$template->registerHelper('texy', callback($texy, 'process'));
-		$template->registerHelper('vlna', function($string) {
+		$template->registerHelper('vlna', function ($string) {
 			$string = preg_replace('<([^a-zA-Z0-9])([vszouai])\s([a-zA-Z0-9]{1,})>', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;
 		});
@@ -79,6 +87,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			'jquery.outline-0.11.js',
 			'netteForms.js',
 			'nette.ajax.js',
+			'history.ajax.js',
 			'main.js',
 		));
 		$compiler = \WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');

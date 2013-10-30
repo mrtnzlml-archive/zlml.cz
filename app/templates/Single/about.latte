@@ -5,6 +5,7 @@
 <ul class="breadcrumb hidden-print">
 	<li><a n:href="Homepage:">home</a></li>
 	<li class="active">about</li>
+	<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
 </ul>
 
 <div class="row">

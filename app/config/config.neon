@@ -28,7 +28,8 @@ services:
 
 factories:
 
-#extensions:
+extensions:
+	ajax: VojtechDobes\NetteAjax\Extension
 #	gettextTranslator: GettextTranslator\DI\Extension
 
 #gettextTranslator:

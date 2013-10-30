@@ -6,7 +6,7 @@
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>{#title|striptags}BLOG{/#} | Martin Zlámal</title>
+	<title n:inner-snippet="title">{#title|striptags}BLOG{/#} | Martin Zlámal</title>
 
 	{control css}
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
@@ -64,7 +64,9 @@
 
 	<div class="container shadow" style="padding: 20px 30px;">
 		<div n:foreach="$flashes as $flash" class="alert {$flash->type}">{$flash->message}</div>
-		{include #content}
+		{snippet content}
+			{include #content}
+		{/snippet}
 	</div>
 
 	<div class="container text-right hidden-print footer" style="background:transparent">
