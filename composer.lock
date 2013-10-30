@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4bcff1901e3f00ed61e7505705f277b8",
+    "hash": "bb0cf1b463b4bfaf8c311ad53afeed2c",
     "packages": [
         {
             "name": "dg/texy",
@@ -155,22 +155,22 @@
         },
         {
             "name": "leafo/lessphp",
-            "version": "dev-master",
+            "version": "v0.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/lessphp.git",
-                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6"
+                "reference": "a11a6141b5715162b933c405379765d817891c5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/bc4f33b4bfc889018ebe53611050729641b82dc6",
-                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/a11a6141b5715162b933c405379765d817891c5d",
+                "reference": "a11a6141b5715162b933c405379765d817891c5d",
                 "shasum": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "0.3-dev"
                 }
             },
             "autoload": {
@@ -192,7 +192,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-10-17 16:23:00"
+            "time": "2013-03-02 16:13:31"
         },
         {
             "name": "linkorb/jsmin-php",
@@ -299,12 +299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "39b480c311f9c88320ca4a343f864198fb65af52"
+                "reference": "720d7901a3c00c000ccb1b7759f19af07c0c6526"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/39b480c311f9c88320ca4a343f864198fb65af52",
-                "reference": "39b480c311f9c88320ca4a343f864198fb65af52",
+                "url": "https://api.github.com/repos/nette/nette/zipball/720d7901a3c00c000ccb1b7759f19af07c0c6526",
+                "reference": "720d7901a3c00c000ccb1b7759f19af07c0c6526",
                 "shasum": ""
             },
             "require": {
@@ -365,7 +365,56 @@
                 "neon",
                 "templating"
             ],
-            "time": "2013-10-15 22:07:48"
+            "time": "2013-10-28 13:47:57"
+        },
+        {
+            "name": "schmutzka/gettexttranslator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomasVotruba/GettextTranslator.git",
+                "reference": "2bea48f2d090fcfa128b2f0215e8ef94335a62fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TomasVotruba/GettextTranslator/zipball/2bea48f2d090fcfa128b2f0215e8ef94335a62fb",
+                "reference": "2bea48f2d090fcfa128b2f0215e8ef94335a62fb",
+                "shasum": ""
+            },
+            "require": {
+                "nette/nette": ">=2.1-dev",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "GettextTranslator/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Patrik Votoček",
+                    "email": "patrik@votocek.cz",
+                    "homepage": "http://patrik.votocek.cz",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tomáš Votruba",
+                    "homepage": "http://tomasvotruba.cz"
+                }
+            ],
+            "description": "Translator for Nette (PHP framework).",
+            "homepage": "http://addons2.nette.org/schmutzka/gettexttranslator",
+            "keywords": [
+                "gettext",
+                "nette",
+                "translator"
+            ],
+            "time": "2013-10-20 11:23:26"
         },
         {
             "name": "srigi/nette-visualpaginator",
@@ -426,7 +475,8 @@
         "janmarek/webloader": 20,
         "natxet/cssmin": 20,
         "linkorb/jsmin-php": 20,
-        "leafo/lessphp": 20
+        "leafo/lessphp": 20,
+        "schmutzka/gettexttranslator": 20
     },
     "platform": {
         "php": ">= 5.3.0"

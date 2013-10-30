@@ -27,3 +27,13 @@ services:
 	- Model\Posts
 
 factories:
+
+#extensions:
+#	gettextTranslator: GettextTranslator\DI\Extension
+
+#gettextTranslator:
+#	lang: cs
+#	files:
+#		front: %appDir%/lang
+#	layout: horizontal
+#	height: 450
