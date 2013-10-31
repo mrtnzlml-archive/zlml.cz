@@ -1,4 +1,4 @@
-(function($, undefined) {
+(function ($, undefined) {
 
 // Is History API reliably supported? (based on Modernizr & PJAX)
 	if (!(window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) return;
@@ -71,7 +71,7 @@
 			var redirect = payload.redirect || payload.url; // backwards compatibility for 'url'
 			if (redirect) {
 				var regexp = new RegExp('//' + window.location.host + '($|/)');
-				if ((redirect.substring(0,4) === 'http') ? regexp.test(redirect) : true) {
+				if ((redirect.substring(0, 4) === 'http') ? regexp.test(redirect) : true) {
 					this.href = redirect;
 				} else {
 					window.location.href = redirect;

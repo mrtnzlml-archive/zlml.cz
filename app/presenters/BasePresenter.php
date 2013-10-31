@@ -97,7 +97,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			'jquery.outline-0.11.js',
 			'netteForms.js',
 			'nette.ajax.js',
-			'history.ajax.js',
+			//'history.ajax.js',
 			'main.js',
 		));
 		$compiler = \WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
@@ -120,7 +120,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$this->flashMessage('Experimentální funkce zapnuty.', 'alert-info');
 		} else {
 			$section->experimental = 'none';
-			$this->flashMessage('Experimentální funkce vypnuty. Doporučuji obnovit stránku.', 'alert-info');
+			$this->flashMessage('Experimentální funkce vypnuty.', 'alert-info');
 		}
 		$this->redirect('this');
 	}
