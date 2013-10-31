@@ -19,6 +19,7 @@
 	"require": {
 		"php": ">= 5.3.0",
 		"nette/nette": "@dev",
+		"nette/tester": "dev-master",
 		"srigi/nette-visualpaginator": "dev-master",
 		"dg/texy": "dev-release-2.x",
         "kukulich/fshl": "dev-develop",

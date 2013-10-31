@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "bb0cf1b463b4bfaf8c311ad53afeed2c",
+    "hash": "928e7c2790e09300c7133dd6ffc0609f",
     "packages": [
         {
             "name": "dg/texy",
@@ -368,6 +368,58 @@
             "time": "2013-10-28 13:47:57"
         },
         {
+            "name": "nette/tester",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/tester.git",
+                "reference": "4f46271816885ed38e8d55b9d3d9fa37182cd312"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/tester/zipball/4f46271816885ed38e8d55b9d3d9fa37182cd312",
+                "reference": "4f46271816885ed38e8d55b9d3d9fa37182cd312",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "bin": [
+                "Tester/tester",
+                "Tester/coverage-report"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Tester/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "http://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "http://nette.org/contributors"
+                }
+            ],
+            "description": "An easy-to-use PHP Unit Testing framework.",
+            "homepage": "http://nette.org",
+            "keywords": [
+                "nette",
+                "testing",
+                "unit"
+            ],
+            "time": "2013-09-13 12:50:22"
+        },
+        {
             "name": "schmutzka/gettexttranslator",
             "version": "dev-master",
             "source": {
@@ -469,6 +521,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "nette/nette": 20,
+        "nette/tester": 20,
         "srigi/nette-visualpaginator": 20,
         "dg/texy": 20,
         "kukulich/fshl": 20,

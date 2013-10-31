@@ -194,8 +194,8 @@ class Posts extends Nette\Object {
 		//TODO: tag search
 		//$where .= " OR tag LIKE $search";
 
-		return $this->sf->table('mirror_posts')
-			->where("MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where", $search)
+		return $this->sf->table('mirror_posts') //MATCH is case insensitive
+			->where("MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where", $search . '*')
 			->order("5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC", $search, $search)
 			->limit(50);
 	}
