@@ -29,8 +29,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$section = $this->session->getSection('experimental');
 		if ($section->experimental == NULL) {
 			$section->experimental = 'none';
+			$section->experimental_data = array();
 		}
 		$this->template->experimental = $section->experimental;
+		$this->template->experimental_data = json_encode($section->experimental_data);
 	}
 
 	protected function createComponentSearch() {
@@ -121,6 +123,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		} else {
 			$section->experimental = 'none';
 			$this->flashMessage('Experimentální funkce vypnuty.', 'alert-info');
+		}
+		$this->redirect('this');
+	}
+
+	// TODO
+	public function handleExperimentalData($data = NULL) {
+		$section = $this->session->getSection('experimental');
+		if($data !== NULL) {
+			$oldData = $section->experimental_data;
 		}
 		$this->redirect('this');
 	}

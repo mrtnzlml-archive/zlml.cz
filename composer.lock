@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "928e7c2790e09300c7133dd6ffc0609f",
+    "hash": "f4abf18e487ce98d38a8c4af116191b2",
     "packages": [
         {
             "name": "dg/texy",
@@ -467,49 +467,6 @@
                 "translator"
             ],
             "time": "2013-10-20 11:23:26"
-        },
-        {
-            "name": "srigi/nette-visualpaginator",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/srigi/nette-visualpaginator.git",
-                "reference": "2098503c9dc82d0c2787ea66e749672c5f06f9d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/srigi/nette-visualpaginator/zipball/2098503c9dc82d0c2787ea66e749672c5f06f9d1",
-                "reference": "2098503c9dc82d0c2787ea66e749672c5f06f9d1",
-                "shasum": ""
-            },
-            "require": {
-                "nette/nette": "~2.0",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "VisualPaginator": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "email": "david@grudl.com",
-                    "homepage": "http://davidgrudl.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Igor Hlina",
-                    "email": "srigi@srigi.sk"
-                }
-            ],
-            "description": "Addon to display paginator in Nette webapplications",
-            "time": "2013-02-21 16:57:03"
         }
     ],
     "packages-dev": [
@@ -522,7 +479,6 @@
     "stability-flags": {
         "nette/nette": 20,
         "nette/tester": 20,
-        "srigi/nette-visualpaginator": 20,
         "dg/texy": 20,
         "kukulich/fshl": 20,
         "janmarek/webloader": 20,

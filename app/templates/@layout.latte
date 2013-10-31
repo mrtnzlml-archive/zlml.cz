@@ -14,7 +14,7 @@
 	{#scripts}{control js}{/#}
 </head>
 
-<body data-experimental="{$experimental}">
+<body data-experimental="{$experimental}" data-experimental-data="{$experimental_data}">
 	<script> document.body.className+=' js' </script>
 
 	<div class="container shadow hidden-print"><style>.record { position: relative; }</style>
@@ -50,6 +50,8 @@
 					{else}
 						<a n:href="experimental!">Vypnout experimentální funkce</a>
 					{/if}
+					<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left"
+						  data-original-title="Zapíná experimentální funkce, které nemusí být každému příjemné a mohou se chovat nepředvídatelně."></span>
 					{*<a n:href="this, lang => en">English</a>*}
 					{*<a n:href="this, lang => cs">Česky</a>*}
 				</div>
@@ -60,11 +62,11 @@
 	{snippet menu}
 	<div class="container hidden-print main-nav" style="background:transparent;padding:0">
 		<ul class="nav nav-pills">
-			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:">home</a></li>
+			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:"><span class="glyphicon glyphicon-home"></span> home</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:about') ? active"><a n:href="Single:about">about</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
-			<li n:class="$presenter->isLinkCurrent('Single:obsah') ? active"><a n:href="Single:obsah">obsah</a></li>
-			<li><a n:href="random!">random</a></li>
+			<li n:class="$presenter->isLinkCurrent('Single:obsah') ? active"><a n:href="Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
+			<li><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
 			{if $user->isLoggedIn()}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
 		</ul>
 	</div>

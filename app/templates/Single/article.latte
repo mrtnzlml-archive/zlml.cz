@@ -15,6 +15,12 @@
 				<a href="javascript:window.print()" class="visible-lg">tisk&nbsp;<span class="glyphicon glyphicon-print"></span></a>
 				<a n:href=":Admin:default $post->id" n:if="$user->isLoggedIn()">edit</a>
 			</small>
+			{*<div class="btn-toolbar" role="toolbar">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-left"></span></button>
+					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+				</div>
+			</div>*}
 		</div>
 	</h2>
 	{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
@@ -29,6 +35,10 @@
 		<div id="columns">
 			{!$body}
 		</div>
+		{*<ul class="pager">
+			<li class="previous disabled"><a>&larr; Older</a></li>
+			<li class="next"><a href="#">Newer &rarr;</a></li>
+		</ul>*}
 	</div>
 	<div class="col-lg-2">
 		<canvas id="outline" class="visible-lg" width="150" height="400"></canvas>

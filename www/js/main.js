@@ -96,6 +96,8 @@ $(function () {
 		$('#' + slugId).val(make_url(val));
 	});
 
+	$('.glyphicon-question-sign').tooltip();
+
 });
 
 var nodiac = { 'á': 'a', 'č': 'c', 'ď': 'd', 'é': 'e', 'ě': 'e', 'í': 'i', 'ň': 'n', 'ó': 'o', 'ř': 'r', 'š': 's', 'ť': 't', 'ú': 'u', 'ů': 'u', 'ý': 'y', 'ž': 'z' };
