@@ -186,6 +186,10 @@ class Posts extends Nette\Object {
 		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
 		foreach ($matches[0] as $part) {
 			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
+				$accents = array('aá', 'cč', 'eéě', 'ií', 'oó', 'rř', 'sš', 'uúů', 'zž');
+				foreach($accents as $accent) {
+					$part = preg_replace("<[$accent]>iu", "[$accent]+", $part);
+				}
 				$regexp = "REGEXP '[[:<:]]" . addslashes(mb_strtoupper($part, 'UTF-8')) . "[[:>:]]'";
 				$where .= " OR (title $regexp OR body $regexp)";
 			}
