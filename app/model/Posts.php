@@ -103,6 +103,7 @@ class Posts extends Nette\Object {
 	}
 
 	/**
+	 * TODO: optimalizovat
 	 * @param $tag_id
 	 * @param int $limit
 	 * @return array

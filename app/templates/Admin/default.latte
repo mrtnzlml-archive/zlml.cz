@@ -51,14 +51,14 @@
 			$(function () {
 				var editor = CodeMirror.fromTextArea(document.getElementById("editor"));
 				var timer = null;
-				$.nette.ajax({
+				/*$.nette.ajax({
 					url: {link update!},
 					data: {
 						title: $('[name="title"]').val(),
 						content: editor.getValue(),
 						tags: $('[name="tags"]').val()
 					}
-				});
+				});*/
 				$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
 					if (timer) {
 						window.clearTimeout(timer);

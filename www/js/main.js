@@ -4,7 +4,7 @@ $(function () {
 	//	$.nette.ext('init').linkSelector = 'a';
 	//}
 
-	$.nette.ext('spinner', {
+	/*$.nette.ext('spinner', {
 		start: function () {
 			$('html').addClass('wait');
 		},
@@ -12,7 +12,7 @@ $(function () {
 			$('html').removeClass('wait');
 			$('html,body').animate({scrollTop: $(".nav").offset().top}, 100);
 		}
-	});
+	});*/
 
 	$.nette.init();
 

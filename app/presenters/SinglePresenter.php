@@ -30,7 +30,7 @@ class SinglePresenter extends BasePresenter {
 
 			//TODO:
 			// 1 - podle tagu
-			// 2 - podle data
+			// 2 - podle data (nejnovější)
 			// 3 - náhodný
 			$next = array();
 			$tags = iterator_to_array($this->posts->getTagsByPostID($post->id));
