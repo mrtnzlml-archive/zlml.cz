@@ -35,17 +35,17 @@
 		<div id="columns">
 			{!$body}
 		</div>
-		{*<ul class="pager">
-			<li class="previous disabled"><a>&larr; Older</a></li>
-			<li class="next"><a href="#">Newer &rarr;</a></li>
-		</ul>*}
+		<ul class="pager" n:if="$nextArticle || $prevArticle">
+			<li class="previous" n:if="$nextArticle"><a n:href="$nextArticle->slug"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí článek</a></li>
+			<li class="next" n:if="$prevArticle"><a n:href="$prevArticle->slug">Další článek&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+		</ul>
 	</div>
 	<div class="col-lg-2">
 		<canvas id="outline" class="visible-lg" width="150" height="400"></canvas>
 	</div>
 </div>
 
-<div class="share hidden-print">
+{*<div class="share hidden-print">
 	<span class="label label-danger">
 		<span class="glyphicon glyphicon-share-alt"></span>
 		<a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a>
@@ -58,7 +58,7 @@
 		<span class="glyphicon glyphicon-share-alt"></span>
 		<a href="http://twitter.com/share?text={$post->title}&url={$url}" target="_blank">Twitter</a>
 	</span>
-</div>
+</div>*}
 
 <div id="bottom">
 	<hr class="hidden-print load_disqus">

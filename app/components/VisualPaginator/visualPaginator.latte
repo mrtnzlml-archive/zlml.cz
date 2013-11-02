@@ -3,7 +3,7 @@
 		{if $paginator->isFirst()}
 			<li class="disabled"><a><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí</a></li>
 		{else}
-			<li><a href="{link this, 'page' => $paginator->page - 1}" rel="prev">« Předchozí</a><li>
+			<li><a href="{link this, 'page' => $paginator->page - 1}" rel="prev"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí</a><li>
 		{/if}
 
 		{foreach $steps as $step}
@@ -16,7 +16,7 @@
 		{/foreach}
 
 		{if $paginator->isLast()}
-			<li class="disabled"><a >Další »</a></li>
+			<li class="disabled"><a>Další&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a></li>
 		{else}
 			<li><a href="{link this, 'page' => $paginator->page + 1}" rel="next">Další&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a></li>
 		{/if}

@@ -23,6 +23,11 @@ class SinglePresenter extends BasePresenter {
 			$this->template->body = $texy->process($post->body);
 			$this->template->url = $this->getHttpRequest()->getUrl();
 
+			$prev = $this->posts->getAllPosts()->where('? > date', $post->date)->order('date DESC')->limit(1)->fetch();
+			$next = $this->posts->getAllPosts()->where('? < date', $post->date)->order('date DESC')->limit(1)->fetch();
+			$this->template->prevArticle = $prev;
+			$this->template->nextArticle = $next;
+
 			//TODO:
 			// 1 - podle tagu
 			// 2 - podle data
