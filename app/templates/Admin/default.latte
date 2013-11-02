@@ -51,14 +51,14 @@
 			$(function () {
 				var editor = CodeMirror.fromTextArea(document.getElementById("editor"));
 				var timer = null;
-				/*$.nette.ajax({
+				$.nette.ajax({
 					url: {link update!},
 					data: {
 						title: $('[name="title"]').val(),
 						content: editor.getValue(),
 						tags: $('[name="tags"]').val()
 					}
-				});*/
+				});
 				$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
 					if (timer) {
 						window.clearTimeout(timer);
@@ -90,8 +90,8 @@
 					{$title} <small>{date('Y-m-d')}</small>
 				{/ifset}
 			</h2>
-			{ifset $tagsPrew}
-				<span n:foreach="$tagsPrew as $tag" class="label">{$tag}&nbsp;</span>
+			{ifset $tagsPrev}
+				<span n:foreach="$tagsPrev as $tag" class="label label-default">{$tag}&nbsp;</span>
 			{/ifset}
 		</div>
 		<div id="preview" n:if="isset($preview)">{!$preview}</div>

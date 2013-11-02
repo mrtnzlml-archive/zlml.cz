@@ -15,13 +15,13 @@
 					</td>
 					<td>#{$tag->color}</td>
 					<td>
-						{*input color$tag->id*}
-						<!--<input type="color" value="#{$tag->color}">-->
+						{input color$tag->id}
 					</td>
 					<td>
 						<div class="btn-group">
-							<a n:href="regenerate! $tag->id" class="btn btn-info">regenerate color</a>
-							<a n:href="deleteTag! $tag->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento tag?">Delete</a>
+							{input update$tag->id, class => 'btn btn-success'}
+							<a n:href="regenerate! $tag->id" class="btn btn-info">Regerovat barvu</a>
+							<a n:href="deleteTag! $tag->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento tag?">Smazat</a>
 						</div>
 					</td>
 				</tr>

@@ -47,15 +47,30 @@ class AdminPresenter extends BasePresenter {
 			$form->addText('color' . $tag->id)
 				->setType('color')
 				->setValue('#' . $tag->color);
+			$form->addSubmit('update' . $tag->id, 'Změnit barvu')
+				->onClick[] = function ($this) use ($tag) {
+				$this->colorSucceeded($this, $tag->id);
+			};
 		}
-		$form->addSubmit('send', 'Změnit barvu');
-		$form->onSuccess[] = $this->colorSucceeded;
 		return $form;
 	}
 
-	public function colorSucceeded($form) {
-		$vals = $form->getValues();
-		$this->flashMessage(preg_replace('<#>', '', $vals->color));
+	/**
+	 * @param $button
+	 * @param $id
+	 */
+	public function colorSucceeded($button, $id) {
+		$vals = $button->getForm()->getValues();
+		$newColor = preg_replace('<#>', '', $vals['color' . $id]);
+		try {
+			$this->posts->updateTagByID($id, array(
+				'color' => $newColor,
+			));
+			$this->flashMessage('Tag byl úspěšně aktualizován.', 'alert-success');
+		} catch (\Exception $exc) {
+			$this->flashMessage($exc->getMessage(), 'alert-error');
+		}
+		$this->redirect('this');
 	}
 
 	protected function createComponentNewPost() {
@@ -121,7 +136,7 @@ class AdminPresenter extends BasePresenter {
 		$texy->headingModule->top = 3; //start at H3
 		$this->template->preview = Nette\Utils\Html::el()->setHtml($texy->process($content));
 		$this->template->title = $title;
-		$this->template->tagsPrew = array_unique(explode(', ', $tags));
+		$this->template->tagsPrev = array_unique(explode(', ', $tags));
 		if ($this->isAjax()) {
 			$this->invalidateControl('preview');
 		} else {

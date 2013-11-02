@@ -19,12 +19,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function beforeRender() {
 		parent::beforeRender();
-		if ($this->isAjax()) {
+		/*if ($this->isAjax()) {
 			$this->invalidateControl('title');
 			$this->invalidateControl('menu');
 			$this->invalidateControl('flashes');
 			$this->invalidateControl('content');
-		}
+		}*/
 
 		$section = $this->session->getSection('experimental');
 		if ($section->experimental == NULL) {
