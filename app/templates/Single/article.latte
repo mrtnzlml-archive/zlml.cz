@@ -45,7 +45,10 @@
 	</div>
 </div>
 
-{*<div class="share hidden-print">
+<div id="bottom">
+	<hr class="hidden-print load_disqus">
+
+	<div class="share hidden-print">
 	<span class="label label-danger">
 		<span class="glyphicon glyphicon-share-alt"></span>
 		<a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a>
@@ -58,11 +61,9 @@
 		<span class="glyphicon glyphicon-share-alt"></span>
 		<a href="http://twitter.com/share?text={$post->title}&url={$url}" target="_blank">Twitter</a>
 	</span>
-</div>*}
+	</div>
 
-<div id="bottom">
-	<hr class="hidden-print load_disqus">
-	{*<h3 class="hidden-print">Mohlo by vás také zajímat:</h3>*}
+	<hr>
 
 	<div class="row hidden-print">
 		<div class="suggestion col-lg-4 col-md-4" n:foreach="$next as $n">
