@@ -1,33 +1,44 @@
 {#content}
 
+{var $rand = rand(2,8)}
+
 {foreach $posts as $post}
 	{var $start = array(1, 3, 6)}
 	{var $end = array(2, 5, 8)}
 	{if in_array($iterator->counter, $start)}<div class="row">{/if}
+
 	<div n:class="$iterator->counter == 1 ? 'col-lg-8 col-md-8' : 'col-lg-4 col-md-4'">
-		<h3><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h3>
-		{if $iterator->counter == 1}
+		{if rand(0,1) && $iterator->counter == $rand}
+			<h3><a href="http://www.fresh-hosting.cz/" target="_blank">FRESH-Hosting</a></h3>
 			<p>
-				{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
-					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
-						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
-					</a>
-				{/foreach}
-				{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:1000}
-				&nbsp;<a n:href=":Single:article $post->slug">přečtěte si více</a>
+				<a href="http://www.fresh-hosting.cz/" target="_blank" style="text-decoration:none">
+					<span class="label hidden-print" style="background: #fb4">reklama</span>
+				</a>
+				Nový webový hosting FRESH-Hosting nedávno nasadil novou verzi PHP s číslem 5.5.6. Obecně PHP verze 5.5+
+				přináší celou řadu zajímavých novinek jako je například operátor yield, který umožňuje vytvářet generátory,
+				zavádí také nový způsob práce s hesly pomocí funkcí password_hash a password_verify, nebo například užitečný blok
+				finally, který v PHP doposud chyběl. Kromě jiných zajímavostí si můžete všechny tyto funkce
+				, díky tomuto hostingu, vyzkoušet za velmi zajímavou cenu&hellip;
+				&nbsp;<a href="http://www.fresh-hosting.cz/" target="_blank">zjistěte více informací</a>
 			</p>
 		{else}
+			<h3><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h3>
 			<p>
 				{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
 					<a n:href="Tag:default, $post_tag->tag->name" style="text-decoration:none">
 						<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
 					</a>
 				{/foreach}
-				{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:450}
+				{if $iterator->counter == 1}
+					{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:1000}
+				{else}
+					{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:450}
+				{/if}
 				&nbsp;<a n:href=":Single:article $post->slug">přečtěte si více</a>
 			</p>
 		{/if}
 	</div>
+
 	{if in_array($iterator->counter, $end) || $iterator->last}</div>{/if}
 {/foreach}
 
