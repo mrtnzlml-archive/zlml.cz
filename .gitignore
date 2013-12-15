@@ -11,5 +11,6 @@ libs/*
 app/config/config.local.neon
 
 !fshlTexy.php
+!JavaScriptLoader.php
 !ZeminemOutputNamingConvention.php
 !Tex.php

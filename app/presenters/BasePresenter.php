@@ -107,7 +107,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$compiler->addFilter(function ($code) {
 			return \JSMin::minify($code);
 		});
-		return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+		return new \Zeminem\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
 	}
 
 	public function handleRandom() {
