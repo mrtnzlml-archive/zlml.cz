@@ -12,21 +12,21 @@ php:
 	# zlib.output_compression: yes
 
 nette:
+	session:
+		debugger: TRUE
+		expiration: 14 days
 	application:
-		errorPresenter: Error
 		mapping:
 			*: App\*Module\*Presenter
-
-	session:
-		expiration: 14 days
+	container:
+		debugger: TRUE
+		accessors: TRUE
 
 services:
 	authenticator: Model\Authenticator
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- Model\Posts
-
-factories:
 
 extensions:
 	ajax: VojtechDobes\NetteAjax\Extension

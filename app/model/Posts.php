@@ -10,8 +10,8 @@ use Nette;
  */
 class Posts extends Nette\Object {
 
-	/** @var Nette\Database\SelectionFactory @inject */
-	public $sf;
+	/** @var Nette\Database\Context @inject */
+	public $database;
 
 	/**
 	 * @param $title
@@ -28,17 +28,17 @@ class Posts extends Nette\Object {
 			'release_date' => $release,
 		);
 		//Save post:
-		$post = $this->sf->table('posts')->insert($data);
+		$post = $this->database->table('posts')->insert($data);
 		//Save tags:
 		if (!empty($tags[0])) {
 			foreach ($tags as $tag) {
 				$color = substr(md5(rand()), 0, 6); //Short and sweet
 				if (count($this->getTagByName($tag)) == 0) { //Pouze nové tagy!
-					$tag = $this->sf->table('tags')->insert(array('name' => $tag, 'color' => $color));
-					$this->sf->table('posts_tags')->insert(array('post_id' => $post->id, 'tag_id' => $tag->id));
+					$tag = $this->database->table('tags')->insert(array('name' => $tag, 'color' => $color));
+					$this->database->table('posts_tags')->insert(array('post_id' => $post->id, 'tag_id' => $tag->id));
 				} else {
 					$tag = $this->getTagByName($tag)->fetch();
-					$this->sf->table('posts_tags')->insert(array('post_id' => $post->id, 'tag_id' => $tag->id));
+					$this->database->table('posts_tags')->insert(array('post_id' => $post->id, 'tag_id' => $tag->id));
 				}
 			}
 		}
@@ -59,22 +59,22 @@ class Posts extends Nette\Object {
 			'release_date' => $release,
 		);
 		//Update post:
-		$post = $this->sf->table('posts')->where('id = ?', $id)->update($data);
+		$post = $this->database->table('posts')->where('id = ?', $id)->update($data);
 		if (!empty($tags[0])) {
-			$this->sf->table('posts_tags')->where('post_id = ?', $id)->delete();
+			$this->database->table('posts_tags')->where('post_id = ?', $id)->delete();
 			foreach ($tags as $tag) {
 				$color = substr(md5(rand()), 0, 6); //Short and sweet
 				$tmp = $this->getTagByName($tag);
 				if (count($tmp) == 0) { //Pouze nové tagy!
-					$tag = $this->sf->table('tags')->insert(array('name' => $tag, 'color' => $color));
-					$this->sf->table('posts_tags')->insert(array('post_id' => $id, 'tag_id' => $tag->id));
+					$tag = $this->database->table('tags')->insert(array('name' => $tag, 'color' => $color));
+					$this->database->table('posts_tags')->insert(array('post_id' => $id, 'tag_id' => $tag->id));
 				} else {
 					$tmp = $this->getTagByName($tag)->fetch(); //Again (because there is - maybe - one new tag)
-					$this->sf->table('posts_tags')->insert(array('post_id' => $id, 'tag_id' => $tmp->id));
+					$this->database->table('posts_tags')->insert(array('post_id' => $id, 'tag_id' => $tmp->id));
 				}
 			}
 		} else {
-			$this->sf->table('posts_tags')->where('post_id = ?', $id)->delete();
+			$this->database->table('posts_tags')->where('post_id = ?', $id)->delete();
 		}
 	}
 
@@ -82,7 +82,7 @@ class Posts extends Nette\Object {
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function getAllPosts() {
-		return $this->sf->table('posts')->where('release_date < NOW()');
+		return $this->database->table('posts')->where('release_date < NOW()');
 	}
 
 	/**
@@ -91,7 +91,7 @@ class Posts extends Nette\Object {
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function getPosts($limit, $offset) {
-		return $this->sf->table('posts')->where('release_date < NOW()')->limit($limit, $offset)->order('date DESC');
+		return $this->database->table('posts')->where('release_date < NOW()')->limit($limit, $offset)->order('date DESC');
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Posts extends Nette\Object {
 	 * @return bool|mixed|IRow
 	 */
 	public function getPostByID($id) {
-		return $this->sf->table('posts')->where('release_date < NOW()')->where('id = ?', $id)->fetch();
+		return $this->database->table('posts')->where('release_date < NOW()')->where('id = ?', $id)->fetch();
 	}
 
 	/**
@@ -110,7 +110,7 @@ class Posts extends Nette\Object {
 	 */
 	public function getPostsByTagID($tag_id, $limit = 20) {
 		$array = array();
-		foreach ($this->sf->table('posts_tags')->where('tag_id = ?', $tag_id) as $post_tag) {
+		foreach ($this->database->table('posts_tags')->where('tag_id = ?', $tag_id) as $post_tag) {
 			$array[] = $this->getPostByID($post_tag->post_id);
 		}
 		return array_reverse($array);
@@ -121,7 +121,7 @@ class Posts extends Nette\Object {
 	 * @return bool|mixed|IRow
 	 */
 	public function getTagByID($tag_id) {
-		return $this->sf->table('tags')->where('id = ?', $tag_id)->fetch();
+		return $this->database->table('tags')->where('id = ?', $tag_id)->fetch();
 	}
 
 	/**
@@ -129,7 +129,7 @@ class Posts extends Nette\Object {
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function getTagsByPostID($post_id) {
-		return $this->sf->table('posts_tags')->where('post_id = ?', $post_id);
+		return $this->database->table('posts_tags')->where('post_id = ?', $post_id);
 	}
 
 	/**
@@ -137,14 +137,14 @@ class Posts extends Nette\Object {
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function getTagByName($name) {
-		return $this->sf->table('tags')->where('name = ?', $name);
+		return $this->database->table('tags')->where('name = ?', $name);
 	}
 
 	/**
 	 * @return Nette\Database\Table\Selection
 	 */
 	public function getAllTags() {
-		return $this->sf->table('tags')->order('name');
+		return $this->database->table('tags')->order('name');
 	}
 
 	/**
@@ -152,7 +152,7 @@ class Posts extends Nette\Object {
 	 * @param $data
 	 */
 	public function updateTagByID($tag_id, $data) {
-		$this->sf->table('tags')->where('id = ?', $tag_id)->update($data);
+		$this->database->table('tags')->where('id = ?', $tag_id)->update($data);
 	}
 
 	/**
@@ -160,11 +160,11 @@ class Posts extends Nette\Object {
 	 */
 	public function deletePostByID($id) {
 		//Delete relation:
-		$this->sf->table('posts_tags')->where('post_id = ?', $id)->delete();
+		$this->database->table('posts_tags')->where('post_id = ?', $id)->delete();
 		//Delete tags:
 		// zatím je tam nechávám...
 		//Delete post:
-		$this->sf->table('posts')->where('id = ?', $id)->delete();
+		$this->database->table('posts')->where('id = ?', $id)->delete();
 	}
 
 	/**
@@ -172,9 +172,9 @@ class Posts extends Nette\Object {
 	 */
 	public function deleteTagById($tag_id) {
 		//Delete relation:
-		$this->sf->table('posts_tags')->where('tag_id = ?', $tag_id)->delete();
+		$this->database->table('posts_tags')->where('tag_id = ?', $tag_id)->delete();
 		//Delete tag:
-		$this->sf->table('tags')->where('id = ?', $tag_id)->delete();
+		$this->database->table('tags')->where('id = ?', $tag_id)->delete();
 	}
 
 	/**
@@ -199,7 +199,7 @@ class Posts extends Nette\Object {
 		//TODO: tag search
 		//$where .= " OR tag LIKE $search";
 
-		return $this->sf->table('mirror_posts') //MATCH is case insensitive
+		return $this->database->table('mirror_posts') //MATCH is case insensitive
 			->where("MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where", $search . '*')
 			->order("5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC", $search, $search)
 			->limit(50);
@@ -207,7 +207,7 @@ class Posts extends Nette\Object {
 
 	// Routers:
 	public function getBySlug($slug) {
-		return $this->sf->table('posts')->where('slug = ?', $slug);
+		return $this->database->table('posts')->where('slug = ?', $slug);
 	}
 
 }

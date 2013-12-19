@@ -67,12 +67,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/janmarek/WebLoader.git",
-                "reference": "d48cc80a6cf8d939daca1551a687db82f4da5603"
+                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/d48cc80a6cf8d939daca1551a687db82f4da5603",
-                "reference": "d48cc80a6cf8d939daca1551a687db82f4da5603",
+                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/b51478e2d302aa98cc9c64a9f55779071621f2c9",
+                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9",
                 "shasum": ""
             },
             "require": {
@@ -81,6 +81,9 @@
             "require-dev": {
                 "mockery/mockery": "0.7.*",
                 "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "leafo/lessphp": "Lessphp is a composer for LESS written in PHP."
             },
             "type": "library",
             "autoload": {
@@ -109,7 +112,7 @@
                 "nette",
                 "webloader"
             ],
-            "time": "2013-07-03 22:23:40"
+            "time": "2013-11-24 01:08:23"
         },
         {
             "name": "kukulich/fshl",
@@ -299,18 +302,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "720d7901a3c00c000ccb1b7759f19af07c0c6526"
+                "reference": "d9951817f5423a657737f9c595572da2c1f24ed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/720d7901a3c00c000ccb1b7759f19af07c0c6526",
-                "reference": "720d7901a3c00c000ccb1b7759f19af07c0c6526",
+                "url": "https://api.github.com/repos/nette/nette/zipball/d9951817f5423a657737f9c595572da2c1f24ed2",
+                "reference": "d9951817f5423a657737f9c595572da2c1f24ed2",
                 "shasum": ""
             },
             "require": {
                 "ext-iconv": "*",
                 "ext-tokenizer": "*",
-                "php": ">=5.3.0"
+                "php": ">=5.3.1"
             },
             "require-dev": {
                 "nette/tester": "@dev"
@@ -319,18 +322,20 @@
                 "ext-fileinfo": "*",
                 "ext-gd": "*",
                 "ext-mbstring": "*",
-                "ext-memcache": "*",
                 "ext-pdo": "*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
+                "classmap": [
+                    "Nette/"
+                ],
                 "files": [
-                    "Nette/loader.php"
+                    "Nette/common/shortcuts.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -354,18 +359,13 @@
             "keywords": [
                 "Forms",
                 "database",
-                "dbal",
                 "debugging",
                 "framework",
-                "images",
-                "latte",
                 "mailing",
-                "micro",
                 "mvc",
-                "neon",
                 "templating"
             ],
-            "time": "2013-10-28 13:47:57"
+            "time": "2013-12-19 15:47:44"
         },
         {
             "name": "nette/tester",
@@ -373,12 +373,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "4f46271816885ed38e8d55b9d3d9fa37182cd312"
+                "reference": "70d47349142b129f83e54ff0cad4c7acddc9429c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/4f46271816885ed38e8d55b9d3d9fa37182cd312",
-                "reference": "4f46271816885ed38e8d55b9d3d9fa37182cd312",
+                "url": "https://api.github.com/repos/nette/tester/zipball/70d47349142b129f83e54ff0cad4c7acddc9429c",
+                "reference": "70d47349142b129f83e54ff0cad4c7acddc9429c",
                 "shasum": ""
             },
             "require": {
@@ -417,7 +417,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2013-09-13 12:50:22"
+            "time": "2013-12-18 17:57:00"
         },
         {
             "name": "schmutzka/gettexttranslator",

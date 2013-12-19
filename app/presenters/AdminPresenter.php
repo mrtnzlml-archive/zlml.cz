@@ -138,7 +138,7 @@ class AdminPresenter extends BasePresenter {
 		$this->template->title = $title;
 		$this->template->tagsPrev = array_unique(explode(', ', $tags));
 		if ($this->isAjax()) {
-			$this->invalidateControl('preview');
+			$this->redrawControl('preview');
 		} else {
 			$this->redirect('this');
 		}

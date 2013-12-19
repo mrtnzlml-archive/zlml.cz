@@ -1,5 +1,5 @@
 {var $robots = 'noindex'}
-{#content}
+{block content}
 
 <div class="row">
 	<div class="col-lg-3">
@@ -18,8 +18,8 @@
 		{/ifset}
 
 		{form newPost}
-			<ul class="error" n:if="$form->allErrors">
-				<li n:foreach="$form->allErrors as $error">{$error}</li>
+			<ul class="error" n:if="$form->errors">
+				<li n:foreach="$form->errors as $error">{$error}</li>
 			</ul>
 			<div class="row">
 				<div class="col-lg-6">
@@ -98,13 +98,13 @@
 	</fieldset>
 {/snippet}
 
-{/#}
+{/block}
 
-{#scripts}
+{block scripts}
 {include #parent}
 <script src="{$basePath}/js/codemirror.js"></script>
-{/#}
+{/block}
 
-{#head}
+{block head}
 <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/codemirror.css">
-{/#}
+{/block}

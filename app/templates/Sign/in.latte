@@ -1,4 +1,4 @@
-{#content}
+{block content}
 <style>
 .form-signin { max-width: 330px; padding: 15px; margin: 40px auto 50px auto; }
 .form-signin ul { color: red; font-weight: bold; }
@@ -11,14 +11,14 @@
 </style>
 
 {form signInForm, class => form-signin}
-	<ul class="error" n:if="$form->allErrors">
-		<li n:foreach="$form->allErrors as $error">{$error}</li>
+	<ul class="error" n:if="$form->errors">
+		<li n:foreach="$form->errors as $error">{$error}</li>
 	</ul>
 	<h2 class="form-signin-heading" n:block=title>Přihlašte se prosím</h2>
 	{input username, class => form-control, placeholder => "Username"}
 	{input password, class => form-control, placeholder => "Heslo"}
 	<label class="checkbox">
-		{input remember} Zapamatovat si přihlášení
+		{input remember}
 	</label>
 	{input send, class => "btn btn-large btn-primary btn-block"}
 {/form}

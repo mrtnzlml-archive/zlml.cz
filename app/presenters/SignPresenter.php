@@ -44,7 +44,7 @@ class SignPresenter extends BasePresenter {
 		$form->addPassword('password', 'Password:')
 			->setRequired('Zadejte prosím správné heslo.');
 
-		$form->addCheckbox('remember', 'Keep me signed in');
+		$form->addCheckbox('remember', 'Zapamatovat si přihlášení');
 
 		$form->addSubmit('send', 'Přihlásit se');
 

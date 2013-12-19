@@ -6,12 +6,12 @@
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title n:inner-snippet="title">{#title|striptags}BLOG{/#} | Martin Zlámal</title>
+	<title n:inner-snippet="title">{block title|striptags}BLOG{/block} | Martin Zlámal</title>
 
 	{control css}
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
-	{#head}{/#}
-	{#scripts}{control js}{/#}
+	{block head}{/block}
+	{block scripts}{control js}{/block}
 </head>
 
 <body data-experimental="{$experimental}" data-experimental-data="{$experimental_data}">
@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-lg-12" style="margin-top: 10px;">
 							<div class="input-group">
-								<input n:input="search" type="search" class="form-control" placeholder="Search">
+								<input n:name="search" type="search" class="form-control" placeholder="Search">
 								<span class="input-group-btn">
 									{input send, class => 'btn btn-default'}
 								</span>

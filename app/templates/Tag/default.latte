@@ -1,6 +1,6 @@
 {var $robots = "noindex, nofollow"}
 
-{#content}
+{block content}
 
 <h2 n:block="title">Články s tagem{ifset $search} "{$search}"{/ifset}</h2>
 {ifset $error}
@@ -35,4 +35,4 @@
 	</div>
 {/ifset}
 
-{/#}
+{/block}
