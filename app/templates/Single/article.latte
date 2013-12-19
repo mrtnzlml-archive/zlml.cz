@@ -12,8 +12,9 @@
 		<small style="white-space:nowrap">{$post->date|date:'Y-m-d'}</small>
 		<div class="pull-right hidden-print">
 			<small>
-				<a href="javascript:window.print()" class="visible-lg">tisk&nbsp;<span class="glyphicon glyphicon-print"></span></a>
-				<a n:href=":Admin:default $post->id" n:if="$user->isLoggedIn()">edit</a>
+				<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span class="glyphicon glyphicon-print"></span></a>
+				<span style="font-size: 25px">\</span>
+				<a n:href=":Admin:default $post->id" n:if="$user->isLoggedIn()">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
 			</small>
 			{*<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
