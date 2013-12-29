@@ -30,11 +30,3 @@ services:
 
 extensions:
 	ajax: VojtechDobes\NetteAjax\Extension
-#	gettextTranslator: GettextTranslator\DI\Extension
-
-#gettextTranslator:
-#	lang: cs
-#	files:
-#		front: %appDir%/lang
-#	layout: horizontal
-#	height: 450

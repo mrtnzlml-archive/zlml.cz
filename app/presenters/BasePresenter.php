@@ -7,11 +7,6 @@ use Nette;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	/** @persistent */
-	//public $lang = 'cs';
-	/** @var \GettextTranslator\Gettext @inject */
-	//public $translator;
-
 	/** @var \Model\Posts @inject */
 	public $posts;
 	/** @var \Nette\Http\Session @inject */
@@ -62,15 +57,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$string = preg_replace('<([^a-zA-Z0-9])([vszouai])\s([a-zA-Z0-9]{1,})>', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;
 		});
-
-		// if not set, the default language will be used
-		/*if (!isset($this->lang)) {
-			$this->lang = $this->translator->getLang();
-		} else {
-			$this->translator->setLang($this->lang);
-		}
-		$template->setTranslator($this->translator);*/
-
 		return $template;
 	}
 
