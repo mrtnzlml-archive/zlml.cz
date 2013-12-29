@@ -26,6 +26,7 @@ services:
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- Model\Posts
+	- Model\Tags
 
 extensions:
 	ajax: VojtechDobes\NetteAjax\Extension

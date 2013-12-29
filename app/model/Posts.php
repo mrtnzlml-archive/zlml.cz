@@ -5,6 +5,7 @@ namespace Model;
 use Nette;
 
 /**
+ * TODO: oddělit TAG logiku do samostatné třídy
  * Class Posts
  * @package Model
  */
@@ -15,6 +16,7 @@ class Posts extends Nette\Object {
 
 	/**
 	 * @param $title
+	 * @param $slug
 	 * @param $tags
 	 * @param $body
 	 * @param $release
@@ -46,6 +48,7 @@ class Posts extends Nette\Object {
 
 	/**
 	 * @param $title
+	 * @param $slug
 	 * @param $tags
 	 * @param $body
 	 * @param $release

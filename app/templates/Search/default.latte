@@ -17,14 +17,14 @@
 					<div class="media-body">
 						<h4 class="media-heading">
 							<a n:href=":Single:article $r->slug">
-								{!$r->title|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
+								{$r->title|noescape|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
 							</a>
 							{*foreach $r->related('posts_tags') as $post_tag}
 								<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
 							{/foreach*}
 						</h4>
 						<p>
-							{!$r->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:550|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
+							{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:550|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
 							&nbsp;<a n:href=":Single:article $r->slug">přečtěte si více</a>
 						</p>
 					</div>
