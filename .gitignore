@@ -8,7 +8,10 @@ libs/*
 !.htaccess
 !web.config
 
+composer.lock
 app/config/config.local.neon
+tests/coverage.dat
+tests/coverage.html
 
 !fshlTexy.php
 !JavaScriptLoader.php

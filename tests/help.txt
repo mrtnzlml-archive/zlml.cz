@@ -1,24 +1,9 @@
 All tests
 =========
-File:		C:\xampp2\htdocs\fresh\libs\nette\tester\Tester\tester.php
-Arguments:	-j 40 -c C:\xampp2\htdocs\fresh\tests\php.ini C:\xampp2\htdocs\fresh\tests
-
-
-
-FRONT tests
-===========
-File:		C:\xampp2\htdocs\fresh\libs\nette\tester\Tester\tester.php
-Arguments:	-j 40 -c C:\xampp2\htdocs\fresh\tests\php.ini C:\xampp2\htdocs\fresh\tests\FrontModule
-
-
+File:		C:\xampp2\htdocs\zeminem.cz2\libs\nette\tester\Tester\tester.php
+Arguments:	-j 40 -c C:\xampp2\htdocs\zeminem.cz2\tests\php.ini C:\xampp2\htdocs\zeminem.cz2\tests
 
 CodeCoverage
 ============
-File:		C:\xampp2\htdocs\fresh\libs\nette\tester\Tester\coverage-report.php
-Arguments:	-c C:\xampp2\htdocs\fresh\tests\coverage.dat -s C:\xampp2\htdocs\fresh\app -o C:\xampp2\htdocs\fresh\tests\coverage.html
-
-
-
-CRON simulation
-===============
-File:		C:\xampp2\htdocs\fresh\www\index.php
+File:		C:\xampp2\htdocs\zeminem.cz2\libs\nette\tester\Tester\coverage-report.php
+Arguments:	-c C:\xampp2\htdocs\zeminem.cz2\tests\coverage.dat -s C:\xampp2\htdocs\zeminem.cz2\app -o C:\xampp2\htdocs\zeminem.cz2\tests\coverage.html

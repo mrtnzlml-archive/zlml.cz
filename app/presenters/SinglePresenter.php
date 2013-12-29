@@ -62,8 +62,4 @@ class SinglePresenter extends BasePresenter {
 		}
 	}
 
-	public function renderTags() {
-		$this->template->tags = $this->posts->getAllTags();
-	}
-
 }
