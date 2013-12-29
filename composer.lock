@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f4abf18e487ce98d38a8c4af116191b2",
+    "hash": "76e7c66101607a7d35dfc65372a7d536",
     "packages": [
         {
             "name": "dg/texy",
@@ -67,16 +67,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/janmarek/WebLoader.git",
-                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9"
+                "reference": "93324b6f7cacfe642c29c9b24322df3070c3bc0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/b51478e2d302aa98cc9c64a9f55779071621f2c9",
-                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9",
+                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/93324b6f7cacfe642c29c9b24322df3070c3bc0d",
+                "reference": "93324b6f7cacfe642c29c9b24322df3070c3bc0d",
                 "shasum": ""
             },
             "require": {
-                "nette/nette": "~2.0"
+                "nette/nette": "~2.0@rc"
             },
             "require-dev": {
                 "mockery/mockery": "0.7.*",
@@ -112,7 +112,7 @@
                 "nette",
                 "webloader"
             ],
-            "time": "2013-11-24 01:08:23"
+            "time": "2013-12-29 16:11:37"
         },
         {
             "name": "kukulich/fshl",
@@ -302,12 +302,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "d9951817f5423a657737f9c595572da2c1f24ed2"
+                "reference": "2673ce7b695d968e7428805789fb92d3cbec52e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/d9951817f5423a657737f9c595572da2c1f24ed2",
-                "reference": "d9951817f5423a657737f9c595572da2c1f24ed2",
+                "url": "https://api.github.com/repos/nette/nette/zipball/2673ce7b695d968e7428805789fb92d3cbec52e8",
+                "reference": "2673ce7b695d968e7428805789fb92d3cbec52e8",
                 "shasum": ""
             },
             "require": {
@@ -365,7 +365,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2013-12-19 15:47:44"
+            "time": "2013-12-27 11:03:24"
         },
         {
             "name": "nette/tester",
@@ -418,55 +418,6 @@
                 "unit"
             ],
             "time": "2013-12-18 17:57:00"
-        },
-        {
-            "name": "schmutzka/gettexttranslator",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/TomasVotruba/GettextTranslator.git",
-                "reference": "2bea48f2d090fcfa128b2f0215e8ef94335a62fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/GettextTranslator/zipball/2bea48f2d090fcfa128b2f0215e8ef94335a62fb",
-                "reference": "2bea48f2d090fcfa128b2f0215e8ef94335a62fb",
-                "shasum": ""
-            },
-            "require": {
-                "nette/nette": ">=2.1-dev",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "GettextTranslator/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Patrik Votoček",
-                    "email": "patrik@votocek.cz",
-                    "homepage": "http://patrik.votocek.cz",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Tomáš Votruba",
-                    "homepage": "http://tomasvotruba.cz"
-                }
-            ],
-            "description": "Translator for Nette (PHP framework).",
-            "homepage": "http://addons2.nette.org/schmutzka/gettexttranslator",
-            "keywords": [
-                "gettext",
-                "nette",
-                "translator"
-            ],
-            "time": "2013-10-20 11:23:26"
         }
     ],
     "packages-dev": [
@@ -484,8 +435,7 @@
         "janmarek/webloader": 20,
         "natxet/cssmin": 20,
         "linkorb/jsmin-php": 20,
-        "leafo/lessphp": 20,
-        "schmutzka/gettexttranslator": 20
+        "leafo/lessphp": 20
     },
     "platform": {
         "php": ">= 5.3.0"

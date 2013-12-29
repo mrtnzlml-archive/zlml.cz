@@ -4,6 +4,7 @@ namespace App;
 
 use Model;
 use Nette;
+use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
@@ -31,7 +32,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	protected function createComponentSearch() {
-		$form = new \Nette\Application\UI\Form;
+		$form = new Nette\Application\UI\Form;
 		$form->addText('search')
 			->setRequired('Vyplňte co chcete vyhledávat.')
 			->setValue($this->getParameter('search'));
@@ -61,22 +62,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	public function createComponentCss() {
-		$files = new \WebLoader\FileCollection(WWW_DIR . '/css');
+		$files = new WebLoader\FileCollection(WWW_DIR . '/css');
 		$files->addFiles(array(
 			'bootstrap.css',
 			'screen.less',
 		));
-		$compiler = \WebLoader\Compiler::createCssCompiler($files, WWW_DIR . '/webtemp');
+		$compiler = WebLoader\Compiler::createCssCompiler($files, WWW_DIR . '/webtemp');
 		$compiler->setOutputNamingConvention(\ZeminemOutputNamingConvention::createCssConvention());
-		$compiler->addFileFilter(new \Webloader\Filter\LessFilter());
+		$compiler->addFileFilter(new Webloader\Filter\LessFilter());
 		$compiler->addFilter(function ($code) {
 			return \CssMin::minify($code);
 		});
-		return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+		return new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
 	}
 
 	public function createComponentJs() {
-		$files = new \WebLoader\FileCollection(WWW_DIR . '/js');
+		$files = new WebLoader\FileCollection(WWW_DIR . '/js');
 		$files->addFiles(array(
 			'jquery.js',
 			'bootstrap.js',
@@ -88,7 +89,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			//'history.ajax.js',
 			'main.js',
 		));
-		$compiler = \WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
+		$compiler = WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
 		$compiler->setOutputNamingConvention(\ZeminemOutputNamingConvention::createJsConvention());
 		$compiler->addFilter(function ($code) {
 			return \JSMin::minify($code);
@@ -116,7 +117,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	// TODO
 	public function handleExperimentalData($data = NULL) {
 		$section = $this->session->getSection('experimental');
-		if($data !== NULL) {
+		if ($data !== NULL) {
 			$oldData = $section->experimental_data;
 		}
 		$this->redirect('this');

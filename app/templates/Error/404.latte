@@ -1,7 +1,7 @@
 {var $robots = noindex}
 
 {block content}
-<h2 n:block=title>Stránka, kterou hledáte, nebyla nalezena <small>error 404</small></h2>
+<h2 n:block=title>Stránka, kterou hledáte, nebyla nalezena <small>[error 404]</small></h2>
 
 <p>Ale nezoufejte, pokusíme se s tím společně něco udělat&hellip;</p>
 
@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-lg-12" style="margin-top: 10px;">
 			<div class="input-group">
-				<input n:input="search" type="search" class="form-control" placeholder="Search" {ifset $test}value="{$test}"{/ifset}>
+				<input n:name="search" type="search" class="form-control" placeholder="Search" {ifset $test}value="{$test}"{/ifset}>
 				<span class="input-group-btn">
 					{input send, class => 'btn btn-primary', value => 'Pokusit se vyhledat'}
 				</span>
