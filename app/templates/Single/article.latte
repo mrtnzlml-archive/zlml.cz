@@ -13,8 +13,10 @@
 		<div class="pull-right hidden-print">
 			<small>
 				<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span class="glyphicon glyphicon-print"></span></a>
-				<span style="font-size: 25px">\</span>
-				<a n:href=":Admin:default $post->id" n:if="$user->isLoggedIn()">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
+				{if $user->isLoggedIn()}
+					<span style="font-size: 25px">\</span>
+					<a n:href=":Admin:default $post->id">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
+				{/if}
 			</small>
 			{*<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
@@ -34,7 +36,7 @@
 <div class="row" style="margin-bottom: 10px">
 	<div class="col-lg-10">
 		<div id="columns">
-			{!$body}
+			{$body|noescape}
 		</div>
 		<ul class="pager" n:if="$nextArticle || $prevArticle">
 			<li class="previous" n:if="$nextArticle"><a n:href="$nextArticle->slug"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí článek</a></li>
