@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Nette;
+
 class SinglePresenter extends BasePresenter {
 
 	public function renderObsah() {
@@ -10,6 +12,11 @@ class SinglePresenter extends BasePresenter {
 	}
 
 	public function renderArticle($slug) {
+		$old_slug = $slug;
+		$slug = Nette\Utils\Strings::webalize($slug);
+		if($old_slug !== $slug) {
+			$this->redirect($slug);
+		}
 		$post = $this->posts->getBySlug($slug)->fetch(); // zobrazeni článku podle slugu
 		if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
 			$this->forward($slug);
