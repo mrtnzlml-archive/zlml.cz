@@ -14,6 +14,11 @@ class RouterFactory {
 
 	private $posts;
 
+	private $broken_links = array(
+		//broken => repaired
+		'feed' => 'Homepage:rss',
+	);
+
 	public function __construct(\Model\Posts $posts) {
 		$this->posts = $posts;
 	}
@@ -28,6 +33,9 @@ class RouterFactory {
 		$paginator = implode('|', $range);
 
 		$router = new RouteList();
+		foreach($this->broken_links as $key => $value) {
+			$router[] = new Route($key, $value, Route::ONE_WAY);
+		}
 		$router[] = new Route('rss', 'Homepage:rss');
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
 		$router[] = new Route('admin', 'Admin:default');
