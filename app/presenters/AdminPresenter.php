@@ -106,24 +106,24 @@ class AdminPresenter extends BasePresenter {
 		$vals = $form->getValues();
 		if ($this->id) { // upravujeme záznam
 			try {
-				$this->posts->sf->connection->beginTransaction();
+				$this->posts->database->connection->beginTransaction();
 				$this->posts->updatePost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release, $this->id);
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
-				$this->posts->sf->connection->commit();
+				$this->posts->database->connection->commit();
 				$this->redirect('this');
 			} catch (\PDOException $exc) {
-				$this->posts->sf->connection->rollBack();
+				$this->posts->database->connection->rollBack();
 				$this->flashMessage($exc->getMessage(), 'alert-error');
 			}
 		} else { // přidáváme záznam
 			try {
-				$this->posts->sf->connection->beginTransaction();
+				$this->posts->database->connection->beginTransaction();
 				$this->posts->newPost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release);
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
-				$this->posts->sf->connection->commit();
+				$this->posts->database->connection->commit();
 				$this->redirect('this');
 			} catch (\PDOException $exc) {
-				$this->posts->sf->connection->rollBack();
+				$this->posts->database->connection->rollBack();
 				$this->flashMessage($exc->getMessage(), 'alert-error');
 			}
 		}
