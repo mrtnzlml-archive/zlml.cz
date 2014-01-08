@@ -1,20 +1,24 @@
 $(function () {
 
-	//if ($('body').data('experimental') != 'none' && (window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
-	//	$.nette.ext('init').linkSelector = 'a';
-	//}
-
-	/*$.nette.ext('spinner', {
-		start: function () {
-			$('html').addClass('wait');
-		},
-		complete: function () {
-			$('html').removeClass('wait');
-			$('html,body').animate({scrollTop: $(".nav").offset().top}, 100);
-		}
-	});*/
-
-	$.nette.init();
+	//TODO: při zapnutém ajaxování nefunguje webkitColumnCount v article.latte ... WTF??
+	/*if ($('body').data('experimental') != 'none' && (window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
+		$.nette.ext('init').linkSelector = 'a';
+		$.nette.ext('spinner', {
+			start: function () {
+				$('html').addClass('wait');
+			},
+			complete: function () {
+				$('html').removeClass('wait');
+				$('html,body').animate({scrollTop: $(".nav").offset().top}, 100);
+			}
+		});
+		$.nette.ext('outline', {
+			complete: function () {
+				outline();
+			}
+		});
+		$.nette.init();
+	}*/
 
 	$('body').on('click', '[data-confirm]', function (e) {
 		var question = $(this).data('confirm');
@@ -30,40 +34,7 @@ $(function () {
 		size: 107
 	});
 
-	$("#outline, #outline2").fracs("outline", {
-		crop: true,
-		styles: [
-			{selector: "p", fillStyle: "rgb(230,230,230)"},
-			{selector: "pre", fillStyle: "rgb(200,200,200)"},
-			{selector: "a,h1,h2,h3,h4,h5,h6", fillStyle: "rgb(104,169,255)"},
-			{selector: "canvas", fillStyle: "rgb(108,196,46)"},
-			{selector: "blockquote,.thumbnail,#disqus_thread", fillStyle: "rgb(221,75,57)"},
-			{selector: "table", fillStyle: "rgb(200,200,30)"}
-
-		],
-		viewportStyle: {fillStyle: "rgba(104,169,255,0.2)"},
-		viewportDragStyle: {fillStyle: "rgba(104,169,255,0.5)"}
-	});
-
-	var fixAffix = function () {
-		return $('#bottom').outerHeight(true) + $('.footer').outerHeight(true) + 40;
-	}
-	$('#outline').affix({
-		offset: {
-			top: 351,
-			bottom: function () {
-				return (this.bottom = fixAffix);
-			}
-		}
-	})
-	$(window).scroll(fixAffix);
-
-	$('#outline2').affix({
-		offset: {
-			top: 264,
-			bottom: 100
-		}
-	})
+	outline();
 
 	var disqus_div = $("#disqus_thread");
 	if (disqus_div.size() > 0) {
@@ -113,4 +84,42 @@ function make_url(s) {
 		s2 += (typeof nodiac[s.charAt(i)] != 'undefined' ? nodiac[s.charAt(i)] : s.charAt(i));
 	}
 	return s2.replace(/[^a-z0-9_]+/g, '-').replace(/^-|-$/g, '');
+}
+
+//TODO: pri experimentální módu a nejaxovém požadavku po načtení zmizí ... WTF??
+function outline() {
+	$("#outline, #outline2").fracs("outline", {
+		crop: true,
+		styles: [
+			{selector: "p", fillStyle: "rgb(230,230,230)"},
+			{selector: "pre", fillStyle: "rgb(200,200,200)"},
+			{selector: "a,h1,h2,h3,h4,h5,h6", fillStyle: "rgb(104,169,255)"},
+			{selector: "canvas", fillStyle: "rgb(108,196,46)"},
+			{selector: "blockquote,.thumbnail,#disqus_thread", fillStyle: "rgb(221,75,57)"},
+			{selector: "table", fillStyle: "rgb(200,200,30)"}
+
+		],
+		viewportStyle: {fillStyle: "rgba(104,169,255,0.2)"},
+		viewportDragStyle: {fillStyle: "rgba(104,169,255,0.5)"}
+	});
+
+	var fixAffix = function () {
+		return $('#bottom').outerHeight(true) + $('.footer').outerHeight(true) + 40;
+	}
+	$('#outline').affix({
+		offset: {
+			top: 351,
+			bottom: function () {
+				return (this.bottom = fixAffix);
+			}
+		}
+	})
+	$(window).scroll(fixAffix);
+
+	$('#outline2').affix({
+		offset: {
+			top: 264,
+			bottom: 100
+		}
+	})
 }

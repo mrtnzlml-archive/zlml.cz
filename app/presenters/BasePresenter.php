@@ -15,12 +15,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function beforeRender() {
 		parent::beforeRender();
-		/*if ($this->isAjax()) {
+		if ($this->isAjax()) {
 			$this->redrawControl('title');
 			$this->redrawControl('menu');
 			$this->redrawControl('flashes');
 			$this->redrawControl('content');
-		}*/
+		}
 
 		$section = $this->session->getSection('experimental');
 		if ($section->experimental == NULL) {
@@ -86,7 +86,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			'jquery.outline-0.11.js',
 			'netteForms.js',
 			'nette.ajax.js',
-			//'history.ajax.js',
+			'history.ajax.js',
 			'main.js',
 		));
 		$compiler = WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');

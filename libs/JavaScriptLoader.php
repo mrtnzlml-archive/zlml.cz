@@ -18,7 +18,7 @@ class JavaScriptLoader extends WebLoader {
 	 */
 	public function getElement($source) {
 		return Html::el("script")
-			->addAttributes(['async' => 'async'])
+			//->addAttributes(['async' => 'async']) //this is one big trouble :-/
 			->type("text/javascript")
 			->src($source);
 	}
