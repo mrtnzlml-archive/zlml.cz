@@ -2,6 +2,15 @@
 
 {block content}
 
+{if $tags}
+	<h2>Nalezené tagy</h2>
+	{foreach $tags as $tag}
+		<a n:href="Tag:default, $tag->name" style="text-decoration:none">
+			<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+		</a>
+	{/foreach}
+{/if}
+
 <h2 n:block="title">Výsledky vyhledávání{ifset $search} "{$search}"{/ifset}</h2>
 {ifset $error}
 	<div class="alert alert-danger">

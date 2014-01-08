@@ -6,6 +6,8 @@ class SearchPresenter extends BasePresenter {
 
 	/** @var \Model\Posts @inject */
 	public $posts;
+	/** @var \Model\Tags @inject */
+	public $tags;
 
 	public function renderDefault($search = NULL) {
 
@@ -20,6 +22,7 @@ class SearchPresenter extends BasePresenter {
 				$this->template->search = $search;
 				$this->template->result = $result;
 			}
+			$this->template->tags = $this->tags->getByName($search);
 		}
 	}
 
