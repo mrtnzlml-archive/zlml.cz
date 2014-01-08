@@ -71,7 +71,7 @@
 				<span n:foreach="$tagsPrev as $tag" class="label label-default">{$tag}&nbsp;</span>
 			{/ifset}
 		</div>
-		<div id="preview" n:if="isset($preview)">{!$preview}</div>
+		<div id="preview" n:if="isset($preview)">{$preview|noescape}</div>
 	</fieldset>
 {/snippet}
 
