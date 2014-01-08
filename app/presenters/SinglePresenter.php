@@ -6,8 +6,13 @@ use Nette;
 
 class SinglePresenter extends BasePresenter {
 
+	/** @var \Model\Tags @inject*/
+	public $tags;
+
 	public function renderObsah() {
 		$articles = $this->posts->getAllPosts()->order('title ASC');
+		$this->template->tags = $this->tags->getAllTags()->order('name ASC');
+		$this->template->tag_score = $this->tags->getTagCloud();
 		$this->template->articles = $articles;
 	}
 
