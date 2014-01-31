@@ -11,16 +11,6 @@
 </ul>
 
 {cache expire => '+20 minutes'}
-	{foreach $tags as $tag}
-		<a n:href="Tag:default, $tag->name" style="text-decoration:none">
-			<span class="label hidden-print" style="background: #{$tag->color};font-size: {$tag_score[$tag->name]}px">{$tag->name}</span>
-		</a>
-	{/foreach}
-{/cache}
-
-<hr>
-
-{cache expire => '+20 minutes'}
 <div class="row" style="margin-bottom: 10px">
 	<div class="col-lg-10">
 		{var $last = ''}

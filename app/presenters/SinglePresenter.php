@@ -11,8 +11,6 @@ class SinglePresenter extends BasePresenter {
 
 	public function renderObsah() {
 		$articles = $this->posts->getAllPosts()->order('title ASC');
-		$this->template->tags = $this->tags->getAllTags()->order('name ASC');
-		$this->template->tag_score = $this->tags->getTagCloud();
 		$this->template->articles = $articles;
 	}
 
