@@ -15,13 +15,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function beforeRender() {
 		parent::beforeRender();
-		if ($this->isAjax()) {
-			$this->redrawControl('title');
-			$this->redrawControl('menu');
-			$this->redrawControl('flashes');
-			$this->redrawControl('content');
-		}
-
 		$section = $this->session->getSection('experimental');
 		if ($section->experimental == NULL) {
 			$section->experimental = 'none';

@@ -89,9 +89,14 @@
 			lineWrapping: true,
 			mode: "text/html"
 		});
+		if (!editor.getValue()) {
+			var loc = location.pathname + location.search;
+			editor.setValue(localStorage.getItem('content:' + loc));
+		}
 		var timer = null;
 		$.nette.ajax({
 			url: {link update!},
+			type: 'post',
 			data: {
 				title: $('[name="title"]').val(),
 				content: editor.getValue(),
@@ -106,12 +111,20 @@
 				timer = null;
 				$.nette.ajax({
 					url: {link update!},
+					type: 'post',
 					data: {
 						title: $('[name="title"]').val(),
 						content: editor.getValue(),
 						tags: $('[name="tags"]').val()
 					}
 				});
+				if(window.localStorage) {
+					//TODO: comment saved
+					var loc = location.pathname + location.search;
+					//localStorage.setItem('title:' + loc, $('[name="title"]').val());
+					localStorage.setItem('content:' + loc, editor.getValue());
+					//localStorage.setItem('tags:' + loc, $('[name="tags"]').val());
+				}
 				e.preventDefault();
 			}, 1000);
 		});
