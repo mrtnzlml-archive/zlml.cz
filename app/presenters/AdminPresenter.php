@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cntrl;
 use Nette;
 
 class AdminPresenter extends BasePresenter {
@@ -95,8 +96,8 @@ class AdminPresenter extends BasePresenter {
 			->setHtmlId('editor')
 			->setValue(empty($this->value) ? '' : $this->value->body)
 			->setRequired('Je zapotřebí napsat nějaký text.');
-		$form->addText('release', 'Datum zveřejnění:')
-			->setType('datetime-local'); //HTML5
+		$form['release'] = new Cntrl\DateInput('Datum zveřejnění (den | měsíc | rok):');
+		$form['release']->setDefaultValue(new \DateTime);
 		$form->addSubmit('save', 'Uložit a publikovat');
 		$form->onSuccess[] = $this->processPostSucceeded;
 		return $form;
@@ -106,24 +107,24 @@ class AdminPresenter extends BasePresenter {
 		$vals = $form->getValues();
 		if ($this->id) { // upravujeme záznam
 			try {
-				$this->posts->database->connection->beginTransaction();
+				$this->posts->database->beginTransaction();
 				$this->posts->updatePost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release, $this->id);
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
-				$this->posts->database->connection->commit();
+				$this->posts->database->commit();
 				$this->redirect('this');
 			} catch (\PDOException $exc) {
-				$this->posts->database->connection->rollBack();
+				$this->posts->database->rollBack();
 				$this->flashMessage($exc->getMessage(), 'alert-error');
 			}
 		} else { // přidáváme záznam
 			try {
-				$this->posts->database->connection->beginTransaction();
-				$this->posts->newPost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release);
+				$this->posts->database->beginTransaction();
+				$this->posts->newPost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, new \DateTime());
 				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
-				$this->posts->database->connection->commit();
+				$this->posts->database->commit();
 				$this->redirect('this');
 			} catch (\PDOException $exc) {
-				$this->posts->database->connection->rollBack();
+				$this->posts->database->rollBack();
 				$this->flashMessage($exc->getMessage(), 'alert-error');
 			}
 		}

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "76e7c66101607a7d35dfc65372a7d536",
+    "hash": "d915703b9c56b578324742af5ce9ef0c",
     "packages": [
         {
             "name": "dg/texy",
@@ -67,12 +67,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/janmarek/WebLoader.git",
-                "reference": "93324b6f7cacfe642c29c9b24322df3070c3bc0d"
+                "reference": "3d44d306d59591dc94f6fdcb98f55c0990d98326"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/93324b6f7cacfe642c29c9b24322df3070c3bc0d",
-                "reference": "93324b6f7cacfe642c29c9b24322df3070c3bc0d",
+                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/3d44d306d59591dc94f6fdcb98f55c0990d98326",
+                "reference": "3d44d306d59591dc94f6fdcb98f55c0990d98326",
                 "shasum": ""
             },
             "require": {
@@ -112,7 +112,7 @@
                 "nette",
                 "webloader"
             ],
-            "time": "2013-12-29 16:11:37"
+            "time": "2014-01-10 14:11:42"
         },
         {
             "name": "kukulich/fshl",
@@ -302,12 +302,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "2673ce7b695d968e7428805789fb92d3cbec52e8"
+                "reference": "9f1921d790825238ec99be4560cb5b991d1c4b21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/2673ce7b695d968e7428805789fb92d3cbec52e8",
-                "reference": "2673ce7b695d968e7428805789fb92d3cbec52e8",
+                "url": "https://api.github.com/repos/nette/nette/zipball/9f1921d790825238ec99be4560cb5b991d1c4b21",
+                "reference": "9f1921d790825238ec99be4560cb5b991d1c4b21",
                 "shasum": ""
             },
             "require": {
@@ -365,7 +365,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2013-12-27 11:03:24"
+            "time": "2014-01-30 02:29:18"
         },
         {
             "name": "nette/tester",
@@ -373,12 +373,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "70d47349142b129f83e54ff0cad4c7acddc9429c"
+                "reference": "dd8074350654a75d81619371dc39b4044e58b8ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/70d47349142b129f83e54ff0cad4c7acddc9429c",
-                "reference": "70d47349142b129f83e54ff0cad4c7acddc9429c",
+                "url": "https://api.github.com/repos/nette/tester/zipball/dd8074350654a75d81619371dc39b4044e58b8ef",
+                "reference": "dd8074350654a75d81619371dc39b4044e58b8ef",
                 "shasum": ""
             },
             "require": {
@@ -417,7 +417,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2013-12-18 17:57:00"
+            "time": "2014-01-29 03:39:37"
         }
     ],
     "packages-dev": [

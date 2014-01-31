@@ -13,6 +13,7 @@ class Posts extends Nette\Object {
 
 	/** @var Nette\Database\Context @inject */
 	public $database;
+	protected $tableName = 'posts';
 
 	/**
 	 * @param $title
@@ -29,8 +30,7 @@ class Posts extends Nette\Object {
 			'date' => new \DateTime(),
 			'release_date' => $release,
 		);
-		//Save post:
-		$post = $this->database->table('posts')->insert($data);
+		$post = $this->database->table($this->tableName)->insert($data); //Save post
 		//Save tags:
 		if (!empty($tags[0])) {
 			foreach ($tags as $tag) {
@@ -191,7 +191,7 @@ class Posts extends Nette\Object {
 		foreach ($matches[0] as $part) {
 			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
 				$accents = array('aá', 'cč', 'eéě', 'ií', 'oó', 'rř', 'sš', 'uúů', 'zž');
-				foreach($accents as $accent) {
+				foreach ($accents as $accent) {
 					$part = preg_replace("<[$accent]>iu", "[$accent]+", $part);
 				}
 				$regexp = "REGEXP '[[:<:]]" . addslashes(mb_strtoupper($part, 'UTF-8')) . "[[:>:]]'";
