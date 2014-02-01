@@ -48,7 +48,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$texy = new \Texy();
 		$template->registerHelper('texy', callback($texy, 'process'));
 		$template->registerHelper('vlna', function ($string) {
-			$string = preg_replace('<([^a-zA-Z0-9])([vszouai])\s([a-zA-Z0-9]{1,})>', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
+			$string = preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;
 		});
 		return $template;
