@@ -8,7 +8,7 @@ class fshlTexy extends Texy {
 		}
 
 		$highlighter = new \FSHL\Highlighter(
-			new \FSHL\Output\Html(),
+			new \FSHL\Output\HtmlManual(),
 			\FSHL\Highlighter::OPTION_TAB_INDENT | \FSHL\Highlighter::OPTION_LINE_COUNTER
 		);
 
