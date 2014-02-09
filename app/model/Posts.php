@@ -11,9 +11,14 @@ use Nette;
  */
 class Posts extends Nette\Object {
 
-	/** @var Nette\Database\Context @inject */
-	public $database;
 	protected $tableName = 'posts';
+
+	/** @var \Nette\Database\Context */
+	private $database;
+
+	public function __construct(Nette\Database\Context $context) {
+		$this->database = $context;
+	}
 
 	/**
 	 * @param $title
