@@ -2,30 +2,27 @@
 
 namespace Model;
 
-/*
-CREATE TABLE users (
-	id int(11) NOT NULL AUTO_INCREMENT,
-	username varchar(50) NOT NULL,
-	password char(60) NOT NULL,
-	role varchar(20) NOT NULL,
-	PRIMARY KEY (id)
-);
-*/
+use Nette\Security\Passwords;
 use Nette;
 use Nette\Utils\Strings;
 
 /**
- * Users authenticator.
+ * Class Authenticator
+ * @package Model
  */
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator {
 
-	/** @var Nette\Database\Context @inject */
-	public $database;
+	/** @var \Nette\Database\Context */
+	private $database;
+
+	public function __construct(Nette\Database\Context $context) {
+		$this->database = $context;
+	}
 
 	/**
-	 * Performs an authentication.
-	 * @return Nette\Security\Identity
-	 * @throws Nette\Security\AuthenticationException
+	 * @param array $credentials
+	 * @return Nette\Security\Identity|Nette\Security\IIdentity
+	 * @throws \Nette\Security\AuthenticationException
 	 */
 	public function authenticate(array $credentials) {
 		list($username, $password) = $credentials;
@@ -35,25 +32,22 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 		}
 
-		if ($row->password !== $this->calculateHash($password, $row->password)) {
+		if (!Passwords::verify($this->removeCapsLock($password), $row->password)) {
 			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+		} else {
+			$row = Nette\ArrayHash::from($row);
+			unset($row->password);
+			return new Nette\Security\Identity($row->id, $row->role, $row);
 		}
-
-		$row = \Nette\ArrayHash::from($row);
-		unset($row->password);
-		return new Nette\Security\Identity($row->id, $row->role, $row);
 	}
 
 	/**
-	 * Computes salted password hash.
-	 * @param  string
-	 * @return string
+	 * Fixes caps lock accidentally turned on.
+	 * @param $password
+	 * @return mixed
 	 */
-	public static function calculateHash($password, $salt = NULL) {
-		if ($password === Strings::upper($password)) { // perhaps caps lock is on
-			$password = Strings::lower($password);
-		}
-		return crypt($password, $salt ? : '$2a$07$' . Strings::random(22));
+	private function removeCapsLock($password) {
+		return $password === Strings::upper($password) ? Strings::lower($password) : $password;
 	}
 
 }
