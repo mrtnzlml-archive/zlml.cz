@@ -1,16 +1,12 @@
 {
-	"name": "nette/sandbox",
-	"description": "The sandbox is a pre-packaged Nette Framework project, basic configured structure for your application.",
-	"homepage": "http://nette.org",
+	"name": "mrtnzlml/zeminem.cz",
+	"description": "Personal website zeminem.cz...",
+	"homepage": "http://www.zeminem.cz",
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"authors": [
 		{
-			"name": "David Grudl",
-			"homepage": "http://davidgrudl.com"
-		},
-		{
-			"name": "Nette Community",
-			"homepage": "http://nette.org/contributors"
+			"name": "Martin Zlámal",
+			"homepage": "http://www.zeminem.cz",
 		}
 	],
 	"config": {
@@ -21,7 +17,7 @@
 		"nette/nette": "2.2.*@dev",
 		"nette/tester": "dev-master",
 		"dg/texy": "dev-release-2.x",
-        "kukulich/fshl": "dev-develop",
+		"kukulich/fshl": "dev-develop",
 		"janmarek/webloader": "dev-master",
 		"natxet/CssMin": "dev-master",
 		"linkorb/jsmin-php": "dev-master",
