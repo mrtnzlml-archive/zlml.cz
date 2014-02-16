@@ -3,12 +3,14 @@
 namespace App;
 
 use Cntrl;
+use Entity;
+use Kdyby;
 use Nette;
 
 class AdminPresenter extends BasePresenter {
 
-	/** @var \Model\Posts @inject */
-	public $posts;
+	/** @var Tags @inject */
+	public $tags;
 
 	/** @persistent */
 	public $id = NULL;
@@ -18,33 +20,43 @@ class AdminPresenter extends BasePresenter {
 	public function startup() {
 		parent::startup();
 		if (!$this->user->isLoggedIn()) {
-			$this->flashMessage('Tudy cesta nevede!', 'alert-error');
+			$this->flashMessage('Tudy cesta nevede!', 'alert-danger');
 			$this->redirect('Sign:in');
 		}
 	}
 
+	public function beforeRender() {
+		parent::beforeRender();
+		$this->template->tagcount = $this->tags->countBy();
+	}
+
+	public function actionDefault($id) {
+		//$post = $this->posts->findOneBy(['id' => $id]);
+		//TODO: array
+		//$this['newPost']->setDefaults($post);
+	}
+
 	public function renderDefault($id) {
-		$this->template->tags = $this->posts->getAllTags();
+		$this->template->tags = $this->tags->findBy(array());
 		if ($id != NULL) {
 			$this->id = $id;
-			$this->value = $this->posts->getPostByID($id);
+			$this->value = $this->posts->findOneBy(['id' => $id]);
 			$this->template->editace = $id;
 		}
 	}
 
 	public function renderPrehled() {
-		//TODO: bez ->where('release_date < NOW()'); !
-		$this->template->posts = $this->posts->getAllPosts()->order('date DESC');
+		$this->template->posts = $this->posts->findBy(array(), ['date' => 'DESC']);
 	}
 
 	public function renderTags() {
-		$this->template->tags = $this->posts->getAllTags();
+		$this->template->tags = $this->tags->findBy(array());
 	}
 
 	protected function createComponentColor() {
 		$form = new Nette\Application\UI\Form;
 		$form->addProtection();
-		foreach ($this->posts->getAllTags() as $tag) {
+		foreach ($this->tags->findBy(array()) as $tag) {
 			$form->addText('color' . $tag->id)
 				->setType('color')
 				->setValue('#' . $tag->color);
@@ -69,7 +81,7 @@ class AdminPresenter extends BasePresenter {
 			));
 			$this->flashMessage('Tag byl úspěšně aktualizován.', 'alert-success');
 		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-error');
+			$this->flashMessage($exc->getMessage(), 'alert-danger');
 		}
 		$this->redirect('this');
 	}
@@ -83,10 +95,11 @@ class AdminPresenter extends BasePresenter {
 		$form->addText('slug', 'URL slug:')
 			->setValue(empty($this->value) ? '' : $this->value->slug)
 			->setRequired('Je zapotřebí vyplnit slug.');
+		//TODO - rovnou naplnit viz http://doc.nette.org/cs/2.1/quickstart/creating-posts#toc-uprava-prispevku
 		$tags = array();
 		if ($this->id) {
-			foreach ($this->posts->getPostByID($this->id)->related('tags') as $a) {
-				$tags[] = $this->posts->getTagByID($a->tag_id)->name;
+			foreach ($this->posts->findOneBy(['id' => $this->id])->tags as $tag) {
+				$tags[] = $tag->name;
 			}
 		}
 		$form->addText('tags', 'Tagy:')
@@ -105,28 +118,29 @@ class AdminPresenter extends BasePresenter {
 
 	public function processPostSucceeded($form) {
 		$vals = $form->getValues();
-		if ($this->id) { // upravujeme záznam
-			try {
-				$this->posts->database->beginTransaction();
-				$this->posts->updatePost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, $vals->release, $this->id);
-				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
-				$this->posts->database->commit();
-				$this->redirect('this');
-			} catch (\PDOException $exc) {
-				$this->posts->database->rollBack();
-				$this->flashMessage($exc->getMessage(), 'alert-error');
+		$id = $this->getParameter('id');
+		try {
+			if ($id) { // upravujeme záznam
+				$post = $this->posts->findOneBy(['id' => $id]);
+			} else { // přidáváme záznam
+				$post = new Entity\Post();
 			}
-		} else { // přidáváme záznam
-			try {
-				$this->posts->database->beginTransaction();
-				$this->posts->newPost($vals->title, $vals->slug, array_unique(explode(', ', $vals->tags)), $vals->editor, new \DateTime());
-				$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
-				$this->posts->database->commit();
-				$this->redirect('this');
-			} catch (\PDOException $exc) {
-				$this->posts->database->rollBack();
-				$this->flashMessage($exc->getMessage(), 'alert-error');
+			$post->title = $vals->title;
+			$post->slug = $vals->slug;
+			$post->body = $vals->editor;
+			$post->date = new \DateTime();
+			$post->release_date = new \DateTime();
+			foreach (array_unique(explode(', ', $vals->tags)) as $tag_name) {
+				$tag = new Entity\Tag();
+				$tag->name = $tag_name;
+				$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
+				$post->addTag($tag); //FIXME
 			}
+			$this->posts->save($post);
+			$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
+			$this->redirect('this');
+		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
+			$this->flashMessage($exc->getMessage(), 'alert-danger');
 		}
 	}
 
@@ -150,7 +164,7 @@ class AdminPresenter extends BasePresenter {
 			$this->posts->deletePostByID($id);
 			$this->flashMessage('Post byl úspěšně smazán.', 'alert-success');
 		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-error');
+			$this->flashMessage($exc->getMessage(), 'alert-danger');
 		}
 		$this->redirect('this');
 	}
@@ -160,7 +174,7 @@ class AdminPresenter extends BasePresenter {
 			$this->posts->deleteTagById($tag_id);
 			$this->flashMessage('Tag byl úspěšně smazán.', 'alert-success');
 		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-error');
+			$this->flashMessage($exc->getMessage(), 'alert-danger');
 		}
 		$this->redirect('this');
 	}
@@ -171,7 +185,7 @@ class AdminPresenter extends BasePresenter {
 			$this->posts->updateTagByID($tag_id, array('color' => $color));
 			$this->redirect('this');
 		} catch (\PDOException $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-error');
+			$this->flashMessage($exc->getMessage(), 'alert-danger');
 			$this->redirect('this');
 		}
 	}

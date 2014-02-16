@@ -1,22 +1,26 @@
 <?php
 
-namespace Model;
+namespace App;
 
+use Kdyby;
 use Nette\Security\Passwords;
 use Nette;
 use Nette\Utils\Strings;
 
 /**
  * Class Authenticator
- * @package Model
+ * @package App
  */
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator {
 
-	/** @var \Nette\Database\Context */
-	private $database;
+	/** @var \Kdyby\Doctrine\EntityDao */
+	private $dao;
 
-	public function __construct(Nette\Database\Context $context) {
-		$this->database = $context;
+	/**
+	 * @param Kdyby\Doctrine\EntityDao $dao
+	 */
+	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
+		$this->dao = $dao;
 	}
 
 	/**
@@ -26,6 +30,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 	 */
 	public function authenticate(array $credentials) {
 		list($username, $password) = $credentials;
+		//FIXME:
 		$row = $this->database->table('users')->where('username', $username)->fetch();
 
 		if (!$row) {

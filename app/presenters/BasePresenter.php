@@ -6,9 +6,12 @@ use Model;
 use Nette;
 use WebLoader;
 
+/*
+ * TODO: automaticky generované TOC u nadpisů v článcích
+ */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	/** @var \Model\Posts @inject */
+	/** @var Posts @inject */
 	public $posts;
 	/** @var \Nette\Http\Session @inject */
 	public $session;
@@ -91,7 +94,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	public function handleRandom() {
-		$post = $this->posts->getAllPosts()->order('RAND()')->limit(1)->fetch();
+		$post = $this->posts->rand();
 		$this->redirect('Single:article', $post->slug);
 	}
 

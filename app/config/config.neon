@@ -7,7 +7,6 @@
 
 php:
 	date.timezone: Europe/Prague
-	# zlib.output_compression: yes
 
 nette:
 	session:
@@ -22,11 +21,15 @@ nette:
 		accessors: TRUE
 
 services:
-	authenticator: Model\Authenticator
+	authenticator: App\Authenticator(@doctrine.dao(Entity\User))
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
-	- Model\Posts
-	- Model\Tags
+	- App\Posts(@doctrine.dao(Entity\Post))
+	- App\Tags(@doctrine.dao(Entity\Tag))
 
 extensions:
 	ajax: VojtechDobes\NetteAjax\Extension
+	console: Kdyby\Console\DI\ConsoleExtension
+	events: Kdyby\Events\DI\EventsExtension
+	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	doctrine: Kdyby\Doctrine\DI\OrmExtension

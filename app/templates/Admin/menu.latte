@@ -6,13 +6,13 @@
 	</a>
 
 	<a n:href=":Admin:prehled" n:class="$presenter->isLinkCurrent(':Admin:prehled')?'list-group-item active':'list-group-item'">
-		{*<span class="badge">14</span>*}
+		<span class="badge">{=ITEMCOUNT}</span>
 		<h4 class="list-group-item-heading">Přehled článků</h4>
 		<p class="list-group-item-text">Podívejte se na starší články</p>
 	</a>
 
 	<a n:href=":Admin:tags" n:class="$presenter->isLinkCurrent(':Admin:tags')?'list-group-item active':'list-group-item'">
-		{*<span class="badge">14</span>*}
+		<span class="badge">{$tagcount}</span>
 		<h4 class="list-group-item-heading">Přehled tagů</h4>
 		<p class="list-group-item-text">Prohlédněte si tagy</p>
 	</a>

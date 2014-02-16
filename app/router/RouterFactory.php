@@ -6,7 +6,6 @@ use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 use Nette;
 
-
 /**
  * Router factory.
  */
@@ -19,7 +18,7 @@ class RouterFactory {
 		'feed' => 'Homepage:rss',
 	);
 
-	public function __construct(\Model\Posts $posts) {
+	public function __construct(Posts $posts) {
 		$this->posts = $posts;
 	}
 
@@ -27,13 +26,13 @@ class RouterFactory {
 	 * @return \Nette\Application\IRouter
 	 */
 	public function createRouter() {
-		define('ITEMCOUNT', $this->posts->getAllPosts()->select('COUNT(*) AS itemCount')->fetch()->itemCount);
+		define('ITEMCOUNT', $this->posts->countBy());
 		$pages = ITEMCOUNT;
 		$range = range(1, ceil($pages / 8));
 		$paginator = implode('|', $range);
 
 		$router = new RouteList();
-		foreach($this->broken_links as $key => $value) {
+		foreach ($this->broken_links as $key => $value) {
 			$router[] = new Route($key, $value, Route::ONE_WAY);
 		}
 		$router[] = new Route('rss', 'Homepage:rss');

@@ -1,24 +1,43 @@
 <?php
 
-namespace Model;
+namespace App;
 
+use Kdyby;
 use Nette;
 
+/**
+ * Class Tags
+ * @package App
+ */
 class Tags extends Nette\Object {
 
-	/** @var \Nette\Database\Context */
-	private $database;
+	/** @var \Kdyby\Doctrine\EntityDao */
+	private $dao;
 
-	public function __construct(Nette\Database\Context $context) {
-		$this->database = $context;
+	/**
+	 * @param Kdyby\Doctrine\EntityDao $dao
+	 */
+	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
+		$this->dao = $dao;
 	}
 
-	public function getByName($name) {
-		return $this->database->table('tags')->where('name = ?', $name);
+	/**
+	 * @param array $criteria
+	 * @param array $orderBy
+	 * @param null $limit
+	 * @param null $offset
+	 * @return array
+	 */
+	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
 	}
 
-	public function getAllTags() {
-		return $this->database->table('tags');
+	/**
+	 * @param array $criteria
+	 * @return mixed
+	 */
+	public function countBy(array $criteria = array()) {
+		return $this->dao->countBy($criteria);
 	}
 
 }

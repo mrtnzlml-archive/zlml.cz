@@ -5,17 +5,9 @@
 # http://nette.org/security-warning
 #
 
-parameters:
-	database:
-		host: 127.0.0.1
-		username: root
-		password: ''
-		database: ''
-		lazy: TRUE
-		profiler: TRUE
-
-nette:
-	database:
-		dsn: 'mysql:host=127.0.0.1;dbname=sample'
-		user: 'root'
-		password: ''
+doctrine:
+	user: root
+	password: ''
+	dbname: sample
+	metadata:
+		Entity: %appDir%

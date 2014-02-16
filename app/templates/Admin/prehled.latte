@@ -12,13 +12,13 @@
 				<tr>
 					<td><a n:href=":Single:article $post->slug">{$post->title}</a></td>
 					<td>
-						{foreach $post->related('posts_tags')->order('tag_id ASC') as $post_tag}
-							<span class="label" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
+						{foreach $post->tags as $tag}
+							<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
 						{/foreach}
 					</td>
 					<td>
-						<span style="color:grey"><abbr title="Date">{$post->date}</abbr></span><br>
-						<span style="color:grey"><abbr title="Release date">{$post->release_date}</abbr></span>
+						<span style="color:grey"><abbr title="Date">{$post->date|date:'j. n. Y'}</abbr></span><br>
+						<span style="color:grey"><abbr title="Release date">{$post->release_date|date:'j. n. Y'}</abbr></span>
 					</td>
 					<td>
 						<div class="btn-group">
