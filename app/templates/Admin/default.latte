@@ -1,114 +1,100 @@
 {var $robots = 'noindex'}
 {block content}
-
-<div class="row">
-	<div class="col-lg-3">
-		{include menu.latte}
-		<div class="well sidebar-nav">
-			{foreach $tags as $tag}
-				<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
-			{/foreach}
+	<div class="row">
+		<div class="col-lg-3">
+			{include menu.latte}
+			<div class="well sidebar-nav">
+				{foreach $tags as $tag}
+					<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
+				{/foreach}
+			</div>
 		</div>
-	</div>
-	<div class="col-lg-9">
-		{ifset $editace}
-			<h2>Editovat článek ({$editace})</h2>
-		{else}
-			<h2>Přidat nový článek</h2>
-		{/ifset}
-
-		{form newPost}
-			<ul class="error" n:if="$form->errors">
-				<li n:foreach="$form->errors as $error">{$error}</li>
-			</ul>
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="form-group">
-						{label title /}
-						{input title, class => "form-control", data-slug-to => "slug"}
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="form-group">
-						{label slug /}
-						{input slug, class => "form-control", id => "slug"}
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="form-group">
-						{label tags /}
-						{input tags, class => "form-control"}
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="form-group">
-						{label release /}
-						{input release}
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				{label editor /}
-				{input editor, class => "form-control"}
-			</div>
-			{input save, class => "btn btn-primary form-control"}
-		{/form}
-	</div>
-</div>
-
-{snippet preview}
-	<fieldset>
-		<legend>RealTime náhled:</legend>
-		<div class="page-header">
-			<h2>
-				{ifset $title}
-					{$title} <small>{date('Y-m-d')}</small>
-				{/ifset}
-			</h2>
-			{ifset $tagsPrev}
-				<span n:foreach="$tagsPrev as $tag" class="label label-default">{$tag}&nbsp;</span>
+		<div class="col-lg-9">
+			{ifset $editace}
+				<h2>Editovat článek ({$editace})</h2>
+			{else}
+				<h2>Přidat nový článek</h2>
 			{/ifset}
+
+			{form newPost, onsubmit => 'if (window.localStorage) {
+			 	localStorage.removeItem(\'content:\' + location.pathname);
+			 	localStorage.removeItem(\'title:\' + location.pathname);
+			 	localStorage.removeItem(\'slug:\' + location.pathname);
+			 	localStorage.removeItem(\'tags:\' + location.pathname);
+			 }'}
+				<ul class="error" n:if="$form->errors">
+					<li n:foreach="$form->errors as $error">{$error}</li>
+				</ul>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							{label title /}
+							{input title, class => "form-control", data-slug-to => "slug"}
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							{label slug /}
+							{input slug, class => "form-control", id => "slug"}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							{label tags /}
+							{input tags, class => "form-control"}
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					{label editor /}
+					{input editor, class => "form-control"}
+				</div>
+			{input save, class => "btn btn-primary form-control"}
+			{/form}
 		</div>
-		<div id="preview" n:if="isset($preview)">{$preview|noescape}</div>
-	</fieldset>
-{/snippet}
+	</div>
+	{snippet preview}
+		<fieldset>
+			<legend>RealTime náhled:</legend>
+			<div class="page-header">
+				<h2>
+					{ifset $title}
+					{$title}
+						<small>{date('Y-m-d')}</small>
+					{/ifset}
+				</h2>
+				{ifset $tagsPrev}
+					<span n:foreach="$tagsPrev as $tag" class="label label-default">{$tag}&nbsp;</span>
+				{/ifset}
+			</div>
+			<div id="preview" n:if="isset($preview)">{$preview|noescape}</div>
+		</fieldset>
+	{/snippet}
 
 {/block}
 
 {block scripts}
-{include #parent}
-<script async="async" src="{$basePath}/js/codemirror.js"></script>
-<script async="async" src="{$basePath}/js/xml.js"></script>
-<script>
-(function() {
-	var load = function() {
-		var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-			lineNumbers: true,
-			lineWrapping: true,
-			mode: "text/html"
-		});
-		if (!editor.getValue()) {
-			var loc = location.pathname + location.search;
-			editor.setValue(localStorage.getItem('content:' + loc));
-		}
-		var timer = null;
-		$.nette.ajax({
-			url: {link update!},
-			type: 'post',
-			data: {
-				title: $('[name="title"]').val(),
-				content: editor.getValue(),
-				tags: $('[name="tags"]').val()
-			}
-		});
-		$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
-			if (timer) {
-				window.clearTimeout(timer);
-			}
-			timer = window.setTimeout(function () {
-				timer = null;
+	{include #parent}
+	<script src="{$basePath}/js/codemirror.js"></script>
+	<script src="{$basePath}/js/xml.js"></script>
+	<script>
+		(function () {
+			var load = function () {
+				var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+					lineNumbers: true,
+					lineWrapping: true,
+					mode: "text/html"
+				});
+				if (window.localStorage && !editor.getValue()) {
+					var loc = location.pathname + location.search;
+					editor.setValue(localStorage.getItem('content:' + loc));
+					$('[name="title"]').val(localStorage.getItem('title:' + loc));
+					$('[name="slug"]').val(localStorage.getItem('slug:' + loc));
+					$('[name="tags"]').val(localStorage.getItem('tags:' + loc));
+				}
+				var timer = null;
 				$.nette.ajax({
 					url: {link update!},
 					type: 'post',
@@ -118,26 +104,41 @@
 						tags: $('[name="tags"]').val()
 					}
 				});
-				if(window.localStorage) {
-					//TODO: comment saved
-					var loc = location.pathname + location.search;
-					//localStorage.setItem('title:' + loc, $('[name="title"]').val());
-					localStorage.setItem('content:' + loc, editor.getValue());
-					//localStorage.setItem('tags:' + loc, $('[name="tags"]').val());
-				}
-				e.preventDefault();
-			}, 1000);
-		});
-	};
-	if(window.addEventListener) {
-		window.addEventListener('load',load);
-	} else {
-		window.attachEvent('onload',load);
-	}
-}());
-</script>
+				$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
+					if (timer) {
+						window.clearTimeout(timer);
+					}
+					timer = window.setTimeout(function () {
+						timer = null;
+						$.nette.ajax({
+							url: {link update!},
+							type: 'post',
+							data: {
+								title: $('[name="title"]').val(),
+								content: editor.getValue(),
+								tags: $('[name="tags"]').val()
+							}
+						});
+						if (window.localStorage) {
+							var loc = location.pathname + location.search;
+							localStorage.setItem('title:' + loc, $('[name="title"]').val());
+							localStorage.setItem('slug:' + loc, $('[name="slug"]').val());
+							localStorage.setItem('content:' + loc, editor.getValue());
+							localStorage.setItem('tags:' + loc, $('[name="tags"]').val());
+						}
+						e.preventDefault();
+					}, 1000);
+				});
+			};
+			if (window.addEventListener) {
+				window.addEventListener('load', load);
+			} else {
+				window.attachEvent('onload', load);
+			}
+		}());
+	</script>
 {/block}
 
 {block head}
-<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/codemirror.css">
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/codemirror.css">
 {/block}

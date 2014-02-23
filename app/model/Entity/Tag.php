@@ -20,10 +20,6 @@ class Tag extends Doctrine\Entities\BaseEntity {
 		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
-	public function addPost(Post $post) {
-		$this->posts[] = $post;
-	}
-
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")

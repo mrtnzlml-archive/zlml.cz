@@ -7,6 +7,7 @@
 	</div>
 	<div class="col-lg-9">
 		<h2>Přehled článků</h2>
+
 		<table class="table">
 			{foreach $posts as $post}
 				<tr>
@@ -17,13 +18,11 @@
 						{/foreach}
 					</td>
 					<td>
-						<span style="color:grey"><abbr title="Date">{$post->date|date:'j. n. Y'}</abbr></span><br>
-						<span style="color:grey"><abbr title="Release date">{$post->release_date|date:'j. n. Y'}</abbr></span>
+						<span style="color:grey"><abbr title="Date">{$post->date|date:'j. n. Y h:m'}</abbr></span><br>
 					</td>
 					<td>
 						<div class="btn-group">
 							<a n:href=":Admin:default, id => $post->id" class="btn btn-info">Edit</a>
-							<!--<a class="btn">Hide</a>-->
 							<a n:href="delete! $post->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat článek?">Delete</a>
 						</div>
 					</td>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Nette;
+use Nette\Http\Url;
 
 class SinglePresenter extends BasePresenter {
 
@@ -10,8 +11,13 @@ class SinglePresenter extends BasePresenter {
 	public $tags;
 
 	public function renderObsah() {
-		$articles = $this->posts->findBy(array(), ['title' => 'ASC']);
+		$articles = $this->posts->findBy([], ['title' => 'ASC']);
 		$this->template->articles = $articles;
+	}
+
+	public function renderTagsah() {
+		$tags = $this->tags->findBy([], ['name' => 'ASC']);
+		$this->template->tags = $tags;
 	}
 
 	public function renderArticle($slug) {
@@ -25,9 +31,22 @@ class SinglePresenter extends BasePresenter {
 			$this->forward($slug);
 		} else { // zobrazení klasických článků
 			$texy = new \fshlTexy();
+			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
+				$el = $invocation->proceed();
+				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
+					$url = new Url($el->attrs['href']);
+					$httpRequest = $this->presenter->getHttpRequest();
+					$uri = $httpRequest->getUrl();
+					if ($url->authority != $uri->host) {
+						$el->attrs['target'] = '_blank';
+					}
+				}
+				return $el;
+			});
 			$texy->addHandler('block', array($texy, 'blockHandler'));
 			$texy->tabWidth = 4;
 			$texy->headingModule->top = 3; //start at H3
+			$texy->headingModule->generateID = TRUE;
 
 			$this->template->post = $post;
 			$this->template->body = $texy->process($post->body);
@@ -38,12 +57,20 @@ class SinglePresenter extends BasePresenter {
 			$this->template->prevArticle = $prev;
 			$this->template->nextArticle = $next;
 
-			//TODO:
-			$next = $this->posts->findBy(['id !=' => $post->getId(), 'tags.name' => 'pcre'], ['date' => 'DESC']);
+			$ids = $next = array();
+			if (isset($post->tags[0])) {
+				$next = $this->posts->findBy(['id !=' => $post->getId(), 'tags.id' => $post->tags], ['date' => 'DESC'], 3);
+				foreach ($next as $n) {
+					array_push($ids, $n->id);
+				}
+			}
 			if (count($next) < 3) {
 				$limit = 3 - count($next);
-				//nesmí se tahat (pole) IDs co už tam jsou...
-				array_push($next, $next[1] = $this->posts->findOneBy(['id !=' => $post->getId()], ['date' => 'DESC'], $limit));
+				if($ids) {
+					$next = array_merge($next, $this->posts->findBy(['id !=' => $post->getId(), 'id != ' => $ids], ['date' => 'DESC'], $limit));
+				} else {
+					$next = array_merge($next, $this->posts->findBy(['id !=' => $post->getId()], ['date' => 'DESC'], $limit));
+				}
 			}
 			$this->template->next = $next;
 		}

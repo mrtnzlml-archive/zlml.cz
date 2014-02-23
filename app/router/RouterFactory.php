@@ -46,12 +46,7 @@ class RouterFactory {
 
 		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('<action>', 'Single:article');
-
 		$router[] = new Route('s[/<search>]', 'Search:default');
-		$router[] = new Route('t[/<search>]', 'Tag:default');
-
-		$router[] = new Route('search[/<search>]', 'Search:default', Route::ONE_WAY);
-
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}

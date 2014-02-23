@@ -2,6 +2,7 @@
 
 namespace Entity;
 
+use App;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine;
 
@@ -12,8 +13,9 @@ use Kdyby\Doctrine;
 class Post extends Doctrine\Entities\BaseEntity {
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="Tag", inversedBy="posts", cascade={"persist", "remove"})
+	 * @ORM\ManyToMany(targetEntity="Tag", inversedBy="posts", cascade={"persist"})
 	 * @ORM\JoinTable(name="posts_tags")
+	 * @ORM\OrderBy({"name" = "ASC"})
 	 */
 	protected $tags;
 
@@ -21,10 +23,17 @@ class Post extends Doctrine\Entities\BaseEntity {
 		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
-	public function addTag(Tag $tag) {
-		//FIXME: přidávají se i duplicity
-		//$this->tags[] = $tag;
-		$this->tags->add($tag);
+	public function addTag(Tag $newTag) {
+		$add = TRUE;
+		foreach ($this->tags as $tag) {
+			if ($tag->name == $newTag->name) {
+				$add = FALSE;
+				break;
+			}
+		}
+		if ($add) {
+			$this->tags->add($newTag);
+		}
 	}
 
 	/**
@@ -45,8 +54,5 @@ class Post extends Doctrine\Entities\BaseEntity {
 
 	/** @ORM\Column(type="datetime") */
 	protected $date;
-
-	/** @ORM\Column(type="datetime") */
-	protected $release_date;
 
 }

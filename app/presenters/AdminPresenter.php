@@ -30,12 +30,6 @@ class AdminPresenter extends BasePresenter {
 		$this->template->tagcount = $this->tags->countBy();
 	}
 
-	public function actionDefault($id) {
-		//$post = $this->posts->findOneBy(['id' => $id]);
-		//TODO: array
-		//$this['newPost']->setDefaults($post);
-	}
-
 	public function renderDefault($id) {
 		$this->template->tags = $this->tags->findBy(array());
 		if ($id != NULL) {
@@ -75,13 +69,17 @@ class AdminPresenter extends BasePresenter {
 	public function colorSucceeded($button, $id) {
 		$vals = $button->getForm()->getValues();
 		$newColor = preg_replace('<#>', '', $vals['color' . $id]);
-		try {
-			$this->posts->updateTagByID($id, array(
-				'color' => $newColor,
-			));
-			$this->flashMessage('Tag byl úspěšně aktualizován.', 'alert-success');
-		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-danger');
+		if (ctype_xdigit($newColor) && (strlen($newColor) == 6 || strlen($newColor) == 3)) {
+			try {
+				$tag = $this->tags->findOneBy(['id' => $id]);
+				$tag->color = $newColor;
+				$this->tags->save($tag);
+				$this->flashMessage('Tag byl úspěšně aktualizován.', 'alert-success');
+			} catch (\Exception $exc) {
+				$this->flashMessage($exc->getMessage(), 'alert-danger');
+			}
+		} else {
+			$this->flashMessage("Barva #$newColor není platnou hexadecimální hodnotou.", 'alert-danger');
 		}
 		$this->redirect('this');
 	}
@@ -95,22 +93,19 @@ class AdminPresenter extends BasePresenter {
 		$form->addText('slug', 'URL slug:')
 			->setValue(empty($this->value) ? '' : $this->value->slug)
 			->setRequired('Je zapotřebí vyplnit slug.');
-		//TODO - rovnou naplnit viz http://doc.nette.org/cs/2.1/quickstart/creating-posts#toc-uprava-prispevku
 		$tags = array();
 		if ($this->id) {
 			foreach ($this->posts->findOneBy(['id' => $this->id])->tags as $tag) {
 				$tags[] = $tag->name;
 			}
 		}
-		$form->addText('tags', 'Tagy:')
+		$form->addText('tags', 'Tagy (oddělené čárkou):')
 			->setAttribute('class', 'form-control')
 			->setValue(implode(', ', $tags));
-		$form->addTextArea('editor', 'Body:')
+		$form->addTextArea('editor', 'Obsah článku:')
 			->setHtmlId('editor')
 			->setValue(empty($this->value) ? '' : $this->value->body)
 			->setRequired('Je zapotřebí napsat nějaký text.');
-		$form['release'] = new Cntrl\DateInput('Datum zveřejnění (den | měsíc | rok):');
-		$form['release']->setDefaultValue(new \DateTime);
 		$form->addSubmit('save', 'Uložit a publikovat');
 		$form->onSuccess[] = $this->processPostSucceeded;
 		return $form;
@@ -124,17 +119,21 @@ class AdminPresenter extends BasePresenter {
 				$post = $this->posts->findOneBy(['id' => $id]);
 			} else { // přidáváme záznam
 				$post = new Entity\Post();
+				$post->date = new \DateTime();
 			}
 			$post->title = $vals->title;
 			$post->slug = $vals->slug;
 			$post->body = $vals->editor;
-			$post->date = new \DateTime();
-			$post->release_date = new \DateTime();
 			foreach (array_unique(explode(', ', $vals->tags)) as $tag_name) {
-				$tag = new Entity\Tag();
-				$tag->name = $tag_name;
-				$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
-				$post->addTag($tag); //FIXME
+				$tag = $this->tags->findOneBy(['name' => $tag_name]);
+				if (!$tag) {
+					$tag = new Entity\Tag();
+					$tag->name = $tag_name;
+					$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
+				}
+				if (!empty($tag_name)) {
+					$post->addTag($tag);
+				}
 			}
 			$this->posts->save($post);
 			$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
@@ -161,8 +160,8 @@ class AdminPresenter extends BasePresenter {
 
 	public function handleDelete($id) {
 		try {
-			$this->posts->deletePostByID($id);
-			$this->flashMessage('Post byl úspěšně smazán.', 'alert-success');
+			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
+			$this->flashMessage('Článek byl úspěšně smazán.', 'alert-success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'alert-danger');
 		}
@@ -171,7 +170,7 @@ class AdminPresenter extends BasePresenter {
 
 	public function handleDeleteTag($tag_id) {
 		try {
-			$this->posts->deleteTagById($tag_id);
+			$this->tags->delete($this->tags->findOneBy(['id' => $tag_id]));
 			$this->flashMessage('Tag byl úspěšně smazán.', 'alert-success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'alert-danger');
@@ -180,14 +179,15 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleRegenerate($tag_id) {
-		$color = substr(md5(rand()), 0, 6); //Short and sweet
 		try {
-			$this->posts->updateTagByID($tag_id, array('color' => $color));
-			$this->redirect('this');
-		} catch (\PDOException $exc) {
+			$tag = $this->tags->findOneBy(['id' => $tag_id]);
+			$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
+			$this->tags->save($tag);
+			$this->flashMessage('Tag byl úspěšně regenerován.', 'alert-success');
+		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'alert-danger');
-			$this->redirect('this');
 		}
+		$this->redirect('this');
 	}
 
 }

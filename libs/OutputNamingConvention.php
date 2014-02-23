@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class ZeminemOutputNamingConvention
+ * Class OutputNamingConvention
  */
-class ZeminemOutputNamingConvention implements \Webloader\IOutputNamingConvention {
+class OutputNamingConvention extends \Nette\Object implements \Webloader\IOutputNamingConvention {
 
 	private $suffix = '';
 
@@ -28,12 +28,8 @@ class ZeminemOutputNamingConvention implements \Webloader\IOutputNamingConventio
 	}
 
 	public function getFilename(array $files, \Webloader\Compiler $compiler) {
-		$name = $this->createHash($files, $compiler);
+		$name = substr(md5(implode('#', $files)), 0, 6);
 		return $name . $this->suffix;
-	}
-
-	protected function createHash(array $files, \Webloader\Compiler $compiler) {
-		return md5(implode("#", $files));
 	}
 
 }

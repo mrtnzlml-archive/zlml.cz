@@ -787,12 +787,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Doctrine.git",
-                "reference": "e1d82979416d997081582ac064b9867f9fea8b21"
+                "reference": "d225a26b349a7cbec438d7015812b9a22a730e32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/e1d82979416d997081582ac064b9867f9fea8b21",
-                "reference": "e1d82979416d997081582ac064b9867f9fea8b21",
+                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/d225a26b349a7cbec438d7015812b9a22a730e32",
+                "reference": "d225a26b349a7cbec438d7015812b9a22a730e32",
                 "shasum": ""
             },
             "require": {
@@ -844,7 +844,7 @@
                 "nette",
                 "orm"
             ],
-            "time": "2014-02-16 16:41:24"
+            "time": "2014-02-20 22:12:38"
         },
         {
             "name": "kdyby/doctrine-cache",
@@ -1137,12 +1137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "d8b7c0cbe5c88ef70c1f11867742e1138a3405bf"
+                "reference": "0f2bc0c4f09ed0af2dc063384a05c9523bc28914"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/d8b7c0cbe5c88ef70c1f11867742e1138a3405bf",
-                "reference": "d8b7c0cbe5c88ef70c1f11867742e1138a3405bf",
+                "url": "https://api.github.com/repos/nette/nette/zipball/0f2bc0c4f09ed0af2dc063384a05c9523bc28914",
+                "reference": "0f2bc0c4f09ed0af2dc063384a05c9523bc28914",
                 "shasum": ""
             },
             "require": {
@@ -1200,7 +1200,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2014-02-15 10:35:05"
+            "time": "2014-02-19 16:31:20"
         },
         {
             "name": "nette/tester",
@@ -1208,12 +1208,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "67ebcc9619d3fa71f0c0eba9f748d803d1b05539"
+                "reference": "d7890156566f3d2a3d8256c215f768f753c9a481"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/67ebcc9619d3fa71f0c0eba9f748d803d1b05539",
-                "reference": "67ebcc9619d3fa71f0c0eba9f748d803d1b05539",
+                "url": "https://api.github.com/repos/nette/tester/zipball/d7890156566f3d2a3d8256c215f768f753c9a481",
+                "reference": "d7890156566f3d2a3d8256c215f768f753c9a481",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1257,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2014-02-14 18:15:46"
+            "time": "2014-02-19 16:48:04"
         },
         {
             "name": "symfony/console",

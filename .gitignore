@@ -15,5 +15,5 @@ tests/coverage.html
 
 !fshlTexy.php
 !JavaScriptLoader.php
-!ZeminemOutputNamingConvention.php
+!OutputNamingConvention.php
 !Tex.php

@@ -2,13 +2,12 @@
 
 {block content}
 
-{if $tags}
-	<h2>Nalezené tagy</h2>
-	{foreach $tags as $tag}
-		<a n:href="Tag:default, $tag->name" style="text-decoration:none">
-			<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
-		</a>
+{if $tag}
+	<h2>Články s tagem <span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span></h2>
+	{foreach $tag->posts as $post}
+		<a n:href=":Single:article $post->slug">{$post->title}</a>{sep}, {/sep}
 	{/foreach}
+	<hr>
 {/if}
 
 <h2 n:block="title">Výsledky vyhledávání{ifset $search} "{$search}"{/ifset}</h2>
@@ -28,11 +27,13 @@
 							<a n:href=":Single:article $r->slug">
 								{$r->title|noescape|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
 							</a>
-							{*foreach $r->related('posts_tags') as $post_tag}
-								<span class="label hidden-print" style="background: #{$post_tag->tag->color}">{$post_tag->tag->name}</span>
-							{/foreach*}
 						</h4>
 						<p>
+							{foreach $r->tags as $tag}
+								<a n:href="Search:default, $tag->name" style="text-decoration:none">
+									<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+								</a>
+							{/foreach}
 							{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:550|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
 							&nbsp;<a n:href=":Single:article $r->slug">přečtěte si více</a>
 						</p>
@@ -45,5 +46,12 @@
 		</div>
 	</div>
 {/ifset}
+<h2>Nenašli jste to co hledáte?</h2>
+<p>Možná to zde opravdu není. Vyzkoušejte však ještě další možnosti:</p>
+<ul>
+	<li>Navštivte <a n:href="Homepage:default">úvodní stránku</a></li>
+	<li>Podívejte se do <a n:href="Single:obsah">obsahu</a> tohoto webu &mdash; třeba najdete to co potřebujete</li>
+	<li>Přihlašte se k <a n:href="Homepage:rss">odběru RSS</a>, aby vám již nic neuteklo</li>
+</ul>
 
 {/block}

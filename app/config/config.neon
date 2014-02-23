@@ -21,11 +21,12 @@ nette:
 		accessors: TRUE
 
 services:
-	authenticator: App\Authenticator(@doctrine.dao(Entity\User))
+	authenticator: App\Authenticator
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- App\Posts(@doctrine.dao(Entity\Post))
 	- App\Tags(@doctrine.dao(Entity\Tag))
+	- App\Users(@doctrine.dao(Entity\User))
 
 extensions:
 	ajax: VojtechDobes\NetteAjax\Extension

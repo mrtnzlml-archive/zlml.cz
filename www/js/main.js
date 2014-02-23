@@ -1,24 +1,8 @@
 $(function () {
 
-	//TODO: při zapnutém ajaxování nefunguje webkitColumnCount v article.latte ... WTF??
-	/*if ($('body').data('experimental') != 'none' && (window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
-		$.nette.ext('init').linkSelector = 'a';
-		$.nette.ext('spinner', {
-			start: function () {
-				$('html').addClass('wait');
-			},
-			complete: function () {
-				$('html').removeClass('wait');
-				$('html,body').animate({scrollTop: $(".nav").offset().top}, 100);
-			}
-		});
-		$.nette.ext('outline', {
-			complete: function () {
-				outline();
-			}
-		});
-		$.nette.init();
-	}*/
+	$("h3[id|=toc]").each(function () {
+		$(this).append($('<a class="anchor"> #</a>').attr("href", "#" + $(this).attr("id")))
+	});
 
 	$('body').on('click', '[data-confirm]', function (e) {
 		var question = $(this).data('confirm');
@@ -29,6 +13,7 @@ $(function () {
 	});
 
 	$('#qr').qrcode({
+		render: 'image',
 		text: document.URL,
 		radius: 0.5,
 		size: 107
@@ -86,7 +71,6 @@ function make_url(s) {
 	return s2.replace(/[^a-z0-9_]+/g, '-').replace(/^-|-$/g, '');
 }
 
-//TODO: pri experimentální módu a nejaxovém požadavku po načtení zmizí ... WTF??
 function outline() {
 	$("#outline, #outline2").fracs("outline", {
 		crop: true,

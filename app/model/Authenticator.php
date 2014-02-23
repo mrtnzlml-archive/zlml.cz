@@ -13,14 +13,13 @@ use Nette\Utils\Strings;
  */
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator {
 
-	/** @var \Kdyby\Doctrine\EntityDao */
-	private $dao;
+	private $users;
 
 	/**
-	 * @param Kdyby\Doctrine\EntityDao $dao
+	 * @param Users $users
 	 */
-	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
-		$this->dao = $dao;
+	public function __construct(Users $users) {
+		$this->users = $users;
 	}
 
 	/**
@@ -30,19 +29,18 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 	 */
 	public function authenticate(array $credentials) {
 		list($username, $password) = $credentials;
-		//FIXME:
-		$row = $this->database->table('users')->where('username', $username)->fetch();
+		$password = $this->removeCapsLock($password);
+		$user = $this->users->findOneBy(['username' => $username]);
 
-		if (!$row) {
-			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
-		}
-
-		if (!Passwords::verify($this->removeCapsLock($password), $row->password)) {
-			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+		if (!$user) {
+			throw new Nette\Security\AuthenticationException('Uživatelské jméno není správné.', self::IDENTITY_NOT_FOUND);
+		} elseif (!Passwords::verify($password, $user->password)) {
+			throw new Nette\Security\AuthenticationException('Zadané heslo není správné.', self::INVALID_CREDENTIAL);
+		} elseif (Passwords::needsRehash($user->password)) {
+			$user->password = Passwords::hash($password);
+			$this->users->save($user);
 		} else {
-			$row = Nette\ArrayHash::from($row);
-			unset($row->password);
-			return new Nette\Security\Identity($row->id, $row->role, $row);
+			return new Nette\Security\Identity($user->id, $user->role);
 		}
 	}
 

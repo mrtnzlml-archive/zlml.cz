@@ -27,7 +27,7 @@
 		</div>
 	</h2>
 	{foreach $post->tags as $tag}
-		<a n:href="Tag:default, $tag->name" style="text-decoration:none">
+		<a n:href="Search:default, $tag->name" style="text-decoration:none">
 			<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 		</a>
 	{/foreach}

@@ -1,46 +1,55 @@
 {block title}OBSAH{/block}
 
 {block content}
-
-<style>.label { padding: 0 .5em .2em .5em; }</style>
-
-<ul class="breadcrumb hidden-print">
-	<li><a n:href="Homepage:">home</a></li>
-	<li class="active">obsah</li>
-	<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
-</ul>
-
-{cache expire => '+20 minutes'}
-<div class="row" style="margin-bottom: 10px">
-	<div class="col-lg-10">
-		{var $last = ''}
-		{foreach $articles as $article}
-			{if strtoupper(substr($article->title, 0, 1)) === $last}
-				<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
-				{foreach $article->tags as $tag}
-					<a n:href="Tag:default, $tag->name" style="text-decoration:none">
-						<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
-					</a>
+	<style>
+		.label { padding: 0 .5em .2em .5em; }
+		.bord { border-right: 1px solid #888; }
+	</style>
+	<ul class="breadcrumb hidden-print">
+		<li><a n:href="Homepage:">home</a></li>
+		<li class="active">obsah (podle nadpisů)</li>
+		<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
+	</ul>
+	{cache expire => '+20 minutes'}
+		<div class="row" style="margin-bottom: 10px">
+			<div class="col-lg-10">
+				<div class="row">
+					<div class="col-lg-6 text-right bord"><h3>Seřadit podle nadpisů</h3></div>
+					<div class="col-lg-6"><a n:href="Single:tagsah"><h3>Seřadit podle tagů</h3></a></div>
+				</div>
+				<hr>
+				{var $last = ''}
+				{foreach $articles as $article}
+					{if strtoupper(substr($article->title, 0, 1)) === $last}
+						<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
+						{foreach $article->tags as $tag}
+							<a n:href="Search:default, $tag->name" style="text-decoration:none">
+								<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+							</a>
+						{/foreach}
+						<br>
+					{else}
+						<hr n:if="!$iterator->first">
+						<h2>{strtoupper(substr($article->title, 0, 1))}</h2>
+						<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
+						{foreach $article->tags as $tag}
+							<a n:href="Search:default, $tag->name" style="text-decoration:none">
+								<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+							</a>
+						{/foreach}
+						<br>
+						{? $last = strtoupper(substr($article->title, 0, 1))}
+					{/if}
 				{/foreach}
-				<br>
-			{else}
-				<hr n:if="!$iterator->first">
-				<h2>{strtoupper(substr($article->title, 0, 1))}</h2>
-				<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
-				{foreach $article->tags as $tag}
-					<a n:href="Tag:default, $tag->name" style="text-decoration:none">
-						<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
-					</a>
-				{/foreach}
-				<br>
-				{? $last = strtoupper(substr($article->title, 0, 1))}
-			{/if}
-		{/foreach}
-	</div>
-	<div class="col-lg-2">
-		<canvas id="outline2" class="visible-lg" width="150" height="400"></canvas>
-	</div>
-</div>
-{/cache}
-
+				<hr>
+				<div class="row">
+					<div class="col-lg-6 text-right bord"><h3>Seřadit podle nadpisů</h3></div>
+					<div class="col-lg-6"><a n:href="Single:tagsah"><h3>Seřadit podle tagů</h3></a></div>
+				</div>
+			</div>
+			<div class="col-lg-2">
+				<canvas id="outline2" class="visible-lg" width="150" height="400"></canvas>
+			</div>
+		</div>
+	{/cache}
 {/block}

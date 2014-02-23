@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Model;
+use Nette\Utils\Strings;
 use Nette;
 use WebLoader;
 
-/*
- * TODO: automaticky generované TOC u nadpisů v článcích
- */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/** @var Posts @inject */
@@ -39,7 +36,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function searchSucceeded($form) {
 		$vals = $form->getValues();
-		$this->redirect('Search:default', $vals->search);
+		$search = Strings::normalize($vals->search);
+		$search = Strings::replace($search, '/[^\d\w]/u', ' ');
+		$words = Strings::split(Strings::trim($search), '/\s+/u');
+		$words = array_unique(array_filter($words, function ($word) {
+			return Strings::length($word) > 1;
+		}));
+		$search = implode(' ', $words);
+		$this->redirect('Search:default', $search);
 	}
 
 	/**
@@ -64,7 +68,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			'screen.less',
 		));
 		$compiler = WebLoader\Compiler::createCssCompiler($files, WWW_DIR . '/webtemp');
-		$compiler->setOutputNamingConvention(\ZeminemOutputNamingConvention::createCssConvention());
+		$compiler->setOutputNamingConvention(\OutputNamingConvention::createCssConvention());
 		$compiler->addFileFilter(new Webloader\Filter\LessFilter());
 		$compiler->addFilter(function ($code) {
 			return \CssMin::minify($code);
@@ -86,7 +90,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			'main.js',
 		));
 		$compiler = WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
-		$compiler->setOutputNamingConvention(\ZeminemOutputNamingConvention::createJsConvention());
+		$compiler->setOutputNamingConvention(\OutputNamingConvention::createJsConvention());
 		$compiler->addFilter(function ($code) {
 			return \JSMin::minify($code);
 		});
@@ -110,7 +114,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->redirect('this');
 	}
 
-	// TODO
+	// TODO ?
 	public function handleExperimentalData($data = NULL) {
 		$section = $this->session->getSection('experimental');
 		if ($data !== NULL) {
