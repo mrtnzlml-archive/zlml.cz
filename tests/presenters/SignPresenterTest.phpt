@@ -21,6 +21,11 @@ class SignPresenterTest extends Tester\TestCase {
 		$this->tester->testAction('in');
 	}
 
+	public function testFalseLogIn() {
+		$this->tester->logIn(FALSE, 'Sign');
+	}
+
 }
 
-id(new SignPresenterTest($container))->run();
+$test = new SignPresenterTest($container);
+$test->run();

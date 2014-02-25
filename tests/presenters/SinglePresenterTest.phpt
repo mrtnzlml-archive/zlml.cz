@@ -2,6 +2,7 @@
 
 namespace Test;
 
+use App;
 use Nette;
 use Tester;
 
@@ -9,12 +10,12 @@ $container = require __DIR__ . '/../bootstrap.php';
 
 class SinglePresenterTest extends Tester\TestCase {
 
-	/** @var \Model\Posts */
+	/** @var App\Posts */
 	private $posts;
 
 	public function __construct(Nette\DI\Container $container) {
 		$this->tester = new Presenter($container);
-		$this->posts = $container->createInstance('\Model\Posts');
+		$this->posts = $container->getByType('\App\Posts');
 	}
 
 	public function setUp() {
@@ -25,11 +26,15 @@ class SinglePresenterTest extends Tester\TestCase {
 		$this->tester->testAction('about');
 	}
 
-	///** @dataProvider dataArticles */
-	//FIXME: no idea how to get model classes...
-	/*public function testRenderArticles($slug) {
+	/** @dataProvider dataArticles */
+	public function testRenderArticles($slug) {
 		$this->tester->testAction('article', 'GET', array('slug' => $slug));
-	}*/
+	}
+
+	public function testRedirectEmptyArticle() {
+		$response = $this->tester->test('article');
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+	}
 
 	public function testRenderObsah() {
 		$this->tester->testAction('obsah');
@@ -39,13 +44,17 @@ class SinglePresenterTest extends Tester\TestCase {
 		$this->tester->testAction('reference');
 	}
 
+	public function testRenderTagsah() {
+		$this->tester->testAction('tagsah');
+	}
+
 	///// dataProviders /////
 
 	/**
 	 * @return array of arrays
 	 */
 	public function dataArticles() {
-		$articles = $this->posts->getAllPosts();
+		$articles = $this->posts->findBy([]);
 		$data = array();
 		foreach ($articles as $article) {
 			$data[] = array($article->slug);
@@ -55,4 +64,5 @@ class SinglePresenterTest extends Tester\TestCase {
 
 }
 
-id(new SinglePresenterTest($container))->run();
+$test = new SinglePresenterTest($container);
+$test->run();

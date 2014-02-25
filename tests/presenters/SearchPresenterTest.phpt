@@ -18,9 +18,10 @@ class SearchPresenterTest extends Tester\TestCase {
 	}
 
 	public function testRenderDefault() {
-		$this->tester->testAction('default');
+		$this->tester->testAction('default', 'GET', ['search' => 'nette']);
 	}
 
 }
 
-id(new SearchPresenterTest($container))->run();
+$test = new SearchPresenterTest($container);
+$test->run();

@@ -1,13 +1,14 @@
 <?php
 
+use Tester\Assert;
+
 $container = require __DIR__ . '/../bootstrap.php';
-$container->createInstance('\Model\Authenticator');
+$auth = $container->createInstance('\App\Authenticator');
 
-//$model = new \Model\Authenticator();
+Assert::exception(function () use ($auth) {
+	$auth->authenticate(['invalid_username', 'invalid_password']);
+}, 'Nette\Security\AuthenticationException', 'Uživatelské jméno není správné.');
 
-$hash = '$2a$07$qy8p5nd1fyne2da1m7vgpe5SnizvXsZm3OxOp5M9fJ8Lsd1Ckcnp2';
-//\Tester\Assert::same($hash, $model->calculateHash('password', $hash));
-//\Tester\Assert::same($hash, $model->calculateHash('PASSWORD', $hash));
-
-//FIXME: no idea how to get model classes...
-//\Tester\Assert::exception($model->authenticate(array('user', 'pass')), 'AuthenticationException', 'The username is incorrect.');
+Assert::exception(function () use ($auth) {
+	$auth->authenticate(['martin', 'invalid_password']);
+}, 'Nette\Security\AuthenticationException', 'Zadané heslo není správné.');

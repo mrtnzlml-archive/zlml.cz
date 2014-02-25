@@ -49,4 +49,5 @@ class HomepagePresenterTest extends Tester\TestCase {
 
 }
 
-id(new HomepagePresenterTest($container))->run();
+$test = new HomepagePresenterTest($container);
+$test->run();

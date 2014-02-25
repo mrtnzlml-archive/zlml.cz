@@ -13,13 +13,9 @@ if (extension_loaded('xdebug')) {
 }
 
 Tester\Environment::setup();
-
-function id($val) {
-	return $val;
-}
+date_default_timezone_set('Europe/Prague');
 
 $configurator = new Nette\Configurator;
-//$configurator->setDebugMode(FALSE);
 $configurator->setTempDirectory(__DIR__ . '/../temp');
 $loader = $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/../app')
