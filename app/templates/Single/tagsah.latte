@@ -25,8 +25,8 @@
 				</div>
 				<hr>
 				{foreach $tags as $tag}
-					<hr n:if="!$iterator->first">
-					<a n:href="Search:default, $tag->name" style="text-decoration:none" style="padding-left:2%">
+					<hr n:if="!$iterator->first && $tag->posts">
+					<a n:href="Search:default, $tag->name" style="text-decoration:none" style="padding-left:2%" n:if="$tag->posts">
 						<h3><span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span></h3>
 					</a>
 					{foreach $tag->posts as $post}
