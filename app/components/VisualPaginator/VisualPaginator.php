@@ -1,13 +1,13 @@
 <?php
 
+namespace Cntrl;
+
+use Nette;
 use Nette\Utils\Paginator;
 
 /**
- * Visual paginator control.
- *
- * @author     David Grudl
- * @copyright  Copyright (c) 2009 David Grudl
- * @package    Nette Extras
+ * Class VisualPaginator
+ * @package Cntrl
  */
 class VisualPaginator extends Nette\Application\UI\Control {
 
@@ -24,7 +24,6 @@ class VisualPaginator extends Nette\Application\UI\Control {
 		if (!$this->paginator) {
 			$this->paginator = new Paginator;
 		}
-
 		return $this->paginator;
 	}
 

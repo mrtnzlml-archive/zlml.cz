@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Cntrl;
 use Nette;
 
 class HomepagePresenter extends BasePresenter {
 
 	public function renderDefault() {
-		$vp = new \VisualPaginator($this, 'paginator');
+		$vp = new Cntrl\VisualPaginator($this, 'paginator');
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 8;
 		$paginator->itemCount = ITEMCOUNT; //see RouterFactory.php
