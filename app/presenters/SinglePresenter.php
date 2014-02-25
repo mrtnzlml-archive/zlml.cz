@@ -23,6 +23,9 @@ class SinglePresenter extends BasePresenter {
 	public function renderArticle($slug) {
 		$old_slug = $slug;
 		$slug = Nette\Utils\Strings::webalize($slug);
+		if(empty($slug)) {
+			$this->redirect('Homepage:default');
+		}
 		if ($old_slug !== $slug) {
 			$this->redirect($slug);
 		}
