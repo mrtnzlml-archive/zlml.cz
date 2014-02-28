@@ -20,7 +20,7 @@
 				<hr>
 				{var $last = ''}
 				{foreach $articles as $article}
-					{if strtoupper(substr($article->title, 0, 1)) === $last}
+					{if mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8')) === $last}
 						<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
 						{foreach $article->tags as $tag}
 							<a n:href="Search:default, $tag->name" style="text-decoration:none">
@@ -30,7 +30,7 @@
 						<br>
 					{else}
 						<hr n:if="!$iterator->first">
-						<h2>{strtoupper(substr($article->title, 0, 1))}</h2>
+						<h2>{mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}</h2>
 						<a n:href=":Single:article $article->slug" style="padding-left:2%">{$article->title}</a>
 						{foreach $article->tags as $tag}
 							<a n:href="Search:default, $tag->name" style="text-decoration:none">
@@ -38,7 +38,7 @@
 							</a>
 						{/foreach}
 						<br>
-						{? $last = strtoupper(substr($article->title, 0, 1))}
+						{? $last = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}
 					{/if}
 				{/foreach}
 				<hr>
