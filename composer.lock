@@ -1137,12 +1137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "0f2bc0c4f09ed0af2dc063384a05c9523bc28914"
+                "reference": "48a506eeb3b434e85b030795d3c357f16940e6d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/0f2bc0c4f09ed0af2dc063384a05c9523bc28914",
-                "reference": "0f2bc0c4f09ed0af2dc063384a05c9523bc28914",
+                "url": "https://api.github.com/repos/nette/nette/zipball/48a506eeb3b434e85b030795d3c357f16940e6d6",
+                "reference": "48a506eeb3b434e85b030795d3c357f16940e6d6",
                 "shasum": ""
             },
             "require": {
@@ -1200,7 +1200,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2014-02-19 16:31:20"
+            "time": "2014-02-23 17:46:39"
         },
         {
             "name": "nette/tester",
@@ -1208,12 +1208,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "d7890156566f3d2a3d8256c215f768f753c9a481"
+                "reference": "00b7c68001acd1a50375c696f9260c9a1f2d78b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/d7890156566f3d2a3d8256c215f768f753c9a481",
-                "reference": "d7890156566f3d2a3d8256c215f768f753c9a481",
+                "url": "https://api.github.com/repos/nette/tester/zipball/00b7c68001acd1a50375c696f9260c9a1f2d78b8",
+                "reference": "00b7c68001acd1a50375c696f9260c9a1f2d78b8",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1257,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2014-02-19 16:48:04"
+            "time": "2014-02-25 06:07:22"
         },
         {
             "name": "symfony/console",

@@ -23,6 +23,7 @@ class RouterFactory {
 	}
 
 	/**
+	 * TODO: zjednodušit, začíná to být moc přeplácané...
 	 * @return \Nette\Application\IRouter
 	 */
 	public function createRouter() {
