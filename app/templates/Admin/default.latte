@@ -80,62 +80,57 @@
 	<script src="{$basePath}/js/codemirror.js"></script>
 	<script src="{$basePath}/js/xml.js"></script>
 	<script>
-		(function () {
-			var load = function () {
-				var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-					lineNumbers: true,
-					lineWrapping: true,
-					mode: "text/html"
-				});
-				if (window.localStorage && !editor.getValue()) {
-					var loc = location.pathname + location.search;
+		$(document).ready(function () {
+			var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+				lineNumbers: true,
+				lineWrapping: true,
+				mode: "text/html"
+			});
+			if (!editor.getValue() && window.localStorage) {
+				var loc = location.pathname + location.search;
+				if(localStorage.getItem('content:' + loc) != undefined) {
 					editor.setValue(localStorage.getItem('content:' + loc));
-					$('[name="title"]').val(localStorage.getItem('title:' + loc));
-					$('[name="slug"]').val(localStorage.getItem('slug:' + loc));
-					$('[name="tags"]').val(localStorage.getItem('tags:' + loc));
-				};
-				var timer = null;
-				$.nette.ajax({
-					url: {link update!},
-					type: 'post',
-					data: {
-						title: $('[name="title"]').val(),
-						content: editor.getValue(),
-						tags: $('[name="tags"]').val()
-					}
-				});
-				$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
-					if (timer) {
-						window.clearTimeout(timer);
-					}
-					timer = window.setTimeout(function () {
-						timer = null;
-						$.nette.ajax({
-							url: {link update!},
-							type: 'post',
-							data: {
-								title: $('[name="title"]').val(),
-								content: editor.getValue(),
-								tags: $('[name="tags"]').val()
-							}
-						});
-						if (window.localStorage) {
-							var loc = location.pathname + location.search;
-							localStorage.setItem('title:' + loc, $('[name="title"]').val());
-							localStorage.setItem('slug:' + loc, $('[name="slug"]').val());
-							localStorage.setItem('content:' + loc, editor.getValue());
-							localStorage.setItem('tags:' + loc, $('[name="tags"]').val());
-						}
-						e.preventDefault();
-					}, 1000);
-				});
-			};
-			if (window.addEventListener) {
-				window.addEventListener('load', load);
-			} else {
-				window.attachEvent('onload', load);
+				}
+				$('[name="title"]').val(localStorage.getItem('title:' + loc));
+				$('[name="slug"]').val(localStorage.getItem('slug:' + loc));
+				$('[name="tags"]').val(localStorage.getItem('tags:' + loc));
 			}
-		}());
+			var timer = null;
+			$.nette.ajax({
+				url: {link update!},
+				type: 'post',
+				data: {
+					title: $('[name="title"]').val(),
+					content: editor.getValue(),
+					tags: $('[name="tags"]').val()
+				}
+			});
+			$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
+				if (timer) {
+					window.clearTimeout(timer);
+				}
+				timer = window.setTimeout(function () {
+					timer = null;
+					$.nette.ajax({
+						url: {link update!},
+						type: 'post',
+						data: {
+							title: $('[name="title"]').val(),
+							content: editor.getValue(),
+							tags: $('[name="tags"]').val()
+						}
+					});
+					if (window.localStorage) {
+						var loc = location.pathname + location.search;
+						localStorage.setItem('title:' + loc, $('[name="title"]').val());
+						localStorage.setItem('slug:' + loc, $('[name="slug"]').val());
+						localStorage.setItem('content:' + loc, editor.getValue());
+						localStorage.setItem('tags:' + loc, $('[name="tags"]').val());
+					}
+					e.preventDefault();
+				}, 1000);
+			});
+		});
 	</script>
 {/block}
 
