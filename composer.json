@@ -16,7 +16,7 @@
 		"php": ">= 5.3.0",
 		"nette/nette": "2.2.*@dev",
 		"nette/tester": "dev-master",
-		"dg/texy": "dev-release-2.x",
+		"texy/texy": "dev-master",
 		"kukulich/fshl": "dev-develop",
 		"janmarek/webloader": "dev-master",
 		"natxet/CssMin": "dev-master",

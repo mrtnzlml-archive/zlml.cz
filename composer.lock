@@ -3,64 +3,8 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4d3d65b1815019f9ad337a60d421587c",
+    "hash": "38bcddd3e3b4f52041c3f67b5c56417c",
     "packages": [
-        {
-            "name": "dg/texy",
-            "version": "dev-release-2.x",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dg/texy.git",
-                "reference": "79d0e1517363ab32edf2db8ec515e3dc84f50f0a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dg/texy/zipball/79d0e1517363ab32edf2db8ec515e3dc84f50f0a",
-                "reference": "79d0e1517363ab32edf2db8ec515e3dc84f50f0a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.0.0"
-            },
-            "replace": {
-                "dg/texy": "self.version"
-            },
-            "require-dev": {
-                "nette/tester": "0.9.*"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/texy.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "http://davidgrudl.com"
-                }
-            ],
-            "description": "Texy converts plain text in easy to read Texy syntax into structurally valid (X)HTML. It supports adding of images, links, nested lists, tables and has full support for CSS. Texy supports hyphenation of long words (which reflects language rules), clickable emails and URL (emails are obfuscated against spambots), national typographic single and double quotation marks, ellipses, em dashes, dimension sign, nonbreakable spaces (e.g. in phone numbers), acronyms, arrows and many others. Texy code can optionally contain HTML tags.",
-            "homepage": "http://texy.info",
-            "keywords": [
-                "html",
-                "markdown",
-                "markup language",
-                "plain text",
-                "text",
-                "textile",
-                "texy",
-                "wiki",
-                "xhtml"
-            ],
-            "time": "2013-10-16 20:01:41"
-        },
         {
             "name": "doctrine/annotations",
             "version": "v1.1.2",
@@ -1137,12 +1081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "48a506eeb3b434e85b030795d3c357f16940e6d6"
+                "reference": "02fb1cd7a7600e2c8cd75951f1fbd83fd0da89b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/48a506eeb3b434e85b030795d3c357f16940e6d6",
-                "reference": "48a506eeb3b434e85b030795d3c357f16940e6d6",
+                "url": "https://api.github.com/repos/nette/nette/zipball/02fb1cd7a7600e2c8cd75951f1fbd83fd0da89b8",
+                "reference": "02fb1cd7a7600e2c8cd75951f1fbd83fd0da89b8",
                 "shasum": ""
             },
             "require": {
@@ -1200,7 +1144,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2014-02-23 17:46:39"
+            "time": "2014-03-03 16:01:24"
         },
         {
             "name": "nette/tester",
@@ -1208,12 +1152,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "00b7c68001acd1a50375c696f9260c9a1f2d78b8"
+                "reference": "d0bb114e5ff8e4f94edc889e8d8892992c335db8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/00b7c68001acd1a50375c696f9260c9a1f2d78b8",
-                "reference": "00b7c68001acd1a50375c696f9260c9a1f2d78b8",
+                "url": "https://api.github.com/repos/nette/tester/zipball/d0bb114e5ff8e4f94edc889e8d8892992c335db8",
+                "reference": "d0bb114e5ff8e4f94edc889e8d8892992c335db8",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1201,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2014-02-25 06:07:22"
+            "time": "2014-02-28 15:42:12"
         },
         {
             "name": "symfony/console",
@@ -1313,6 +1257,62 @@
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
             "time": "2014-02-11 13:52:09"
+        },
+        {
+            "name": "texy/texy",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/texy.git",
+                "reference": "75ebbf9aa27f7e79ad3ba368ad536328ebbd2744"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/texy/zipball/75ebbf9aa27f7e79ad3ba368ad536328ebbd2744",
+                "reference": "75ebbf9aa27f7e79ad3ba368ad536328ebbd2744",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "replace": {
+                "dg/texy": "self.version"
+            },
+            "require-dev": {
+                "nette/tester": "~1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/texy.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "http://davidgrudl.com"
+                }
+            ],
+            "description": "Texy converts plain text in easy to read Texy syntax into structurally valid (X)HTML. It supports adding of images, links, nested lists, tables and has full support for CSS. Texy supports hyphenation of long words (which reflects language rules), clickable emails and URL (emails are obfuscated against spambots), national typographic single and double quotation marks, ellipses, em dashes, dimension sign, nonbreakable spaces (e.g. in phone numbers), acronyms, arrows and many others. Texy code can optionally contain HTML tags.",
+            "homepage": "http://texy.info",
+            "keywords": [
+                "html",
+                "markdown",
+                "markup language",
+                "plain text",
+                "text",
+                "textile",
+                "texy",
+                "wiki",
+                "xhtml"
+            ],
+            "time": "2014-02-11 03:21:16"
         }
     ],
     "packages-dev": [
@@ -1325,7 +1325,7 @@
     "stability-flags": {
         "nette/nette": 20,
         "nette/tester": 20,
-        "dg/texy": 20,
+        "texy/texy": 20,
         "kukulich/fshl": 20,
         "janmarek/webloader": 20,
         "natxet/cssmin": 20,
