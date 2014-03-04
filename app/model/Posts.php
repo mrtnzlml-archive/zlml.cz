@@ -4,8 +4,8 @@ namespace App;
 
 use Doctrine;
 use Kdyby;
-use Nette;
 use Nette\Utils\Strings;
+use Nette;
 
 /**
  * Class Posts
@@ -40,6 +40,7 @@ class Posts extends Nette\Object {
 	 * @return array
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+		//TODO: prefetch
 		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
 	}
 
@@ -112,7 +113,7 @@ class Posts extends Nette\Object {
 		foreach ($matches[0] as $part) {
 			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
 				$accents = array('aá', 'cč', 'dď', 'eéě', 'ií', 'nň', 'oó', 'rř', 'sš', 'tť', 'uúů', 'yý', 'zž');
-				foreach($accents as $accent) {
+				foreach ($accents as $accent) {
 					$part = preg_replace("<[$accent]>iu", "[$accent]+", $part);
 				}
 				$regexp = "REGEXP '[[:<:]]" . addslashes(mb_strtoupper($part, 'UTF-8')) . "[[:>:]]'";
