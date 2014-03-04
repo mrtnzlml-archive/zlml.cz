@@ -18,12 +18,6 @@
 					<a n:href=":Admin:default $post->id">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
 				{/if}
 			</small>
-			{*<div class="btn-toolbar" role="toolbar">
-				<div class="btn-group">
-					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-left"></span></button>
-					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
-				</div>
-			</div>*}
 		</div>
 	</h2>
 	{foreach $post->tags as $tag}
@@ -36,6 +30,11 @@
 <div class="row" style="margin-bottom: 10px">
 	<div class="col-lg-10">
 		<div id="columns">
+			<div n:if="$post->date->getTimestamp() < strtotime('-1 year')" class="alert alert-danger">
+				<strong>Pozor!</strong> Tento článek je starší než jeden rok. Může se proto stát, že již není aktuální.
+				Snažím se však všechny články držet v aktuální podobě. Narazíte-li proto na nějakou neauktuální informaci,
+				dejte mi prosím vědět a já ji opravím. <em>Děkuji</em>
+			</div>
 			{$body|noescape}
 		</div>
 		<ul class="pager" n:if="$nextArticle || $prevArticle">
