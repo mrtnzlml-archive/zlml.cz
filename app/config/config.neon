@@ -24,6 +24,7 @@ services:
 	authenticator: App\Authenticator
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
+	- App\Pictures(@doctrine.dao(Entity\Picture))
 	- App\Posts(@doctrine.dao(Entity\Post))
 	- App\Tags(@doctrine.dao(Entity\Tag))
 	- App\Users(@doctrine.dao(Entity\User))

@@ -9,6 +9,8 @@ use Nette;
 
 class AdminPresenter extends BasePresenter {
 
+	/** @var Pictures @inject */
+	public $pictures;
 	/** @var Tags @inject */
 	public $tags;
 
@@ -37,6 +39,10 @@ class AdminPresenter extends BasePresenter {
 			$this->value = $this->posts->findOneBy(['id' => $id]);
 			$this->template->editace = $id;
 		}
+	}
+
+	public function renderPictures() {
+		$this->template->pictures = $this->pictures->findBy(array());
 	}
 
 	public function renderPrehled() {
@@ -189,6 +195,26 @@ class AdminPresenter extends BasePresenter {
 			$this->flashMessage($exc->getMessage(), 'alert-danger');
 		}
 		$this->redirect('this');
+	}
+
+	public function handleUploadPicture() {
+		$uploader = new \UploadHandler();
+		$uploader->allowedExtensions = array("jpeg", "jpg", "png", "gif");
+		$result = $uploader->handleUpload(__DIR__ . '/../../www/uploads');
+		try {
+			$picture = new Entity\Picture();
+			$picture->uuid = $uploader->getUuid();
+			$picture->name = $uploader->getUploadName();
+			//$this->pictures->save($picture);
+		} catch (\Exception $exc) {
+			$uploader->handleDelete(__DIR__ . '/../../www/uploads');
+			$this->flashMessage($exc->getMessage(), 'alert-danger');
+			$this->sendResponse(new Nette\Application\Responses\JsonResponse(array(
+				'error' => $exc->getMessage(),
+			)));
+		}
+		//$this->redrawControl('pictures');
+		$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
 	}
 
 }

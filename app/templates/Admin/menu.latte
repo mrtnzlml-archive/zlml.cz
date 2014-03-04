@@ -1,8 +1,12 @@
 <div class="list-group">
 	<a n:href=":Admin:default, id => NULL" n:class="$presenter->isLinkCurrent(':Admin:default')?'list-group-item active':'list-group-item'">
-		{*<span class="badge">14</span>*}
 		<h4 class="list-group-item-heading">Přidat nový článek</h4>
 		<p class="list-group-item-text">Napište nový článek</p>
+	</a>
+
+	<a n:href=":Admin:pictures" n:class="$presenter->isLinkCurrent(':Admin:pictures')?'list-group-item active':'list-group-item'">
+		<h4 class="list-group-item-heading">Nahrát nový obrázek</h4>
+		<p class="list-group-item-text">Zde nahrajte obrázky</p>
 	</a>
 
 	<a n:href=":Admin:prehled" n:class="$presenter->isLinkCurrent(':Admin:prehled')?'list-group-item active':'list-group-item'">
