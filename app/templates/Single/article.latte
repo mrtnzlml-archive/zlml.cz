@@ -9,7 +9,7 @@
 <div class="page-header">
 	<h2>
 		{$post->title|vlna}
-		<small style="white-space:nowrap">{$post->date|date:'Y-m-d'}</small>
+		<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
 		<div class="pull-right hidden-print">
 			<small>
 				<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span class="glyphicon glyphicon-print"></span></a>

@@ -11,13 +11,7 @@ class SinglePresenter extends BasePresenter {
 	public $tags;
 
 	public function renderObsah() {
-		$articles = $this->posts->findBy([], ['title' => 'ASC']);
-		$this->template->articles = $articles;
-	}
-
-	public function renderTagsah() {
-		$tags = $this->tags->findBy([], ['name' => 'ASC']);
-		$this->template->tags = $tags;
+		$this->template->articles = $this->posts->findBy([], ['title' => 'ASC']);
 	}
 
 	public function renderArticle($slug) {

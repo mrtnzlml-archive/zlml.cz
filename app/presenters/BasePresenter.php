@@ -59,6 +59,26 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			$string = preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;
 		});
+		$template->registerHelper('dateInWords', function ($time) {
+			$time = Nette\DateTime::from($time);
+			$months = array(1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec');
+			return $time->format('j. ') . $months[$time->format('n')] . $time->format(' Y');
+		});
+		$template->registerHelper('timeAgoInWords', function ($time) {
+			$time = Nette\DateTime::from($time);
+			$delta = round((time() - $time->getTimestamp()) / 60);
+			if ($delta == 0) return 'před okamžikem';
+			if ($delta == 1) return 'před minutou';
+			if ($delta < 45) return "před $delta minutami";
+			if ($delta < 90) return 'před hodinou';
+			if ($delta < 1440) return 'před ' . round($delta / 60) . ' hodinami';
+			if ($delta < 2880) return 'včera';
+			if ($delta < 43200) return 'před ' . round($delta / 1440) . ' dny';
+			if ($delta < 86400) return 'před měsícem';
+			if ($delta < 525960) return 'před ' . round($delta / 43200) . ' měsíci';
+			if ($delta < 1051920) return 'před rokem';
+			return 'před ' . round($delta / 525960) . ' lety';
+		});
 		return $template;
 	}
 
