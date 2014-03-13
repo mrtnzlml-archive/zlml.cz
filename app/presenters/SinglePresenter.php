@@ -21,17 +21,16 @@ class SinglePresenter extends BasePresenter {
 	}
 
 	public function renderArticle($slug) {
-		$old_slug = $slug;
-		$slug = Nette\Utils\Strings::webalize($slug);
-		if(empty($slug)) {
+		$webalized = Nette\Utils\Strings::webalize($slug);
+		if(empty($webalized)) {
 			$this->redirect('Homepage:default');
 		}
-		if ($old_slug !== $slug) {
-			$this->redirect($slug);
+		if ($slug !== $webalized) {
+			$this->redirect('Single:article', $webalized);
 		}
-		$post = $this->posts->findOneBy(['slug' => $slug]); // zobrazeni článku podle slugu
+		$post = $this->posts->findOneBy(['slug' => $webalized]); // zobrazeni článku podle slugu
 		if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
-			$this->forward($slug);
+			$this->forward($webalized);
 		} else { // zobrazení klasických článků
 			$texy = new \fshlTexy();
 			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
