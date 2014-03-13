@@ -10,6 +10,7 @@ libs/*
 
 composer.lock
 app/config/config.local.neon
+config.local.neon
 tests/coverage.dat
 tests/coverage.html
 

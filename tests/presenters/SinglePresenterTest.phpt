@@ -44,17 +44,14 @@ class SinglePresenterTest extends Tester\TestCase {
 		$this->tester->testAction('reference');
 	}
 
-	public function testRenderTagsah() {
-		$this->tester->testAction('tagsah');
-	}
-
 	///// dataProviders /////
 
 	/**
 	 * @return array of arrays
 	 */
 	public function dataArticles() {
-		$articles = $this->posts->findBy([]);
+		//$articles = $this->posts->findBy([]);
+		$articles = $this->posts->findOneBy([]);
 		$data = array();
 		foreach ($articles as $article) {
 			$data[] = array($article->slug);
