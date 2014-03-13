@@ -30,11 +30,6 @@
 <div class="row" style="margin-bottom: 10px">
 	<div class="col-lg-10">
 		<div id="columns">
-			<div n:if="$post->date->getTimestamp() < strtotime('-1 year')" class="alert alert-danger">
-				<strong>Pozor!</strong> Tento článek je starší než jeden rok. Může se proto stát, že již není aktuální.
-				Snažím se však všechny články držet v aktuální podobě. Narazíte-li proto na nějakou neauktuální informaci,
-				dejte mi prosím vědět a já ji opravím. <em>Děkuji</em>
-			</div>
 			{$body|noescape}
 		</div>
 		<ul class="pager" n:if="$nextArticle || $prevArticle">
