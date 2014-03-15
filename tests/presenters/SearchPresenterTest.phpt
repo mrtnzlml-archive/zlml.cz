@@ -21,6 +21,15 @@ class SearchPresenterTest extends Tester\TestCase {
 		$this->tester->testAction('default', 'GET', ['search' => 'nette']);
 	}
 
+	//FIXME
+	/*public function testSearchForm() {
+		$this->tester->testForm('default', 'GET', array(
+			'do' => 'search-submit',
+		), array(
+			'search' => 'test',
+		));
+	}*/
+
 }
 
 $test = new SearchPresenterTest($container);

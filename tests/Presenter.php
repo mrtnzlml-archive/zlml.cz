@@ -15,14 +15,12 @@ class Presenter extends Nette\Object {
 	private $container;
 	private $presenter;
 	private $presName;
-	private $session;
 
 	/**
 	 * @param Nette\DI\Container $container
 	 */
 	public function __construct(Nette\DI\Container $container) {
 		$this->container = $container;
-		$this->session = $container->session;
 	}
 
 	/**
@@ -98,39 +96,19 @@ class Presenter extends Nette\Object {
 	}
 
 	/**
-	 * @param bool $successful
-	 * @param string $presName
+	 * @param int $id
+	 * @param null $roles
+	 * @param null $data
 	 */
-	public function logIn($successful = TRUE, $presName = 'Auth:Sign') {
-		$presenterFactory = $this->container->getByType('Nette\Application\IPresenterFactory');
-		$presenter = $presenterFactory->createPresenter($presName);
-		$presenter->autoCanonicalize = FALSE;
-		$request = new Nette\Application\Request('Sign', 'POST', array(
-			'action' => 'in',
-			'do' => 'signInForm-submit',
-		), array(
-			'username' => '',
-			'password' => $successful ? '' : 'wrong password', //FIXME: config!
-		));
-		$this->container->user->logout();
-		$response = $presenter->run($request);
-		if ($successful) {
-			Tester\Assert::true($this->container->user->isLoggedIn());
-			Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
-		} else {
-			Tester\Assert::false($this->container->user->isLoggedIn());
-			Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		}
+	public function logIn($id = 1, $roles = NULL, $data = NULL) {
+		$identity = new Nette\Security\Identity($id, $roles, $data);
+		$user = $this->container->getByType('Nette\Security\User');
+		$user->login($identity);
 	}
 
-	public function getSession() {
-		Tester\Assert::true($this->session instanceof Nette\Http\Session);
-		return $this->session;
-	}
-
-	public function removeSession($session) {
-		$session = $session->remove();
-		Tester\Assert::false($session instanceof Nette\Http\Session);
+	public function logOut() {
+		$user = $this->container->getByType('Nette\Security\User');
+		$user->logout();
 	}
 
 }

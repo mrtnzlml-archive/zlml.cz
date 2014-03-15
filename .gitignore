@@ -13,6 +13,7 @@ app/config/config.local.neon
 config.local.neon
 tests/coverage.dat
 tests/coverage.html
+www/webtemp
 
 !fshlTexy.php
 !JavaScriptLoader.php

@@ -79,9 +79,8 @@ function outline() {
 			{selector: "pre", fillStyle: "rgb(200,200,200)"},
 			{selector: "a,h1,h2,h3,h4,h5,h6", fillStyle: "rgb(104,169,255)"},
 			{selector: "canvas", fillStyle: "rgb(108,196,46)"},
-			{selector: "blockquote,.thumbnail,#disqus_thread", fillStyle: "rgb(221,75,57)"},
-			{selector: "table", fillStyle: "rgb(200,200,30)"}
-
+			{selector: "img,.thumbnail,#disqus_thread", fillStyle: "rgb(221,75,57)"},
+			{selector: "input,blockquote,table", fillStyle: "rgb(200,200,30)"}
 		],
 		viewportStyle: {fillStyle: "rgba(104,169,255,0.2)"},
 		viewportDragStyle: {fillStyle: "rgba(104,169,255,0.5)"}

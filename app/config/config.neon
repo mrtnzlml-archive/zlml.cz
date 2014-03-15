@@ -30,7 +30,6 @@ services:
 	- App\Users(@doctrine.dao(Entity\User))
 
 extensions:
-	ajax: VojtechDobes\NetteAjax\Extension
 	console: Kdyby\Console\DI\ConsoleExtension
 	events: Kdyby\Events\DI\EventsExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension

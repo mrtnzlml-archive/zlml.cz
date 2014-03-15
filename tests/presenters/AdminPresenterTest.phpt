@@ -10,9 +10,10 @@ $container = require __DIR__ . '/../bootstrap.php';
 /**
  * Class AdminPresenterTest
  * @package Test
- * @skip
  */
 class AdminPresenterTest extends Tester\TestCase {
+
+	private $action;
 
 	public function __construct(Nette\DI\Container $container) {
 		$this->tester = new Presenter($container);
@@ -20,11 +21,38 @@ class AdminPresenterTest extends Tester\TestCase {
 
 	public function setUp() {
 		$this->tester->init('Admin');
-		$this->tester->logIn(TRUE, 'Sign');
+		$this->tester->logIn();
 	}
 
 	public function testRenderDefault() {
-		$this->tester->testAction('default');
+		$this->action = 'default';
+		$this->tester->testAction($this->action);
+	}
+
+	public function testRenderDefaultEdit() {
+		$this->action = 'default';
+		$this->tester->testAction($this->action, 'GET', [1]);
+	}
+
+	public function testRenderPictures() {
+		$this->action = 'pictures';
+		$this->tester->testAction($this->action);
+	}
+
+	public function testRenderPrehled() {
+		$this->action = 'prehled';
+		$this->tester->testAction($this->action);
+	}
+
+	public function testRenderTags() {
+		$this->action = 'tags';
+		$this->tester->testAction($this->action);
+	}
+
+	public function tearDown() {
+		$this->tester->logOut();
+		$response = $this->tester->test($this->action);
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 
 }
