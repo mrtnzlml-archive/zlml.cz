@@ -12,6 +12,9 @@
 			<title>{$post->title}</title>
 			<link>{link //:Single:article $post->slug}</link>
 			<description>{$post->body|texy}</description>
+			<category n:foreach="$post->tags as $tag">
+				{$tag->name}
+			</category>
 		</item>
 	</channel>
 </rss>
