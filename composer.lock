@@ -731,16 +731,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Doctrine.git",
-                "reference": "d225a26b349a7cbec438d7015812b9a22a730e32"
+                "reference": "0f9e7cd9a450e5723a7cf6c93858c1443c283b26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/d225a26b349a7cbec438d7015812b9a22a730e32",
-                "reference": "d225a26b349a7cbec438d7015812b9a22a730e32",
+                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/0f9e7cd9a450e5723a7cf6c93858c1443c283b26",
+                "reference": "0f9e7cd9a450e5723a7cf6c93858c1443c283b26",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "~2.4",
+                "doctrine/orm": "~2.4.1",
                 "kdyby/annotations": "~2.0@dev",
                 "kdyby/console": "~2.0@dev",
                 "kdyby/doctrine-cache": "~2.1@dev",
@@ -776,6 +776,7 @@
             "authors": [
                 {
                     "name": "Filip Procházka",
+                    "email": "filip@prochazka.su",
                     "homepage": "http://filip-prochazka.com"
                 }
             ],
@@ -788,7 +789,7 @@
                 "nette",
                 "orm"
             ],
-            "time": "2014-02-20 22:12:38"
+            "time": "2014-03-19 16:21:54"
         },
         {
             "name": "kdyby/doctrine-cache",
@@ -838,16 +839,16 @@
         },
         {
             "name": "kdyby/events",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Events.git",
-                "reference": "8878e831e7cc10a448b88b72b22f833c84e5adc8"
+                "reference": "bbe97b55366457d920e30b3d7b90daa336375e54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Events/zipball/8878e831e7cc10a448b88b72b22f833c84e5adc8",
-                "reference": "8878e831e7cc10a448b88b72b22f833c84e5adc8",
+                "url": "https://api.github.com/repos/Kdyby/Events/zipball/bbe97b55366457d920e30b3d7b90daa336375e54",
+                "reference": "bbe97b55366457d920e30b3d7b90daa336375e54",
                 "shasum": ""
             },
             "require": {
@@ -882,6 +883,7 @@
             "authors": [
                 {
                     "name": "Filip Procházka",
+                    "email": "filip@prochazka.su",
                     "homepage": "http://filip-prochazka.com"
                 }
             ],
@@ -891,7 +893,7 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2014-01-08 11:55:38"
+            "time": "2014-03-13 23:29:55"
         },
         {
             "name": "kukulich/fshl",
@@ -982,12 +984,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/linkorb/jsmin-php.git",
-                "reference": "be85d87fc9c27730e7e9ced742b13010dafc1026"
+                "reference": "c598ed59809eb91f2decb00d8ed37b307e1a52b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/linkorb/jsmin-php/zipball/be85d87fc9c27730e7e9ced742b13010dafc1026",
-                "reference": "be85d87fc9c27730e7e9ced742b13010dafc1026",
+                "url": "https://api.github.com/repos/linkorb/jsmin-php/zipball/c598ed59809eb91f2decb00d8ed37b307e1a52b0",
+                "reference": "c598ed59809eb91f2decb00d8ed37b307e1a52b0",
                 "shasum": ""
             },
             "require": {
@@ -1007,7 +1009,7 @@
                 {
                     "name": "Joost Faassen",
                     "email": "j.faassen@linkorb.com",
-                    "role": "Packaging for composer"
+                    "role": "Development"
                 },
                 {
                     "name": "Douglas Crockford",
@@ -1031,7 +1033,7 @@
                 "jsmin",
                 "minify"
             ],
-            "time": "2013-03-15 13:16:35"
+            "time": "2014-03-04 21:29:41"
         },
         {
             "name": "natxet/CssMin",
@@ -1081,12 +1083,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "02fb1cd7a7600e2c8cd75951f1fbd83fd0da89b8"
+                "reference": "26018f57d0c961fb024c2cdd72385e92476e026f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/02fb1cd7a7600e2c8cd75951f1fbd83fd0da89b8",
-                "reference": "02fb1cd7a7600e2c8cd75951f1fbd83fd0da89b8",
+                "url": "https://api.github.com/repos/nette/nette/zipball/26018f57d0c961fb024c2cdd72385e92476e026f",
+                "reference": "26018f57d0c961fb024c2cdd72385e92476e026f",
                 "shasum": ""
             },
             "require": {
@@ -1144,7 +1146,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2014-03-03 16:01:24"
+            "time": "2014-03-21 15:31:11"
         },
         {
             "name": "nette/tester",
@@ -1152,20 +1154,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "d0bb114e5ff8e4f94edc889e8d8892992c335db8"
+                "reference": "d7c12a80e134e1f93e2eeff4dcdf8d935426b374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/d0bb114e5ff8e4f94edc889e8d8892992c335db8",
-                "reference": "d0bb114e5ff8e4f94edc889e8d8892992c335db8",
+                "url": "https://api.github.com/repos/nette/tester/zipball/d7c12a80e134e1f93e2eeff4dcdf8d935426b374",
+                "reference": "d7c12a80e134e1f93e2eeff4dcdf8d935426b374",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "bin": [
-                "Tester/tester",
-                "Tester/coverage-report"
+                "Tester/tester"
             ],
             "type": "library",
             "extra": {
@@ -1201,7 +1202,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2014-02-28 15:42:12"
+            "time": "2014-03-15 19:00:57"
         },
         {
             "name": "symfony/console",
@@ -1264,12 +1265,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/texy.git",
-                "reference": "75ebbf9aa27f7e79ad3ba368ad536328ebbd2744"
+                "reference": "00df66cb1b84f6c344f6cc8b4fb24b956458ee8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/texy/zipball/75ebbf9aa27f7e79ad3ba368ad536328ebbd2744",
-                "reference": "75ebbf9aa27f7e79ad3ba368ad536328ebbd2744",
+                "url": "https://api.github.com/repos/dg/texy/zipball/00df66cb1b84f6c344f6cc8b4fb24b956458ee8c",
+                "reference": "00df66cb1b84f6c344f6cc8b4fb24b956458ee8c",
                 "shasum": ""
             },
             "require": {
@@ -1312,7 +1313,7 @@
                 "wiki",
                 "xhtml"
             ],
-            "time": "2014-02-11 03:21:16"
+            "time": "2014-03-10 15:02:30"
         }
     ],
     "packages-dev": [

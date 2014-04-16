@@ -124,6 +124,7 @@ class AdminPresenter extends BasePresenter {
 			if ($id) { // upravujeme záznam
 				$post = $this->posts->findOneBy(['id' => $id]);
 			} else { // přidáváme záznam
+				//TODO: send pingbacks
 				$post = new Entity\Post();
 				$post->date = new \DateTime();
 			}
