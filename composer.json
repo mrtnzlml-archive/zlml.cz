@@ -6,15 +6,12 @@
 	"authors": [
 		{
 			"name": "Martin Zlámal",
-			"homepage": "http://www.zeminem.cz"
+			"homepage": "http://www.zeminem.cz/"
 		}
 	],
-	"config": {
-		"vendor-dir": "libs"
-	},
 	"require": {
 		"php": ">= 5.3.0",
-		"nette/nette": "2.2.*@dev",
+		"nette/nette": "dev-master",
 		"nette/tester": "dev-master",
 		"texy/texy": "dev-master",
 		"kukulich/fshl": "dev-develop",
@@ -23,5 +20,6 @@
 		"linkorb/jsmin-php": "dev-master",
 		"leafo/lessphp": "0.3.*@dev",
 		"kdyby/doctrine": "@dev"
-	}
+	},
+	"minimum-stability": "dev"
 }

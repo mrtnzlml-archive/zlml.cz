@@ -24,7 +24,7 @@ class HomepagePresenterTest extends Tester\TestCase {
 	public function testRenderRss() {
 		$response = $this->tester->test('rss');
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Templating\ITemplate);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 		$html = (string)$response->getSource();
 		$dom = @Tester\DomQuery::fromHtml($html);
 		Tester\Assert::true($dom->has('rss'));
@@ -39,7 +39,7 @@ class HomepagePresenterTest extends Tester\TestCase {
 	public function testRenderSitemap() {
 		$response = $this->tester->test('sitemap');
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Templating\ITemplate);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 		$html = (string)$response->getSource();
 		$dom = @Tester\DomQuery::fromHtml($html);
 		Tester\Assert::true($dom->has('urlset'));

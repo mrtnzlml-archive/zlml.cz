@@ -1,8 +1,7 @@
+.idea/*
 log/*
 temp/*
-libs/*
-
-.idea/*
+vendor/*
 
 !.gitignore
 !.htaccess
@@ -14,9 +13,3 @@ config.local.neon
 tests/coverage.dat
 tests/coverage.html
 www/webtemp
-
-!fshlTexy.php
-!JavaScriptLoader.php
-!OutputNamingConvention.php
-!Tex.php
-!UploadHandler.php

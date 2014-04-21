@@ -58,7 +58,7 @@ class Presenter extends Nette\Object {
 		$response = $this->test($action, $method, $params, $post);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Templating\ITemplate);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 		$html = (string)$response->getSource();
 		$dom = @Tester\DomQuery::fromHtml($html); //FIXME: shutup
