@@ -7,9 +7,13 @@
 		<link>{link //:Homepage:default}</link>
 		<description>Nejnovější články na blogu.</description>
 		<language>cs</language>
+		<managingEditor>mrtnzlml@gmail.com</managingEditor>
+		<webMaster>mrtnzlml@gmail.com</webMaster>
 
 		<item n:foreach="$posts as $post">
 			<title>{$post->title}</title>
+			<pubDate>{$post->date|date:'D, d M Y H:i:s O'}</pubDate>
+			<author>mrtnzlml@gmail.com</author>
 			<link>{link //:Single:article $post->slug}</link>
 			<description>{$post->body|texy}</description>
 			<category n:foreach="$post->tags as $tag">
