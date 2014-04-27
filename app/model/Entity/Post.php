@@ -20,6 +20,7 @@ class Post extends Doctrine\Entities\BaseEntity {
 	protected $tags;
 
 	public function __construct() {
+		//FIXME
 		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 

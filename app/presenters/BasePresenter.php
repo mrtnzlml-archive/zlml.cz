@@ -60,12 +60,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			return $string;
 		});
 		$template->registerHelper('dateInWords', function ($time) {
-			$time = Nette\DateTime::from($time);
+			$time = Nette\Utils\DateTime::from($time);
 			$months = array(1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec');
 			return $time->format('j. ') . $months[$time->format('n')] . $time->format(' Y');
 		});
 		$template->registerHelper('timeAgoInWords', function ($time) {
-			$time = Nette\DateTime::from($time);
+			$time = Nette\Utils\DateTime::from($time);
 			$delta = round((time() - $time->getTimestamp()) / 60);
 			if ($delta == 0) return 'před okamžikem';
 			if ($delta == 1) return 'před minutou';

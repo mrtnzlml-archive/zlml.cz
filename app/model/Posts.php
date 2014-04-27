@@ -4,8 +4,8 @@ namespace App;
 
 use Doctrine;
 use Kdyby;
-use Nette\Utils\Strings;
 use Nette;
+use Nette\Utils\Strings;
 
 /**
  * Class Posts
@@ -40,8 +40,17 @@ class Posts extends Nette\Object {
 	 * @return array
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
-		//TODO: prefetch
-		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
+		$qb = $this->dao->createQueryBuilder('p')
+			->whereCriteria($criteria)
+			->autoJoinOrderBy($orderBy)
+			->join('p.tags', 'tt') //t already used?
+			->addSelect('tt');
+		//TODO: limit
+		return $qb->getQuery()
+			->setMaxResults($limit)
+			->setFirstResult($offset)
+			->getResult();
+		//return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
 	}
 
 	/**

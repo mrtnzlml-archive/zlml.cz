@@ -40,13 +40,9 @@ class Tags extends Nette\Object {
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
 		$qb = $this->dao->createQueryBuilder('t')
 			->whereCriteria($criteria)
-			->innerJoin('t.posts', 'p')
-			->addSelect('p'); // This will produce less SQL queries with prefetch.
-		if ($orderBy) {
-			foreach ($orderBy as $sort => $order) {
-				$qb->addOrderBy('t.' . $sort, $order);
-			}
-		}
+			->autoJoinOrderBy($orderBy)
+			->join('t.posts', 'p')
+			->addSelect('p');
 		return $qb->getQuery()
 			->setMaxResults($limit)
 			->setFirstResult($offset)

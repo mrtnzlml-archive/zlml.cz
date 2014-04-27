@@ -18,6 +18,11 @@ $configurator->createRobotLoader()
 
 define("WWW_DIR", __DIR__ . '/../www');
 
+//FIXME: nefunguje instanceof
+class_alias('Nette\Utils\ObjectMixin', 'Nette\ObjectMixin');
+//class_alias('Nette\Application\UI\ITemplate', 'Nette\Templating\ITemplate');
+//FIXME: neexistuje Nette\Diagnostics\Helpers::clickableDump()
+
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
