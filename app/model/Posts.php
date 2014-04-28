@@ -40,7 +40,7 @@ class Posts extends Nette\Object {
 	 * @return array
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
-		$qb = $this->dao->createQueryBuilder('p')
+		/*$qb = $this->dao->createQueryBuilder('p')
 			->whereCriteria($criteria)
 			->autoJoinOrderBy($orderBy)
 			->join('p.tags', 'tt') //t already used?
@@ -49,8 +49,8 @@ class Posts extends Nette\Object {
 		return $qb->getQuery()
 			->setMaxResults($limit)
 			->setFirstResult($offset)
-			->getResult();
-		//return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
+			->getResult();*/
+		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
 	}
 
 	/**

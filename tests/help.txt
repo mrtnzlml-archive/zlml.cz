@@ -1,9 +1,9 @@
 All tests
 =========
-File:		C:\xampp2\htdocs\zeminem.cz2\vendor\nette\tester\Tester\tester.php
-Arguments:	-j 40 -c C:\xampp2\htdocs\zeminem.cz2\tests\php.ini C:\xampp2\htdocs\zeminem.cz2\tests
+File:		C:\xampp\htdocs\zeminem.cz\vendor\nette\tester\Tester\tester.php
+Arguments:	-c C:\xampp\htdocs\zeminem.cz\tests\php.ini C:\xampp\htdocs\zeminem.cz\tests
 
 CodeCoverage
 ============
-File:		C:\xampp2\htdocs\zeminem.cz2\vendor\nette\tester\Tester\coverage-report.php
-Arguments:	-c C:\xampp2\htdocs\zeminem.cz2\tests\coverage.dat -s C:\xampp2\htdocs\zeminem.cz2\app -o C:\xampp2\htdocs\zeminem.cz2\tests\coverage.html
+File:		C:\xampp\htdocs\zeminem.cz\vendor\nette\tester\Tester\coverage-report.php
+Arguments:	-c C:\xampp\htdocs\zeminem.cz\tests\coverage.dat -s C:\xampp\htdocs\zeminem.cz\app -o C:\xampp\htdocs\zeminem.cz\tests\coverage.html
