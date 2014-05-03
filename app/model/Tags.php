@@ -38,15 +38,15 @@ class Tags extends Nette\Object {
 	 * @return array
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
-		$qb = $this->dao->createQueryBuilder('t')
+		$query = $this->dao->createQueryBuilder('t')
 			->whereCriteria($criteria)
-			->autoJoinOrderBy($orderBy)
+			->autoJoinOrderBy((array)$orderBy)
 			->join('t.posts', 'p')
-			->addSelect('p');
-		return $qb->getQuery()
-			->setMaxResults($limit)
-			->setFirstResult($offset)
-			->getResult();
+			->addSelect('p')
+			->getQuery();
+		$resultSet = new Kdyby\Doctrine\ResultSet($query);
+		$resultSet->setFetchJoinCollection(FALSE); //generate less db queries, try it!
+		return $resultSet->applyPaging($offset, $limit);
 	}
 
 	/**

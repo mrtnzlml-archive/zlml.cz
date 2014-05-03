@@ -40,17 +40,15 @@ class Posts extends Nette\Object {
 	 * @return array
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
-		/*$qb = $this->dao->createQueryBuilder('p')
+		$query = $this->dao->createQueryBuilder('p')
 			->whereCriteria($criteria)
-			->autoJoinOrderBy($orderBy)
+			->autoJoinOrderBy((array)$orderBy)
 			->join('p.tags', 'tt') //t already used?
-			->addSelect('tt');
-		//TODO: limit
-		return $qb->getQuery()
-			->setMaxResults($limit)
-			->setFirstResult($offset)
-			->getResult();*/
-		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
+			->addSelect('tt')
+			->getQuery();
+		$resultSet = new Kdyby\Doctrine\ResultSet($query);
+		$resultSet->setFetchJoinCollection(FALSE); //generate less db queries, try it!
+		return $resultSet->applyPaging($offset, $limit)->getIterator();
 	}
 
 	/**
@@ -100,7 +98,7 @@ class Posts extends Nette\Object {
 	 * @return mixed|null
 	 */
 	public function rand() {
-		$posts = $this->findBy([]);
+		$posts = iterator_to_array($this->findBy([]));
 		return $posts[rand(0, count($posts) - 1)];
 	}
 

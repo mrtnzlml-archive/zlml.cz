@@ -63,9 +63,9 @@ class SinglePresenter extends BasePresenter {
 			if (count($next) < 3) {
 				$limit = 3 - count($next);
 				if($ids) {
-					$next = array_merge($next, $this->posts->findBy(['id !=' => $post->getId(), 'id != ' => $ids], ['date' => 'DESC'], $limit));
+					$next = array_merge((array)$next, (array)$this->posts->findBy(['id !=' => $post->getId(), 'id != ' => $ids], ['date' => 'DESC'], $limit));
 				} else {
-					$next = array_merge($next, $this->posts->findBy(['id !=' => $post->getId()], ['date' => 'DESC'], $limit));
+					$next = array_merge((array)$next, (array)$this->posts->findBy(['id !=' => $post->getId()], ['date' => 'DESC'], $limit));
 				}
 			}
 			$this->template->next = $next;
