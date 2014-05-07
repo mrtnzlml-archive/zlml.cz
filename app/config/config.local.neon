@@ -8,6 +8,6 @@
 doctrine:
 	user: root
 	password: ''
-	dbname: sample
+	dbname: zeminem
 	metadata:
 		Entity: %appDir%
