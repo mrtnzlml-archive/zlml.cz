@@ -7,11 +7,6 @@ if (!class_exists('Tester\Assert')) {
 	exit(1);
 }
 
-if (extension_loaded('xdebug')) {
-	xdebug_disable();
-	\Tester\CodeCoverage\Collector::start(__DIR__ . '/coverage.dat');
-}
-
 Tester\Environment::setup();
 date_default_timezone_set('Europe/Prague');
 
