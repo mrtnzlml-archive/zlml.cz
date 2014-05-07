@@ -1,0 +1,11 @@
+language: php
+php:
+  - 5.5
+
+script: vendor/bin/tester tests -s -c tests/php.ini
+
+before_script:
+  - mysql -u root -e 'create database zeminem;'
+  - mysql -u root -D zeminem < zeminem.sql
+  - mysql -u root -D zeminem < diff.sql
+  - composer update
