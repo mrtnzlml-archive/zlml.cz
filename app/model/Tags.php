@@ -45,7 +45,6 @@ class Tags extends Nette\Object {
 			->addSelect('p')
 			->getQuery();
 		$resultSet = new Kdyby\Doctrine\ResultSet($query);
-		$resultSet->setFetchJoinCollection(FALSE); //generate less db queries, try it!
 		return $resultSet->applyPaging($offset, $limit);
 	}
 
