@@ -5,5 +5,5 @@ Arguments:	-c C:\xampp\htdocs\zeminem.cz\tests\php.ini C:\xampp\htdocs\zeminem.c
 
 CodeCoverage
 ============
-File:		C:\xampp\htdocs\zeminem.cz\vendor\nette\tester\Tester\coverage-report.php
-Arguments:	-c C:\xampp\htdocs\zeminem.cz\tests\coverage.dat -s C:\xampp\htdocs\zeminem.cz\app -o C:\xampp\htdocs\zeminem.cz\tests\coverage.html
+File:		C:\xampp\htdocs\zeminem.cz\vendor\nette\tester\Tester\tester.php
+Arguments:	-c C:\xampp\htdocs\zeminem.cz\tests\php.ini --coverage-src C:\xampp\htdocs\zeminem.cz\app --coverage C:\xampp\htdocs\zeminem.cz\tests\coverage.html C:\xampp\htdocs\zeminem.cz\tests

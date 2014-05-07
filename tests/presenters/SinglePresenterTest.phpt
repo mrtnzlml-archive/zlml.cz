@@ -50,8 +50,9 @@ class SinglePresenterTest extends Tester\TestCase {
 	 * @return array of arrays
 	 */
 	public function dataArticles() {
+		$articles = $this->posts->findBy([], NULL, 10, 0);
 		//$articles = $this->posts->findBy([]);
-		$articles = $this->posts->findOneBy([]);
+		//$articles = $this->posts->findOneBy([]);
 		$data = array();
 		foreach ($articles as $article) {
 			$data[] = array($article->slug);

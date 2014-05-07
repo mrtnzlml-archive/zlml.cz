@@ -21,6 +21,12 @@ class HomepagePresenterTest extends Tester\TestCase {
 		$this->tester->testAction('default');
 	}
 
+	public function testRenderDefaultPage2() {
+		$this->tester->testAction('default', Presenter::GET, [
+			'paginator-page' => 2,
+		]);
+	}
+
 	public function testRenderRss() {
 		$response = $this->tester->test('rss');
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);

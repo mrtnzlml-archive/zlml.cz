@@ -16,6 +16,9 @@ class Presenter extends Nette\Object {
 	private $presenter;
 	private $presName;
 
+	const GET = 'GET';
+	const POST = 'POST';
+
 	/**
 	 * @param Nette\DI\Container $container
 	 */
@@ -40,7 +43,7 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function test($action, $method = 'GET', $params = array(), $post = array()) {
+	public function test($action, $method = self::GET, $params = array(), $post = array()) {
 		$params['action'] = $action;
 		$request = new Nette\Application\Request($this->presName, $method, $params, $post);
 		$response = $this->presenter->run($request);
@@ -54,14 +57,14 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function testAction($action, $method = 'GET', $params = array(), $post = array()) {
+	public function testAction($action, $method = self::GET, $params = array(), $post = array()) {
 		$response = $this->test($action, $method, $params, $post);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 		$html = (string)$response->getSource();
-		$dom = @Tester\DomQuery::fromHtml($html); //FIXME: shutup
+		$dom = @Tester\DomQuery::fromHtml($html);
 		Tester\Assert::true($dom->has('html'));
 		Tester\Assert::true($dom->has('title'));
 		Tester\Assert::true($dom->has('body'));
@@ -76,7 +79,7 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function testJson($action, $method = 'GET', $params = array(), $post = array()) {
+	public function testJson($action, $method = self::GET, $params = array(), $post = array()) {
 		$response = $this->test($action, $method, $params, $post);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\JsonResponse);
 		Tester\Assert::same('application/json', $response->getContentType());
@@ -89,7 +92,7 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function testForm($action, $method = 'POST', $post = array()) {
+	public function testForm($action, $method = self::POST, $post = array()) {
 		$response = $this->test($action, $method, $post);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 		return $response;
