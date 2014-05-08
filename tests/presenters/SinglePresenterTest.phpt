@@ -8,6 +8,9 @@ use Tester;
 
 $container = require __DIR__ . '/../bootstrap.php';
 
+/**
+ * @testCase
+ */
 class SinglePresenterTest extends Tester\TestCase {
 
 	/** @var App\Posts */

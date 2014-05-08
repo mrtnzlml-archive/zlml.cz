@@ -1,5 +1,6 @@
 language: php
 php:
+  - 5.3
   - 5.4
   - 5.5
   - 5.6
@@ -7,13 +8,10 @@ php:
 
 matrix:
   allow_failures:
+    - php: 5.3
     - php: hhvm
 
 script: vendor/bin/tester tests -s -c tests/php.ini
-
-after_failure:
-  # Print *.actual content
-  - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
 
 before_script:
   - mysql -u root -e 'create database zeminem;'

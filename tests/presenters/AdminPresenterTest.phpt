@@ -8,8 +8,7 @@ use Tester;
 $container = require __DIR__ . '/../bootstrap.php';
 
 /**
- * Class AdminPresenterTest
- * @package Test
+ * @testCase
  */
 class AdminPresenterTest extends Tester\TestCase {
 
