@@ -5,7 +5,7 @@ a, a:hover, a:focus { color: @red; text-decoration: underline; }
 a:hover { text-decoration: none; }
 a[href^="#error:"] { background: red; color: white; }
 
-body { background: #ECE9DD url("../img/bgnoise_lg.png"); font-family: 'Open Sans', sans-serif; }
+body { position: relative; background: #ECE9DD url("../img/bgnoise_lg.png"); font-family: 'Open Sans', sans-serif; }
 
 html.wait, html.wait * { cursor: wait !important; }
 
@@ -26,9 +26,9 @@ p { text-align: justify; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens:
 
 table { margin-bottom: 10px; }
 
-.affix { position: fixed; top: 10px; }​
-.affix-top { position: relative; top: 10px; }
-.affix-bottom { position: absolute; bottom: 10px; }
+.affix { position: fixed; top: 10px; width: 136px; }​
+.affix-top { position: relative; top: 10px; width: 136px; }
+.affix-bottom { position: absolute; bottom: 10px; width: 136px; }
 
 .anchor { color: #ddd; }
 
@@ -67,7 +67,11 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .main-nav > .nav a:hover { background: @red !important; color: white; }
 .main-nav > .nav > li > a { color: #847D62; .radius(0px); padding: 15px 20px; margin: 0; text-decoration: none;  }
 
-#outline, #outline2 { z-index: 1000; margin: 12px; background-color: #fff; border: 1px solid rgba(0,0,0,0.1); }
+#outline { z-index: 1000; margin: 12px; text-align: center; }
+#outline #pocet { font-size: 30px; }
+#outline #time { font-size: 25px; }
+#outline #zbyva, #outline #slov, #outline #brotip { color: #888; }
+#outline #brotip { text-transform: uppercase; }
 
 .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus,
 .pagination > li > a, .pagination > li > span { color: @red; }

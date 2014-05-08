@@ -57,15 +57,19 @@ header('Retry-After: 300'); // 5 minutes in seconds
 
 	<div class="container shadow" style="padding: 20px 30px;">
 		<h2>Chviličku strpení prosím...</h2>
-		<p>Stránka je dočasně mimo provoz z důvodu údržby. Vzhledem k tomu, že se jedná o opravdu velký update, je nutné tuto stránku odstavit.</p>
+		<p>
+			Stránka je dočasně mimo provoz z důvodu údržby.
+			Vzhledem k tomu, že se jedná o opravdu velký update, je nutné tuto stránku dočasně, ale úplně odstavit.
+		</p>
 		<h3>Co tento velký update přinese?</h3>
 		<ul>
-			<li>Kompletně jsem přepracoval backend, konkrétně teď bude tento blog využívat Doctrine</li>
-			<li>Díky tomu jsem se mohl soustředit na zlepšení funkčnosti a odstranění několika chyb</li>
-			<li>A aby byla nějaká změna i vidět, přidal jsem parádní řazení obsahu podle tagů</li>
-			<li>... a pak to vyhledávání, to jsem celé zlepšil a nově i integroval hledání tagů</li>
+			<li>Na pozadí poběží úplně nová verze Nette Frameworku</li>
+			<li>Optimalizoval jsem dotazy na dabazázi, takže vše bude rychlejší</li>
+			<li>Odstranil jsem javascriptovou komponentu která vše zdržovala</li>
+			<li>Přidal jsem javascriptovou komponentu, která bude lepší a rychlejší</li>
+			<li>A v neposlední řadě jsem vylepšil RSS výstup</li>
 		</ul>
-		<p>Až bude vše hotové, tak se stránka sama načte a můžete pokračovat v prohlížení... &#9786;</p>
+		<p>Až bude vše hotové, tak se stránka <strong>sama načte</strong> a můžete pokračovat ve čtení&hellip; &#9786;</p>
 	</div>
 
 	<div class="container text-right hidden-print footer" style="background:transparent">

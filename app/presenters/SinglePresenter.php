@@ -45,7 +45,9 @@ class SinglePresenter extends BasePresenter {
 			$texy->headingModule->generateID = TRUE;
 
 			$this->template->post = $post;
-			$this->template->body = $texy->process($post->body);
+			$body = $texy->process($post->body);
+			$this->template->body = $body;
+			$this->template->wordCount = str_word_count(strip_tags($body));
 			$this->template->url = $this->getHttpRequest()->getUrl();
 
 			$prev = $this->posts->findOlder($post->date);

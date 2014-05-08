@@ -1,90 +1,104 @@
 {block content}
-
-<ul class="breadcrumb hidden-print hidden-sm">
-	<li><a n:href="Homepage:">home</a></li>
-	<li class="active" n:block="title">{$post->title}</li>
-	<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
-</ul>
-
-<div class="page-header">
-	<h2>
-		{$post->title|vlna}
-		<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
-		<div class="pull-right hidden-print">
-			<small>
-				<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span class="glyphicon glyphicon-print"></span></a>
-				{if $user->isLoggedIn()}
-					<span style="font-size: 25px">\</span>
-					<a n:href=":Admin:default $post->id">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
-				{/if}
-			</small>
-		</div>
-	</h2>
-	{foreach $post->tags as $tag}
-		<a n:href="Search:default, $tag->name" style="text-decoration:none">
-			<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
-		</a>
-	{/foreach}
-</div>
-
-<div class="row" style="margin-bottom: 10px">
-	<div class="col-lg-10">
-		<div id="columns">
-			{$body|noescape}
-		</div>
-		<ul class="pager" n:if="$nextArticle || $prevArticle">
-			<li class="previous" n:if="$nextArticle"><a n:href="$nextArticle->slug"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí článek</a></li>
-			<li class="next" n:if="$prevArticle"><a n:href="$prevArticle->slug">Další článek&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-		</ul>
+	<ul class="breadcrumb hidden-print hidden-sm">
+		<li><a n:href="Homepage:">home</a></li>
+		<li class="active" n:block="title">{$post->title}</li>
+		<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
+	</ul>
+	<div class="page-header">
+		<h2>
+			{$post->title|vlna}
+			<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
+			<div class="pull-right hidden-print">
+				<small>
+					<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span
+								class="glyphicon glyphicon-print"></span></a>
+					{if $user->isLoggedIn()}
+						<span style="font-size: 25px">\</span>
+						<a n:href=":Admin:default $post->id">edit&nbsp;<span
+									class="glyphicon glyphicon-edit"></span></a>
+					{/if}
+				</small>
+			</div>
+		</h2>
+		{foreach $post->tags as $tag}
+			<a n:href="Search:default, $tag->name" style="text-decoration:none">
+				<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+			</a>
+		{/foreach}
 	</div>
-	<div class="col-lg-2">
-		<canvas id="outline" class="visible-lg" width="150" height="400"></canvas>
-	</div>
-</div>
+	<div class="row" style="margin-bottom: 10px">
+		<div class="col-lg-10">
+			<div id="columns">
+				{$body|noescape}
+			</div>
+			<ul class="pager hidden-print" n:if="$nextArticle || $prevArticle">
+				<li class="previous" n:if="$nextArticle"><a n:href="$nextArticle->slug"><span
+								class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí článek</a></li>
+				<li class="next" n:if="$prevArticle"><a n:href="$prevArticle->slug">Další článek&nbsp;<span
+								class="glyphicon glyphicon-chevron-right"></span></a></li>
+			</ul>
 
-<div id="bottom">
-	<hr class="hidden-print load_disqus">
+			<div id="bottom">
+				<hr class="hidden-print load_disqus">
 
-	<div class="share hidden-print">
-	<span class="label label-danger">
-		<span class="glyphicon glyphicon-share-alt"></span>
-		<a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a>
-	</span>
-	<span class="label label-info">
-		<span class="glyphicon glyphicon-share-alt"></span>
-		<a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a>
-	</span>
-	<span class="label label-success">
-		<span class="glyphicon glyphicon-share-alt"></span>
-		<a href="http://twitter.com/share?text={$post->title}&url={$url}" target="_blank">Twitter</a>
-	</span>
-	</div>
+				<div class="share hidden-print">
+			<span class="label label-danger">
+				<span class="glyphicon glyphicon-share-alt"></span>
+				<a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a>
+			</span>
+			<span class="label label-info">
+				<span class="glyphicon glyphicon-share-alt"></span>
+				<a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a>
+			</span>
+			<span class="label label-success">
+				<span class="glyphicon glyphicon-share-alt"></span>
+				<a href="http://twitter.com/share?text={$post->title}&url={$url}" target="_blank">Twitter</a>
+			</span>
+				</div>
 
-	<hr>
+				<hr>
 
-	<div class="row hidden-print">
-		<div class="suggestion col-lg-4 col-md-4" n:foreach="$next as $n">
-			<div class="thumbnail">
-				<div class="caption">
-					<a n:href=":Single:article $n->slug"><div class="caption">
-						<h3>{$n->title|truncate:25}</h3>
-						{foreach $n->tags as $tag}
-							<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
-						{/foreach}
-						<p>{$n->body|texy|striptags|truncate:300}</p>
-					</div></a>
+				<div class="row hidden-print">
+					<div class="suggestion col-lg-4 col-md-4" n:foreach="$next as $n">
+						<div class="thumbnail">
+							<div class="caption">
+								<a n:href=":Single:article $n->slug">
+									<div class="caption">
+										<h3>{$n->title|truncate:20}</h3>
+										{foreach $n->tags as $tag}
+											<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
+										{/foreach}
+										<p>{$n->body|texy|striptags|truncate:200}</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="hidden-print">
+					<div id="disqus_thread" style="padding: 20px 0" data-disqus-shortname="mrtnzlml"></div>
+					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments
+							powered by Disqus.</a></noscript>
+					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
+								class="logo-disqus">Disqus</span></a>
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-2 visible-lg">
+			<div id="outline" data-spy="affix" data-offset-top="351">
+				<span id="zbyva">zbývá</span><br>
+				<span id="pocet">{$wordCount}</span><br>
+				<span id="slov">slov</span><br>
+				<span class="glyphicon glyphicon-time"></span>
+				<span id="time">{ceil($wordCount/200)}</span>
+				<span id="minuty">minut</span>
+				<hr>
+				<span id="brotip">Brotip</span><br>
+				<span id="tip">&hellip;</span>
+			</div>
+		</div>
 	</div>
-
-	<div class="hidden-print">
-		<div id="disqus_thread" style="padding: 20px 0" data-disqus-shortname="mrtnzlml"></div>
-		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-		<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-	</div>
-</div>
-
 {/block}
 
 
@@ -94,16 +108,16 @@
 {block scripts}
 	{include #parent}
 	<script>
-		(function() {
-			var load = function() {
-				if($('body').data('experimental') != 'none' && !document.getElementsByTagName('pre').length && window.innerWidth > 1200) {
+		(function () {
+			var load = function () {
+				if ($('body').data('experimental') != 'none' && !document.getElementsByTagName('pre').length && window.innerWidth > 1200) {
 					$('#columns')[0].style.webkitColumnCount = 2;
 				}
 			};
-			if(window.addEventListener) {
-				window.addEventListener('load',load);
+			if (window.addEventListener) {
+				window.addEventListener('load', load);
 			} else {
-				window.attachEvent('onload',load);
+				window.attachEvent('onload', load);
 			}
 		}());
 	</script>

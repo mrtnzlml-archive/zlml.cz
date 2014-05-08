@@ -3,7 +3,8 @@
 {block content}
 	<style>
 		.label { padding: 0 .5em .2em .5em; }
-		.bord { border-right: 1px solid #888; }
+		.link { font-size: 18px; padding-left: 2%; text-decoration: none; }
+		.link:hover { text-decoration: underline; }
 	</style>
 	<ul class="breadcrumb hidden-print">
 		<li><a n:href="Homepage:">home</a></li>
@@ -12,33 +13,31 @@
 	</ul>
 	{cache expire => '+20 minutes'}
 		<div class="row" style="margin-bottom: 10px">
-			<div class="col-lg-10">
+			<div class="col-lg-12">
 				{var $last = ''}
 				{foreach $articles as $article}
 					{if mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8')) === $last}
-						<a n:href=":Single:article $article->slug" style="padding-left:2%" title="{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$article->title}</a>
+						<a n:href=":Single:article $article->slug" class="link" title="{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$article->title}</a>
 						{foreach $article->tags as $tag}
 							<a n:href="Search:default, $tag->name" style="text-decoration:none">
 								<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 							</a>
 						{/foreach}
+						<p style="padding-left:4%">{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}</p>
 						<br>
 					{else}
 						<hr n:if="!$iterator->first">
 						<h2>{mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}</h2>
-						<a n:href=":Single:article $article->slug" style="padding-left:2%" title="{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$article->title}</a>
+						<a n:href=":Single:article $article->slug" class="link" title="{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$article->title}</a>
 						{foreach $article->tags as $tag}
 							<a n:href="Search:default, $tag->name" style="text-decoration:none">
 								<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 							</a>
 						{/foreach}
-						<br>
+						<p style="padding-left:4%">{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}</p>
 						{? $last = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}
 					{/if}
 				{/foreach}
-			</div>
-			<div class="col-lg-2">
-				<canvas id="outline2" class="visible-lg" width="150" height="400"></canvas>
 			</div>
 		</div>
 	{/cache}
