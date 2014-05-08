@@ -1,7 +1,7 @@
 $(function () {
 
 	$("h3[id|=toc]").each(function () {
-		$(this).append($('<a class="anchor"> #</a>').attr("href", "#" + $(this).attr("id")))
+		$(this).append($('<a class="anchor hidden-print"> #</a>').attr("href", "#" + $(this).attr("id")))
 	});
 
 	$('body').on('click', '[data-confirm]', function (e) {
