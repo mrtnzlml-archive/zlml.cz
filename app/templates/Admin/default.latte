@@ -10,6 +10,7 @@
 			</div>
 		</div>
 		<div class="col-lg-9">
+			<span class="pull-right"><a>HELP</a></span>
 			{ifset $editace}
 				<h2>Editovat článek ({$editace})</h2>
 			{else}
@@ -39,14 +40,35 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="form-group">
-							{label tags /}
-							{input tags, class => "form-control"}
-						</div>
-					</div>
+				<div class="form-group">
+					{label tags /}
+					{input tags, class => "form-control"}
 				</div>
+
+				<div id="explorer" style="display:none">
+					{snippet explorer}
+						{ifset $content}
+							{$content}
+						{else}
+							<ul>
+								<li><a n:href="showChild!" class="ajax">Folder 1</a></li>
+								<li><a n:href="showChild!" class="ajax">Folder 1</a></li>
+								<li><a n:href="showChild!" class="ajax">Folder 1</a></li>
+							</ul>
+						{/ifset}
+					{/snippet}
+				</div>
+				<div class="text-center">
+					<span class="glyphicon glyphicon-chevron-down"></span>
+					<a id="pictures">OBRÁZKY</a>
+					<span class="glyphicon glyphicon-chevron-down"></span>
+				</div>
+				<script>
+					$("#pictures").click(function () {
+						$("#explorer").toggle("fast");
+					});
+				</script>
+
 				<div class="form-group">
 					{label editor /}
 					{input editor, class => "form-control"}
@@ -88,7 +110,7 @@
 			});
 			if (!editor.getValue() && window.localStorage) {
 				var loc = location.pathname + location.search;
-				if(localStorage.getItem('content:' + loc) != undefined) {
+				if (localStorage.getItem('content:' + loc) != undefined) {
 					editor.setValue(localStorage.getItem('content:' + loc));
 				}
 				$('[name="title"]').val(localStorage.getItem('title:' + loc));

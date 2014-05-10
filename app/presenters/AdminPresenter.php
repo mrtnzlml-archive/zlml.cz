@@ -218,4 +218,13 @@ class AdminPresenter extends BasePresenter {
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
 	}
 
+	public function handleShowChild() {
+		$ul = Nette\Utils\Html::el('ul');
+		$ul->add(Nette\Utils\Html::el('li')->setHtml('child 1'));
+		$ul->add(Nette\Utils\Html::el('li')->setHtml('child 2'));
+		$ul->add(Nette\Utils\Html::el('li')->setHtml('child 3'));
+		$this->template->content = $ul;
+		$this->redrawControl('explorer');
+	}
+
 }
