@@ -6,6 +6,7 @@ vendor/*
 !.gitignore
 !.htaccess
 !web.config
+!.keep
 
 deployment.ini
 deployment.log
