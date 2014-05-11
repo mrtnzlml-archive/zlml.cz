@@ -6,7 +6,6 @@ vendor/*
 !.gitignore
 !.htaccess
 !web.config
-!.keep
 
 composer.lock
 tests/coverage.dat
