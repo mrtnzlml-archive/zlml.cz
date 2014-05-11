@@ -13,6 +13,11 @@ class AdminPresenter extends BasePresenter {
 	public $pictures;
 	/** @var Tags @inject */
 	public $tags;
+	/** @var Users @inject */
+	public $users;
+
+	/** @var \IUserEditFormFactory @inject */
+	public $userEditFormFactory;
 
 	/** @persistent */
 	public $id = NULL;
@@ -51,6 +56,21 @@ class AdminPresenter extends BasePresenter {
 
 	public function renderTags() {
 		$this->template->tags = $this->tags->findBy(array());
+	}
+
+	public function renderUsers() {
+		$this->template->users = $this->users->findBy(array());
+	}
+
+	public function renderUserEdit($id = NULL) {
+		if ($id === NULL) {
+			$this->redirect('users');
+		}
+		$this->template->account = $this->users->findOneBy(['id' => $id]);
+	}
+
+	protected function createComponentUserEditForm() {
+		return $this->userEditFormFactory->create();
 	}
 
 	protected function createComponentColor() {

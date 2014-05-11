@@ -6,6 +6,7 @@ use Nette;
 use Tester;
 
 /**
+ * TODO: test sitemap & RSS
  * Class Presenter
  * @package Test
  */
@@ -112,6 +113,9 @@ class Presenter extends Nette\Object {
 	public function logOut() {
 		$user = $this->container->getByType('Nette\Security\User');
 		$user->logout();
+		//TODO:
+		//$response = $this->tester->test($this->action);
+		//Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 
 }

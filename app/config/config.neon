@@ -30,6 +30,7 @@ services:
 	- App\Tags(@doctrine.dao(Entity\Tag))
 	- App\Users(@doctrine.dao(Entity\User))
 	#- App\Xmlrpc
+	- IUserEditFormFactory
 
 extensions:
 	console: Kdyby\Console\DI\ConsoleExtension

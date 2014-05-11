@@ -1,0 +1,16 @@
+{var $robots = 'noindex'}
+{block content}
+
+	<div class="row">
+		<div class="col-lg-3">
+			{include menu.latte}
+		</div>
+		<div class="col-lg-9">
+			<h2>Úprava uživatele <strong>{$account->username}</strong></h2>
+			&hellip;
+			{control userEditForm}
+			{* TODO: změna username, hesla a nastavní oprávnění do ACL *}
+		</div>
+	</div>
+
+{/block}

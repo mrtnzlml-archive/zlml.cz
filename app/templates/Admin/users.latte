@@ -1,0 +1,31 @@
+{var $robots = 'noindex'}
+{block content}
+
+	<div class="row">
+		<div class="col-lg-3">
+			{include menu.latte}
+		</div>
+		<div class="col-lg-9">
+			<h2>Přehled uživatelů</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Role</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr n:foreach="$users as $user">
+						<td>{$user->username}</td>
+						<td>{$user->role}</td>
+						<td>
+							<a n:href="userEdit $user->id" class="btn btn-info">Upravit</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{/block}

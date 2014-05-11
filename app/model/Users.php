@@ -33,6 +33,17 @@ class Users extends Nette\Object {
 	/**
 	 * @param array $criteria
 	 * @param array $orderBy
+	 * @param null $limit
+	 * @param null $offset
+	 * @return array
+	 */
+	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
+	}
+
+	/**
+	 * @param array $criteria
+	 * @param array $orderBy
 	 * @return mixed|null|object
 	 */
 	public function findOneBy(array $criteria, array $orderBy = null) {

@@ -48,6 +48,11 @@ class AdminPresenterTest extends Tester\TestCase {
 		$this->tester->testAction($this->action);
 	}
 
+	public function testRenderUsers() {
+		$this->action = 'users';
+		$this->tester->testAction($this->action);
+	}
+
 	public function tearDown() {
 		$this->tester->logOut();
 		$response = $this->tester->test($this->action);
