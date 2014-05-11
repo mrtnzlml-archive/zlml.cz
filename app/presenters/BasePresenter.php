@@ -11,19 +11,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/** @var Posts @inject */
 	public $posts;
-	/** @var \Nette\Http\Session @inject */
-	public $session;
-
-	public function beforeRender() {
-		parent::beforeRender();
-		$section = $this->session->getSection('experimental');
-		if ($section->experimental == NULL) {
-			$section->experimental = 'none';
-			$section->experimental_data = array();
-		}
-		$this->template->experimental = $section->experimental;
-		$this->template->experimental_data = json_encode($section->experimental_data);
-	}
 
 	protected function createComponentSearch() {
 		$form = new Nette\Application\UI\Form;
@@ -119,27 +106,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	public function handleRandom() {
 		$post = $this->posts->rand();
 		$this->redirect('Single:article', $post->slug);
-	}
-
-	public function handleExperimental() {
-		$section = $this->session->getSection('experimental');
-		if ($section->experimental == 'none') {
-			$section->experimental = 'all';
-			$this->flashMessage('Experimentální funkce zapnuty.', 'alert-info');
-		} else {
-			$section->experimental = 'none';
-			$this->flashMessage('Experimentální funkce vypnuty.', 'alert-info');
-		}
-		$this->redirect('this');
-	}
-
-	// TODO ?
-	public function handleExperimentalData($data = NULL) {
-		$section = $this->session->getSection('experimental');
-		if ($data !== NULL) {
-			$oldData = $section->experimental_data;
-		}
-		$this->redirect('this');
 	}
 
 }

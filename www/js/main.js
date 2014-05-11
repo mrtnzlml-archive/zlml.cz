@@ -50,8 +50,6 @@ $(function () {
 		$('#' + slugId).val(make_url(val));
 	});
 
-	$('.glyphicon-question-sign').tooltip();
-
 	var a, b = $("#pocet").eq(0),
 		d = parseInt($(b).text(), 10);
 	var time = $("#time"),
