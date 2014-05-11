@@ -100,25 +100,3 @@
 		</div>
 	</div>
 {/block}
-
-
-
-
-
-{block scripts}
-	{include #parent}
-	<script>
-		(function () {
-			var load = function () {
-				if ($('body').data('experimental') != 'none' && !document.getElementsByTagName('pre').length && window.innerWidth > 1200) {
-					$('#columns')[0].style.webkitColumnCount = 2;
-				}
-			};
-			if (window.addEventListener) {
-				window.addEventListener('load', load);
-			} else {
-				window.attachEvent('onload', load);
-			}
-		}());
-	</script>
-{/block}

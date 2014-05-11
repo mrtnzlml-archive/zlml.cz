@@ -16,7 +16,7 @@
 	{block scripts}{control js}{/block}
 </head>
 
-<body data-experimental="{$experimental}" data-experimental-data="{$experimental_data}">
+<body>
 	<script> document.body.className+=' js' </script>
 
 	<div class="container shadow hidden-print"><style>.record { position: relative; }</style>
@@ -27,20 +27,20 @@
 			<div class="col-lg-7 col-md-8">
 				<h1><a n:href="Homepage:">Martin <span style="white-space:nowrap"><span class="transf1">Zlá</span><span class="transf2">mal</span></span></a></h1>
 			</div>
-			<div class="col-lg-3 col-md-4">
+			<div class="col-lg-3 col-md-4" style="margin-top:10px">
 				{form search, class => 'form-inline'}
 					<div class="row">
 						<div class="col-lg-12" style="margin-top: 10px;">
 							<div class="input-group">
 								<input n:name="search" type="search" class="form-control" placeholder="Search">
 								<span class="input-group-btn">
-									{input send, class => 'btn btn-default'}
+									{input send, class => 'btn btn-default go'}
 								</span>
 							</div>
 						</div>
 					</div>
 				{/form}
-				<div class="text-right" style="margin-top: 20px;">
+				<div class="text-right" style="margin-top:20px">
 					<a href="https://twitter.com/mrtnzlml" target="_blank">Twitter</a>
 					&middot;
 					<a href="https://plus.google.com/u/0/108269453578187886435?rel=author" target="_blank">G+</a>
@@ -48,14 +48,6 @@
 					<a href="https://bitbucket.org/mrtnzlml" target="_blank">Bitbucket</a>
 					&middot;
 					<a n:href=":Homepage:rss" target="_blank">RSS</a>
-					<br>
-					{if $experimental == 'none'}
-						<a n:href="experimental!">Zapnout experimentální funkce</a>
-					{else}
-						<a n:href="experimental!">Vypnout experimentální funkce</a>
-					{/if}
-					<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left"
-						  data-original-title="Zapíná experimentální funkce, které nemusí být každému příjemné a mohou se chovat nepředvídatelně."></span>
 				</div>
 			</div>
 		</div>
