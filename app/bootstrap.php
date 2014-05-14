@@ -21,6 +21,11 @@ define("WWW_DIR", __DIR__ . '/../www');
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
-$container = $configurator->createContainer();
+
+try {
+	$container = $configurator->createContainer();
+} catch (Kdyby\Doctrine\UnexpectedValueException $exc) {
+	require_once(__DIR__ . DIRECTORY_SEPARATOR . 'install.php');
+}
 
 return $container;
