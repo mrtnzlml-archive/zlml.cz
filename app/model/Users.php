@@ -50,4 +50,12 @@ class Users extends Nette\Object {
 		return $this->dao->findOneBy($criteria, $orderBy);
 	}
 
+	/**
+	 * @param array $criteria
+	 * @return mixed
+	 */
+	public function countBy(array $criteria = array()) {
+		return $this->dao->countBy($criteria);
+	}
+
 }

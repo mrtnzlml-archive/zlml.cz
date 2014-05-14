@@ -50,7 +50,7 @@ class UserEditForm extends UI\Control {
 		} catch (\Exception $exc) {
 			$this->presenter->flashMessage($exc->getMessage(), 'danger');
 		}
-		$this->onSave($this, $this->account);
+		$this->onSave();
 	}
 
 }
