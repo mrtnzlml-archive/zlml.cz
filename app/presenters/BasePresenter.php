@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Nette;
 use Nette\Utils\Strings;
+use Nette;
 use Texy;
 use WebLoader;
 
@@ -40,8 +40,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 */
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
-		$texy = new Texy\Texy();
-		$template->registerHelper('texy', callback($texy, 'process'));
+		$template->registerHelper('texy', function ($input) {
+			$texy = new Texy\Texy();
+			$html = new Nette\Utils\Html();
+			return $html::el()->setHtml($texy->process($input));
+		});
 		$template->registerHelper('vlna', function ($string) {
 			$string = preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;

@@ -16,8 +16,10 @@ class AdminPresenter extends BasePresenter {
 	/** @var Users @inject */
 	public $users;
 
-	/** @var \IUserEditFormFactory @inject */
+	/** @var \UserEditFormFactory @inject */
 	public $userEditFormFactory;
+	/** @var \IRoleFormFactory @inject */
+	public $roleFormFactory;
 
 	/** @persistent */
 	public $id = NULL;
@@ -27,14 +29,22 @@ class AdminPresenter extends BasePresenter {
 	public function startup() {
 		parent::startup();
 		if (!$this->user->isLoggedIn()) {
-			$this->flashMessage('Tudy cesta nevede!', 'alert-danger');
-			$this->redirect('Sign:in');
+			if ($this->user->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
+				$this->flashMessage('Byli jste odhlášeni z důvodu nečinnosti. Přihlaste se prosím znovu.', 'danger');
+			}
+			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
+		} elseif (!$this->user->isAllowed($this->name, Authorizator::VIEW)) {
+			$this->flashMessage('Přístup byl odepřen. Nemáte oprávnění k zobrazení této stránky.', 'danger');
+			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
 		}
 	}
 
 	public function beforeRender() {
 		parent::beforeRender();
 		$this->template->tagcount = $this->tags->countBy();
+		if (!$this->user->isAllowed('Admin', Authorizator::EDIT)) {
+			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
+		}
 	}
 
 	public function renderDefault($id) {
@@ -70,7 +80,15 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	protected function createComponentUserEditForm() {
-		return $this->userEditFormFactory->create();
+		$control = $this->userEditFormFactory->create(1); //TODO
+		$control->onSave[] = function ($control, $actuality) {
+			$this->redirect('users');
+		};
+		return $control;
+	}
+
+	protected function createComponentRoleEditForm() {
+		return $this->roleFormFactory->create();
 	}
 
 	protected function createComponentColor() {
@@ -100,12 +118,12 @@ class AdminPresenter extends BasePresenter {
 				$tag = $this->tags->findOneBy(['id' => $id]);
 				$tag->color = $newColor;
 				$this->tags->save($tag);
-				$this->flashMessage('Tag byl úspěšně aktualizován.', 'alert-success');
+				$this->flashMessage('Tag byl úspěšně aktualizován.', 'success');
 			} catch (\Exception $exc) {
-				$this->flashMessage($exc->getMessage(), 'alert-danger');
+				$this->flashMessage($exc->getMessage(), 'danger');
 			}
 		} else {
-			$this->flashMessage("Barva #$newColor není platnou hexadecimální hodnotou.", 'alert-danger');
+			$this->flashMessage("Barva #$newColor není platnou hexadecimální hodnotou.", 'danger');
 		}
 		$this->redirect('this');
 	}
@@ -138,6 +156,11 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function processPostSucceeded($form) {
+		if(!$this->editable()) {
+			$this->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
+			$this->redirect('this');
+			return;
+		}
 		$vals = $form->getValues();
 		$id = $this->getParameter('id');
 		try {
@@ -163,10 +186,10 @@ class AdminPresenter extends BasePresenter {
 				}
 			}
 			$this->posts->save($post);
-			$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'alert-success');
+			$this->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'success');
 			$this->redirect('this');
 		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
-			$this->flashMessage($exc->getMessage(), 'alert-danger');
+			$this->flashMessage($exc->getMessage(), 'danger');
 		}
 	}
 
@@ -189,9 +212,9 @@ class AdminPresenter extends BasePresenter {
 	public function handleDelete($id) {
 		try {
 			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
-			$this->flashMessage('Článek byl úspěšně smazán.', 'alert-success');
+			$this->flashMessage('Článek byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-danger');
+			$this->flashMessage($exc->getMessage(), 'danger');
 		}
 		$this->redirect('this');
 	}
@@ -199,9 +222,9 @@ class AdminPresenter extends BasePresenter {
 	public function handleDeleteTag($tag_id) {
 		try {
 			$this->tags->delete($this->tags->findOneBy(['id' => $tag_id]));
-			$this->flashMessage('Tag byl úspěšně smazán.', 'alert-success');
+			$this->flashMessage('Tag byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-danger');
+			$this->flashMessage($exc->getMessage(), 'danger');
 		}
 		$this->redirect('this');
 	}
@@ -211,9 +234,9 @@ class AdminPresenter extends BasePresenter {
 			$tag = $this->tags->findOneBy(['id' => $tag_id]);
 			$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
 			$this->tags->save($tag);
-			$this->flashMessage('Tag byl úspěšně regenerován.', 'alert-success');
+			$this->flashMessage('Tag byl úspěšně regenerován.', 'success');
 		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'alert-danger');
+			$this->flashMessage($exc->getMessage(), 'danger');
 		}
 		$this->redirect('this');
 	}
@@ -229,13 +252,17 @@ class AdminPresenter extends BasePresenter {
 			//$this->pictures->save($picture);
 		} catch (\Exception $exc) {
 			$uploader->handleDelete(__DIR__ . '/../../www/uploads');
-			$this->flashMessage($exc->getMessage(), 'alert-danger');
+			$this->flashMessage($exc->getMessage(), 'danger');
 			$this->sendResponse(new Nette\Application\Responses\JsonResponse(array(
 				'error' => $exc->getMessage(),
 			)));
 		}
 		//$this->redrawControl('pictures');
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
+	}
+
+	private function editable() {
+		return $this->user->isAllowed('Admin', Authorizator::EDIT) ? TRUE : FALSE;
 	}
 
 }

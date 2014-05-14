@@ -1,34 +1,24 @@
 <?php
 
 namespace App;
-use Model;
+
 use Nette;
 
 /** Sign in/out presenters. */
 class SignPresenter extends BasePresenter {
 
-	public function signInFormSucceeded($form) {
-		$values = $form->getValues();
+	/** @persistent */
+	public $backlink = '';
 
-		if ($values->remember) {
-			$this->getUser()->setExpiration('+ 14 days', FALSE);
-		} else {
-			$this->getUser()->setExpiration('+ 20 minutes', TRUE);
+	public function actionIn() {
+		if ($this->user->isLoggedIn() && $this->user->isAllowed('Admin', 'view')) {
+			$this->redirect('Admin:default');
 		}
-
-		try {
-			$this->getUser()->login($values->username, $values->password);
-		} catch (Nette\Security\AuthenticationException $e) {
-			$form->addError($e->getMessage());
-			return;
-		}
-
-		$this->redirect('Homepage:');
 	}
 
 	public function actionOut() {
 		$this->getUser()->logout();
-		$this->flashMessage('Odhlášení bylo úpěšné.', 'alert-info');
+		$this->flashMessage('Odhlášení bylo úpěšné.', 'info');
 		$this->redirect('in');
 	}
 
@@ -40,17 +30,29 @@ class SignPresenter extends BasePresenter {
 		$form = new Nette\Application\UI\Form;
 		$form->addText('username', 'Username:')
 			->setRequired('Zadejte prosím uživatelské jméno.');
-
 		$form->addPassword('password', 'Password:')
 			->setRequired('Zadejte prosím správné heslo.');
-
 		$form->addCheckbox('remember', 'Zapamatovat si přihlášení');
-
 		$form->addSubmit('send', 'Přihlásit se');
-
-		// call method signInFormSucceeded() on success
 		$form->onSuccess[] = $this->signInFormSucceeded;
 		return $form;
+	}
+
+	public function signInFormSucceeded($form) {
+		$values = $form->getValues();
+		if ($values->remember) {
+			$this->getUser()->setExpiration('+ 14 days', FALSE);
+		} else {
+			$this->getUser()->setExpiration('+ 20 minutes', TRUE);
+		}
+		try {
+			$this->getUser()->login($values->username, $values->password);
+		} catch (Nette\Security\AuthenticationException $e) {
+			$form->addError($e->getMessage());
+			return;
+		}
+		$this->restoreRequest($this->backlink);
+		$this->redirect('Homepage:');
 	}
 
 }

@@ -6,17 +6,24 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			<h2>Přehled uživatelů</h2>
+			<h2>
+				Přehled uživatelů
+				<a n:href="userEdit" class="btn btn-default">
+					<span class="glyphicon glyphicon-asterisk"></span>&nbsp;Založit uživatele
+				</a>
+			</h2>
 			<table class="table">
 				<thead>
 					<tr>
+						<th>No.</th>
 						<th>Username</th>
 						<th>Role</th>
-						<th>&nbsp;</th>
+						<th>Akce</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr n:foreach="$users as $user">
+						<td>#{$iterator->counter}</td>
 						<td>{$user->username}</td>
 						<td>{$user->role}</td>
 						<td>

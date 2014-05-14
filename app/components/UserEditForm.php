@@ -3,20 +3,23 @@
 namespace Cntrl;
 
 use App;
+use Entity;
 use Nette\Application\UI;
 
 class UserEditForm extends UI\Control {
 
+	public $onSave = [];
+
 	private $users;
 	private $account;
 
-	public function __construct(App\Users $users) {
+	public function __construct(App\Users $users, $id) {
 		parent::__construct();
 		$this->users = $users;
+		$this->account = $this->users->findOneBy(['id' => $id]);
 	}
 
 	public function render() {
-		$this->account = $this->users->findOneBy(['id' => $this->presenter->getParameter('id')]);
 		$this->template->setFile(__DIR__ . '/UserEditForm.latte');
 		$this->template->render();
 	}
@@ -27,10 +30,11 @@ class UserEditForm extends UI\Control {
 		$form->addText('username', 'Uživatelské přihlašovací jméno:')
 			->setValue($this->account->username)
 			->setRequired('Zadejte prosím přihlašovací jméno.');
-		$form->addSelect('role', 'Role:', array('admin')); //TODO: samostatná tabulka
-		$form->addSelect('perm1', 'Může ...', array('Ano', 'Ne'));
-		$form->addSelect('perm2', 'Může ...', array('Ano', 'Ne'));
-		$form->addSelect('perm3', 'Může ...', array('Ano', 'Ne'));
+		//TODO: password
+		$form->addSelect('role', 'Role:', array(
+			'admin' => 'Administrátor'
+		))->setDisabled();
+		//TODO: nastavení rolí musí být někde samostatně
 		$form->addSubmit('save', 'Uložit změny');
 		$form->onSuccess[] = $this->formSucceeded;
 		return $form;
@@ -38,8 +42,15 @@ class UserEditForm extends UI\Control {
 
 	public function formSucceeded(UI\Form $form) {
 		$vals = $form->getValues();
-
-		$this->presenter->flashMessage('TODO');
+		try {
+			$this->account->username = $vals->username;
+			$this->account->role = $vals->role;
+			$this->users->save($this->account);
+			$this->presenter->flashMessage('Změny úspěšně uloženy.', 'success');
+		} catch (\Exception $exc) {
+			$this->presenter->flashMessage($exc->getMessage(), 'danger');
+		}
+		$this->onSave($this, $this->account);
 	}
 
 }

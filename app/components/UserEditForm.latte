@@ -1,1 +1,17 @@
-{control form}
+{form form}
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="form-group">
+				{label username /}
+				{input username, class => "form-control"}
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="form-group">
+				{label role /}
+				{input role, class => "form-control"}
+			</div>
+		</div>
+	</div>
+	{input save, class => "btn btn-primary form-control"}
+{/form}
