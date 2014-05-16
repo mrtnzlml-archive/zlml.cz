@@ -11,3 +11,5 @@ doctrine:
 	dbname: zeminem
 	metadata:
 		Entity: %appDir%
+
+#{doctrine: {dbname: zeminem, user: root, pass: ""}}

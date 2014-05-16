@@ -17,21 +17,21 @@
 
 <?php
 
-$form = new Nette\Application\UI\Form();
+$form = new Nette\Forms\Form;
 $form->addSelect('database', 'Typ databáze', array(
 	'pdo_mysql' => 'MySQL',
 ));
 $form->addText('dbname', 'Název databáze')->setRequired();
 $form->addText('host', 'Hostname')->setValue('127.0.0.1')->setRequired();
 $form->addText('user', 'Uživatel databáze')->setRequired();
-$form->addPassword('pass', 'Heslo k databázi')->setRequired();
+$form->addPassword('pass', 'Heslo k databázi');
 $form->addSubmit('create', 'Nainstaloval projekt');
-$form->onSuccess[] = install($form);
 echo $form;
 
-function install(Nette\Application\UI\Form $form) {
+if ($form->isSubmitted() && $form->isValid()) {
 	$vals = $form->getValues();
-	dump(\Nette\Neon\Neon::encode($vals));
+	//file_put_contents('test.neon', \Nette\Neon\Neon::encode(['doctrine' => $vals]));
+	dump(\Nette\Neon\Neon::encode(['doctrine' => $vals]));
 }
 
 exit;
