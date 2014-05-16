@@ -27,7 +27,10 @@
 						<td>{$user->username}</td>
 						<td>{$user->role}</td>
 						<td>
-							<a n:href="userEdit $user->id" class="btn btn-info">Upravit</a>
+							<div class="btn-group">
+								<a n:href="userEdit $user->id" class="btn btn-info">Upravit</a>
+								<a n:href="deleteUser! $user->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento účet?">Smazat</a>
+							</div>
 						</td>
 					</tr>
 				</tbody>

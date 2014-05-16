@@ -58,4 +58,13 @@ class Users extends Nette\Object {
 		return $this->dao->countBy($criteria);
 	}
 
+	/**
+	 * @param $entity
+	 * @param null $relations
+	 * @param bool $flush
+	 */
+	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
+		$this->dao->delete($entity, $relations, $flush);
+	}
+
 }

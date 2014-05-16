@@ -5,6 +5,7 @@ namespace Cntrl;
 use App;
 use Entity;
 use Nette\Application\UI;
+use Nette\Security\Passwords;
 
 class UserEditForm extends UI\Control {
 
@@ -27,23 +28,39 @@ class UserEditForm extends UI\Control {
 	protected function createComponentForm() {
 		$form = new UI\Form;
 		$form->addProtection();
-		$form->addText('username', 'Uživatelské přihlašovací jméno:')
-			->setValue($this->account->username)
+		$form->addText('username', 'Uživatelské přihlašovací jméno:') //TODO: DB duplicate
 			->setRequired('Zadejte prosím přihlašovací jméno.');
-		//TODO: password
-		$form->addSelect('role', 'Role:', array(
-			'admin' => 'Administrátor'
-		))->setDisabled();
-		//TODO: nastavení rolí musí být někde samostatně
+		$form->addPassword('password', 'Nové heslo k tomuto účtu:')
+			->setRequired('Zadejte prosím své stávající, nebo nové heslo.');
+		$role = array(
+			'admin' => 'Administrátor',
+			'demo' => 'Demo účet'
+		);
+		$form->addSelect('role', 'Role:', $role); //FIXME: práva může změnit jen admin a ne sobě
+		if ($this->account) {
+			$form->setDefaults(array(
+				'username' => $this->account->username,
+				'role' => $this->account->role,
+			));
+		}
 		$form->addSubmit('save', 'Uložit změny');
 		$form->onSuccess[] = $this->formSucceeded;
 		return $form;
 	}
 
 	public function formSucceeded(UI\Form $form) {
+		if (!$this->editable()) {
+			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
+			$this->redirect('this');
+			return;
+		}
 		$vals = $form->getValues();
 		try {
+			if (!$this->account) {
+				$this->account = new Entity\User();
+			}
 			$this->account->username = $vals->username;
+			$this->account->password = Passwords::hash($vals->password);
 			$this->account->role = $vals->role;
 			$this->users->save($this->account);
 			$this->presenter->flashMessage('Změny úspěšně uloženy.', 'success');
@@ -51,6 +68,10 @@ class UserEditForm extends UI\Control {
 			$this->presenter->flashMessage($exc->getMessage(), 'danger');
 		}
 		$this->onSave();
+	}
+
+	private function editable() {
+		return $this->presenter->user->isAllowed('Admin', App\Authorizator::EDIT) ? TRUE : FALSE;
 	}
 
 }

@@ -21,7 +21,7 @@ class AdminPresenter extends BasePresenter {
 	/** @var \UserEditFormFactory @inject */
 	public $userEditFormFactory;
 
-	private $id = NULL;
+	private $id;
 
 	public function startup() {
 		parent::startup();
@@ -45,12 +45,13 @@ class AdminPresenter extends BasePresenter {
 		}
 	}
 
+	public function actionDefault($id = NULL) {
+		$this->id = $id;
+	}
+
 	public function renderDefault($id = NULL) {
 		$this->template->tags = $this->tags->findBy(array());
-		if ($id !== NULL) {
-			$this->id = $id;
-			$this->template->editace = $id;
-		}
+		$this->template->editace = $id;
 	}
 
 	public function renderPictures() {
@@ -69,10 +70,11 @@ class AdminPresenter extends BasePresenter {
 		$this->template->users = $this->users->findBy(array());
 	}
 
+	public function actionUserEdit($id = NULL) {
+		$this->id = $id;
+	}
+
 	public function renderUserEdit($id = NULL) {
-		if ($id !== NULL) {
-			$this->id = $id;
-		}
 		$this->template->account = $this->users->findOneBy(['id' => $id]);
 	}
 
@@ -159,6 +161,16 @@ class AdminPresenter extends BasePresenter {
 		try {
 			$this->tags->delete($this->tags->findOneBy(['id' => $tag_id]));
 			$this->flashMessage('Tag byl úspěšně smazán.', 'success');
+		} catch (\Exception $exc) {
+			$this->flashMessage($exc->getMessage(), 'danger');
+		}
+		$this->redirect('this');
+	}
+
+	public function handleDeleteUser($user_id) {
+		try {
+			$this->users->delete($this->users->findOneBy(['id' => $user_id]));
+			$this->flashMessage('Uživatel byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
 		}

@@ -59,24 +59,20 @@ class PostForm extends UI\Control {
 	}
 
 	public function postFormSucceeded($form) {
-		//FIXME: doesn't work yet
-		/*if (!$this->editable()) {
-			$this->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
+		if (!$this->editable()) {
+			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$this->redirect('this');
 			return;
-		}*/
+		}
 		$vals = $form->getValues();
 		try {
-			if ($this->post) { // upravujeme záznam
-				$post = $this->post;
-			} else { // přidáváme záznam
-				//TODO: send pingbacks
-				$post = new Entity\Post();
-				$post->date = new \DateTime();
+			if (!$this->post) {
+				$this->post = new Entity\Post();
+				$this->post->date = new \DateTime();
 			}
-			$post->title = $vals->title;
-			$post->slug = $vals->slug;
-			$post->body = $vals->editor;
+			$this->post->title = $vals->title;
+			$this->post->slug = $vals->slug;
+			$this->post->body = $vals->editor;
 			foreach (array_unique(explode(', ', $vals->tags)) as $tag_name) {
 				$tag = $this->tags->findOneBy(['name' => $tag_name]);
 				if (!$tag) {
@@ -85,15 +81,19 @@ class PostForm extends UI\Control {
 					$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
 				}
 				if (!empty($tag_name)) {
-					$post->addTag($tag);
+					$this->post->addTag($tag);
 				}
 			}
-			$this->posts->save($post);
+			$this->posts->save($this->post);
 			$this->presenter->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'success');
 		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
 			$this->presenter->flashMessage($exc->getMessage(), 'danger');
 		}
 		$this->onSave();
+	}
+
+	private function editable() {
+		return $this->presenter->user->isAllowed('Admin', App\Authorizator::EDIT) ? TRUE : FALSE;
 	}
 
 }

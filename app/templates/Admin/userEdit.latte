@@ -6,7 +6,11 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			<h2>Úprava uživatele <strong>{$account->username}</strong></h2>
+			{if $account}
+				<h2>Úprava uživatele <strong>{$account->username}</strong></h2>
+			{else}
+				<h2>Založení nového uživatele</h2>
+			{/if}
 			<p>
 				Na této stránce můžete pohodlně upravit, nebo vytvořit nového uživatele.
 			</p>
