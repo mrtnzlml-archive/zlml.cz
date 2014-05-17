@@ -1,7 +1,7 @@
-____        _ __    __
-/ __ )__  __(_) /___/ /__  _____
-/ __  / / / / / / __  / _ \/ ___/
-/ /_/ / /_/ / / / /_/ /  __/ /
+    ____        _ __    __
+   / __ )__  __(_) /___/ /__  _____
+  / __  / / / / / / __  / _ \/ ___/
+ / /_/ / /_/ / / / /_/ /  __/ /
 /_____/\__,_/_/_/\__,_/\___/_/ 1.0.0
 
 <?php
@@ -10,6 +10,11 @@ require 'tools/nette.phar';
 use Nette\Utils\Finder;
 
 $dir = "./blog";
+if (strpos(dirname(__FILE__), '/', 0) !== false) {
+	define('WINDOWS_SERVER', false);
+} else {
+	define('WINDOWS_SERVER', true);
+}
 
 echo "--- Setting up PHP..." . PHP_EOL;
 set_time_limit(0);
@@ -21,31 +26,34 @@ echo exec('git clone https://mrtnzlml@bitbucket.org/mrtnzlml/www.zeminem.cz.git 
 echo "--- Updating Composer..." . PHP_EOL;
 echo exec("composer selfupdate");
 
-echo "--- Installing dependencies..." . PHP_EOL;
+echo "--- Installing dependencies... [can take a while]" . PHP_EOL;
 $working_dir = realpath($dir);
-echo exec("composer update --working-dir $working_dir");
+//echo exec("composer update --working-dir $working_dir");
 
 echo "--- Cleaning project..." . PHP_EOL;
 foreach (Finder::findDirectories(".git")->from($working_dir)->childFirst() as $file) {
-	unlink($file); //http://stackoverflow.com/questions/12148229/how-to-get-permission-to-use-unlink
+	delete($file);
 }
 foreach (Finder::findFiles(".git*")->from($working_dir) as $file) {
-	unlink($file);
+	delete($file);
 }
-
-//unlink travis atd...
+delete($working_dir . DIRECTORY_SEPARATOR . '.travis.yml');
+delete($working_dir . DIRECTORY_SEPARATOR . 'composer.json');
+delete($working_dir . DIRECTORY_SEPARATOR . 'composer.lock');
+delete($working_dir . DIRECTORY_SEPARATOR . '.git');
+delete($working_dir . DIRECTORY_SEPARATOR . 'tests');
+delete($working_dir . DIRECTORY_SEPARATOR . 'temp/cache');
 
 echo "--- Creating ZIP archive..." . PHP_EOL;
 $source = './blog/';
 $destination = './blog.zip';
 $zip = new ZipArchive();
 if (!$zip->open($destination, ZIPARCHIVE::OVERWRITE)) {
-	//TODO:die
+	die("FATAL: Cannot create a ZIP archive!\n");
 }
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
 foreach ($files as $file) {
 	$file = str_replace('\\', '/', $file);
-	//TODO: ignore file & folders (.git, tests)
 	if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..'))) { // Ignore "." and ".." folders
 		continue;
 	}
@@ -61,3 +69,28 @@ $zip->close();
 echo "----------------" . PHP_EOL;
 echo "----- DONE -----" . PHP_EOL;
 echo "----------------" . PHP_EOL;
+
+
+function delete($fileName) {
+	if (is_dir($fileName)) {
+		echo " > Deleting directory $fileName" . PHP_EOL;
+		foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($fileName, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $item) {
+			if (is_dir($item)) {
+				rmdir($item);
+			} else {
+				unlink($item);
+			}
+		}
+		rmdir($fileName);
+	} elseif (is_file($fileName)) {
+		echo " > Deleting file $fileName" . PHP_EOL;
+		if (!WINDOWS_SERVER) {
+			if (!unlink($fileName)) {
+				echo " > ::ERR:: while deleting directory $fileName" . PHP_EOL;
+			}
+		} else {
+			$lines = array();
+			exec("DEL /F/Q \"$fileName\"", $lines, $deleteError);
+		}
+	}
+}
