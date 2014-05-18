@@ -50,8 +50,15 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			<h2>Nahrát nový obrázek</h2>
+			<h2>
+				Nahrát nový obrázek
+				<a class="btn btn-default"><span class="glyphicon glyphicon-asterisk"></span> Nová složka</a>
+				<a class="btn btn-default">Změnit složku</a>
+			</h2>
+			<p>Právě nahráváte obrázky do složky <strong>XXX</strong>.</p>
 			<div id="image-uploader"></div>
+
+			<h2>Nahrané obrázky</h2>
 			<table class="table">
 				{snippet pictures}
 					{foreach $pictures as $picture}
