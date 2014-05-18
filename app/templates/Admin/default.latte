@@ -50,11 +50,23 @@
 						{ifset $content}
 							{$content}
 						{else}
-							<ul>
-								<li><a n:href="showChild!" class="ajax">Folder 1</a></li>
-								<li><a n:href="showChild!" class="ajax">Folder 1</a></li>
-								<li><a n:href="showChild!" class="ajax">Folder 1</a></li>
-							</ul>
+							{foreach $pictureFolders as $key => $value}
+								<div class="row">
+									<div class="col-lg-2">
+										<img src="" width="100" height="100">
+									</div>
+									<div class="col-lg-10">
+										<a>{$value}</a><br>
+										<code>[* {$key}/qrcode-ahoj.png 200x200 .(qrcode-ahoj) *]</code><br>
+										<span class="glyphicon glyphicon-picture">INSERT</span>
+									</div>
+								</div>
+							{/foreach}
+							{*<ul>
+								<li><a n:href="showChild! 1" class="ajax">Folder 1</a></li>
+								<li><a n:href="showChild! 2" class="ajax">Folder 1</a></li>
+								<li><a n:href="showChild! 3" class="ajax">Folder 1</a></li>
+							</ul>*}
 						{/ifset}
 					{/snippet}
 				</div>
