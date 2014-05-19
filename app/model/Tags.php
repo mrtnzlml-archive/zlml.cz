@@ -41,7 +41,7 @@ class Tags extends Nette\Object {
 		$query = $this->dao->createQueryBuilder('t')
 			->whereCriteria($criteria)
 			->autoJoinOrderBy((array)$orderBy)
-			->join('t.posts', 'p')
+			->leftJoin('t.posts', 'p')
 			->addSelect('p')
 			->getQuery();
 		$resultSet = new Kdyby\Doctrine\ResultSet($query);

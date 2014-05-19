@@ -43,7 +43,7 @@ class Posts extends Nette\Object {
 		$query = $this->dao->createQueryBuilder('p')
 			->whereCriteria($criteria)
 			->autoJoinOrderBy((array)$orderBy)
-			->join('p.tags', 'tt') //t already used?
+			->leftJoin('p.tags', 'tt') //t already used?
 			->addSelect('tt')
 			->getQuery();
 		$resultSet = new Kdyby\Doctrine\ResultSet($query);
