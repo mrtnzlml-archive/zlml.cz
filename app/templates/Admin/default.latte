@@ -22,7 +22,7 @@
 			 	localStorage.removeItem(\'title:\' + location.pathname);
 			 	localStorage.removeItem(\'slug:\' + location.pathname);
 			 	localStorage.removeItem(\'tags:\' + location.pathname);
-			 }'}
+			}'}
 				<ul class="error" n:if="$form->errors">
 					<li n:foreach="$form->errors as $error">{$error}</li>
 				</ul>
@@ -45,41 +45,34 @@
 					{input tags, class => "form-control"}
 				</div>
 
-				<div id="explorer" style="display:none">
-					{snippet explorer}
-						{ifset $content}
-							{$content}
-						{else}
-							{foreach $pictureFolders as $key => $value}
-								<div class="row">
-									<div class="col-lg-2">
-										<img src="" width="100" height="100">
-									</div>
-									<div class="col-lg-10">
-										<a>{$value}</a><br>
-										<code>[* {$key}/qrcode-ahoj.png 200x200 .(qrcode-ahoj) *]</code><br>
-										<span class="glyphicon glyphicon-picture">INSERT</span>
-									</div>
-								</div>
-							{/foreach}
-							{*<ul>
-								<li><a n:href="showChild! 1" class="ajax">Folder 1</a></li>
-								<li><a n:href="showChild! 2" class="ajax">Folder 1</a></li>
-								<li><a n:href="showChild! 3" class="ajax">Folder 1</a></li>
-							</ul>*}
-						{/ifset}
-					{/snippet}
+				<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-lg">Vložit obrázek</button>
+				<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="modalLabel">Vyberte obrázek, který chcete do textu vložit</h4>
+							</div>
+							<div class="modal-body">
+								<style>
+									.pic > input[type=radio] { display:none; }
+                                    input[type=radio] + img { cursor:pointer; border: 4px solid transparent; }
+                                    input[type=radio]:checked + img { border: 4px solid #00f; }
+								</style>
+								{foreach $pictures as $picture}
+									<label class="pic" for="{$picture->uuid}">
+										<input id="{$picture->uuid}" type="radio" name="pic" />
+										<img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100">
+									</label>
+								{/foreach}
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+								<button type="button" class="btn btn-primary">Vložit vybraný obrázek do textu</button>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="text-center">
-					<span class="glyphicon glyphicon-chevron-down"></span>
-					<a id="pictures">OBRÁZKY</a>
-					<span class="glyphicon glyphicon-chevron-down"></span>
-				</div>
-				<script>
-					$("#pictures").click(function () {
-						$("#explorer").toggle("fast");
-					});
-				</script>
 
 				<div class="form-group">
 					{label editor /}

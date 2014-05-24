@@ -50,27 +50,22 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			<h2>
-				Nahrát nový obrázek
-				<a class="btn btn-default"><span class="glyphicon glyphicon-asterisk"></span> Nová složka</a>
-				<a class="btn btn-default">Změnit složku</a>
-			</h2>
-			<p>Právě nahráváte obrázky do složky <strong>XXX</strong>.</p>
+			<h2>Nahrát nový obrázek</h2>
 			<div id="image-uploader"></div>
-
-			<h2>Nahrané obrázky v této složce</h2>
 			<table class="table">
-				{foreach $pictures as $picture}
-					<tr>
-						<td><img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100"></td>
-						<td>{$picture->uuid}/{$picture->name}<br>[* {$picture->uuid}/{$picture->name} *]</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-danger" data-confirm="Opravdu chcete smazat tento obrázek?">Delete</a>
-							</div>
-						</td>
-					</tr>
-				{/foreach}
+				{snippet pictures}
+					{foreach $pictures as $picture}
+						<tr>
+							<td><img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100"></td>
+							<td>{$picture->uuid}/{$picture->name}<br>[* {$picture->uuid}/{$picture->name} *]</td>
+							<td>
+								<div class="btn-group">
+									<a n:href="deletePicture! $picture->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento obrázek?">Delete</a>
+								</div>
+							</td>
+						</tr>
+					{/foreach}
+				{/snippet}
 			</table>
 		</div>
 	</div>
