@@ -64,7 +64,7 @@ class Presenter extends Nette\Object {
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 		$html = (string)$response->getSource();
-		$dom = Tester\DomQuery::fromHtml($html);
+		$dom = @Tester\DomQuery::fromHtml($html);
 		Tester\Assert::true($dom->has('html'));
 		Tester\Assert::true($dom->has('title'));
 		Tester\Assert::true($dom->has('body'));

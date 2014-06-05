@@ -12,7 +12,7 @@
 		"php": ">= 5.3.1",
 		"nette/nette": "~2.2.0",
 		"nette/tester": "~1.1.0",
-		"texy/texy": "~2.5",
+		"texy/texy": "2.*@dev",
 		"kukulich/fshl": "~2.1.0",
 		"janmarek/webloader": "~2.2.0",
 		"natxet/CssMin": "~3.0.2",

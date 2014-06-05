@@ -17,4 +17,5 @@ before_script:
   - mysql -u root -e 'create database zeminem;'
   - mysql -u root -D zeminem < zeminem.sql
   - mysql -u root -D zeminem < diff.sql
+  - composer selfupdate
   - composer update
