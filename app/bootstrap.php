@@ -24,8 +24,7 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
 try {
 	$container = $configurator->createContainer();
+	return $container;
 } catch (Kdyby\Doctrine\UnexpectedValueException $exc) {
 	require_once(__DIR__ . DIRECTORY_SEPARATOR . 'install.php');
 }
-
-return $container;

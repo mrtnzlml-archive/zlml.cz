@@ -5,4 +5,4 @@
 # http://nette.org/security-warning
 #
 
-{doctrine: {user: root, password: "", dbname: zeminem}}
+{doctrine: {user: root, password: "", dbname: zeminem2}}
