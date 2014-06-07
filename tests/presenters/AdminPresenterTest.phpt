@@ -30,7 +30,7 @@ class AdminPresenterTest extends Tester\TestCase {
 
 	public function testRenderDefaultEdit() {
 		$this->action = 'default';
-		$this->tester->testAction($this->action, 'GET', [1]);
+		$this->tester->testAction($this->action, 'GET', array(1));
 	}
 
 	public function testRenderPictures() {

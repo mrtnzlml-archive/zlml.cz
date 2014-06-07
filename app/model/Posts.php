@@ -97,7 +97,7 @@ class Posts extends Nette\Object {
 	 * @return mixed|null
 	 */
 	public function rand() {
-		$posts = iterator_to_array($this->findBy([]));
+		$posts = iterator_to_array($this->findBy(array()));
 		return $posts[rand(0, count($posts) - 1)];
 	}
 
@@ -134,10 +134,10 @@ class Posts extends Nette\Object {
 		$sql = "SELECT u.id FROM mirror_posts u WHERE MATCH(u.title, u.body) AGAINST(? IN BOOLEAN MODE)$where
 				ORDER BY 5 * MATCH(u.title) AGAINST (?) + MATCH(u.body) AGAINST (?) DESC";
 		$query = $em->createNativeQuery($sql, $rsm);
-		$query->setParameters([$search, $search, $search]);
+		$query->setParameters(array($search, $search, $search));
 		$result = $query->getScalarResult();
 		$ids = array_map('current', $result);
-		return $this->findBy(['id' => $ids]);
+		return $this->findBy(array('id' => $ids));
 	}
 
 	/**

@@ -25,9 +25,9 @@ class HomepagePresenterTest extends Tester\TestCase {
 	}
 
 	public function testRenderDefaultPage2() {
-		$this->tester->testAction('default', Presenter::GET, [
+		$this->tester->testAction('default', Presenter::GET, array(
 			'paginator-page' => 2,
-		]);
+		));
 	}
 
 	public function testRenderRss() {

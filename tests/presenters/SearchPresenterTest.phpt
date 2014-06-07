@@ -21,11 +21,11 @@ class SearchPresenterTest extends Tester\TestCase {
 	}
 
 	public function testRenderDefault() {
-		$this->tester->testAction('default', 'GET', ['search' => 'nette']);
+		$this->tester->testAction('default', 'GET', array('search' => 'nette'));
 	}
 
 	public function testRenderDefaultEmpty() {
-		$this->tester->testAction('default', 'GET', ['search' => 'pritomtodotazupravdepodobnenicvdatabazinenajdu']);
+		$this->tester->testAction('default', 'GET', array('search' => 'pritomtodotazupravdepodobnenicvdatabazinenajdu'));
 	}
 
 	//FIXME
