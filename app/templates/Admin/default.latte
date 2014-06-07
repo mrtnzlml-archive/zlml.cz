@@ -10,6 +10,7 @@
 			</div>
 		</div>
 		<div class="col-lg-9">
+			<span class="pull-right"><a>HELP</a></span>
 			{ifset $editace}
 				<h2>Editovat článek ({$editace})</h2>
 			{else}
@@ -51,7 +52,7 @@
 			});
 			if (!editor.getValue() && window.localStorage) {
 				var loc = location.pathname + location.search;
-				if(localStorage.getItem('content:' + loc) != undefined) {
+				if (localStorage.getItem('content:' + loc) != undefined) {
 					editor.setValue(localStorage.getItem('content:' + loc));
 				}
 				$('[name="title"]').val(localStorage.getItem('title:' + loc));

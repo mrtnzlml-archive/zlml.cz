@@ -51,6 +51,7 @@ class AdminPresenter extends BasePresenter {
 
 	public function renderDefault($id = NULL) {
 		$this->template->tags = $this->tags->findBy(array());
+		$this->template->pictures = $this->pictures->findBy(array());
 		if ($id != NULL) {
 			$this->id = $id;
 			$this->value = $this->posts->findOneBy(array('id' => $id));
@@ -141,6 +142,7 @@ class AdminPresenter extends BasePresenter {
 		$texy->tabWidth = 4;
 		$texy->headingModule->top = 3; //start at H3
 		$texy->headingModule->generateID = TRUE;
+		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module
 		$this->template->preview = Nette\Utils\Html::el()->setHtml($texy->process($content));
 		$this->template->title = $title;
 		$this->template->tagsPrev = array_unique(explode(', ', $tags));
@@ -202,7 +204,7 @@ class AdminPresenter extends BasePresenter {
 			$picture = new Entity\Picture();
 			$picture->uuid = $uploader->getUuid();
 			$picture->name = $uploader->getUploadName();
-			//$this->pictures->save($picture);
+			$this->pictures->save($picture);
 		} catch (\Exception $exc) {
 			$uploader->handleDelete(__DIR__ . '/../../www/uploads');
 			$this->flashMessage($exc->getMessage(), 'danger');
@@ -210,8 +212,18 @@ class AdminPresenter extends BasePresenter {
 				'error' => $exc->getMessage(),
 			)));
 		}
-		//$this->redrawControl('pictures');
+		//TODO: napřed předat do šablony nová data
+		$this->redrawControl('pictures');
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
+	}
+
+	public function handleDeletePicture($id) {
+		$picture = $this->pictures->findOneBy(['id' => $id]);
+		unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
+		rmdir(__DIR__ . '/../../www/uploads/' . $picture->uuid);
+		$this->pictures->delete($picture);
+		$this->flashMessage('Obrázek byl úspěšně smazán.', 'alert-success');
+		$this->redirect('this');
 	}
 
 }
