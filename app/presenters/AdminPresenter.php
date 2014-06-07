@@ -148,6 +148,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleDelete($id) {
+		//TODO: pro demo uživatele zamezit možnost mazání
 		try {
 			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
 			$this->flashMessage('Článek byl úspěšně smazán.', 'success');

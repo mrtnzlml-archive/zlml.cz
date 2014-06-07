@@ -4,7 +4,6 @@ namespace App;
 
 use Nette\Utils\Strings;
 use Nette;
-use Texy;
 use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
@@ -41,7 +40,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
 		$template->registerHelper('texy', function ($input) {
-			$texy = new Texy\Texy();
+			$texy = new \Texy();
 			$html = new Nette\Utils\Html();
 			return $html::el()->setHtml($texy->process($input));
 		});
