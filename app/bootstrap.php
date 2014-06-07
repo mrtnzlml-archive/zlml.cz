@@ -22,9 +22,11 @@ define("WWW_DIR", __DIR__ . '/../www');
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
-try {
+//FIXME: nefunguje CMD (orm:info)
+$config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
+if (is_array($config) && array_key_exists('doctrine', $config)) {
 	$container = $configurator->createContainer();
 	return $container;
-} catch (Kdyby\Doctrine\UnexpectedValueException $exc) {
+} else {
 	require_once(__DIR__ . DIRECTORY_SEPARATOR . 'install.php');
 }
