@@ -16,7 +16,7 @@ script: vendor/bin/tester tests -s -c tests/php.ini
 #TODO: generovat schéma z entit (!pořešit data a triggery!)
 before_script:
   - mysql -u root -e 'create database zeminem;'
-  - mysql -u root -D zeminem < zeminem.sql
+  - mysql -u root -D zeminem < zeminem.sql #TODO: generovat schéma z entit (!pořešit data a triggery!)
   - mysql -u root -D zeminem < diff.sql
   - composer selfupdate
   - composer update
