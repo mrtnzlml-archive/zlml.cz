@@ -61,7 +61,7 @@
 			<li n:class="$presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:obsah') || $presenter->isLinkCurrent('Single:tagsah') ? active"><a n:href="Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
 			<li><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
-			{if $user->isLoggedIn()}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
+			{if $user->isAllowed('Admin', 'view')}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
 			<li n:class="$presenter->isLinkCurrent('Single:develop') ? 'pull-right active' : pull-right"><a n:href="Single:develop">develop</a></li>
 		</ul>
 	</div>
@@ -69,7 +69,7 @@
 
 	<div class="container shadow" style="padding: 20px 30px;">
 		{snippet flashes}
-			<div n:foreach="$flashes as $flash" class="alert {$flash->type}">{$flash->message}</div>
+			<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message|texy}</div>
 		{/snippet}
 		{snippet content}
 			{include #content}

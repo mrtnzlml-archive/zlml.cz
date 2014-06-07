@@ -20,7 +20,7 @@ class AdminPresenterTest extends Tester\TestCase {
 
 	public function setUp() {
 		$this->tester->init('Admin');
-		$this->tester->logIn();
+		$this->tester->logIn(1, 'admin');
 	}
 
 	public function testRenderDefault() {
@@ -45,6 +45,11 @@ class AdminPresenterTest extends Tester\TestCase {
 
 	public function testRenderTags() {
 		$this->action = 'tags';
+		$this->tester->testAction($this->action);
+	}
+
+	public function testRenderUsers() {
+		$this->action = 'users';
 		$this->tester->testAction($this->action);
 	}
 

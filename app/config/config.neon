@@ -22,6 +22,7 @@ nette:
 
 services:
 	authenticator: App\Authenticator
+	- App\Authorizator
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- App\Pictures(@doctrine.dao(Entity\Picture))
@@ -30,6 +31,8 @@ services:
 	- App\Tags(@doctrine.dao(Entity\Tag))
 	- App\Users(@doctrine.dao(Entity\User))
 	#- App\Xmlrpc
+	- PostFormFactory
+	- UserEditFormFactory
 
 extensions:
 	console: Kdyby\Console\DI\ConsoleExtension
