@@ -36,7 +36,7 @@ class AdminPresenter extends BasePresenter {
 		$this->template->tags = $this->tags->findBy(array());
 		if ($id != NULL) {
 			$this->id = $id;
-			$this->value = $this->posts->findOneBy(['id' => $id]);
+			$this->value = $this->posts->findOneBy(array('id' => $id));
 			$this->template->editace = $id;
 		}
 	}
@@ -46,7 +46,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function renderPrehled() {
-		$this->template->posts = $this->posts->findBy(array(), ['date' => 'DESC']);
+		$this->template->posts = $this->posts->findBy(array(), array('date' => 'DESC'));
 	}
 
 	public function renderTags() {
@@ -77,7 +77,7 @@ class AdminPresenter extends BasePresenter {
 		$newColor = preg_replace('<#>', '', $vals['color' . $id]);
 		if (ctype_xdigit($newColor) && (strlen($newColor) == 6 || strlen($newColor) == 3)) {
 			try {
-				$tag = $this->tags->findOneBy(['id' => $id]);
+				$tag = $this->tags->findOneBy(array('id' => $id));
 				$tag->color = $newColor;
 				$this->tags->save($tag);
 				$this->flashMessage('Tag byl úspěšně aktualizován.', 'alert-success');
@@ -101,7 +101,7 @@ class AdminPresenter extends BasePresenter {
 			->setRequired('Je zapotřebí vyplnit slug.');
 		$tags = array();
 		if ($this->id) {
-			foreach ($this->posts->findOneBy(['id' => $this->id])->tags as $tag) {
+			foreach ($this->posts->findOneBy(array('id' => $this->id))->tags as $tag) {
 				$tags[] = $tag->name;
 			}
 		}
@@ -122,7 +122,7 @@ class AdminPresenter extends BasePresenter {
 		$id = $this->getParameter('id');
 		try {
 			if ($id) { // upravujeme záznam
-				$post = $this->posts->findOneBy(['id' => $id]);
+				$post = $this->posts->findOneBy(array('id' => $id));
 			} else { // přidáváme záznam
 				//TODO: send pingbacks
 				$post = new Entity\Post();
@@ -132,7 +132,7 @@ class AdminPresenter extends BasePresenter {
 			$post->slug = $vals->slug;
 			$post->body = $vals->editor;
 			foreach (array_unique(explode(', ', $vals->tags)) as $tag_name) {
-				$tag = $this->tags->findOneBy(['name' => $tag_name]);
+				$tag = $this->tags->findOneBy(array('name' => $tag_name));
 				if (!$tag) {
 					$tag = new Entity\Tag();
 					$tag->name = $tag_name;
@@ -168,7 +168,7 @@ class AdminPresenter extends BasePresenter {
 
 	public function handleDelete($id) {
 		try {
-			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
+			$this->posts->delete($this->posts->findOneBy(array('id' => $id)));
 			$this->flashMessage('Článek byl úspěšně smazán.', 'alert-success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'alert-danger');
@@ -178,7 +178,7 @@ class AdminPresenter extends BasePresenter {
 
 	public function handleDeleteTag($tag_id) {
 		try {
-			$this->tags->delete($this->tags->findOneBy(['id' => $tag_id]));
+			$this->tags->delete($this->tags->findOneBy(array('id' => $tag_id)));
 			$this->flashMessage('Tag byl úspěšně smazán.', 'alert-success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'alert-danger');
@@ -188,7 +188,7 @@ class AdminPresenter extends BasePresenter {
 
 	public function handleRegenerate($tag_id) {
 		try {
-			$tag = $this->tags->findOneBy(['id' => $tag_id]);
+			$tag = $this->tags->findOneBy(array('id' => $tag_id));
 			$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
 			$this->tags->save($tag);
 			$this->flashMessage('Tag byl úspěšně regenerován.', 'alert-success');
