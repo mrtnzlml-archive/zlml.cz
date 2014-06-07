@@ -27,11 +27,12 @@ class SinglePresenter extends BasePresenter {
 			$this->forward($webalized);
 		} else { // zobrazení klasických článků
 			$texy = new \fshlTexy();
-			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
+			$_this = $this;
+			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) use ($_this) {
 				$el = $invocation->proceed();
 				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
 					$url = new Url($el->attrs['href']);
-					$httpRequest = $this->presenter->getHttpRequest();
+					$httpRequest = $_this->presenter->getHttpRequest();
 					$uri = $httpRequest->getUrl();
 					if ($url->authority != $uri->host) {
 						$el->attrs['target'] = '_blank';
