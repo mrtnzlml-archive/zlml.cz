@@ -1,6 +1,6 @@
 language: php
 php:
-  - 5.3
+  - 5.3.3
   - 5.4
   - 5.5
   - 5.6
@@ -8,11 +8,12 @@ php:
 
 matrix:
   allow_failures:
-    - php: 5.3
+    - php: 5.3.3
     - php: hhvm
 
 script: vendor/bin/tester tests -s -c tests/php.ini
 
+#TODO: generovat schéma z entit (!pořešit data a triggery!)
 before_script:
   - mysql -u root -e 'create database zeminem;'
   - mysql -u root -D zeminem < zeminem.sql
