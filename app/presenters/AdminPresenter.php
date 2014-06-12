@@ -52,11 +52,7 @@ class AdminPresenter extends BasePresenter {
 	public function renderDefault($id = NULL) {
 		$this->template->tags = $this->tags->findBy(array());
 		$this->template->pictures = $this->pictures->findBy(array());
-		if ($id != NULL) {
-			$this->id = $id;
-			$this->value = $this->posts->findOneBy(array('id' => $id));
-			$this->template->editace = $id;
-		}
+		$this->id = $id;
 	}
 
 	public function renderPictures() {
