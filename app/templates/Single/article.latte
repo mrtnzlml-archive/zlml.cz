@@ -44,15 +44,15 @@
 				<div class="share hidden-print">
 			<span class="label label-danger">
 				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a>
+				<a href="https://plus.google.com/share?url={link //this}" target="_blank">Google</a>
 			</span>
 			<span class="label label-info">
 				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a>
+				<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_blank">Facebook</a>
 			</span>
 			<span class="label label-success">
 				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://twitter.com/share?text={$post->title}&url={$url}" target="_blank">Twitter</a>
+				<a href="http://twitter.com/share?text={$post->title}&url={link //this}" target="_blank">Twitter</a>
 			</span>
 				</div>
 
@@ -77,7 +77,7 @@
 				</div>
 
 				<div class="hidden-print">
-					<div id="disqus_thread" style="padding: 20px 0" data-disqus-shortname="mrtnzlml"></div>
+					<div id="disqus_thread" style="padding: 20px 0" data-disqus-shortname="mrtnzlml" data-disqus-url="{link //this}"></div>
 					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments
 							powered by Disqus.</a></noscript>
 					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
