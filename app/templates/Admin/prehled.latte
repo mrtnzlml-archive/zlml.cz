@@ -11,10 +11,12 @@
 		<table class="table">
 			{foreach $posts as $post}
 				<tr>
-					<td><a n:href=":Single:article $post->slug">{$post->title}</a></td>
+					<td><a n:href=":Single:article $post->slug" title="{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$post->title}</a></td>
 					<td>
 						{foreach $post->tags as $tag}
-							<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
+							<a n:href="Search:default, $tag->name" style="text-decoration:none">
+								<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+							</a>
 						{/foreach}
 					</td>
 					<td>
@@ -27,9 +29,6 @@
 						</div>
 					</td>
 				</tr>
-				<!--<tr>
-					<td colspan="4" style="border-top:none">{$post->body|texy|striptags|truncate:300}</td>
-				</tr>-->
 			{/foreach}
 		</table>
 	</div>
