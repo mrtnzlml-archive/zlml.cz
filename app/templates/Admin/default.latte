@@ -5,7 +5,7 @@
 			{include menu.latte}
 			<div class="well sidebar-nav">
 				{foreach $tags as $tag}
-					<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
+					<span onclick="insertTag({$tag->name});" class="label" style="cursor:copy;background:#{$tag->color}">{$tag->name}</span>
 				{/foreach}
 			</div>
 		</div>

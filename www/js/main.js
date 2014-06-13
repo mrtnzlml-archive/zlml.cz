@@ -104,3 +104,12 @@ function make_url(s) {
 	}
 	return s2.replace(/[^a-z0-9_]+/g, '-').replace(/^-|-$/g, '');
 }
+
+function insertTag(tagname) {
+	var input = $('[name="tags"]');
+	if ($.trim(input.val()).length > 0) {
+		input.val(input.val() + ', ' + tagname);
+	} else {
+		input.val(tagname);
+	}
+}
