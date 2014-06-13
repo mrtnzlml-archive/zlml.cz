@@ -16,37 +16,36 @@ class SinglePresenter extends BasePresenter
         $this->template->articles = $this->posts->findBy(array(), array('title' => 'ASC'));
     }
 
-    public function renderArticle($slug)
-    {
-        $webalized = Nette\Utils\Strings::webalize($slug);
-        if (empty($webalized)) {
-            $this->redirect('Homepage:default');
-        }
-        if ($slug !== $webalized) {
-            $this->redirect('Single:article', $webalized);
-        }
-        $post = $this->posts->findOneBy(array('slug' => $webalized)); // zobrazeni článku podle slugu
-        if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
-            $this->forward($webalized);
-        } else { // zobrazení klasických článků
-            $texy = new \fshlTexy();
-            $_this = $this;
-            $texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) use ($_this) {
-                $el = $invocation->proceed();
-                if ($el instanceof \TexyHtml && $el->getName() === 'a') {
-                    $url = new Url($el->attrs['href']);
-                    $httpRequest = $_this->presenter->getHttpRequest();
-                    $uri = $httpRequest->getUrl();
-                    if ($url->authority != $uri->host) {
-                        $el->attrs['target'] = '_blank';
-                    }
-                }
-                return $el;
-            });
-            $texy->addHandler('block', array($texy, 'blockHandler'));
-            $texy->tabWidth = 4;
-            $texy->headingModule->top = 3; //start at H3
-            $texy->headingModule->generateID = TRUE;
+	public function renderArticle($slug) {
+		$webalized = Nette\Utils\Strings::webalize($slug);
+		if (empty($webalized)) {
+			$this->redirect('Homepage:default');
+		}
+		if ($slug !== $webalized) {
+			$this->redirect('Single:article', $webalized);
+		}
+		$post = $this->posts->findOneBy(['slug' => $webalized]); // zobrazeni článku podle slugu
+		if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
+			$this->forward($webalized);
+		} else { // zobrazení klasických článků
+			$texy = new \fshlTexy();
+			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
+				$el = $invocation->proceed();
+				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
+					//FIXME: nefunguje na ostrém serveru (?)
+					$url = new Url($el->attrs['href']);
+					$httpRequest = $this->presenter->getHttpRequest();
+					$uri = $httpRequest->getUrl();
+					if ($url->authority != $uri->host) {
+						$el->attrs['target'] = '_blank';
+					}
+				}
+				return $el;
+			});
+			$texy->addHandler('block', array($texy, 'blockHandler'));
+			$texy->tabWidth = 4;
+			$texy->headingModule->top = 3; //start at H3
+			$texy->headingModule->generateID = TRUE;
 
             $this->template->post = $post;
             $body = $texy->process($post->body);

@@ -29,7 +29,7 @@ class HomepagePresenter extends BasePresenter {
 	public function renderDefault() {
 		$vp = new Cntrl\VisualPaginator($this, 'paginator');
 		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 8;
+		$paginator->itemsPerPage = 10;
 		$paginator->itemCount = ITEMCOUNT; //see RouterFactory.php
 		$posts = $this->posts->findBy(array(), array('date' => 'DESC'), $paginator->itemsPerPage, $paginator->offset);
 		$this->template->posts = $posts;

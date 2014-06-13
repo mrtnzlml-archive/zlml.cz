@@ -153,7 +153,7 @@ class AdminPresenter extends BasePresenter {
 		//TODO: pro demo uživatele zamezit možnost mazání
 		try {
 			$this->posts->delete($this->posts->findOneBy(array('id' => $id)));
-			$this->flashMessage('Článek byl úspěšně smazán.', 'alert-success');
+			$this->flashMessage('Článek byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
 		}
@@ -163,7 +163,7 @@ class AdminPresenter extends BasePresenter {
 	public function handleDeleteTag($tag_id) {
 		try {
 			$this->tags->delete($this->tags->findOneBy(array('id' => $tag_id)));
-			$this->flashMessage('Tag byl úspěšně smazán.', 'alert-success');
+			$this->flashMessage('Tag byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
 		}
@@ -218,7 +218,7 @@ class AdminPresenter extends BasePresenter {
 		unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
 		rmdir(__DIR__ . '/../../www/uploads/' . $picture->uuid);
 		$this->pictures->delete($picture);
-		$this->flashMessage('Obrázek byl úspěšně smazán.', 'alert-success');
+		$this->flashMessage('Obrázek byl úspěšně smazán.', 'success');
 		$this->redirect('this');
 	}
 
