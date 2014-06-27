@@ -9,7 +9,6 @@ php:
 matrix:
   allow_failures:
     - php: 5.3.3
-    - php: 5.5
     - php: hhvm
 
 script: vendor/bin/tester tests -s -c tests/php.ini
