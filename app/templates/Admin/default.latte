@@ -26,7 +26,7 @@
 				<h2>
 					{ifset $title}
 					{$title}
-						<small>{date('Y-m-d')}</small>
+						<small>{date('U')|dateInWords} ({date('U')|timeAgoInWords})</small>
 					{/ifset}
 				</h2>
 				{ifset $tagsPrev}
