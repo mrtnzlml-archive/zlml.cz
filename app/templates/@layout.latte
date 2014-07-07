@@ -19,7 +19,7 @@
 <body>
 	<script> document.body.className+=' js' </script>
 
-	<div class="container shadow hidden-print"><style>.record { position: relative; }</style>
+	<div class="container shadow hidden-print">
 		<div class="row">
 			<div class="col-lg-2 visible-lg">
 				<a n:href="Homepage:"><div id="qr"></div></a>
@@ -32,7 +32,7 @@
 					<div class="row">
 						<div class="col-lg-12" style="margin-top:10px">
 							<div class="input-group">
-								<input n:name="search" type="search" class="form-control" placeholder="Search">
+								<input n:name="search" type="search" class="form-control" placeholder="Hledat">
 								<span class="input-group-btn">
 									{input send, class => 'btn btn-default go'}
 								</span>
@@ -40,12 +40,16 @@
 						</div>
 					</div>
 				{/form}
-				<div class="text-right" style="margin-top:20px">
+				<div class="text-right" style="margin-top:10px">
 					<a href="https://twitter.com/mrtnzlml" target="_blank">Twitter</a>
 					&middot;
 					<a href="https://plus.google.com/u/0/108269453578187886435?rel=author" target="_blank">G+</a>
 					&middot;
+					<a href="http://cz.linkedin.com/in/mrtnzlml/" target="_blank">LinkedIn</a>
+					<br>
 					<a href="https://bitbucket.org/mrtnzlml" target="_blank">Bitbucket</a>
+					&middot;
+					<a href="https://github.com/mrtnzlml" target="_blank">GitHub</a>
 					&middot;
 					<a n:href=":Homepage:rss" target="_blank">RSS</a>
 				</div>
@@ -67,7 +71,7 @@
 	</div>
 	{/snippet}
 
-	<div class="container shadow" style="padding: 20px 30px;">
+	<div class="container shadow" style="padding: 20px 30px;border-radius: 0 0 6px 6px;">
 		{snippet flashes}
 			<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message|texy}</div>
 		{/snippet}
@@ -76,12 +80,9 @@
 		{/snippet}
 	</div>
 
-	<div class="container text-right hidden-print footer" style="background:transparent">
-		<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a n:href="Homepage:">Tato webová stránka</a></span>, jejímž autorem je
-		<a xmlns:cc="http://creativecommons.org/ns#" n:href="Single:about" property="cc:attributionName" rel="cc:attributionURL">Martin Zlámal</a>, podléhá licenci<br>
-		<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.cs" target="_blank">Creative Commons Uveďte autora-Zachovejte licenci 4.0 International </a><br>
-		&copy; 2012 - <?php echo date("Y"); ?>&nbsp;<a n:href="Homepage:">Martin Zlámal</a> <span class="glyphicon glyphicon-qrcode"></span> | {if $user->isLoggedIn()}<a href="{link Sign:out}">Odhlásit</a>{else}<a n:href="Sign:in" data-toggle="modal">Login</a>{/if}<br>
-		<a href="http://www.fresh-hosting.cz/?utm_source=zeminem&utm_medium=link&utm_campaign=fresh" target="_blank">www.fresh-hosting.cz</a> | <a href="https://bitbucket.org/mrtnzlml/www.zeminem.cz/issues" target="_blank">Našli jste chybu?</a>
+	<div class="container text-center hidden-print footer">
+		I <span class="glyphicon glyphicon-heart" style="color:maroon"></span> <a href="http://nette.org/" target="_blank">Nette Framework</a><br>
+		&copy; 2012 - <?php echo date("Y"); ?>&nbsp;<span class="glyphicon glyphicon-qrcode"></span>
 	</div>
 
 	<script type="text/javascript" n:if="preg_match('/^http:\/\/(www.)?zeminem.cz/i', $baseUrl)">

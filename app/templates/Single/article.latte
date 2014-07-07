@@ -1,9 +1,4 @@
 {block content}
-	<ul class="breadcrumb hidden-print hidden-sm">
-		<li><a n:href="Homepage:">home</a></li>
-		<li class="active" n:block="title">{$post->title}</li>
-		<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
-	</ul>
 	<div class="page-header">
 		<h2>
 			{$post->title|vlna}

@@ -2,12 +2,6 @@
 
 {block content}
 
-<ul class="breadcrumb">
-	<li><a n:href="Homepage:">home</a></li>
-	<li class="active">reference</li>
-	<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
-</ul>
-
 <div class="row">
 	<div class="col-lg-8 col-md-8">
 		<h3>Proč zvolit právě mé služby?</h3>
@@ -31,7 +25,7 @@
 		<p>Preferuji statické firemní prezentace, ale nebojím se velmi rozsáhlých aplikací.</p>
 		<p>Přečtěte si o mě <a n:href="Single:about">nějaké další informace</a>, nebo se podívejte níže na mé vybrané reference:</p>
 	</div>
-	<div class="col-lg-4 col-md-4">
+	<div class="col-lg-4 col-md-4" style="padding-top:30px">
 		<a href="{$basePath}/img/reference/cert.jpg" target="_blank">
 			<img src="{$basePath}/img/reference/cert.jpg" class="img-thumbnail img-responsive" />
 		</a>
