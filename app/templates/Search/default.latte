@@ -10,7 +10,7 @@
 	<hr>
 {/if}
 
-<h2 n:block="title">Výsledky vyhledávání{ifset $search} "{$search}"{/ifset}</h2>
+<h2 n:block="title">Výsledky vyhledávání{ifset $search} „{$search}“{/ifset}</h2>
 {ifset $error}
 	<div class="alert alert-danger">
 		<strong>{$error}</strong>
@@ -27,6 +27,7 @@
 							<a n:href=":Single:article $r->slug">
 								{$r->title|noescape|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
 							</a>
+							<small class="pull-right" style="white-space:nowrap">{$r->date|dateInWords} ({$r->date|timeAgoInWords})</small>
 						</h4>
 						<p>
 							{foreach $r->tags as $tag}
