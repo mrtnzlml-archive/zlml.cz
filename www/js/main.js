@@ -63,7 +63,7 @@ $(function () {
 				f = $(this).scrollTop(),
 				g = a - f,
 				h = Math.ceil(g * e),
-				min = Math.ceil(h / 200);
+				min = Math.ceil(h / 180);
 			h >= 0 ? (b.text(h), time.text(min)) : (b.text("0"), time.text("0"));
 			switch (min) {
 				case 1:
