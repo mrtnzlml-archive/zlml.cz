@@ -8,6 +8,7 @@ CREATE TABLE `pictures` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(40) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
