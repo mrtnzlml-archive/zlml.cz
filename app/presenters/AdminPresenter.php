@@ -92,7 +92,7 @@ class AdminPresenter extends BasePresenter {
 	protected function createComponentPostForm() {
 		$control = $this->postFormFactory->create($this->id);
 		$control->onSave[] = function () {
-			$this->redirect('default'); //FIXME: pokud error, tak nepřesměrovávat...
+			$this->redirect('default');
 		};
 		return $control;
 	}

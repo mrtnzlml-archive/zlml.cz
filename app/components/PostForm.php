@@ -86,10 +86,10 @@ class PostForm extends UI\Control {
 			}
 			$this->posts->save($this->post);
 			$this->presenter->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'success');
+			$this->onSave();
 		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
-			$this->presenter->flashMessage($exc->getMessage(), 'danger');
+			$this->presenter->flashMessage('Tento URL slug je již v databázi uložen, zvolte prosím jiný.', 'danger');
 		}
-		$this->onSave();
 	}
 
 	private function editable() {
