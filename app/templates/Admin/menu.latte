@@ -22,7 +22,7 @@
 		<p class="list-group-item-text">Prohlédněte si tagy</p>
 	</a>
 
-	<a n:href=":Admin:users" n:class="$presenter->isLinkCurrent(':Admin:users')?'list-group-item active':'list-group-item'">
+	<a n:href=":Admin:users" n:class="list-group-item,preg_match('/^user[a-z-]*$/i',$presenter->view)?active">
 		<span class="badge">{$usercount}</span>
 		<h4 class="list-group-item-heading">Přehled uživatelů</h4>
 		<p class="list-group-item-text">Upravte práva uživatelům</p>
