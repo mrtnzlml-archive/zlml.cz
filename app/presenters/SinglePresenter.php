@@ -45,7 +45,9 @@ class SinglePresenter extends BasePresenter
 			$texy->addHandler('block', array($texy, 'blockHandler'));
 			$texy->tabWidth = 4;
 			$texy->headingModule->top = 3; //start at H3
-			$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module
+			$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module FIXME
+			$texy->imageModule->leftClass = 'leftAlignedImage';
+			$texy->imageModule->rightClass = 'rightAlignedImage';
 			$texy->headingModule->generateID = TRUE;
 
             $this->template->post = $post;
