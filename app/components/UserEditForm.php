@@ -4,6 +4,7 @@ namespace Cntrl;
 
 use App;
 use Entity;
+use Kdyby;
 use Nette\Application\UI;
 use Nette\Security\Passwords;
 
@@ -32,20 +33,26 @@ class UserEditForm extends UI\Control {
 			->setRequired('Zadejte prosím přihlašovací jméno.');
 		$form->addPassword('password', 'Nové heslo k tomuto účtu:')
 			->setRequired('Zadejte prosím své stávající, nebo nové heslo.');
-		$role = array(
-			'admin' => 'Administrátor',
-			'demo' => 'Demo účet'
-		);
-		//FIXME: upravovat práva může jen admin, při zakládání musí být default nějaká menší než admin (ošetřit formSucceeded)
-		/*if($this->presenter->user->isInRole('admin') && $this->account->role !== 'admin') {
+		if ($this->presenter->user->isInRole('admin')) {
+			$role = array(
+				'admin' => 'Administrátor',
+				'demo' => 'Demo účet'
+			);
 			$form->addSelect('role', 'Role:', $role);
 		} else {
-			$form->addSelect('role', 'Role:', $role)->setDisabled();
-		}*/
+			$role = array(
+				'demo' => 'Demo účet'
+			);
+			$form->addSelect('role', 'Role:', $role);
+		}
 		if ($this->account) {
 			$form->setDefaults(array(
 				'username' => $this->account->username,
 				'role' => $this->account->role,
+			));
+		} else {
+			$form->setDefaults(array(
+				'role' => 'demo',
 			));
 		}
 		$form->addSubmit('save', 'Uložit změny');
@@ -69,6 +76,8 @@ class UserEditForm extends UI\Control {
 			$this->account->role = $vals->role;
 			$this->users->save($this->account);
 			$this->presenter->flashMessage('Změny úspěšně uloženy.', 'success');
+		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
+			$this->presenter->flashMessage('Uživatel s tímto jménem již existuje. Zvolte prosím jiné.', 'danger');
 		} catch (\Exception $exc) {
 			$this->presenter->flashMessage($exc->getMessage(), 'danger');
 		}
