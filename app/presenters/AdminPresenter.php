@@ -10,6 +10,8 @@ use Nette;
 
 class AdminPresenter extends BasePresenter {
 
+	public $onBeforeRestrictedFunctionality = [];
+
 	/** @var Pictures @inject */
 	public $pictures;
 	/** @var Tags @inject */
@@ -117,11 +119,7 @@ class AdminPresenter extends BasePresenter {
 	 * @param $id
 	 */
 	public function colorSucceeded($button, $id) {
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
+		$this->onBeforeRestrictedFunctionality($this);
 		$vals = $button->getForm()->getValues();
 		$newColor = preg_replace('<#>', '', $vals['color' . $id]);
 		if (ctype_xdigit($newColor) && (strlen($newColor) == 6 || strlen($newColor) == 3)) {
@@ -159,11 +157,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleDelete($id) {
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat (ani mazat) opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
+		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->posts->delete($this->posts->findOneBy(array('id' => $id)));
 			$this->flashMessage('Článek byl úspěšně smazán.', 'success');
@@ -174,11 +168,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleDeleteTag($tag_id) {
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat (ani mazat) opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
+		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->tags->delete($this->tags->findOneBy(array('id' => $tag_id)));
 			$this->flashMessage('Tag byl úspěšně smazán.', 'success');
@@ -189,11 +179,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleDeleteUser($user_id) {
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat (ani mazat) opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
+		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->users->delete($this->users->findOneBy(['id' => $user_id]));
 			$this->flashMessage('Uživatel byl úspěšně smazán.', 'success');
@@ -204,11 +190,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleRegenerate($tag_id) {
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
+		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$tag = $this->tags->findOneBy(array('id' => $tag_id));
 			$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
@@ -221,7 +203,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleUploadPicture() {
-		ob_start();
+		//ob_start();
 		$uploader = new \UploadHandler();
 		$uploader->allowedExtensions = array("jpeg", "jpg", "png", "gif", "iso");
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
@@ -249,21 +231,13 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleDeletePicture($id) {
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat (ani mazat) opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
+		$this->onBeforeRestrictedFunctionality($this);
 		$picture = $this->pictures->findOneBy(['id' => $id]);
 		@unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
 		@rmdir(__DIR__ . '/../../www/uploads/' . $picture->uuid);
 		$this->pictures->delete($picture);
 		$this->flashMessage('Obrázek byl úspěšně smazán.', 'success');
 		$this->redirect('this');
-	}
-
-	private function editable() {
-		return $this->user->isAllowed('Admin', App\Authorizator::EDIT) ? TRUE : FALSE;
 	}
 
 }

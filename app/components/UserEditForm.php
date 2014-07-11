@@ -11,6 +11,7 @@ use Nette\Security\Passwords;
 class UserEditForm extends UI\Control {
 
 	public $onSave = [];
+	//public $onBeforeRestrictedFunctionality = [];
 
 	private $users;
 	private $account;
@@ -61,6 +62,7 @@ class UserEditForm extends UI\Control {
 	}
 
 	public function formSucceeded(UI\Form $form) {
+		//$this->onBeforeRestrictedFunctionality($this); //FIXME: must be registered in config, but it's against generated factories
 		if (!$this->editable()) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$this->redirect('this');

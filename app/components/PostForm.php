@@ -10,6 +10,7 @@ use Nette\Application\UI;
 class PostForm extends UI\Control {
 
 	public $onSave = [];
+	//public $onBeforeRestrictedFunctionality = [];
 
 	/** @var \App\Posts */
 	private $posts;
@@ -59,6 +60,7 @@ class PostForm extends UI\Control {
 	}
 
 	public function postFormSucceeded($form) {
+		//$this->onBeforeRestrictedFunctionality($this); //FIXME: must be registered in config, but it's against generated factories
 		if (!$this->editable()) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$this->redirect('this');
