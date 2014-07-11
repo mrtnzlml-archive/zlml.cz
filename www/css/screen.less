@@ -1,5 +1,6 @@
 @font-face { font-family:"Audiowide"; src:url(../Audiowide-Regular.ttf); }
 @red = #DA0700;
+@redhover = #CC0700;
 
 a, a:hover, a:focus { color: @red; text-decoration: underline; }
 a:hover { text-decoration: none; }
@@ -32,6 +33,9 @@ table { margin-bottom: 10px; }
 
 .anchor { color: #ddd; }
 
+.article h3 { clear: both; }
+.article img { padding: 10px; }
+
 .badge a { color: #FFF; text-decoration: none; }
 a.list-group-item.active > .badge, .nav-pills > .active > a > .badge { color: @red; }
 
@@ -51,6 +55,9 @@ a.list-group-item.active > .badge, .nav-pills > .active > a > .badge { color: @r
 #explorer ul li { list-style: none; }
 
 .glyphicon { font-size: 90%; }
+
+.go { color: white; background-color: @red; border-color: #ccc; }
+.go:hover { color: white; background-color: @redhover; border-color: #adadad; }
 
 .highlight { background: #ffffaa; }
 

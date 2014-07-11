@@ -38,6 +38,7 @@ class AdminPresenter extends BasePresenter {
 
 	public function beforeRender() {
 		parent::beforeRender();
+		$this->template->picturecount = $this->pictures->countBy();
 		$this->template->tagcount = $this->tags->countBy();
 		$this->template->usercount = $this->users->countBy();
 		if (!$this->user->isAllowed('Admin', Authorizator::EDIT)) {
@@ -51,12 +52,12 @@ class AdminPresenter extends BasePresenter {
 
 	public function renderDefault($id = NULL) {
 		$this->template->tags = $this->tags->findBy(array());
-		$this->template->pictures = $this->pictures->findBy(array());
+		$this->template->pictures = $this->pictures->findBy(array(), ['created' => 'DESC']);
 		$this->id = $id;
 	}
 
 	public function renderPictures() {
-		$this->template->pictures = $this->pictures->findBy(array());
+		$this->template->pictures = $this->pictures->findBy(array(), ['created' => 'DESC']);
 	}
 
 	public function renderPrehled() {
@@ -90,7 +91,7 @@ class AdminPresenter extends BasePresenter {
 	protected function createComponentPostForm() {
 		$control = $this->postFormFactory->create($this->id);
 		$control->onSave[] = function () {
-			$this->redirect('default');
+			$this->redirect('default'); //FIXME: pokud error, tak nepřesměrovávat...
 		};
 		return $control;
 	}
@@ -193,17 +194,24 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleUploadPicture() {
+		ob_start();
 		$uploader = new \UploadHandler();
-		$uploader->allowedExtensions = array("jpeg", "jpg", "png", "gif");
-		$result = $uploader->handleUpload(__DIR__ . '/../../www/uploads');
+		$uploader->allowedExtensions = array("jpeg", "jpg", "png", "gif", "iso");
+		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
+		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');
+		//TODO: picture optimalization (?)
+		$result = $uploader->handleUpload(__DIR__ . '/../../www/uploads', $name);
 		try {
-			$picture = new Entity\Picture();
+			$picture = $this->pictures->findOneBy(['uuid' => $uploader->getUuid()]);
+			if (!$picture) { //FIXME: toto není optimální (zejména kvůli rychlosti)
+				$picture = new Entity\Picture();
+			}
 			$picture->uuid = $uploader->getUuid();
-			$picture->name = $uploader->getUploadName();
+			$picture->name = $name;
+			$picture->created = new \DateTime('now');
 			$this->pictures->save($picture);
 		} catch (\Exception $exc) {
 			$uploader->handleDelete(__DIR__ . '/../../www/uploads');
-			$this->flashMessage($exc->getMessage(), 'danger');
 			$this->sendResponse(new Nette\Application\Responses\JsonResponse(array(
 				'error' => $exc->getMessage(),
 			)));
@@ -215,8 +223,8 @@ class AdminPresenter extends BasePresenter {
 
 	public function handleDeletePicture($id) {
 		$picture = $this->pictures->findOneBy(['id' => $id]);
-		unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
-		rmdir(__DIR__ . '/../../www/uploads/' . $picture->uuid);
+		@unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
+		@rmdir(__DIR__ . '/../../www/uploads/' . $picture->uuid);
 		$this->pictures->delete($picture);
 		$this->flashMessage('Obrázek byl úspěšně smazán.', 'success');
 		$this->redirect('this');

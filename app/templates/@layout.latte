@@ -16,7 +16,7 @@
 	{block scripts}{control js}{/block}
 </head>
 
-<body data-experimental="{$experimental}" data-experimental-data="{$experimental_data}">
+<body>
 	<script> document.body.className+=' js' </script>
 
 	<div class="container shadow hidden-print">
@@ -34,7 +34,7 @@
 							<div class="input-group">
 								<input n:name="search" type="search" class="form-control" placeholder="Hledat">
 								<span class="input-group-btn">
-									{input send, class => 'btn btn-default'}
+									{input send, class => 'btn btn-default go'}
 								</span>
 							</div>
 						</div>
@@ -52,14 +52,6 @@
 					<a href="https://github.com/mrtnzlml" target="_blank">GitHub</a>
 					&middot;
 					<a n:href=":Homepage:rss" target="_blank">RSS</a>
-					<br>
-					{if $experimental == 'none'}
-						<a n:href="experimental!">Zapnout experimentální funkce</a>
-					{else}
-						<a n:href="experimental!">Vypnout experimentální funkce</a>
-					{/if}
-					<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left"
-						  data-original-title="Zapíná experimentální funkce, které nemusí být každému příjemné a mohou se chovat nepředvídatelně."></span>
 				</div>
 			</div>
 		</div>
