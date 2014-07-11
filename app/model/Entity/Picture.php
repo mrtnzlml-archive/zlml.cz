@@ -24,4 +24,7 @@ class Picture extends Doctrine\Entities\BaseEntity {
 	/** @ORM\Column(type="string", length=255) */
 	protected $name;
 
+	/** @ORM\Column(type="datetime") */
+	protected $created;
+
 }

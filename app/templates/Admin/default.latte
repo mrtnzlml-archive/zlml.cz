@@ -12,10 +12,50 @@
 		<div class="col-lg-9">
 			<span class="pull-right"><a>HELP</a></span>
 			{ifset $editace}
-				<h2>Editovat článek ({$editace})</h2>
+				<h2>
+					Editovat článek ({$editace})
+					<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-lg">
+						<span class="glyphicon glyphicon-picture"></span>
+						Vložit obrázek
+					</button>
+				</h2>
 			{else}
-				<h2>Přidat nový článek</h2>
+				<h2>
+					Přidat nový článek
+					<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-lg">
+						<span class="glyphicon glyphicon-picture"></span>
+						Vložit obrázek
+					</button>
+				</h2>
 			{/ifset}
+
+			<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="modalLabel">Vyberte obrázek, který chcete do textu vložit</h4>
+						</div>
+						<div class="modal-body">
+							<style>
+								.pic > input[type=radio] { display:none; }
+								input[type=radio] + img { cursor:pointer; border: 4px solid transparent; }
+								input[type=radio]:checked + img { border: 4px solid #00f; }
+							</style>
+							{foreach $pictures as $picture}
+								<label class="pic" for="{$picture->uuid}">
+									<input id="{$picture->uuid}" type="radio" name="pic" data-dismiss="modal" data-source="{$picture->uuid}/{$picture->name}" />
+									<img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100">
+								</label>
+							{/foreach}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			{control postForm}
 		</div>
 	</div>
@@ -42,7 +82,6 @@
 {block scripts}
 	{include #parent}
 	<script src="{$basePath}/js/codemirror.js"></script>
-	<script src="{$basePath}/js/xml.js"></script>
 	<script>
 		$(document).ready(function () {
 			var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
@@ -50,6 +89,12 @@
 				lineWrapping: true,
 				mode: "text/html"
 			});
+
+			$('input[name=pic]').click(function(e){
+				e.preventDefault();
+				editor.replaceSelection('[* ' + $('input[name=pic]').data('source') + ' 200x200 <]');
+			});
+
 			if (!editor.getValue() && window.localStorage) {
 				var loc = location.pathname + location.search;
 				if (localStorage.getItem('content:' + loc) != undefined) {

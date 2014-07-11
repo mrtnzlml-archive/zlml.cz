@@ -57,7 +57,15 @@ class Pictures extends Nette\Object {
 	 * @param bool $flush
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
-		return $this->dao->delete($entity, $relations, $flush);
+		$this->dao->delete($entity, $relations, $flush);
+	}
+
+	/**
+	 * @param array $criteria
+	 * @return mixed
+	 */
+	public function countBy(array $criteria = array()) {
+		return $this->dao->countBy($criteria);
 	}
 
 }
