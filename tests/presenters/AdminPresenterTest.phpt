@@ -8,6 +8,7 @@ use Tester;
 $container = require __DIR__ . '/../bootstrap.php';
 
 /**
+ * TODO: testy pro demo uživatele
  * @testCase
  */
 class AdminPresenterTest extends Tester\TestCase {
