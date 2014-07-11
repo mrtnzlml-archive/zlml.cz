@@ -28,11 +28,14 @@ services:
 	- App\Pictures(@doctrine.dao(Entity\Picture))
 	- App\Pingbacks(@doctrine.dao(Entity\Pingback))
 	- App\Posts(@doctrine.dao(Entity\Post))
+	- App\PostsMirror(@doctrine.dao(Entity\Post))
 	- App\Tags(@doctrine.dao(Entity\Tag))
 	- App\Users(@doctrine.dao(Entity\User))
 	#- App\Xmlrpc
 	- PostFormFactory
 	- UserEditFormFactory
+
+	- PostsListener
 
 extensions:
 	console: Kdyby\Console\DI\ConsoleExtension

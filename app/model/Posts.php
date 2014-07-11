@@ -4,14 +4,17 @@ namespace App;
 
 use Doctrine;
 use Kdyby;
-use Nette;
 use Nette\Utils\Strings;
+use Nette;
 
 /**
  * Class Posts
  * @package App
  */
 class Posts extends Nette\Object {
+
+	public $onSave = [];
+	public $onDelete = [];
 
 	/** @var \Kdyby\Doctrine\EntityDao */
 	private $dao;
@@ -29,7 +32,9 @@ class Posts extends Nette\Object {
 	 * @return array
 	 */
 	public function save($entity = NULL, $relations = NULL) {
-		return $this->dao->save($entity, $relations);
+		$entity = $this->dao->save($entity, $relations);
+		$this->onSave($entity);
+		return $entity;
 	}
 
 	/**
@@ -147,6 +152,7 @@ class Posts extends Nette\Object {
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
 		$this->dao->delete($entity, $relations, $flush);
+		$this->onDelete($entity);
 	}
 
 }
