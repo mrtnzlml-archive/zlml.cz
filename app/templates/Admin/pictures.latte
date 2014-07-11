@@ -50,8 +50,12 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			<h2>Nahrát nový obrázek</h2>
-			<div id="image-uploader"></div>
+			{if $user->isAllowed('Admin', 'edit')}
+				<h2>Nahrát nový obrázek</h2>
+				<div id="image-uploader"></div>
+			{else}
+				<div class="alert alert-danger">Jakožto demo uživatel nemůžete nahrávat obrázky.</div>
+			{/if}
 
 			<h2 n:if="$pictures">Nahrané obrázky</h2>
 			<table class="table">

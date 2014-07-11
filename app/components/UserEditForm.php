@@ -37,11 +37,11 @@ class UserEditForm extends UI\Control {
 			'demo' => 'Demo účet'
 		);
 		//FIXME: upravovat práva může jen admin, při zakládání musí být default nějaká menší než admin (ošetřit formSucceeded)
-		if($this->presenter->user->isInRole('admin') && $this->account->role !== 'admin') {
+		/*if($this->presenter->user->isInRole('admin') && $this->account->role !== 'admin') {
 			$form->addSelect('role', 'Role:', $role);
 		} else {
 			$form->addSelect('role', 'Role:', $role)->setDisabled();
-		}
+		}*/
 		if ($this->account) {
 			$form->setDefaults(array(
 				'username' => $this->account->username,
