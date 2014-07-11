@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<link rel="stylesheet" type="text/css" href="./../www/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <style>
 	body { color: #333; background: white; width: 600px; margin: 50px auto }
 	h1 { font: bold 47px/1.5 sans-serif; margin: .6em 0 }
