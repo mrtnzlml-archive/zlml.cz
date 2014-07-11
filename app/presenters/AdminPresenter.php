@@ -139,7 +139,7 @@ class AdminPresenter extends BasePresenter {
 		$texy->tabWidth = 4;
 		$texy->headingModule->top = 3; //start at H3
 		$texy->headingModule->generateID = TRUE;
-		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module
+		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module TODO: $leftClass, $rightClass
 		$this->template->preview = Nette\Utils\Html::el()->setHtml($texy->process($content));
 		$this->template->title = $title;
 		$this->template->tagsPrev = array_unique(explode(', ', $tags));
