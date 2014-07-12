@@ -92,7 +92,7 @@
 
 			$('input[name=pic]').click(function(e){
 				e.preventDefault();
-				editor.replaceSelection('[* ' + $('input[name=pic]').data('source') + ' 200x200 <]');
+				editor.replaceSelection('[* ' + $(this).data('source') + ' 200x200 <]');
 			});
 
 			if (!editor.getValue() && window.localStorage) {
