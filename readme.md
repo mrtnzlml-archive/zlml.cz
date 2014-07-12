@@ -41,9 +41,9 @@ from repository using Git and load libraries using Composer:
 
 		composer create-project mrtnzlml/zeminem.cz <folder_name> dev-develop
 
-Make directories `temp` and `log` writable. Navigate your browser
-to the `www` directory and you will see a welcome page. PHP 5.4 allows
-you run `php -S localhost:8888 -t www` to start the webserver and
+Make directories `temp`, `log`, `www/webtemp`, `www/chunks` and `www/uploads` writable.
+Navigate your browser to the `www` directory and you will see a welcome page.
+PHP 5.4 allows you run `php -S localhost:8888 -t www` to start the webserver and
 then visit `http://localhost:8888` in your browser.
 Port must be set according to the local computer settings.
 
