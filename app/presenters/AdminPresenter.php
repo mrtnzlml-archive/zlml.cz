@@ -138,14 +138,7 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function handleUpdate($title, $content, $tags) {
-		$texy = new \fshlTexy();
-		$texy->addHandler('block', array($texy, 'blockHandler'));
-		$texy->tabWidth = 4;
-		$texy->headingModule->top = 3; //start at H3
-		$texy->headingModule->generateID = TRUE;
-		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module FIXME
-		$texy->imageModule->leftClass = 'leftAlignedImage';
-		$texy->imageModule->rightClass = 'rightAlignedImage';
+		$texy = $this->prepareTexy();
 		$this->template->preview = Nette\Utils\Html::el()->setHtml($texy->process($content));
 		$this->template->title = $title;
 		$this->template->tagsPrev = array_unique(explode(', ', $tags));

@@ -123,25 +123,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->redirect('Single:article', $post->slug);
 	}
 
-	public function handleExperimental() {
-		$section = $this->session->getSection('experimental');
-		if ($section->experimental == 'none') {
-			$section->experimental = 'all';
-			$this->flashMessage('Experimentální funkce zapnuty.', 'alert-info');
-		} else {
-			$section->experimental = 'none';
-			$this->flashMessage('Experimentální funkce vypnuty.', 'alert-info');
-		}
-		$this->redirect('this');
-	}
-
-	// TODO ?
-	public function handleExperimentalData($data = NULL) {
-		$section = $this->session->getSection('experimental');
-		if ($data !== NULL) {
-			$oldData = $section->experimental_data;
-		}
-		$this->redirect('this');
+	/**
+	 * @return \fshlTexy
+	 */
+	protected function prepareTexy() {
+		$texy = new \fshlTexy();
+		$texy->addHandler('block', array($texy, 'blockHandler'));
+		$texy->tabWidth = 4;
+		$texy->headingModule->top = 3; //start at H3
+		$texy->headingModule->generateID = TRUE;
+		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module FIXME
+		$texy->imageModule->leftClass = 'leftAlignedImage';
+		$texy->imageModule->rightClass = 'rightAlignedImage';
+		$texy->headingModule->generateID = TRUE;
+		return $texy;
 	}
 
 }

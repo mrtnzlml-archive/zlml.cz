@@ -28,7 +28,7 @@ class SinglePresenter extends BasePresenter
 		if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
 			$this->forward($webalized);
 		} else { // zobrazení klasických článků
-			$texy = new \fshlTexy();
+			$texy = $this->prepareTexy();
 			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
 				$el = $invocation->proceed();
 				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
@@ -42,13 +42,6 @@ class SinglePresenter extends BasePresenter
 				}
 				return $el;
 			});
-			$texy->addHandler('block', array($texy, 'blockHandler'));
-			$texy->tabWidth = 4;
-			$texy->headingModule->top = 3; //start at H3
-			$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module FIXME
-			$texy->imageModule->leftClass = 'leftAlignedImage';
-			$texy->imageModule->rightClass = 'rightAlignedImage';
-			$texy->headingModule->generateID = TRUE;
 
             $this->template->post = $post;
             $body = $texy->process($post->body);
