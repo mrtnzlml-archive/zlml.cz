@@ -1,3 +1,10 @@
+{block meta}
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@mrtnzlml">
+	<meta name="twitter:title" content="{$post->title}">
+	<meta name="twitter:description" content="{$body|truncate:200}">
+{/block}
+
 {block content}
 	<div class="page-header">
 		<h2>
