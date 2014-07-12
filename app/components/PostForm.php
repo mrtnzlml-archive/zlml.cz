@@ -75,6 +75,7 @@ class PostForm extends UI\Control {
 			$this->post->title = $vals->title;
 			$this->post->slug = $vals->slug;
 			$this->post->body = $vals->editor;
+			$this->post->draft = FALSE;
 			foreach (array_unique(explode(', ', $vals->tags)) as $tag_name) {
 				$tag = $this->tags->findOneBy(['name' => $tag_name]);
 				if (!$tag) {

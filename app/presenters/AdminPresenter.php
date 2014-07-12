@@ -56,6 +56,9 @@ class AdminPresenter extends BasePresenter {
 	public function renderDefault($id = NULL) {
 		$this->template->tags = $this->tags->findBy(array());
 		$this->template->pictures = $this->pictures->findBy(array(), ['created' => 'DESC']);
+		if ($id !== NULL) {
+			$this->template->editace = TRUE;
+		}
 		$this->id = $id;
 	}
 
@@ -137,8 +140,20 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleUpdate($title, $content, $tags) {
+	public function handleUpdate($title, $content, $tags, $slug) {
 		$texy = $this->prepareTexy();
+
+		//podle slugu to není dobrý nápad (budou se množit) - musí se to udělat nějak chytřeji
+		/*$article = $this->posts->findOneBy(['slug' => $slug]);
+		if (!$article) {
+			$article = new Entity\Post;
+			$article->date = new \DateTime();
+		}
+		$article->title = $title;
+		$article->slug = $slug;
+		$article->body = $content;
+		$this->posts->save($article);*/
+
 		$this->template->preview = Nette\Utils\Html::el()->setHtml($texy->process($content));
 		$this->template->title = $title;
 		$this->template->tagsPrev = array_unique(explode(', ', $tags));

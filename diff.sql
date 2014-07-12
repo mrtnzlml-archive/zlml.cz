@@ -20,3 +20,6 @@ CREATE TABLE `pingbacks` (
 	KEY `post_id` (`post_id`),
 	CONSTRAINT `pingbacks_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `posts`
+ADD `draft` tinyint(1) NOT NULL DEFAULT '1';

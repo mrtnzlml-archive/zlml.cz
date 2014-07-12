@@ -11,7 +11,12 @@
 		<table class="table">
 			{foreach $posts as $post}
 				<tr>
-					<td><a n:href=":Single:article $post->slug" title="{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$post->title}</a></td>
+					<td>
+						<span n:if="$post->draft" class="label label-success">DRAFT</span>
+						<a n:href=":Single:article $post->slug" title="{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">
+							{$post->title}
+						</a>
+					</td>
 					<td>
 						{foreach $post->tags as $tag}
 							<a n:href="Search:default, $tag->name" style="text-decoration:none">

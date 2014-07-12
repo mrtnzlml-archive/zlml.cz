@@ -111,7 +111,8 @@
 				data: {
 					title: $('[name="title"]').val(),
 					content: editor.getValue(),
-					tags: $('[name="tags"]').val()
+					tags: $('[name="tags"]').val(),
+					slug: $('[name="slug"]').val()
 				}
 			});
 			$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
@@ -126,7 +127,8 @@
 						data: {
 							title: $('[name="title"]').val(),
 							content: editor.getValue(),
-							tags: $('[name="tags"]').val()
+							tags: $('[name="tags"]').val(),
+							slug: $('[name="slug"]').val()
 						}
 					});
 					if (window.localStorage) {
