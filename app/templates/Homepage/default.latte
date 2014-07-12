@@ -5,11 +5,7 @@
 	{var $large = array(1, 4, 5, 8, 9)}
 
 	<div n:class="in_array($iterator->counter, $large) ? 'col-lg-7 col-md-7' : 'col-lg-5 col-md-5'">
-		<h3>
-			<a n:href=":Single:article $post->slug">
-				<span n:if="$iterator->first" class="glyphicon glyphicon-fire"></span> {$post->title|vlna}
-			</a>
-		</h3>
+		<h3><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h3>
 		<p>
 			{foreach $post->tags as $tag}
 				<a n:href="Search:default, $tag->name" style="text-decoration:none">
