@@ -34,6 +34,7 @@ class UserEditForm extends UI\Control {
 			->setRequired('Zadejte prosím přihlašovací jméno.');
 		$form->addPassword('password', 'Nové heslo k tomuto účtu:')
 			->setRequired('Zadejte prosím své stávající, nebo nové heslo.');
+		//TODO: toto bude zapotřebí předělat
 		if ($this->presenter->user->isInRole('admin')) {
 			$role = array(
 				'admin' => 'Administrátor',
@@ -49,7 +50,7 @@ class UserEditForm extends UI\Control {
 		if ($this->account) {
 			$form->setDefaults(array(
 				'username' => $this->account->username,
-				'role' => $this->account->role,
+				//'role' => $this->account->role,
 			));
 		} else {
 			$form->setDefaults(array(
