@@ -1,6 +1,7 @@
 {
 	"name": "mrtnzlml/zeminem.cz",
-	"description": "Personal website zeminem.cz...",
+	"description": "Source code of www.zeminem.cz website",
+	"version": "1.0.0",
 	"homepage": "http://www.zeminem.cz",
 	"authors": [
 		{
