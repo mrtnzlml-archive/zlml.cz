@@ -14,6 +14,7 @@ class Presenter extends Nette\Object {
 
 	/** @var \Nette\DI\Container */
 	private $container;
+	/** @var Nette\Application\UI\Presenter */
 	private $presenter;
 	private $presName;
 
@@ -116,6 +117,10 @@ class Presenter extends Nette\Object {
 		//TODO:
 		//$response = $this->tester->test($this->action);
 		//Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+	}
+
+	public function getPresenter() {
+		return $this->presenter;
 	}
 
 }

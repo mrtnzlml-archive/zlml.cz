@@ -39,12 +39,32 @@ class SinglePresenterTest extends Tester\TestCase {
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 
+	public function testNonWebalizedArticle() {
+		$response = $this->tester->test('article', 'GET', array('slug' => 'rčš .rčš 5'));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+	}
+
+	public function testForward() {
+		$response = $this->tester->test('article', 'GET', array('slug' => 'about'));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\ForwardResponse);
+	}
+
+	public function testRenderDevelop() {
+		$this->tester->testAction('develop');
+	}
+
 	public function testRenderObsah() {
 		$this->tester->testAction('obsah');
 	}
 
 	public function testRenderReference() {
 		$this->tester->testAction('reference');
+	}
+
+	public function testRandom() {
+		$response = $this->tester->test('default', 'GET', array('do' => 'random'));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+
 	}
 
 	///// dataProviders /////

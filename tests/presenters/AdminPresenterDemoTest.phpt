@@ -9,6 +9,7 @@ use Tester;
 $container = require __DIR__ . '/../bootstrap.php';
 
 /**
+ * TODO: ověřit práva k akcím
  * @testCase
  */
 class AdminPresenterTest extends Tester\TestCase {
@@ -28,7 +29,7 @@ class AdminPresenterTest extends Tester\TestCase {
 
 	public function setUp() {
 		$this->tester->init('Admin');
-		$this->tester->logIn(1, 'admin');
+		$this->tester->logIn(1, 'demo');
 	}
 
 	public function testRenderDefault() {
@@ -66,29 +67,6 @@ class AdminPresenterTest extends Tester\TestCase {
 		$this->action = 'userEdit';
 		$user = $this->users->findOneBy([]);
 		$this->tester->testAction($this->action, 'GET', array($user->getId()));
-	}
-
-	/**
-	 * @skip
-	 */
-	public function testRenderUserEditForm() {
-		/*$response = $this->tester->test('userEdit', 'POST', array(
-			'do' => 'userEditForm-form-submit',
-		), array(
-			'username' => 'Username',
-			'password' => 'Password',
-			'role' => 'demo',
-			'token' => 'token'
-		));
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);*/
-		//FIXME: CSRF
-		/*$user = $this->users->findOneBy(['username' => 'Username']);
-		$response = $this->tester->test('users', 'GET', array(
-			'do' => 'deleteUser',
-		), array(
-			'user_id' => $user->getId(),
-		));
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);*/
 	}
 
 	public function tearDown() {

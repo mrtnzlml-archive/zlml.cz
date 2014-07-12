@@ -3,6 +3,7 @@
 namespace App;
 
 use Nette;
+use Nette\Application\UI;
 
 /** Sign in/out presenters. */
 class SignPresenter extends BasePresenter {
@@ -27,7 +28,7 @@ class SignPresenter extends BasePresenter {
 	 * @return Nette\Application\UI\Form
 	 */
 	protected function createComponentSignInForm() {
-		$form = new Nette\Application\UI\Form;
+		$form = new UI\Form;
 		$form->addText('username', 'Username:')
 			->setRequired('Zadejte prosím uživatelské jméno.');
 		$form->addPassword('password', 'Password:')
@@ -38,7 +39,7 @@ class SignPresenter extends BasePresenter {
 		return $form;
 	}
 
-	public function signInFormSucceeded($form) {
+	public function signInFormSucceeded(UI\Form $form) {
 		$values = $form->getValues();
 		if ($values->remember) {
 			$this->getUser()->setExpiration('+ 14 days', FALSE);
@@ -52,7 +53,7 @@ class SignPresenter extends BasePresenter {
 			return;
 		}
 		$this->restoreRequest($this->backlink);
-		$this->redirect('Homepage:');
+		$this->redirect('Admin:');
 	}
 
 }
