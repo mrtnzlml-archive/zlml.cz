@@ -210,10 +210,10 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleUploadPicture() {
+	public function handleUploadReciever() {
 		//ob_start();
 		$uploader = new \UploadHandler();
-		$uploader->allowedExtensions = array("jpeg", "jpg", "png", "gif", "iso");
+		$uploader->allowedExtensions = array("jpeg", "jpg", "png", "gif");
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
 		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');
 		//TODO: picture optimalization (?)
