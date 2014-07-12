@@ -142,6 +142,7 @@ class AdminPresenter extends BasePresenter {
 
 	public function handleUpdate($title, $content, $tags, $slug) {
 		$texy = $this->prepareTexy();
+		$texy->imageModule->root = '../../uploads/';
 
 		//podle slugu to není dobrý nápad (budou se množit) - musí se to udělat nějak chytřeji
 		/*$article = $this->posts->findOneBy(['slug' => $slug]);
