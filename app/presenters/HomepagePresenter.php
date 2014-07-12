@@ -29,18 +29,18 @@ class HomepagePresenter extends BasePresenter {
 	public function renderDefault() {
 		$vp = new Cntrl\VisualPaginator($this, 'paginator');
 		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 8;
+		$paginator->itemsPerPage = 10;
 		$paginator->itemCount = ITEMCOUNT; //see RouterFactory.php
-		$posts = $this->posts->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
+		$posts = $this->posts->findBy(array(), array('date' => 'DESC'), $paginator->itemsPerPage, $paginator->offset);
 		$this->template->posts = $posts;
 	}
 
 	public function renderRss() {
-		$this->template->posts = $this->posts->findBy([], ['date' => 'DESC'], 50);
+		$this->template->posts = $this->posts->findBy(array(), array('date' => 'DESC'), 50);
 	}
 
 	public function renderSitemap() {
-		$this->template->sitemap = $this->posts->findBy([]);
+		$this->template->sitemap = $this->posts->findBy(array());
 	}
 
 }

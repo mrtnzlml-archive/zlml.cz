@@ -2,6 +2,7 @@
 
 namespace Test;
 
+use App;
 use Nette;
 use Tester;
 
@@ -12,15 +13,22 @@ $container = require __DIR__ . '/../bootstrap.php';
  */
 class AdminPresenterTest extends Tester\TestCase {
 
+	/** @var App\Users */
+	private $users;
+	/** @var App\Posts */
+	private $articles;
+
 	private $action;
 
 	public function __construct(Nette\DI\Container $container) {
 		$this->tester = new Presenter($container);
+		$this->users = $container->getByType('App\Users');
+		$this->articles = $container->getByType('App\Posts');
 	}
 
 	public function setUp() {
 		$this->tester->init('Admin');
-		$this->tester->logIn();
+		$this->tester->logIn(1, 'admin');
 	}
 
 	public function testRenderDefault() {
@@ -30,7 +38,8 @@ class AdminPresenterTest extends Tester\TestCase {
 
 	public function testRenderDefaultEdit() {
 		$this->action = 'default';
-		$this->tester->testAction($this->action, 'GET', [1]);
+		$article = $this->users->findOneBy([]);
+		$this->tester->testAction($this->action, 'GET', array($article->getId()));
 	}
 
 	public function testRenderPictures() {
@@ -46,6 +55,40 @@ class AdminPresenterTest extends Tester\TestCase {
 	public function testRenderTags() {
 		$this->action = 'tags';
 		$this->tester->testAction($this->action);
+	}
+
+	public function testRenderUsers() {
+		$this->action = 'users';
+		$this->tester->testAction($this->action);
+	}
+
+	public function testRenderUserEdit() {
+		$this->action = 'userEdit';
+		$user = $this->users->findOneBy([]);
+		$this->tester->testAction($this->action, 'GET', array($user->getId()));
+	}
+
+	/**
+	 * @skip
+	 */
+	public function testRenderUserEditForm() {
+		/*$response = $this->tester->test('userEdit', 'POST', array(
+			'do' => 'userEditForm-form-submit',
+		), array(
+			'username' => 'Username',
+			'password' => 'Password',
+			'role' => 'demo',
+			'token' => 'token'
+		));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);*/
+		//FIXME: CSRF
+		/*$user = $this->users->findOneBy(['username' => 'Username']);
+		$response = $this->tester->test('users', 'GET', array(
+			'do' => 'deleteUser',
+		), array(
+			'user_id' => $user->getId(),
+		));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);*/
 	}
 
 	public function tearDown() {

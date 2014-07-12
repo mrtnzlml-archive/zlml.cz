@@ -1,8 +1,19 @@
-Source code of www.zeminem.cz website
-=====================================
+Source code of www.zeminem.cz [1.1]
+====================================
 
 [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/www.zeminem.cz)
-Twitter Bootstrap inside!
+
+What's on the background
+------------------------
+- [Nette Framework](http://nette.org/en/) - a popular tool for PHP web development
+- [Nette Tester](http://tester.nette.org/en/) – enjoyable unit testing
+- [Latte](http://latte.nette.org/en/) - amazing template engine for PHP
+- [Texy](http://texy.info/en/) - is sexy
+- [FSHL](http://fshl.kukulich.cz/) - free, open source, universal and very fast syntax highlighter
+- [Webloader](https://github.com/janmarek/WebLoader) - component for smart CSS and JS files loading
+- [Doctrine 2](http://www.doctrine-project.org/) - library primarily focused on database storage and object mapping (using [Kdyby](https://github.com/Kdyby/Doctrine))
+- [Kdyby\Events](https://github.com/Kdyby/Events)
+- and much more...
 
 Installing
 ----------
@@ -26,9 +37,13 @@ from repository using Git and load libraries using Composer:
 
 		composer update
 
-Make directories `temp` and `log` writable. Navigate your browser
-to the `www` directory and you will see a welcome page. PHP 5.4 allows
-you run `php -S localhost:8888 -t www` to start the webserver and
+5. Alternatively you can use Composer instead of `git clone`:
+
+		composer create-project mrtnzlml/zeminem.cz <folder_name> dev-develop
+
+Make directories `temp`, `log`, `www/webtemp`, `www/chunks` and `www/uploads` writable.
+Navigate your browser to the `www` directory and you will see a welcome page.
+PHP 5.4 allows you run `php -S localhost:8888 -t www` to start the webserver and
 then visit `http://localhost:8888` in your browser.
 Port must be set according to the local computer settings.
 

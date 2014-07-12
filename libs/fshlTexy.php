@@ -1,6 +1,6 @@
 <?php
 
-class fshlTexy extends \Texy\Texy {
+class fshlTexy extends \Texy {
 
 	public function blockHandler($invocation, $blocktype, $content, $lang, $modifier) {
 		if ($blocktype !== 'block/code') {
@@ -13,7 +13,7 @@ class fshlTexy extends \Texy\Texy {
 		);
 
 		$texy = $invocation->getTexy();
-		$content = \Texy\Texy::outdent($content);
+		$content = \Texy::outdent($content);
 
 		//Set correct lexer:
 		switch(strtoupper($lang)) {
@@ -33,9 +33,9 @@ class fshlTexy extends \Texy\Texy {
 		}
 
 		$content = $highlighter->highlight($content, $lexer);
-		$content = $texy->protect($content, \Texy\Texy::CONTENT_BLOCK);
+		$content = $texy->protect($content, \Texy::CONTENT_BLOCK);
 
-		$elPre = \Texy\HtmlElement::el('pre');
+		$elPre = \TexyHtml::el('pre');
 		if ($modifier) {
 			$modifier->decorate($texy, $elPre);
 		}

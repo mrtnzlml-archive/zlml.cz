@@ -1,7 +1,7 @@
 {var $robots = 'noindex'}
 {block content}
 	<style>
-		{*.qq-uploader { position: relative; width: 100%; }
+		.qq-uploader { position: relative; width: 100%; }
 		.qq-upload-button { border: 1px dashed #ccc; background: #e5e5e5; color: #aaa; height: 100px; display: block; text-align: center; }
 		.qq-upload-button > div { font-size: 20px; margin: 40px; }
 		.qq-upload-button > INPUT { height: 100px; }
@@ -40,7 +40,7 @@
 		.qq-edit-filename-icon.qq-editable { display: inline-block; cursor: pointer; }
 		INPUT.qq-edit-filename.qq-editing { position: static; margin-top: -5px; margin-right: 10px; margin-bottom: -5px; opacity: 1; filter: alpha(opacity=100); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; }
 		.qq-edit-filename-icon { display: none; background: url("../images/edit.gif"); width: 15px; height: 15px; vertical-align: text-bottom; margin-right: 5px; }
-		INPUT.qq-edit-filename.qq-editing ~ .qq-upload-cancel { display: none; }*}
+		INPUT.qq-edit-filename.qq-editing ~ .qq-upload-cancel { display: none; }
 	</style>
 	<link href="http://fineuploader.com/source/fineuploader-4.3.1.min.css" rel="stylesheet">
 	<script type="text/javascript" src="{$basePath}/js/jquery.fineuploader.min.js"></script>
@@ -50,22 +50,31 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			<h2>Nahrát nový obrázek</h2>
-			<div id="image-uploader"></div>
+			{if $user->isAllowed('Admin', 'edit')}
+				<h2>Nahrát nový obrázek</h2>
+				<div id="image-uploader"></div>
+			{else}
+				<div class="alert alert-danger">Jakožto demo uživatel nemůžete nahrávat obrázky.</div>
+			{/if}
 
-			<h2>Nahrané obrázky</h2>
+			<h2 n:if="$pictures">Nahrané obrázky</h2>
 			<table class="table">
-				{foreach $pictures as $picture}
-					<tr>
-						<td><img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100"></td>
-						<td>{$picture->uuid}/{$picture->name}<br>[* {$picture->uuid}/{$picture->name} *]</td>
-						<td>
-							<div class="btn-group">
-								<a class="btn btn-danger" data-confirm="Opravdu chcete smazat tento obrázek?">Delete</a>
-							</div>
-						</td>
-					</tr>
-				{/foreach}
+				{snippet pictures}
+					{foreach $pictures as $picture}
+						<tr>
+							<td><img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100"></td>
+							<td>
+								<code style="white-space:pre-wrap">[* {$picture->uuid}/{$picture->name} *]</code>
+								<a href="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" target="_blank">otevřít v novém okně</a>
+							</td>
+							<td>
+								<div class="btn-group">
+									<a n:href="deletePicture! $picture->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento obrázek?">Delete</a>
+								</div>
+							</td>
+						</tr>
+					{/foreach}
+				{/snippet}
 			</table>
 		</div>
 	</div>
@@ -73,26 +82,26 @@
 	<script>
 		$(function () {
 			$('#image-uploader').fineUploader({
-				debug: true,
+				debug: true, //FIXME
 				request: {
-					endpoint: 'pictures?do=uploadPicture'
+					endpoint: 'pictures?do=uploadReciever'
 				},
-				retry: {
-					enableAuto: true
-				}
+				retry: { enableAuto: true },
+				chunking: { enabled: true },
+				resume: { enabled: true }
 			});
 		});
 	</script>
 	<script type="text/template" id="qq-template">
 		<div class="qq-uploader-selector qq-uploader">
 			<div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
-				<span>Drop files here to upload</span>
+				<span>Přetáhněte sem obrázky, které chcete nahrát</span>
 			</div>
 			<div class="qq-upload-button-selector qq-upload-button">
-				<div>Upload a file</div>
+				<div>Přetáhněte sem obrázky, které chcete nahrát</div>
 			</div>
             <span class="qq-drop-processing-selector qq-drop-processing">
-                <span>Processing dropped files...</span>
+                <span>Nahrávám obrázky...</span>
                 <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
             </span>
 			<ul class="qq-upload-list-selector qq-upload-list">
@@ -106,9 +115,9 @@
 					<span class="qq-upload-file-selector qq-upload-file"></span>
 					<input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
 					<span class="qq-upload-size-selector qq-upload-size"></span>
-					<a class="qq-upload-cancel-selector qq-upload-cancel" href="#">Cancel</a>
-					<a class="qq-upload-retry-selector qq-upload-retry" href="#">Retry</a>
-					<a class="qq-upload-delete-selector qq-upload-delete" href="#">Delete</a>
+					<a class="qq-upload-cancel-selector qq-upload-cancel" href="#">Zrušit</a>
+					<a class="qq-upload-retry-selector qq-upload-retry" href="#">Opakovat</a>
+					<a class="qq-upload-delete-selector qq-upload-delete" href="#">Smazat</a>
 					<span class="qq-upload-status-text-selector qq-upload-status-text"></span>
 				</li>
 			</ul>

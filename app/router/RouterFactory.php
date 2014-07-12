@@ -29,7 +29,7 @@ class RouterFactory {
 	public function createRouter() {
 		define('ITEMCOUNT', $this->posts->countBy());
 		$pages = ITEMCOUNT;
-		$range = range(1, ceil($pages / 8));
+		$range = range(1, ceil($pages / 10));
 		$paginator = implode('|', $range);
 
 		$router = new RouteList();
@@ -39,11 +39,11 @@ class RouterFactory {
 		$router[] = new Route('last', array(
 			'presenter' => 'Homepage',
 			'action' => 'default',
-			'paginator-page' => ceil($pages / 8)
+			'paginator-page' => ceil($pages / 10)
 		), Route::ONE_WAY);
 		$router[] = new Route('rss', 'Homepage:rss');
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
-		$router[] = new Route('admin', 'Admin:default');
+		$router[] = new Route('admin[/<action>[/<id>]]', 'Admin:default');
 		$router[] = new Route("[<paginator-page [$paginator]>]", array(
 			'presenter' => 'Homepage',
 			'action' => 'default',

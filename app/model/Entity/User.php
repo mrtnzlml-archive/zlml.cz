@@ -18,7 +18,7 @@ class User extends Doctrine\Entities\BaseEntity {
 	 */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(unique=true, type="string", length=100) */
 	protected $username;
 
 	/** @ORM\Column(type="string", length=100) */

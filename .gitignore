@@ -8,6 +8,9 @@ vendor/*
 !web.config
 !.keep
 
+.htdeployment
+deployment.ini
+deployment.log
 composer.lock
 tests/coverage.dat
 tests/coverage.html

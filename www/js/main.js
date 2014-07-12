@@ -21,24 +21,25 @@ $(function () {
 
 	var disqus_div = $("#disqus_thread");
 	if (disqus_div.size() > 0) {
-		var ds_loaded = false,
-			top = $('.load_disqus').offset().top,
-			disqus_data = disqus_div.data(),
-			check = function () {
-				if (!ds_loaded && $(window).scrollTop() + $(window).height() > top) {
-					ds_loaded = true;
-					for (var key in disqus_data) {
-						if (key.substr(0, 6) == 'disqus') {
-							window['disqus_' + key.replace('disqus', '').toLowerCase()] = disqus_data[key];
-						}
+		var ds_loaded = false;
+		var top = $('.load_disqus').offset().top;
+		var disqus_data = disqus_div.data();
+		var check = function () {
+			//if there is #comment hash in url load disqus directly, otherwise load it lazy way
+			if (!ds_loaded && (window.location.hash.indexOf('comment') > -1 || $(window).scrollTop() + $(window).height() > top)) {
+				ds_loaded = true;
+				for (var key in disqus_data) {
+					if (key.substr(0, 6) == 'disqus') {
+						window['disqus_' + key.replace('disqus', '').toLowerCase()] = disqus_data[key];
 					}
-					var dsq = document.createElement('script');
-					dsq.type = 'text/javascript';
-					dsq.async = true;
-					dsq.src = 'http://' + window.disqus_shortname + '.disqus.com/embed.js';
-					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 				}
-			};
+				var dsq = document.createElement('script');
+				dsq.type = 'text/javascript';
+				dsq.async = true;
+				dsq.src = 'http://' + window.disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			}
+		};
 		$(window).scroll(check);
 		check();
 	}
@@ -64,7 +65,7 @@ $(function () {
 				f = $(this).scrollTop(),
 				g = a - f,
 				h = Math.ceil(g * e),
-				min = Math.ceil(h / 200);
+				min = Math.ceil(h / 180);
 			h >= 0 ? (b.text(h), time.text(min)) : (b.text("0"), time.text("0"));
 			switch (min) {
 				case 1:
@@ -105,4 +106,13 @@ function make_url(s) {
 		s2 += (typeof nodiac[s.charAt(i)] != 'undefined' ? nodiac[s.charAt(i)] : s.charAt(i));
 	}
 	return s2.replace(/[^a-z0-9_]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function insertTag(tagname) {
+	var input = $('[name="tags"]');
+	if ($.trim(input.val()).length > 0) {
+		input.val(input.val() + ', ' + tagname);
+	} else {
+		input.val(tagname);
+	}
 }

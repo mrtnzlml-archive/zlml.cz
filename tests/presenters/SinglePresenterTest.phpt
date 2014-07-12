@@ -39,6 +39,20 @@ class SinglePresenterTest extends Tester\TestCase {
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 
+	public function testNonWebalizedArticle() {
+		$response = $this->tester->test('article', 'GET', array('slug' => 'rčš .rčš 5'));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+	}
+
+	public function testForward() {
+		$response = $this->tester->test('article', 'GET', array('slug' => 'about'));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\ForwardResponse);
+	}
+
+	public function testRenderDevelop() {
+		$this->tester->testAction('develop');
+	}
+
 	public function testRenderObsah() {
 		$this->tester->testAction('obsah');
 	}
@@ -47,15 +61,21 @@ class SinglePresenterTest extends Tester\TestCase {
 		$this->tester->testAction('reference');
 	}
 
+	public function testRandom() {
+		$response = $this->tester->test('default', 'GET', array('do' => 'random'));
+		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+
+	}
+
 	///// dataProviders /////
 
 	/**
 	 * @return array of arrays
 	 */
 	public function dataArticles() {
-		$articles = $this->posts->findBy([], NULL, 10, 0);
-		//$articles = $this->posts->findBy([]);
-		//$articles = $this->posts->findOneBy([]);
+		$articles = $this->posts->findBy(array(), NULL, 10, 0);
+		//$articles = $this->posts->findBy(array());
+		//$articles = $this->posts->findOneBy(array());
 		$data = array();
 		foreach ($articles as $article) {
 			$data[] = array($article->slug);

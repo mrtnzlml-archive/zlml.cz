@@ -5,9 +5,4 @@
 # http://nette.org/security-warning
 #
 
-doctrine:
-	user: root
-	password: ''
-	dbname: zeminem
-	metadata:
-		Entity: %appDir%
+{doctrine: {user: root, password: "", dbname: zeminem}}

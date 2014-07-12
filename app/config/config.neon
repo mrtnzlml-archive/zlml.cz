@@ -22,14 +22,28 @@ nette:
 
 services:
 	authenticator: App\Authenticator
+	- App\Authorizator
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- App\Pictures(@doctrine.dao(Entity\Picture))
 	- App\Pingbacks(@doctrine.dao(Entity\Pingback))
 	- App\Posts(@doctrine.dao(Entity\Post))
+	- App\PostsMirror(@doctrine.dao(Entity\Post))
 	- App\Tags(@doctrine.dao(Entity\Tag))
 	- App\Users(@doctrine.dao(Entity\User))
 	#- App\Xmlrpc
+
+	- PostFormFactory
+	- UserEditFormFactory
+
+	#It should be here because of Kdyby\Events (?) --- security problem (if you forgot it) :-(
+	- App\AdminPresenter
+	-
+		class: PostsListener
+		tags: [kdyby.subscriber]
+	-
+		class: RestrictListener
+		tags: [kdyby.subscriber]
 
 extensions:
 	console: Kdyby\Console\DI\ConsoleExtension

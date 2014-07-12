@@ -1,9 +1,11 @@
+{block meta}
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@mrtnzlml">
+	<meta name="twitter:title" content="{$post->title}">
+	<meta name="twitter:description" content="{$body|truncate:200}">
+{/block}
+
 {block content}
-	<ul class="breadcrumb hidden-print hidden-sm">
-		<li><a n:href="Homepage:">home</a></li>
-		<li class="active" n:block="title">{$post->title}</li>
-		<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
-	</ul>
 	<div class="page-header">
 		<h2>
 			{$post->title|vlna}
@@ -28,7 +30,7 @@
 	</div>
 	<div class="row" style="margin-bottom: 10px">
 		<div class="col-lg-10">
-			<div id="columns">
+			<div class="article" id="columns">
 				{$body|noescape}
 			</div>
 			<ul class="pager hidden-print" n:if="$nextArticle || $prevArticle">
@@ -44,15 +46,15 @@
 				<div class="share hidden-print">
 			<span class="label label-danger">
 				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="https://plus.google.com/share?url={$url}" target="_blank">Google</a>
+				<a href="https://plus.google.com/share?url={link //this}" target="_blank">Google</a>
 			</span>
 			<span class="label label-info">
 				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://www.facebook.com/sharer.php?u={$url}" target="_blank">Facebook</a>
+				<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_blank">Facebook</a>
 			</span>
 			<span class="label label-success">
 				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://twitter.com/share?text={$post->title}&url={$url}" target="_blank">Twitter</a>
+				<a href="http://twitter.com/share?text={$post->title}&url={link //this}" target="_blank">Twitter</a>
 			</span>
 				</div>
 
@@ -77,7 +79,22 @@
 				</div>
 
 				<div class="hidden-print">
-					<div id="disqus_thread" style="padding: 20px 0" data-disqus-shortname="mrtnzlml"></div>
+					<div class="alert alert-info" style="margin-top: 20px">
+						<p>
+							V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>
+							<code>&lt;code&gt;</code> <code>&lt;em&gt;</code> <code>&lt;strong&gt;</code> a
+							<a href="https://help.disqus.com/customer/portal/articles/466253-what-html-tags-are-allowed-within-comments"
+							   target="_blank">další</a>&hellip;
+						</p>
+						<p>
+							Kódy programů lze napsat pomocí <code>&lt;pre&gt;&lt;code&gt;alert('XSS');&lt;/code&gt;&lt;/pre&gt;</code>,
+							detekce jazyka se provede
+							<a href="https://help.disqus.com/customer/portal/articles/665057"
+							   target="_blank">automaticky</a>&hellip;
+						</p>
+					</div>
+					<div id="disqus_thread" style="padding-bottom: 30px" data-disqus-shortname="mrtnzlml"
+					     data-disqus-url="{link //this}"></div>
 					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments
 							powered by Disqus.</a></noscript>
 					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
@@ -99,26 +116,4 @@
 			</div>
 		</div>
 	</div>
-{/block}
-
-
-
-
-
-{block scripts}
-	{include #parent}
-	<script>
-		(function () {
-			var load = function () {
-				if ($('body').data('experimental') != 'none' && !document.getElementsByTagName('pre').length && window.innerWidth > 1200) {
-					$('#columns')[0].style.webkitColumnCount = 2;
-				}
-			};
-			if (window.addEventListener) {
-				window.addEventListener('load', load);
-			} else {
-				window.attachEvent('onload', load);
-			}
-		}());
-	</script>
 {/block}

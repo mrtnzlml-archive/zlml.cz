@@ -6,11 +6,6 @@
 		.link { font-size: 18px; padding-left: 2%; text-decoration: none; }
 		.link:hover { text-decoration: underline; }
 	</style>
-	<ul class="breadcrumb hidden-print">
-		<li><a n:href="Homepage:">home</a></li>
-		<li class="active">obsah</li>
-		<li class="pull-right" n:if="$presenter->isAjax()">Loaded With Ajax</li>
-	</ul>
 	{cache expire => '+20 minutes'}
 		<div class="row" style="margin-bottom: 10px">
 			<div class="col-lg-12">

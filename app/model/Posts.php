@@ -13,6 +13,9 @@ use Nette\Utils\Strings;
  */
 class Posts extends Nette\Object {
 
+	public $onSave = [];
+	public $onDelete = [];
+
 	/** @var \Kdyby\Doctrine\EntityDao */
 	private $dao;
 
@@ -29,7 +32,9 @@ class Posts extends Nette\Object {
 	 * @return array
 	 */
 	public function save($entity = NULL, $relations = NULL) {
-		return $this->dao->save($entity, $relations);
+		$entity = $this->dao->save($entity, $relations);
+		$this->onSave($entity);
+		return $entity;
 	}
 
 	/**
@@ -43,7 +48,7 @@ class Posts extends Nette\Object {
 		$query = $this->dao->createQueryBuilder('p')
 			->whereCriteria($criteria)
 			->autoJoinOrderBy((array)$orderBy)
-			->join('p.tags', 'tt') //t already used?
+			->leftJoin('p.tags', 'tt') //t already used?
 			->addSelect('tt')
 			->getQuery();
 		$resultSet = new Kdyby\Doctrine\ResultSet($query);
@@ -97,10 +102,14 @@ class Posts extends Nette\Object {
 	 * @return mixed|null
 	 */
 	public function rand() {
-		$posts = iterator_to_array($this->findBy([]));
+		$posts = iterator_to_array($this->findBy(array()));
 		return $posts[rand(0, count($posts) - 1)];
 	}
 
+	/**
+	 * @param $search
+	 * @return array
+	 */
 	public function fulltextSearch($search) {
 		$search = Strings::lower(Strings::normalize($search));
 		$search = Strings::replace($search, '/[^\d\w]/u', ' ');
@@ -129,15 +138,24 @@ class Posts extends Nette\Object {
 
 		$em = $this->dao->getEntityManager();
 		$rsm = new Doctrine\ORM\Query\ResultSetMapping();
-		$rsm->addEntityResult('\Entity\Post', 'u');
-		$rsm->addFieldResult('u', 'id', 'id');
-		$sql = "SELECT u.id FROM mirror_posts u WHERE MATCH(u.title, u.body) AGAINST(? IN BOOLEAN MODE)$where
-				ORDER BY 5 * MATCH(u.title) AGAINST (?) + MATCH(u.body) AGAINST (?) DESC";
+		$rsm->addScalarResult('id', 'id');
+		$rsm->addScalarResult('title_score', 'title_score');
+		$rsm->addScalarResult('body_score', 'body_score');
+		$sql = "SELECT id, 5 * MATCH(title) AGAINST (?) AS title_score, MATCH(body) AGAINST (?) AS body_score
+				FROM mirror_posts WHERE MATCH(title, body) AGAINST(? IN BOOLEAN MODE)$where
+				ORDER BY 5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC";
 		$query = $em->createNativeQuery($sql, $rsm);
-		$query->setParameters([$search, $search, $search]);
+		$query->setParameters(array($search, $search, $search, $search, $search));
 		$result = $query->getScalarResult();
 		$ids = array_map('current', $result);
-		return $this->findBy(['id' => $ids]);
+		//FIXME:WARNING: temporary ugly hack because WHERE id IN (79, 10, 45, 54, 62) doesn't keep order
+		$tmp = [];
+		foreach ($ids as $key => $value) {
+			$relevance = $result[$key]['title_score'];
+			$tmp[$key . '#' . $relevance] = $this->findOneBy(['id' => $value]);
+		}
+		return $tmp;
+		//return $this->findBy(array('id' => $ids));
 	}
 
 	/**
@@ -147,6 +165,7 @@ class Posts extends Nette\Object {
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
 		$this->dao->delete($entity, $relations, $flush);
+		$this->onDelete($entity);
 	}
 
 }

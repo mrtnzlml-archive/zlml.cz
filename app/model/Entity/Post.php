@@ -55,4 +55,7 @@ class Post extends Doctrine\Entities\BaseEntity {
 	/** @ORM\Column(type="datetime") */
 	protected $date;
 
+	/** @ORM\Column(type="boolean") */
+	protected $draft = FALSE;//TRUE;
+
 }

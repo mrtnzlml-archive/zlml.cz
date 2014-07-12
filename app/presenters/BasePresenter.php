@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Nette;
 use Nette\Utils\Strings;
-use Texy;
+use Nette;
 use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
@@ -53,8 +52,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 */
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
-		$texy = new Texy\Texy();
-		$template->registerHelper('texy', callback($texy, 'process'));
+		$template->registerHelper('texy', function ($input) {
+			$texy = new \Texy();
+			$html = new Nette\Utils\Html();
+			return $html::el()->setHtml($texy->process($input));
+		});
 		$template->registerHelper('vlna', function ($string) {
 			$string = preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;
@@ -121,25 +123,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->redirect('Single:article', $post->slug);
 	}
 
-	public function handleExperimental() {
-		$section = $this->session->getSection('experimental');
-		if ($section->experimental == 'none') {
-			$section->experimental = 'all';
-			$this->flashMessage('Experimentální funkce zapnuty.', 'alert-info');
-		} else {
-			$section->experimental = 'none';
-			$this->flashMessage('Experimentální funkce vypnuty.', 'alert-info');
-		}
-		$this->redirect('this');
-	}
-
-	// TODO ?
-	public function handleExperimentalData($data = NULL) {
-		$section = $this->session->getSection('experimental');
-		if ($data !== NULL) {
-			$oldData = $section->experimental_data;
-		}
-		$this->redirect('this');
+	/**
+	 * @return \fshlTexy
+	 */
+	protected function prepareTexy() {
+		$texy = new \fshlTexy();
+		$texy->addHandler('block', array($texy, 'blockHandler'));
+		$texy->tabWidth = 4;
+		$texy->headingModule->top = 3; //start at H3
+		$texy->headingModule->generateID = TRUE;
+		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module FIXME
+		$texy->imageModule->leftClass = 'leftAlignedImage';
+		$texy->imageModule->rightClass = 'rightAlignedImage';
+		$texy->headingModule->generateID = TRUE;
+		return $texy;
 	}
 
 }

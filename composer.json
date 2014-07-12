@@ -1,8 +1,8 @@
 {
 	"name": "mrtnzlml/zeminem.cz",
-	"description": "Personal website zeminem.cz...",
+	"description": "Source code of www.zeminem.cz website",
+	"version": "1.1.0",
 	"homepage": "http://www.zeminem.cz",
-	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"authors": [
 		{
 			"name": "Martin Zlámal",
@@ -10,16 +10,16 @@
 		}
 	],
 	"require": {
-		"php": ">= 5.3.0",
-		"nette/nette": "v2.2-rc4",
-		"nette/tester": "dev-master",
-		"texy/texy": "dev-master",
-		"kukulich/fshl": "dev-develop",
-		"janmarek/webloader": "dev-master",
-		"natxet/CssMin": "dev-master",
-		"linkorb/jsmin-php": "dev-master",
-		"leafo/lessphp": "0.3.*@dev",
-		"kdyby/doctrine": "@dev"
-	},
-	"minimum-stability": "dev"
+		"php": ">= 5.3.1",
+		"nette/nette": "~2.2.2",
+		"nette/tester": "~1.2.0",
+		"texy/texy": "2.*@dev",
+		"kukulich/fshl": "~2.1.0",
+		"janmarek/webloader": "~2.2.0",
+		"natxet/CssMin": "~3.0.2",
+		"linkorb/jsmin-php": "~1.0.0",
+		"leafo/lessphp": "v0.4.0",
+		"kdyby/doctrine": "~2.0.0",
+		"dg/ftp-deployment": "dev-master"
+	}
 }
