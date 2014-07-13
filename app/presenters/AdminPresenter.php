@@ -66,19 +66,35 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function renderPictures() {
-		$this->template->pictures = $this->pictures->findBy(array(), ['created' => 'DESC']);
+		$vp = new Cntrl\VisualPaginator($this, 'paginator');
+		$paginator = $vp->getPaginator();
+		$paginator->itemsPerPage = 25;
+		$paginator->itemCount = $this->pictures->countBy();
+		$this->template->pictures = $this->pictures->findBy(array(), ['created' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderPrehled() {
-		$this->template->posts = $this->posts->findBy(array(), array('date' => 'DESC'));
+		$vp = new Cntrl\VisualPaginator($this, 'paginator');
+		$paginator = $vp->getPaginator();
+		$paginator->itemsPerPage = 25;
+		$paginator->itemCount = ITEMCOUNT;
+		$this->template->posts = $this->posts->findBy(array(), array('date' => 'DESC'), $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderTags() {
-		$this->template->tags = $this->tags->findBy(array());
+		$vp = new Cntrl\VisualPaginator($this, 'paginator');
+		$paginator = $vp->getPaginator();
+		$paginator->itemsPerPage = 25;
+		$paginator->itemCount = $this->tags->countBy();
+		$this->template->tags = $this->tags->findBy(array(), array(), $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderUsers() {
-		$this->template->users = $this->users->findBy(array());
+		$vp = new Cntrl\VisualPaginator($this, 'paginator');
+		$paginator = $vp->getPaginator();
+		$paginator->itemsPerPage = 25;
+		$paginator->itemCount = $this->users->countBy();
+		$this->template->users = $this->users->findBy(array(), array(), $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function actionUserEdit($id = NULL) {
