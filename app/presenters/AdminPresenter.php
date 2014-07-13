@@ -42,8 +42,7 @@ class AdminPresenter extends BasePresenter {
 	public function beforeRender() {
 		parent::beforeRender();
 
-		$stack = \Stack::getStack();
-		$this->template->menuStack = $stack->getMenu();
+		$this->template->menuStack = $this->stack->getMenu();
 
 		$this->template->picturecount = $this->pictures->countBy();
 		$this->template->tagcount = $this->tags->countBy();

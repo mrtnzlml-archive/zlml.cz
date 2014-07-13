@@ -13,15 +13,26 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/** @var \Nette\Http\Session @inject */
 	public $session;
 
-	public function beforeRender() {
-		parent::beforeRender();
-		$section = $this->session->getSection('experimental');
-		if ($section->experimental == NULL) {
-			$section->experimental = 'none';
-			$section->experimental_data = array();
+	protected $stack;
+
+	public function __construct() {
+		parent::__construct();
+		$this->stack = \Stack::getStack();
+	}
+
+	public function formatTemplateFiles() {
+		$name = $this->getName();
+		$presenter = substr($name, strrpos(':' . $name, ':'));
+		$dir = dirname($this->getReflection()->getFileName());
+		$dir = is_dir("$dir/templates") ? $dir : dirname($dir);
+
+		$locations = array(
+			"$dir/templates/$presenter/$this->view.latte",
+		);
+		foreach ($this->stack->getTemplates() as $template) {
+			$locations[] = "$dir/extensions/$presenter/$this->view.latte";
 		}
-		$this->template->experimental = $section->experimental;
-		$this->template->experimental_data = json_encode($section->experimental_data);
+		return $locations;
 	}
 
 	protected function createComponentSearch() {
