@@ -44,6 +44,7 @@ class PostForm extends UI\Control {
 		$form->addText('tags', 'Tagy (oddělené čárkou):')
 			->setAttribute('class', 'form-control')
 			->setValue(implode(', ', $tags));
+		$form->addText('publish_date', 'Datum publikování článku:')->setType('datetime-local');
 		$form->addTextArea('editor', 'Obsah článku:')
 			->setHtmlId('editor')
 			->setRequired('Je zapotřebí napsat nějaký text.');
@@ -52,6 +53,7 @@ class PostForm extends UI\Control {
 				'title' => $this->post->title,
 				'slug' => $this->post->slug,
 				'editor' => $this->post->body,
+				'publish_date' => $this->post->publish_date->format('Y-m-d\TH:i:s'),
 			));
 		}
 		$form->addSubmit('save', 'Uložit a publikovat');
@@ -72,6 +74,7 @@ class PostForm extends UI\Control {
 				$this->post = new Entity\Post();
 				$this->post->date = new \DateTime();
 			}
+			$this->post->publish_date = $vals->publish_date ? new \DateTime($vals->publish_date) : new \DateTime('now');
 			$this->post->title = $vals->title;
 			$this->post->slug = $vals->slug;
 			$this->post->body = $vals->editor;

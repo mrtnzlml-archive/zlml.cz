@@ -4,8 +4,8 @@ namespace App;
 
 use Doctrine;
 use Kdyby;
-use Nette;
 use Nette\Utils\Strings;
+use Nette;
 
 /**
  * Class Posts
@@ -102,7 +102,7 @@ class Posts extends Nette\Object {
 	 * @return mixed|null
 	 */
 	public function rand() {
-		$posts = iterator_to_array($this->findBy(array()));
+		$posts = iterator_to_array($this->findBy(array('publish_date <=' => new \DateTime())));
 		return $posts[rand(0, count($posts) - 1)];
 	}
 
@@ -152,7 +152,11 @@ class Posts extends Nette\Object {
 		$tmp = [];
 		foreach ($ids as $key => $value) {
 			$relevance = $result[$key]['title_score'];
-			$tmp[$key . '#' . $relevance] = $this->findOneBy(['id' => $value]);
+			$article = $this->findOneBy(['id' => $value, 'publish_date <=' => new \DateTime()]);
+			if (empty($article)) {
+				continue;
+			}
+			$tmp[$key . '#' . $relevance] = $article;
 		}
 		return $tmp;
 		//return $this->findBy(array('id' => $ids));

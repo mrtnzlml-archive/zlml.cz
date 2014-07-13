@@ -10,6 +10,7 @@ class SearchPresenter extends BasePresenter {
 	public $tags;
 
 	public function renderDefault($search) {
+		//FIXME tagy ::: 'publish_date <=' => new \DateTime()
 		$this->template->tag = $this->tags->findOneBy(array('name' => $search));
 		$result = $this->posts->fulltextSearch($search);
 		if (count($result) == 0) {
