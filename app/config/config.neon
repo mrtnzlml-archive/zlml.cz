@@ -29,11 +29,13 @@ services:
 	- App\Pingbacks(@doctrine.dao(Entity\Pingback))
 	- App\Posts(@doctrine.dao(Entity\Post))
 	- App\PostsMirror(@doctrine.dao(Entity\Post))
+	- App\Settings(@doctrine.dao(Entity\Setting))
 	- App\Tags(@doctrine.dao(Entity\Tag))
 	- App\Users(@doctrine.dao(Entity\User))
 	#- App\Xmlrpc
 
 	- PostFormFactory
+	- SettingsFormFactory
 	- UserEditFormFactory
 
 	#It should be here because of Kdyby\Events (?) --- security problem (if you forgot it) :-(

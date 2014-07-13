@@ -21,6 +21,8 @@ class AdminPresenter extends BasePresenter {
 
 	/** @var \PostFormFactory @inject */
 	public $postFormFactory;
+	/** @var \SettingsFormFactory @inject */
+	public $settingsFormFactory;
 	/** @var \UserEditFormFactory @inject */
 	public $userEditFormFactory;
 
@@ -109,6 +111,14 @@ class AdminPresenter extends BasePresenter {
 		$control = $this->userEditFormFactory->create($this->id);
 		$control->onSave[] = function () {
 			$this->redirect('users');
+		};
+		return $control;
+	}
+
+	protected function createComponentSettingsForm() {
+		$control = $this->settingsFormFactory->create();
+		$control->onSave[] = function () {
+			$this->redirect('settings');
 		};
 		return $control;
 	}
