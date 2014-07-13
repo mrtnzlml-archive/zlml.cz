@@ -30,7 +30,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			"$dir/templates/$presenter/$this->view.latte",
 		);
 		foreach ($this->stack->getTemplates() as $template) {
-			$locations[] = "$dir/extensions/$presenter/$this->view.latte";
+			$locations[] = "$dir/$template/$presenter/$this->view.latte";
 		}
 		return $locations;
 	}

@@ -8,6 +8,7 @@ use Nette\Utils\Strings;
 use Nette;
 
 /**
+ * TODO: QueryObject
  * Class Posts
  * @package App
  */
