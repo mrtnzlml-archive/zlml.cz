@@ -4,12 +4,20 @@ use Nette\Utils\Html;
 
 class CoreExtension extends Nette\DI\CompilerExtension {
 
+	/*public function loadConfiguration() {
+		$builder = $this->getContainerBuilder();
+		$presenterFactory = $builder->getDefinition('nette.presenterFactory');
+		foreach ($this->compiler->getExtensions() as $extension) {
+			if ($extension instanceof IPresenterMappingProvider) {
+				$presenterFactory->addSetup('setMapping', array($extension::getPresenterMapping()));
+			}
+		}
+	}*/
 
 	public function afterCompile(Nette\PhpGenerator\ClassType $class) {
-		$extensions = $this->compiler->getExtensions();
 		$initialize = $class->methods['initialize'];
 		$initialize->addBody('$stack = \Stack::getStack();');
-		foreach ($extensions as $extension) {
+		foreach ($this->compiler->getExtensions() as $extension) {
 			if ($extension instanceof IMenuProvider) {
 				$initialize->addBody('$stack->addMenu(' . get_class($extension) . '::getMenuItems());');
 			}

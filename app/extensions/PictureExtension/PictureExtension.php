@@ -2,7 +2,7 @@
 
 use Nette\Utils\Html;
 
-class PictureExtension extends Nette\DI\CompilerExtension implements IMenuProvider, IPageProvider {
+class PictureExtension extends Nette\DI\CompilerExtension implements IMenuProvider, IPageProvider, IPresenterMappingProvider {
 
 	public static function getMenuItems() {
 		//použít latte šablony (?)
@@ -14,6 +14,10 @@ class PictureExtension extends Nette\DI\CompilerExtension implements IMenuProvid
 
 	public static function getPage() {
 		return 'extensions'; //it's just for test
+	}
+
+	public static function getPresenterMapping() {
+		return array('Picture' => 'App\\Extensions\\PictureExtension\\*Module\\*Presenter');
 	}
 
 }

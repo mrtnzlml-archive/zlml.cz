@@ -7,3 +7,7 @@ interface IMenuProvider {
 interface IPageProvider {
 	public static function getPage();
 }
+
+interface IPresenterMappingProvider {
+	public static function getPresenterMapping();
+}
