@@ -43,6 +43,7 @@ class RouterFactory {
 		), Route::ONE_WAY);
 		$router[] = new Route('rss', 'Homepage:rss');
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
+		//$router[] = new Route('admin[/<presenter>/<action>[/<id>]]', 'Admin:default');
 		$router[] = new Route('admin[/<action>[/<id>]]', 'Admin:default');
 		$router[] = new Route("[<paginator-page [$paginator]>]", array(
 			'presenter' => 'Homepage',

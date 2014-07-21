@@ -6,6 +6,16 @@ use Nette;
 
 class PicturePresenter extends BasePresenter {
 
+	/** @var \IAdminMenuFactory @inject */
+	public $adminMenuFactory;
+
+	/**
+	 * @return \Cntrl\AdminMenu
+	 */
+	protected function createComponentAdminMenu() {
+		return $this->adminMenuFactory->create();
+	}
+
 	public function formatLayoutTemplateFiles() {
 		$name = $this->getName();
 		$presenter = substr($name, strrpos(':' . $name, ':'));

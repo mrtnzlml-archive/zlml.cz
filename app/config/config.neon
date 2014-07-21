@@ -37,6 +37,7 @@ services:
 	- PostFormFactory
 	- SettingsFormFactory
 	- UserEditFormFactory
+	- IAdminMenuFactory
 
 	#It should be here because of Kdyby\Events (?) --- security problem (if you forgot it) :-(
 	- App\AdminPresenter
