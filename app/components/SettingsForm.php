@@ -27,9 +27,11 @@ class SettingsForm extends UI\Control {
 	protected function createComponentSettingsForm() {
 		$form = new UI\Form;
 		$form->addProtection();
-		$form->addGroup('Obecné nastevní');
+		$form->addGroup('Obecné nastavení');
 		$form->addCheckbox('random_search', 'Povolit random výběr příspěvku');
 		$form->addCheckbox('show_content', 'Zobrazit obsah blogu');
+		$form->addText('ga_code', 'Google Analytics kód');
+		$form->addText('disqus_shortname', 'Disqus shortname');
 		//nastavení příspěvků (v grupě vedle obecného)
 
 		$form->addGroup('Aktivace rozšíření'); //našítat dostupná rozšíření
