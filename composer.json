@@ -19,7 +19,9 @@
 		"natxet/CssMin": "~3.0.2",
 		"linkorb/jsmin-php": "~1.0.0",
 		"leafo/lessphp": "v0.4.0",
-		"kdyby/doctrine": "~2.0.0",
+		"kdyby/doctrine": "~2.0.0"
+	},
+	"require-dev": {
 		"dg/ftp-deployment": "dev-master"
 	}
 }

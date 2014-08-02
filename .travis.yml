@@ -19,4 +19,4 @@ before_script:
   - mysql -u root -D zeminem < zeminem.sql
   - mysql -u root -D zeminem < diff.sql
   - composer selfupdate
-  - composer update
+  - composer update --no-dev
