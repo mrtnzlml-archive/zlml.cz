@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Model;
 use Nette;
-use Nette\Diagnostics\Debugger;
+use Tracy;
 
 
 /**
@@ -30,10 +29,10 @@ class ErrorPresenter extends BasePresenter {
 				$this->template->test = $request->parameters['action'];
 			}
 			// log to access.log
-			Debugger::log("HTTP code $code: {$exception->getMessage()} in {$exception->getFile()}:{$exception->getLine()}", 'access');
+			Tracy\Debugger::log("HTTP code $code: {$exception->getMessage()} in {$exception->getFile()}:{$exception->getLine()}", 'access');
 		} else {
 			$this->setView('500'); // load template 500.latte
-			Debugger::log($exception, Debugger::ERROR); // and log exception
+			Tracy\Debugger::log($exception, Tracy\Debugger::ERROR); // and log exception
 		}
 	}
 
