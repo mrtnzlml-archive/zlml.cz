@@ -1,7 +1,9 @@
 Source code of www.zeminem.cz [1.1]
 ====================================
 
-[![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/www.zeminem.cz)
+Master branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/www.zeminem.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/www.zeminem.cz)
+
+It's tested against at least PHP 5.4.29. The lower version of PHP is not supported yet.
 
 What's on the background
 ------------------------
@@ -35,7 +37,7 @@ from repository using Git and load libraries using Composer:
 
 4. Load libraries via Composer:
 
-		composer update
+		composer update --no-dev
 
 5. Alternatively you can use Composer instead of `git clone`:
 
