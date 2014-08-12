@@ -7,21 +7,20 @@
 
 {block content}
 	<div class="page-header">
-		<h2>
+		<h2 class="title">
 			{$post->title|vlna}
-			<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
-			<div class="pull-right hidden-print">
-				<small>
-					<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span
-								class="glyphicon glyphicon-print"></span></a>
-					{if $user->isLoggedIn()}
-						<span style="font-size: 25px">\</span>
-						<a n:href=":Admin:default $post->id">edit&nbsp;<span
-									class="glyphicon glyphicon-edit"></span></a>
-					{/if}
-				</small>
-			</div>
+			<br>
+			<small class="date">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
 		</h2>
+		<div class="pull-right hidden-print">
+			<a href="javascript:window.print()" class="visible-lg pull-right" style="display: inline !important">
+				tisk&nbsp;<span class="glyphicon glyphicon-print"></span>
+			</a>
+			{if $user->isLoggedIn()}
+				<span style="font-size: 25px">\</span>
+				<a n:href=":Admin:default $post->id">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
+			{/if}
+		</div>
 		{foreach $post->tags as $tag}
 			<a n:href="Search:default, $tag->name" style="text-decoration:none">
 				<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
@@ -29,38 +28,30 @@
 		{/foreach}
 	</div>
 	<div class="row" style="margin-bottom: 10px">
-		<div class="col-lg-10">
+		<div class="col-lg-12">
 			<div class="article" id="columns">
 				{$body|noescape}
+				<h3 class="load_disqus hidden-print">Sdílejte tento článek</h3>
+
+				<div class="share hidden-print text-center">
+					<span class="label label-danger">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<a href="https://plus.google.com/share?url={link //this}" target="_blank">Google</a>
+					</span>
+					<span class="label label-info">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_blank">Facebook</a>
+					</span>
+					<span class="label label-success">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<a href="http://twitter.com/share?text={$post->title}&url={link //this}"
+						   target="_blank">Twitter</a>
+					</span>
+				</div>
 			</div>
-			<ul class="pager hidden-print" n:if="$nextArticle || $prevArticle">
-				<li class="previous" n:if="$nextArticle"><a n:href="$nextArticle->slug"><span
-								class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí článek</a></li>
-				<li class="next" n:if="$prevArticle"><a n:href="$prevArticle->slug">Další článek&nbsp;<span
-								class="glyphicon glyphicon-chevron-right"></span></a></li>
-			</ul>
 
 			<div id="bottom">
-				<hr class="hidden-print load_disqus">
-
-				<div class="share hidden-print">
-			<span class="label label-danger">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="https://plus.google.com/share?url={link //this}" target="_blank">Google</a>
-			</span>
-			<span class="label label-info">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_blank">Facebook</a>
-			</span>
-			<span class="label label-success">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://twitter.com/share?text={$post->title}&url={link //this}" target="_blank">Twitter</a>
-			</span>
-				</div>
-
-				<hr>
-
-				<div class="row hidden-print">
+				{*<div class="row hidden-print">
 					<div class="suggestion col-lg-4 col-md-4" n:foreach="$next as $n">
 						<div class="thumbnail">
 							<div class="caption">
@@ -76,22 +67,27 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>*}
 
 				<div class="hidden-print">
-					<div class="alert alert-info" style="margin-top: 20px">
-						<p>
-							V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>
-							<code>&lt;code&gt;</code> <code>&lt;em&gt;</code> <code>&lt;strong&gt;</code> a
-							<a href="https://help.disqus.com/customer/portal/articles/466253-what-html-tags-are-allowed-within-comments"
-							   target="_blank">další</a>&hellip;
-						</p>
-						<p>
-							Kódy programů lze napsat pomocí <code>&lt;pre&gt;&lt;code&gt;alert('XSS');&lt;/code&gt;&lt;/pre&gt;</code>,
-							detekce jazyka se provede
-							<a href="https://help.disqus.com/customer/portal/articles/665057"
-							   target="_blank">automaticky</a>&hellip;
-						</p>
+					<div class="comment-help" style="margin-top: 20px">
+						<ul>
+							<li>
+								V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>
+								<code>&lt;code&gt;</code> <code>&lt;em&gt;</code> <code>&lt;strong&gt;</code> a
+								<a href="https://help.disqus.com/customer/portal/articles/466253-what-html-tags-are-allowed-within-comments"
+								   target="_blank">další</a>
+							</li>
+							<li>
+								Kódy programů lze napsat pomocí <code>&lt;pre&gt;&lt;code&gt;alert('XSS');&lt;/code&gt;&lt;/pre&gt;</code>,
+								detekce jazyka se provede
+								<a href="https://help.disqus.com/customer/portal/articles/665057"
+								   target="_blank">automaticky</a>
+							</li>
+							<li>
+								Tykejme si v komentářích
+							</li>
+						</ul>
 					</div>
 					<div id="disqus_thread" style="padding-bottom: 30px" data-disqus-shortname="mrtnzlml"
 					     data-disqus-url="{link //this}"></div>
@@ -100,19 +96,6 @@
 					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
 								class="logo-disqus">Disqus</span></a>
 				</div>
-			</div>
-		</div>
-		<div class="col-lg-2 visible-lg">
-			<div id="outline" data-spy="affix" data-offset-top="351">
-				<span id="zbyva">zbývá</span><br>
-				<span id="pocet">{$wordCount}</span><br>
-				<span id="slov">slov</span><br>
-				<span class="glyphicon glyphicon-time"></span>
-				<span id="time">{ceil($wordCount/200)}</span>
-				<span id="minuty">minut</span>
-				<hr>
-				<span id="brotip">Brotip</span><br>
-				<span id="tip">&hellip;</span>
 			</div>
 		</div>
 	</div>

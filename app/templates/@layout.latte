@@ -19,8 +19,33 @@
 
 <body>
 	<script> document.body.className+=' js' </script>
+	<div class="container">
+		<div class="hidden-print">
+			<ul class="nav nav-justified">
+				<li n:class="home, $presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:"><span class="glyphicon glyphicon-home"></span> home</a></li>
+				<li n:class="about, $presenter->isLinkCurrent('Single:about') ? active"><a n:href="Single:about">about</a></li>
+				<li n:class="reference, $presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
+				<li n:class="obsah, $presenter->isLinkCurrent('Single:obsah') || $presenter->isLinkCurrent('Single:tagsah') ? active"><a n:href="Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
+				<li class="random"><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
+				{if $user->isAllowed('Admin', 'view')}<li n:class="admin, $presenter->isLinkCurrent('Admin:') ? active"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
+				<li n:class="develop, $presenter->isLinkCurrent('Single:develop') ? active"><a n:href="Single:develop">develop</a></li>
+			</ul>
+		</div>
+		<div class="hidden-print">
+			<h1><a n:href="Homepage:">Martin <span style="white-space:nowrap"><span class="transf1">Zlá</span><span class="transf2">mal</span></span></a></h1>
+			<p class="text-center">Protože každý si chce číst&hellip;</p>
+			<hr>
+		</div>
 
-	<div class="container shadow hidden-print">
+		{snippet flashes}
+			<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message|texy}</div>
+		{/snippet}
+		{snippet content}
+			{include #content}
+		{/snippet}
+	</div>
+
+	{*<div class="container shadow hidden-print">
 		<div class="row">
 			<div class="col-lg-2 visible-lg">
 				<a n:href="Homepage:"><div id="qr"></div></a>
@@ -56,9 +81,9 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>*}
 
-	{snippet menu}
+	{*snippet menu}
 	<div class="container hidden-print main-nav" style="background:transparent;padding:0">
 		<ul class="nav nav-pills">
 			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:"><span class="glyphicon glyphicon-home"></span> home</a></li>
@@ -70,16 +95,16 @@
 			<li n:class="$presenter->isLinkCurrent('Single:develop') ? 'pull-right active' : pull-right"><a n:href="Single:develop">develop</a></li>
 		</ul>
 	</div>
-	{/snippet}
+	{/snippet*}
 
-	<div class="container shadow" style="padding: 20px 30px;border-radius: 0 0 6px 6px;">
+	{*<div class="container shadow" style="padding: 20px 30px;border-radius: 0 0 6px 6px;">
 		{snippet flashes}
 			<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message|texy}</div>
 		{/snippet}
 		{snippet content}
 			{include #content}
 		{/snippet}
-	</div>
+	</div>*}
 
 	<div class="container text-center hidden-print footer">
 		I <span class="glyphicon glyphicon-heart" style="color:maroon"></span> <a href="http://nette.org/" target="_blank">Nette Framework</a><br>

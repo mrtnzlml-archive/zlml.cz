@@ -46,11 +46,6 @@ class SinglePresenter extends BasePresenter {
 			$this->template->body = $body;
 			$this->template->wordCount = str_word_count(strip_tags($body));
 
-			$prev = $this->posts->findOlder($post->date);
-			$next = $this->posts->findNewer($post->date);
-			$this->template->prevArticle = $prev;
-			$this->template->nextArticle = $next;
-
 			$ids = $next = array();
 			if (isset($post->tags[0])) {
 				$next = $this->posts->findBy(array('id !=' => $post->getId(), 'tags.id' => $post->tags), array('date' => 'DESC'), 3);
