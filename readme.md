@@ -3,7 +3,7 @@ Source code of www.zeminem.cz [1.1]
 
 Master branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/www.zeminem.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/www.zeminem.cz)
 
-It's tested against at least PHP 5.4.29. The lower version of PHP is not supported yet.
+It's tested against at least PHP 5.4.29. The lower version of PHP is not supported.
 
 What's on the background
 ------------------------
@@ -76,21 +76,14 @@ Git automatically fetch all changes from a remote repository and then merge them
 
 That's it.
 
-Changing a remote's URL
+Amazing administration
 -----------------------
+![Administration](/www/img/screens/admin.png)
 
-To change an existing remote's URL, use the `git remote set-url` command:
-```php
-$ git remote -v
-# View existing remotes
-origin  https://mrtnzlml@bitbucket.org/mrtnzlml/www.zeminem.cz.git (fetch)
-origin  https://mrtnzlml@bitbucket.org/mrtnzlml/www.zeminem.cz.git (push)
+Awesome print experience
+------------------------
+![Print view](/www/img/screens/print.png)
 
-$ git remote set-url origin https://github.com/user/repo.git
-# Change the 'origin' remote's URL
-
-$ git remote -v
-# Verify new remote URL
-# origin  https://github.com/user/repo.git (fetch)
-# origin  https://github.com/user/repo.git (push)
-```
+Incredible articles
+-------------------
+![Incredible article](/www/img/screens/article.png)
