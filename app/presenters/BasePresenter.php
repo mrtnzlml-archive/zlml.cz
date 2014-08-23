@@ -143,7 +143,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$texy->tabWidth = 4;
 		$texy->headingModule->top = 3; //start at H3
 		$texy->headingModule->generateID = TRUE;
-		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module FIXME
+		$texy->imageModule->root = $this->getHttpRequest()->getUrl()->getBaseUrl() . 'uploads/';
 		$texy->imageModule->leftClass = 'leftAlignedImage';
 		$texy->imageModule->rightClass = 'rightAlignedImage';
 		return $texy;
