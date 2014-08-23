@@ -5,7 +5,7 @@
 {if $tag}
 	<h2>Články s tagem <span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span></h2>
 	{foreach $tag->posts as $post}
-		<a n:href=":Single:article $post->slug">{$post->title}</a>{sep}, {/sep}
+		<a n:href=":Single:article $post->slug" title="{$post->body|texy|striptags|truncate:500}">{$post->title}</a>{sep} <strong>#</strong> {/sep}
 	{/foreach}
 	<hr>
 {/if}
