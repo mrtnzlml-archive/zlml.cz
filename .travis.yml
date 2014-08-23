@@ -31,4 +31,4 @@ before_script:
   - composer selfupdate
   - composer install --prefer-dist --no-dev
 
-#TODO: before_script - generovat pomocí příkazu, nepoužívat SQL dumpy (Doctrine)
+#TODO: before_script - generovat pomoci prikazu, nepouzivat SQL dumpy (Doctrine)
