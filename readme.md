@@ -78,12 +78,12 @@ That's it.
 
 Amazing administration
 -----------------------
-![Administration](/www/img/screens/admin.png)
+![Administration](www/img/screens/admin.png)
 
 Awesome print experience
 ------------------------
-![Print view](/www/img/screens/print.png)
+![Print view](www/img/screens/print.png)
 
 Incredible articles
 -------------------
-![Incredible article](/www/img/screens/article.png)
+![Incredible article](www/img/screens/article.png)
