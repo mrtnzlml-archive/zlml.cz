@@ -12,6 +12,10 @@ $(function () {
 		}
 	});
 
+	$('.toggleHelp').click(function () {
+		$('.help').toggle('fast');
+	});
+
 	$('#qr').qrcode({
 		render: 'image',
 		text: document.URL,

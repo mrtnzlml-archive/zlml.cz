@@ -10,7 +10,33 @@
 			</div>
 		</div>
 		<div class="col-lg-9">
-			<span class="pull-right"><a>HELP</a></span>{* TODO *}
+			<span class="pull-right"><a href="javascript:void(0)" class="toggleHelp">HELP</a></span>
+			<div class="help">
+				<span class="pull-right"><a href="javascript:void(0)" class="toggleHelp">CLOSE</a></span>
+				<h4>Nadpisy</h4>
+				<pre>
+Titulek 1      Titulek 2      Titulek 2     Podtitulek
+#########      *********      =========     ----------</pre>
+				<h4>Tvorba odkazů</h4>
+				<pre>
+"Text odkazu":{link //this}
+"Write me":me@example.com</pre>
+				<h4>Obrázky</h4>
+				<pre>
+[* image.gif .(alternativní text) *]
+[* image.gif <] - obrázek zarovnaný vlevo
+[* image.gif >] - obrázek zarovnaný vpravo
+[* image.gif *] *** Toto je *popiska* pod obrázkem</pre>
+				<h4>Tabulky</h4>
+				<pre>
+|-----------------------------
+| Jméno      | Příjmení  | Věk
+|----------------------------
+| Jesus      | Christ    | 33
+| Cecilie    | Svobodova | 74</pre>
+				<p class="pull-left">Odstavce oddělujte mezerou v textu.</p>
+				<a href="http://texy.info/cs/syntax" class="pull-right" target="_blank">Více informací</a>
+			</div>
 			{ifset $editace}
 				<h2>
 					Editovat článek ({$editace})
