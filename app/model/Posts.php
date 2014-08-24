@@ -4,8 +4,8 @@ namespace Model;
 
 use Doctrine;
 use Kdyby;
-use Nette\Utils\Strings;
 use Nette;
+use Nette\Utils\Strings;
 
 /**
  * TODO: QueryObject
@@ -104,7 +104,7 @@ class Posts extends Nette\Object {
 	 */
 	public function rand() {
 		$posts = iterator_to_array($this->findBy(['publish_date <=' => new \DateTime()]));
-		if($posts) {
+		if ($posts) {
 			return $posts[rand(0, count($posts) - 1)];
 		}
 		return NULL;
@@ -174,6 +174,24 @@ class Posts extends Nette\Object {
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
 		$this->dao->delete($entity, $relations, $flush);
 		$this->onDelete($entity);
+	}
+
+	/**
+	 * @param array $criteria
+	 * @param array $orderBy
+	 * @param null $limit
+	 * @param null $offset
+	 * @return \ArrayIterator
+	 */
+	public function findForApi(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+		$query = $this->dao->createQueryBuilder('p')
+			->whereCriteria($criteria)
+			->autoJoinOrderBy((array)$orderBy)
+			->leftJoin('p.tags', 'tt') //t already used?
+			->addSelect('tt')
+			->getQuery();
+		$resultSet = new Kdyby\Doctrine\ResultSet($query);
+		return $resultSet->applyPaging($offset, $limit)->getIterator(Doctrine\ORM\AbstractQuery::HYDRATE_ARRAY);
 	}
 
 }

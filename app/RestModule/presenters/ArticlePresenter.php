@@ -2,10 +2,14 @@
 
 namespace App\RestModule;
 
+use Model;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI;
 
-class ClientPresenter extends UI\Presenter {
+class ArticlePresenter extends UI\Presenter {
+
+	/** @var Model\Posts @inject */
+	public $posts;
 
 	// http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/
 
@@ -40,7 +44,7 @@ class ClientPresenter extends UI\Presenter {
 			$response['err_info'] = 'Requested ID cannot be empty.';
 			$this->sendResponse(new JsonResponse($response));
 		} else {
-			$response['data'] = array(); //TODO
+			$response['data'] = $this->posts->findForApi(['id' => $id]); //FIXME: vracet 1 result, ne $result[0]
 			$this->sendResponse(new JsonResponse($response));
 		}
 	}
