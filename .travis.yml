@@ -21,6 +21,14 @@ matrix:
     - php: hhvm-nightly
     - env: DB=pgsql
     - env: DB=sqlite
+  exclude:
+    - php: hhvm
+    - php: hhvm-nightly
+  include:
+    - php: hhvm
+      script: vendor/bin/tester -p php tests -s -c tests/php.ini
+    - php: hhvm-nightly
+      script: vendor/bin/tester -p php tests -s -c tests/php.ini
 
 script: vendor/bin/tester tests -s -c tests/php.ini
 
