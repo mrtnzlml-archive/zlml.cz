@@ -100,11 +100,14 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @return mixed|null
+	 * @return null
 	 */
 	public function rand() {
 		$posts = iterator_to_array($this->findBy(array('publish_date <=' => new \DateTime())));
-		return $posts[rand(0, count($posts) - 1)];
+		if($posts) {
+			return $posts[rand(0, count($posts) - 1)];
+		}
+		return NULL;
 	}
 
 	/**

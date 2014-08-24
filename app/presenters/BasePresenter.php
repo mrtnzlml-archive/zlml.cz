@@ -131,7 +131,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function handleRandom() {
 		$post = $this->posts->rand();
-		$this->redirect('Single:article', $post->slug);
+		if ($post) {
+			$this->redirect('Single:article', $post->slug);
+		}
+		$this->redirect('Homepage:default');
 	}
 
 	/**

@@ -8,13 +8,14 @@ use Kdyby\Doctrine;
 
 /**
  * @ORM\Entity
- * @ORM\Table(
+ * @ORM\Table(name="mirror_posts", options={"engine"="MyISAM"})
+ * ORM\Table(
  *      name="mirror_posts",
  *      options={"engine"="MyISAM"},
  *      indexes={
- *          @ORM\Index(columns={"title, body"}, flags={"fulltext"}),
- *          @ORM\Index(columns={"title"}, flags={"fulltext"}),
- *          @ORM\Index(columns={"body"}, flags={"fulltext"})
+ *          ORM\Index(columns={"title, body"}, flags={"fulltext"}),
+ *          ORM\Index(columns={"title"}, flags={"fulltext"}),
+ *          ORM\Index(columns={"body"}, flags={"fulltext"})
  *      }
  * )
  * TODO: flags feature is available in Doctrine 2.5

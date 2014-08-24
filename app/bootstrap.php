@@ -27,5 +27,5 @@ if (is_array($config) && array_key_exists('doctrine', $config)) {
 	$container = $configurator->createContainer();
 	return $container;
 } else {
-	require_once(WWW_DIR . DIRECTORY_SEPARATOR . '.install.php');
+	require_once(__DIR__ . '/model/.install.php');
 }
