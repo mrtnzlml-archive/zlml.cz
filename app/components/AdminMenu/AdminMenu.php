@@ -2,19 +2,19 @@
 
 namespace Cntrl;
 
-use App;
+use Model;
 use Nette\Application\UI;
 
 class AdminMenu extends UI\Control {
 
-	/** @var \App\Pictures */
+	/** @var \Model\Pictures */
 	private $pictures;
-	/** @var \App\Tags */
+	/** @var \Model\Tags */
 	private $tags;
-	/** @var \App\Users */
+	/** @var \Model\Users */
 	private $users;
 
-	public function __construct(App\Pictures $pictures, App\Tags $tags, App\Users $users) {
+	public function __construct(Model\Pictures $pictures, Model\Tags $tags, Model\Users $users) {
 		parent::__construct();
 		$this->pictures = $pictures;
 		$this->tags = $tags;

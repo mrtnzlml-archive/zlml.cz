@@ -2,10 +2,10 @@
 
 class SettingsFormFactory {
 
-	/** @var \App\Settings */
+	/** @var \Model\Settings */
 	private $settings;
 
-	public function __construct(App\Settings $settings) {
+	public function __construct(Model\Settings $settings) {
 		$this->settings = $settings;
 	}
 

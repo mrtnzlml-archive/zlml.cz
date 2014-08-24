@@ -2,7 +2,7 @@
 
 namespace Cntrl;
 
-use App;
+use Model;
 use Entity;
 use Kdyby;
 use Nette\Application\UI;
@@ -11,10 +11,10 @@ class SettingsForm extends UI\Control {
 
 	public $onSave = [];
 
-	/** @var \App\Settings */
+	/** @var \Model\Settings */
 	private $settings;
 
-	public function __construct(App\Settings $settings) {
+	public function __construct(Model\Settings $settings) {
 		parent::__construct();
 		$this->settings = $settings;
 	}
@@ -59,7 +59,7 @@ class SettingsForm extends UI\Control {
 	}
 
 	private function editable() {
-		return $this->presenter->user->isAllowed('Admin', App\Authorizator::EDIT) ? TRUE : FALSE;
+		return $this->presenter->user->isAllowed('Admin', Model\Authorizator::EDIT) ? TRUE : FALSE;
 	}
 
 }

@@ -2,7 +2,7 @@
 
 namespace Cntrl;
 
-use App;
+use Model;
 use Entity;
 use Kdyby;
 use Nette\Application\UI;
@@ -16,7 +16,7 @@ class UserEditForm extends UI\Control {
 	private $users;
 	private $account;
 
-	public function __construct(App\Users $users, $id) {
+	public function __construct(Model\Users $users, $id) {
 		parent::__construct();
 		$this->users = $users;
 		$this->account = $this->users->findOneBy(['id' => $id]);
@@ -88,7 +88,7 @@ class UserEditForm extends UI\Control {
 	}
 
 	private function editable() {
-		return $this->presenter->user->isAllowed('Admin', App\Authorizator::EDIT) ? TRUE : FALSE;
+		return $this->presenter->user->isAllowed('Admin', Model\Authorizator::EDIT) ? TRUE : FALSE;
 	}
 
 }

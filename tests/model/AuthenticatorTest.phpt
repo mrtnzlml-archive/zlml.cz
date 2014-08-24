@@ -3,7 +3,7 @@
 use Tester\Assert;
 
 $container = require __DIR__ . '/../bootstrap.php';
-$auth = $container->createInstance('\App\Authenticator');
+$auth = $container->createInstance('\Model\Authenticator');
 
 Assert::exception(function () use ($auth) {
 	$auth->authenticate(array('invalid_username', 'invalid_password'));

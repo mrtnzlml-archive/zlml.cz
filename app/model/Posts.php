@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Doctrine;
 use Kdyby;
@@ -10,7 +10,7 @@ use Nette;
 /**
  * TODO: QueryObject
  * Class Posts
- * @package App
+ * @package Model
  */
 class Posts extends Nette\Object {
 

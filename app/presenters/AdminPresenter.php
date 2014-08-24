@@ -3,6 +3,7 @@
 namespace App;
 
 use App;
+use Model;
 use Cntrl;
 use Entity;
 use Kdyby;
@@ -12,11 +13,11 @@ class AdminPresenter extends BasePresenter {
 
 	public $onBeforeRestrictedFunctionality = [];
 
-	/** @var Pictures @inject */
+	/** @var \Model\Pictures @inject */
 	public $pictures;
-	/** @var Tags @inject */
+	/** @var \Model\Tags @inject */
 	public $tags;
-	/** @var Users @inject */
+	/** @var \Model\Users @inject */
 	public $users;
 
 	/** @var \PostFormFactory @inject */
@@ -35,7 +36,7 @@ class AdminPresenter extends BasePresenter {
 				$this->flashMessage('Byli jste odhlášeni z důvodu nečinnosti. Přihlaste se prosím znovu.', 'danger');
 			}
 			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
-		} elseif (!$this->user->isAllowed($this->name, Authorizator::VIEW)) {
+		} elseif (!$this->user->isAllowed($this->name, Model\Authorizator::READ)) {
 			$this->flashMessage('Přístup byl odepřen. Nemáte oprávnění k zobrazení této stránky.', 'danger');
 			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
 		}
@@ -49,7 +50,7 @@ class AdminPresenter extends BasePresenter {
 		$this->template->picturecount = $this->pictures->countBy();
 		$this->template->tagcount = $this->tags->countBy();
 		$this->template->usercount = $this->users->countBy();
-		if (!$this->user->isAllowed('Admin', Authorizator::EDIT)) {
+		if (!$this->user->isAllowed('Admin', Model\Authorizator::READ)) {
 			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
 		}
 	}

@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Kdyby;
 use Nette;
 
 /**
  * Class Settings
- * @package App
+ * @package Model
  */
 class Settings extends Nette\Object {
 

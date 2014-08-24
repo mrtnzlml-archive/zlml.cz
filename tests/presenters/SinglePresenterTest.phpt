@@ -2,7 +2,7 @@
 
 namespace Test;
 
-use App;
+use Model;
 use Nette;
 use Tester;
 
@@ -13,12 +13,12 @@ $container = require __DIR__ . '/../bootstrap.php';
  */
 class SinglePresenterTest extends Tester\TestCase {
 
-	/** @var App\Posts */
+	/** @var Model\Posts */
 	private $posts;
 
 	public function __construct(Nette\DI\Container $container) {
 		$this->tester = new Presenter($container);
-		$this->posts = $container->getByType('\App\Posts');
+		$this->posts = $container->getByType('\Model\Posts');
 	}
 
 	public function setUp() {

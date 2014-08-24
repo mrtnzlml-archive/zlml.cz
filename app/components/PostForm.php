@@ -2,7 +2,7 @@
 
 namespace Cntrl;
 
-use App;
+use Model;
 use Entity;
 use Kdyby;
 use Nette\Application\UI;
@@ -12,13 +12,13 @@ class PostForm extends UI\Control {
 	public $onSave = [];
 	//public $onBeforeRestrictedFunctionality = [];
 
-	/** @var \App\Posts */
+	/** @var \Model\Posts */
 	private $posts;
-	/** @var \App\Tags */
+	/** @var \Model\Tags */
 	private $tags;
 	private $post;
 
-	public function __construct(App\Posts $posts, App\Tags $tags, $id) {
+	public function __construct(Model\Posts $posts, Model\Tags $tags, $id) {
 		parent::__construct();
 		$this->posts = $posts;
 		$this->tags = $tags;
@@ -99,7 +99,7 @@ class PostForm extends UI\Control {
 	}
 
 	private function editable() {
-		return $this->presenter->user->isAllowed('Admin', App\Authorizator::EDIT) ? TRUE : FALSE;
+		return $this->presenter->user->isAllowed('Admin', Model\Authorizator::EDIT) ? TRUE : FALSE;
 	}
 
 }

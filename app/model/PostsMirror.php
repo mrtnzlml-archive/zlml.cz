@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Doctrine;
 use Kdyby;
@@ -8,7 +8,7 @@ use Nette;
 
 /**
  * Class PostsMirror
- * @package App
+ * @package Model
  */
 class PostsMirror extends Nette\Object {
 

@@ -4,14 +4,14 @@ class PostsListener extends Nette\Object implements Kdyby\Events\Subscriber {
 
 	private $postsMirror;
 
-	public function __construct(App\PostsMirror $postsMirror) {
+	public function __construct(Model\PostsMirror $postsMirror) {
 		$this->postsMirror = $postsMirror;
 	}
 
 	public function getSubscribedEvents() {
 		return array(
-			'App\Posts::onSave',
-			'App\Posts::onDelete',
+			'Model\Posts::onSave',
+			'Model\Posts::onDelete',
 		);
 	}
 

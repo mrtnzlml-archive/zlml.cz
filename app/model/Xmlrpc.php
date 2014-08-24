@@ -1,10 +1,14 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Nette;
 use Nette\Utils\Validators;
 
+/**
+ * Class Xmlrpc
+ * @package Model
+ */
 class Xmlrpc extends Nette\Object {
 
 	const REGEXP_PINGBACK_LINK = '<link rel="pingback" href="([^"]+)" ?/?>';

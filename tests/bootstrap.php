@@ -1,5 +1,7 @@
 <?php
 
+//TODO: test pro AOP, jestli jsou všechny \Model\ třídy zabezpečeny v aspektu...
+
 require __DIR__ . '/../vendor/autoload.php';
 
 if (!class_exists('Tester\Assert')) {

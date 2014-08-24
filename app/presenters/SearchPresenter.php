@@ -4,9 +4,9 @@ namespace App;
 
 class SearchPresenter extends BasePresenter {
 
-	/** @var Posts @inject */
+	/** @var \Model\Posts @inject */
 	public $posts;
-	/** @var Tags @inject */
+	/** @var \Model\Tags @inject */
 	public $tags;
 
 	public function renderDefault($search) {

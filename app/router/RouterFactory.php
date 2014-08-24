@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Nette;
+use Model;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
+use Nette;
 
 /**
  * Router factory.
@@ -18,7 +19,7 @@ class RouterFactory {
 		'feed' => 'Homepage:rss',
 	);
 
-	public function __construct(Posts $posts) {
+	public function __construct(Model\Posts $posts) {
 		$this->posts = $posts;
 	}
 

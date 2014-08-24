@@ -8,7 +8,7 @@ use Nette;
 
 class HomepagePresenter extends BasePresenter {
 
-	///** @var \App\Xmlrpc @inject */
+	///** @var \Model\Xmlrpc @inject */
 	//public $xmlrpc;
 	///** @var Nette\Http\Request @inject */
 	//public $httpRequest;

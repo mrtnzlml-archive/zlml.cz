@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Kdyby;
 use Nette;
 
 /**
  * Class Tags
- * @package App
+ * @package Model
  */
 class Tags extends Nette\Object {
 

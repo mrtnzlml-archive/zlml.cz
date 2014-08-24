@@ -3,7 +3,7 @@
 use Tester\Assert;
 
 $container = require __DIR__ . '/../bootstrap.php';
-$xmlrpc = $container->createInstance('\App\Xmlrpc');
+$xmlrpc = $container->createInstance('\Model\Xmlrpc');
 
 /**
  * @skip Call to undefined function xmlrpc_server_create (bacuse CLI?)

@@ -2,12 +2,13 @@
 
 namespace App;
 
-use Nette;
+use Model;
 use Nette\Http\Url;
+use Nette;
 
 class SinglePresenter extends BasePresenter {
 
-	/** @var Tags @inject */
+	/** @var \Model\Tags @inject */
 	public $tags;
 
 	public function renderObsah() {

@@ -8,7 +8,7 @@ use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	/** @var Posts @inject */
+	/** @var \Model\Posts @inject */
 	public $posts;
 	/** @var \Nette\Http\Session @inject */
 	public $session;

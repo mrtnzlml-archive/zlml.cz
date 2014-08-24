@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Kdyby;
 use Nette\Security\Passwords;
@@ -9,7 +9,7 @@ use Nette\Utils\Strings;
 
 /**
  * Class Authenticator
- * @package App
+ * @package Model
  */
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator {
 
@@ -40,7 +40,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 			$user->password = Passwords::hash($password);
 			$this->users->save($user);
 		} else {
-			return new Nette\Security\Identity($user->id, $user->role);
+			return new Nette\Security\Identity($user->getId(), $user->role);
 		}
 	}
 
