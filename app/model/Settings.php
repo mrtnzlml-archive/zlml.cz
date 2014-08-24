@@ -38,7 +38,7 @@ class Settings extends Nette\Object {
 	 */
 	public function findByKeys(array $keys) {
 		$keys = $this->dao->findBy(['key' => $keys]);
-		$result = array();
+		$result = [];
 		foreach ($keys as $key) {
 			$result[$key->key] = is_numeric($key->value) ? (float)$key->value : $key->value;
 		}

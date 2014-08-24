@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 5.3.3
   - 5.4
   - 5.5
   - 5.6
@@ -15,7 +14,6 @@ env:
 
 matrix:
   allow_failures:
-    - php: 5.3.3
     - php: 5.6
     - php: hhvm
     - php: hhvm-nightly
@@ -26,9 +24,9 @@ matrix:
     - php: hhvm-nightly
   include:
     - php: hhvm
-      script: vendor/bin/tester -p php tests -s -c tests/php.ini
+      script: vendor/bin/tester -p php tests
     - php: hhvm-nightly
-      script: vendor/bin/tester -p php tests -s -c tests/php.ini
+      script: vendor/bin/tester -p php tests
 
 script: vendor/bin/tester tests -s -c tests/php.ini
 

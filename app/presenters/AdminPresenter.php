@@ -35,10 +35,10 @@ class AdminPresenter extends BasePresenter {
 			if ($this->user->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
 				$this->flashMessage('Byli jste odhlášeni z důvodu nečinnosti. Přihlaste se prosím znovu.', 'danger');
 			}
-			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
+			$this->redirect('Sign:in', ['backlink' => $this->storeRequest()]);
 		} elseif (!$this->user->isAllowed($this->name, Model\Authorizator::READ)) {
 			$this->flashMessage('Přístup byl odepřen. Nemáte oprávnění k zobrazení této stránky.', 'danger');
-			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
+			$this->redirect('Sign:in', ['backlink' => $this->storeRequest()]);
 		}
 	}
 
@@ -60,8 +60,8 @@ class AdminPresenter extends BasePresenter {
 	}
 
 	public function renderDefault($id = NULL) {
-		$this->template->tags = $this->tags->findBy(array());
-		$this->template->pictures = $this->pictures->findBy(array(), ['created' => 'DESC']);
+		$this->template->tags = $this->tags->findBy([]);
+		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC']);
 		if ($id !== NULL) {
 			$this->template->editace = TRUE;
 		}
@@ -73,7 +73,7 @@ class AdminPresenter extends BasePresenter {
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 25;
 		$paginator->itemCount = $this->pictures->countBy();
-		$this->template->pictures = $this->pictures->findBy(array(), ['created' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
+		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderPrehled() {
@@ -81,7 +81,7 @@ class AdminPresenter extends BasePresenter {
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 25;
 		$paginator->itemCount = ITEMCOUNT;
-		$this->template->posts = $this->posts->findBy(array(), array('date' => 'DESC'), $paginator->itemsPerPage, $paginator->offset);
+		$this->template->posts = $this->posts->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderTags() {
@@ -89,7 +89,7 @@ class AdminPresenter extends BasePresenter {
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 25;
 		$paginator->itemCount = $this->tags->countBy();
-		$this->template->tags = $this->tags->findBy(array(), array(), $paginator->itemsPerPage, $paginator->offset);
+		$this->template->tags = $this->tags->findBy([], [], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderUsers() {
@@ -97,7 +97,7 @@ class AdminPresenter extends BasePresenter {
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 25;
 		$paginator->itemCount = $this->users->countBy();
-		$this->template->users = $this->users->findBy(array(), array(), $paginator->itemsPerPage, $paginator->offset);
+		$this->template->users = $this->users->findBy([], [], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function actionUserEdit($id = NULL) {
@@ -135,7 +135,7 @@ class AdminPresenter extends BasePresenter {
 	protected function createComponentColor() {
 		$form = new Nette\Application\UI\Form;
 		$form->addProtection();
-		foreach ($this->tags->findBy(array()) as $tag) {
+		foreach ($this->tags->findBy([]) as $tag) {
 			$form->addText('color' . $tag->id)
 				->setType('color')
 				->setValue('#' . $tag->color);
@@ -157,7 +157,7 @@ class AdminPresenter extends BasePresenter {
 		$newColor = preg_replace('<#>', '', $vals['color' . $id]);
 		if (ctype_xdigit($newColor) && (strlen($newColor) == 6 || strlen($newColor) == 3)) {
 			try {
-				$tag = $this->tags->findOneBy(array('id' => $id));
+				$tag = $this->tags->findOneBy(['id' => $id]);
 				$tag->color = $newColor;
 				$this->tags->save($tag);
 				$this->flashMessage('Tag byl úspěšně aktualizován.', 'success');
@@ -197,7 +197,7 @@ class AdminPresenter extends BasePresenter {
 	public function handleDelete($id) {
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
-			$this->posts->delete($this->posts->findOneBy(array('id' => $id)));
+			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
 			$this->flashMessage('Článek byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
@@ -208,7 +208,7 @@ class AdminPresenter extends BasePresenter {
 	public function handleDeleteTag($tag_id) {
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
-			$this->tags->delete($this->tags->findOneBy(array('id' => $tag_id)));
+			$this->tags->delete($this->tags->findOneBy(['id' => $tag_id]));
 			$this->flashMessage('Tag byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
@@ -230,7 +230,7 @@ class AdminPresenter extends BasePresenter {
 	public function handleRegenerate($tag_id) {
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
-			$tag = $this->tags->findOneBy(array('id' => $tag_id));
+			$tag = $this->tags->findOneBy(['id' => $tag_id]);
 			$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
 			$this->tags->save($tag);
 			$this->flashMessage('Tag byl úspěšně regenerován.', 'success');
@@ -243,7 +243,7 @@ class AdminPresenter extends BasePresenter {
 	public function handleUploadReciever() {
 		//ob_start();
 		$uploader = new \UploadHandler();
-		$uploader->allowedExtensions = array("jpeg", "jpg", "png", "gif");
+		$uploader->allowedExtensions = ["jpeg", "jpg", "png", "gif"];
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
 		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');
 		//TODO: picture optimalization (?)
@@ -259,9 +259,9 @@ class AdminPresenter extends BasePresenter {
 			$this->pictures->save($picture);
 		} catch (\Exception $exc) {
 			$uploader->handleDelete(__DIR__ . '/../../www/uploads');
-			$this->sendResponse(new Nette\Application\Responses\JsonResponse(array(
+			$this->sendResponse(new Nette\Application\Responses\JsonResponse([
 				'error' => $exc->getMessage(),
-			)));
+			]));
 		}
 		//TODO: napřed předat do šablony nová data
 		$this->redrawControl('pictures');

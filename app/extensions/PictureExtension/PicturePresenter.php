@@ -22,12 +22,12 @@ class PicturePresenter extends BasePresenter {
 		$layout = $this->layout ? $this->layout : 'layout';
 		$dir = dirname($this->getReflection()->getFileName());
 		$dir = is_dir("$dir/templates") ? $dir : dirname($dir);
-		$list = array(
+		$list = [
 			"$dir/templates/$presenter/@$layout.latte",
 			"$dir/templates/$presenter.@$layout.latte",
 			"$dir/templates/$presenter/@$layout.phtml",
 			"$dir/templates/$presenter.@$layout.phtml",
-		);
+		];
 		$list[] = WWW_DIR . "/../app/templates/@$layout.latte"; //FIXME
 		return $list;
 	}
@@ -35,9 +35,9 @@ class PicturePresenter extends BasePresenter {
 	public function formatTemplateFiles() {
 		$dir = dirname($this->getReflection()->getFileName());
 		$dir = dirname($dir);
-		return array(
+		return [
 			"$dir/PictureExtension/$this->view.latte",
-		);
+		];
 	}
 
 }

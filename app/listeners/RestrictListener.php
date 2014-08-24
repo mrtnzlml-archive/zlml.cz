@@ -3,11 +3,11 @@
 class RestrictListener extends Nette\Object implements Kdyby\Events\Subscriber {
 
 	public function getSubscribedEvents() {
-		return array(
+		return [
 			'App\AdminPresenter::onBeforeRestrictedFunctionality' => 'adminEdit',
 //			'Cntrl\PostForm::onBeforeRestrictedFunctionality' => 'controlEdit',
 //			'Cntrl\UserEditForm::onBeforeRestrictedFunctionality' => 'controlEdit',
-		);
+		];
 	}
 
 	public function adminEdit(Nette\Application\UI\Presenter $presenter) {

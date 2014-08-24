@@ -17,7 +17,7 @@ class PictureExtension extends Nette\DI\CompilerExtension implements IMenuProvid
 	}
 
 	public static function getPresenterMapping() {
-		return array('Picture' => 'App\\Extensions\\PictureExtension\\*Module\\*Presenter');
+		return ['Picture' => 'App\\Extensions\\PictureExtension\\*Module\\*Presenter'];
 	}
 
 }

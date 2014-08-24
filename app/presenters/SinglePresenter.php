@@ -12,7 +12,7 @@ class SinglePresenter extends BasePresenter {
 	public $tags;
 
 	public function renderObsah() {
-		$this->template->articles = $this->posts->findBy(array('publish_date <=' => new \DateTime()), array('title' => 'ASC'));
+		$this->template->articles = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['title' => 'ASC']);
 	}
 
 	public function renderArticle($slug) {
@@ -52,9 +52,9 @@ class SinglePresenter extends BasePresenter {
 			$this->template->prevArticle = $prev;
 			$this->template->nextArticle = $next;
 
-			$ids = $next = array();
+			$ids = $next = [];
 			if (isset($post->tags[0])) {
-				$next = $this->posts->findBy(array('id !=' => $post->getId(), 'tags.id' => $post->tags), array('date' => 'DESC'), 3);
+				$next = $this->posts->findBy(['id !=' => $post->getId(), 'tags.id' => $post->tags], ['date' => 'DESC'], 3);
 				foreach ($next as $n) {
 					array_push($ids, $n->id);
 				}
@@ -62,9 +62,9 @@ class SinglePresenter extends BasePresenter {
 			if (count($next) < 3) {
 				$limit = 3 - count($next);
 				if ($ids) {
-					$next = array_merge((array)$next, (array)$this->posts->findBy(array('id !=' => $post->getId(), 'id != ' => $ids), array('date' => 'DESC'), $limit));
+					$next = array_merge((array)$next, (array)$this->posts->findBy(['id !=' => $post->getId(), 'id != ' => $ids], ['date' => 'DESC'], $limit));
 				} else {
-					$next = array_merge((array)$next, (array)$this->posts->findBy(array('id !=' => $post->getId()), array('date' => 'DESC'), $limit));
+					$next = array_merge((array)$next, (array)$this->posts->findBy(['id !=' => $post->getId()], ['date' => 'DESC'], $limit));
 				}
 			}
 			$this->template->next = $next;

@@ -36,26 +36,26 @@ class UserEditForm extends UI\Control {
 			->setRequired('Zadejte prosím své stávající, nebo nové heslo.');
 		//TODO: toto bude zapotřebí předělat
 		if ($this->presenter->user->isInRole('admin')) {
-			$role = array(
+			$role = [
 				'admin' => 'Administrátor',
 				'demo' => 'Demo účet'
-			);
+			];
 			$form->addSelect('role', 'Role:', $role);
 		} else {
-			$role = array(
+			$role = [
 				'demo' => 'Demo účet'
-			);
+			];
 			$form->addSelect('role', 'Role:', $role);
 		}
 		if ($this->account) {
-			$form->setDefaults(array(
+			$form->setDefaults([
 				'username' => $this->account->username,
 				//'role' => $this->account->role,
-			));
+			]);
 		} else {
-			$form->setDefaults(array(
+			$form->setDefaults([
 				'role' => 'demo',
-			));
+			]);
 		}
 		$form->addSubmit('save', 'Uložit změny');
 		$form->onSuccess[] = $this->formSucceeded;

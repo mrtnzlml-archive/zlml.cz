@@ -69,7 +69,7 @@ class Posts extends Nette\Object {
 	 * @param array $criteria
 	 * @return mixed
 	 */
-	public function countBy(array $criteria = array()) {
+	public function countBy(array $criteria = []) {
 		return $this->dao->countBy($criteria);
 	}
 
@@ -103,7 +103,7 @@ class Posts extends Nette\Object {
 	 * @return null
 	 */
 	public function rand() {
-		$posts = iterator_to_array($this->findBy(array('publish_date <=' => new \DateTime())));
+		$posts = iterator_to_array($this->findBy(['publish_date <=' => new \DateTime()]));
 		if($posts) {
 			return $posts[rand(0, count($posts) - 1)];
 		}
@@ -131,7 +131,7 @@ class Posts extends Nette\Object {
 		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
 		foreach ($matches[0] as $part) {
 			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
-				$accents = array('aá', 'cč', 'dď', 'eéě', 'ií', 'nň', 'oó', 'rř', 'sš', 'tť', 'uúů', 'yý', 'zž');
+				$accents = ['aá', 'cč', 'dď', 'eéě', 'ií', 'nň', 'oó', 'rř', 'sš', 'tť', 'uúů', 'yý', 'zž'];
 				foreach ($accents as $accent) {
 					$part = preg_replace("<[$accent]>iu", "[$accent]+", $part);
 				}
@@ -149,7 +149,7 @@ class Posts extends Nette\Object {
 				FROM mirror_posts WHERE MATCH(title, body) AGAINST(? IN BOOLEAN MODE)$where
 				ORDER BY 5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC";
 		$query = $em->createNativeQuery($sql, $rsm);
-		$query->setParameters(array($search, $search, $search, $search, $search));
+		$query->setParameters([$search, $search, $search, $search, $search]);
 		$result = $query->getScalarResult();
 		$ids = array_map('current', $result);
 		//FIXME:WARNING: temporary ugly hack because WHERE id IN (79, 10, 45, 54, 62) doesn't keep order

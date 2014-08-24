@@ -21,7 +21,7 @@ class Xmlrpc extends Nette\Object {
 	//const RESPONSE_FAULT_ALREADY_REGISTERED = 0x0030;
 	//const RESPONSE_FAULT_ACCESS_DENIED = 0x0031;
 
-	private $responses = array(
+	private $responses = [
 		self::RESPONSE_SUCCESS => 'Success',
 		//self::RESPONSE_FAULT_GENERIC => 'Unknown error.',
 		self::RESPONSE_FAULT_SOURCE => 'The source URI does not exist.',
@@ -30,7 +30,7 @@ class Xmlrpc extends Nette\Object {
 		self::RESPONSE_FAULT_TARGET_INVALID => 'The specified target URI cannot be used as a target.',
 		//self::RESPONSE_FAULT_ALREADY_REGISTERED => 'The pingback has already been registered.',
 		//self::RESPONSE_FAULT_ACCESS_DENIED => 'Access denied.'
-	);
+	];
 
 	private $server;
 	private $pingback_url;
@@ -41,7 +41,7 @@ class Xmlrpc extends Nette\Object {
 		$this->server = xmlrpc_server_create();
 		//http://www.hixie.ch/specs/pingback/pingback
 		//https://github.com/tedeh/pingback-php
-		xmlrpc_server_register_method($this->server, 'pingback.ping', array($this, 'pingback_ping'));
+		xmlrpc_server_register_method($this->server, 'pingback.ping', [$this, 'pingback_ping']);
 	}
 
 	public function __destruct() {
@@ -86,7 +86,7 @@ class Xmlrpc extends Nette\Object {
 			return $this->xmlrpc_fault(self::RESPONSE_FAULT_SOURCE_LINK);
 		}
 
-		return xmlrpc_encode(array($this->responses[self::RESPONSE_SUCCESS]));
+		return xmlrpc_encode([$this->responses[self::RESPONSE_SUCCESS]]);
 
 		//musí odkazovat na post id
 		//pokud v databázi neexistuje záznam o pingback, pak přistoupit na vzdálenou stránku
@@ -94,7 +94,7 @@ class Xmlrpc extends Nette\Object {
 	}
 
 	public static function sendPingback($from, $to, $server) {
-		$request = xmlrpc_encode_request('pingback.ping', array($from, $to), array('encoding' => 'utf-8'));
+		$request = xmlrpc_encode_request('pingback.ping', [$from, $to], ['encoding' => 'utf-8']);
 		$curl = curl_init($server);
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
@@ -105,17 +105,17 @@ class Xmlrpc extends Nette\Object {
 	}
 
 	private function xmlrpc_fault($faultCode) {
-		return xmlrpc_encode(array(
+		return xmlrpc_encode([
 			'faultCode' => $faultCode,
 			'faultString' => $this->responses[$faultCode]
-		));
+		]);
 	}
 
 }
 
 if (!function_exists('http_parse_headers')) {
 	function http_parse_headers($raw_headers) {
-		$headers = array();
+		$headers = [];
 		$key = '';
 		foreach (explode("\n", $raw_headers) as $i => $h) {
 			$h = explode(':', $h, 2);
@@ -123,9 +123,9 @@ if (!function_exists('http_parse_headers')) {
 				if (!isset($headers[$h[0]])) {
 					$headers[$h[0]] = trim($h[1]);
 				} elseif (is_array($headers[$h[0]])) {
-					$headers[$h[0]] = array_merge($headers[$h[0]], array(trim($h[1])));
+					$headers[$h[0]] = array_merge($headers[$h[0]], [trim($h[1])]);
 				} else {
-					$headers[$h[0]] = array_merge(array($headers[$h[0]]), array(trim($h[1])));
+					$headers[$h[0]] = array_merge([$headers[$h[0]]], [trim($h[1])]);
 				}
 				$key = $h[0];
 			} else {

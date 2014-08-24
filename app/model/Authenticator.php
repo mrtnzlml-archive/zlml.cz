@@ -30,7 +30,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 	public function authenticate(array $credentials) {
 		list($username, $password) = $credentials;
 		$password = $this->removeCapsLock($password);
-		$user = $this->users->findOneBy(array('username' => $username));
+		$user = $this->users->findOneBy(['username' => $username]);
 
 		if (!$user) {
 			throw new Nette\Security\AuthenticationException('Uživatelské jméno není správné.', self::IDENTITY_NOT_FOUND);

@@ -9,10 +9,10 @@ class PostsListener extends Nette\Object implements Kdyby\Events\Subscriber {
 	}
 
 	public function getSubscribedEvents() {
-		return array(
+		return [
 			'Model\Posts::onSave',
 			'Model\Posts::onDelete',
-		);
+		];
 	}
 
 	public function onSave(Entity\Post $entity) {

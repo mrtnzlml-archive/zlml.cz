@@ -54,7 +54,7 @@ if (!$zip->open($destination, ZIPARCHIVE::OVERWRITE)) {
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
 foreach ($files as $file) {
 	$file = str_replace('\\', '/', $file);
-	if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..'))) { // Ignore "." and ".." folders
+	if (in_array(substr($file, strrpos($file, '/') + 1), ['.', '..'])) { // Ignore "." and ".." folders
 		continue;
 	}
 	echo "[Archive] $file\n";
@@ -89,7 +89,7 @@ function delete($fileName) {
 				echo " > ::ERR:: while deleting directory $fileName" . PHP_EOL;
 			}
 		} else {
-			$lines = array();
+			$lines = [];
 			exec("DEL /F/Q \"$fileName\"", $lines, $deleteError);
 		}
 	}

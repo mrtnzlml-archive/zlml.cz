@@ -26,9 +26,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$dir = dirname($this->getReflection()->getFileName());
 		$dir = is_dir("$dir/templates") ? $dir : dirname($dir);
 
-		$locations = array(
+		$locations = [
 			"$dir/templates/$presenter/$this->view.latte",
-		);
+		];
 		foreach ($this->stack->getTemplates() as $template) {
 			$locations[] = "$dir/$template/$presenter/$this->view.latte";
 		}
@@ -74,7 +74,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		});
 		$template->registerHelper('dateInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
-			$months = array(1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec');
+			$months = [1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 			return $time->format('j. ') . $months[$time->format('n')] . $time->format(' Y');
 		});
 		$template->registerHelper('timeAgoInWords', function ($time) {
@@ -97,10 +97,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function createComponentCss() {
 		$files = new WebLoader\FileCollection(WWW_DIR . '/css');
-		$files->addFiles(array(
+		$files->addFiles([
 			'bootstrap.css',
 			'screen.less',
-		));
+		]);
 		$compiler = WebLoader\Compiler::createCssCompiler($files, WWW_DIR . '/webtemp');
 		$compiler->setOutputNamingConvention(\OutputNamingConvention::createCssConvention());
 		$compiler->addFileFilter(new Webloader\Filter\LessFilter());
@@ -112,7 +112,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	public function createComponentJs() {
 		$files = new WebLoader\FileCollection(WWW_DIR . '/js');
-		$files->addFiles(array(
+		$files->addFiles([
 			'jquery.js',
 			'bootstrap.js',
 			'jquery.qrcode-0.6.0.js',
@@ -120,7 +120,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 			'nette.ajax.js',
 			'history.ajax.js',
 			'main.js',
-		));
+		]);
 		$compiler = WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
 		$compiler->setOutputNamingConvention(\OutputNamingConvention::createJsConvention());
 		$compiler->addFilter(function ($code) {
@@ -142,7 +142,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 */
 	protected function prepareTexy() {
 		$texy = new \fshlTexy();
-		$texy->addHandler('block', array($texy, 'blockHandler'));
+		$texy->addHandler('block', [$texy, 'blockHandler']);
 		$texy->tabWidth = 4;
 		$texy->headingModule->top = 3; //start at H3
 		$texy->headingModule->generateID = TRUE;

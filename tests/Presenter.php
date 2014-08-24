@@ -45,7 +45,7 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function test($action, $method = self::GET, $params = array(), $post = array()) {
+	public function test($action, $method = self::GET, $params = [], $post = []) {
 		$params['action'] = $action;
 		$request = new Nette\Application\Request($this->presName, $method, $params, $post);
 		$response = $this->presenter->run($request);
@@ -59,7 +59,7 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function testAction($action, $method = self::GET, $params = array(), $post = array()) {
+	public function testAction($action, $method = self::GET, $params = [], $post = []) {
 		$response = $this->test($action, $method, $params, $post);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
@@ -81,7 +81,7 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function testJson($action, $method = self::GET, $params = array(), $post = array()) {
+	public function testJson($action, $method = self::GET, $params = [], $post = []) {
 		$response = $this->test($action, $method, $params, $post);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\JsonResponse);
 		Tester\Assert::same('application/json', $response->getContentType());
@@ -94,7 +94,7 @@ class Presenter extends Nette\Object {
 	 * @param array $post
 	 * @return mixed
 	 */
-	public function testForm($action, $method = self::POST, $post = array()) {
+	public function testForm($action, $method = self::POST, $post = []) {
 		$response = $this->test($action, $method, $post);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 		return $response;

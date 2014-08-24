@@ -64,7 +64,7 @@ class Pictures extends Nette\Object {
 	 * @param array $criteria
 	 * @return mixed
 	 */
-	public function countBy(array $criteria = array()) {
+	public function countBy(array $criteria = []) {
 		return $this->dao->countBy($criteria);
 	}
 

@@ -35,7 +35,7 @@ class PostForm extends UI\Control {
 		$form->addProtection();
 		$form->addText('title', 'Titulek:')->setRequired('Je zapotřebí vyplnit titulek.');
 		$form->addText('slug', 'URL slug:')->setRequired('Je zapotřebí vyplnit slug.');
-		$tags = array();
+		$tags = [];
 		if ($this->post) {
 			foreach ($this->post->tags as $tag) {
 				$tags[] = $tag->name;
@@ -49,12 +49,12 @@ class PostForm extends UI\Control {
 			->setHtmlId('editor')
 			->setRequired('Je zapotřebí napsat nějaký text.');
 		if ($this->post) {
-			$form->setDefaults(array(
+			$form->setDefaults([
 				'title' => $this->post->title,
 				'slug' => $this->post->slug,
 				'editor' => $this->post->body,
 				'publish_date' => $this->post->publish_date->format('Y-m-d\TH:i:s'),
-			));
+			]);
 		}
 		$form->addSubmit('save', 'Uložit a publikovat');
 		$form->onSuccess[] = $this->postFormSucceeded;
