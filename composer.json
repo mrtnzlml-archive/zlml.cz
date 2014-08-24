@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">= 5.4.29",
-		"nette/nette": "~2.2.2",
+		"nette/nette": "2.2.3-RC",
 		"nette/tester": "~1.2.0",
 		"texy/texy": "2.*@dev",
 		"kukulich/fshl": "~2.1.0",
@@ -25,5 +25,6 @@
 	},
 	"require-dev": {
 		"dg/ftp-deployment": "dev-master"
-	}
+	},
+	"minimum-stability": "RC"
 }
