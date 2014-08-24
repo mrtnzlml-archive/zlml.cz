@@ -27,7 +27,6 @@ script: vendor/bin/tester tests -s -c tests/php.ini
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database zeminem;'; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -D zeminem < sql/mysql.sql; fi"
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -D zeminem < sql/data.sql; fi"
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database zeminem;' -U postgres; fi"
   - composer selfupdate
   - composer install --prefer-dist --no-dev
