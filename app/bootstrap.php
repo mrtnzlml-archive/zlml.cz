@@ -23,9 +23,8 @@ $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
 $config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
-if (is_array($config) && array_key_exists('doctrine', $config)) {
-	$container = $configurator->createContainer();
-	return $container;
+if (PHP_SAPI === 'cli' || is_array($config) && array_key_exists('doctrine', $config)) {
+	return $configurator->createContainer();
 } else {
-	require_once(__DIR__ . '/model/.install.php');
+	require_once(__DIR__ . '/model/.install');
 }

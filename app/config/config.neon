@@ -39,6 +39,13 @@ services:
 	- UserEditFormFactory
 	- IAdminMenuFactory
 
+	-
+		class: App\Console\BlogInstall
+		tags: [kdyby.console.command]
+	-
+		class: App\Console\BlogUpdate
+		tags: [kdyby.console.command]
+
 	#It should be here because of Kdyby\Events (?) --- security problem (if you forgot it) :-(
 	- App\AdminPresenter
 	-

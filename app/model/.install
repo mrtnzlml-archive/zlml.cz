@@ -6,7 +6,7 @@
 	body {
 		color: #333;
 		background: white;
-		width: 600px;
+		width: 530px;
 		margin: 50px auto
 	}
 
@@ -37,22 +37,20 @@
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
+		border-radius: 0;
 	}
 
 	.form-control:focus {
 		z-index: 2;
 	}
 
-	input[type="text"] {
+	input[type="text"], select {
 		margin-bottom: -1px;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
 	}
 
-	input[type="password"] {
+	input[type="password"], input[type="submit"] {
 		margin-bottom: 10px;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
+		border-radius: 0;
 	}
 </style>
 
@@ -127,8 +125,8 @@ if ($form->isSubmitted() && $form->isValid()) {
 		/** @var \Kdyby\Doctrine\EntityManager $em */
 		$em = $container->getByType('\Kdyby\Doctrine\EntityManager');
 		$schemaTool = new Doctrine\ORM\Tools\SchemaTool($em);
-		$schemaTool->createSchema($em->getMetadataFactory()->getAllMetadata());
-//		$schemaTool->updateSchema($em->getMetadataFactory()->getAllMetadata());
+//		$schemaTool->createSchema($em->getMetadataFactory()->getAllMetadata());
+		$schemaTool->updateSchema($em->getMetadataFactory()->getAllMetadata());
 		$post = new \Entity\Post;
 		$post->title = 'Vítejte na svém novém blogu!';
 		$post->slug = 'vitejte-na-svem-novem-blogu';
@@ -139,7 +137,6 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$em->flush();
 		echo "<div class='alert alert-success'><strong>OK</strong> Instalace byla úspěšná, načtěte prosím tuto stránku znovu.</div>";
 	} catch (\Exception $exc) {
-		dump($exc);
 		file_put_contents(__DIR__ . '/../config/config.local.neon', $security);
 		echo "<div class='alert alert-danger'><strong>ERROR (#" . $exc->getCode() . "):</strong> " . $exc->getMessage() . "</div>";
 	}
