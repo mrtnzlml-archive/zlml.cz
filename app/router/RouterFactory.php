@@ -3,9 +3,9 @@
 namespace App;
 
 use Model;
+use Nette;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
-use Nette;
 
 /**
  * Router factory.
@@ -51,7 +51,12 @@ class RouterFactory {
 			'action' => 'default',
 			'paginator-page' => 1
 		]);
-
+		//TODO: options - API URL, enable API
+		$router[] = new RestRouter('api[/<presenter>[/<id>]]', array(
+			'module' => 'Rest',
+			'presenter' => 'Resource',
+			'action' => 'get',
+		), RestRouter::RESTFUL); //TODO: kanonizace URL
 		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('<action>', 'Single:article');
 		$router[] = new Route('s[/<search>]', 'Search:default');
