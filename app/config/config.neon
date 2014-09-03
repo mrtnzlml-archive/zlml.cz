@@ -55,6 +55,11 @@ services:
 		class: RestrictListener
 		tags: [kdyby.subscriber]
 
+console:
+	commands:
+		- App\Console\BlogInstall
+		- App\Console\BlogUpdate
+
 aspects:
 	- SecurityAspect
 
