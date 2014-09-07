@@ -1,0 +1,55 @@
+{var $robots = 'noindex'}
+{block content}
+	<div class="row">
+		<div class="col-lg-3">
+			{include menu.latte}
+		</div>
+		<div class="col-lg-9">
+			<h2>
+				Přehled všech stránek
+				<a n:href="pageEdit" class="btn btn-primary">
+					<span class="glyphicon glyphicon-plus"></span>
+					Založit novou stránku
+				</a>
+			</h2>
+
+			<div class="alert alert-danger">
+				Na této stránce se ještě pracuje. Chcete <a href="https://github.com/mrtnzlml/www.zeminem.cz/pulls"
+				                                            target="_blank">pomoci</a>?
+			</div>
+			<table class="table">
+				{foreach $pages as $page}
+					<tr>
+						<td>
+							<span n:if="$page->draft" class="label label-success">DRAFT</span>
+							<a n:href=":Single:article $page->slug"
+							   title="{$page->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">
+								{$page->title}
+							</a>
+						</td>
+						<td>
+							{foreach $page->tags as $tag}
+								<a n:href="Search:default, $tag->name" style="text-decoration:none">
+									<span class="label hidden-print" style="background: #{$tag->color}">
+										{$tag->name}
+									</span>
+								</a>
+							{/foreach}
+						</td>
+						<td>
+							<span style="color:grey">
+								<abbr title="Date">{$page->date|date:'j. n. Y h:m'}</abbr>
+							</span><br>
+						</td>
+						<td>
+							{* TODO *}
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+			<div class="row col-lg-12 text-center">
+				{control paginator}
+			</div>
+		</div>
+	</div>
+{/block}

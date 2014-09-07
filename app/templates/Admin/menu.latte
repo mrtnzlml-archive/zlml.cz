@@ -22,6 +22,14 @@
 		<p class="list-group-item-text">Podívejte se na starší články</p>
 	</a>
 
+	<a n:href=":Admin:pages"
+	   n:class="list-group-item,preg_match('/^page[a-z-]*$/i',$presenter->view)?active">
+		<span class="badge">{$pagecount}</span>
+		<h4 class="list-group-item-heading">Stránky</h4>
+
+		<p class="list-group-item-text">Vytvořte si nové stránky</p>
+	</a>
+
 	<a n:href=":Admin:tags"
 	   n:class="$presenter->isLinkCurrent(':Admin:tags')?'list-group-item active':'list-group-item'">
 		<span class="badge">{$tagcount}</span>

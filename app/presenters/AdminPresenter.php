@@ -3,10 +3,10 @@
 namespace App;
 
 use App;
-use Model;
 use Cntrl;
 use Entity;
 use Kdyby;
+use Model;
 use Nette;
 
 class AdminPresenter extends BasePresenter {
@@ -19,6 +19,8 @@ class AdminPresenter extends BasePresenter {
 	public $tags;
 	/** @var \Model\Users @inject */
 	public $users;
+	/** @var \Model\Pages @inject */
+	public $pages;
 
 	/** @var \PostFormFactory @inject */
 	public $postFormFactory;
@@ -50,6 +52,7 @@ class AdminPresenter extends BasePresenter {
 		$this->template->picturecount = $this->pictures->countBy();
 		$this->template->tagcount = $this->tags->countBy();
 		$this->template->usercount = $this->users->countBy();
+		$this->template->pagecount = $this->pages->countBy();
 		if (!$this->user->isAllowed('Admin', Model\Authorizator::READ)) {
 			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
 		}
@@ -82,6 +85,14 @@ class AdminPresenter extends BasePresenter {
 		$paginator->itemsPerPage = 25;
 		$paginator->itemCount = ITEMCOUNT;
 		$this->template->posts = $this->posts->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
+	}
+
+	public function renderPages() {
+		$vp = new Cntrl\VisualPaginator($this, 'paginator');
+		$paginator = $vp->getPaginator();
+		$paginator->itemsPerPage = 25;
+		$paginator->itemCount = $this->pages->countBy();
+		$this->template->pages = $this->pages->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderTags() {

@@ -25,6 +25,7 @@ services:
 	router: @routerFactory::createRouter
 	- Model\Authenticator
 	- Model\Authorizator
+	- Model\Pages(@doctrine.dao(Entity\Page))
 	- Model\Pictures(@doctrine.dao(Entity\Picture))
 	- Model\Pingbacks(@doctrine.dao(Entity\Pingback))
 	- Model\Posts(@doctrine.dao(Entity\Post))
