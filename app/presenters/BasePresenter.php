@@ -12,12 +12,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	public $posts;
 	/** @var \Nette\Http\Session @inject */
 	public $session;
+	/** @var \Model\Settings @inject */
+	public $settings;
 
 	protected $stack;
+	protected $setting;
 
 	public function __construct() {
 		parent::__construct();
 		$this->stack = \Stack::getStack();
+	}
+
+	public function startup() {
+		parent::startup();
+		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
 	}
 
 	public function formatTemplateFiles() {
@@ -130,6 +138,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	public function handleRandom() {
+		if (!$this->setting->random_search) {
+			$this->error();
+		}
 		$post = $this->posts->rand();
 		if ($post) {
 			$this->redirect('Single:article', $post->slug);

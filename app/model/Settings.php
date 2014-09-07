@@ -2,6 +2,7 @@
 
 namespace Model;
 
+use Entity;
 use Kdyby;
 use Nette;
 
@@ -22,6 +23,27 @@ class Settings extends Nette\Object {
 	}
 
 	/**
+	 * @param Nette\Utils\ArrayHash $vals
+	 */
+	public function save(Nette\Utils\ArrayHash $vals) {
+		foreach ($vals as $key => $value) {
+			if ($entity = $this->findOneBy(['key' => $key])) {
+				if ($entity->value != $value) {
+					$entity->value = $value;
+					$this->dao->add($entity);
+				}
+			} else {
+				$entity = new Entity\Setting;
+				$entity->key = $key;
+				$entity->value = $value;
+				$this->dao->add($entity);
+			}
+		}
+		$em = $this->dao->getEntityManager();
+		$em->flush();
+	}
+
+	/**
 	 * @param array $criteria
 	 * @param array $orderBy
 	 * @param null $limit
@@ -30,6 +52,15 @@ class Settings extends Nette\Object {
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
 		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
+	}
+
+	/**
+	 * @param array $criteria
+	 * @param array $orderBy
+	 * @return mixed|null|object
+	 */
+	public function findOneBy(array $criteria, array $orderBy = null) {
+		return $this->dao->findOneBy($criteria, $orderBy);
 	}
 
 	/**
@@ -43,6 +74,15 @@ class Settings extends Nette\Object {
 			$result[$key->key] = is_numeric($key->value) ? (float)$key->value : $key->value;
 		}
 		return $result;
+	}
+
+	public function findAllByKeys() {
+		$keys = $this->dao->findBy([]);
+		$result = [];
+		foreach ($keys as $key) {
+			$result[$key->key] = is_numeric($key->value) ? (float)$key->value : $key->value;
+		}
+		return Nette\Utils\ArrayHash::from($result);
 	}
 
 	/**

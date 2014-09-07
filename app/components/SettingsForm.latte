@@ -1,1 +1,38 @@
-{control settingsForm}
+{form settingsForm}
+	<div class="row">
+		<div class="col-lg-6">
+			<fieldset>
+				<legend>Obecné nastavení</legend>
+				<div class="checkbox">
+					{input random_search}
+				</div>
+				<div class="checkbox">
+					{input show_content}
+				</div>
+				<div class="form-group">
+					{label ga_code /}
+					{input ga_code, class => "form-control"}
+				</div>
+				<div class="form-group">
+					{label disqus_shortname /}
+					{input disqus_shortname, class => "form-control"}
+				</div>
+			</fieldset>
+		</div>
+		<div class="col-lg-6">
+			<fieldset>
+				<legend>Nastavení příspěvků</legend>
+				<div class="checkbox">
+					{input show_comments}
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	{*<fieldset>
+		<legend>Aktivovat rozšíření</legend>
+		<div class="checkbox">
+			{input enable1}
+		</div>
+	</fieldset>*}
+{input save, class => "btn btn-success"}
+{/form}

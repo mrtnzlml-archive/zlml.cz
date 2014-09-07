@@ -99,7 +99,7 @@ class PostForm extends UI\Control {
 	}
 
 	private function editable() {
-		return $this->presenter->user->isAllowed('Admin', Model\Authorizator::EDIT) ? TRUE : FALSE;
+		return $this->presenter->user->isAllowed('Admin', Model\Authorizator::CREATE) ? TRUE : FALSE;
 	}
 
 }

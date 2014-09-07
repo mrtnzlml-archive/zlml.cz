@@ -119,7 +119,7 @@ class AdminPresenter extends BasePresenter {
 	protected function createComponentSettingsForm() {
 		$control = $this->settingsFormFactory->create();
 		$control->onSave[] = function () {
-			$this->redirect('settings');
+			$this->redirect('setting');
 		};
 		return $control;
 	}

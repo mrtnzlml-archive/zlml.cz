@@ -12,6 +12,9 @@ class SinglePresenter extends BasePresenter {
 	public $tags;
 
 	public function renderObsah() {
+		if (!$this->setting->show_content) {
+			$this->error();
+		}
 		$this->template->articles = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['title' => 'ASC']);
 	}
 

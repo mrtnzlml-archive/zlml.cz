@@ -64,8 +64,8 @@
 			<li n:class="$presenter->isLinkCurrent('Homepage:') ? active"><a n:href="Homepage:"><span class="glyphicon glyphicon-home"></span> home</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:about') ? active"><a n:href="Single:about">about</a></li>
 			<li n:class="$presenter->isLinkCurrent('Single:reference') ? active"><a n:href="Single:reference">reference</a></li>
-			<li n:class="$presenter->isLinkCurrent('Single:obsah') || $presenter->isLinkCurrent('Single:tagsah') ? active"><a n:href="Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
-			<li><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
+			<li n:if="$setting->show_content" n:class="$presenter->isLinkCurrent('Single:obsah') || $presenter->isLinkCurrent('Single:tagsah') ? active"><a n:href="Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
+			<li n:if="$setting->random_search"><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
 			{if $user->isAllowed('Admin', 'view')}<li n:class="$presenter->isLinkCurrent('Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:default, id => NULL">admin</a></li>{/if}
 			<li n:class="$presenter->isLinkCurrent('Single:develop') ? 'pull-right active' : pull-right"><a n:href="Single:develop">develop</a></li>
 		</ul>
@@ -91,7 +91,7 @@
 
 	<script type="text/javascript" n:if="preg_match('/^http:\/\/(www.)?zeminem.cz/i', $baseUrl)">
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-39142238-1']);
+		_gaq.push(['_setAccount', {$setting->ga_code}]);
 		_gaq.push(['_trackPageview']);
 		(function() {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
