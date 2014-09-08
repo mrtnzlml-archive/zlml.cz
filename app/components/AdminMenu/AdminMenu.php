@@ -19,7 +19,7 @@ class AdminMenu extends UI\Control {
 		$this->template->render();
 	}
 
-	public function addContributor($entry) {
+	public function addContributor(\MenuItem $entry) {
 		$this->contributors[] = $entry;
 	}
 

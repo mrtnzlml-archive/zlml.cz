@@ -1,8 +1,11 @@
 <div class="list-group">
 	{foreach $contributors as $contributor}
-		<a class="list-group-item">
-			<h4 class="list-group-item-heading">{$contributor}</h4>
-			{* TODO: <p>, badge *}
+		<a href="{$contributor->link}"
+		   n:class="$presenter->isLinkCurrent($contributor->link)?'list-group-item active':'list-group-item'">
+			<span class="badge">{$contributor->badge}</span>
+			<h4 class="list-group-item-heading">{$contributor->heading}</h4>
+
+			<p class="list-group-item-text">{$contributor->text}</p>
 		</a>
 	{/foreach}
 	<a href="{plink Admin:setting}"
