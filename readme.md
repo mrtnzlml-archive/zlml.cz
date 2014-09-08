@@ -3,7 +3,7 @@ Source code of www.zeminem.cz [1.1]
 
 Master branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/www.zeminem.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/www.zeminem.cz)
 
-It's tested against at least PHP 5.4.29. The lower version of PHP is not supported.
+It's tested against at least PHP 5.4.29. The lower version of PHP is not supported, sorry.
 
 What's on the background
 ------------------------
@@ -14,12 +14,21 @@ What's on the background
 - [FSHL](http://fshl.kukulich.cz/) - free, open source, universal and very fast syntax highlighter
 - [Webloader](https://github.com/janmarek/WebLoader) - component for smart CSS and JS files loading
 - [Doctrine 2](http://www.doctrine-project.org/) - library primarily focused on database storage and object mapping (using [Kdyby](https://github.com/Kdyby/Doctrine))
-- [Kdyby\Events](https://github.com/Kdyby/Events)
+- [Kdyby\Events](https://github.com/Kdyby/Events) - robust events system for Nette Framework
+- [Kdyby\AOP](https://github.com/Kdyby/Aop) - AOP functionality for Nette Framework
 - and much more...
+
+Contribution
+------------
+Do you want to be on contribution list? You can be! Just send one pull request and help me to improve
+this project. I'll place your name and link to this page and into the composer.json file.
+
+Name          | Website
+------------- | -------
+Martin Zlámal | http://www.zeminem.cz/
 
 Installing
 ----------
-
 The best way to install this project is to download latest package
 from repository using Git and load libraries using Composer:
 
@@ -63,7 +72,6 @@ Then you have to create database for this website. You can use Adminer tool in
 
 Updating
 --------
-
 If you're still in project folder, the best way how to update
 your project from a remote repository is pull it using Git:
 
@@ -87,3 +95,26 @@ Awesome print experience
 Incredible articles
 -------------------
 ![Incredible article](www/img/screens/article.png)
+
+Roadmap
+-------
+- [x] absolute URL for pictures (RSS readers)
+- [x] visual paginator
+- [x] Twitter cards
+- [x] pictures support
+- [x] Doctrine triggers for fulltext search
+- [x] settings page
+- [x] intelligent comments preload
+- [x] build script
+- [x] presenter testing
+- [ ] REST API (_in progress_)
+- [ ] extensions support (_in progress_)
+- [ ] article concepts (_in progress_)
+- [ ] pages support (_in progress_)
+- [ ] date of publication (_in progress_)
+- [ ] automatic database install / update (_in progress_)
+- [ ] model security (CRUD) - aspects (_in progress_)
+- [ ] modular structure
+- [ ] pingbacks
+- [ ] hashtags support
+- [ ] better texy editor / WYSIWYG
