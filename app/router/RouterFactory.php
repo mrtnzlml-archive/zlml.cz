@@ -3,9 +3,9 @@
 namespace App;
 
 use Model;
-use Nette;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
+use Nette;
 
 /**
  * Router factory.
@@ -60,7 +60,7 @@ class RouterFactory {
 		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('<action>', 'Single:article');
 		$router[] = new Route('s[/<search>]', 'Search:default');
-		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+		//$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}
 

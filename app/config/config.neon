@@ -38,7 +38,7 @@ services:
 	- PostFormFactory
 	- SettingsFormFactory
 	- UserEditFormFactory
-	- IAdminMenuFactory
+	adminMenuFactory: IAdminMenuFactory
 
 	-
 		class: App\Console\BlogInstall
@@ -69,8 +69,5 @@ extensions:
 	events: Kdyby\Events\DI\EventsExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
-	aop: Kdyby\Aop\DI\AopExtension
-
-	#- CoreExtension
+	aop: Kdyby\Aop\DI\AopExtensio
 	- PictureExtension
-	- AnotherExtension

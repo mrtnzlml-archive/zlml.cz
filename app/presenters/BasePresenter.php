@@ -15,32 +15,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	/** @var \Model\Settings @inject */
 	public $settings;
 
-	protected $stack;
 	protected $setting;
-
-	public function __construct() {
-		parent::__construct();
-		$this->stack = \Stack::getStack();
-	}
 
 	public function startup() {
 		parent::startup();
 		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
-	}
-
-	public function formatTemplateFiles() {
-		$name = $this->getName();
-		$presenter = substr($name, strrpos(':' . $name, ':'));
-		$dir = dirname($this->getReflection()->getFileName());
-		$dir = is_dir("$dir/templates") ? $dir : dirname($dir);
-
-		$locations = [
-			"$dir/templates/$presenter/$this->view.latte",
-		];
-		foreach ($this->stack->getTemplates() as $template) {
-			$locations[] = "$dir/$template/$presenter/$this->view.latte";
-		}
-		return $locations;
 	}
 
 	protected function createComponentSearch() {

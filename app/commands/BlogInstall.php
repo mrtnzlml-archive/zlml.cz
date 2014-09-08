@@ -14,6 +14,7 @@ class BlogInstall extends Command {
 	public $em;
 
 	protected function configure() {
+		//TODO: osamostatnit se od aplikace - používat vlastní connection přes parametry
 		$this->setName('blog:install')->setDescription('Install database schema (set-up DB credentials in config.local.neon).');
 	}
 
