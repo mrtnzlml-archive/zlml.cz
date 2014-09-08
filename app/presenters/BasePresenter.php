@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Latte;
 use Nette\Utils\Strings;
 use Nette;
 use WebLoader;
@@ -90,9 +91,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		]);
 		$compiler = WebLoader\Compiler::createCssCompiler($files, WWW_DIR . '/webtemp');
 		$compiler->setOutputNamingConvention(\OutputNamingConvention::createCssConvention());
-		$compiler->addFileFilter(new Webloader\Filter\LessFilter());
+		$compiler->addFileFilter(new WebLoader\Filter\LessFilter());
 		$compiler->addFilter(function ($code) {
-			return \CssMin::minify($code);
+			$code = Latte\Runtime\Filters::strip($code);
+			$code = Latte\Runtime\Filters::trim($code);
+			$code = preg_replace('/\/\*(.*?)\*\//s', '', $code); //remove comments
+			return $code;
 		});
 		return new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
 	}
@@ -111,7 +115,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$compiler = WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
 		$compiler->setOutputNamingConvention(\OutputNamingConvention::createJsConvention());
 		$compiler->addFilter(function ($code) {
-			return \JSMin::minify($code);
+			$code = preg_replace('/\/\*(.*?)\*\//s', '', $code); //remove multiline comments - inline warning!
+			$code = preg_replace('/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/', "\n", $code); //remove new lines
+			$code = preg_replace('/(^[ \t]+)(.+)$/m', "$2", $code); //odstraní úvodní mezery a tabulátory na řádku
+			return trim($code);
 		});
 		return new \Zeminem\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
 	}
