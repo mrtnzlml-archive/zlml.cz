@@ -35,10 +35,11 @@ services:
 	- Model\Users(@doctrine.dao(Entity\User))
 	#- Model\Xmlrpc
 
+	adminMenuFactory: IAdminMenuFactory
+	- ISignInFormFactory
 	- PostFormFactory
 	- SettingsFormFactory
 	- UserEditFormFactory
-	adminMenuFactory: IAdminMenuFactory
 
 	-
 		class: App\Console\BlogInstall
