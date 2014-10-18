@@ -19,6 +19,11 @@ class SignIn extends UI\Control {
 		$this->template->render();
 	}
 
+	public function renderMinimal() {
+		$this->template->setFile(__DIR__ . '/SignInMinimal.latte');
+		$this->template->render();
+	}
+
 	/**
 	 * Sign-in form factory.
 	 * @return Nette\Application\UI\Form

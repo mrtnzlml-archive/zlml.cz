@@ -8,6 +8,8 @@ use Nette;
 
 class SinglePresenter extends BasePresenter {
 
+	/** @var \ISignInFormFactory @inject */
+	public $signInFormFactory;
 	/** @var \Model\Tags @inject */
 	public $tags;
 
@@ -72,6 +74,11 @@ class SinglePresenter extends BasePresenter {
 			}
 			$this->template->next = $next;
 		}
+	}
+
+	/** @return \Cntrl\SignIn */
+	protected function createComponentSignInForm() {
+		return $this->signInFormFactory->create();
 	}
 
 }
