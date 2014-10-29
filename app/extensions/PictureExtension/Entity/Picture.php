@@ -7,7 +7,7 @@ use Kdyby\Doctrine;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="pictures")
+ * @ORM\Table(name="pictures_ext")
  */
 class Picture extends Doctrine\Entities\BaseEntity {
 
