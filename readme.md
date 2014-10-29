@@ -95,26 +95,3 @@ Awesome print experience
 Incredible articles
 -------------------
 ![Incredible article](www/img/screens/article.png)
-
-Roadmap
--------
-- [x] absolute URL for pictures (RSS readers)
-- [x] visual paginator
-- [x] Twitter cards
-- [x] pictures support
-- [x] Doctrine triggers for fulltext search
-- [x] settings page
-- [x] intelligent comments preload
-- [x] build script
-- [x] presenter testing
-- [ ] REST API (_in progress_)
-- [ ] extensions support (_in progress_)
-- [ ] article concepts (_in progress_)
-- [ ] pages support (_in progress_)
-- [ ] date of publication (_in progress_)
-- [ ] automatic database install / update (_in progress_)
-- [ ] model security (CRUD) - aspects (_in progress_)
-- [ ] modular structure
-- [ ] pingbacks
-- [ ] hashtags support
-- [ ] better texy editor / WYSIWYG
