@@ -11,7 +11,7 @@ class RestrictListener extends Nette\Object implements Kdyby\Events\Subscriber {
 	}
 
 	public function adminEdit(Nette\Application\UI\Presenter $presenter) {
-		if (!$presenter->user->isAllowed('Admin', Model\Authorizator::EDIT)) {
+		if (!$presenter->user->isAllowed('Admin', Model\Authorizator::UPDATE)) {
 			$presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$presenter->redirect('this');
 			return;
@@ -19,7 +19,7 @@ class RestrictListener extends Nette\Object implements Kdyby\Events\Subscriber {
 	}
 
 	public function controlEdit(Nette\Application\UI\Control $control) {
-		if (!$control->presenter->user->isAllowed('Admin', Model\Authorizator::EDIT)) {
+		if (!$control->presenter->user->isAllowed('Admin', Model\Authorizator::UPDATE)) {
 			$control->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$control->presenter->redirect('this');
 			return;
