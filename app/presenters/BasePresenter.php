@@ -3,8 +3,8 @@
 namespace App;
 
 use Latte;
-use Nette\Utils\Strings;
 use Nette;
+use Nette\Utils\Strings;
 use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
@@ -15,12 +15,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	public $session;
 	/** @var \Model\Settings @inject */
 	public $settings;
+	/** @var \Model\Pages @inject */
+	public $pages;
 
 	protected $setting;
 
 	public function startup() {
 		parent::startup();
 		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
+		$this->template->pages = $this->pages->findBy([]);
 	}
 
 	protected function createComponentSearch() {

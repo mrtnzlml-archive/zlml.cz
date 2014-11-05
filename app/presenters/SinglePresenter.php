@@ -3,8 +3,8 @@
 namespace App;
 
 use Model;
-use Nette\Http\Url;
 use Nette;
+use Nette\Http\Url;
 
 class SinglePresenter extends BasePresenter {
 
@@ -28,15 +28,15 @@ class SinglePresenter extends BasePresenter {
 		if ($slug !== $webalized) {
 			$this->redirect('Single:article', $webalized);
 		}
-		$post = $this->posts->findOneBy(['slug' => $webalized, 'publish_date <=' => new \DateTime()]); // zobrazeni článku podle slugu
-		if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
+		$post = $this->posts->findOneBy(['slug' => $webalized, 'publish_date <=' => new \DateTime()]); // zobrazení článku podle slugu
+		$page = $this->pages->findOneBy(['slug' => $webalized]); // zobrazení stránky podle slugu
+		if (!$post && !$page) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
 			$this->forward($webalized);
-		} else { // zobrazení klasických článků
+		} elseif ($post) { // zobrazení klasických článků
 			$texy = $this->prepareTexy();
 			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
 				$el = $invocation->proceed();
 				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
-					//FIXME: nefunguje na ostrém serveru (?)
 					$url = new Url($el->attrs['href']);
 					$httpRequest = $this->presenter->getHttpRequest();
 					$uri = $httpRequest->getUrl();
@@ -73,6 +73,24 @@ class SinglePresenter extends BasePresenter {
 				}
 			}
 			$this->template->next = $next;
+		} else { //PAGE
+			$this->setView('page');
+			$texy = $this->prepareTexy();
+			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
+				$el = $invocation->proceed();
+				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
+					$url = new Url($el->attrs['href']);
+					$httpRequest = $this->presenter->getHttpRequest();
+					$uri = $httpRequest->getUrl();
+					if ($url->authority != $uri->host) {
+						$el->attrs['target'] = '_blank';
+					}
+				}
+				return $el;
+			});
+			$this->template->page = $page;
+			$body = $texy->process($page->body);
+			$this->template->body = $body;
 		}
 	}
 

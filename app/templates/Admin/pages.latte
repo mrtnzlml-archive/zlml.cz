@@ -12,11 +12,11 @@
 					Založit novou stránku
 				</a>
 			</h2>
-
-			<div class="alert alert-danger">
-				Na této stránce se ještě pracuje. Chcete <a href="https://github.com/mrtnzlml/www.zeminem.cz/pulls"
-				                                            target="_blank">pomoci</a>?
-			</div>
+			{if empty($pages)}
+				<div class="alert alert-info">
+					Žádná stránka zatím není vytvořena. Vyzkoušejte to, je to opravdu jednoduché&hellip; (-:
+				</div>
+			{/if}
 			<table class="table">
 				{foreach $pages as $page}
 					<tr>
@@ -28,21 +28,16 @@
 							</a>
 						</td>
 						<td>
-							{foreach $page->tags as $tag}
-								<a n:href="Search:default, $tag->name" style="text-decoration:none">
-									<span class="label hidden-print" style="background: #{$tag->color}">
-										{$tag->name}
-									</span>
-								</a>
-							{/foreach}
-						</td>
-						<td>
 							<span style="color:grey">
 								<abbr title="Date">{$page->date|date:'j. n. Y h:m'}</abbr>
-							</span><br>
+							</span>
 						</td>
 						<td>
-							{* TODO *}
+							<div class="btn-group" style="width:120px">
+								<a n:href=":Admin:pageEdit, id => $page->id" class="btn btn-info">Edit</a>
+								<a n:href="deletePage! $page->id" class="btn btn-danger"
+								   data-confirm="Opravdu chcete tuto stránku článek?">Delete</a>
+							</div>
 						</td>
 					</tr>
 				{/foreach}

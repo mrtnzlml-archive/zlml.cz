@@ -5,11 +5,167 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			<div class="alert alert-danger">
-				Na této stránce se ještě pracuje. Chcete <a href="https://github.com/mrtnzlml/www.zeminem.cz/pulls"
-				                                            target="_blank">pomoci</a>?
+			<span class="pull-right"><a href="javascript:void(0)" class="toggleHelp">NÁPOVĚDA</a></span>
+
+			<div class="help">
+				<span class="pull-right"><a href="javascript:void(0)" class="toggleHelp">ZAVŘÍT</a></span>
+				<h4>Nadpisy</h4>
+				<pre>
+Titulek 1      Titulek 2      Titulek 2     Podtitulek
+#########      *********      =========     ----------</pre>
+				<h4>Typografie</h4>
+				<pre>
+**tučné**      //kurzíva//</pre>
+				<h4>Tvorba odkazů</h4>
+				<pre>
+"Text odkazu":{link //this}
+					"Write me":me@example.com</pre>
+				<h4>Obrázky</h4>
+				<pre>
+[* image.gif .(alternativní text) *]
+[* image.gif <] - obrázek zarovnaný vlevo
+[* image.gif >] - obrázek zarovnaný vpravo
+[* image.gif *] *** Toto je *popiska* pod obrázkem</pre>
+				<h4>Tabulky</h4>
+				<pre>
+|-----------------------------
+| Jméno      | Příjmení  | Věk
+|----------------------------
+| Jesus      | Christ    | 33
+| Cecilie    | Svobodova | 74</pre>
+				<p class="pull-left">Odstavce oddělujte mezerou v textu.</p>
+				<a href="http://texy.info/cs/syntax" class="pull-right" target="_blank">Více informací</a>
 			</div>
-			{* TODO *}
+			{ifset $editace}
+				<h2>
+					Editovat stránku ({$editace})
+					<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-lg">
+						<span class="glyphicon glyphicon-picture"></span>
+						Vložit obrázek
+					</button>
+				</h2>
+			{else}
+				<h2>
+					Přidat novou stránku
+					<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-lg">
+						<span class="glyphicon glyphicon-picture"></span>
+						Vložit obrázek
+					</button>
+				</h2>
+			{/ifset}
+			<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+			     aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="modalLabel">Vyberte obrázek, který chcete do textu vložit</h4>
+						</div>
+						<div class="modal-body">
+							<style>
+								.pic > input[type=radio] {
+									display: none;
+								}
+
+								input[type=radio] + img {
+									cursor: pointer;
+									border: 4px solid transparent;
+								}
+
+								input[type=radio]:checked + img {
+									border: 4px solid #00f;
+								}
+							</style>
+							{foreach $pictures as $picture}
+								<label class="pic" for="{$picture->uuid}">
+									<input id="{$picture->uuid}" type="radio" name="pic" data-dismiss="modal"
+									       data-source="{$picture->uuid}/{$picture->name}"/>
+									<img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100">
+								</label>
+							{/foreach}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			{control pageForm}
 		</div>
 	</div>
+	{snippet preview}
+		<fieldset>
+			<legend>RealTime náhled:</legend>
+			<div class="page-header">
+				<h2>{ifset $title}{$title}{/ifset}</h2>
+			</div>
+			<div id="preview" class="article" n:if="isset($preview)">{$preview|noescape}</div>
+		</fieldset>
+	{/snippet}
+{/block}
+
+{block scripts}
+	{include #parent}
+	<script src="{$basePath}/js/codemirror.js"></script>
+	<script>
+		$(document).ready(function () {
+			var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+				lineNumbers: true,
+				lineWrapping: true,
+				mode: "text/html"
+			});
+
+			$('input[name=pic]').click(function (e) {
+				e.preventDefault();
+				editor.replaceSelection('[* ' + $(this).data('source') + ' 200x200 <]');
+			});
+
+			if (!editor.getValue() && window.localStorage) {
+				var loc = location.pathname + location.search;
+				if (localStorage.getItem('content:' + loc) != undefined) {
+					editor.setValue(localStorage.getItem('content:' + loc));
+				}
+				$('[name="title"]').val(localStorage.getItem('title:' + loc));
+				$('[name="slug"]').val(localStorage.getItem('slug:' + loc));
+			}
+			var timer = null;
+			$.nette.ajax({
+				url: {link update!},
+				type: 'post',
+				data: {
+					title: $('[name="title"]').val(),
+					content: editor.getValue(),
+					slug: $('[name="slug"]').val()
+				}
+			});
+			$('textarea, [name="title"]').live('keyup', function (e) {
+				if (timer) {
+					window.clearTimeout(timer);
+				}
+				timer = window.setTimeout(function () {
+					timer = null;
+					$.nette.ajax({
+						url: {link update!},
+						type: 'post',
+						data: {
+							title: $('[name="title"]').val(),
+							content: editor.getValue(),
+							slug: $('[name="slug"]').val()
+						}
+					});
+					if (window.localStorage) {
+						var loc = location.pathname + location.search;
+						localStorage.setItem('title:' + loc, $('[name="title"]').val());
+						localStorage.setItem('slug:' + loc, $('[name="slug"]').val());
+						localStorage.setItem('content:' + loc, editor.getValue());
+					}
+					e.preventDefault();
+				}, 1000);
+			});
+		});
+	</script>
+{/block}
+
+{block head}
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/codemirror.css">
 {/block}

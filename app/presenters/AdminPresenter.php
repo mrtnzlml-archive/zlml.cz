@@ -22,6 +22,8 @@ class AdminPresenter extends BasePresenter {
 	/** @var \Model\Pages @inject */
 	public $pages;
 
+	/** @var \PageFormFactory @inject */
+	public $pageFormFactory;
 	/** @var \PostFormFactory @inject */
 	public $postFormFactory;
 	/** @var \SettingsFormFactory @inject */
@@ -61,6 +63,18 @@ class AdminPresenter extends BasePresenter {
 
 	public function renderDefault($id = NULL) {
 		$this->template->tags = $this->tags->findBy([]);
+		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC']);
+		if ($id !== NULL) {
+			$this->template->editace = TRUE;
+		}
+		$this->id = $id;
+	}
+
+	public function actionPageEdit($id = NULL) {
+		$this->id = $id;
+	}
+
+	public function renderPageEdit($id = NULL) {
 		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC']);
 		if ($id !== NULL) {
 			$this->template->editace = TRUE;
@@ -128,6 +142,14 @@ class AdminPresenter extends BasePresenter {
 		$control = $this->settingsFormFactory->create();
 		$control->onSave[] = function () {
 			$this->redirect('setting');
+		};
+		return $control;
+	}
+
+	protected function createComponentPageForm() {
+		$control = $this->pageFormFactory->create($this->id);
+		$control->onSave[] = function () {
+			$this->redirect('default');
 		};
 		return $control;
 	}
@@ -207,6 +229,17 @@ class AdminPresenter extends BasePresenter {
 		try {
 			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
 			$this->flashMessage('Článek byl úspěšně smazán.', 'success');
+		} catch (\Exception $exc) {
+			$this->flashMessage($exc->getMessage(), 'danger');
+		}
+		$this->redirect('this');
+	}
+
+	public function handleDeletePage($id) {
+		$this->onBeforeRestrictedFunctionality($this);
+		try {
+			$this->pages->delete($this->pages->findOneBy(['id' => $id]));
+			$this->flashMessage('Stránka byla úspěšně smazána.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
 		}
