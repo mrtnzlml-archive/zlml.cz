@@ -3,6 +3,7 @@
 namespace Model;
 
 use Doctrine;
+use Entity;
 use Kdyby;
 use Nette;
 
@@ -28,7 +29,15 @@ class PostsMirror extends Nette\Object {
 	 * @return array
 	 */
 	public function save($entity = NULL, $relations = NULL) {
-		return $this->dao->save($entity, $relations);
+		if ($entity instanceof Entity\Post) {
+			$postsMirror = new Entity\PostMirror;
+			$postsMirror->title = $entity->title;
+			$postsMirror->body = $entity->body;
+			$postsMirror->date = $entity->date;
+		} else {
+			$postsMirror = $entity;
+		}
+		return $this->dao->save($postsMirror, $relations);
 	}
 
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
