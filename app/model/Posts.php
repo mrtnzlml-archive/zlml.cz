@@ -28,13 +28,13 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @param null $entity
+	 * @param null $entity \Entity\Post
 	 * @param null $relations
 	 * @return array
 	 */
 	public function save($entity = NULL, $relations = NULL) {
 		$entity = $this->dao->save($entity, $relations);
-		$this->onSave($entity);
+		$this->onSave($entity->id);
 		return $entity;
 	}
 
@@ -157,13 +157,13 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @param $entity
+	 * @param $entity \Entity\Post
 	 * @param null $relations
 	 * @param bool $flush
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
+		$this->onDelete($entity->id);
 		$this->dao->delete($entity, $relations, $flush);
-		$this->onDelete($entity);
 	}
 
 	/**

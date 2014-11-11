@@ -24,22 +24,28 @@ class PostsMirror extends Nette\Object {
 	}
 
 	/**
+	 * @param array $criteria
+	 * @param array $orderBy
+	 * @return mixed|null|object
+	 */
+	public function findOneBy(array $criteria, array $orderBy = null) {
+		return $this->dao->findOneBy($criteria, $orderBy);
+	}
+
+	/**
 	 * @param null $entity
 	 * @param null $relations
 	 * @return array
 	 */
 	public function save($entity = NULL, $relations = NULL) {
-		if ($entity instanceof Entity\Post) {
-			$postsMirror = new Entity\PostMirror;
-			$postsMirror->title = $entity->title;
-			$postsMirror->body = $entity->body;
-			$postsMirror->date = $entity->date;
-		} else {
-			$postsMirror = $entity;
-		}
-		return $this->dao->save($postsMirror, $relations);
+		return $this->dao->save($entity, $relations);
 	}
 
+	/**
+	 * @param $entity
+	 * @param null $relations
+	 * @param bool $flush
+	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
 		$this->dao->delete($entity, $relations, $flush);
 	}

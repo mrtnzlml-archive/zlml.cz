@@ -26,7 +26,7 @@ class PostMirror extends Doctrine\Entities\BaseEntity {
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
+	 * @ORM\GeneratedValue(strategy="NONE")
 	 */
 	protected $id;
 
