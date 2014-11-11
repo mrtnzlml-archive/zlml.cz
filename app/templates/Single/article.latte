@@ -43,19 +43,25 @@
 			<div id="bottom">
 				<hr class="hidden-print load_disqus">
 
-				<div class="share hidden-print">
-			<span class="label label-danger">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="https://plus.google.com/share?url={link //this}" target="_blank">Google</a>
-			</span>
-			<span class="label label-info">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_blank">Facebook</a>
-			</span>
-			<span class="label label-success">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://twitter.com/share?text={$post->title}&url={link //this}" target="_blank">Twitter</a>
-			</span>
+				<div class="share hidden-print text-center">
+					<span class="label" style="background:#DF5138">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<a href="https://plus.google.com/share?url={link //this}" target="_new">Google+</a>
+					</span>
+					<span class="label" style="background:#3B5998">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_new">Facebook</a>
+					</span>
+					<span class="label" style="background:#00AFED">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<a href="http://twitter.com/share?text={$post->title}&url={link //this}"
+						   target="_new">Twitter</a>
+					</span>
+					<span class="label" style="background:#1B85BD">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<a href="http://www.linkedin.com/shareArticle?mini=true&url={link //this}&title={$post->title}"
+						   target="_new">LinkedIn</a>
+					</span>
 				</div>
 
 				<hr>

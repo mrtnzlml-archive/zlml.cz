@@ -1,15 +1,27 @@
 $(function () {
 
+	var bodyEl = $('body');
+
 	$("h3[id|=toc]").each(function () {
 		$(this).append($('<a class="anchor hidden-print"> #</a>').attr("href", "#" + $(this).attr("id")))
 	});
 
-	$('body').on('click', '[data-confirm]', function (e) {
+	bodyEl.on('click', '[data-confirm]', function (e) {
 		var question = $(this).data('confirm');
 		if (!confirm(question)) {
 			e.stopImmediatePropagation();
 			e.preventDefault();
 		}
+	});
+
+	bodyEl.on('click', 'a[target^="_new"]', function(e) {
+		var width = window.innerWidth / 2 ;
+		var height = window.innerHeight / 1.5;
+		var top = window.innerHeight / 4;
+		var left = window.innerHeight / 2;
+		window.open(this.href, 'newwindow', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+		e.stopImmediatePropagation();
+		e.preventDefault();
 	});
 
 	$('.toggleHelp').click(function () {
