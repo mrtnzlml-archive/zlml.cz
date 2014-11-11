@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-lg-3">
 			{include menu.latte}
-			<div class="well sidebar-nav">
+			<div n:if="count($tags)" class="well sidebar-nav">
 				{foreach $tags as $tag}
 					<span onclick="insertTag({$tag->name});" class="label" style="cursor:copy;background:#{$tag->color}">{$tag->name}</span>
 				{/foreach}
