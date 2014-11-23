@@ -2,13 +2,15 @@
 	"name": "mrtnzlml/zeminem.cz",
 	"description": "Source code of www.zeminem.cz website",
 	"version": "1.1.0",
-	"homepage": "http://www.zeminem.cz",
-	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"homepage": "http://www.zeminem.cz/",
+	"license": [
+		"BSD-3-Clause",
+		"GPL-2.0",
+		"GPL-3.0"
+	],
 	"authors": [
-		{
-			"name": "Martin Zlámal",
-			"homepage": "http://www.zeminem.cz/"
-		}
+		{"name": "Ondřej Lang"},
+		{"name": "Martin Zlámal", "homepage": "http://www.zeminem.cz/"}
 	],
 	"require": {
 		"php": ">= 5.4",

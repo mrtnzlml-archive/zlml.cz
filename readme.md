@@ -21,11 +21,12 @@ What's on the background
 Contribution
 ------------
 Do you want to be on contribution list? You can be! Just send one pull request and help me to improve
-this project. I'll place your name and link to this page and into the composer.json file.
+this project. I'll place your name and link to this page and into the composer.json file (in alphabetical order).
 
 Name          | Website
 ------------- | -------
-Martin Zlámal | http://www.zeminem.cz/
+Lang Ondřej   | unknown - feel free to update
+Zlámal Martin | http://www.zeminem.cz/
 
 Installing
 ----------
