@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
+<title>New installation</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <style>
 	body {
@@ -79,13 +80,13 @@ if (extension_loaded('pdo_pgsql')) {
 if (empty($drivers)) {
 	echo "
 	<div class='alert alert-danger'>
-		Nemáte nainstalovaný žádný podporovaný driver databáze. Podporované jsou:
+		Looks like you haven't installed any of supported database drivers. Supported database drivers are:
 		<ul>
 			<li>pdo_mysql</li>
 			<li>pdo_pgsql</li>
 		</ul>
 	</div>";
-	exit;
+	exit();
 }
 
 $form = new Nette\Forms\Form;
@@ -98,7 +99,7 @@ $form->addPassword('pass');
 
 $form->addText('username');
 $form->addPassword('password');
-        
+
 $form->addSubmit('create', 'Install');
 
 $form->render('begin');
@@ -119,7 +120,7 @@ $form->render('end');
 
 if ($form->isSubmitted() && $form->isValid()) {
 	$vals = $form->getValues();
-        
+
 	try {
 		file_put_contents(__DIR__ . '/../config/config.local.neon', $security . \Nette\Neon\Neon::encode(['doctrine' => [
 				'host' => $vals->host,
@@ -135,30 +136,31 @@ if ($form->isSubmitted() && $form->isValid()) {
 			->addConfig(__DIR__ . '/../config/config.neon')
 			->addConfig(__DIR__ . '/../config/config.local.neon')
 			->createContainer();
-                
+
 		/** @var \Kdyby\Doctrine\EntityManager $em */
 		$em = $container->getByType('\Kdyby\Doctrine\EntityManager');
-                
+
 		$schemaTool = new Doctrine\ORM\Tools\SchemaTool($em);
 		$schemaTool->updateSchema($em->getMetadataFactory()->getAllMetadata());
-                
+
 		$admin = new \Entity\User;
 		$admin->username = $vals->username;
 		$admin->password = \Nette\Security\Passwords::hash($vals->password);
-		$admin->role     = "admin";
+		$admin->role = "admin";
 		$em->persist($admin);
-                
+
 		$post = new \Entity\Post;
-		$post->title = 'Vítejte na svém novém blogu!';
-		$post->slug = 'vitejte-na-svem-novem-blogu';
-		$post->body = 'Instalace proběhla úspěšně. Jupí! (-:';
+		$title = 'Welcome to your new blog!';
+		$post->title = $title;
+		$post->slug = Nette\Utils\Strings::webalize($title);
+		$post->body = 'The installation was successful. Yaay! (-:';
 		$post->date = new \DateTime;
 		$post->publish_date = new \DateTime;
 		$em->persist($post);
-                
+
 		$em->flush();
-                
-		echo "<div class='alert alert-success'><strong>OK</strong> Instalace byla úspěšná, načtěte prosím tuto stránku znovu.</div>";
+
+		echo "<div class='alert alert-success'><strong>OK</strong> The installation was successful, please press F5 and reload this page again.</div>";
 	} catch (\Exception $exc) {
 		file_put_contents(__DIR__ . '/../config/config.local.neon', $security);
 		echo "<div class='alert alert-danger'><strong>ERROR (#" . $exc->getCode() . "):</strong> " . $exc->getMessage() . "</div>";
