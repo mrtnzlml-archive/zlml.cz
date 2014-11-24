@@ -113,15 +113,31 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 	<script src="{$basePath}/js/codemirror.js"></script>
 	<script>
 		$(document).ready(function () {
+			var mac = CodeMirror.keyMap["default"] == CodeMirror.keyMap.macDefault;
+			var ctrl = mac ? "Cmd-" : "Ctrl-";
+			var map = { };
+			map[ctrl + "B"] = function(cm) { wrap(cm, '**'); };
+			map[ctrl + "I"] = function (cm) { wrap(cm, '//'); };
+			function wrap(cm, mark) {
+				var selection = cm.doc.getSelection();
+				if (selection) {
+					cm.doc.replaceSelection(mark + selection + mark);
+				} else {
+					var cur = cm.doc.getCursor();
+					cm.doc.replaceRange(mark + mark, cur);
+					cm.doc.setCursor(cur.line, cur.ch + mark.length);
+				}
+			}
 			var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 				lineNumbers: true,
 				lineWrapping: true,
 				mode: "text/html"
 			});
+			editor.addKeyMap(map);
 
 			$('input[name=pic]').click(function(e){
 				e.preventDefault();
-				editor.replaceSelection('[* ' + $(this).data('source') + ' 200x200 <]');
+				editor.replaceSelection('[* ' + $(this).data('source') + ' 200x? <]');
 			});
 
 			if (!editor.getValue() && window.localStorage) {
