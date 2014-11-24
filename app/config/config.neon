@@ -50,7 +50,7 @@ services:
 		tags: [kdyby.console.command]
 
 	#It should be here because of Kdyby\Events (?) --- security problem (if you forgot it) :-(
-	- App\AdminPresenter
+	- App\AdminModule\AdminPresenter
 	-
 		class: PostsListener
 		tags: [kdyby.subscriber]

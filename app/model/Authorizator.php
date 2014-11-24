@@ -25,11 +25,11 @@ class Authorizator implements Nette\Security\IAuthorizator {
 		$acl->addRole('demo', 'guest'); // demo dědí od guest
 		$acl->addRole('admin', 'demo'); // a od něj dědí admin
 		// seznam zdrojů, ke kterým mohou uživatelé přistupovat
-		$acl->addResource('Admin');
+		$acl->addResource('Admin:Admin');
 		$acl->addResource('Front');
 		// pravidla, určující, kdo co může s čím dělat
 		$acl->allow('guest', 'Front', self::READ);
-		$acl->allow('demo', 'Admin', self::READ);
+		$acl->allow('demo', 'Admin:Admin', self::READ);
 		$acl->allow('admin', Permission::ALL, Permission::ALL);
 		// Nastaveno!
 		$this->acl = $acl;

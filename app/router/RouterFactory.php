@@ -3,9 +3,9 @@
 namespace App;
 
 use Model;
+use Nette;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
-use Nette;
 
 /**
  * Router factory.
@@ -45,7 +45,11 @@ class RouterFactory {
 		$router[] = new Route('rss', 'Homepage:rss');
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
 		//$router[] = new Route('admin[/<presenter>/<action>[/<id>]]', 'Admin:default');
-		$router[] = new Route('admin[/<action>[/<id>]]', 'Admin:default');
+		$router[] = new Route('admin[/<action>[/<id>]]', array(
+			'module' => 'Admin',
+			'presenter' => 'Admin',
+			'action' => 'default',
+		));
 		$router[] = new Route("[<paginator-page [$paginator]>]", [
 			'presenter' => 'Homepage',
 			'action' => 'default',

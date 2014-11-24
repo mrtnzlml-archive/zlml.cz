@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\AdminModule;
 
 use App;
 use Cntrl;
@@ -39,10 +39,10 @@ class AdminPresenter extends BasePresenter {
 			if ($this->user->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
 				$this->flashMessage('Byli jste odhlášeni z důvodu nečinnosti. Přihlaste se prosím znovu.', 'danger');
 			}
-			$this->redirect('Sign:in', ['backlink' => $this->storeRequest()]);
+			$this->redirect(':Sign:in', ['backlink' => $this->storeRequest()]);
 		} elseif (!$this->user->isAllowed($this->name, Model\Authorizator::READ)) {
 			$this->flashMessage('Přístup byl odepřen. Nemáte oprávnění k zobrazení této stránky.', 'danger');
-			$this->redirect('Sign:in', ['backlink' => $this->storeRequest()]);
+			$this->redirect(':Sign:in', ['backlink' => $this->storeRequest()]);
 		}
 	}
 
@@ -52,7 +52,7 @@ class AdminPresenter extends BasePresenter {
 		$this->template->tagcount = $this->tags->countBy();
 		$this->template->usercount = $this->users->countBy();
 		$this->template->pagecount = $this->pages->countBy();
-		if (!$this->user->isAllowed('Admin', Model\Authorizator::READ)) {
+		if (!$this->user->isAllowed('Admin:Admin', Model\Authorizator::READ)) {
 			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
 		}
 	}

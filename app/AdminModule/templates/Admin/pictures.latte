@@ -50,7 +50,7 @@
 			{include menu.latte}
 		</div>
 		<div class="col-lg-9">
-			{if $user->isAllowed('Admin', 'edit')}
+			{if $user->isAllowed('Admin:Admin', 'edit')}
 				<h2>Nahrát nový obrázek</h2>
 				<div id="image-uploader"></div>
 			{else}

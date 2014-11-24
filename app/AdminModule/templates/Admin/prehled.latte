@@ -23,7 +23,7 @@
 						</td>
 						<td>
 							{foreach $post->tags as $tag}
-								<a n:href="Search:default, $tag->name" style="text-decoration:none">
+								<a n:href=":Search:default, $tag->name" style="text-decoration:none">
 									<span class="label hidden-print"
 									      style="background: #{$tag->color}">{$tag->name}</span>
 								</a>
@@ -35,7 +35,7 @@
 						</td>
 						<td>
 							<div class="btn-group" style="width:120px">
-								<a n:href=":Admin:default, id => $post->id" class="btn btn-info">Edit</a>
+								<a n:href=":Admin:Admin:default, id => $post->id" class="btn btn-info">Edit</a>
 								<a n:href="delete! $post->id" class="btn btn-danger"
 								   data-confirm="Opravdu chcete smazat článek?">Delete</a>
 							</div>
