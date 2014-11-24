@@ -34,6 +34,7 @@ class SettingsForm extends UI\Control {
 		$form->addText('disqus_shortname', 'Disqus shortname:');
 		//Nastavení příspěvků:
 		$form->addCheckbox('show_comments', 'Zobrazovat komentáře');
+		$form->addCheckbox('show_print', 'Umožnit tisk článků');
 
 		//$form->addCheckbox('enable1', 'Aktivovat EXTENSION'); //TODO: do vlastního extension config povolování extensions
 

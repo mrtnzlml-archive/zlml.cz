@@ -12,10 +12,10 @@
 			<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
 			<div class="pull-right hidden-print">
 				<small>
-					<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span
+					<a n:if="$setting->show_print" href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span
 								class="glyphicon glyphicon-print"></span></a>
 					{if $user->isLoggedIn()}
-						<span style="font-size: 25px">\</span>
+						<span n:if="$setting->show_print" style="font-size: 25px">\</span>
 						<a n:href=":Admin:default $post->id">edit&nbsp;<span
 									class="glyphicon glyphicon-edit"></span></a>
 					{/if}
@@ -99,7 +99,8 @@
 							   target="_blank">automaticky</a>&hellip;
 						</p>
 					</div>
-					<div id="disqus_thread" style="padding-bottom: 30px" data-disqus-shortname="{$setting->disqus_shortname}"
+					<div id="disqus_thread" style="padding-bottom: 30px"
+					     data-disqus-shortname="{$setting->disqus_shortname}"
 					     data-disqus-url="{link //this}"></div>
 					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments
 							powered by Disqus.</a></noscript>
