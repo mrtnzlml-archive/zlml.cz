@@ -216,7 +216,7 @@ class AdminPresenter extends BasePresenter {
 
 		$this->template->preview = Nette\Utils\Html::el()->setHtml($texy->process($content));
 		$this->template->title = $title;
-		$this->template->tagsPrev = array_unique(explode(', ', $tags));
+		$this->template->tagsPrev = array_unique(preg_split('/\s*,\s*/', $tags));
 		if ($this->isAjax()) {
 			$this->redrawControl('preview');
 		} else {

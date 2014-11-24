@@ -79,7 +79,7 @@ class PostForm extends UI\Control {
 			$this->post->slug = $vals->slug;
 			$this->post->body = $vals->editor;
 			$this->post->draft = FALSE;
-			foreach (array_unique(explode(', ', $vals->tags)) as $tag_name) {
+			foreach (array_unique(preg_split('/\s*,\s*/', $vals->tags)) as $tag_name) {
 				$tag = $this->tags->findOneBy(['name' => $tag_name]);
 				if (!$tag) {
 					$tag = new Entity\Tag();
