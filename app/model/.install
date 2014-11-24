@@ -97,8 +97,8 @@ $form->addText('dbname')->setRequired();
 $form->addText('user')->setRequired();
 $form->addPassword('pass');
 
-$form->addText('username');
-$form->addPassword('password');
+$form->addText('username')->setRequired();
+$form->addPassword('password')->setRequired();
 
 $form->addSubmit('create', 'Install');
 
