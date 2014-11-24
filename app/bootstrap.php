@@ -22,9 +22,4 @@ define("WWW_DIR", __DIR__ . '/../www');
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
-$config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
-if (PHP_SAPI === 'cli' || is_array($config) && array_key_exists('doctrine', $config)) {
-	return $configurator->createContainer();
-} else {
-	require_once(__DIR__ . '/model/.install');
-}
+return $configurator;
