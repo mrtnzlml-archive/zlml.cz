@@ -97,8 +97,8 @@ $form->addText('dbname')->setRequired();
 $form->addText('user')->setRequired();
 $form->addPassword('pass');
 
-$form->addText('username');
-$form->addPassword('password');
+$form->addText('username')->setRequired();
+$form->addPassword('password')->setRequired();
 
 $form->addSubmit('create', 'Install');
 
@@ -112,7 +112,7 @@ echo $form['dbname']->control->setClass('form-control')->setPlaceholder('Databas
 echo $form['user']->control->setClass('form-control')->setPlaceholder('Database user');
 echo $form['pass']->control->setClass('form-control')->setPlaceholder('Database password');
 
-echo $form['username']->control->setClass('form-control')->setPlaceholder('Admin username');
+echo $form['username']->control->setClass('form-control')->setPlaceholder('Admin username (admin)');
 echo $form['password']->control->setClass('form-control')->setPlaceholder('Admin password');
 
 echo $form['create']->control->setClass('btn btn-large btn-primary btn-block');
