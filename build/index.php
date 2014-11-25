@@ -6,7 +6,7 @@
 
 <?php
 
-require 'tools/nette.phar';
+require __DIR__ . '/../vendor/autoload.php';
 use Nette\Utils\Finder;
 
 $dir = "./blog";
@@ -20,17 +20,11 @@ echo "--- Setting up PHP..." . PHP_EOL;
 set_time_limit(0);
 date_default_timezone_set('Europe/Prague');
 
-echo "--- Downloading project from git repository..." . PHP_EOL;
-echo exec('git clone https://mrtnzlml@bitbucket.org/mrtnzlml/www.zeminem.cz.git blog') . PHP_EOL;
-
-echo "--- Updating Composer..." . PHP_EOL;
-echo exec("composer selfupdate");
-
-echo "--- Installing dependencies... [can take a while]" . PHP_EOL;
-$working_dir = realpath($dir);
-//echo exec("composer update --working-dir $working_dir");
+echo "--- Installing blog via Composer... [can take a while]" . PHP_EOL;
+echo exec("composer create-project --no-interaction mrtnzlml/zeminem.cz blog dev-develop");
 
 echo "--- Cleaning project..." . PHP_EOL;
+$working_dir = realpath($dir);
 foreach (Finder::findDirectories(".git")->from($working_dir)->childFirst() as $file) {
 	delete($file);
 }
@@ -42,6 +36,7 @@ delete($working_dir . DIRECTORY_SEPARATOR . 'composer.json');
 delete($working_dir . DIRECTORY_SEPARATOR . 'composer.lock');
 delete($working_dir . DIRECTORY_SEPARATOR . '.git');
 delete($working_dir . DIRECTORY_SEPARATOR . 'tests');
+delete($working_dir . DIRECTORY_SEPARATOR . 'build');
 delete($working_dir . DIRECTORY_SEPARATOR . 'temp/cache');
 
 echo "--- Creating ZIP archive..." . PHP_EOL;
