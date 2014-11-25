@@ -1,0 +1,48 @@
+<?php
+
+use Kdyby\Doctrine\UnexpectedValueException;
+use Doctrine\DBAL\Exception\ConnectionException;
+
+class isInstallRequired
+{
+    /** @var string */
+    private $installFile;
+    
+    public function __construct(Exception $error)
+    {
+        $this->installFile  = ".install";
+        $this->checkIfInstall($error);
+    }
+    
+    /**
+    * Determinate if new installation is required
+    * @param Exception $error
+    */
+   public function checkIfInstall(Exception $error)
+   {
+       $this->catchBlankConfig($error, $this->installFile);
+       $this->catchUnknownDatabase($error, $this->installFile);
+   }
+
+   /**
+    * Check if doctrine is correctly setup in config
+    * @param Exception $error
+    * @param string $link
+    */
+   private function catchBlankConfig(Exception $error, $link)
+   {
+       if($error instanceof UnexpectedValueException AND strpos($error->getMessage(), "doctrine:"))
+           require_once $link;
+   }
+
+   /**
+    * Check if application using correct database
+    * @param Exception $error
+    * @param string $link
+    */
+   private function catchUnknownDatabase(Exception $error, $link)
+   {
+       if($error instanceof ConnectionException AND $error->getErrorCode() == 1049)
+           require_once $link;
+   }
+}
