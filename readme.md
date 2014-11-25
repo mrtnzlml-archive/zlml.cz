@@ -25,8 +25,8 @@ this project. I'll place your name and link to this page and into the composer.j
 
 Name          | Website
 ------------- | -------
-Lang Ondřej   | unknown - feel free to update
 Zlámal Martin | http://www.zeminem.cz/
+Lang Ondřej   | N/A
 
 Installing
 ----------
