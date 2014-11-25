@@ -4,7 +4,7 @@ namespace App;
 
 use Latte;
 use Nette;
-use Nette\Utils\Strings;
+use Nette\Application\UI;
 use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
@@ -27,7 +27,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	protected function createComponentSearch() {
-		$form = new Nette\Application\UI\Form;
+		$form = new UI\Form;
 		$form->addText('search')
 			->setRequired('Vyplňte co chcete vyhledávat.')
 			->setValue($this->getParameter('search'));
@@ -36,16 +36,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $form;
 	}
 
-	public function searchSucceeded($form) {
-		$vals = $form->getValues();
-		$search = Strings::normalize($vals->search);
-		$search = Strings::replace($search, '/[^\d\w]/u', ' ');
-		$words = Strings::split(Strings::trim($search), '/\s+/u');
-		$words = array_unique(array_filter($words, function ($word) {
-			return Strings::length($word) > 1;
-		}));
-		$search = implode(' ', $words);
-		$this->redirect('Search:default', $search);
+	public function searchSucceeded(UI\Form $form, $values) {
+		$this->redirect('Search:default', $values->search);
 	}
 
 	/**

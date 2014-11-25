@@ -5,7 +5,6 @@ namespace Model;
 use Doctrine;
 use Kdyby;
 use Nette;
-use Nette\Utils\Strings;
 
 /**
  * TODO: QueryObject
@@ -45,7 +44,7 @@ class Posts extends Nette\Object {
 		$query = $this->dao->createQueryBuilder('p')
 			->whereCriteria($criteria)
 			->autoJoinOrderBy((array)$orderBy)
-			->leftJoin('p.tags', 'tt') //t already used?
+			->leftJoin('p.tags', 'tt')//t already used?
 			->addSelect('tt')
 			->getQuery();
 		$resultSet = new Kdyby\Doctrine\ResultSet($query);
@@ -105,17 +104,6 @@ class Posts extends Nette\Object {
 	 * @Secure\Reads
 	 */
 	public function fulltextSearch($search) {
-		$search = Strings::lower(Strings::normalize($search));
-		$search = Strings::replace($search, '/[^\d\w]/u', ' ');
-		$words = Strings::split(Strings::trim($search), '/\s+/u');
-		$words = array_unique(array_filter($words, function ($word) {
-			return Strings::length($word) > 1;
-		}));
-		$words = array_map(function ($word) {
-			return Strings::toAscii($word) . '*';
-		}, $words);
-		$search = implode(' ', $words);
-
 		$where = "";
 		$ft_min_word_len = 4;
 		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
@@ -173,7 +161,7 @@ class Posts extends Nette\Object {
 		$query = $this->dao->createQueryBuilder('p')
 			->whereCriteria($criteria)
 			->autoJoinOrderBy((array)$orderBy)
-			->leftJoin('p.tags', 'tt') //t already used?
+			->leftJoin('p.tags', 'tt')//t already used?
 			->addSelect('tt')
 			->getQuery();
 		$resultSet = new Kdyby\Doctrine\ResultSet($query);
