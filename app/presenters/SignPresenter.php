@@ -12,8 +12,8 @@ class SignPresenter extends BasePresenter {
 	public $signInFormFactory;
 
 	public function actionIn() {
-		if ($this->user->isLoggedIn() && $this->user->isAllowed('Admin', 'view')) {
-			$this->redirect('Admin:default');
+		if ($this->user->isLoggedIn() && $this->user->isAllowed('Admin:Admin', 'view')) {
+			$this->redirect(':Admin:Admin:default');
 		}
 	}
 

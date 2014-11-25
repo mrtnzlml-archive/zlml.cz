@@ -54,7 +54,7 @@ class SignIn extends UI\Control {
 			return;
 		}
 		$this->presenter->restoreRequest($this->backlink);
-		$this->presenter->redirect('Admin:');
+		$this->presenter->redirect(':Admin:Admin:');
 	}
 
 }
