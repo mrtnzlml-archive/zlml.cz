@@ -88,7 +88,7 @@ class UserEditForm extends UI\Control {
 	}
 
 	private function editable() {
-		return $this->presenter->user->isAllowed('Admin', Model\Authorizator::CREATE) ? TRUE : FALSE;
+		return $this->presenter->user->isAllowed('Admin:Admin', Model\Authorizator::CREATE) ? TRUE : FALSE;
 	}
 
 }
