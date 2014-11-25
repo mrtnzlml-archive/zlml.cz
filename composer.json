@@ -14,12 +14,12 @@
 	],
 	"require": {
 		"php": ">= 5.4",
-		"nette/nette": "~2.2.4-RC",
-		"nette/tester": "~1.2.0",
+		"nette/nette": "2.3.*@dev",
+		"nette/tester": "1.3.*@dev",
 		"kukulich/fshl": "~2.1.0",
 		"janmarek/webloader": "~2.2.0",
 		"leafo/lessphp": "~0.4.0",
-		"kdyby/doctrine": "~2.0.0",
+		"kdyby/doctrine": "dev-master",
 		"kdyby/aop": "dev-master",
 		"texy/texy": "dev-master",
 		"dg/adminer-custom": "dev-master"
