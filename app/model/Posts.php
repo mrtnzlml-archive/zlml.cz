@@ -38,7 +38,11 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @Secure\Reads(allow="guest")
+	 * @param array $criteria
+	 * @param array $orderBy
+	 * @param null $limit
+	 * @param null $offset
+	 * @return \ArrayIterator
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
 		$query = $this->dao->createQueryBuilder('p')
@@ -52,21 +56,26 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @Secure\Reads
+	 * @param array $criteria
+	 * @param array $orderBy
+	 * @return mixed|null|object
 	 */
 	public function findOneBy(array $criteria, array $orderBy = null) {
 		return $this->dao->findOneBy($criteria, $orderBy);
 	}
 
 	/**
-	 * @Secure\Reads(allow="guest")
+	 * @param array $criteria
+	 * @return mixed
 	 */
 	public function countBy(array $criteria = []) {
 		return $this->dao->countBy($criteria);
 	}
 
 	/**
-	 * @Secure\Reads
+	 * @param \DateTime $date
+	 * @return mixed|null
+	 * @throws Doctrine\ORM\NonUniqueResultException
 	 */
 	public function findOlder(\DateTime $date) {
 		$query = $this->dao->select()->where('? > date', $date)->order('date DESC')->limit(1);
@@ -78,7 +87,9 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @Secure\Reads
+	 * @param \DateTime $date
+	 * @return mixed|null
+	 * @throws Doctrine\ORM\NonUniqueResultException
 	 */
 	public function findNewer(\DateTime $date) {
 		$query = $this->dao->select()->where('? < date', $date)->limit(1);
@@ -90,7 +101,7 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @Secure\Reads
+	 * @return null
 	 */
 	public function rand() {
 		$posts = iterator_to_array($this->findBy(['publish_date <=' => new \DateTime()]));
@@ -101,7 +112,8 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @Secure\Reads
+	 * @param $search
+	 * @return array
 	 */
 	public function fulltextSearch($search) {
 		$where = "";
@@ -155,7 +167,11 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @Secure\Reads
+	 * @param array $criteria
+	 * @param array $orderBy
+	 * @param null $limit
+	 * @param null $offset
+	 * @return \ArrayIterator
 	 */
 	public function findForApi(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
 		$query = $this->dao->createQueryBuilder('p')

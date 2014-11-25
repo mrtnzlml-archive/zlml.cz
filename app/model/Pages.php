@@ -67,7 +67,8 @@ class Pages extends Nette\Object {
 	}
 
 	/**
-	 * @Secure\Reads(allow="guest")
+	 * @param array $criteria
+	 * @return mixed
 	 */
 	public function countBy(array $criteria = []) {
 		return $this->dao->countBy($criteria);
