@@ -8,5 +8,10 @@ $container = require __DIR__ . '/../app/bootstrap.php';
 
 define('APP_DIR', __DIR__ . '/../app');
 
-// Run application.
-$container->getService('application')->run();
+// Try to run application else start new installation
+try {
+    $container->createContainer()->getService('application')->run();
+} catch (Exception $exc) {
+    include APP_DIR . "/model/.isInstallRequired";
+    new isInstallRequired($exc);
+}
