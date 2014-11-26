@@ -139,9 +139,9 @@ if ($form->isSubmitted() && $form->isValid()) {
 
 		/** @var \Kdyby\Doctrine\EntityManager $em */
 		$em = $container->getByType('\Kdyby\Doctrine\EntityManager');
-		
+
 		/** @var \Kdyby\Doctrine\Connection $em */
-		$conn   = $container->getByType('\Kdyby\Doctrine\Connection');
+		$conn = $container->getByType('\Kdyby\Doctrine\Connection');
 
 		$schemaTool = new Doctrine\ORM\Tools\SchemaTool($em);
 		$schemaTool->updateSchema($em->getMetadataFactory()->getAllMetadata());
@@ -151,9 +151,9 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$admin->password = \Nette\Security\Passwords::hash($vals->password);
 		$admin->role = "admin";
 		$em->persist($admin);
-		
-		$settingSql = file_get_contents(__DIR__ . "\..\..\sql\settings.sql");
-		$setting    = $conn->prepare($settingSql);
+
+		$settingSql = file_get_contents(__DIR__ . '\..\..\sql\settings.sql');
+		$setting = $conn->prepare($settingSql);
 		$setting->execute();
 
 		$post = new \Entity\Post;
