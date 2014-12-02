@@ -159,8 +159,15 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$em->persist($demo);
 
 		$settingSql = file_get_contents(__DIR__ . '\..\..\sql\settings.sql');
+		/** @var PDOStatement $setting */
 		$setting = $conn->prepare($settingSql);
 		$setting->execute();
+
+		//Doctrine fulltext workaround:
+		$workaroundSql = file_get_contents(__DIR__ . '\..\..\sql\fulltext-workaround.sql');
+		/** @var PDOStatement $workaround */
+		$workaround = $conn->prepare($workaroundSql);
+		$workaround->execute();
 
 		$post = new \Entity\Post;
 		$title = 'Welcome to your new blog!';
