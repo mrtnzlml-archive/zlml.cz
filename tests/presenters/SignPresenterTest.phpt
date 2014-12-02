@@ -41,7 +41,7 @@ class SignPresenterTest extends Tester\TestCase {
 	public function testSignInForm() {
 		$presenter = $this->tester->getPresenter();
 		$response = $this->tester->test('in', 'POST', array(
-			'do' => 'signInForm-submit',
+			'do' => 'signInForm-signInForm-submit',
 		), array(
 			'username' => 'Username',
 			'password' => 'Password',
@@ -50,7 +50,7 @@ class SignPresenterTest extends Tester\TestCase {
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::false($presenter->user->isLoggedIn());
 		$response = $this->tester->test('in', 'POST', array(
-			'do' => 'signInForm-submit',
+			'do' => 'signInForm-signInForm-submit',
 		), array(
 			'username' => 'Username',
 			'password' => 'Password',

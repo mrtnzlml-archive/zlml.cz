@@ -27,7 +27,7 @@ class AdminPresenterTest extends Tester\TestCase {
 	}
 
 	public function setUp() {
-		$this->tester->init('Admin');
+		$this->tester->init('Admin:Admin');
 		$this->tester->logIn(1, 'admin');
 	}
 
