@@ -152,6 +152,12 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$admin->role = "admin";
 		$em->persist($admin);
 
+		$demo = new \Entity\User;
+		$demo->username = "demo";
+		$demo->password = \Nette\Security\Passwords::hash("demo");
+		$demo->role = "demo";
+		$em->persist($demo);
+
 		$settingSql = file_get_contents(__DIR__ . '\..\..\sql\settings.sql');
 		$setting = $conn->prepare($settingSql);
 		$setting->execute();
