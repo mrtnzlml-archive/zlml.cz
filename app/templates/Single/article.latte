@@ -12,7 +12,8 @@
 			<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
 			<div class="pull-right hidden-print">
 				<small>
-					<a n:if="$setting->show_print" href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span
+					<a n:if="$setting->show_print" href="javascript:window.print()" class="visible-lg"
+					   style="display: inline !important">tisk&nbsp;<span
 								class="glyphicon glyphicon-print"></span></a>
 					{if $user->isLoggedIn()}
 						<span n:if="$setting->show_print" style="font-size: 25px">\</span>
@@ -84,7 +85,10 @@
 					</div>
 				</div>
 
-				<div n:if="$setting->show_comments" class="hidden-print">
+				<div class="alert alert-danger" n:if="$setting->show_comments && !isset($setting->disqus_shortname)">
+					Please setup your disqus shortname in administration&hellip;
+				</div>
+				<div n:if="$setting->show_comments && isset($setting->disqus_shortname)" class="hidden-print">
 					<div class="alert alert-info" style="margin-top: 20px">
 						<p>
 							V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>
