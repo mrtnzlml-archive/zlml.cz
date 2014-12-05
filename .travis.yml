@@ -32,12 +32,8 @@ script:
   - php code-checker/src/code-checker.php
 
 before_script:
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database zeminem;'; fi"
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -D zeminem < sql/mysql.sql; fi"
-  - sh -c "if [ '$DB' = 'mysql' ]; then echo \"{doctrine:{host:127.0.0.1,port:3306,user:root,password:'',dbname:zeminem,driver:pdo_mysql}}\" > app/config/config.local.neon fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database zeminem;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database blog-mysql;'; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then php www/index.php root blog-mysql; fi"
   - composer selfupdate
   - composer install --prefer-dist --no-dev
   - composer create-project nette/code-checker code-checker ~2.2 --no-interaction --prefer-source
-
-#TODO: before_script - generovat pomoci prikazu, nepouzivat SQL dumpy (Doctrine)

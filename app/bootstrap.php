@@ -22,9 +22,21 @@ define("WWW_DIR", __DIR__ . '/../www');
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
+$help = <<<HELP
+
+Please configure connection to the database first! Use following options:
+	php index.php <db-user> <db-name> [<db-pass>]
+
+HELP;
+
 $config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
-if (PHP_SAPI === 'cli' || is_array($config) && array_key_exists('doctrine', $config)) {
+if (is_array($config) && array_key_exists('doctrine', $config)) {
 	return $configurator->createContainer();
+} elseif (PHP_SAPI === 'cli') {
+	if (!isset($argv[2])) {
+		die($help);
+	}
+	require_once(__DIR__ . '/model/.install-cli');
 } else {
 	require_once(__DIR__ . '/model/.install');
 }
