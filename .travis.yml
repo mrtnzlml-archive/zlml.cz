@@ -29,7 +29,7 @@ matrix:
 
 script:
   - vendor/bin/tester tests -p $TESTER_PHP_BIN -s -c tests/php.ini
-  - php code-checker/src/code-checker.php
+  - php code-checker/src/code-checker.php -d app
 
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database blog_mysql;'; fi"
