@@ -32,7 +32,7 @@ HELP;
 $config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
 if (is_array($config) && array_key_exists('doctrine', $config)) {
 	return $configurator->createContainer();
-} elseif (PHP_SAPI === 'cli') {
+} elseif (PHP_SAPI === 'cli' || getenv('TRAVIS')) {
 	if (!isset($argv[2])) {
 		die($help);
 	}
