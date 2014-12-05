@@ -34,6 +34,7 @@ script:
 after_failure:
   # Print *.log content
   - for i in $(find log -name \*.log); do echo "--- $i"; cat $i; echo; echo; done
+  - cat app/config/config.local.neon; echo; echo;
 
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database blog_mysql;'; fi"
