@@ -37,6 +37,8 @@ if (is_array($config) && array_key_exists('doctrine', $config)) {
 		die($help);
 	}
 	require_once(__DIR__ . '/model/.install-cli');
+	$_SERVER['argv'] = [$argv[0]];
+	return $configurator->createContainer();
 } else {
 	require_once(__DIR__ . '/model/.install');
 }
