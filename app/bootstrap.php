@@ -6,7 +6,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $configurator = new \Nette\Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
-//$configurator->setDebugMode(FALSE);
+//$configurator->setDebugMode(TRUE);
 $configurator->enableDebugger(__DIR__ . '/../log', 'mrtnzlml@gmail.com');
 
 // Enable RobotLoader - this will load all classes automatically
@@ -22,9 +22,23 @@ define("WWW_DIR", __DIR__ . '/../www');
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
+$help = <<<HELP
+
+Please configure connection to the database first! Use following options:
+	php index.php -u <db-user> -n <db-name> [-p <db-pass>] [-d <db-driver=mysql|pgsql>]
+
+HELP;
+
 $config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
-if (PHP_SAPI === 'cli' || is_array($config) && array_key_exists('doctrine', $config)) {
+if (is_array($config) && array_key_exists('doctrine', $config)) {
 	return $configurator->createContainer();
+} elseif (PHP_SAPI === 'cli') {
+	$options = getopt('u:n:p::d::');
+	if (!isset($options['u']) || !isset($options['n'])) {
+		die($help);
+	}
+	require_once(__DIR__ . '/model/.install-cli');
+	exit;
 } else {
 	require_once(__DIR__ . '/model/.install');
 }
