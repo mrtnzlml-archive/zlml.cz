@@ -25,7 +25,7 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 $help = <<<HELP
 
 Please configure connection to the database first! Use following options:
-	php index.php -u <db-user> -n <db-name> [-p <db-pass>]
+	php index.php -u <db-user> -n <db-name> [-p <db-pass>] [-d <db-driver=mysql|pgsql>]
 
 HELP;
 
@@ -33,7 +33,7 @@ $config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.l
 if (is_array($config) && array_key_exists('doctrine', $config)) {
 	return $configurator->createContainer();
 } elseif (PHP_SAPI === 'cli') {
-	$options = getopt('u:n:p::');
+	$options = getopt('u:n:p::d::');
 	if (!isset($options['u']) || !isset($options['n'])) {
 		die($help);
 	}
