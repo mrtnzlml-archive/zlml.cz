@@ -16,6 +16,21 @@ file_put_contents(__DIR__ . '/../config/config.local.neon', $security . \Nette\N
 		'dbname' => $options['n'],
 	]]));
 
+$config = new \Nette\Configurator();
+$container = $config->setTempDirectory(__DIR__ . '/../../temp')
+	->addConfig(__DIR__ . '/../config/config.neon')
+	->addConfig(__DIR__ . '/../config/config.local.neon')
+	->createContainer();
+
+/** @var \Kdyby\Doctrine\EntityManager $em */
+$em = $container->getByType('\Kdyby\Doctrine\EntityManager');
+
+/** @var \Kdyby\Doctrine\Connection $em */
+$conn = $container->getByType('\Kdyby\Doctrine\Connection');
+
+$schemaTool = new Doctrine\ORM\Tools\SchemaTool($em);
+$schemaTool->updateSchema($em->getMetadataFactory()->getAllMetadata());
+
 //
 //try {
 //	$options = getopt('u:n:p::');
