@@ -140,7 +140,7 @@ if ($form->isSubmitted() && $form->isValid()) {
 		/** @var \Kdyby\Doctrine\EntityManager $em */
 		$em = $container->getByType('\Kdyby\Doctrine\EntityManager');
 
-		/** @var \Kdyby\Doctrine\Connection $em */
+		/** @var \Kdyby\Doctrine\Connection $conn */
 		$conn = $container->getByType('\Kdyby\Doctrine\Connection');
 
 		$schemaTool = new Doctrine\ORM\Tools\SchemaTool($em);

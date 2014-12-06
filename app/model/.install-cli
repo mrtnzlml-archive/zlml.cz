@@ -25,23 +25,23 @@ $container = $config->setTempDirectory(__DIR__ . '/../../temp')
 /** @var \Kdyby\Doctrine\EntityManager $em */
 $em = $container->getByType('\Kdyby\Doctrine\EntityManager');
 
-/** @var \Kdyby\Doctrine\Connection $em */
+/** @var \Kdyby\Doctrine\Connection $conn */
 $conn = $container->getByType('\Kdyby\Doctrine\Connection');
 
 $schemaTool = new Doctrine\ORM\Tools\SchemaTool($em);
 $schemaTool->updateSchema($em->getMetadataFactory()->getAllMetadata());
 
-$admin = new \Entity\User;
-$admin->username = 'admin';
-$admin->password = \Nette\Security\Passwords::hash('admin');
-$admin->role = "admin";
-$em->persist($admin);
-
-$demo = new \Entity\User;
-$demo->username = "demo";
-$demo->password = \Nette\Security\Passwords::hash("demo");
-$demo->role = "demo";
-$em->persist($demo);
+//$admin = new \Entity\User;
+//$admin->username = 'admin';
+//$admin->password = \Nette\Security\Passwords::hash('admin');
+//$admin->role = "admin";
+//$em->persist($admin);
+//
+//$demo = new \Entity\User;
+//$demo->username = "demo";
+//$demo->password = \Nette\Security\Passwords::hash("demo");
+//$demo->role = "demo";
+//$em->persist($demo);
 
 $settingSql = file_get_contents(__DIR__ . '\..\..\sql\settings.sql');
 /** @var PDOStatement $setting */
@@ -54,16 +54,16 @@ $workaroundSql = file_get_contents(__DIR__ . '\..\..\sql\fulltext-workaround.sql
 $workaround = $conn->prepare($workaroundSql);
 $workaround->execute();
 
-$post = new \Entity\Post;
-$title = 'Welcome to your new blog!';
-$post->title = $title;
-$post->slug = Nette\Utils\Strings::webalize($title);
-$post->body = 'The installation was successful. Yaay! (-:';
-$post->date = new \DateTime;
-$post->publish_date = new \DateTime;
-$em->persist($post);
-
-$em->flush();
+//$post = new \Entity\Post;
+//$title = 'Welcome to your new blog!';
+//$post->title = $title;
+//$post->slug = Nette\Utils\Strings::webalize($title);
+//$post->body = 'The installation was successful. Yaay! (-:';
+//$post->date = new \DateTime;
+//$post->publish_date = new \DateTime;
+//$em->persist($post);
+//
+//$em->flush();
 
 
 
