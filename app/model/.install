@@ -158,13 +158,13 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$demo->role = "demo";
 		$em->persist($demo);
 
-		$settingSql = file_get_contents(__DIR__ . '/../../sql/settings.sql');
+		$settingSql = file_get_contents(__DIR__ . '/../../sql/settings-mysql.sql');
 		/** @var PDOStatement $setting */
 		$setting = $conn->prepare($settingSql);
 		$setting->execute();
 
 		//Doctrine fulltext workaround:
-		$workaroundSql = file_get_contents(__DIR__ . '/../../sql/fulltext-workaround.sql');
+		$workaroundSql = file_get_contents(__DIR__ . '/../../sql/fulltext-workaround-mysql.sql');
 		/** @var PDOStatement $workaround */
 		$workaround = $conn->prepare($workaroundSql);
 		$workaround->execute();

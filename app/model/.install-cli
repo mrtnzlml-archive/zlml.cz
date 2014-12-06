@@ -10,12 +10,13 @@ NEON;
 
 try {
 	$options = getopt('u:n:p:d:');
+	$driver = isset($options['d']) && in_array($options['d'], ['mysql', 'pgsql']) ? 'pdo_' . $options['d'] : 'pdo_mysql';
 	file_put_contents(__DIR__ . '/../config/config.local.neon', $security . \Nette\Neon\Neon::encode(['doctrine' => [
 			'host' => '127.0.0.1',
 			'user' => $options['u'],
 			'password' => isset($options['p']) ? $options['p'] : '',
 			'dbname' => $options['n'],
-			'driver' => isset($options['d']) && in_array($options['d'], ['mysql', 'pgsql']) ? 'pdo_' . $options['d'] : 'pdo_mysql',
+			'driver' => $driver,
 		]]));
 
 	$config = new \Nette\Configurator();
@@ -45,16 +46,22 @@ try {
 	$demo->role = "demo";
 	$em->persist($demo);
 
-	$settingSql = file_get_contents(__DIR__ . '/../../sql/settings.sql');
+	if ($driver == 'pdo_mysql') {
+		$settingSql = file_get_contents(__DIR__ . '/../../sql/settings-mysql.sql');
+	} else {
+		$settingSql = file_get_contents(__DIR__ . '/../../sql/settings-pgsql.sql');
+	}
 	/** @var PDOStatement $setting */
 	$setting = $conn->prepare($settingSql);
 	$setting->execute();
 
 	//Doctrine fulltext workaround:
-	$workaroundSql = file_get_contents(__DIR__ . '/../../sql/fulltext-workaround.sql');
-	/** @var PDOStatement $workaround */
-	$workaround = $conn->prepare($workaroundSql);
-	$workaround->execute();
+	if ($driver == 'pdo_mysql') {
+		$workaroundSql = file_get_contents(__DIR__ . '/../../sql/fulltext-workaround-mysql.sql');
+		/** @var PDOStatement $workaround */
+		$workaround = $conn->prepare($workaroundSql);
+		$workaround->execute();
+	}
 
 	$post = new \Entity\Post;
 	$title = 'Welcome to your new blog!';
