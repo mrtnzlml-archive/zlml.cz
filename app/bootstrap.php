@@ -33,7 +33,7 @@ $config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.l
 if (is_array($config) && array_key_exists('doctrine', $config)) {
 	return $configurator->createContainer();
 } elseif (PHP_SAPI === 'cli') {
-	$options = getopt('u:n:p::d::');
+	$options = getopt('u:n:p:d:');
 	if (!isset($options['u']) || !isset($options['n'])) {
 		die($help);
 	}
