@@ -25,20 +25,20 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 $help = <<<HELP
 
 Please configure connection to the database first! Use following options:
-	php index.php <db-user> <db-name> [<db-pass>]
+	php index.php -u <db-user> -n <db-name> [-p <db-pass>]
 
 HELP;
 
 $config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
 if (is_array($config) && array_key_exists('doctrine', $config)) {
 	return $configurator->createContainer();
-} elseif (PHP_SAPI === 'cli' || getenv('TRAVIS')) {
-	if (!isset($argv[2])) {
+} elseif (PHP_SAPI === 'cli') {
+	$options = getopt('u:n:p::');
+	if (!isset($options['u']) || !isset($options['n'])) {
 		die($help);
 	}
 	require_once(__DIR__ . '/model/.install-cli');
-	$_SERVER['argv'] = [$argv[0]];
-	return $configurator->createContainer();
+	exit;
 } else {
 	require_once(__DIR__ . '/model/.install');
 }
