@@ -40,5 +40,5 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database blog_test;'; fi"
   - composer selfupdate
   - composer install --prefer-dist --no-dev
-  - php www/index.php root blog_test
+  - php www/index.php -u root -n blog_test
   - composer create-project nette/code-checker code-checker ~2.2 --no-interaction --prefer-source
