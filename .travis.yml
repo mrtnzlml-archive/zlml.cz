@@ -24,9 +24,9 @@ matrix:
     - env: DB=sqlite
   exclude:
     - php: hhvm
-      env: TESTER_PHP_BIN=php-cgi
+      env: TESTER_PHP_BIN=php-cgi #FIXME
     - php: hhvm-nightly
-      env: TESTER_PHP_BIN=php-cgi
+      env: TESTER_PHP_BIN=php-cgi #FIXME
 
 script:
   - vendor/bin/tester tests -p $TESTER_PHP_BIN -s -c tests/php.ini
