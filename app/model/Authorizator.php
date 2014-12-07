@@ -35,8 +35,30 @@ class Authorizator implements Nette\Security\IAuthorizator {
 		$this->acl = $acl;
 	}
 
-	function isAllowed($role, $resource, $privilege) {
+	/**
+	 * @param $role
+	 * @param $resource
+	 * @param $privilege
+	 * @return bool
+	 */
+	public function isAllowed($role, $resource, $privilege) {
 		return $this->acl->isAllowed($role, $resource, $privilege);
+	}
+
+	/**
+	 * @param $role
+	 * @param Nette\Security\User $user
+	 * @return bool
+	 */
+	public function isAtLeastInRole($role, Nette\Security\User $user) {
+		$result = TRUE;
+		foreach ($user->getRoles() as $userRole) {
+			if ($userRole === $role) {
+				return TRUE;
+			}
+			$result &= $this->acl->roleInheritsFrom($userRole, $role);
+		}
+		return (boolean)$result;
 	}
 
 }

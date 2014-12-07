@@ -30,6 +30,9 @@ class Posts extends Nette\Object {
 	 * @param null $entity \Entity\Post
 	 * @param null $relations
 	 * @return array
+	 *
+	 * @Secure\Create(allow="admin")
+	 * @Secure\Update(allow="admin")
 	 */
 	public function save($entity = NULL, $relations = NULL) {
 		$entity = $this->dao->save($entity, $relations);
@@ -43,6 +46,8 @@ class Posts extends Nette\Object {
 	 * @param null $limit
 	 * @param null $offset
 	 * @return \ArrayIterator
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
 		$query = $this->dao->createQueryBuilder('p')
@@ -59,6 +64,8 @@ class Posts extends Nette\Object {
 	 * @param array $criteria
 	 * @param array $orderBy
 	 * @return mixed|null|object
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneBy(array $criteria, array $orderBy = null) {
 		return $this->dao->findOneBy($criteria, $orderBy);
@@ -67,6 +74,8 @@ class Posts extends Nette\Object {
 	/**
 	 * @param array $criteria
 	 * @return mixed
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function countBy(array $criteria = []) {
 		return $this->dao->countBy($criteria);
@@ -76,6 +85,8 @@ class Posts extends Nette\Object {
 	 * @param \DateTime $date
 	 * @return mixed|null
 	 * @throws Doctrine\ORM\NonUniqueResultException
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findOlder(\DateTime $date) {
 		$query = $this->dao->select()->where('? > date', $date)->order('date DESC')->limit(1);
@@ -90,6 +101,8 @@ class Posts extends Nette\Object {
 	 * @param \DateTime $date
 	 * @return mixed|null
 	 * @throws Doctrine\ORM\NonUniqueResultException
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findNewer(\DateTime $date) {
 		$query = $this->dao->select()->where('? < date', $date)->limit(1);
@@ -102,6 +115,8 @@ class Posts extends Nette\Object {
 
 	/**
 	 * @return null
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function rand() {
 		$posts = iterator_to_array($this->findBy(['publish_date <=' => new \DateTime()]));
@@ -114,6 +129,8 @@ class Posts extends Nette\Object {
 	/**
 	 * @param $search
 	 * @return array
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function fulltextSearch($search) {
 		$where = "";
@@ -160,6 +177,8 @@ class Posts extends Nette\Object {
 	 * @param $entity \Entity\Post
 	 * @param null $relations
 	 * @param bool $flush
+	 *
+	 * @Secure\Delete(allow="admin")
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
 		$this->onDelete($entity->id);

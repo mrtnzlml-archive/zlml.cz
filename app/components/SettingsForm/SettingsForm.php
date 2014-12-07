@@ -5,6 +5,7 @@ namespace Cntrl;
 use Entity;
 use Kdyby;
 use Model;
+use Nette;
 use Nette\Application\UI;
 
 class SettingsForm extends UI\Control {
@@ -44,25 +45,16 @@ class SettingsForm extends UI\Control {
 		return $form;
 	}
 
-	public function settingsFormSucceeded($form) {
-		//$this->onBeforeRestrictedFunctionality($this); //FIXME: must be registered in config, but it's against generated factories
-		if (!$this->editable()) {
+	public function settingsFormSucceeded($form, $vals) {
+		try {
+			$this->settings->save($vals);
+			$this->presenter->flashMessage('Změny jsou úspěšně uloženy.', 'success');
+		} catch (Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$this->redirect('this');
 			return;
 		}
-		try {
-			$vals = $form->getValues();
-			$this->settings->save($vals);
-			$this->presenter->flashMessage('Změny jsou úspěšně uloženy.', 'success');
-		} catch (\Exception $exc) {
-			$this->presenter->flashMessage($exc->getMessage(), 'danger');
-		}
 		$this->onSave();
-	}
-
-	private function editable() {
-		return $this->presenter->user->isAllowed('Admin:Admin', Model\Authorizator::CREATE) ? TRUE : FALSE;
 	}
 
 }

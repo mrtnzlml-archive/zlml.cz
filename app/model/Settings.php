@@ -24,6 +24,9 @@ class Settings extends Nette\Object {
 
 	/**
 	 * @param Nette\Utils\ArrayHash $vals
+	 *
+	 * @Secure\Create(allow="admin")
+	 * @Secure\Update(allow="admin")
 	 */
 	public function save(Nette\Utils\ArrayHash $vals) {
 		foreach ($vals as $key => $value) {
@@ -58,6 +61,8 @@ class Settings extends Nette\Object {
 	 * @param array $criteria
 	 * @param array $orderBy
 	 * @return mixed|null|object
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneBy(array $criteria, array $orderBy = null) {
 		return $this->dao->findOneBy($criteria, $orderBy);
@@ -66,6 +71,8 @@ class Settings extends Nette\Object {
 	/**
 	 * @param array $keys
 	 * @return array
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findByKeys(array $keys) {
 		$keys = $this->dao->findBy(['key' => $keys]);
@@ -76,6 +83,11 @@ class Settings extends Nette\Object {
 		return $result;
 	}
 
+	/**
+	 * @return Nette\Utils\ArrayHash
+	 *
+	 * @Secure\Read(allow="guest")
+	 */
 	public function findAllByKeys() {
 		$keys = $this->dao->findBy([]);
 		$result = [];
@@ -88,6 +100,8 @@ class Settings extends Nette\Object {
 	/**
 	 * @param $key
 	 * @return int|null|string
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneByKey($key) {
 		$result = $this->dao->findOneBy(['key' => $key]);

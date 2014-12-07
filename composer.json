@@ -19,6 +19,7 @@
 		"kukulich/fshl": "~2.1.0",
 		"janmarek/webloader": "~2.2.0",
 		"leafo/lessphp": "~0.4.0",
+		"kdyby/aop": "dev-master",
 		"kdyby/doctrine": "dev-master",
 		"texy/texy": "dev-master",
 		"dg/adminer-custom": "dev-master"

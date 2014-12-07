@@ -25,6 +25,9 @@ class Tags extends Nette\Object {
 	 * @param null $entity
 	 * @param null $relations
 	 * @return array
+	 *
+	 * @Secure\Create(allow="admin")
+	 * @Secure\Update(allow="admin")
 	 */
 	public function save($entity = NULL, $relations = NULL) {
 		return $this->dao->save($entity, $relations);
@@ -36,6 +39,8 @@ class Tags extends Nette\Object {
 	 * @param null $limit
 	 * @param null $offset
 	 * @return array
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
 		$query = $this->dao->createQueryBuilder('t')
@@ -52,6 +57,8 @@ class Tags extends Nette\Object {
 	 * @param array $criteria
 	 * @param array $orderBy
 	 * @return mixed|null|object
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneBy(array $criteria, array $orderBy = null) {
 		return $this->dao->findOneBy($criteria, $orderBy);
@@ -60,6 +67,8 @@ class Tags extends Nette\Object {
 	/**
 	 * @param array $criteria
 	 * @return mixed
+	 *
+	 * @Secure\Read(allow="guest")
 	 */
 	public function countBy(array $criteria = []) {
 		return $this->dao->countBy($criteria);
@@ -69,6 +78,8 @@ class Tags extends Nette\Object {
 	 * @param $entity
 	 * @param null $relations
 	 * @param bool $flush
+	 *
+	 * @Secure\Delete(allow="admin")
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
 		$this->dao->delete($entity, $relations, $flush);

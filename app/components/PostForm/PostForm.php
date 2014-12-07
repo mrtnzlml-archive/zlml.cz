@@ -2,9 +2,10 @@
 
 namespace Cntrl;
 
-use Model;
 use Entity;
 use Kdyby;
+use Model;
+use Nette;
 use Nette\Application\UI;
 
 class PostForm extends UI\Control {
@@ -61,14 +62,7 @@ class PostForm extends UI\Control {
 		return $form;
 	}
 
-	public function postFormSucceeded($form) {
-		//$this->onBeforeRestrictedFunctionality($this); //FIXME: must be registered in config, but it's against generated factories
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
-		$vals = $form->getValues();
+	public function postFormSucceeded($form, $vals) {
 		try {
 			if (!$this->post) {
 				$this->post = new Entity\Post();
@@ -95,11 +89,11 @@ class PostForm extends UI\Control {
 			$this->onSave();
 		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
 			$this->presenter->flashMessage('Tento URL slug je již v databázi uložen, zvolte prosím jiný.', 'danger');
+		} catch (Nette\Security\AuthenticationException $exc) {
+			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
+			$this->redirect('this');
+			return;
 		}
-	}
-
-	private function editable() {
-		return $this->presenter->user->isAllowed('Admin:Admin', Model\Authorizator::CREATE) ? TRUE : FALSE;
 	}
 
 }

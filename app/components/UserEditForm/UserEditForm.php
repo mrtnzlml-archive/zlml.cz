@@ -2,9 +2,10 @@
 
 namespace Cntrl;
 
-use Model;
 use Entity;
 use Kdyby;
+use Model;
+use Nette;
 use Nette\Application\UI;
 use Nette\Security\Passwords;
 
@@ -62,14 +63,7 @@ class UserEditForm extends UI\Control {
 		return $form;
 	}
 
-	public function formSucceeded(UI\Form $form) {
-		//$this->onBeforeRestrictedFunctionality($this); //FIXME: must be registered in config, but it's against generated factories
-		if (!$this->editable()) {
-			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
-			$this->redirect('this');
-			return;
-		}
-		$vals = $form->getValues();
+	public function formSucceeded(UI\Form $form, $vals) {
 		try {
 			if (!$this->account) {
 				$this->account = new Entity\User();
@@ -81,14 +75,12 @@ class UserEditForm extends UI\Control {
 			$this->presenter->flashMessage('Změny úspěšně uloženy.', 'success');
 		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
 			$this->presenter->flashMessage('Uživatel s tímto jménem již existuje. Zvolte prosím jiné.', 'danger');
-		} catch (\Exception $exc) {
-			$this->presenter->flashMessage($exc->getMessage(), 'danger');
+		} catch (Nette\Security\AuthenticationException $exc) {
+			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
+			$this->redirect('this');
+			return;
 		}
 		$this->onSave();
-	}
-
-	private function editable() {
-		return $this->presenter->user->isAllowed('Admin:Admin', Model\Authorizator::CREATE) ? TRUE : FALSE;
 	}
 
 }
