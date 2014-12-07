@@ -13,14 +13,12 @@ env:
   matrix:
     - DB=mysql
     - DB=pgsql
-    - DB=sqlite
 
 matrix:
   allow_failures:
     - php: hhvm
     - php: hhvm-nightly
     - env: DB=pgsql
-    - env: DB=sqlite
   exclude:
     - php: hhvm
       env: TESTER_PHP_BIN=php-cgi #FIXME
@@ -29,7 +27,6 @@ matrix:
 
 script:
   - vendor/bin/tester tests -p $TESTER_PHP_BIN -s -c tests/php.ini
-  #- php code-checker/src/code-checker.php -d app
 
 after_failure:
   - cat app/config/config.local.neon; echo; echo;
@@ -41,7 +38,6 @@ before_script:
   - composer install --prefer-dist --no-dev
   - sh -c "if [ '$DB' = 'mysql' ]; then php www/index.php -u root -n blog_mysql; fi"
   - sh -c "if [ '$DB' = 'pgsql' ]; then php www/index.php -u postgres -n blog_pgsql -d pgsql; fi"
-  #- composer create-project nette/code-checker code-checker ~2.2 --no-interaction --prefer-source
 
 notifications:
   email: false
