@@ -9,7 +9,6 @@ use Tester;
 $container = require __DIR__ . '/../bootstrap.php';
 
 /**
- * TODO: ověřit práva k akcím
  * @testCase
  */
 class AdminPresenterTest extends Tester\TestCase {
