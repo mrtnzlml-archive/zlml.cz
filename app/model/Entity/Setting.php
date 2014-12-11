@@ -19,9 +19,9 @@ class Setting extends Doctrine\Entities\BaseEntity {
 	protected $id;
 
 	/** @ORM\Column(type="string", name="`key`", unique=TRUE) */
-	protected $key;
+	public $key;
 
 	/** @ORM\Column(type="string", name="`value`", nullable=TRUE) */
-	protected $value;
+	public $value;
 
 }

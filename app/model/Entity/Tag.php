@@ -29,9 +29,9 @@ class Tag extends Doctrine\Entities\BaseEntity {
 	protected $id;
 
 	/** @ORM\Column(type="string", length=50) */
-	protected $name;
+	public $name;
 
 	/** @ORM\Column(type="string", length=6) */
-	protected $color;
+	public $color;
 
 }

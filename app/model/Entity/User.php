@@ -19,12 +19,12 @@ class User extends Doctrine\Entities\BaseEntity {
 	protected $id;
 
 	/** @ORM\Column(unique=true, type="string", length=100) */
-	protected $username;
+	public $username;
 
 	/** @ORM\Column(type="string", length=100) */
-	protected $password;
+	public $password;
 
 	/** @ORM\Column(type="string", length=20) */
-	protected $role;
+	public $role;
 
 }
