@@ -31,11 +31,23 @@
 			</fieldset>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<fieldset>
+				<legend style="color:maroon">Nebezpečná nastavení</legend>
+				<div class="checkbox">
+					{input disable_blog}
+				</div>
+			</fieldset>
+		</div>
+	</div>
 	{*<fieldset>
 		<legend>Aktivovat rozšíření</legend>
 		<div class="checkbox">
 			{input enable1}
 		</div>
 	</fieldset>*}
-{input save, class => "btn btn-success"}
+	<div class="well" style="max-width:250px;margin: 20px auto">
+		{input save, class => "btn btn-block btn-success"}
+	</div>
 {/form}

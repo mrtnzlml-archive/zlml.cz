@@ -29,6 +29,7 @@ class SettingsForm extends UI\Control {
 		$form = new UI\Form;
 		$form->addProtection();
 		//Obecné nastavení:
+		$form->addCheckbox('disable_blog', 'Zakázat blog jako takový');
 		$form->addCheckbox('random_search', 'Povolit random výběr příspěvků');
 		$form->addCheckbox('show_content', 'Zobrazit obsah blogu');
 		$form->addText('ga_code', 'Google Analytics kód:');

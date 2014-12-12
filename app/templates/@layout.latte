@@ -29,18 +29,20 @@
 				<h1><a n:href=":Homepage:">Martin <span style="white-space:nowrap"><span class="transf1">Zlá</span><span class="transf2">mal</span></span></a></h1>
 			</div>
 			<div class="col-lg-3 col-md-4">
-				{form search, class => 'form-inline'}
-					<div class="row">
-						<div class="col-lg-12" style="margin-top:10px">
-							<div class="input-group">
-								<input n:name="search" type="search" class="form-control" placeholder="Hledat">
-								<span class="input-group-btn">
-									{input send, class => 'btn btn-default go'}
-								</span>
+				{if !$setting->disable_blog}
+					{form search, class => 'form-inline'}
+						<div class="row">
+							<div class="col-lg-12" style="margin-top:10px">
+								<div class="input-group">
+									<input n:name="search" type="search" class="form-control" placeholder="Hledat">
+									<span class="input-group-btn">
+										{input send, class => 'btn btn-default go'}
+									</span>
+								</div>
 							</div>
 						</div>
-					</div>
-				{/form}
+					{/form}
+				{/if}
 				<div class="text-right" style="margin-top: 20px;">
 					<a href="https://twitter.com/mrtnzlml" target="_blank">Twitter</a>
 					&middot;
@@ -61,7 +63,7 @@
 	{snippet menu}
 	<div class="container hidden-print main-nav" style="background:transparent;padding:0">
 		<ul class="nav nav-pills">
-			<li n:class="$presenter->isLinkCurrent(':Homepage:') ? active"><a n:href=":Homepage:"><span class="glyphicon glyphicon-home"></span> home</a></li>
+			<li n:if="!$setting->disable_blog" n:class="$presenter->isLinkCurrent(':Homepage:') ? active"><a n:href=":Homepage:"><span class="glyphicon glyphicon-home"></span> home</a></li>
 			<li n:class="$presenter->isLinkCurrent(':Single:about') ? active"><a n:href=":Single:about">about</a></li>
 			<li n:class="$presenter->isLinkCurrent(':Single:reference') ? active"><a n:href=":Single:reference">reference</a></li>
 			{foreach $pages as $page}
@@ -69,8 +71,8 @@
 					<a n:href=":Single:$page->slug">{$page->title|lower}</a>
 				</li>
 			{/foreach}
-			<li n:if="$setting->show_content" n:class="$presenter->isLinkCurrent(':Single:obsah') || $presenter->isLinkCurrent(':Single:tagsah') ? active"><a n:href=":Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
-			<li n:if="$setting->random_search"><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
+			<li n:if="$setting->show_content && !$setting->disable_blog" n:class="$presenter->isLinkCurrent(':Single:obsah') || $presenter->isLinkCurrent(':Single:tagsah') ? active"><a n:href=":Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
+			<li n:if="$setting->random_search && !$setting->disable_blog"><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
 			{if $user->isAllowed('Admin:Admin', 'view')}<li n:class="$presenter->isLinkCurrent(':Admin:Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:Admin:, id => NULL">admin</a></li>{/if}
 			<li n:class="$presenter->isLinkCurrent(':Single:develop') ? 'pull-right active' : pull-right"><a n:href=":Single:develop">develop</a></li>
 		</ul>
