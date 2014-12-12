@@ -85,10 +85,11 @@
 					</div>
 				</div>
 
-				<div class="alert alert-danger" n:if="$setting->show_comments && !isset($setting->disqus_shortname)">
+				{dump $setting->disqus_shortname}
+				<div class="alert alert-danger" n:if="!$post->disable_comments && $setting->show_comments && empty($setting->disqus_shortname)">
 					Please setup your disqus shortname in administration&hellip;
 				</div>
-				<div n:if="$setting->show_comments && isset($setting->disqus_shortname)" class="hidden-print">
+				<div n:if="!$post->disable_comments && $setting->show_comments && !empty($setting->disqus_shortname)" class="hidden-print">
 					<div class="alert alert-info" style="margin-top: 20px">
 						<p>
 							V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>

@@ -10,8 +10,6 @@ use Nette\Application\UI;
 
 class SettingsForm extends UI\Control {
 
-	public $onSave = [];
-
 	/** @var \Model\Settings */
 	private $settings;
 
@@ -46,7 +44,7 @@ class SettingsForm extends UI\Control {
 		return $form;
 	}
 
-	public function settingsFormSucceeded($form, $vals) {
+	public function settingsFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals) {
 		try {
 			$this->settings->save($vals);
 			$this->presenter->flashMessage('Změny jsou úspěšně uloženy.', 'success');
@@ -55,7 +53,6 @@ class SettingsForm extends UI\Control {
 			$this->redirect('this');
 			return;
 		}
-		$this->onSave();
 	}
 
 }

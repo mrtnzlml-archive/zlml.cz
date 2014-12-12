@@ -59,6 +59,9 @@ class Post extends Doctrine\Entities\BaseEntity {
 	public $publish_date;
 
 	/** @ORM\Column(type="boolean") */
+	public $disable_comments = FALSE;
+
+	/** @ORM\Column(type="boolean") */
 	public $draft = FALSE; //TRUE;
 
 }

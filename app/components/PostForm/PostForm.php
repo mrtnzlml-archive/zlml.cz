@@ -49,12 +49,14 @@ class PostForm extends UI\Control {
 		$form->addTextArea('editor', 'Obsah článku:')
 			->setHtmlId('editor')
 			->setRequired('Je zapotřebí napsat nějaký text.');
+		$form->addCheckbox('disable_comments', 'Zakázat pod tímto článkem komentáře');
 		if ($this->post) {
 			$form->setDefaults([
 				'title' => $this->post->title,
 				'slug' => $this->post->slug,
 				'editor' => $this->post->body,
 				'publish_date' => $this->post->publish_date->format('Y-m-d\TH:i:s'),
+				'disable_comments' => $this->post->disable_comments,
 			]);
 		}
 		$form->addSubmit('save', 'Uložit a publikovat');
@@ -62,7 +64,7 @@ class PostForm extends UI\Control {
 		return $form;
 	}
 
-	public function postFormSucceeded($form, $vals) {
+	public function postFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals) {
 		try {
 			if (!$this->post) {
 				$this->post = new Entity\Post();
@@ -72,6 +74,7 @@ class PostForm extends UI\Control {
 			$this->post->title = $vals->title;
 			$this->post->slug = $vals->slug;
 			$this->post->body = $vals->editor;
+			$this->post->disable_comments = $vals->disable_comments;
 			$this->post->draft = FALSE;
 			foreach (array_unique(preg_split('/\s*,\s*/', $vals->tags)) as $tag_name) {
 				$tag = $this->tags->findOneBy(['name' => $tag_name]);
