@@ -10,6 +10,8 @@ use Nette\Application\UI;
 
 class SettingsForm extends UI\Control {
 
+	public $onSave = [];
+
 	/** @var \Model\Settings */
 	private $settings;
 
@@ -48,6 +50,7 @@ class SettingsForm extends UI\Control {
 		try {
 			$this->settings->save($vals);
 			$this->presenter->flashMessage('Změny jsou úspěšně uloženy.', 'success');
+			$this->onSave();
 		} catch (Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$this->redirect('this');
