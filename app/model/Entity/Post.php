@@ -44,24 +44,24 @@ class Post extends Doctrine\Entities\BaseEntity {
 	protected $id;
 
 	/** @ORM\Column(type="text") */
-	public $title;
+	protected $title;
 
 	/** @ORM\Column(type="text") */
-	public $slug;
+	protected $slug;
 
 	/** @ORM\Column(type="text") */
-	public $body;
+	protected $body;
 
 	/** @ORM\Column(type="datetime") */
-	public $date;
+	protected $date;
 
 	/** @ORM\Column(type="datetime") */
-	public $publish_date;
+	protected $publish_date;
 
 	/** @ORM\Column(type="boolean") */
-	public $disable_comments = FALSE;
+	protected $disable_comments = FALSE;
 
 	/** @ORM\Column(type="boolean") */
-	public $draft = FALSE; //TRUE;
+	protected $draft = FALSE; //TRUE;
 
 }

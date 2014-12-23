@@ -31,12 +31,12 @@ class PostMirror extends Doctrine\Entities\BaseEntity {
 	protected $id;
 
 	/** @ORM\Column(type="text") */
-	public $title;
+	protected $title;
 
 	/** @ORM\Column(type="text") */
-	public $body;
+	protected $body;
 
 	/** @ORM\Column(type="datetime") */
-	public $date;
+	protected $date;
 
 }

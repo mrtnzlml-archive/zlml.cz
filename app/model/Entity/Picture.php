@@ -19,12 +19,12 @@ class Picture extends Doctrine\Entities\BaseEntity {
 	protected $id;
 
 	/** @ORM\Column(type="string", length=40) */
-	public $uuid;
+	protected $uuid;
 
 	/** @ORM\Column(type="string", length=255) */
-	public $name;
+	protected $name;
 
 	/** @ORM\Column(type="datetime") */
-	public $created;
+	protected $created;
 
 }

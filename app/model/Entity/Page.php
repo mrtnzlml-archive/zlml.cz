@@ -20,18 +20,18 @@ class Page extends Doctrine\Entities\BaseEntity {
 	protected $id;
 
 	/** @ORM\Column(type="text") */
-	public $title;
+	protected $title;
 
 	/** @ORM\Column(type="text") */
-	public $slug;
+	protected $slug;
 
 	/** @ORM\Column(type="text") */
-	public $body;
+	protected $body;
 
 	/** @ORM\Column(type="datetime") */
-	public $date;
+	protected $date;
 
 	/** @ORM\Column(type="boolean") */
-	public $draft = FALSE; //TRUE;
+	protected $draft = FALSE; //TRUE;
 
 }
