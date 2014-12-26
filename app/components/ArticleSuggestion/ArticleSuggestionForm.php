@@ -39,7 +39,7 @@ class ArticleSuggestion extends UI\Control {
 			$message->setFrom('postmaster@zeminem.cz')
 				->addTo('mrtnzlml@gmail.com')
 				->setSubject('Návrh článku - zeminem.cz')
-				->setBody("<strong>Návrh článku:</strong> $vals->article");
+				->setHtmlBody("<h1>Návrh článku</h1> $vals->article");
 			$mailer->send($message);
 		} catch (Nette\InvalidStateException $exc) { //We have fallback message backup... (-:
 			Debugger::log('InvalidStateException: ' . $exc->getMessage(), Debugger::CRITICAL);
