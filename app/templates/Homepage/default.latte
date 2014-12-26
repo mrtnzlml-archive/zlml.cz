@@ -1,5 +1,19 @@
 {block content}
 	{foreach $posts as $post}
+		{if $iterator->counter === 3}
+			<div class="row well" style="margin:0;background:url({$basePath}/img/skulls.png)">
+				<div class="col-lg-5 col-md-5">
+					<span style="font-size:21px">Navrhněte článek!</span>
+					<p>
+						Navrhněte, jaký článek by vás zajímal. Napište dostatečně přesvědčivé argumenty a je zde
+						určitá šance, že bude tento článek uveřejněn. Ale pozor! Žádné PR&hellip; (-:
+					</p>
+				</div>
+				<div class="col-lg-7 col-md-7">
+					{control articleSuggestion}
+				</div>
+			</div>
+		{/if}
 		{if $iterator->odd}<div class="row">{/if}
 		{var $large = array(1, 4, 5, 8, 9)}
 		<div n:class="in_array($iterator->counter, $large) ? 'col-lg-7 col-md-7' : 'col-lg-5 col-md-5'">

@@ -72,8 +72,7 @@ $(function () {
 	var a, b = $("#pocet").eq(0),
 		d = parseInt($(b).text(), 10);
 	var time = $("#time"),
-		minuty = $("#minuty"),
-		tip = $("#tip");
+		minuty = $("#minuty");
 	$(document).on('scroll', function () {
 		a && clearTimeout(a), a = setTimeout(function () {
 			var a = $("#columns").height(),
@@ -85,23 +84,18 @@ $(function () {
 			h >= 0 ? (b.text(h), time.text(min)) : (b.text("0"), time.text("0"));
 			switch (min) {
 				case 1:
-					tip.text("Dočtěte tento text.");
 					minuty.text("minuta");
 					break;
 				case 2:
-					tip.text("Napijte se.");
 					minuty.text("minuty");
 					break;
 				case 3:
 					minuty.text("minuty");
-					tip.text("Uvařte si kafe.");
 					break;
 				case 4:
-					tip.text("Nasvačte se.");
 					minuty.text("minuty");
 					break;
 				default:
-					tip.text("Přečtěte si komentáře.");
 					minuty.text("minut");
 			}
 		}, 100)

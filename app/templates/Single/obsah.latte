@@ -6,6 +6,18 @@
 		.link { font-size: 18px; padding-left: 2%; text-decoration: none; }
 		.link:hover { text-decoration: underline; }
 	</style>
+	<div class="row well" style="margin:0;background:url({$basePath}/img/skulls.png)">
+		<div class="col-lg-5 col-md-5">
+			<span style="font-size:21px">Navrhněte článek!</span>
+			<p>
+				Navrhněte, jaký článek by vás zajímal. Napište dostatečně přesvědčivé argumenty a je zde
+				určitá šance, že bude tento článek uveřejněn. Ale pozor! Žádné PR&hellip; (-:
+			</p>
+		</div>
+		<div class="col-lg-7 col-md-7">
+			{control articleSuggestion}
+		</div>
+	</div>
 	{cache expire => '+20 minutes'}
 		<div class="row" style="margin-bottom: 10px">
 			<div class="col-lg-12">

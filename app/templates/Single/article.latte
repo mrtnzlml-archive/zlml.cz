@@ -6,28 +6,21 @@
 {/block}
 
 {block content}
-	<div class="page-header">
-		<h2>
+	<div class="page-header text-center">
+		<h2 style="font-size:40px">
 			{block title}{$post->title|vlna}{/block}
-			<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
-			<div class="pull-right hidden-print">
-				<small>
-					<a n:if="$setting->show_print" href="javascript:window.print()" class="visible-lg"
-					   style="display: inline !important">tisk&nbsp;<span
-								class="glyphicon glyphicon-print"></span></a>
-					{if $user->isLoggedIn()}
-						<span n:if="$setting->show_print" style="font-size: 25px">\</span>
-						<a n:href=":Admin:Admin:default $post->id">edit&nbsp;<span
-									class="glyphicon glyphicon-edit"></span></a>
-					{/if}
-				</small>
-			</div>
 		</h2>
-		{foreach $post->tags as $tag}
-			<a n:href="Search:default, $tag->name" style="text-decoration:none">
-				<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
-			</a>
-		{/foreach}
+
+		<div style="white-space:nowrap;color:gray">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</div>
+		<div style="margin:10px">
+			{foreach $post->tags as $tag}
+				<a n:href="Search:default, $tag->name" style="text-decoration:none">
+					<span class="label hidden-print" style="padding:5px 10px;margin: 2px;background: #{$tag->color}">
+						{$tag->name}
+					</span>
+				</a>
+			{/foreach}
+		</div>
 	</div>
 	<div class="row" style="margin-bottom: 10px">
 		<div class="col-lg-10">
@@ -86,10 +79,12 @@
 				</div>
 
 				{dump $setting->disqus_shortname}
-				<div class="alert alert-danger" n:if="!$post->disable_comments && $setting->show_comments && empty($setting->disqus_shortname)">
+				<div class="alert alert-danger"
+				     n:if="!$post->disable_comments && $setting->show_comments && empty($setting->disqus_shortname)">
 					Please setup your disqus shortname in administration&hellip;
 				</div>
-				<div n:if="!$post->disable_comments && $setting->show_comments && !empty($setting->disqus_shortname)" class="hidden-print">
+				<div n:if="!$post->disable_comments && $setting->show_comments && !empty($setting->disqus_shortname)"
+				     class="hidden-print">
 					<div class="alert alert-info" style="margin-top: 20px">
 						<p>
 							V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>
@@ -113,9 +108,32 @@
 								class="logo-disqus">Disqus</span></a>
 				</div>
 			</div>
+			<div class="row well hidden-print" style="margin:0;background:url({$basePath}/img/skulls.png)">
+				<div class="col-lg-5 col-md-5">
+					<span style="font-size:21px">Navrhněte článek!</span>
+					<p>
+						Navrhněte, jaký článek by vás zajímal. Napište dostatečně přesvědčivé argumenty a je zde
+						určitá šance, že bude tento článek uveřejněn. Ale pozor! Žádné PR&hellip; (-:
+					</p>
+				</div>
+				<div class="col-lg-7 col-md-7">
+					{control articleSuggestion}
+				</div>
+			</div>
 		</div>
 		<div class="col-lg-2 visible-lg">
 			<div id="outline" data-spy="affix" data-offset-top="351">
+				<div class="text-center hidden-print">
+					<a n:if="$setting->show_print" href="javascript:window.print()" class="visible-lg"
+					   style="display: inline !important">tisk&nbsp;<span
+								class="glyphicon glyphicon-print"></span></a>
+					{if $user->isLoggedIn()}
+						<span n:if="$setting->show_print" style="font-size:20px">\</span>
+						<a n:href=":Admin:Admin:default $post->id">edit&nbsp;<span
+									class="glyphicon glyphicon-edit"></span></a>
+					{/if}
+				</div>
+				<hr>
 				<span id="zbyva">zbývá</span><br>
 				<span id="pocet">{$wordCount}</span><br>
 				<span id="slov">slov</span><br>
@@ -123,8 +141,24 @@
 				<span id="time">{ceil($wordCount/200)}</span>
 				<span id="minuty">minut</span>
 				<hr>
-				<span id="brotip">Brotip</span><br>
-				<span id="tip">&hellip;</span>
+				<p class="text-right">
+					Víte, že můžete <a data-toggle="modal" data-target=".article-modal">navrhnout</a> co bude v novém
+					článku?
+				</p>
+			</div>
+		</div>
+		<div class="modal fade article-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+		     aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="modalLabel">Navrhněte článek!</h4>
+					</div>
+					<div class="modal-body">
+						{control articleSuggestion}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

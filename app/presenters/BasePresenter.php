@@ -17,6 +17,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	public $settings;
 	/** @var \Model\Pages @inject */
 	public $pages;
+	/** @var \IArticleSuggestionFactory @inject */
+	public $articleSuggestion;
 
 	protected $setting;
 
@@ -24,6 +26,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		parent::startup();
 		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
 		$this->template->pages = $this->pages->findBy([]);
+	}
+
+	/**
+	 * @return \Cntrl\ArticleSuggestion
+	 */
+	protected function createComponentArticleSuggestion() {
+		return $this->articleSuggestion->create();
 	}
 
 	protected function createComponentSearch() {

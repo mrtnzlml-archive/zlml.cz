@@ -3,7 +3,6 @@
 namespace App;
 
 use Cntrl;
-use Nette\Application\Responses;
 use Nette;
 
 class HomepagePresenter extends BasePresenter {
