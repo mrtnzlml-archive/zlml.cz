@@ -133,9 +133,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		}
 		$post = $this->posts->rand();
 		if ($post) {
-			$this->redirect('Single:article', $post->slug);
+			$this->redirect(':Single:article', $post->slug);
 		}
-		$this->redirect('Homepage:default');
+		$this->redirect(':Homepage:default');
 	}
 
 	/**
