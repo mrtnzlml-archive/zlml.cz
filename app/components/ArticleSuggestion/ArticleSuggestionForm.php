@@ -23,6 +23,7 @@ class ArticleSuggestion extends UI\Control {
 	protected function createComponentArticleSuggestion() {
 		$form = new UI\Form;
 		$form->addTextArea('article', NULL)->setRequired('Vyplňte prosím, o čem by měl článek být.');
+		$form->addAntispam();
 		$form->addSubmit('send', 'Odeslat návrh');
 		$form->onSuccess[] = $this->articleSuggestionSucceeded;
 		return $form;
