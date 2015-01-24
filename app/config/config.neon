@@ -39,7 +39,6 @@ services:
 	#- Model\Xmlrpc
 
 	adminMenuFactory: IAdminMenuFactory
-	- IArticleSuggestionFactory
 	- ISignInFormFactory
 	- PageFormFactory
 	- PostFormFactory

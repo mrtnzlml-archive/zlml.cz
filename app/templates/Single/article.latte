@@ -108,18 +108,6 @@
 								class="logo-disqus">Disqus</span></a>
 				</div>
 			</div>
-			<div class="row well hidden-print" style="margin:0;background:url({$basePath}/img/skulls.png)">
-				<div class="col-lg-5 col-md-5">
-					<span style="font-size:21px">Navrhněte článek!</span>
-					<p>
-						Navrhněte, jaký článek by vás zajímal. Napište dostatečně přesvědčivé argumenty a je zde
-						určitá šance, že bude tento článek uveřejněn. Ale pozor! Žádné PR&hellip; (-:
-					</p>
-				</div>
-				<div class="col-lg-7 col-md-7">
-					{control articleSuggestion}
-				</div>
-			</div>
 		</div>
 		<div class="col-lg-2 visible-lg">
 			<div id="outline" data-spy="affix" data-offset-top="351">
@@ -140,25 +128,6 @@
 				<span class="glyphicon glyphicon-time"></span>
 				<span id="time">{ceil($wordCount/200)}</span>
 				<span id="minuty">minut</span>
-				<hr>
-				<p class="text-right">
-					Víte, že můžete <a data-toggle="modal" data-target=".article-modal">navrhnout</a> co bude v novém
-					článku?
-				</p>
-			</div>
-		</div>
-		<div class="modal fade article-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-		     aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="modalLabel">Navrhněte článek!</h4>
-					</div>
-					<div class="modal-body">
-						{control articleSuggestion}
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
