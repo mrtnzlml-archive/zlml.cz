@@ -20,7 +20,7 @@ class SearchPresenter extends BasePresenter {
 			return Strings::length($word) > 1;
 		}));
 		$words = array_map(function ($word) {
-			return Strings::toAscii($word) . '*';
+			return Strings::toAscii($word);
 		}, $words);
 		$string = implode(' ', $words);
 

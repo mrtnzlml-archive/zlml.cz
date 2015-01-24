@@ -2,14 +2,17 @@
 
 {block content}
 	{if $tag}
-		<h2>Články s tagem <span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span></h2>
+		<h2>Nalezeno {count($tag->posts)} článků s tagem <span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span></h2>
 		{foreach $tag->posts as $post}
 			<a n:href=":Single:article $post->slug"
 			   title="{$post->body|texy|striptags|truncate:500}">{$post->title}</a>{sep}<strong>#</strong>{/sep}
 		{/foreach}
 		<hr>
 	{/if}
-	<h2 n:block="title">Výsledky vyhledávání{ifset $search} „{$search}“{/ifset}</h2>
+	<h2 n:block="title">Výsledky vyhledávání
+		{ifset $search}výrazu „<strong>{$search}</strong>“ v textu{/ifset}
+		{ifset $result}({count($result)} nálezů){/ifset}
+	</h2>
 	{ifset $error}
 		<div class="alert alert-danger">
 			<strong>{$error}</strong>
@@ -45,18 +48,6 @@
 			</div>
 		</div>
 	{/ifset}
-	<div class="row well" style="margin:0;background:url({$basePath}/img/skulls.png)">
-		<div class="col-lg-5 col-md-5">
-			<span style="font-size:21px">Navrhněte článek!</span>
-			<p>
-				Navrhněte, jaký článek by vás zajímal. Napište dostatečně přesvědčivé argumenty a je zde
-				určitá šance, že bude tento článek uveřejněn. Ale pozor! Žádné PR&hellip; (-:
-			</p>
-		</div>
-		<div class="col-lg-7 col-md-7">
-			{control articleSuggestion}
-		</div>
-	</div>
 	<h2>Nenašli jste to co hledáte?</h2>
 	<p>Možná to zde opravdu není. Vyzkoušejte však ještě další možnosti:</p>
 	<ul>
