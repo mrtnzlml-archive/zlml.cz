@@ -2,6 +2,7 @@
 log/*
 temp/*
 vendor/*
+vendor-client/*
 
 !.gitignore
 !.htaccess

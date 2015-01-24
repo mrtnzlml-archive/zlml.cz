@@ -17,6 +17,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	public $settings;
 	/** @var \Model\Pages @inject */
 	public $pages;
+	/** @var \WebLoader\LoaderFactory @inject */
+	public $webLoader;
 
 	protected $setting;
 
@@ -79,43 +81,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	public function createComponentCss() {
-		$files = new WebLoader\FileCollection(WWW_DIR . '/css');
-		$files->addFiles([
-			'bootstrap.css',
-			'screen.less',
-		]);
-		$compiler = WebLoader\Compiler::createCssCompiler($files, WWW_DIR . '/webtemp');
-		$compiler->setOutputNamingConvention(\OutputNamingConvention::createCssConvention());
-		$compiler->addFileFilter(new WebLoader\Filter\LessFilter());
-		$compiler->addFilter(function ($code) {
-			$code = Latte\Runtime\Filters::strip($code);
-			$code = Latte\Runtime\Filters::trim($code);
-			$code = preg_replace('/\/\*(.*?)\*\//s', '', $code); //remove comments
-			return $code;
-		});
-		return new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv');
 	}
 
 	public function createComponentJs() {
-		$files = new WebLoader\FileCollection(WWW_DIR . '/js');
-		$files->addFiles([
-			'jquery.js',
-			'bootstrap.js',
-			'jquery.qrcode-0.6.0.js',
-			'netteForms.js',
-			'nette.ajax.js',
-			'history.ajax.js',
-			'main.js',
-		]);
-		$compiler = WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
-		$compiler->setOutputNamingConvention(\OutputNamingConvention::createJsConvention());
-		$compiler->addFilter(function ($code) {
-			$code = preg_replace('/\/\*(.*?)\*\//s', '', $code); //remove multiline comments - inline warning!
-			$code = preg_replace('/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/', "\n", $code); //remove new lines
-			$code = preg_replace('/(^[ \t]+)(.+)$/m', "$2", $code); //odstraní úvodní mezery a tabulátory na řádku
-			return trim($code);
-		});
-		return new \Zeminem\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+		return $this->webLoader->createJavaScriptLoader('default');
 	}
 
 	public function handleRandom() {

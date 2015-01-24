@@ -110,7 +110,6 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 
 {block scripts}
 	{include #parent}
-	<script src="{$basePath}/js/codemirror.js"></script>
 	<script>
 		$(document).ready(function () {
 			var mac = CodeMirror.keyMap["default"] == CodeMirror.keyMap.macDefault;
@@ -160,7 +159,7 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 					slug: $('[name="slug"]').val()
 				}
 			});
-			$('textarea, [name="title"], [name="tags"]').live('keyup', function (e) {
+			$('textarea, [name="title"], [name="tags"]').on('keyup', function (e) {
 				if (timer) {
 					window.clearTimeout(timer);
 				}
@@ -188,8 +187,4 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 			});
 		});
 	</script>
-{/block}
-
-{block head}
-	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/codemirror.css">
 {/block}

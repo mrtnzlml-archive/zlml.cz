@@ -24,6 +24,8 @@ define("WWW_DIR", __DIR__ . '/../www');
 
 $configurator->addConfig(__DIR__ . '/../app/config/config.neon');
 $configurator->addConfig(__DIR__ . '/../app/config/config.local.neon');
+$configurator->addParameters(['wwwDir' => __DIR__ . '/../www']); //because of %wwwDir% in config in CLI environment
+
 $container = $configurator->createContainer();
 
 return $container;
