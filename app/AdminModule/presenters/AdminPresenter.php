@@ -288,7 +288,7 @@ class AdminPresenter extends BasePresenter {
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
 		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');
 		//TODO: picture optimalization (?)
-		$result = $uploader->handleUpload(__DIR__ . '/../../www/uploads', $name);
+		$result = $uploader->handleUpload(__DIR__ . '/../../../www/uploads', $name);
 		try {
 			$picture = $this->pictures->findOneBy(['uuid' => $uploader->getUuid()]);
 			if (!$picture) { //FIXME: toto není optimální (zejména kvůli rychlosti)
