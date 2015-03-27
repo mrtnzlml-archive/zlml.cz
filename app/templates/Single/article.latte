@@ -12,6 +12,9 @@
 		</h2>
 
 		<div style="white-space:nowrap;color:gray">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</div>
+		<div class="text-center hidden-print" n:if="$user->isLoggedIn()">
+			<a n:href=":Admin:Admin:default $post->id">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
+		</div>
 		<div style="margin:10px">
 			{foreach $post->tags as $tag}
 				<a n:href="Search:default, $tag->name" style="text-decoration:none">
@@ -23,7 +26,7 @@
 		</div>
 	</div>
 	<div class="row" style="margin-bottom: 10px">
-		<div class="col-lg-10">
+		<div class="col-lg-10 col-lg-offset-1">
 			<div class="article" id="columns">
 				{$body|noescape}
 			</div>
@@ -107,27 +110,6 @@
 					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
 								class="logo-disqus">Disqus</span></a>
 				</div>
-			</div>
-		</div>
-		<div class="col-lg-2 visible-lg">
-			<div id="outline" data-spy="affix" data-offset-top="351">
-				<div class="text-center hidden-print">
-					<a n:if="$setting->show_print" href="javascript:window.print()" class="visible-lg"
-					   style="display: inline !important">tisk&nbsp;<span
-								class="glyphicon glyphicon-print"></span></a>
-					{if $user->isLoggedIn()}
-						<span n:if="$setting->show_print" style="font-size:20px">\</span>
-						<a n:href=":Admin:Admin:default $post->id">edit&nbsp;<span
-									class="glyphicon glyphicon-edit"></span></a>
-					{/if}
-				</div>
-				<hr>
-				<span id="zbyva">zbývá</span><br>
-				<span id="pocet">{$wordCount}</span><br>
-				<span id="slov">slov</span><br>
-				<span class="glyphicon glyphicon-time"></span>
-				<span id="time">{ceil($wordCount/200)}</span>
-				<span id="minuty">minut</span>
 			</div>
 		</div>
 	</div>

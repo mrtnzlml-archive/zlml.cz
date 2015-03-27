@@ -1,98 +1,104 @@
 {block title}DEVELOP{/block}
 
 {block content}
-	<h2 class="text-center">Tento blog má otevřené zdrojové kódy</h2>
-	<p>
-		Co to znamená? To znamená, že si tento blog může kdokoliv stáhnout, vyzkoušet a dokonce i používat
-		dle vlastní potřeby za podmínky že změní texty a nebude vytvářet přesnou kopii tohoto blogu.
-		Takový projekt jsem ještě nikde neviděl a myslím si, že to může přinést jen ovoce. Můžete se podívat
-		jak takový blog může vypadat po technologické stránce a to včetně databáze. Sice tím riskuji
-		odhalení nějaké bezpečnostní chyby a následné napadení ostré verze tohoto blogu, ale i to jsem
-		ochoten pro dobro věci podstoupit&hellip; ☺
-	</p>
 	<div class="row">
-		<div class="col-lg-7 col-md-7">
-			<p>
-				Vy však nemusíte riskovat nic. Vyzkoušejte si nejdříve, jak se vám bude s tímto blogem pracovat.
-				Připravil jsem pro všechny <strong>demo</strong> přístup do administrace. Pomocí formuláře
-				na pravé straně se můžete rovnou přihlásit a podívat se, jaké má blog možnosti, jak se píše v Texy
-				editoru a real-time náhledem, nebo jak se spravují obrázky. Vše je připraveno tak, aby bylo ovládání
-				maximálně srozumitelné a problematičtější částy administrace obsahují přehlednou nápovědu.
-				Jedná se pouze o demo přístup, tzn. všechny operace, které nějakým způsobem ovlivňují obsah
-				databáze jsou z důvodu bezpečnosti zakázány.
+		<div class="col-lg-10 col-lg-offset-1">
+			<h2 class="text-center">Tento blog má otevřené zdrojové kódy</h2>
+			<p class="text-center">
+				<img src="https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master" alt="Master"/>
+				<img src="https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=develop" alt="Develop"/>
 			</p>
-		</div>
-		<div class="col-lg-5 col-md-5">
-			{control signInForm:minimal}
+			<p>
+				Co to znamená? To znamená, že si tento blog může kdokoliv stáhnout, vyzkoušet a dokonce i používat
+				dle vlastní potřeby za podmínky že změní texty a nebude vytvářet přesnou kopii tohoto blogu.
+				Takový projekt jsem ještě nikde neviděl a myslím si, že to může přinést jen ovoce. Můžete se podívat
+				jak takový blog může vypadat po technologické stránce a to včetně databáze. Sice tím riskuji
+				odhalení nějaké bezpečnostní chyby a následné napadení ostré verze tohoto blogu, ale i to jsem
+				ochoten pro dobro věci podstoupit&hellip; ☺
+			</p>
+
+			<div class="row">
+				<div class="col-lg-7 col-md-7">
+					<p>
+						Vy však nemusíte riskovat nic. Vyzkoušejte si nejdříve, jak se vám bude s tímto blogem pracovat.
+						Připravil jsem pro všechny <strong>demo</strong> přístup do administrace. Pomocí formuláře
+						na pravé straně se můžete rovnou přihlásit a podívat se, jaké má blog možnosti, jak se píše v
+						Texy editoru a real-time náhledem, nebo jak se spravují obrázky. Vše je připraveno tak, aby bylo
+						ovládání maximálně srozumitelné a problematičtější částy administrace obsahují přehlednou
+						nápovědu. Jedná se pouze o demo přístup, tzn. všechny operace, které nějakým způsobem ovlivňují
+						obsah databáze jsou z důvodu bezpečnosti zakázány.
+					</p>
+				</div>
+				<div class="col-lg-5 col-md-5">
+					{control signInForm:minimal}
+				</div>
+			</div>
+			<h2 class="text-center">Stáhněte si jej</h2>
+			<p>
+				Stáhněte si aktuální verzi tohoto blogu. V současné době je instalace poněkud kostrbatější, ale
+				v <em>develop</em> již pracuji na automatickém instalátoru. Blog si můžete stáhnout ze své oblíbené
+				verzovací služby. V současné době je blog uveřejněn pouze na GitHubu&hellip;
+			</p>
+			<p>
+				Pokud nebudete stahovat ZIP archiv, ale zvolíte modernější nástroje, doporučuji nainstalovat
+				<a href="http://msysgit.github.io/" target="_blank">Git</a> a <a href="http://getcomposer.org/"
+				                                                                 target="_blank">Composer</a>.
+				Přirozeně je zapotřebí instalovat někam kde aplikaci může spustit server s PHP interpretem a databází.
+			</p>
+
+			<div class="row" style="margin-top:50px;margin-bottom:25px">
+				<div class="col-lg-5">
+					<a class="btn btn-default" href="https://github.com/mrtnzlml/www.zeminem.cz" target="_blank">
+						<img src="{$basePath}/img/loga/github.png">
+					</a>
+				</div>
+				<div class="col-lg-7">
+					<pre>git clone https://github.com/mrtnzlml/www.zeminem.cz.git</pre>
+					<p>&mdash; nebo &mdash;</p>
+					<pre>composer create-project mrtnzlml/www.zeminem.cz --stability=dev</pre>
+				</div>
+			</div>
+			<p>
+				Závislosti je nutné pomocí nástroje Composer po stažení nainstalovat. Přečtěte si prosím detailní
+				informace v <strong>readme.md</strong> souboru. Databáze je k dispozici v souboru
+				<strong>zeminem.sql</strong>
+				a konfiguraci databáze naleznete v souboru <code>app/config/config.local.neon</code>. Při prvním
+				spuštění se může cokoliv pokazit. Čtěte proto prosím pozorně chybové hlášky. Věřím, že nebude složité
+				ani problémové tento projekt spustit, kdyby však něco nešlo, dejte mi to vědět do komentářů níže&hellip;
+			</p>
+
+			<h2 class="text-center">Možnosti podpory</h2>
+			<p>
+				Při vývoji tohoto blogu je pro mě nesmírně důležitá zpětná vazba od kohokoliv. Zejména potom programové
+				problémy a návrhy mají své místo. K těmto účelům slouží issues stránky, které naleznete na
+				<a href="https://github.com/mrtnzlml/www.zeminem.cz/issues" target="_blank">GitHubu</a>. Na tyto stránky
+				patří jakýkoliv návrh na zlepšení, hlášení chyb, technické dotazy a jednoduše vše co se tohoto projektu
+				více či méně týká.
+			</p>
+			<p>
+				A jelikož se jedná o otevřený projekt, byla by škoda se ho snažit uzavírat. Máte-li tedy nápad, máte
+				možnost si projekt forknout, nápad implementovat a odeslat pull request. Pokud uznám provedenou změnu za
+				vhodnou, pak ji mohu do projektu zařadit.
+			</p>
+
+			<div style="margin:30px auto;width:145px">
+				<img src="{$basePath}/img/labtocat.png">
+			</div>
+			<div id="disqus_thread"></div>
+			<script type="text/javascript">
+				var disqus_shortname = 'mrtnzlml';
+				(function () {
+					var dsq = document.createElement('script');
+					dsq.type = 'text/javascript';
+					dsq.async = true;
+					dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				})();
+			</script>
+			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+					Disqus.</a></noscript>
+			<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
+						class="logo-disqus">Disqus</span></a>
 		</div>
 	</div>
-	<h2 class="text-center">Stáhněte si jej</h2>
-	<p>
-		Stáhněte si aktuální verzi tohoto blogu. V současné době je instalace poněkud kostrbatější, ale
-		v <em>develop</em> již pracuji na automatickém instalátoru. Blog si můžete stáhnout ze své oblíbené
-		verzovací služby. V současné době je blog uveřejněn současně jak na Bitbucketu, tak na GitHubu&hellip;
-	</p>
-	<p>
-		Pokud nebudete stahovat ZIP archiv, ale zvolíte modernější nástroje, doporučuji nainstalovat
-		<a href="http://msysgit.github.io/" target="_blank">Git</a> a <a href="http://getcomposer.org/" target="_blank">Composer</a>.
-		Přirozeně je zapotřebí instalovat někam kde aplikaci může spustit server s PHP interpretem a databází.
-	</p>
-	<div class="row" style="margin-top:50px;margin-bottom:25px">
-		<div class="col-lg-6 col-md-6 col-sm-6 text-right">
-			<a class="btn btn-default" href="https://bitbucket.org/mrtnzlml/www.zeminem.cz" target="_blank">
-				<img src="{$basePath}/img/loga/bitbucket.png">
-			</a>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6">
-			<a class="btn btn-default" href="https://github.com/mrtnzlml/www.zeminem.cz" target="_blank">
-				<img src="{$basePath}/img/loga/github.png">
-			</a>
-		</div>
-	</div>
-	<div class="row" style="margin-bottom:25px">
-		<div class="col-lg-6 col-md-6 col-sm-6 text-right">
-			<pre>git clone https://mrtnzlml@bitbucket.org/mrtnzlml/www.zeminem.cz.git</pre>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6">
-			<pre>git clone https://github.com/mrtnzlml/www.zeminem.cz.git</pre>
-		</div>
-	</div>
-	<p>
-		Závislosti je nutné pomocí nástroje Composer po stažení nainstalovat. Přečtěte si prosím detailní informace
-		v <strong>readme.md</strong> souboru. Databáze je k dispozici v souboru <strong>zeminem.sql</strong>
-		a konfiguraci databáze naleznete v souboru <code>app/config/config.local.neon</code>. Při prvním spuštění
-		se může cokoliv pokazit. Čtěte proto prosím pozorně chybové hlášky. Věřím, že nebude složité ani problémové
-		tento projekt spustit, kdyby však něco nešlo, dejte mi to vědět do komentářů níže&hellip;
-	</p>
-	<h2 class="text-center">Možnosti podpory</h2>
-	<p>
-		Při vývoji tohoto blogu je pro mě nesmírně důležitá zpětná vazba od kohokoliv. Zejména potom programové
-		problémy a návrhy mají své místo. K těmto účelům slouží issues stránky, které naleznete jak na
-		<a href="https://bitbucket.org/mrtnzlml/www.zeminem.cz/issues" target="_blank">Bitbucketu</a>, tak na
-		<a href="https://github.com/mrtnzlml/www.zeminem.cz/issues" target="_blank">GitHubu</a>. Na tyto stránky
-		patří jakýkoliv návrh na zlepšení, hlášení chyb, technické dotazy a jednoduše vše co se tohoto projektu
-		více či méně týká.
-	</p>
-	<p>
-		A jelikož se jedná o otevřený projekt, byla by škoda se ho snažit uzavírat. Máte-li tedy nápad, máte možnost
-		si projekt forknout, nápad implementovat a odeslat pull request. Pokud uznám provedenou změnu za vhodnou,
-		pak ji mohu do projektu zařadit.
-	</p>
-	<div style="margin:30px auto;width:145px">
-		<img src="{$basePath}/img/labtocat.png">
-	</div>
-	<div id="disqus_thread"></div>
-	<script type="text/javascript">
-		var disqus_shortname = 'mrtnzlml';
-		(function () {
-			var dsq = document.createElement('script');
-			dsq.type = 'text/javascript';
-			dsq.async = true;
-			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		})();
-	</script>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
-			Disqus.</a></noscript>
-	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 {/block}

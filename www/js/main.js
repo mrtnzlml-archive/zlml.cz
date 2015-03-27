@@ -67,40 +67,6 @@ $(function () {
 		$('#' + slugId).val(make_url(val));
 	});
 
-	$('.glyphicon-question-sign').tooltip();
-
-	var a, b = $("#pocet").eq(0),
-		d = parseInt($(b).text(), 10);
-	var time = $("#time"),
-		minuty = $("#minuty");
-	$(document).on('scroll', function () {
-		a && clearTimeout(a), a = setTimeout(function () {
-			var a = $("#columns").height(),
-				e = d / a,
-				f = $(this).scrollTop(),
-				g = a - f,
-				h = Math.ceil(g * e),
-				min = Math.ceil(h / 180);
-			h >= 0 ? (b.text(h), time.text(min)) : (b.text("0"), time.text("0"));
-			switch (min) {
-				case 1:
-					minuty.text("minuta");
-					break;
-				case 2:
-					minuty.text("minuty");
-					break;
-				case 3:
-					minuty.text("minuty");
-					break;
-				case 4:
-					minuty.text("minuty");
-					break;
-				default:
-					minuty.text("minut");
-			}
-		}, 100)
-	});
-
 });
 
 var nodiac = { 'á': 'a', 'č': 'c', 'ď': 'd', 'é': 'e', 'ě': 'e', 'í': 'i', 'ň': 'n', 'ó': 'o', 'ř': 'r', 'š': 's', 'ť': 't', 'ú': 'u', 'ů': 'u', 'ý': 'y', 'ž': 'z' };
