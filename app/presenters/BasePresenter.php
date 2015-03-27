@@ -81,7 +81,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	public function createComponentCss() {
-		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv');
+		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv,print');
 	}
 
 	public function createComponentJs() {
