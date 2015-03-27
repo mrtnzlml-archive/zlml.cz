@@ -21,7 +21,7 @@ class AdminPresenterTest extends Tester\TestCase {
 	private $action;
 
 	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new Presenter($container);
+		$this->tester = new PresenterTester($container);
 		$this->users = $container->getByType('\Model\Users');
 		$this->articles = $container->getByType('\Model\Posts');
 	}

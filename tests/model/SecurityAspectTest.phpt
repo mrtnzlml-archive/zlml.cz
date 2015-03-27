@@ -35,7 +35,7 @@ class SecurityAspectTest extends Tester\TestCase {
 	private $users;
 
 	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new Presenter($container);
+		$this->tester = new PresenterTester($container);
 		$this->pages = $container->getByType('\Model\Pages');
 		$this->pictures = $container->getByType('\Model\Pictures');
 		$this->posts = $container->getByType('\Model\Posts');

@@ -13,11 +13,7 @@ $container = require __DIR__ . '/../bootstrap.php';
 class SearchPresenterTest extends Tester\TestCase {
 
 	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new Presenter($container);
-	}
-
-	public function setUp() {
-		$this->tester->init('Search');
+		$this->tester = new PresenterTester($container, 'Search');
 	}
 
 	public function testRenderDefault() {

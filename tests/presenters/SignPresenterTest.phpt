@@ -13,11 +13,7 @@ $container = require __DIR__ . '/../bootstrap.php';
 class SignPresenterTest extends Tester\TestCase {
 
 	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new Presenter($container);
-	}
-
-	public function setUp() {
-		$this->tester->init('Sign');
+		$this->tester = new PresenterTester($container, 'Sign');
 	}
 
 	public function testRenderIn() {

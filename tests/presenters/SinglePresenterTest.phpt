@@ -17,12 +17,8 @@ class SinglePresenterTest extends Tester\TestCase {
 	private $posts;
 
 	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new Presenter($container);
+		$this->tester = new PresenterTester($container, 'Single');
 		$this->posts = $container->getByType('\Model\Posts');
-	}
-
-	public function setUp() {
-		$this->tester->init('Single');
 	}
 
 	public function testRenderAbout() {
