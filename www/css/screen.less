@@ -3,7 +3,7 @@
 @redhover = #CC0700;
 
 a, a:hover, a:focus { color: @red; text-decoration: underline; }
-a:hover { text-decoration: none; }
+a:hover, a:focus { text-decoration: none; }
 a[href^="#error:"] { background: red; color: white; }
 
 body { font-size: 16px; position: relative; background: #ECE9DD url("../img/bgnoise_lg.png"); font-family: 'Open Sans', sans-serif; }
@@ -27,10 +27,6 @@ p { text-align: justify; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens:
 
 table { margin-bottom: 10px; }
 
-.affix { position: fixed; top: 10px; width: 136px; }​
-.affix-top { position: relative; top: 10px; width: 136px; }
-.affix-bottom { position: absolute; bottom: 10px; width: 136px; }
-
 .anchor { color: #ddd; }
 
 .article h3 { clear: both; }
@@ -40,8 +36,9 @@ table { margin-bottom: 10px; }
 .badge a { color: #FFF; text-decoration: none; }
 a.list-group-item.active > .badge, .nav-pills > .active > a > .badge { color: @red; }
 
-.CodeMirror { border: 1px solid #ccc; height: auto; }
+.CodeMirror { border: 1px solid #ccc; height: auto; min-height: 300px; }
 .CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { min-height: 300px; }
 
 .col-lg-2 > canvas { cursor: default !important; }
 
@@ -53,20 +50,28 @@ a.list-group-item.active > .badge, .nav-pills > .active > a > .badge { color: @r
 .footer a { text-decoration: none; color: #888; }
 .footer a:hover { text-decoration: underline; }
 
+.form-control, .btn { border-radius: 0; }
+
 #explorer ul li { list-style: none; }
 
 .glyphicon { font-size: 90%; }
 
 .go { color: white; background-color: @red; border-color: #ccc; }
-.go:hover { color: white; background-color: @redhover; border-color: #adadad; }
+.go:hover, .go:focus { color: white; background-color: @redhover; border-color: #adadad; }
 
-.highlight { background: #ffffaa; }
+.help { display: none; min-width: 500px; padding: 10px 20px; background: white; position: absolute; right: 0; top: -10px; z-index: 100;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.5); -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.5); box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.5);
+}
+
+.highlight { background: #ffffaa; font-style: italic; }
 
 .pager { margin-bottom: 0; }
 
+.label { padding: 0em .5em .1em; border-radius: .2em; }
 .label > a { color: #fff; text-decoration: none; }
 .share { margin: 10px auto; }
-.share > .label { font-size: 16px; margin: 5px; }
+.share > .label { font-size: 18px; font-weight: normal; margin: 5px; padding: 7px 14px; }
+.share > .label > i.fa { padding-left: 5px; padding-right: 10px; }
 
 .suggestion h3 { margin-top: 0; }
 .suggestion p { margin: 10px 0 10px; }
@@ -82,12 +87,6 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .main-nav > .nav .active a:hover { background: @red; color: white; }
 .main-nav > .nav a:hover { background: @red !important; color: white; }
 .main-nav > .nav > li > a { color: #847D62; .radius(0px); padding: 15px 20px; margin: 0; text-decoration: none;  }
-
-#outline { z-index: 1000; margin: 12px; text-align: center; }
-#outline #pocet { font-size: 30px; }
-#outline #time { font-size: 25px; }
-#outline #zbyva, #outline #slov, #outline #brotip { color: #888; }
-#outline #brotip { text-transform: uppercase; }
 
 .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus,
 .pagination > li > a, .pagination > li > span { color: @red; }
@@ -138,14 +137,13 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .css-value { color: #448ccb; }
 .css-func { color: #448ccb; font-weight: bold; }
 .css-color { color: #0076a3; }
-.css-comment { background-color: #e5f8ff; color: #999999; }
+.css-comment { background-color: #e5f8ff; color: #999; }
 
 /* CPP */
 .cpp-keywords1 {color: #0000ff; font-weight: bold;}
 .cpp-num {color: #ff0000;}
 .cpp-quote {color: #a52a2a; font-weight: bold;}
-.cpp-comment {color: #00ff00;}
-.cpp-preproc {color: #c0c0c0;}
+.cpp-comment, .cpp-preproc { color: #999; }
 
 /* HTML */
 .html-tag {color: #598527; font-weight: bold;}
@@ -163,9 +161,9 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 
 /* Javascript */
 .js-out {color: #898993;}
-.js-keywords1 {color: #575757; font-weight: bold;}
-.js-num {color: #575757;}
-.js-quote {color: #575757; font-weight: bold;}
+.js-keywords1 {color: #a52a2a; font-weight: bold;}
+.js-num {color: #0000ff;}
+.js-quote {color: #009900; font-weight: bold;}
 .js-comment {color: #898993; background-color: #f4f4f4;}
 
 /* Neon */

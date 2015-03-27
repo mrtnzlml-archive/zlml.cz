@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Kdyby;
 use Nette\Security\Passwords;
@@ -9,7 +9,7 @@ use Nette\Utils\Strings;
 
 /**
  * Class Authenticator
- * @package App
+ * @package Model
  */
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator {
 
@@ -30,7 +30,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 	public function authenticate(array $credentials) {
 		list($username, $password) = $credentials;
 		$password = $this->removeCapsLock($password);
-		$user = $this->users->findOneBy(array('username' => $username));
+		$user = $this->users->findOneBy(['username' => $username]);
 
 		if (!$user) {
 			throw new Nette\Security\AuthenticationException('Uživatelské jméno není správné.', self::IDENTITY_NOT_FOUND);
@@ -40,7 +40,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 			$user->password = Passwords::hash($password);
 			$this->users->save($user);
 		} else {
-			return new Nette\Security\Identity($user->id, $user->role);
+			return new Nette\Security\Identity($user->getId(), $user->role);
 		}
 	}
 

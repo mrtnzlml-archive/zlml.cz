@@ -14,7 +14,7 @@ $container = require __DIR__ . '/../bootstrap.php';
 class ErrorPresenterTest extends Tester\TestCase {
 
 	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new Presenter($container);
+		$this->tester = new PresenterTester($container);
 	}
 
 	public function setUp() {

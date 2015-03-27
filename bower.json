@@ -1,0 +1,27 @@
+{
+	"name": "mrtnzlml/zeminem.cz",
+	"version": "1.1.0",
+	"homepage": "http://www.zeminem.cz/",
+	"authors": [
+		"Martin Zlámal <mrtnzlml@gmail.com>"
+	],
+	"description": "Source code of www.zeminem.cz website",
+	"license": [
+		"BSD-3-Clause",
+		"GPL-2.0",
+		"GPL-3.0"
+	],
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"bootstrap": "~3.3.1",
+		"codemirror": "~4.12.0",
+		"nette-forms": "~2.2.4",
+		"nette.ajax.js": "vojtech-dobes/nette.ajax.js#~2.0.0"
+	}
+}

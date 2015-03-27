@@ -2,30 +2,34 @@
 
 namespace App;
 
-use Nette\Utils\Strings;
+use Latte;
 use Nette;
+use Nette\Application\UI;
 use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-	/** @var Posts @inject */
+	/** @var \Model\Posts @inject */
 	public $posts;
 	/** @var \Nette\Http\Session @inject */
 	public $session;
+	/** @var \Model\Settings @inject */
+	public $settings;
+	/** @var \Model\Pages @inject */
+	public $pages;
+	/** @var \WebLoader\LoaderFactory @inject */
+	public $webLoader;
 
-	public function beforeRender() {
-		parent::beforeRender();
-		$section = $this->session->getSection('experimental');
-		if ($section->experimental == NULL) {
-			$section->experimental = 'none';
-			$section->experimental_data = array();
-		}
-		$this->template->experimental = $section->experimental;
-		$this->template->experimental_data = json_encode($section->experimental_data);
+	protected $setting;
+
+	public function startup() {
+		parent::startup();
+		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
+		$this->template->pages = $this->pages->findBy([]);
 	}
 
 	protected function createComponentSearch() {
-		$form = new Nette\Application\UI\Form;
+		$form = new UI\Form;
 		$form->addText('search')
 			->setRequired('Vyplňte co chcete vyhledávat.')
 			->setValue($this->getParameter('search'));
@@ -34,16 +38,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $form;
 	}
 
-	public function searchSucceeded($form) {
-		$vals = $form->getValues();
-		$search = Strings::normalize($vals->search);
-		$search = Strings::replace($search, '/[^\d\w]/u', ' ');
-		$words = Strings::split(Strings::trim($search), '/\s+/u');
-		$words = array_unique(array_filter($words, function ($word) {
-			return Strings::length($word) > 1;
-		}));
-		$search = implode(' ', $words);
-		$this->redirect('Search:default', $search);
+	public function searchSucceeded(UI\Form $form, $values) {
+		$this->redirect('Search:default', $values->search);
 	}
 
 	/**
@@ -63,7 +59,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		});
 		$template->registerHelper('dateInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
-			$months = array(1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec');
+			$months = [1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 			return $time->format('j. ') . $months[$time->format('n')] . $time->format(' Y');
 		});
 		$template->registerHelper('timeAgoInWords', function ($time) {
@@ -85,42 +81,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	public function createComponentCss() {
-		$files = new WebLoader\FileCollection(WWW_DIR . '/css');
-		$files->addFiles(array(
-			'bootstrap.css',
-			'screen.less',
-		));
-		$compiler = WebLoader\Compiler::createCssCompiler($files, WWW_DIR . '/webtemp');
-		$compiler->setOutputNamingConvention(\OutputNamingConvention::createCssConvention());
-		$compiler->addFileFilter(new Webloader\Filter\LessFilter());
-		$compiler->addFilter(function ($code) {
-			return \CssMin::minify($code);
-		});
-		return new WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv,print');
 	}
 
 	public function createComponentJs() {
-		$files = new WebLoader\FileCollection(WWW_DIR . '/js');
-		$files->addFiles(array(
-			'jquery.js',
-			'bootstrap.js',
-			'jquery.qrcode-0.6.0.js',
-			'netteForms.js',
-			'nette.ajax.js',
-			'history.ajax.js',
-			'main.js',
-		));
-		$compiler = WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
-		$compiler->setOutputNamingConvention(\OutputNamingConvention::createJsConvention());
-		$compiler->addFilter(function ($code) {
-			return \JSMin::minify($code);
-		});
-		return new \Zeminem\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+		return $this->webLoader->createJavaScriptLoader('default');
 	}
 
 	public function handleRandom() {
+		if (!$this->setting->random_search) {
+			$this->error();
+		}
 		$post = $this->posts->rand();
-		$this->redirect('Single:article', $post->slug);
+		if ($post) {
+			$this->redirect(':Single:article', $post->slug);
+		}
+		$this->redirect(':Homepage:default');
 	}
 
 	/**
@@ -128,14 +104,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	 */
 	protected function prepareTexy() {
 		$texy = new \fshlTexy();
-		$texy->addHandler('block', array($texy, 'blockHandler'));
+		$texy->addHandler('block', [$texy, 'blockHandler']);
 		$texy->tabWidth = 4;
 		$texy->headingModule->top = 3; //start at H3
 		$texy->headingModule->generateID = TRUE;
-		$texy->imageModule->root = 'uploads/'; //http://texy.info/cs/api-image-module FIXME
+		$texy->imageModule->root = $this->getHttpRequest()->getUrl()->getBaseUrl() . 'uploads/';
 		$texy->imageModule->leftClass = 'leftAlignedImage';
 		$texy->imageModule->rightClass = 'rightAlignedImage';
-		$texy->headingModule->generateID = TRUE;
 		return $texy;
 	}
 

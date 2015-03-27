@@ -4,7 +4,7 @@ class UserEditFormFactory {
 
 	private $users;
 
-	public function __construct(App\Users $users) {
+	public function __construct(Model\Users $users) {
 		$this->users = $users;
 	}
 

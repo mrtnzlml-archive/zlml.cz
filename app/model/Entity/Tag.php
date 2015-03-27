@@ -13,6 +13,7 @@ class Tag extends Doctrine\Entities\BaseEntity {
 
 	/**
 	 * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags")
+	 * @ORM\OrderBy({"date" = "DESC"})
 	 **/
 	protected $posts;
 

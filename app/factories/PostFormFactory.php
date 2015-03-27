@@ -5,7 +5,7 @@ class PostFormFactory {
 	private $posts;
 	private $tags;
 
-	public function __construct(App\Posts $posts, App\Tags $tags) {
+	public function __construct(Model\Posts $posts, Model\Tags $tags) {
 		$this->posts = $posts;
 		$this->tags = $tags;
 	}

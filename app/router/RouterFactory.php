@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Model;
 use Nette;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
@@ -13,12 +14,12 @@ class RouterFactory {
 
 	private $posts;
 
-	private $broken_links = array(
+	private $broken_links = [
 		//broken => repaired
 		'feed' => 'Homepage:rss',
-	);
+	];
 
-	public function __construct(Posts $posts) {
+	public function __construct(Model\Posts $posts) {
 		$this->posts = $posts;
 	}
 
@@ -36,20 +37,30 @@ class RouterFactory {
 		foreach ($this->broken_links as $key => $value) {
 			$router[] = new Route($key, $value, Route::ONE_WAY);
 		}
-		$router[] = new Route('last', array(
+		$router[] = new Route('last', [
 			'presenter' => 'Homepage',
 			'action' => 'default',
 			'paginator-page' => ceil($pages / 10)
-		), Route::ONE_WAY);
+		], Route::ONE_WAY);
 		$router[] = new Route('rss', 'Homepage:rss');
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
-		$router[] = new Route('admin[/<action>[/<id>]]', 'Admin:default');
-		$router[] = new Route("[<paginator-page [$paginator]>]", array(
+		//$router[] = new Route('admin[/<presenter>/<action>[/<id>]]', 'Admin:default');
+		$router[] = new Route('admin[/<action>[/<id>]]', array(
+			'module' => 'Admin',
+			'presenter' => 'Admin',
+			'action' => 'default',
+		));
+		$router[] = new Route("[<paginator-page [$paginator]>]", [
 			'presenter' => 'Homepage',
 			'action' => 'default',
 			'paginator-page' => 1
-		));
-
+		]);
+		//TODO: options - API URL, enable API
+		$router[] = new RestRouter('api[/<presenter>[/<id>]]', array(
+			'module' => 'Rest',
+			'presenter' => 'Resource',
+			'action' => 'get',
+		), RestRouter::RESTFUL); //TODO: kanonizace URL
 		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('<action>', 'Single:article');
 		$router[] = new Route('s[/<search>]', 'Search:default');

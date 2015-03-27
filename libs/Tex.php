@@ -54,70 +54,70 @@ class Tex implements FSHL\Lexer {
 	 * @return array
 	 */
 	public function getStates() {
-		return array(
-			'OUT' => array(
-				array(
-					'$' => array('MATH', Generator::NEXT),
-					'\\' => array('FUNC', Generator::NEXT),
-					'{' => array('ATTR1', Generator::NEXT),
-					'[' => array('ATTR2', Generator::NEXT),
-					'%' => array('COMMENT', Generator::NEXT),
-					'LINE' => array(Generator::STATE_SELF, Generator::NEXT),
-					'TAB' => array(Generator::STATE_SELF, Generator::NEXT),
-				),
+		return [
+			'OUT' => [
+				[
+					'$' => ['MATH', Generator::NEXT],
+					'\\' => ['FUNC', Generator::NEXT],
+					'{' => ['ATTR1', Generator::NEXT],
+					'[' => ['ATTR2', Generator::NEXT],
+					'%' => ['COMMENT', Generator::NEXT],
+					'LINE' => [Generator::STATE_SELF, Generator::NEXT],
+					'TAB' => [Generator::STATE_SELF, Generator::NEXT],
+				],
 				Generator::STATE_FLAG_NONE,
 				'tex-out',
 				null
-			),
-			'MATH' => array(
-				array(
-					'LINE' => array(Generator::STATE_SELF, Generator::NEXT),
-					'TAB' => array(Generator::STATE_SELF, Generator::NEXT),
-					'$' => array(Generator::STATE_RETURN, Generator::CURRENT),
-				),
+			],
+			'MATH' => [
+				[
+					'LINE' => [Generator::STATE_SELF, Generator::NEXT],
+					'TAB' => [Generator::STATE_SELF, Generator::NEXT],
+					'$' => [Generator::STATE_RETURN, Generator::CURRENT],
+				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-math',
 				null
-			),
-			'FUNC' => array(
-				array(
-					'!ALNUM_' => array(Generator::STATE_RETURN, Generator::BACK),
+			],
+			'FUNC' => [
+				[
+					'!ALNUM_' => [Generator::STATE_RETURN, Generator::BACK],
 
-				),
+				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-func',
 				null
-			),
-			'ATTR1' => array(
-				array(
-					'LINE' => array(Generator::STATE_SELF, Generator::NEXT),
-					'TAB' => array(Generator::STATE_SELF, Generator::NEXT),
-					'}' => array(Generator::STATE_RETURN, Generator::CURRENT)
-				),
+			],
+			'ATTR1' => [
+				[
+					'LINE' => [Generator::STATE_SELF, Generator::NEXT],
+					'TAB' => [Generator::STATE_SELF, Generator::NEXT],
+					'}' => [Generator::STATE_RETURN, Generator::CURRENT]
+				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-attr1',
 				null
-			),
-			'ATTR2' => array(
-				array(
-					'LINE' => array(Generator::STATE_SELF, Generator::NEXT),
-					'TAB' => array(Generator::STATE_SELF, Generator::NEXT),
-					']' => array(Generator::STATE_RETURN, Generator::CURRENT),
-				),
+			],
+			'ATTR2' => [
+				[
+					'LINE' => [Generator::STATE_SELF, Generator::NEXT],
+					'TAB' => [Generator::STATE_SELF, Generator::NEXT],
+					']' => [Generator::STATE_RETURN, Generator::CURRENT],
+				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-attr2',
 				null
-			),
-			'COMMENT' => array(
-				array(
-					'LINE' => array(Generator::STATE_RETURN, Generator::BACK),
-					'TAB' => array(Generator::STATE_SELF, Generator::NEXT),
-				),
+			],
+			'COMMENT' => [
+				[
+					'LINE' => [Generator::STATE_RETURN, Generator::BACK],
+					'TAB' => [Generator::STATE_SELF, Generator::NEXT],
+				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-comment',
 				null
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -126,7 +126,7 @@ class Tex implements FSHL\Lexer {
 	 * @return array
 	 */
 	public function getDelimiters() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -135,6 +135,6 @@ class Tex implements FSHL\Lexer {
 	 * @return array
 	 */
 	public function getKeywords() {
-		return array();
+		return [];
 	}
 }

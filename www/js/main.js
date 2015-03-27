@@ -1,15 +1,31 @@
 $(function () {
 
+	var bodyEl = $('body');
+
 	$("h3[id|=toc]").each(function () {
 		$(this).append($('<a class="anchor hidden-print"> #</a>').attr("href", "#" + $(this).attr("id")))
 	});
 
-	$('body').on('click', '[data-confirm]', function (e) {
+	bodyEl.on('click', '[data-confirm]', function (e) {
 		var question = $(this).data('confirm');
 		if (!confirm(question)) {
 			e.stopImmediatePropagation();
 			e.preventDefault();
 		}
+	});
+
+	bodyEl.on('click', 'a[target^="_new"]', function(e) {
+		var width = window.innerWidth / 2 ;
+		var height = window.innerHeight / 1.5;
+		var top = window.innerHeight / 4;
+		var left = window.innerHeight / 2;
+		window.open(this.href, 'newwindow', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+		e.stopImmediatePropagation();
+		e.preventDefault();
+	});
+
+	$('.toggleHelp').click(function () {
+		$('.help').toggle('fast');
 	});
 
 	$('#qr').qrcode({
@@ -49,46 +65,6 @@ $(function () {
 		var slugId = $(this).data('slug-to');
 		var val = $(this).val();
 		$('#' + slugId).val(make_url(val));
-	});
-
-	$('.glyphicon-question-sign').tooltip();
-
-	var a, b = $("#pocet").eq(0),
-		d = parseInt($(b).text(), 10);
-	var time = $("#time"),
-		minuty = $("#minuty"),
-		tip = $("#tip");
-	$(document).on('scroll', function () {
-		a && clearTimeout(a), a = setTimeout(function () {
-			var a = $("#columns").height(),
-				e = d / a,
-				f = $(this).scrollTop(),
-				g = a - f,
-				h = Math.ceil(g * e),
-				min = Math.ceil(h / 180);
-			h >= 0 ? (b.text(h), time.text(min)) : (b.text("0"), time.text("0"));
-			switch (min) {
-				case 1:
-					tip.text("Dočtěte tento text.");
-					minuty.text("minuta");
-					break;
-				case 2:
-					tip.text("Napijte se.");
-					minuty.text("minuty");
-					break;
-				case 3:
-					minuty.text("minuty");
-					tip.text("Uvařte si kafe.");
-					break;
-				case 4:
-					tip.text("Nasvačte se.");
-					minuty.text("minuty");
-					break;
-				default:
-					tip.text("Přečtěte si komentáře.");
-					minuty.text("minut");
-			}
-		}, 100)
 	});
 
 });

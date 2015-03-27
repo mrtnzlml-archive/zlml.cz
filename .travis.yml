@@ -1,22 +1,43 @@
 language: php
+
 php:
-  - 5.3.3
   - 5.4
   - 5.5
   - 5.6
   - hhvm
+  - hhvm-nightly
+
+env:
+  global:
+    - TESTER_PHP_BIN=php
+  matrix:
+    - DB=mysql
+    - DB=pgsql
 
 matrix:
   allow_failures:
-    - php: 5.3.3
-    - php: 5.6
     - php: hhvm
+    - php: hhvm-nightly
+    - env: DB=pgsql
+  exclude:
+    - php: hhvm
+      env: TESTER_PHP_BIN=php-cgi #FIXME
+    - php: hhvm-nightly
+      env: TESTER_PHP_BIN=php-cgi #FIXME
 
-script: vendor/bin/tester tests -s -c tests/php.ini
+script:
+  - vendor/bin/tester tests -p $TESTER_PHP_BIN -s -c tests/php.ini
+
+after_failure:
+  - cat app/config/config.local.neon; echo; echo;
 
 before_script:
-  - mysql -u root -e 'create database zeminem;'
-  - mysql -u root -D zeminem < zeminem.sql
-  - mysql -u root -D zeminem < diff.sql
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database blog_mysql;'; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database blog_pgsql;' -U postgres; fi"
   - composer selfupdate
-  - composer update
+  - composer install --prefer-dist --no-dev
+  - sh -c "if [ '$DB' = 'mysql' ]; then php www/index.php -u root -n blog_mysql; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then php www/index.php -u postgres -n blog_pgsql -d pgsql; fi"
+
+notifications:
+  email: false

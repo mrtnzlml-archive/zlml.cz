@@ -1,0 +1,30 @@
+parameters:
+	clientVendorDir: %appDir%/../vendor-client
+
+webloader:
+	css:
+		default:
+			sourceDir: %wwwDir%/css
+			files:
+				- %clientVendorDir%/bootstrap/dist/css/bootstrap.min.css
+				- %clientVendorDir%/codemirror/lib/codemirror.css
+				- screen.less
+			fileFilters:
+				- @lessFilter
+				- @cssUrlsFilter
+
+	js:
+		default:
+			sourceDir: %clientVendorDir%
+			files:
+				- jquery/dist/jquery.js
+				- bootstrap/dist/js/bootstrap.min.js
+				- nette-forms/src/assets/netteForms.js
+				- nette.ajax.js/nette.ajax.js
+				- codemirror/lib/codemirror.js
+				- %wwwDir%/js/jquery.qrcode-0.6.0.js
+				- %wwwDir%/js/main.js
+
+services:
+	lessFilter: WebLoader\Filter\LessFilter
+	cssUrlsFilter: Webloader\Filter\LessFilter

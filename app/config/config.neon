@@ -21,32 +21,52 @@ nette:
 		accessors: TRUE
 
 services:
-	authenticator: App\Authenticator
-	- App\Authorizator
+	doctrine.default.connection:
+		setup:
+			- $throwOldKdybyExceptions(TRUE) #FIXME: https://github.com/Kdyby/Doctrine/commit/4d4da40844827007bdd4911527f72162e0e14537
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
-	- App\Pictures(@doctrine.dao(Entity\Picture))
-	- App\Pingbacks(@doctrine.dao(Entity\Pingback))
-	- App\Posts(@doctrine.dao(Entity\Post))
-	- App\PostsMirror(@doctrine.dao(Entity\Post))
-	- App\Tags(@doctrine.dao(Entity\Tag))
-	- App\Users(@doctrine.dao(Entity\User))
-	#- App\Xmlrpc
+	- Model\Authenticator
+	- Model\Authorizator
+	- Model\Pages(@doctrine.dao(Entity\Page))
+	- Model\Pictures(@doctrine.dao(Entity\Picture))
+	- Model\Pingbacks(@doctrine.dao(Entity\Pingback))
+	- Model\Posts(@doctrine.dao(Entity\Post))
+	- Model\PostsMirror(@doctrine.dao(Entity\PostMirror))
+	- Model\Settings(@doctrine.dao(Entity\Setting))
+	- Model\Tags(@doctrine.dao(Entity\Tag))
+	- Model\Users(@doctrine.dao(Entity\User))
+	#- Model\Xmlrpc
 
+	adminMenuFactory: IAdminMenuFactory
+	- ISignInFormFactory
+	- PageFormFactory
 	- PostFormFactory
+	- SettingsFormFactory
 	- UserEditFormFactory
+	- App\AdminModule\AdminPresenter # Kdyby\Events!
 
-	#It should be here because of Kdyby\Events (?) --- security problem (if you forgot it) :-(
-	- App\AdminPresenter
-	-
-		class: PostsListener
-		tags: [kdyby.subscriber]
-	-
-		class: RestrictListener
-		tags: [kdyby.subscriber]
+events:
+	subscribers:
+		- PostsListener
+		- RestrictListener
+
+console:
+	commands:
+		- App\Console\BlogInstall
+		- App\Console\BlogUpdate
+
+aspects:
+	- SecurityAspect
 
 extensions:
+	aop: Kdyby\Aop\DI\AopExtension
 	console: Kdyby\Console\DI\ConsoleExtension
 	events: Kdyby\Events\DI\EventsExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	webloader: WebLoader\Nette\Extension
+	- PictureExtension
+
+includes:
+	- webloader.neon

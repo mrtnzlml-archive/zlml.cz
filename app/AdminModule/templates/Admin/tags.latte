@@ -1,0 +1,36 @@
+{var $robots = 'noindex'}
+{block content}
+
+<div class="row">
+	<div class="col-lg-3">
+		{include menu.latte}
+	</div>
+	<div class="col-lg-9">
+		<h2>Přehled tagů</h2>
+		<table class="table">
+			{form color}
+				<tr n:foreach="$tags as $tag">
+					<td>
+						<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
+					</td>
+					<td>#{$tag->color}</td>
+					<td>
+						{input color$tag->id}
+					</td>
+					<td>
+						<div class="btn-group">
+							{input update$tag->id, class => 'btn btn-success'}
+							<a n:href="regenerate! $tag->id" class="btn btn-info">Regerovat barvu</a>
+							<a n:href="deleteTag! $tag->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento tag?">Smazat</a>
+						</div>
+					</td>
+				</tr>
+			{/form}
+		</table>
+		<div class="row col-lg-12 text-center">
+			{control paginator}
+		</div>
+	</div>
+</div>
+
+{/block}

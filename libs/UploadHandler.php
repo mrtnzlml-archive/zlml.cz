@@ -2,7 +2,7 @@
 
 class UploadHandler {
 
-	public $allowedExtensions = array();
+	public $allowedExtensions = [];
 	public $sizeLimit = null;
 	public $inputName = 'qqfile';
 	public $chunksFolder = 'chunks';
@@ -58,17 +58,17 @@ class UploadHandler {
 		if ($this->toBytes(ini_get('post_max_size')) < $this->sizeLimit ||
 			$this->toBytes(ini_get('upload_max_filesize')) < $this->sizeLimit){
 			$size = max(1, $this->sizeLimit / 1024 / 1024) . 'M';
-			return array('error'=>"Server error. Increase post_max_size and upload_max_filesize to ".$size);
+			return ['error'=>"Server error. Increase post_max_size and upload_max_filesize to ".$size];
 		}
 
 		if ($this->isInaccessible($uploadDirectory)){
-			return array('error' => "Server error. Uploads directory isn't writable");
+			return ['error' => "Server error. Uploads directory isn't writable"];
 		}
 
 		if(!isset($_SERVER['CONTENT_TYPE'])) {
-			return array('error' => "No files were uploaded.");
+			return ['error' => "No files were uploaded."];
 		} else if (strpos(strtolower($_SERVER['CONTENT_TYPE']), 'multipart/') !== 0){
-			return array('error' => "Server error. Not a multipart request. Please set forceMultipart to default value (true).");
+			return ['error' => "Server error. Not a multipart request. Please set forceMultipart to default value (true)."];
 		}
 
 		// Get size and name
@@ -81,16 +81,16 @@ class UploadHandler {
 
 		// Validate name
 		if ($name === null || $name === ''){
-			return array('error' => 'File name empty.');
+			return ['error' => 'File name empty.'];
 		}
 
 		// Validate file size
 		if ($size == 0){
-			return array('error' => 'File is empty.');
+			return ['error' => 'File is empty.'];
 		}
 
 		if ($size > $this->sizeLimit){
-			return array('error' => 'File is too large.');
+			return ['error' => 'File is too large.'];
 		}
 
 		// Validate file extension
@@ -99,7 +99,7 @@ class UploadHandler {
 
 		if($this->allowedExtensions && !in_array(strtolower($ext), array_map("strtolower", $this->allowedExtensions))){
 			$these = implode(', ', $this->allowedExtensions);
-			return array('error' => 'File has an invalid extension, it should be one of '. $these . '.');
+			return ['error' => 'File has an invalid extension, it should be one of '. $these . '.'];
 		}
 
 		// Save a chunk
@@ -113,7 +113,7 @@ class UploadHandler {
 			$partIndex = (int)$_REQUEST['qqpartindex'];
 
 			if (!is_writable($chunksFolder) && !is_executable($uploadDirectory)){
-				return array('error' => "Server error. Chunks directory isn't writable or executable.");
+				return ['error' => "Server error. Chunks directory isn't writable or executable."];
 			}
 
 			$targetFolder = $this->chunksFolder.DIRECTORY_SEPARATOR.$uuid;
@@ -128,7 +128,7 @@ class UploadHandler {
 			// Last chunk saved successfully
 			if ($success AND ($totalParts-1 == $partIndex)){
 
-				$target = join(DIRECTORY_SEPARATOR, array($uploadDirectory, $uuid, $name));
+				$target = join(DIRECTORY_SEPARATOR, [$uploadDirectory, $uuid, $name]);
 				//$target = $this->getUniqueTargetPath($uploadDirectory, $name);
 				$this->uploadName = $uuid.DIRECTORY_SEPARATOR.$name;
 
@@ -152,16 +152,16 @@ class UploadHandler {
 
 				rmdir($targetFolder);
 
-				return array("success" => true, "uuid" => $uuid);
+				return ["success" => true, "uuid" => $uuid];
 			}
 
-			return array("success" => true, "uuid" => $uuid);
+			return ["success" => true, "uuid" => $uuid];
 
 		}
 		else {
 			# non-chunked upload
 
-			$target = join(DIRECTORY_SEPARATOR, array($uploadDirectory, $uuid, $name));
+			$target = join(DIRECTORY_SEPARATOR, [$uploadDirectory, $uuid, $name]);
 			//$target = $this->getUniqueTargetPath($uploadDirectory, $name);
 
 			if ($target){
@@ -171,12 +171,12 @@ class UploadHandler {
 					mkdir(dirname($target));
 				}
 				if (move_uploaded_file($file['tmp_name'], $target)){
-					return array('success'=> true, "uuid" => $uuid);
+					return ['success'=> true, "uuid" => $uuid];
 				}
 			}
 
-			return array('error'=> 'Could not save uploaded file.' .
-				'The upload was cancelled, or server error encountered');
+			return ['error'=> 'Could not save uploaded file.' .
+				'The upload was cancelled, or server error encountered'];
 		}
 	}
 
@@ -189,24 +189,24 @@ class UploadHandler {
 	public function handleDelete($uploadDirectory, $name=null)
 	{
 		if ($this->isInaccessible($uploadDirectory)) {
-			return array('error' => "Server error. Uploads directory isn't writable" . ((!$isWin) ? " or executable." : "."));
+			return ['error' => "Server error. Uploads directory isn't writable" . ((!$this->isWindows()) ? " or executable." : ".")];
 		}
 
 		$targetFolder = $uploadDirectory;
 		$url = parse_url($_SERVER['REQUEST_URI']);
 		$uuid = $_POST['qquuid'];
 
-		$target = join(DIRECTORY_SEPARATOR, array($targetFolder, $uuid));
+		$target = join(DIRECTORY_SEPARATOR, [$targetFolder, $uuid]);
 
 		print_r($target);
 		if (is_dir($target)){
 			$this->removeDir($target);
-			return array("success" => true, "uuid" => $uuid);
+			return ["success" => true, "uuid" => $uuid];
 		} else {
-			return array("success" => false,
+			return ["success" => false,
 				"error" => "File not found! Unable to delete.",
 				"path" => $uuid
-			);
+			];
 		}
 
 	}
@@ -290,7 +290,7 @@ class UploadHandler {
 			if (is_dir($item)){
 				removeDir($item);
 			} else {
-				unlink(join(DIRECTORY_SEPARATOR, array($dir, $item)));
+				unlink(join(DIRECTORY_SEPARATOR, [$dir, $item]));
 			}
 
 		}
@@ -324,8 +324,19 @@ class UploadHandler {
 	 * @param string $directory The target directory to test access
 	 */
 	protected function isInaccessible($directory) {
-		$isWin = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+		$isWin = $this->isWindows();
 		$folderInaccessible = ($isWin) ? !is_writable($directory) : ( !is_writable($directory) && !is_executable($directory) );
 		return $folderInaccessible;
 	}
+
+	/**
+	 * Determines is the OS is Windows or not
+	 *
+	 * @return boolean
+	 */
+	protected function isWindows() {
+		$isWin = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+		return $isWin;
+	}
+
 }

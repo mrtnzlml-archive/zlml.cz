@@ -1,25 +1,34 @@
 {
-	"name": "mrtnzlml/zeminem.cz",
-	"description": "Source code of www.zeminem.cz website",
-	"version": "1.1.0",
-	"homepage": "http://www.zeminem.cz",
-	"authors": [
-		{
-			"name": "Martin Zlámal",
-			"homepage": "http://www.zeminem.cz/"
-		}
-	],
-	"require": {
-		"php": ">= 5.3.1",
-		"nette/nette": "~2.2.2",
-		"nette/tester": "~1.2.0",
-		"texy/texy": "2.*@dev",
-		"kukulich/fshl": "~2.1.0",
-		"janmarek/webloader": "~2.2.0",
-		"natxet/CssMin": "~3.0.2",
-		"linkorb/jsmin-php": "~1.0.0",
-		"leafo/lessphp": "v0.4.0",
-		"kdyby/doctrine": "~2.0.0",
-		"dg/ftp-deployment": "dev-master"
-	}
+  "name": "mrtnzlml/zeminem.cz",
+  "description": "Source code of www.zeminem.cz website",
+  "version": "1.2.0",
+  "homepage": "http://www.zeminem.cz/",
+  "license": [
+    "BSD-3-Clause",
+    "GPL-2.0",
+    "GPL-3.0"
+  ],
+  "authors": [
+    {"name": "Ondřej Lang"},
+    {
+      "name": "Martin Zlámal",
+      "homepage": "http://www.zeminem.cz/"
+    }
+  ],
+  "require": {
+    "php": ">= 5.4",
+    "nette/nette": "~2.2.0",
+    "kukulich/fshl": "~2.1.0",
+    "janmarek/webloader": "~2.2.0",
+    "leafo/lessphp": "~0.4.0",
+    "kdyby/aop": "dev-master",
+    "kdyby/doctrine": "~2.2.0",
+    "texy/texy": "dev-master",
+    "dg/adminer-custom": "dev-master"
+  },
+  "require-dev": {
+    "dg/ftp-deployment": "dev-master",
+    "nette/tester": "dev-master",
+    "mrtnzlml/testbench": "dev-master"
+  }
 }

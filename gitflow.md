@@ -26,6 +26,10 @@ RELEASE	- konvence v názvu větví: release-* (release-1.2)
 			git merge --no-ff release-1.2
 			git branch -d release-1.2
 
+			git push --all //jen větve
+			git push --tags //jen tagy
+			git push --mirror //jako all+tags
+
 HOTFIX	- konvence v názvu větví: hotfix-* (hotfix-1.2.1)
 		- dělá se z MASTER
 			git checkout -b hotfix-1.2.1 master

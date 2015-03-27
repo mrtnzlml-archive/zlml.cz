@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Model;
 
 use Doctrine;
 use Kdyby;
@@ -8,7 +8,7 @@ use Nette;
 
 /**
  * Class Pingbacks
- * @package App
+ * @package Model
  */
 class Pingbacks extends Nette\Object {
 

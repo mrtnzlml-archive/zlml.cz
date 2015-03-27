@@ -2,33 +2,32 @@
 
 namespace Test;
 
-use App;
+use Model;
 use Nette;
 use Tester;
 
 $container = require __DIR__ . '/../bootstrap.php';
 
 /**
- * TODO: ověřit práva k akcím
  * @testCase
  */
 class AdminPresenterTest extends Tester\TestCase {
 
-	/** @var App\Users */
+	/** @var Model\Users */
 	private $users;
-	/** @var App\Posts */
+	/** @var Model\Posts */
 	private $articles;
 
 	private $action;
 
 	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new Presenter($container);
-		$this->users = $container->getByType('App\Users');
-		$this->articles = $container->getByType('App\Posts');
+		$this->tester = new PresenterTester($container);
+		$this->users = $container->getByType('\Model\Users');
+		$this->articles = $container->getByType('\Model\Posts');
 	}
 
 	public function setUp() {
-		$this->tester->init('Admin');
+		$this->tester->init('Admin:Admin');
 		$this->tester->logIn(1, 'demo');
 	}
 

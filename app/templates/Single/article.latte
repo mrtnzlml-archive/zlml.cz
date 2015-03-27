@@ -6,30 +6,27 @@
 {/block}
 
 {block content}
-	<div class="page-header">
-		<h2>
-			{$post->title|vlna}
-			<small style="white-space:nowrap">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</small>
-			<div class="pull-right hidden-print">
-				<small>
-					<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span
-								class="glyphicon glyphicon-print"></span></a>
-					{if $user->isLoggedIn()}
-						<span style="font-size: 25px">\</span>
-						<a n:href=":Admin:default $post->id">edit&nbsp;<span
-									class="glyphicon glyphicon-edit"></span></a>
-					{/if}
-				</small>
-			</div>
+	<div class="page-header text-center">
+		<h2 style="font-size:40px">
+			{block title}{$post->title|vlna}{/block}
 		</h2>
-		{foreach $post->tags as $tag}
-			<a n:href="Search:default, $tag->name" style="text-decoration:none">
-				<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
-			</a>
-		{/foreach}
+
+		<div style="white-space:nowrap;color:gray">{$post->date|dateInWords} ({$post->date|timeAgoInWords})</div>
+		<div class="text-center hidden-print" n:if="$user->isLoggedIn()">
+			<a n:href=":Admin:Admin:default $post->id">edit&nbsp;<span class="glyphicon glyphicon-edit"></span></a>
+		</div>
+		<div style="margin:10px">
+			{foreach $post->tags as $tag}
+				<a n:href="Search:default, $tag->name" style="text-decoration:none">
+					<span class="label hidden-print" style="padding:5px 10px;margin: 2px;background: #{$tag->color}">
+						{$tag->name}
+					</span>
+				</a>
+			{/foreach}
+		</div>
 	</div>
 	<div class="row" style="margin-bottom: 10px">
-		<div class="col-lg-10">
+		<div class="col-lg-10 col-lg-offset-1">
 			<div class="article" id="columns">
 				{$body|noescape}
 			</div>
@@ -43,19 +40,25 @@
 			<div id="bottom">
 				<hr class="hidden-print load_disqus">
 
-				<div class="share hidden-print">
-			<span class="label label-danger">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="https://plus.google.com/share?url={link //this}" target="_blank">Google</a>
-			</span>
-			<span class="label label-info">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_blank">Facebook</a>
-			</span>
-			<span class="label label-success">
-				<span class="glyphicon glyphicon-share-alt"></span>
-				<a href="http://twitter.com/share?text={$post->title}&url={link //this}" target="_blank">Twitter</a>
-			</span>
+				<div class="share hidden-print text-center">
+					<span class="label" style="background:#DF5138">
+						<i class="fa fa-google-plus"></i>
+						<a href="https://plus.google.com/share?url={link //this}" target="_new">Google+</a>
+					</span>
+					<span class="label" style="background:#3B5998">
+						<i class="fa fa-facebook"></i>
+						<a href="http://www.facebook.com/sharer.php?u={link //this}" target="_new">Facebook</a>
+					</span>
+					<span class="label" style="background:#00AFED">
+						<i class="fa fa-twitter"></i>
+						<a href="http://twitter.com/share?text={$post->title}&url={link //this}"
+						   target="_new">Twitter</a>
+					</span>
+					<span class="label" style="background:#1B85BD">
+						<i class="fa fa-linkedin"></i>
+						<a href="http://www.linkedin.com/shareArticle?mini=true&url={link //this}&title={$post->title}"
+						   target="_new">LinkedIn</a>
+					</span>
 				</div>
 
 				<hr>
@@ -78,7 +81,13 @@
 					</div>
 				</div>
 
-				<div class="hidden-print">
+				{dump $setting->disqus_shortname}
+				<div class="alert alert-danger"
+				     n:if="!$post->disable_comments && $setting->show_comments && empty($setting->disqus_shortname)">
+					Please setup your disqus shortname in administration&hellip;
+				</div>
+				<div n:if="!$post->disable_comments && $setting->show_comments && !empty($setting->disqus_shortname)"
+				     class="hidden-print">
 					<div class="alert alert-info" style="margin-top: 20px">
 						<p>
 							V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>
@@ -93,26 +102,14 @@
 							   target="_blank">automaticky</a>&hellip;
 						</p>
 					</div>
-					<div id="disqus_thread" style="padding-bottom: 30px" data-disqus-shortname="mrtnzlml"
+					<div id="disqus_thread" style="padding-bottom: 30px"
+					     data-disqus-shortname="{$setting->disqus_shortname}"
 					     data-disqus-url="{link //this}"></div>
 					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments
 							powered by Disqus.</a></noscript>
 					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
 								class="logo-disqus">Disqus</span></a>
 				</div>
-			</div>
-		</div>
-		<div class="col-lg-2 visible-lg">
-			<div id="outline" data-spy="affix" data-offset-top="351">
-				<span id="zbyva">zbývá</span><br>
-				<span id="pocet">{$wordCount}</span><br>
-				<span id="slov">slov</span><br>
-				<span class="glyphicon glyphicon-time"></span>
-				<span id="time">{ceil($wordCount/200)}</span>
-				<span id="minuty">minut</span>
-				<hr>
-				<span id="brotip">Brotip</span><br>
-				<span id="tip">&hellip;</span>
 			</div>
 		</div>
 	</div>
