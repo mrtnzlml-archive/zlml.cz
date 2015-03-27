@@ -1,4 +1,4 @@
-Source code of www.zeminem.cz [1.1]
+Source code of www.zeminem.cz [1.2]
 ====================================
 
 Master branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/www.zeminem.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/www.zeminem.cz)
