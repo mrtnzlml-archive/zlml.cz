@@ -34,18 +34,18 @@ class SinglePresenter extends BasePresenter {
 			$this->forward($webalized);
 		} elseif ($post) { // zobrazení klasických článků
 			$texy = $this->prepareTexy();
-			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
-				$el = $invocation->proceed();
-				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
-					$url = new Url($el->attrs['href']);
-					$httpRequest = $this->presenter->getHttpRequest();
-					$uri = $httpRequest->getUrl();
-					if ($url->authority != $uri->host) {
-						$el->attrs['target'] = '_blank';
-					}
-				}
-				return $el;
-			});
+//			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
+//				$el = $invocation->proceed();
+//				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
+//					$url = new Url($el->attrs['href']);
+//					$httpRequest = $this->presenter->getHttpRequest();
+//					$uri = $httpRequest->getUrl();
+//					if ($url->authority != $uri->host) {
+//						$el->attrs['target'] = '_blank';
+//					}
+//				}
+//				return $el;
+//			});
 
 			$this->template->post = $post;
 			$body = $texy->process($post->body);
