@@ -2,58 +2,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <title>New installation</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<style>
-	body {
-		color: #333;
-		background: white;
-		width: 530px;
-		margin: 50px auto
-	}
-
-	h1 {
-		font: bold 47px/1.5 sans-serif;
-		margin: .6em 0
-	}
-
-	p {
-		font: 21px/1.5 Georgia, serif;
-		margin: 1.5em 0
-	}
-
-	.alert {
-		margin-top: 10px;
-	}
-
-	ul {
-		color: red;
-		font-weight: bold;
-	}
-
-	.form-control {
-		position: relative;
-		font-size: 16px;
-		height: auto;
-		padding: 10px;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-		border-radius: 0;
-	}
-
-	.form-control:focus {
-		z-index: 2;
-	}
-
-	input[type="text"], select {
-		margin-bottom: -1px;
-	}
-
-	input[type="password"], input[type="submit"] {
-		margin-bottom: 10px;
-		border-radius: 0;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="css/install.css">
 
 <h1>New installation</h1>
 <p>
