@@ -15,11 +15,9 @@ $(function () {
 	});
 
 	bodyEl.on('click', 'a[target^="_new"]', function(e) {
-		var width = window.innerWidth / 2 ;
-		var height = window.innerHeight / 1.5;
-		var top = window.innerHeight / 4;
-		var left = window.innerHeight / 2;
-		window.open(this.href, 'newwindow', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+		var top = window.screenY + (window.outerHeight - 500) / 2;
+		var left = window.screenX + (window.outerWidth - 650) / 2;
+		window.open(this.href, 'newwindow', 'width=650, height=500, top=' + top + ', left=' + left);
 		e.stopImmediatePropagation();
 		e.preventDefault();
 	});
