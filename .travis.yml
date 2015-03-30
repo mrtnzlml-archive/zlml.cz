@@ -4,29 +4,18 @@ php:
   - 5.4
   - 5.5
   - 5.6
-  - hhvm
-  - hhvm-nightly
 
 env:
-  global:
-    - TESTER_PHP_BIN=php
   matrix:
     - DB=mysql
     - DB=pgsql
 
 matrix:
   allow_failures:
-    - php: hhvm
-    - php: hhvm-nightly
     - env: DB=pgsql
-  exclude:
-    - php: hhvm
-      env: TESTER_PHP_BIN=php-cgi #FIXME
-    - php: hhvm-nightly
-      env: TESTER_PHP_BIN=php-cgi #FIXME
 
 script:
-  - vendor/bin/tester tests -p $TESTER_PHP_BIN -s -c tests/php.ini
+  - vendor/bin/tester tests -p php -s -c tests/php.ini
 
 after_failure:
   - cat app/config/config.local.neon; echo; echo;
