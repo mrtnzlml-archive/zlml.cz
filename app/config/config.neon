@@ -61,10 +61,11 @@ aspects:
 
 extensions:
 	aop: Kdyby\Aop\DI\AopExtension
-	console: Kdyby\Console\DI\ConsoleExtension
-	events: Kdyby\Events\DI\EventsExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	aspects: Kdyby\Aop\DI\AspectsExtension
+	console: Kdyby\Console\DI\ConsoleExtension
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	events: Kdyby\Events\DI\EventsExtension
 	webloader: WebLoader\Nette\Extension
 	- PictureExtension
 

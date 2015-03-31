@@ -27,4 +27,4 @@ webloader:
 
 services:
 	lessFilter: WebLoader\Filter\LessFilter
-	cssUrlsFilter: Webloader\Filter\LessFilter
+	cssUrlsFilter: WebLoader\Filter\LessFilter
