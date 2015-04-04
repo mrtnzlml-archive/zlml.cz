@@ -18,40 +18,21 @@ What's on the background
 - [Kdyby\AOP](https://github.com/Kdyby/Aop) - AOP functionality for Nette Framework
 - and much more...
 
-Contribution
-------------
-Do you want to be on contribution list? You can be! Just send one pull request and help me to improve
-this project. I'll place your name and link to this page and into the composer.json file (in alphabetical order).
-
-Name          | Website
-------------- | -------
-Lang Ondřej   | unknown - feel free to update
-Zlámal Martin | http://www.zeminem.cz/
-
 Installing
 ----------
-The best way to install this project is to download latest package
-from repository using Git and load libraries using Composer:
+The best way to install this project is to download latest package with dependencies using Composer:
 
-1. Install Git: (see http://msysgit.github.io/)
-2. Install Composer: (see http://getcomposer.org/)
-3. Clone project via Git:
+1. Install Composer: (see http://getcomposer.org/)
+2. Use Composer:
 
-		git clone https://mrtnzlml@bitbucket.org/mrtnzlml/www.zeminem.cz.git
-		-- OR --
-		git clone https://mrtnzlml@bitbucket.org/mrtnzlml/www.zeminem.cz.git <folder_name>
+		composer create-project mrtnzlml/zeminem.cz --stability=dev
+		
+3. Install Bower: (see http://bower.io/)
+4. Go to the project folder and install client side dependencies:
 
-		cd www.zeminem.cz
-		-- OR --
-		cd <folder_name>
+		bower install
 
-4. Load libraries via Composer:
-
-		composer update --no-dev
-
-5. Alternatively you can use Composer instead of `git clone`:
-
-		composer create-project mrtnzlml/zeminem.cz <folder_name> dev-develop
+It's like Composer for front-end.
 
 Make directories `temp`, `log`, `www/webtemp`, `www/chunks` and `www/uploads` writable.
 Navigate your browser to the `www` directory and you will see a welcome page.
@@ -68,22 +49,10 @@ Then you have to create database for this website. You can use Adminer tool in
 `http://localhost:8888/adminer` or you can do that manually using command line:
 
 		mysql -u root -e 'create database zeminem;'
-        mysql -u root -D zeminem < zeminem.sql
-        mysql -u root -D zeminem < diff.sql
-
-Updating
---------
-If you're still in project folder, the best way how to update
-your project from a remote repository is pull it using Git:
-
-1. Install Git: (see http://msysgit.github.io/) - already done
-2. Pull project via Git:
-
-		git pull
-
-Git automatically fetch all changes from a remote repository and then merge them into local project.
-
-That's it.
+        mysql -u root -D zeminem < sql/zeminem.sql
+        
+There is also automatic (beta) installer. Just install this project using Composer and open
+it in your favourite browser. I am still working on it...
 
 Amazing administration
 -----------------------
