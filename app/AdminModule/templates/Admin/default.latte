@@ -41,21 +41,9 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 				<a href="http://texy.info/cs/syntax" class="pull-right" target="_blank">Více informací</a>
 			</div>
 			{ifset $editace}
-				<h2>
-					Editovat článek ({$editace})
-					<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-lg">
-						<span class="glyphicon glyphicon-picture"></span>
-						Vložit obrázek
-					</button>
-				</h2>
+				<h2>Editovat článek ({$editace_id})</h2>
 			{else}
-				<h2>
-					Přidat nový článek
-					<button class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-lg">
-						<span class="glyphicon glyphicon-picture"></span>
-						Vložit obrázek
-					</button>
-				</h2>
+				<h2>Přidat nový článek</h2>
 			{/ifset}
 
 			<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -105,7 +93,6 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 			<div id="preview" class="article" n:if="isset($preview)">{$preview|noescape}</div>
 		</fieldset>
 	{/snippet}
-
 {/block}
 
 {block scripts}
@@ -128,15 +115,28 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 				}
 			}
 			var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-				lineNumbers: true,
 				lineWrapping: true,
 				mode: "text/html"
 			});
 			editor.addKeyMap(map);
 
+			$('button.editor').on('click', function(event) {
+				var action = $(this).data('action');
+				var selection = editor.doc.getSelection();
+				if (selection) {
+					editor.doc.replaceSelection(action + selection + action);
+				} else {
+					var cur = editor.doc.getCursor();
+					editor.doc.replaceRange(action + action, cur);
+					editor.doc.setCursor(cur.line, cur.ch + action.length);
+				}
+				editor.focus();
+			});
+
 			$('input[name=pic]').click(function(e){
 				e.preventDefault();
 				editor.replaceSelection('[* ' + $(this).data('source') + ' 200x? <]');
+				editor.focus();
 			});
 
 			if (!editor.getValue() && window.localStorage) {
@@ -159,7 +159,7 @@ Titulek 1      Titulek 2      Titulek 2     Podtitulek
 					slug: $('[name="slug"]').val()
 				}
 			});
-			$('textarea, [name="title"], [name="tags"]').on('keyup', function (e) {
+			$('textarea, [name="title"], [name="tags"]').on('change keyup paste', function (e) {
 				if (timer) {
 					window.clearTimeout(timer);
 				}
