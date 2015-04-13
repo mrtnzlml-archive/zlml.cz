@@ -39,7 +39,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
 
 	public function searchSucceeded(UI\Form $form, $values) {
-		$this->redirect('Search:default', $values->search);
+		$this->redirect(':Search:default', $values->search);
 	}
 
 	/**

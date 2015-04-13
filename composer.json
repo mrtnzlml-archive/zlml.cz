@@ -1,28 +1,26 @@
 {
   "name": "mrtnzlml/zeminem.cz",
   "description": "Source code of www.zeminem.cz website",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "homepage": "http://www.zeminem.cz/",
-  "license": [
-    "BSD-3-Clause",
-    "GPL-2.0",
-    "GPL-3.0"
-  ],
-  "authors": [
-    {"name": "Ondřej Lang"},
-    {
-      "name": "Martin Zlámal",
-      "homepage": "http://www.zeminem.cz/"
-    }
-  ],
   "require": {
     "php": ">= 5.4",
-    "nette/nette": "~2.2.0",
+    "nette/application": "~2.3.0",
+    "nette/bootstrap": "~2.3.0",
+    "nette/caching": "~2.3.0",
+    "nette/di": "~2.3.0",
+    "nette/forms": "~2.3.0",
+    "nette/http": "~2.3.0",
+    "nette/robot-loader": "~2.3.0",
+    "nette/security": "~2.3.0",
+    "nette/utils": "~2.3.0",
+    "latte/latte": "~2.3.0",
+    "tracy/tracy": "~2.3.0",
     "kukulich/fshl": "~2.1.0",
     "janmarek/webloader": "~2.2.0",
     "leafo/lessphp": "~0.4.0",
     "kdyby/aop": "dev-master",
-    "kdyby/doctrine": "~2.2.0",
+    "kdyby/doctrine": "~2.3.0",
     "texy/texy": "dev-master",
     "dg/adminer-custom": "dev-master"
   },

@@ -6,5 +6,5 @@
 #
 
 doctrine:
-	dbname: zeminem
-	user: root
+	dbname: ''
+	user: ''

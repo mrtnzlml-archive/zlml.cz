@@ -20,7 +20,9 @@ define("WWW_DIR", __DIR__ . '/../www');
 
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
-$configurator->addConfig(__DIR__ . '/config/config.local.neon');
+if(file_exists(__DIR__ . '/config/config.local.neon')) {
+	$configurator->addConfig(__DIR__ . '/config/config.local.neon');
+}
 
 \AntispamControl::register();
 
@@ -31,8 +33,10 @@ Please configure connection to the database first! Use following options:
 
 HELP;
 
-$config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
-if (is_array($config) && array_key_exists('doctrine', $config)) {
+if(file_exists(__DIR__ . '/config/config.local.neon')) {
+	$config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
+}
+if (isset($config) && is_array($config) && array_key_exists('doctrine', $config)) {
 	return $configurator->createContainer();
 } elseif (PHP_SAPI === 'cli') {
 	$options = getopt('u:n:p:d:');

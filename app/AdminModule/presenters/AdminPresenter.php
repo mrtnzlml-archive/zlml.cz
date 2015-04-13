@@ -66,6 +66,7 @@ class AdminPresenter extends BasePresenter {
 		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC']);
 		if ($id !== NULL) {
 			$this->template->editace = TRUE;
+			$this->template->editace_id = $this->id;
 		}
 		$this->id = $id;
 	}
