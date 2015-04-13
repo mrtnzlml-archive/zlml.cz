@@ -8,27 +8,27 @@ php:
 env:
   matrix:
     - DB=mysql
-    - DB=pgsql
+#    - DB=pgsql
 
-matrix:
-  allow_failures:
-    - env: DB=pgsql
+#matrix:
+#  allow_failures:
+#    - env: DB=pgsql
 
 script:
   - vendor/bin/tester tests -p php -s -c tests/php.ini
 
 after_failure:
-  - cat app/config/config.local.neon; echo; echo;
+  - cat app/config/config.local.neon;
 
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database blog_mysql;'; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database blog_pgsql;' -U postgres; fi"
+#  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database blog_pgsql;' -U postgres; fi"
   - composer selfupdate
   - composer install --prefer-dist --no-dev
   - npm install -g bower
   - bower install
   - sh -c "if [ '$DB' = 'mysql' ]; then php www/index.php -u root -n blog_mysql; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then php www/index.php -u postgres -n blog_pgsql -d pgsql; fi"
+#  - sh -c "if [ '$DB' = 'pgsql' ]; then php www/index.php -u postgres -n blog_pgsql -d pgsql; fi"
 
 notifications:
   email: false
