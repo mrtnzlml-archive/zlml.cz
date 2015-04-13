@@ -20,7 +20,7 @@
     "janmarek/webloader": "~2.2.0",
     "leafo/lessphp": "~0.4.0",
     "kdyby/aop": "dev-master",
-    "kdyby/doctrine": "~2.2.0",
+    "kdyby/doctrine": "~2.3.0",
     "texy/texy": "dev-master",
     "dg/adminer-custom": "dev-master"
   },
