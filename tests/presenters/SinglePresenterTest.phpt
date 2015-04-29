@@ -57,12 +57,6 @@ class SinglePresenterTest extends Tester\TestCase {
 		$this->tester->testAction('reference');
 	}
 
-	public function testRandom() {
-		$response = $this->tester->test('default', 'GET', array('do' => 'random'));
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
-
-	}
-
 	///// dataProviders /////
 
 	/**
