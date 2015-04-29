@@ -82,38 +82,6 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @param \DateTime $date
-	 * @return mixed|null
-	 * @throws Doctrine\ORM\NonUniqueResultException
-	 *
-	 * @Secure\Read(allow="guest")
-	 */
-	public function findOlder(\DateTime $date) {
-		$query = $this->dao->select()->where('? > date', $date)->order('date DESC')->limit(1);
-		try {
-			return $query->createQuery()->getSingleResult();
-		} catch (Doctrine\ORM\NoResultException $exc) {
-			return NULL;
-		}
-	}
-
-	/**
-	 * @param \DateTime $date
-	 * @return mixed|null
-	 * @throws Doctrine\ORM\NonUniqueResultException
-	 *
-	 * @Secure\Read(allow="guest")
-	 */
-	public function findNewer(\DateTime $date) {
-		$query = $this->dao->select()->where('? < date', $date)->limit(1);
-		try {
-			return $query->createQuery()->getSingleResult();
-		} catch (Doctrine\ORM\NoResultException $exc) {
-			return NULL;
-		}
-	}
-
-	/**
 	 * @param $search
 	 * @return array
 	 *

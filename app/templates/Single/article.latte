@@ -30,14 +30,8 @@
 			<div class="article" id="columns">
 				{$body|noescape}
 			</div>
-			<ul class="pager hidden-print" n:if="$nextArticle || $prevArticle">
-				<li class="previous" n:if="$nextArticle"><a n:href="$nextArticle->slug"><span
-								class="glyphicon glyphicon-chevron-left"></span>&nbsp;Předchozí článek</a></li>
-				<li class="next" n:if="$prevArticle"><a n:href="$prevArticle->slug">Další článek&nbsp;<span
-								class="glyphicon glyphicon-chevron-right"></span></a></li>
-			</ul>
 
-			<div id="bottom">
+			<div id="bottom" style="margin-top: 50px">
 				<hr class="hidden-print load_disqus">
 
 				<div class="share hidden-print text-center">
@@ -63,25 +57,6 @@
 
 				<hr>
 
-				<div class="row hidden-print">
-					<div class="suggestion col-lg-4 col-md-4" n:foreach="$next as $n">
-						<div class="thumbnail">
-							<div class="caption">
-								<a n:href=":Single:article $n->slug">
-									<div class="caption">
-										<h3>{$n->title|truncate:20}</h3>
-										{foreach $n->tags as $tag}
-											<span class="label" style="background: #{$tag->color}">{$tag->name}</span>
-										{/foreach}
-										<p>{$n->body|texy|striptags|truncate:200}</p>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{dump $setting->disqus_shortname}
 				<div class="alert alert-danger"
 				     n:if="!$post->disable_comments && $setting->show_comments && empty($setting->disqus_shortname)">
 					Please setup your disqus shortname in administration&hellip;
