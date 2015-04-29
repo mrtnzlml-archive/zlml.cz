@@ -114,19 +114,6 @@ class Posts extends Nette\Object {
 	}
 
 	/**
-	 * @return null
-	 *
-	 * @Secure\Read(allow="guest")
-	 */
-	public function rand() {
-		$posts = iterator_to_array($this->findBy(['publish_date <=' => new \DateTime()]));
-		if ($posts) {
-			return $posts[rand(0, count($posts) - 1)];
-		}
-		return NULL;
-	}
-
-	/**
 	 * @param $search
 	 * @return array
 	 *

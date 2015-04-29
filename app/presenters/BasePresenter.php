@@ -88,17 +88,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $this->webLoader->createJavaScriptLoader('default');
 	}
 
-	public function handleRandom() {
-		if (!$this->setting->random_search) {
-			$this->error();
-		}
-		$post = $this->posts->rand();
-		if ($post) {
-			$this->redirect(':Single:article', $post->slug);
-		}
-		$this->redirect(':Homepage:default');
-	}
-
 	/**
 	 * @return \fshlTexy
 	 */

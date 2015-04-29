@@ -72,7 +72,6 @@
 				</li>
 			{/foreach}
 			<li n:if="$setting->show_content && !$setting->disable_blog" n:class="$presenter->isLinkCurrent(':Single:obsah') || $presenter->isLinkCurrent(':Single:tagsah') ? active"><a n:href=":Single:obsah">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a></li>
-			<li n:if="$setting->random_search && !$setting->disable_blog"><a n:href="random!">random <span class="glyphicon glyphicon-random"></span></a></li>
 			{if $user->isAllowed('Admin:Admin', 'view')}<li n:class="$presenter->isLinkCurrent(':Admin:Admin:') ? 'pull-right active' : pull-right"><a n:href=":Admin:Admin:, id => NULL">admin</a></li>{/if}
 			<li n:class="$presenter->isLinkCurrent(':Single:develop') ? 'pull-right active' : pull-right"><a n:href=":Single:develop">develop</a></li>
 		</ul>
