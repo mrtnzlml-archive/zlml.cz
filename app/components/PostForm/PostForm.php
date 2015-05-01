@@ -2,6 +2,7 @@
 
 namespace Cntrl;
 
+use Doctrine;
 use Entity;
 use Kdyby;
 use Model;
@@ -90,7 +91,7 @@ class PostForm extends UI\Control {
 			$this->posts->save($this->post);
 			$this->presenter->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'success');
 			$this->onSave();
-		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
+		} catch (Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
 			$this->presenter->flashMessage('Tento URL slug je již v databázi uložen, zvolte prosím jiný.', 'danger');
 		} catch (Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');

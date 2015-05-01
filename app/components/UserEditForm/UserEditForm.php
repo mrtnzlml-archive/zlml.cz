@@ -2,6 +2,7 @@
 
 namespace Cntrl;
 
+use Doctrine;
 use Entity;
 use Kdyby;
 use Model;
@@ -73,7 +74,7 @@ class UserEditForm extends UI\Control {
 			$this->account->role = $vals->role;
 			$this->users->save($this->account);
 			$this->presenter->flashMessage('Změny úspěšně uloženy.', 'success');
-		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
+		} catch (Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
 			$this->presenter->flashMessage('Uživatel s tímto jménem již existuje. Zvolte prosím jiné.', 'danger');
 		} catch (Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');

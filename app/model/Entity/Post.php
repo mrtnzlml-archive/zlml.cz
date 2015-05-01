@@ -46,7 +46,7 @@ class Post extends Doctrine\Entities\BaseEntity {
 	/** @ORM\Column(type="text") */
 	protected $title;
 
-	/** @ORM\Column(type="text") */
+	/** @ORM\Column(type="text", unique=true) */
 	protected $slug;
 
 	/** @ORM\Column(type="text") */

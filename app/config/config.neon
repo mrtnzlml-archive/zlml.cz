@@ -8,22 +8,19 @@
 php:
 	date.timezone: Europe/Prague
 
-nette:
-	session:
-		debugger: TRUE
-		expiration: 14 days
-	application:
-		errorPresenter: Error
-		mapping:
-			*: App\*Module\*Presenter
-	container:
-		debugger: TRUE
-		accessors: TRUE
+session:
+	debugger: TRUE
+	expiration: 14 days
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\*Presenter
+
+di:
+	debugger: TRUE
 
 services:
-	doctrine.default.connection:
-		setup:
-			- $throwOldKdybyExceptions(TRUE) #FIXME: https://github.com/Kdyby/Doctrine/commit/4d4da40844827007bdd4911527f72162e0e14537
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- Model\Authenticator
