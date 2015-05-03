@@ -10,8 +10,8 @@
 		<div class="row" style="margin-bottom: 20px">
 			<div class="col-lg-10 col-lg-offset-1">
 				<div class="hidden-print">
-					{foreach range(65, 90) as $code}
-						<a href="#letter-{chr($code)}">{chr($code)}</a>{sep}, {/sep}
+					{foreach $letters as $letter}
+						<a href="#letter-{$letter}">{$letter}</a>{sep}, {/sep}
 					{/foreach}
 				</div>
 				{var $last = ''}

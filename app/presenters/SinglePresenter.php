@@ -17,7 +17,15 @@ class SinglePresenter extends BasePresenter {
 		if (!$this->setting->show_content) {
 			$this->error();
 		}
-		$this->template->articles = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['title' => 'ASC']);
+		$articles = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['title' => 'ASC']);
+		$this->template->articles = $articles;
+
+		$letters = [];
+		foreach ($articles as $article) {
+			$letter = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'));
+			$letters[$letter] = $letter;
+		}
+		$this->template->letters = $letters;
 	}
 
 	public function renderArticle($slug) {
