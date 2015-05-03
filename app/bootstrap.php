@@ -14,7 +14,7 @@ define('APP_DIR', __DIR__ . '/../app');
 define('WWW_DIR', __DIR__ . '/../www');
 
 $configurator->addConfig(__DIR__ . '/config/config.neon');
-if(file_exists(__DIR__ . '/config/config.local.neon')) {
+if (file_exists(__DIR__ . '/config/config.local.neon')) {
 	$configurator->addConfig(__DIR__ . '/config/config.local.neon');
 }
 
@@ -28,7 +28,7 @@ Please configure connection to the database first! Use following options:
 
 HELP;
 
-if(file_exists(__DIR__ . '/config/config.local.neon')) {
+if (file_exists(__DIR__ . '/config/config.local.neon')) {
 	$config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/config/config.local.neon'));
 }
 if (isset($config) && is_array($config) && array_key_exists('doctrine', $config)) {
@@ -38,8 +38,8 @@ if (isset($config) && is_array($config) && array_key_exists('doctrine', $config)
 	if (!isset($options['u']) || !isset($options['n'])) {
 		die($help);
 	}
-	require_once(__DIR__ . '/model/.install-cli');
+	require_once(__DIR__ . '/model/.install-cli.php');
 	exit;
 } else {
-	require_once(__DIR__ . '/model/.install');
+	require_once(__DIR__ . '/model/.install.php');
 }
