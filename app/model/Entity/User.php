@@ -11,12 +11,7 @@ use Kdyby\Doctrine;
  */
 class User extends Doctrine\Entities\BaseEntity {
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
+	use Doctrine\Entities\Attributes\Identifier;
 
 	/** @ORM\Column(unique=TRUE, type="string", length=100) */
 	protected $username;

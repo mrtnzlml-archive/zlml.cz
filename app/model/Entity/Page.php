@@ -12,17 +12,12 @@ use Kdyby\Doctrine;
  */
 class Page extends Doctrine\Entities\BaseEntity {
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
+	use Doctrine\Entities\Attributes\Identifier;
 
 	/** @ORM\Column(type="text") */
 	protected $title;
 
-	/** @ORM\Column(type="string", unique=TRUE, length=) */
+	/** @ORM\Column(type="string", unique=TRUE) */
 	protected $slug;
 
 	/** @ORM\Column(type="text") */

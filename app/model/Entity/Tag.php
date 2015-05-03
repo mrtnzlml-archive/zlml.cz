@@ -11,6 +11,8 @@ use Kdyby\Doctrine;
  */
 class Tag extends Doctrine\Entities\BaseEntity {
 
+	use Doctrine\Entities\Attributes\Identifier;
+
 	/**
 	 * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags")
 	 * @ORM\OrderBy({"date" = "DESC"})
@@ -20,13 +22,6 @@ class Tag extends Doctrine\Entities\BaseEntity {
 	public function __construct() {
 		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
 	}
-
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
 
 	/** @ORM\Column(type="string", length=50) */
 	protected $name;

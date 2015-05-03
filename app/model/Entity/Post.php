@@ -12,6 +12,8 @@ use Kdyby\Doctrine;
  */
 class Post extends Doctrine\Entities\BaseEntity {
 
+	use Doctrine\Entities\Attributes\Identifier;
+
 	/**
 	 * @ORM\ManyToMany(targetEntity="Tag", inversedBy="posts", cascade={"persist"})
 	 * @ORM\JoinTable(name="posts_tags")
@@ -35,13 +37,6 @@ class Post extends Doctrine\Entities\BaseEntity {
 			$this->tags->add($newTag);
 		}
 	}
-
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
 
 	/** @ORM\Column(type="text") */
 	protected $title;
