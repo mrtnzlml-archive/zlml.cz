@@ -16,8 +16,8 @@ class PictureExtension extends Nette\DI\CompilerExtension {
 		//Admin Menu:
 		$priorityQueue = new \SplPriorityQueue();
 		$menuItem = new MenuItem();
-		$menuItem->setHeading(_('Nahrát nový obrázek'));
-		$menuItem->setText(_('Zde nahrajte obrázky'));
+		$menuItem->setHeading('Nahrát nový obrázek');
+		$menuItem->setText('Zde nahrajte obrázky');
 		$menuItem->setLink(':Admin:pictures');
 		$priorityQueue->insert($menuItem, 10);
 		$adminMenuFactory = $builder->getDefinition('adminMenuFactory');
