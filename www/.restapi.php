@@ -4,30 +4,42 @@
 
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
+
 date_default_timezone_set('UTC');
 $date = date('YmdHi');
 
-$url = 'http://localhost.dev/zeminem.cz/www/api/article/10';
+$url = 'http://localhost.dev/www.zeminem.cz/www/api/v1/articles';
 $hmac = hash_hmac('sha512', $url . $date, 'PRIVATE_KEY');
 
-// create a new cURL resource
 $curl = curl_init($url);
 
-// set URL and other appropriate options
+$data = [
+	'title' => 'Title',
+	'body' => 'Body',
+];
+
 curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+//curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+//curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+curl_setopt($curl, CURLOPT_HTTPHEADER, [
 	'public-api-key: PUBLIC_KEY',
 	"api-hash: $hmac",
-));
+]);
 
-// grab URL and pass it to the browser
 $result = curl_exec($curl);
+//var_dump($result);
 
-// close cURL resource, and free up system resources
 curl_close($curl);
 
-require __DIR__ . '/../vendor/tracy/tracy/src/tracy.php';
 Tracy\Debugger::enable();
-Tracy\Debugger::dump(json_decode($result));
+//Tracy\Debugger::dump(json_decode($result));
+
+$texy = new Texy();
+foreach (json_decode($result)->data as $article) {
+	echo "<h3>$article->title</h3>";
+	echo "<p>" . \Nette\Utils\Strings::truncate(strip_tags($texy->process($article->body)), 500) . "</p>";
+}

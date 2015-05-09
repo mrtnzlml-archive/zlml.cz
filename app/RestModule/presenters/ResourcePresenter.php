@@ -5,7 +5,8 @@ namespace App\RestModule;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI;
 
-class ResourcePresenter extends UI\Presenter {
+class ResourcePresenter extends UI\Presenter
+{
 
 	// http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/
 
@@ -17,7 +18,8 @@ class ResourcePresenter extends UI\Presenter {
 	 * [SERVER]		- compare both hashes and return response (or failure)
 	 */
 
-	public function actionGet() {
+	public function actionGet()
+	{
 		$api_key = $this->getHttpRequest()->getHeader('public-api-key');
 		$api_hash = $this->getHttpRequest()->getHeader('api-hash');
 
@@ -32,9 +34,9 @@ class ResourcePresenter extends UI\Presenter {
 			$response['err_info'] = 'You are not authorized.';
 			$this->sendResponse(new JsonResponse($response));
 		} else {
-			$response['data'] = array(
+			$response['data'] = [
 				'info' => 'Everything works fine.'
-			);
+			];
 			$this->sendResponse(new JsonResponse($response));
 		}
 	}

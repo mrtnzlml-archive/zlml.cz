@@ -56,7 +56,7 @@ class RouterFactory {
 			'paginator-page' => 1
 		]);
 		//TODO: options - API URL, enable API
-		$router[] = new RestRouter('api[/<presenter>[/<id>]]', array(
+		$router[] = new RestRouter('api/v1[/<presenter>[/<id>]]', array(
 			'module' => 'Rest',
 			'presenter' => 'Resource',
 			'action' => 'get',
