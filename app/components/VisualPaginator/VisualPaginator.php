@@ -9,7 +9,8 @@ use Nette\Utils\Paginator;
  * Class VisualPaginator
  * @package Cntrl
  */
-class VisualPaginator extends Nette\Application\UI\Control {
+class VisualPaginator extends Nette\Application\UI\Control
+{
 
 	/** @var Nette\Utils\Paginator */
 	private $paginator;
@@ -20,7 +21,8 @@ class VisualPaginator extends Nette\Application\UI\Control {
 	/**
 	 * @return Nette\Utils\Paginator
 	 */
-	public function getPaginator() {
+	public function getPaginator()
+	{
 		if (!$this->paginator) {
 			$this->paginator = new Paginator;
 		}
@@ -29,10 +31,13 @@ class VisualPaginator extends Nette\Application\UI\Control {
 
 	/**
 	 * Renders paginator.
+	 *
 	 * @param array $options
+	 *
 	 * @return void
 	 */
-	public function render($options = NULL) {
+	public function render($options = NULL)
+	{
 		$paginator = $this->getPaginator();
 
 		if (NULL !== $options) {
@@ -65,10 +70,13 @@ class VisualPaginator extends Nette\Application\UI\Control {
 
 	/**
 	 * Loads state informations.
+	 *
 	 * @param  array
+	 *
 	 * @return void
 	 */
-	public function loadState(array $params) {
+	public function loadState(array $params)
+	{
 		parent::loadState($params);
 		$this->getPaginator()->page = $this->page;
 	}

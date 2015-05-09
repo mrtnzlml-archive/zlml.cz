@@ -8,7 +8,8 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @Target({"METHOD"})
  */
-class Create extends Annotation {
+class Create extends Annotation
+{
 
 	/**
 	 * @var string

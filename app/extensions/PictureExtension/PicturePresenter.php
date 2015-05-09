@@ -6,7 +6,8 @@ use Cntrl;
 use Entity;
 use Nette;
 
-class PicturesPresenter extends BasePresenter {
+class PicturesPresenter extends BasePresenter
+{
 
 	/** @var \Model\Pictures @inject */
 	public $pictures;
@@ -14,7 +15,8 @@ class PicturesPresenter extends BasePresenter {
 	/** @var \IAdminMenuFactory @inject */
 	public $adminMenuFactory;
 
-	public function renderDefault() {
+	public function renderDefault()
+	{
 		$vp = new Cntrl\VisualPaginator($this, 'paginator');
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 25; //FIXME: nastavitelný parametr
@@ -22,7 +24,8 @@ class PicturesPresenter extends BasePresenter {
 		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
-	public function handleUploadReciever() {
+	public function handleUploadReciever()
+	{
 		$uploader = new \UploadHandler();
 		$uploader->allowedExtensions = ["jpeg", "jpg", "png", "gif"];
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
@@ -49,7 +52,8 @@ class PicturesPresenter extends BasePresenter {
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
 	}
 
-	public function handleDeletePicture($id) {
+	public function handleDeletePicture($id)
+	{
 		//$this->onBeforeRestrictedFunctionality($this); FIXME
 		$picture = $this->pictures->findOneBy(['id' => $id]);
 		@unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
@@ -62,15 +66,17 @@ class PicturesPresenter extends BasePresenter {
 	/**
 	 * @return \Cntrl\AdminMenu
 	 */
-	protected function createComponentAdminMenu() {
+	protected function createComponentAdminMenu()
+	{
 		return $this->adminMenuFactory->create();
 	}
 
-	public function formatLayoutTemplateFiles() {
+	public function formatLayoutTemplateFiles()
+	{
 		$name = $this->getName();
 		$presenter = substr($name, strrpos(':' . $name, ':'));
 		$dir = is_dir(APP_DIR . "/templates") ? APP_DIR : dirname(APP_DIR);
-		$list = array("$dir/templates/$presenter/@layout.latte");
+		$list = ["$dir/templates/$presenter/@layout.latte"];
 		do {
 			$list[] = "$dir/templates/@layout.latte";
 			$dir = dirname($dir);
@@ -78,7 +84,8 @@ class PicturesPresenter extends BasePresenter {
 		return $list;
 	}
 
-	public function formatTemplateFiles() {
+	public function formatTemplateFiles()
+	{
 		return [__DIR__ . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . "$this->view.latte"];
 	}
 

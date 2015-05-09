@@ -1,6 +1,7 @@
 <?php
 
-interface ISignInFormFactory {
+interface ISignInFormFactory
+{
 
 	/** @return \Cntrl\SignIn */
 	public function create();

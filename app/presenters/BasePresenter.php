@@ -7,7 +7,8 @@ use Nette;
 use Nette\Application\UI;
 use WebLoader;
 
-abstract class BasePresenter extends Nette\Application\UI\Presenter {
+abstract class BasePresenter extends Nette\Application\UI\Presenter
+{
 
 	/** @var \Model\Posts @inject */
 	public $posts;
@@ -22,13 +23,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	protected $setting;
 
-	public function startup() {
+	public function startup()
+	{
 		parent::startup();
 		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
 		$this->template->pages = $this->pages->findBy([]);
 	}
 
-	protected function createComponentSearch() {
+	protected function createComponentSearch()
+	{
 		$form = new UI\Form;
 		$form->addText('search')
 			->setRequired('Vyplňte co chcete vyhledávat.')
@@ -38,15 +41,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $form;
 	}
 
-	public function searchSucceeded(UI\Form $form, $values) {
+	public function searchSucceeded(UI\Form $form, $values)
+	{
 		$this->redirect(':Search:default', $values->search);
 	}
 
 	/**
 	 * @param null $class
+	 *
 	 * @return Nette\Templating\ITemplate
 	 */
-	protected function createTemplate($class = NULL) {
+	protected function createTemplate($class = NULL)
+	{
 		$template = parent::createTemplate($class);
 		$template->registerHelper('texy', function ($input) {
 			$texy = new \Texy();
@@ -80,18 +86,21 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $template;
 	}
 
-	public function createComponentCss() {
+	public function createComponentCss()
+	{
 		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv,print');
 	}
 
-	public function createComponentJs() {
+	public function createComponentJs()
+	{
 		return $this->webLoader->createJavaScriptLoader('default');
 	}
 
 	/**
 	 * @return \fshlTexy
 	 */
-	protected function prepareTexy() {
+	protected function prepareTexy()
+	{
 		$texy = new \fshlTexy();
 		$texy->addHandler('block', [$texy, 'blockHandler']);
 		$texy->tabWidth = 4;

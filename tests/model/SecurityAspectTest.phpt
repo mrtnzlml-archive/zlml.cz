@@ -3,11 +3,11 @@
 namespace Test;
 
 use Entity\Page;
+use Entity\Picture;
 use Entity\Post;
 use Entity\PostMirror;
 use Entity\Tag;
 use Entity\User;
-use Entity\Picture;
 use Model;
 use Nette;
 use Tester;
@@ -17,7 +17,8 @@ $container = require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class SecurityAspectTest extends Tester\TestCase {
+class SecurityAspectTest extends Tester\TestCase
+{
 
 	/** @var Model\Pages */
 	private $pages;
@@ -34,7 +35,8 @@ class SecurityAspectTest extends Tester\TestCase {
 	/** @var Model\Users */
 	private $users;
 
-	public function __construct(Nette\DI\Container $container) {
+	public function __construct(Nette\DI\Container $container)
+	{
 		$this->tester = new PresenterTester($container);
 		$this->pages = $container->getByType('\Model\Pages');
 		$this->pictures = $container->getByType('\Model\Pictures');
@@ -45,11 +47,13 @@ class SecurityAspectTest extends Tester\TestCase {
 		$this->users = $container->getByType('\Model\Users');
 	}
 
-	public function setUp() {
+	public function setUp()
+	{
 		$this->tester->logIn(1, 'demo');
 	}
 
-	public function testRestrictedPagesSave() {
+	public function testRestrictedPagesSave()
+	{
 		Tester\Assert::exception(function () {
 			$page = new Page;
 			$page->title = 'title';
@@ -59,7 +63,8 @@ class SecurityAspectTest extends Tester\TestCase {
 		}, 'Nette\Security\AuthenticationException', 'You are NOT allowed to call function %a%(). You need at least %a% role.');
 	}
 
-	public function testRestrictedPicturesSave() {
+	public function testRestrictedPicturesSave()
+	{
 		Tester\Assert::exception(function () {
 			$picture = new Picture;
 			$picture->uuid = 'uuid';
@@ -68,7 +73,8 @@ class SecurityAspectTest extends Tester\TestCase {
 		}, 'Nette\Security\AuthenticationException', 'You are NOT allowed to call function %a%(). You need at least %a% role.');
 	}
 
-	public function testRestrictedPostsSave() {
+	public function testRestrictedPostsSave()
+	{
 		Tester\Assert::exception(function () {
 			$post = new Post;
 			$post->title = 'title';
@@ -78,7 +84,8 @@ class SecurityAspectTest extends Tester\TestCase {
 		}, 'Nette\Security\AuthenticationException', 'You are NOT allowed to call function %a%(). You need at least %a% role.');
 	}
 
-	public function testRestrictedPostsMirrorSave() {
+	public function testRestrictedPostsMirrorSave()
+	{
 		Tester\Assert::exception(function () {
 			$postMirror = new PostMirror;
 			$postMirror->title = 'title';
@@ -87,14 +94,16 @@ class SecurityAspectTest extends Tester\TestCase {
 		}, 'Nette\Security\AuthenticationException', 'You are NOT allowed to call function %a%(). You need at least %a% role.');
 	}
 
-	public function testRestrictedSettingsSave() {
+	public function testRestrictedSettingsSave()
+	{
 		Tester\Assert::exception(function () {
 			$setting = new Nette\Utils\ArrayHash(['key' => 'value']);
 			$this->settings->save($setting);
 		}, 'Nette\Security\AuthenticationException', 'You are NOT allowed to call function %a%(). You need at least %a% role.');
 	}
 
-	public function testRestrictedTagsSave() {
+	public function testRestrictedTagsSave()
+	{
 		Tester\Assert::exception(function () {
 			$tag = new Tag;
 			$tag->name = 'name';
@@ -103,7 +112,8 @@ class SecurityAspectTest extends Tester\TestCase {
 		}, 'Nette\Security\AuthenticationException', 'You are NOT allowed to call function %a%(). You need at least %a% role.');
 	}
 
-	public function testRestrictedUsersSave() {
+	public function testRestrictedUsersSave()
+	{
 		Tester\Assert::exception(function () {
 			$user = new User;
 			$user->username = 'username';
@@ -113,7 +123,8 @@ class SecurityAspectTest extends Tester\TestCase {
 		}, 'Nette\Security\AuthenticationException', 'You are NOT allowed to call function %a%(). You need at least %a% role.');
 	}
 
-	public function tearDown() {
+	public function tearDown()
+	{
 		$this->tester->logOut();
 	}
 

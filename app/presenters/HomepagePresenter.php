@@ -5,7 +5,8 @@ namespace App;
 use Cntrl;
 use Nette;
 
-class HomepagePresenter extends BasePresenter {
+class HomepagePresenter extends BasePresenter
+{
 
 	///** @var \Model\Xmlrpc @inject */
 	//public $xmlrpc;
@@ -25,7 +26,8 @@ class HomepagePresenter extends BasePresenter {
 		}
 	}*/
 
-	public function renderDefault() {
+	public function renderDefault()
+	{
 		$vp = new Cntrl\VisualPaginator($this, 'paginator');
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = 10;
@@ -34,11 +36,13 @@ class HomepagePresenter extends BasePresenter {
 		$this->template->posts = $posts;
 	}
 
-	public function renderRss() {
+	public function renderRss()
+	{
 		$this->template->posts = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['date' => 'DESC'], 50);
 	}
 
-	public function renderSitemap() {
+	public function renderSitemap()
+	{
 		$this->template->sitemap = $this->posts->findBy(['publish_date <=' => new \DateTime()]);
 	}
 

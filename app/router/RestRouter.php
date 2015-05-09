@@ -10,7 +10,8 @@ namespace App;
 use Nette;
 use Nette\Http\IRequest;
 
-class RestRouter extends Nette\Application\Routers\Route {
+class RestRouter extends Nette\Application\Routers\Route
+{
 
 	const METHOD_POST = 4;
 	const METHOD_GET = 8;
@@ -18,7 +19,8 @@ class RestRouter extends Nette\Application\Routers\Route {
 	const METHOD_DELETE = 32;
 	const RESTFUL = 64;
 
-	public function match(IRequest $httpRequest) {
+	public function match(IRequest $httpRequest)
+	{
 		$httpMethod = $httpRequest->getMethod();
 		if (($this->flags & self::RESTFUL) == self::RESTFUL) {
 			$presenterRequest = parent::match($httpRequest);

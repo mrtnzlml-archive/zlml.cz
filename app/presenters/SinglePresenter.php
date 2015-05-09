@@ -6,14 +6,16 @@ use Model;
 use Nette;
 use Nette\Http\Url;
 
-class SinglePresenter extends BasePresenter {
+class SinglePresenter extends BasePresenter
+{
 
 	/** @var \ISignInFormFactory @inject */
 	public $signInFormFactory;
 	/** @var \Model\Tags @inject */
 	public $tags;
 
-	public function renderObsah() {
+	public function renderObsah()
+	{
 		if (!$this->setting->show_content) {
 			$this->error();
 		}
@@ -28,7 +30,8 @@ class SinglePresenter extends BasePresenter {
 		$this->template->letters = $letters;
 	}
 
-	public function renderArticle($slug) {
+	public function renderArticle($slug)
+	{
 		$webalized = Nette\Utils\Strings::webalize($slug);
 		if (empty($webalized)) {
 			$this->redirect('Homepage:default');
@@ -66,7 +69,8 @@ class SinglePresenter extends BasePresenter {
 	}
 
 	/** @return \Cntrl\SignIn */
-	protected function createComponentSignInForm() {
+	protected function createComponentSignInForm()
+	{
 		return $this->signInFormFactory->create();
 	}
 

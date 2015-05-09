@@ -1,15 +1,18 @@
 <?php
 
-class SettingsFormFactory {
+class SettingsFormFactory
+{
 
 	/** @var \Model\Settings */
 	private $settings;
 
-	public function __construct(Model\Settings $settings) {
+	public function __construct(Model\Settings $settings)
+	{
 		$this->settings = $settings;
 	}
 
-	public function create() {
+	public function create()
+	{
 		return new \Cntrl\SettingsForm($this->settings);
 	}
 

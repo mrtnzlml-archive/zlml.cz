@@ -10,7 +10,8 @@ use Kdyby\Doctrine;
  * @ORM\Entity
  * @ORM\Table(name="pages")
  */
-class Page extends Doctrine\Entities\BaseEntity {
+class Page extends Doctrine\Entities\BaseEntity
+{
 
 	use Doctrine\Entities\Attributes\Identifier;
 

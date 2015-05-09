@@ -3,31 +3,35 @@
 namespace Model;
 
 use Kdyby;
-use Nette\Security\Passwords;
 use Nette;
+use Nette\Security\Passwords;
 use Nette\Utils\Strings;
 
 /**
  * Class Authenticator
  * @package Model
  */
-class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator {
+class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator
+{
 
 	private $users;
 
 	/**
 	 * @param Users $users
 	 */
-	public function __construct(Users $users) {
+	public function __construct(Users $users)
+	{
 		$this->users = $users;
 	}
 
 	/**
 	 * @param array $credentials
+	 *
 	 * @return Nette\Security\Identity|Nette\Security\IIdentity
 	 * @throws \Nette\Security\AuthenticationException
 	 */
-	public function authenticate(array $credentials) {
+	public function authenticate(array $credentials)
+	{
 		list($username, $password) = $credentials;
 		$password = $this->removeCapsLock($password);
 		$user = $this->users->findOneBy(['username' => $username]);
@@ -46,10 +50,13 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 
 	/**
 	 * Fixes caps lock accidentally turned on.
+	 *
 	 * @param $password
+	 *
 	 * @return mixed
 	 */
-	private function removeCapsLock($password) {
+	private function removeCapsLock($password)
+	{
 		return $password === Strings::upper($password) ? Strings::lower($password) : $password;
 	}
 

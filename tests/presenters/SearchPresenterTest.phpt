@@ -10,32 +10,37 @@ $container = require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class SearchPresenterTest extends Tester\TestCase {
+class SearchPresenterTest extends Tester\TestCase
+{
 
-	public function __construct(Nette\DI\Container $container) {
+	public function __construct(Nette\DI\Container $container)
+	{
 		$this->tester = new PresenterTester($container, 'Search');
 	}
 
-	public function testRenderDefault() {
-		$this->tester->testAction('default', 'GET', array('search' => 'nette'));
+	public function testRenderDefault()
+	{
+		$this->tester->testAction('default', 'GET', ['search' => 'nette']);
 	}
 
-	public function testRenderDefaultEmpty() {
-		$this->tester->testAction('default', 'GET', array('search' => 'pritomtodotazupravdepodobnenicvdatabazinenajdu'));
+	public function testRenderDefaultEmpty()
+	{
+		$this->tester->testAction('default', 'GET', ['search' => 'pritomtodotazupravdepodobnenicvdatabazinenajdu']);
 	}
 
-	public function testSearchForm() {
-		$response = $this->tester->test('default', 'POST', array(
+	public function testSearchForm()
+	{
+		$response = $this->tester->test('default', 'POST', [
 			'do' => 'search-submit',
-		), array(
+		], [
 			'search' => 'test',
-		));
+		]);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
-		$response = $this->tester->test('default', 'POST', array(
+		$response = $this->tester->test('default', 'POST', [
 			'do' => 'search-submit',
-		), array(
+		], [
 			'search' => 'ač óR ůz',
-		));
+		]);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 

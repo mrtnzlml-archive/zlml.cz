@@ -10,7 +10,8 @@ use Nette;
 use Nette\Application\UI;
 use Nette\Security\Passwords;
 
-class UserEditForm extends UI\Control {
+class UserEditForm extends UI\Control
+{
 
 	public $onSave = [];
 	//public $onBeforeRestrictedFunctionality = [];
@@ -18,18 +19,21 @@ class UserEditForm extends UI\Control {
 	private $users;
 	private $account;
 
-	public function __construct(Model\Users $users, $id) {
+	public function __construct(Model\Users $users, $id)
+	{
 		parent::__construct();
 		$this->users = $users;
 		$this->account = $this->users->findOneBy(['id' => $id]);
 	}
 
-	public function render() {
+	public function render()
+	{
 		$this->template->setFile(__DIR__ . '/UserEditForm.latte');
 		$this->template->render();
 	}
 
-	protected function createComponentForm() {
+	protected function createComponentForm()
+	{
 		$form = new UI\Form;
 		$form->addProtection();
 		$form->addText('username', 'Uživatelské přihlašovací jméno:')
@@ -64,7 +68,8 @@ class UserEditForm extends UI\Control {
 		return $form;
 	}
 
-	public function formSucceeded(UI\Form $form, $vals) {
+	public function formSucceeded(UI\Form $form, $vals)
+	{
 		try {
 			if (!$this->account) {
 				$this->account = new Entity\User();

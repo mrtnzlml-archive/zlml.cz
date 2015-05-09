@@ -19,7 +19,7 @@ $security = <<<NEON
 #\n\n
 NEON;
 
-$drivers = array();
+$drivers = [];
 if (extension_loaded('pdo_mysql')) {
 	$drivers['pdo_mysql'] = 'MySQL';
 }
@@ -120,9 +120,9 @@ if ($form->isSubmitted() && $form->isValid()) {
 			$workaround->execute();
 		} else {
 			$settingSql = file_get_contents(__DIR__ . '/../../sql/settings-pgsql.sql');
-            /** @var PDOStatement $setting */
-            $setting = $conn->prepare($settingSql);
-            $setting->execute();
+			/** @var PDOStatement $setting */
+			$setting = $conn->prepare($settingSql);
+			$setting->execute();
 		}
 
 		$post = new \Entity\Post;

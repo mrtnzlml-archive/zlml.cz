@@ -8,16 +8,19 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BlogUpdate extends Command {
+class BlogUpdate extends Command
+{
 
 	/** @var \Kdyby\Doctrine\EntityManager @inject */
 	public $em;
 
-	protected function configure() {
+	protected function configure()
+	{
 		$this->setName('blog:update')->setDescription('Update database schema (set-up DB credentials in config.local.neon).');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
 		try {
 			$schemaTool = new Doctrine\ORM\Tools\SchemaTool($this->em);
 			$schemaTool->updateSchema($this->em->getMetadataFactory()->getAllMetadata());

@@ -9,7 +9,8 @@ use Nette\Security\Permission;
  * Class Authorizator
  * @package Model
  */
-class Authorizator implements Nette\Security\IAuthorizator {
+class Authorizator implements Nette\Security\IAuthorizator
+{
 
 	private $acl;
 
@@ -18,7 +19,8 @@ class Authorizator implements Nette\Security\IAuthorizator {
 	const UPDATE = 'update';
 	const DELETE = 'delete';
 
-	public function __construct() {
+	public function __construct()
+	{
 		$acl = new Nette\Security\Permission();
 		// definice rolí
 		$acl->addRole('guest');
@@ -39,18 +41,22 @@ class Authorizator implements Nette\Security\IAuthorizator {
 	 * @param $role
 	 * @param $resource
 	 * @param $privilege
+	 *
 	 * @return bool
 	 */
-	public function isAllowed($role, $resource, $privilege) {
+	public function isAllowed($role, $resource, $privilege)
+	{
 		return $this->acl->isAllowed($role, $resource, $privilege);
 	}
 
 	/**
 	 * @param $role
 	 * @param Nette\Security\User $user
+	 *
 	 * @return bool
 	 */
-	public function isAtLeastInRole($role, Nette\Security\User $user) {
+	public function isAtLeastInRole($role, Nette\Security\User $user)
+	{
 		$result = TRUE;
 		foreach ($user->getRoles() as $userRole) {
 			if ($userRole === $role) {

@@ -8,6 +8,7 @@ use App;
  * Class BasePresenter
  * @package App\AdminModule
  */
-abstract class BasePresenter extends App\BasePresenter {
+abstract class BasePresenter extends App\BasePresenter
+{
 
 }

@@ -8,7 +8,8 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @Target({"METHOD"})
  */
-class Read extends Annotation {
+class Read extends Annotation
+{
 
 	/**
 	 * @var string

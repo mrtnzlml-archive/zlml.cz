@@ -9,7 +9,8 @@ use Kdyby\Doctrine;
  * @ORM\Entity
  * @ORM\Table(name="pictures")
  */
-class Picture extends Doctrine\Entities\BaseEntity {
+class Picture extends Doctrine\Entities\BaseEntity
+{
 
 	use Doctrine\Entities\Attributes\Identifier;
 

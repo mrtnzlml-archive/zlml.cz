@@ -1,8 +1,10 @@
 <?php
 
-class fshlTexy extends \Texy {
+class fshlTexy extends \Texy
+{
 
-	public function blockHandler($invocation, $blocktype, $content, $lang, $modifier) {
+	public function blockHandler($invocation, $blocktype, $content, $lang, $modifier)
+	{
 		if ($blocktype !== 'block/code') {
 			return $invocation->proceed(); //vstup se nebude zpracovavat
 		}

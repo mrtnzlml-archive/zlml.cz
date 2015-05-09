@@ -9,7 +9,8 @@ use Nette\Utils\Validators;
  * Class Xmlrpc
  * @package Model
  */
-class Xmlrpc extends Nette\Object {
+class Xmlrpc extends Nette\Object
+{
 
 	const REGEXP_PINGBACK_LINK = '<link rel="pingback" href="([^"]+)" ?/?>';
 	const RESPONSE_SUCCESS = -1;
@@ -37,18 +38,21 @@ class Xmlrpc extends Nette\Object {
 
 	//Kdyby\Curl ?
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->server = xmlrpc_server_create();
 		//http://www.hixie.ch/specs/pingback/pingback
 		//https://github.com/tedeh/pingback-php
 		xmlrpc_server_register_method($this->server, 'pingback.ping', [$this, 'pingback_ping']);
 	}
 
-	public function __destruct() {
+	public function __destruct()
+	{
 		xmlrpc_server_destroy($this->server);
 	}
 
-	public function pingback_ping($source, $target) {
+	public function pingback_ping($source, $target)
+	{
 		if (!Validators::isUrl($source)) {
 			return $this->xmlrpc_fault(self::RESPONSE_FAULT_SOURCE);
 		}
@@ -58,9 +62,9 @@ class Xmlrpc extends Nette\Object {
 		}
 
 		$curl = curl_init($target);
-		curl_setopt($curl, CURLOPT_HEADER, true);
-		curl_setopt($curl, CURLOPT_NOBODY, true);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HEADER, TRUE);
+		curl_setopt($curl, CURLOPT_NOBODY, TRUE);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
 		$headers = http_parse_headers(curl_exec($curl));
 		curl_close($curl);
 		if (isset($headers['X-Pingback']) && !empty($headers['X-Pingback'])) {
@@ -74,7 +78,7 @@ class Xmlrpc extends Nette\Object {
 		}
 
 		$content = file_get_contents($source);
-		if ($content !== false) {
+		if ($content !== FALSE) {
 			$doc = new \DOMDocument();
 			@$doc->loadHTML($content);
 			foreach ($doc->getElementsByTagName('a') as $link) {
@@ -93,18 +97,20 @@ class Xmlrpc extends Nette\Object {
 		//parsování titulku ze vzdálené stránky
 	}
 
-	public static function sendPingback($from, $to, $server) {
+	public static function sendPingback($from, $to, $server)
+	{
 		$request = xmlrpc_encode_request('pingback.ping', [$from, $to], ['encoding' => 'utf-8']);
 		$curl = curl_init($server);
-		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POST, TRUE);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
 		$response = curl_exec($curl);
 		curl_close($curl);
 		return $response;
 	}
 
-	private function xmlrpc_fault($faultCode) {
+	private function xmlrpc_fault($faultCode)
+	{
 		return xmlrpc_encode([
 			'faultCode' => $faultCode,
 			'faultString' => $this->responses[$faultCode]
@@ -114,7 +120,8 @@ class Xmlrpc extends Nette\Object {
 }
 
 if (!function_exists('http_parse_headers')) {
-	function http_parse_headers($raw_headers) {
+	function http_parse_headers($raw_headers)
+	{
 		$headers = [];
 		$key = '';
 		foreach (explode("\n", $raw_headers) as $i => $h) {

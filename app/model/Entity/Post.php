@@ -10,7 +10,8 @@ use Kdyby\Doctrine;
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
-class Post extends Doctrine\Entities\BaseEntity {
+class Post extends Doctrine\Entities\BaseEntity
+{
 
 	use Doctrine\Entities\Attributes\Identifier;
 
@@ -21,11 +22,13 @@ class Post extends Doctrine\Entities\BaseEntity {
 	 */
 	protected $tags;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
-	public function addTag(Tag $newTag) {
+	public function addTag(Tag $newTag)
+	{
 		$add = TRUE;
 		foreach ($this->tags as $tag) {
 			if ($tag->name == $newTag->name) {

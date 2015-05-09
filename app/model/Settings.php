@@ -10,7 +10,8 @@ use Nette;
  * Class Settings
  * @package Model
  */
-class Settings extends Nette\Object {
+class Settings extends Nette\Object
+{
 
 	/** @var \Kdyby\Doctrine\EntityDao */
 	private $dao;
@@ -18,7 +19,8 @@ class Settings extends Nette\Object {
 	/**
 	 * @param Kdyby\Doctrine\EntityDao $dao
 	 */
-	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
+	public function __construct(Kdyby\Doctrine\EntityDao $dao)
+	{
 		$this->dao = $dao;
 	}
 
@@ -28,7 +30,8 @@ class Settings extends Nette\Object {
 	 * @Secure\Create(allow="admin")
 	 * @Secure\Update(allow="admin")
 	 */
-	public function save(Nette\Utils\ArrayHash $vals) {
+	public function save(Nette\Utils\ArrayHash $vals)
+	{
 		foreach ($vals as $key => $value) {
 			if ($entity = $this->findOneBy(['key' => $key])) {
 				if ($entity->value != $value) {
@@ -51,30 +54,36 @@ class Settings extends Nette\Object {
 	 * @param array $orderBy
 	 * @param null $limit
 	 * @param null $offset
+	 *
 	 * @return array
 	 */
-	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
+	{
 		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
 	}
 
 	/**
 	 * @param array $criteria
 	 * @param array $orderBy
+	 *
 	 * @return mixed|null|object
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findOneBy(array $criteria, array $orderBy = null) {
+	public function findOneBy(array $criteria, array $orderBy = NULL)
+	{
 		return $this->dao->findOneBy($criteria, $orderBy);
 	}
 
 	/**
 	 * @param array $keys
+	 *
 	 * @return array
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findByKeys(array $keys) {
+	public function findByKeys(array $keys)
+	{
 		$keys = $this->dao->findBy(['key' => $keys]);
 		$result = [];
 		foreach ($keys as $key) {
@@ -88,7 +97,8 @@ class Settings extends Nette\Object {
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findAllByKeys() {
+	public function findAllByKeys()
+	{
 		$keys = $this->dao->findBy([]);
 		$result = [];
 		foreach ($keys as $key) {
@@ -99,11 +109,13 @@ class Settings extends Nette\Object {
 
 	/**
 	 * @param $key
+	 *
 	 * @return int|null|string
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findOneByKey($key) {
+	public function findOneByKey($key)
+	{
 		$result = $this->dao->findOneBy(['key' => $key]);
 		if ($result) {
 			$result = $result->value;

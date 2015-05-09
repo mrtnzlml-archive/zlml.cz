@@ -9,7 +9,8 @@ use Model;
 use Nette;
 use Nette\Application\UI;
 
-class PostForm extends UI\Control {
+class PostForm extends UI\Control
+{
 
 	public $onSave = [];
 	//public $onBeforeRestrictedFunctionality = [];
@@ -20,19 +21,22 @@ class PostForm extends UI\Control {
 	private $tags;
 	private $post;
 
-	public function __construct(Model\Posts $posts, Model\Tags $tags, $id) {
+	public function __construct(Model\Posts $posts, Model\Tags $tags, $id)
+	{
 		parent::__construct();
 		$this->posts = $posts;
 		$this->tags = $tags;
 		$this->post = $this->posts->findOneBy(['id' => $id]);
 	}
 
-	public function render() {
+	public function render()
+	{
 		$this->template->setFile(__DIR__ . '/PostForm.latte');
 		$this->template->render();
 	}
 
-	protected function createComponentPostForm() {
+	protected function createComponentPostForm()
+	{
 		$form = new UI\Form;
 		$form->addProtection();
 		$form->addText('title', 'Titulek:')->setRequired('Je zapotřebí vyplnit titulek.');
@@ -65,7 +69,8 @@ class PostForm extends UI\Control {
 		return $form;
 	}
 
-	public function postFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals) {
+	public function postFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals)
+	{
 		try {
 			if (!$this->post) {
 				$this->post = new Entity\Post();

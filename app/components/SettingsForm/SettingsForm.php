@@ -8,24 +8,28 @@ use Model;
 use Nette;
 use Nette\Application\UI;
 
-class SettingsForm extends UI\Control {
+class SettingsForm extends UI\Control
+{
 
 	public $onSave = [];
 
 	/** @var \Model\Settings */
 	private $settings;
 
-	public function __construct(Model\Settings $settings) {
+	public function __construct(Model\Settings $settings)
+	{
 		parent::__construct();
 		$this->settings = $settings;
 	}
 
-	public function render() {
+	public function render()
+	{
 		$this->template->setFile(__DIR__ . '/SettingsForm.latte');
 		$this->template->render();
 	}
 
-	protected function createComponentSettingsForm() {
+	protected function createComponentSettingsForm()
+	{
 		$form = new UI\Form;
 		$form->addProtection();
 		//Obecné nastavení:
@@ -44,7 +48,8 @@ class SettingsForm extends UI\Control {
 		return $form;
 	}
 
-	public function settingsFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals) {
+	public function settingsFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals)
+	{
 		try {
 			$this->settings->save($vals);
 			$this->presenter->flashMessage('Změny jsou úspěšně uloženy.', 'success');

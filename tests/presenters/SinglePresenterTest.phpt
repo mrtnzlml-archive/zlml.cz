@@ -11,49 +11,59 @@ $container = require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class SinglePresenterTest extends Tester\TestCase {
+class SinglePresenterTest extends Tester\TestCase
+{
 
 	/** @var Model\Posts */
 	private $posts;
 
-	public function __construct(Nette\DI\Container $container) {
+	public function __construct(Nette\DI\Container $container)
+	{
 		$this->tester = new PresenterTester($container, 'Single');
 		$this->posts = $container->getByType('\Model\Posts');
 	}
 
-	public function testRenderAbout() {
+	public function testRenderAbout()
+	{
 		$this->tester->testAction('about');
 	}
 
 	/** @dataProvider dataArticles */
-	public function testRenderArticles($slug) {
-		$this->tester->testAction('article', 'GET', array('slug' => $slug));
+	public function testRenderArticles($slug)
+	{
+		$this->tester->testAction('article', 'GET', ['slug' => $slug]);
 	}
 
-	public function testRedirectEmptyArticle() {
+	public function testRedirectEmptyArticle()
+	{
 		$response = $this->tester->test('article');
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 
-	public function testNonWebalizedArticle() {
-		$response = $this->tester->test('article', 'GET', array('slug' => 'rčš .rčš 5'));
+	public function testNonWebalizedArticle()
+	{
+		$response = $this->tester->test('article', 'GET', ['slug' => 'rčš .rčš 5']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 
-	public function testForward() {
-		$response = $this->tester->test('article', 'GET', array('slug' => 'about'));
+	public function testForward()
+	{
+		$response = $this->tester->test('article', 'GET', ['slug' => 'about']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\ForwardResponse);
 	}
 
-	public function testRenderDevelop() {
+	public function testRenderDevelop()
+	{
 		$this->tester->testAction('develop');
 	}
 
-	public function testRenderObsah() {
+	public function testRenderObsah()
+	{
 		$this->tester->testAction('obsah');
 	}
 
-	public function testRenderReference() {
+	public function testRenderReference()
+	{
 		$this->tester->testAction('reference');
 	}
 
@@ -62,13 +72,14 @@ class SinglePresenterTest extends Tester\TestCase {
 	/**
 	 * @return array of arrays
 	 */
-	public function dataArticles() {
-		$articles = $this->posts->findBy(array(), NULL, 10, 0);
+	public function dataArticles()
+	{
+		$articles = $this->posts->findBy([], NULL, 10, 0);
 		//$articles = $this->posts->findBy(array());
 		//$articles = $this->posts->findOneBy(array());
-		$data = array();
+		$data = [];
 		foreach ($articles as $article) {
-			$data[] = array($article->slug);
+			$data[] = [$article->slug];
 		}
 		return $data;
 	}

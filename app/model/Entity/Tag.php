@@ -9,7 +9,8 @@ use Kdyby\Doctrine;
  * @ORM\Entity
  * @ORM\Table(name="tags")
  */
-class Tag extends Doctrine\Entities\BaseEntity {
+class Tag extends Doctrine\Entities\BaseEntity
+{
 
 	use Doctrine\Entities\Attributes\Identifier;
 
@@ -19,7 +20,8 @@ class Tag extends Doctrine\Entities\BaseEntity {
 	 **/
 	protected $posts;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 

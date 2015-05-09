@@ -8,17 +8,20 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BlogInstall extends Command {
+class BlogInstall extends Command
+{
 
 	/** @var \Kdyby\Doctrine\EntityManager @inject */
 	public $em;
 
-	protected function configure() {
+	protected function configure()
+	{
 		//TODO: osamostatnit se od aplikace - používat vlastní connection přes parametry
 		$this->setName('blog:install')->setDescription('Install database schema (set-up DB credentials in config.local.neon).');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
 		try {
 			$schemaTool = new Doctrine\ORM\Tools\SchemaTool($this->em);
 			$schemaTool->createSchema($this->em->getMetadataFactory()->getAllMetadata());

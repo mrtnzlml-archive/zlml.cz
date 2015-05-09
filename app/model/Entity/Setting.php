@@ -9,7 +9,8 @@ use Kdyby\Doctrine;
  * @ORM\Entity
  * @ORM\Table(name="settings")
  */
-class Setting extends Doctrine\Entities\BaseEntity {
+class Setting extends Doctrine\Entities\BaseEntity
+{
 
 	use Doctrine\Entities\Attributes\Identifier;
 

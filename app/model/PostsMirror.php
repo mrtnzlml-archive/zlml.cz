@@ -11,7 +11,8 @@ use Nette;
  * Class PostsMirror
  * @package Model
  */
-class PostsMirror extends Nette\Object {
+class PostsMirror extends Nette\Object
+{
 
 	/** @var \Kdyby\Doctrine\EntityDao */
 	private $dao;
@@ -19,30 +20,35 @@ class PostsMirror extends Nette\Object {
 	/**
 	 * @param Kdyby\Doctrine\EntityDao $dao
 	 */
-	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
+	public function __construct(Kdyby\Doctrine\EntityDao $dao)
+	{
 		$this->dao = $dao;
 	}
 
 	/**
 	 * @param array $criteria
 	 * @param array $orderBy
+	 *
 	 * @return mixed|null|object
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findOneBy(array $criteria, array $orderBy = null) {
+	public function findOneBy(array $criteria, array $orderBy = NULL)
+	{
 		return $this->dao->findOneBy($criteria, $orderBy);
 	}
 
 	/**
 	 * @param null $entity
 	 * @param null $relations
+	 *
 	 * @return array
 	 *
 	 * @Secure\Create(allow="admin")
 	 * @Secure\Update(allow="admin")
 	 */
-	public function save($entity = NULL, $relations = NULL) {
+	public function save($entity = NULL, $relations = NULL)
+	{
 		return $this->dao->save($entity, $relations);
 	}
 
@@ -53,7 +59,8 @@ class PostsMirror extends Nette\Object {
 	 *
 	 * @Secure\Delete(allow="admin")
 	 */
-	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
+	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
+	{
 		$this->dao->delete($entity, $relations, $flush);
 	}
 

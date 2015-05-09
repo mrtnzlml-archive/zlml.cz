@@ -9,7 +9,8 @@ use Model;
 use Nette;
 use Nette\Application\UI;
 
-class PageForm extends UI\Control {
+class PageForm extends UI\Control
+{
 
 	public $onSave = [];
 	//public $onBeforeRestrictedFunctionality = [];
@@ -18,18 +19,21 @@ class PageForm extends UI\Control {
 	private $pages;
 	private $page;
 
-	public function __construct(Model\Pages $pages, $id) {
+	public function __construct(Model\Pages $pages, $id)
+	{
 		parent::__construct();
 		$this->pages = $pages;
 		$this->page = $this->pages->findOneBy(['id' => $id]);
 	}
 
-	public function render() {
+	public function render()
+	{
 		$this->template->setFile(__DIR__ . '/PageForm.latte');
 		$this->template->render();
 	}
 
-	protected function createComponentPageForm() {
+	protected function createComponentPageForm()
+	{
 		$form = new UI\Form;
 		$form->addProtection();
 		$form->addText('title', 'Název:')->setRequired('Je zapotřebí vyplnit název stránky.');
@@ -49,7 +53,8 @@ class PageForm extends UI\Control {
 		return $form;
 	}
 
-	public function pageFormSucceeded($form, $vals) {
+	public function pageFormSucceeded($form, $vals)
+	{
 		try {
 			if (!$this->page) {
 				$this->page = new Entity\Page();

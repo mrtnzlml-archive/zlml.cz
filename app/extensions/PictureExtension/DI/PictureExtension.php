@@ -4,15 +4,17 @@ use Nette\Application\Routers\Route;
 use Nette\DI;
 use Nette\PhpGenerator\PhpLiteral;
 
-class PictureExtension extends Nette\DI\CompilerExtension {
+class PictureExtension extends Nette\DI\CompilerExtension
+{
 
 	//TODO: instalace do databáze
 
-	public function beforeCompile() {
+	public function beforeCompile()
+	{
 		$builder = $this->getContainerBuilder();
 		$router = $builder->getDefinition('router'); //TODO: route prepend
-		$router->addSetup('offsetSet', array(new PhpLiteral('NULL'), new Route('newadmin/pictures[/<id>]', 'App:Pictures:default')));
-		$builder->getDefinition('nette.presenterFactory')->addSetup('setMapping', array(array('App' => 'App\\*Module\\*Presenter')));
+		$router->addSetup('offsetSet', [new PhpLiteral('NULL'), new Route('newadmin/pictures[/<id>]', 'App:Pictures:default')]);
+		$builder->getDefinition('nette.presenterFactory')->addSetup('setMapping', [['App' => 'App\\*Module\\*Presenter']]);
 		//Admin Menu:
 		$priorityQueue = new \SplPriorityQueue();
 		$menuItem = new MenuItem();

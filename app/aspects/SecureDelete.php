@@ -8,7 +8,8 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @Target({"METHOD"})
  */
-class Delete extends Annotation {
+class Delete extends Annotation
+{
 
 	/**
 	 * @var string
