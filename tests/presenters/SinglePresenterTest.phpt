@@ -6,65 +6,63 @@ use Model;
 use Nette;
 use Tester;
 
-$container = require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 /**
  * @testCase
  */
-class SinglePresenterTest extends Tester\TestCase
+class SinglePresenterTest extends \CustomTestCase
 {
 
 	/** @var Model\Posts */
 	private $posts;
 
-	public function __construct(Nette\DI\Container $container)
+	public function __construct()
 	{
-		$this->tester = new PresenterTester($container, 'Single');
-		$this->posts = $container->getByType('\Model\Posts');
+		$this->openPresenter('Single:');
+		$this->posts = $this->getService('Model\Posts');
 	}
 
 	public function testRenderAbout()
 	{
-		$this->tester->testAction('about');
+		$this->checkAction('about');
 	}
 
 	/** @dataProvider dataArticles */
 	public function testRenderArticles($slug)
 	{
-		$this->tester->testAction('article', 'GET', ['slug' => $slug]);
+		$this->checkAction('article', 'GET', ['slug' => $slug]);
 	}
 
 	public function testRedirectEmptyArticle()
 	{
-		$response = $this->tester->test('article');
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+		$response = $this->checkRedirect('article');
 	}
 
 	public function testNonWebalizedArticle()
 	{
-		$response = $this->tester->test('article', 'GET', ['slug' => 'rčš .rčš 5']);
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+		$response = $this->checkRedirect('article', 'GET', ['slug' => 'rčš .rčš 5']);
 	}
 
 	public function testForward()
 	{
-		$response = $this->tester->test('article', 'GET', ['slug' => 'about']);
+		$response = $this->check('article', 'GET', ['slug' => 'about']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\ForwardResponse);
 	}
 
 	public function testRenderDevelop()
 	{
-		$this->tester->testAction('develop');
+		$this->checkAction('develop');
 	}
 
 	public function testRenderObsah()
 	{
-		$this->tester->testAction('obsah');
+		$this->checkAction('obsah');
 	}
 
 	public function testRenderReference()
 	{
-		$this->tester->testAction('reference');
+		$this->checkAction('reference');
 	}
 
 	///// dataProviders /////
@@ -86,5 +84,4 @@ class SinglePresenterTest extends Tester\TestCase
 
 }
 
-$test = new SinglePresenterTest($container);
-$test->run();
+(new SinglePresenterTest)->run();

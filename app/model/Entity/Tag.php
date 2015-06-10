@@ -8,6 +8,9 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="tags")
+ *
+ * @method setName(string)
+ * @method setColor(string)
  */
 class Tag extends Doctrine\Entities\BaseEntity
 {

@@ -8,6 +8,9 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="pictures")
+ *
+ * @method setUuid(string)
+ * @method setName(string)
  */
 class Picture extends Doctrine\Entities\BaseEntity
 {

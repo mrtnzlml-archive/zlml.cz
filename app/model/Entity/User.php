@@ -8,6 +8,10 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
+ *
+ * @method setUsername(string)
+ * @method setPassword(string)
+ * @method setRole(string)
  */
 class User extends Doctrine\Entities\BaseEntity
 {

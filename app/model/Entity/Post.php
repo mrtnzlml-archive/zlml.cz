@@ -9,6 +9,10 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="posts")
+ *
+ * @method setTitle(string)
+ * @method setSlug(string)
+ * @method setBody(string)
  */
 class Post extends Doctrine\Entities\BaseEntity
 {

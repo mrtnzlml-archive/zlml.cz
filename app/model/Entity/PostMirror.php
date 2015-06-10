@@ -20,6 +20,9 @@ use Kdyby\Doctrine;
  * )
  * TODO: flags feature is available in Doctrine 2.5
  * see: https://github.com/doctrine/doctrine2/commit/3a1e24e6801961128c27104919050d40d745030b
+ *
+ * @method setTitle(string)
+ * @method setBody(string)
  */
 class PostMirror extends Doctrine\Entities\BaseEntity
 {

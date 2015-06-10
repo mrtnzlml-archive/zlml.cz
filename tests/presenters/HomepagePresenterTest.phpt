@@ -5,42 +5,41 @@ namespace Test;
 use Nette;
 use Tester;
 
-$container = require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 /**
  * @testCase
  */
-class HomepagePresenterTest extends Tester\TestCase
+class HomepagePresenterTest extends \CustomTestCase
 {
 
-	public function __construct(Nette\DI\Container $container)
+	public function setUp()
 	{
-		$this->tester = new PresenterTester($container, 'Homepage');
+		$this->openPresenter('Homepage:');
 	}
 
 	public function testRenderDefault()
 	{
-		$this->tester->testAction('default');
+		$this->checkAction('default');
 	}
 
 	public function testRenderDefaultPage2()
 	{
-		$this->tester->testAction('default', PresenterTester::GET, [
+		$this->checkAction('default', 'GET', [
 			'paginator-page' => 2,
 		]);
 	}
 
 	public function testRenderRss()
 	{
-		$this->tester->testRss('rss');
+		$this->checkRss('rss');
 	}
 
 	public function testRenderSitemap()
 	{
-		$this->tester->testSitemap('sitemap');
+		$this->checkSitemap('sitemap');
 	}
 
 }
 
-$test = new HomepagePresenterTest($container);
-$test->run();
+(new HomepagePresenterTest)->run();

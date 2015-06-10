@@ -5,44 +5,43 @@ namespace Test;
 use Nette;
 use Tester;
 
-$container = require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 /**
  * @testCase
  */
-class SignPresenterTest extends Tester\TestCase
+class SignPresenterTest extends \CustomTestCase
 {
 
-	public function __construct(Nette\DI\Container $container)
+	public function __construct()
 	{
-		$this->tester = new PresenterTester($container, 'Sign');
+		$this->openPresenter('Sign:');
 	}
 
 	public function testRenderIn()
 	{
-		$this->tester->testAction('in');
+		$this->checkAction('in');
 	}
 
 	public function testRenderLoggedIn()
 	{
-		$this->tester->logIn(1, 'admin');
-		$response = $this->tester->test('in');
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+		$this->logIn(1, 'admin');
+		$this->checkRedirect('in');
 	}
 
 	public function testRenderLogOut()
 	{
-		$presenter = $this->tester->getPresenter();
-		$this->tester->logIn(1, 'admin');
+		$presenter = $this->getPresenter();
+		$this->logIn(1, 'admin');
 		Tester\Assert::true($presenter->user->isLoggedIn());
-		$this->tester->test('out');
+		$this->check('out');
 		Tester\Assert::false($presenter->user->isLoggedIn());
 	}
 
 	public function testSignInForm()
 	{
-		$presenter = $this->tester->getPresenter();
-		$response = $this->tester->test('in', 'POST', [
+		$presenter = $this->getPresenter();
+		$response = $this->check('in', 'POST', [
 			'do' => 'signInForm-signInForm-submit',
 		], [
 			'username' => 'Username',
@@ -51,7 +50,7 @@ class SignPresenterTest extends Tester\TestCase
 		]);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::false($presenter->user->isLoggedIn());
-		$response = $this->tester->test('in', 'POST', [
+		$response = $this->check('in', 'POST', [
 			'do' => 'signInForm-signInForm-submit',
 		], [
 			'username' => 'Username',
@@ -64,5 +63,4 @@ class SignPresenterTest extends Tester\TestCase
 
 }
 
-$test = new SignPresenterTest($container);
-$test->run();
+(new SignPresenterTest)->run();

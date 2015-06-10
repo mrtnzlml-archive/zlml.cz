@@ -9,23 +9,13 @@ if (!class_exists('Tester\Assert')) {
 	exit(1);
 }
 
-Tester\Environment::setup();
-date_default_timezone_set('Europe/Prague');
-
-$configurator = new Nette\Configurator;
-$configurator->setTempDirectory(__DIR__ . '/../temp');
-$loader = $configurator->createRobotLoader()
-	->addDirectory(__DIR__ . '/../app')
-	->addDirectory(__DIR__ . '/../libs')
-	->addDirectory(__DIR__ . '/../tests')
-	->register();
+$loader = new \Nette\Loaders\RobotLoader();
+$loader->setCacheStorage(new \Nette\Caching\Storages\MemoryStorage());
+$loader->addDirectory(__DIR__ . '/../app');
+$loader->addDirectory(__DIR__ . '/../libs');
+$loader->addDirectory(__DIR__ . '/../tests');
+$loader->register();
 
 define("WWW_DIR", __DIR__ . '/../www');
 
-$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
-$configurator->addConfig(__DIR__ . '/../app/config/config.local.neon');
-$configurator->addParameters(['wwwDir' => __DIR__ . '/../www']); //because of %wwwDir% in config in CLI environment
-
-$container = $configurator->createContainer();
-
-return $container;
+Test\Bootstrap::setup(__DIR__);
