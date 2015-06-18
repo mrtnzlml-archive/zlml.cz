@@ -41,6 +41,7 @@ services:
 	- PostFormFactory
 	- SettingsFormFactory
 	- UserEditFormFactory
+	- Cntrl\IVisualPaginatorFactory
 	- App\AdminModule\AdminPresenter # Kdyby\Events!
 
 events:

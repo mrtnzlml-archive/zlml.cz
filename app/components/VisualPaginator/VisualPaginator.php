@@ -24,7 +24,7 @@ class VisualPaginator extends Nette\Application\UI\Control
 	public function getPaginator()
 	{
 		if (!$this->paginator) {
-			$this->paginator = new Paginator;
+			$this->paginator = (new Paginator)->setItemsPerPage(25);
 		}
 		return $this->paginator;
 	}
@@ -81,4 +81,10 @@ class VisualPaginator extends Nette\Application\UI\Control
 		$this->getPaginator()->page = $this->page;
 	}
 
+}
+
+interface IVisualPaginatorFactory
+{
+	/** @return VisualPaginator */
+	function create();
 }

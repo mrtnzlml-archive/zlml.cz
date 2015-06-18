@@ -31,6 +31,8 @@ class AdminPresenter extends BasePresenter
 	public $settingsFormFactory;
 	/** @var \UserEditFormFactory @inject */
 	public $userEditFormFactory;
+	/** @var Cntrl\IVisualPaginatorFactory @inject */
+	public $paginatorFactory;
 
 	private $id;
 
@@ -94,46 +96,36 @@ class AdminPresenter extends BasePresenter
 
 	public function renderPictures()
 	{
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->pictures->countBy();
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->pictures->countBy());
 		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderPrehled()
 	{
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = ITEMCOUNT;
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount(ITEMCOUNT);
 		$this->template->posts = $this->posts->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderPages()
 	{
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->pages->countBy();
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->pages->countBy());
 		$this->template->pages = $this->pages->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderTags()
 	{
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->tags->countBy();
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->tags->countBy());
 		$this->template->tags = $this->tags->findBy([], [], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderUsers()
 	{
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->users->countBy();
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->users->countBy());
 		$this->template->users = $this->users->findBy([], [], $paginator->itemsPerPage, $paginator->offset);
 	}
 
@@ -145,6 +137,11 @@ class AdminPresenter extends BasePresenter
 	public function renderUserEdit($id = NULL)
 	{
 		$this->template->account = $this->users->findOneBy(['id' => $id]);
+	}
+
+	protected function createComponentPaginator()
+	{
+		return $this->paginatorFactory->create();
 	}
 
 	protected function createComponentUserEditForm()
