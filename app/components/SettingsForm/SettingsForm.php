@@ -62,3 +62,9 @@ class SettingsForm extends UI\Control
 	}
 
 }
+
+interface ISettingsFormFactory
+{
+	/** @return SettingsForm */
+	function create();
+}

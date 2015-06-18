@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cntrl\ISignInFactory;
 use Model;
 use Nette;
 use Nette\Http\Url;
@@ -9,7 +10,7 @@ use Nette\Http\Url;
 class SinglePresenter extends BasePresenter
 {
 
-	/** @var \ISignInFormFactory @inject */
+	/** @var ISignInFactory @inject */
 	public $signInFormFactory;
 	/** @var \Model\Tags @inject */
 	public $tags;

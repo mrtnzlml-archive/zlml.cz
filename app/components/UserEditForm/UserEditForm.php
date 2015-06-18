@@ -19,7 +19,7 @@ class UserEditForm extends UI\Control
 	private $users;
 	private $account;
 
-	public function __construct(Model\Users $users, $id)
+	public function __construct($id, Model\Users $users)
 	{
 		parent::__construct();
 		$this->users = $users;
@@ -89,4 +89,10 @@ class UserEditForm extends UI\Control
 		$this->onSave();
 	}
 
+}
+
+interface IUserEditFormFactory
+{
+	/** @return UserEditForm */
+	function create($id);
 }

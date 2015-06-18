@@ -35,12 +35,12 @@ services:
 	- Model\Users(@doctrine.dao(Entity\User))
 	#- Model\Xmlrpc
 
-	adminMenuFactory: IAdminMenuFactory
-	- ISignInFormFactory
-	- PageFormFactory
-	- PostFormFactory
-	- SettingsFormFactory
-	- UserEditFormFactory
+	adminMenuFactory: Cntrl\IAdminMenuFactory
+	- Cntrl\ISignInFactory
+	- Cntrl\IPageFormFactory
+	- Cntrl\IPostFormFactory
+	- Cntrl\ISettingsFormFactory
+	- Cntrl\IUserEditFormFactory
 	- Cntrl\IVisualPaginatorFactory
 	- App\AdminModule\AdminPresenter # Kdyby\Events!
 

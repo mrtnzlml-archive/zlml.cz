@@ -28,3 +28,9 @@ class AdminMenu extends UI\Control
 	}
 
 }
+
+interface IAdminMenuFactory
+{
+	/** @return AdminMenu */
+	function create();
+}

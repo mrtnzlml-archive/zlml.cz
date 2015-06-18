@@ -12,7 +12,7 @@ class PicturesPresenter extends BasePresenter
 	/** @var \Model\Pictures @inject */
 	public $pictures;
 
-	/** @var \IAdminMenuFactory @inject */
+	/** @var Cntrl\IAdminMenuFactory @inject */
 	public $adminMenuFactory;
 
 	public function renderDefault()

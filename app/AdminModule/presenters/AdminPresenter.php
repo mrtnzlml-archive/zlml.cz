@@ -23,13 +23,13 @@ class AdminPresenter extends BasePresenter
 	/** @var \Model\Pages @inject */
 	public $pages;
 
-	/** @var \PageFormFactory @inject */
+	/** @var Cntrl\IPageFormFactory @inject */
 	public $pageFormFactory;
-	/** @var \PostFormFactory @inject */
+	/** @var Cntrl\IPostFormFactory @inject */
 	public $postFormFactory;
-	/** @var \SettingsFormFactory @inject */
+	/** @var Cntrl\ISettingsFormFactory @inject */
 	public $settingsFormFactory;
-	/** @var \UserEditFormFactory @inject */
+	/** @var Cntrl\IUserEditFormFactory @inject */
 	public $userEditFormFactory;
 	/** @var Cntrl\IVisualPaginatorFactory @inject */
 	public $paginatorFactory;

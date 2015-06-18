@@ -19,7 +19,7 @@ class PageForm extends UI\Control
 	private $pages;
 	private $page;
 
-	public function __construct(Model\Pages $pages, $id)
+	public function __construct($id, Model\Pages $pages)
 	{
 		parent::__construct();
 		$this->pages = $pages;
@@ -76,4 +76,10 @@ class PageForm extends UI\Control
 		}
 	}
 
+}
+
+interface IPageFormFactory
+{
+	/** @return PageForm */
+	function create($id);
 }

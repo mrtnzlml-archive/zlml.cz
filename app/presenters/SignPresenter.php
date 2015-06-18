@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cntrl\ISignInFactory;
 use Nette;
 use Nette\Application\UI;
 
@@ -9,7 +10,7 @@ use Nette\Application\UI;
 class SignPresenter extends BasePresenter
 {
 
-	/** @var \ISignInFormFactory @inject */
+	/** @var ISignInFactory @inject */
 	public $signInFormFactory;
 
 	public function actionIn()

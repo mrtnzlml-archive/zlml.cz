@@ -21,7 +21,7 @@ class PostForm extends UI\Control
 	private $tags;
 	private $post;
 
-	public function __construct(Model\Posts $posts, Model\Tags $tags, $id)
+	public function __construct($id, Model\Posts $posts, Model\Tags $tags)
 	{
 		parent::__construct();
 		$this->posts = $posts;
@@ -105,4 +105,10 @@ class PostForm extends UI\Control
 		}
 	}
 
+}
+
+interface IPostFormFactory
+{
+	/** @return PostForm */
+	function create($id);
 }

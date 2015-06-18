@@ -64,3 +64,9 @@ class SignIn extends UI\Control
 	}
 
 }
+
+interface ISignInFactory
+{
+	/** @return SignIn */
+	function create();
+}
