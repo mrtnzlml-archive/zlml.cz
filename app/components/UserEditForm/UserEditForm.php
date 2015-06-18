@@ -2,7 +2,6 @@
 
 namespace Cntrl;
 
-use Doctrine;
 use Entity;
 use Kdyby;
 use Model;
@@ -10,8 +9,7 @@ use Nette;
 use Nette\Application\UI;
 use Nette\Security\Passwords;
 
-class UserEditForm extends UI\Control
-{
+class UserEditForm extends UI\Control {
 
 	const DEFAULT_ROLE = 'demo';
 
@@ -26,8 +24,7 @@ class UserEditForm extends UI\Control
 	private $users;
 	private $account;
 
-	public function __construct(Model\Users $users, $id)
-	{
+	public function __construct(Model\Users $users, $id) {
 		parent::__construct();
 		$this->users = $users;
 		$this->account = $this->users->findOneBy(['id' => $id]);
@@ -35,17 +32,15 @@ class UserEditForm extends UI\Control
 		if(!$this->account) {
 			$this->account = new Entity\User();
 			$this->account->role = self::DEFAULT_ROLE;
-		}
+		}		
 	}
 
-	public function render()
-	{
+	public function render() {
 		$this->template->setFile(__DIR__ . '/UserEditForm.latte');
 		$this->template->render();
 	}
 
-	protected function createComponentForm()
-	{
+	protected function createComponentForm() {
 		$form = new UI\Form;
 		$form->addProtection();
 		$form->addText('username', 'Uživatelské přihlašovací jméno:')
@@ -53,19 +48,21 @@ class UserEditForm extends UI\Control
 			->setRequired('Zadejte prosím přihlašovací jméno.');
 		$form->addPassword('password', 'Nové heslo k tomuto účtu:')
 			->setRequired('Zadejte prosím své stávající, nebo nové heslo.');
+		//$form->addPassword('passwordVerify', 'Heslo pro kontrolu:')
+		//    ->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu')
+		//    ->addRule(UI\Form::EQUAL, 'Hesla se neshodují', $form['password']);
 
-		if ($this->presenter->user->isInRole('admin')) {
+		//if ($this->presenter->user->isInRole('admin')) {
 			$form->addSelect('role', 'Role:', $this->roles)
 				->setDefaultValue($this->account->role);
-		}
+		//}
 
 		$form->addSubmit('save', 'Uložit změny');
 		$form->onSuccess[] = $this->formSucceeded;
 		return $form;
 	}
 
-	public function formSucceeded(UI\Form $form, $vals)
-	{
+	public function formSucceeded(UI\Form $form, $vals) {
 		try {
 			$this->account->username = $vals->username;
 			$this->account->password = Passwords::hash($vals->password);
@@ -86,5 +83,4 @@ class UserEditForm extends UI\Control
 		}
 		$this->onSave();
 	}
-
 }
