@@ -6,7 +6,7 @@
 				{input username, class => "form-control"}
 			</div>
 		</div>
-		<div class="col-lg-6">
+		<div n:ifset="$form['role']" class="col-lg-6">
 			<div class="form-group">
 				{label role /}
 				{input role, class => "form-control"}
