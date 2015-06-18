@@ -13,8 +13,15 @@ use Nette\Security\Passwords;
 class UserEditForm extends UI\Control
 {
 
+	const DEFAULT_ROLE = 'demo';
+
 	public $onSave = [];
 	//public $onBeforeRestrictedFunctionality = [];
+
+	private $roles = [
+		'demo' => 'Demo účet',
+		'admin' => 'Administrátor',
+	];
 
 	private $users;
 	private $account;
@@ -24,6 +31,11 @@ class UserEditForm extends UI\Control
 		parent::__construct();
 		$this->users = $users;
 		$this->account = $this->users->findOneBy(['id' => $id]);
+
+		if(!$this->account) {
+			$this->account = new Entity\User();
+			$this->account->role = self::DEFAULT_ROLE;
+		}
 	}
 
 	public function render()
@@ -37,32 +49,16 @@ class UserEditForm extends UI\Control
 		$form = new UI\Form;
 		$form->addProtection();
 		$form->addText('username', 'Uživatelské přihlašovací jméno:')
+			->setDefaultValue($this->account->username)
 			->setRequired('Zadejte prosím přihlašovací jméno.');
 		$form->addPassword('password', 'Nové heslo k tomuto účtu:')
 			->setRequired('Zadejte prosím své stávající, nebo nové heslo.');
-		//TODO: toto bude zapotřebí předělat
+
 		if ($this->presenter->user->isInRole('admin')) {
-			$role = [
-				'admin' => 'Administrátor',
-				'demo' => 'Demo účet'
-			];
-			$form->addSelect('role', 'Role:', $role);
-		} else {
-			$role = [
-				'demo' => 'Demo účet'
-			];
-			$form->addSelect('role', 'Role:', $role);
+			$form->addSelect('role', 'Role:', $this->roles)
+				->setDefaultValue($this->account->role);
 		}
-		if ($this->account) {
-			$form->setDefaults([
-				'username' => $this->account->username,
-				//'role' => $this->account->role,
-			]);
-		} else {
-			$form->setDefaults([
-				'role' => 'demo',
-			]);
-		}
+
 		$form->addSubmit('save', 'Uložit změny');
 		$form->onSuccess[] = $this->formSucceeded;
 		return $form;
@@ -71,15 +67,17 @@ class UserEditForm extends UI\Control
 	public function formSucceeded(UI\Form $form, $vals)
 	{
 		try {
-			if (!$this->account) {
-				$this->account = new Entity\User();
-			}
 			$this->account->username = $vals->username;
 			$this->account->password = Passwords::hash($vals->password);
-			$this->account->role = $vals->role;
+			$this->account->role = self::DEFAULT_ROLE;
+
+			if ($this->presenter->user->isInRole('admin') && isset($vals->role)) {
+				$this->account->role = $vals->role;
+			}
+
 			$this->users->save($this->account);
 			$this->presenter->flashMessage('Změny úspěšně uloženy.', 'success');
-		} catch (Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
+		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
 			$this->presenter->flashMessage('Uživatel s tímto jménem již existuje. Zvolte prosím jiné.', 'danger');
 		} catch (Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
