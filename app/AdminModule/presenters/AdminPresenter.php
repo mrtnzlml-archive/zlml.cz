@@ -37,6 +37,11 @@ class AdminPresenter extends BasePresenter
 	public function startup()
 	{
 		parent::startup();
+		$this->checkAuthorization();
+	}
+
+	private function checkAuthorization()
+	{
 		if (!$this->user->isLoggedIn()) {
 			if ($this->user->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
 				$this->flashMessage('Byli jste odhlášeni z důvodu nečinnosti. Přihlaste se prosím znovu.', 'danger');
@@ -46,8 +51,12 @@ class AdminPresenter extends BasePresenter
 			$this->flashMessage('Přístup byl odepřen. Nemáte oprávnění k zobrazení této stránky.', 'danger');
 			$this->redirect(':Sign:in', ['backlink' => $this->storeRequest()]);
 		}
+		
+		if (!$this->user->isAllowed('Admin:Admin', Model\Authorizator::READ)) {
+			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
+		}		
 	}
-
+	
 	public function beforeRender()
 	{
 		parent::beforeRender();
@@ -55,9 +64,6 @@ class AdminPresenter extends BasePresenter
 		$this->template->tagcount = $this->tags->countBy();
 		$this->template->usercount = $this->users->countBy();
 		$this->template->pagecount = $this->pages->countBy();
-		if (!$this->user->isAllowed('Admin:Admin', Model\Authorizator::READ)) {
-			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
-		}
 	}
 
 	public function actionDefault($id = NULL)
