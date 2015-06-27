@@ -31,23 +31,25 @@ class SinglePresenterTest extends \CustomTestCase
 	/** @dataProvider dataArticles */
 	public function testRenderArticles($slug)
 	{
-		$this->checkAction('article', 'GET', ['slug' => $slug]);
+		$this->checkAction('article', ['slug' => $slug]);
 	}
 
 	public function testRedirectEmptyArticle()
 	{
-		$response = $this->checkRedirect('article');
+		$this->checkRedirect('article', '/');
 	}
 
 	public function testNonWebalizedArticle()
 	{
-		$response = $this->checkRedirect('article', 'GET', ['slug' => 'rčš .rčš 5']);
+		$this->checkRedirect('article', '/rcs-rcs-5', ['slug' => 'rčš .rčš 5']);
 	}
 
 	public function testForward()
 	{
-		$response = $this->check('article', 'GET', ['slug' => 'about']);
+		/** @var Nette\Application\Responses\ForwardResponse $response */
+		$response = $this->check('article', ['slug' => 'about']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\ForwardResponse);
+		//TODO: checkForward method in testbench...
 	}
 
 	public function testRenderDevelop()

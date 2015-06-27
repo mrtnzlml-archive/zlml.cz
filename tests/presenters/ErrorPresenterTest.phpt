@@ -21,7 +21,7 @@ class ErrorPresenterTest extends \CustomTestCase
 
 	public function testRenderDefault()
 	{
-		$response = $this->check('default', 'GET', ['exception' => 'ErrorPresenterTest']);
+		$response = $this->check('default', ['exception' => 'ErrorPresenterTest']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 	}

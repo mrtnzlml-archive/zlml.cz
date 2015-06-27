@@ -37,7 +37,7 @@ class AdminPresenterTest extends \CustomTestCase
 	public function testRenderDefaultEdit()
 	{
 		$article = $this->users->findOneBy([]);
-		$this->checkAction($this->action = 'default', 'GET', [$article->getId()]);
+		$this->checkAction($this->action = 'default', [$article->getId()]);
 	}
 
 	public function testRenderPictures()
@@ -63,7 +63,7 @@ class AdminPresenterTest extends \CustomTestCase
 	public function testRenderUserEdit()
 	{
 		$user = $this->users->findOneBy([]);
-		$this->checkAction($this->action = 'userEdit', 'GET', [$user->getId()]);
+		$this->checkAction($this->action = 'userEdit', [$user->getId()]);
 	}
 
 	/**
@@ -93,7 +93,7 @@ class AdminPresenterTest extends \CustomTestCase
 	public function tearDown()
 	{
 		$this->logOut();
-		$this->checkRedirect($this->action);
+		$this->checkRedirect($this->action, '/sign/in');
 	}
 
 }

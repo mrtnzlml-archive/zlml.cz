@@ -26,7 +26,7 @@ class SignPresenterTest extends \CustomTestCase
 	public function testRenderLoggedIn()
 	{
 		$this->logIn(1, 'admin');
-		$this->checkRedirect('in');
+		$this->checkRedirect('in', '/admin');
 	}
 
 	public function testRenderLogOut()
@@ -41,7 +41,7 @@ class SignPresenterTest extends \CustomTestCase
 	public function testSignInForm()
 	{
 		$presenter = $this->getPresenter();
-		$response = $this->check('in', 'POST', [
+		$response = $this->check('in', [
 			'do' => 'signInForm-signInForm-submit',
 		], [
 			'username' => 'Username',
@@ -50,7 +50,7 @@ class SignPresenterTest extends \CustomTestCase
 		]);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::false($presenter->user->isLoggedIn());
-		$response = $this->check('in', 'POST', [
+		$response = $this->check('in', [
 			'do' => 'signInForm-signInForm-submit',
 		], [
 			'username' => 'Username',

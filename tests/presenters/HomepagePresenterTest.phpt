@@ -25,7 +25,7 @@ class HomepagePresenterTest extends \CustomTestCase
 
 	public function testRenderDefaultPage2()
 	{
-		$this->checkAction('default', 'GET', [
+		$this->checkAction('default', [
 			'paginator-page' => 2,
 		]);
 	}
