@@ -8,9 +8,12 @@ use Entity;
 use Kdyby;
 use Model;
 use Nette;
+use Nextras\Application\UI\SecuredLinksPresenterTrait;
 
 class AdminPresenter extends BasePresenter
 {
+
+	use SecuredLinksPresenterTrait;
 
 	public $onBeforeRestrictedFunctionality = [];
 
@@ -245,6 +248,10 @@ class AdminPresenter extends BasePresenter
 		}
 	}
 
+	/**
+	 * @param $id
+	 * @secured
+	 */
 	public function handleDelete($id)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
@@ -257,6 +264,10 @@ class AdminPresenter extends BasePresenter
 		$this->redirect('this');
 	}
 
+	/**
+	 * @param $id
+	 * @secured
+	 */
 	public function handleDeletePage($id)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
@@ -269,6 +280,10 @@ class AdminPresenter extends BasePresenter
 		$this->redirect('this');
 	}
 
+	/**
+	 * @param $tag_id
+	 * @secured
+	 */
 	public function handleDeleteTag($tag_id)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
@@ -281,6 +296,10 @@ class AdminPresenter extends BasePresenter
 		$this->redirect('this');
 	}
 
+	/**
+	 * @param $user_id
+	 * @secured
+	 */
 	public function handleDeleteUser($user_id)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
@@ -293,6 +312,10 @@ class AdminPresenter extends BasePresenter
 		$this->redirect('this');
 	}
 
+	/**
+	 * @param $tag_id
+	 * @secured
+	 */
 	public function handleRegenerate($tag_id)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
@@ -336,6 +359,10 @@ class AdminPresenter extends BasePresenter
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
 	}
 
+	/**
+	 * @param $id
+	 * @secured
+	 */
 	public function handleDeletePicture($id)
 	{
 		$this->onBeforeRestrictedFunctionality($this);

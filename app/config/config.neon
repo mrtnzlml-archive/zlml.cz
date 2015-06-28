@@ -57,6 +57,10 @@ console:
 aspects:
 	- SecurityAspect
 
+annotations:
+	ignore:
+		- secured
+
 extensions:
 	aop: Kdyby\Aop\DI\AopExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
