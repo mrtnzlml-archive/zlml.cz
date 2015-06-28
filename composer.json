@@ -24,17 +24,12 @@
     "kukulich/fshl": "~2.1.0",
     "janmarek/webloader": "~2.2.0",
     "leafo/lessphp": "~0.4.0",
-    "kdyby/aop": "dev-patch-1",
+    "kdyby/aop": "dev-master",
+    "kdyby/annotations": "dev-master",
     "kdyby/doctrine": "~2.3.0",
     "texy/texy": "dev-master",
     "nextras/secured-links": "^1.3"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/mrtnzlml/Aop"
-    }
-  ],
   "require-dev": {
     "dg/adminer-custom": "dev-master",
     "dg/ftp-deployment": "dev-master",
