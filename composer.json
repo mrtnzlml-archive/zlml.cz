@@ -3,6 +3,11 @@
   "description": "Source code of www.zeminem.cz website",
   "version": "1.3.0",
   "homepage": "http://www.zeminem.cz/",
+  "license": [
+    "BSD-3-Clause",
+    "GPL-2.0",
+    "GPL-3.0"
+  ],
   "require": {
     "php": ">= 5.4",
     "nette/application": "~2.3.0",
