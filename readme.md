@@ -16,6 +16,7 @@ What's on the background
 - [Doctrine 2](http://www.doctrine-project.org/) - library primarily focused on database storage and object mapping (using [Kdyby](https://github.com/Kdyby/Doctrine))
 - [Kdyby\Events](https://github.com/Kdyby/Events) - robust events system for Nette Framework
 - [Kdyby\AOP](https://github.com/Kdyby/Aop) - AOP functionality for Nette Framework
+- [Nextras\SecuredLinks](https://github.com/nextras/secured-links) - for better CSRF protection
 - and much more...
 
 Installing
