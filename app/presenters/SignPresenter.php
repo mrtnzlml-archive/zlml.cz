@@ -20,12 +20,12 @@ class SignPresenter extends BasePresenter
 		}
 	}
 
-	public function actionOut()
-	{
-		$this->getUser()->logout();
-		$this->flashMessage('Odhlášení bylo úpěšné.', 'info');
-		$this->redirect('in');
-	}
+//	public function actionOut()
+//	{
+//		$this->getUser()->logout();
+//		$this->flashMessage('Odhlášení bylo úpěšné.', 'info');
+//		$this->redirect('in');
+//	}
 
 	/** @return \Cntrl\SignIn */
 	protected function createComponentSignInForm()

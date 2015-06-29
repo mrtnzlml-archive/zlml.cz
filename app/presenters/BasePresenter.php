@@ -46,6 +46,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->redirect(':Search:default', $values->search);
 	}
 
+	protected function createComponentSignOutForm()
+	{
+		$form = new UI\Form;
+		$form->addProtection();
+		$form->addSubmit('logout', 'Odhlásit se')
+			->setAttribute('class', 'logout');
+		$form->onSuccess[] = function () {
+			$this->getUser()->logout();
+			$this->flashMessage('Odhlášení bylo úpěšné.', 'info');
+			$this->redirect('in');
+		};
+		return $form;
+	}
+
 	/**
 	 * @param null $class
 	 *
@@ -86,12 +100,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		return $template;
 	}
 
-	public function createComponentCss()
+	protected function createComponentCss()
 	{
 		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv,print');
 	}
 
-	public function createComponentJs()
+	protected function createComponentJs()
 	{
 		return $this->webLoader->createJavaScriptLoader('default');
 	}
