@@ -55,7 +55,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$form->onSuccess[] = function () {
 			$this->getUser()->logout();
 			$this->flashMessage('Odhlášení bylo úpěšné.', 'info');
-			$this->redirect('in');
+			$this->redirect(':Sign:in');
 		};
 		return $form;
 	}
