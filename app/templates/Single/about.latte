@@ -10,6 +10,16 @@
 			white-space: nowrap;
 		}
 	</style>
+	<script>
+		$(function () {
+			$.nette.ajax({
+				url: {link getEmail!},
+				success: function (payload) {
+					$('#protected').replaceWith(payload.emailLink);
+				}
+			});
+		});
+	</script>
 	<div class="row" style="padding-top:30px">
 		<div class="col-lg-3 text-right visible-lg"><h3>Osobní údaje</h3></div>
 		<div class="col-lg-3 hidden-lg"><h3>Osobní údaje</h3></div>
@@ -18,8 +28,9 @@
 				<h2 style="margin-top:0">Martin Zlámal</h2>
 				Brnířov 118, 345 06 Kdyně (Česká republika)<br>
 				<abbr title="Telefon">Tel:</abbr> +420 723 764 899<br>
-				Email: <a href="mailto:mrtnzlml@gmail.com" target="_blank">mrtnzlml@gmail.com</a><br>
-				Web: <a href="http://www.zeminem.cz/" target="_blank">www.zeminem.cz</a><br>
+				Email: <a id="protected">Loading...</a><br>
+				{*Email: <a id="protected">Loading...</a>&nbsp;<span class="label label-success hidden-print">Novinka</span><br>*}
+				Web: <a href="http://zlml.cz/" target="_blank">zlml.cz</a>&nbsp;<span class="label label-success hidden-print">Novinka</span><br>
 				<img src="{$basePath}/img/linkedin.png" width="15"/>
 				LinkedIn: <a href="http://cz.linkedin.com/in/mrtnzlml/" target="_blank">cz.linkedin.com/in/mrtnzlml</a>
 			</address>

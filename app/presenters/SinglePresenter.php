@@ -75,4 +75,14 @@ class SinglePresenter extends BasePresenter
 		return $this->signInFormFactory->create();
 	}
 
+	public function handleGetEmail() {
+		if ($this->isAjax()) {
+			$hidden = 'mrtnzlml@gmail.com'; //TODO: mrtn@zlml.cz
+			$el = Nette\Utils\Html::el('a target=_blank')->href('mailto:' . $hidden)->setText($hidden);
+			$this->payload->emailLink = (string)$el;
+			$this->sendPayload();
+		}
+		$this->redirect('this');
+	}
+
 }
