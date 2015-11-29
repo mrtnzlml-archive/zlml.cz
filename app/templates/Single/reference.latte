@@ -4,28 +4,30 @@
 	<div class="row">
 		<div class="col-lg-9 col-md-9">
 			<h3>Chcete mě získat pro svůj projekt?</h3>
-			<p>
-				V současné době již neposkytuji služby soukromě, ale jsem vždy uchycen v nějaké firmě a specializuji se
-				na vývoj větších webových aplikacích zejména pak s pomocí Nette Frameworku a dalších pokročilých
-				technologií. Pokud tedy chcete, abych přiložil svojí ruku k vašemu projektu, kontaktujte prosím
-				firmu <a n:href="Single:about">ve které právě teď pracuji</a>.
-			</p>
+            <div class="alert alert-danger">
+                <p>
+                    V současné době již <strong>neposkytuji služby soukromě</strong>, ale specializuji se
+                    na vývoj větších webových aplikacích primárně pomocí Nette Frameworku a dalších pokročilých
+                    technologií. Pokud tedy chcete, abych přiložil svojí ruku k vašemu projektu, kontaktujte prosím
+                    firmu <a n:href="Single:about">ve které právě teď pracuji</a>.
+                </p>
+            </div>
 			<p>
 				Níže jsou k nahlédnutí jednoduché projekty, ke kterým jsem se dostal trošku osobněji a nejedná se tedy
 				o firemní reference. Co znamenají jednotlivé štítky?
 			</p>
 			<table class="table table-condensed">
-				<tr>
-					<td><span class="label label-warning">IN PROGRESS</span></td>
-					<td>Projekt je stále aktivně vyvíjen.</td>
-				</tr>
+				{*<tr>*}
+					{*<td><span class="label label-warning">IN PROGRESS</span></td>*}
+					{*<td>Projekt je stále aktivně vyvíjen.</td>*}
+				{*</tr>*}
 				<tr>
 					<td><span class="label label-success">STABLE</span></td>
 					<td>Projekt je funkční a aktivně využívaný.</td>
 				</tr>
 				<tr>
 					<td><span class="label label-default">DEPRECATED</span></td>
-					<td>O tento projekt se již nestarám a nemám o něm žádné čersvé informace.</td>
+					<td>O tento projekt se již dlouho nestarám.</td>
 				</tr>
 				<tr>
 					<td><span class="label label-danger">EXPERIMENTAL</span></td>
@@ -33,8 +35,7 @@
 				</tr>
 			</table>
 			<p>
-				Přečtěte si o mě <a n:href="Single:about">nějaké další informace</a>, nebo se podívejte níže na mé
-				vybrané reference:
+				Přečtěte si o mě <a n:href="Single:about">nějaké další informace</a>.
 			</p>
 		</div>
 		<div class="col-lg-3 col-md-3" style="padding-top:30px">
@@ -46,6 +47,14 @@
 			</a>
 		</div>
 	</div>
+    <hr>
+    <h3><img src="{$basePath}/img/loga/odoo.png" width="100" style="margin-top:-12px"/> moduly</h3>
+    <p>
+        Nějaký čas jsem strávil tvorbou modulů pro systém <a href=https://www.odoo.com/>Odoo</a> v Pythonu. Za své působení jsem stihl
+        vytvořit celou řadu modulů do tohoto systému, které řeší problémy od bezpečnosti, přes design, kolem propojení se systémem ARES
+        a měření času práce (Timely) až po složité definování a řízení procesů. Ačkoliv to byla zajímavá práce, pak se k tomu nechci
+        vracet a <strong>žádné další moduly již soukromě nedělám</strong>.
+    </p>
 	<hr>
 	<div class="row">
 		<div class="col-lg-8 col-md-8">
@@ -53,7 +62,7 @@
 				<a href="http://www.fresh-hosting.cz/" target="_blank">www.fresh-hosting.cz<sup>2.0</sup></a>
 				<small style="white-space:nowrap">
 					[ <a href="http://www.fresh-hosting.cz/" target="_blank">navštívit webovou stránku</a> ]
-					<span class="label label-warning">IN PROGRESS</span>
+                    <span class="label label-success">STABLE</span>
 				</small>
 			</h3>
 			<p>
@@ -85,7 +94,7 @@
 				<a href="http://www.orgis.cz/" target="_blank">www.orgis.cz</a>
 				<small style="white-space:nowrap">
 					[ <a href="http://www.orgis.cz/" target="_blank">navštívit webovou stránku</a> ]
-					<span class="label label-success">STABLE</span>
+                    <span class="label label-default">DEPRECATED</span>
 				</small>
 			</h3>
 			<p>
@@ -99,10 +108,11 @@
 				<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
 			</ul>
 			<p>Autorům těchto nástrojů a služeb tímto výslovně děkuji.</p>
-			<p>
-				Zároveň si zaslouží poděkování také <strong>František Rajtmajer</strong> za korekturu textů a důkladnou
-				kontrolu celého webu. Děkuji!
-			</p>
+            <p>
+                Tento projekt je zároveň asi největším zklamáním, protože jsem na něj byl opravdu pyšný a poté, co jej převzal někdo jiný
+                šla jeho kvalita (minimálně z pohledu designu) rapidně dolů. Tak jsem se toho vylekal, až mě to donutilo napsat sem
+                tento text&hellip; :)
+            </p>
 		</div>
 		<div class="col-lg-4 col-md-4">
 			<a href="http://www.orgis.cz/" target="_blank">
@@ -117,7 +127,7 @@
 				<a href="http://www.manxis.eu/" target="_blank">www.manxis.eu</a>
 				<small style="white-space:nowrap">
 					[ <a href="http://www.manxis.eu/" target="_blank">navštívit webovou stránku</a> ]
-					<span class="label label-success">STABLE</span>
+                    <span class="label label-default">DEPRECATED</span>
 				</small>
 			</h3>
 			<p>
@@ -146,11 +156,11 @@
 				<small style="white-space:nowrap">
 					[ <a href="http://eshop.iaeste.cz/" target="_blank">navštívit webovou stránku</a> |
 					<a href="https://bitbucket.org/mrtnzlml/iaeste-eshop/issues" target="_blank">issues</a> ]
-					<span class="label label-success">STABLE</span>
+                    <span class="label label-default">DEPRECATED</span>
 				</small>
 			</h3>
 			<p>
-				Tento projekt je již pomalu, ale jistě <span class="label label-default">DEPRECATED</span>. Po lehkých
+				Tento projekt je již zastaralý. Po lehkých
 				úpravách, ale se zachováním velké části původního programu byl nad tímto eshopem postaven web
 				<a href="http://projekty.iaeste.cz/" target="_blank">projekty.iaeste.cz</a>.
 			</p>
@@ -185,7 +195,7 @@
 				<a href="http://www.fancyshop.cz/" target="_blank">www.fancyshop.cz</a>
 				<small style="white-space:nowrap">
 					[ <a href="http://www.fancyshop.cz/" target="_blank">navštívit webovou stránku</a> ]
-					<span class="label label-success">STABLE</span>
+                    <span class="label label-default">DEPRECATED</span>
 				</small>
 			</h3>
 			<p>
@@ -291,7 +301,7 @@
 				<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
 			</ul>
 			<p>Autorům těchto nástrojů a služeb tímto výslovně děkuji.</p>
-			<p>V současné době se o tento web stará kolega <strong>František Rajtmajer</strong>.</p>
+			<p>V současné době se o tento web stará bývalý kolega <strong>František Rajtmajer</strong>.</p>
 		</div>
 		<div class="col-lg-4 col-md-4">
 			<a href="http://boknet.cz/" target="_blank">
@@ -360,16 +370,6 @@
 		<div class="col-lg-4 col-md-4">
 			<iframe width="560" height="315" src="//www.youtube.com/embed/xR53OK-AjVg" frameborder="0" allowfullscreen
 			        class="img-thumbnail img-responsive" style="min-height: 250px;"></iframe>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<h2 class="text-center">Chcete zde být také?</h2>
-
-		<div class="text-center">
-			Není nic jednoduššího, než mi <a n:href="Single:about">napsat</a>.
-			<br>
-			Pamatujte, že kdo se bojí, nesmí do lesa&hellip; (-:
 		</div>
 	</div>
 {/block}
