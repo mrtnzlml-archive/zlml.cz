@@ -5,6 +5,7 @@ namespace App;
 use Latte;
 use Nette;
 use Nette\Application\UI;
+use Texy\Texy;
 use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter
@@ -18,7 +19,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	public $settings;
 	/** @var \Model\Pages @inject */
 	public $pages;
-	/** @var \WebLoader\LoaderFactory @inject */
+	/** @var \WebLoader\Nette\LoaderFactory @inject */
 	public $webLoader;
 
 	protected $setting;
@@ -63,13 +64,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	/**
 	 * @param null $class
 	 *
-	 * @return Nette\Templating\ITemplate
+	 * @return UI\ITemplate
 	 */
-	protected function createTemplate($class = NULL)
+	protected function createTemplate()
 	{
-		$template = parent::createTemplate($class);
+		/** @var Nette\Bridges\ApplicationLatte\Template $template */
+		$template = parent::createTemplate();
 		$template->registerHelper('texy', function ($input) {
-			$texy = new \Texy();
+			$texy = new Texy();
 			$html = new Nette\Utils\Html();
 			return $html::el()->setHtml($texy->process($input));
 		});
