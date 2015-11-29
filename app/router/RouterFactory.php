@@ -66,7 +66,7 @@ class RouterFactory
 		], RestRouter::RESTFUL); //TODO: kanonizace URL
 		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('<action>', 'Single:article');
-		$router[] = new Route('s[/<search>]', 'Search:default');
+		$router[] = new Route('s[/<search .+>]', 'Search:default');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}

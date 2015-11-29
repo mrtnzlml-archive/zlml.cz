@@ -16,7 +16,6 @@
 			{/if}
 			<h2 n:block="title">Výsledky vyhledávání
 				{ifset $search}výrazu „<strong>{$search}</strong>“ v textu{/ifset}
-				{ifset $result}({count($result)} nálezů){/ifset}
 			</h2>
 			{ifset $error}
 				<div class="alert alert-danger">
