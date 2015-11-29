@@ -7,10 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 	{block meta}{/block}
-
 	<title n:inner-snippet="title">{block title|striptags}BLOG{/block} | Martin Zlámal</title>
-
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	{control css}
 	{*<link rel="pingback" n:href="//Homepage:xmlrpc">*}
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
@@ -38,7 +35,7 @@
 									<input n:name="search" type="search" class="form-control input-lg" placeholder="Hledat">
 									<span class="input-group-btn">
 										<button n:name="send" class="btn btn-default go input-lg">
-											<i class="fa fa-search"></i>
+                                            <svg width="15" height="15" style="margin-bottom:-2px;fill:#fff" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
 										</button>
 									</span>
 								</div>
@@ -47,13 +44,10 @@
 					{/form}
 				{/if}
 				<div class="text-right" style="margin-top: 15px;">
-					<a href="https://twitter.com/mrtnzlml" target="_blank"><strong>@mrtnzlml</strong></a>
+                    <svg width="20" height="20" style="margin-bottom:-4px;fill:currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg>
+					<a href="https://twitter.com/mrtnzlml" target="_blank">@mrtnzlml</a>
 					&middot;
-					<a href="http://cz.linkedin.com/in/mrtnzlml/" target="_blank">LinkedIn</a>
-					<br>
-					<a href="https://github.com/mrtnzlml" target="_blank">GitHub</a>
-					&middot;
-					<i class="fa fa-rss"></i>
+                    <svg width="20" height="20" style="margin-bottom:-4px;fill:currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M576 1344q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm512 123q2 28-17 48-18 21-47 21h-135q-25 0-43-16.5t-20-41.5q-22-229-184.5-391.5t-391.5-184.5q-25-2-41.5-20t-16.5-43v-135q0-29 21-47 17-17 43-17h5q160 13 306 80.5t259 181.5q114 113 181.5 259t80.5 306zm512 2q2 27-18 47-18 20-46 20h-143q-26 0-44.5-17.5t-19.5-42.5q-12-215-101-408.5t-231.5-336-336-231.5-408.5-102q-25-1-42.5-19.5t-17.5-43.5v-143q0-28 20-46 18-18 44-18h3q262 13 501.5 120t425.5 294q187 186 294 425.5t120 501.5z"/></svg>
 					<a n:href=":Homepage:rss" target="_blank"><strong>RSS</strong></a>
 				</div>
 			</div>
