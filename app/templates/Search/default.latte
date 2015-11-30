@@ -1,12 +1,11 @@
 {var $robots = "noindex, nofollow"}
 
 {block content}
-    {include '../@octocat-right.latte'}
+	{include '../@octocat-right.latte'}
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
 			{if $tag}
-				<h2>Nalezeno {count($tag->posts)} článků s tagem <span class="label hidden-print"
-				                                                       style="background: #{$tag->color}">{$tag->name}</span>
+				<h2>Nalezeno {count($tag->posts)} článků s tagem <span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 				</h2>
 				{foreach $tag->posts as $post}
 					<a n:href=":Single:article $post->slug"
@@ -38,8 +37,7 @@
 						<p>
 							{foreach $r->tags as $tag}
 								<a n:href="Search:default, $tag->name" style="text-decoration:none">
-										<span class="label hidden-print"
-										      style="background: #{$tag->color}">{$tag->name}</span>
+										<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 								</a>
 							{/foreach}
 							{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:600|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
