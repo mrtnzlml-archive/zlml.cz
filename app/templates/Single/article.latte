@@ -6,7 +6,7 @@
 {/block}
 
 {block content}
-    {include '../@octocat-right.latte'}
+	{include '../@octocat-right.latte'}
 	<div class="page-header text-center">
 		<h2 style="font-size:40px">
 			{block title}{$post->title|vlna}{/block}
@@ -57,11 +57,11 @@
 				<hr>
 
 				<div class="alert alert-danger"
-				     n:if="!$post->disable_comments && $setting->show_comments && empty($setting->disqus_shortname)">
+					 n:if="!$post->disable_comments && $setting->show_comments && empty($setting->disqus_shortname)">
 					Please setup your disqus shortname in administration&hellip;
 				</div>
 				<div n:if="!$post->disable_comments && $setting->show_comments && !empty($setting->disqus_shortname)"
-				     class="hidden-print">
+					 class="hidden-print">
 					<div class="alert alert-info" style="margin-top: 20px">
 						<p>
 							V komentářích jsou povolené HTML tagy <code>&lt;a&gt;</code> <code>&lt;blockquote&gt;</code>
@@ -77,8 +77,8 @@
 						</p>
 					</div>
 					<div id="disqus_thread" style="padding-bottom: 30px"
-					     data-disqus-shortname="{$setting->disqus_shortname}"
-					     data-disqus-url="{link //this}"></div>
+						 data-disqus-shortname="{$setting->disqus_shortname}"
+						 data-disqus-url="{link //this}"></div>
 					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments
 							powered by Disqus.</a></noscript>
 					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
