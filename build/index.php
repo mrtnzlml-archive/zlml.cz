@@ -21,7 +21,7 @@ set_time_limit(0);
 date_default_timezone_set('Europe/Prague');
 
 echo "--- Installing blog via Composer... [can take a while]" . PHP_EOL;
-echo exec("composer create-project --no-interaction mrtnzlml/zeminem.cz blog dev-develop");
+echo exec("composer create-project --no-interaction mrtnzlml/zlml.cz blog dev-develop");
 
 echo "--- Cleaning project..." . PHP_EOL;
 $working_dir = realpath($dir);

@@ -1,11 +1,11 @@
 {
-  "name": "mrtnzlml/zeminem.cz",
+  "name": "mrtnzlml/zlml.cz",
   "version": "1.3.1",
-  "homepage": "http://www.zeminem.cz/",
+  "homepage": "http://zlml.cz/",
   "authors": [
     "Martin Zlámal <mrtnzlml@gmail.com>"
   ],
-  "description": "Source code of www.zeminem.cz website",
+  "description": "Source code of zlml.cz website",
   "license": [
     "BSD-3-Clause",
     "GPL-2.0",
