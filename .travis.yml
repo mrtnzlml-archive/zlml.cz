@@ -15,7 +15,6 @@ env:
 matrix:
   allow_failures:
     - env: DB=pgsql
-    - php: 7.0
     - php: hhvm
 
 script:

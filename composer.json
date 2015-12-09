@@ -28,7 +28,7 @@
     "leafo/lessphp": "^0.4",
     "kdyby/aop": "1.0.x-dev",
     "kdyby/annotations": "^2.2",
-    "kdyby/doctrine": "^2.3",
+    "kdyby/doctrine": "^3.0",
     "texy/texy": "dev-master",
     "nextras/secured-links": "^1.3"
   },
