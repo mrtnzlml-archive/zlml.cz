@@ -24,7 +24,7 @@
     "latte/latte": "^2.3",
     "tracy/tracy": "^2.3",
     "kukulich/fshl": "^2.1",
-    "janmarek/webloader": "^2.2",
+    "janmarek/webloader": "^2.5",
     "leafo/lessphp": "^0.4",
     "kdyby/aop": "1.0.x-dev",
     "kdyby/annotations": "^2.2",

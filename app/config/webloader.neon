@@ -4,11 +4,11 @@ parameters:
 webloader:
 	css:
 		default:
-			sourceDir: %wwwDir%/css
+			sourceDir: %clientVendorDir%
 			files:
-				- %clientVendorDir%/bootstrap/dist/css/bootstrap.min.css
-				- %clientVendorDir%/codemirror/lib/codemirror.css
-				- screen.less
+				- bootstrap/dist/css/bootstrap.min.css
+				- codemirror/lib/codemirror.css
+				- %wwwDir%/css/screen.less
 			fileFilters:
 				- @lessFilter
 				- @cssUrlsFilter
