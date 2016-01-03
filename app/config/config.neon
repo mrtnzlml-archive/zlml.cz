@@ -33,7 +33,6 @@ services:
 	- Model\Settings(@doctrine.dao(Entity\Setting))
 	- Model\Tags(@doctrine.dao(Entity\Tag))
 	- Model\Users(@doctrine.dao(Entity\User))
-	#- Model\Xmlrpc
 
 	adminMenuFactory: Cntrl\IAdminMenuFactory
 	- Cntrl\ISignInFactory
