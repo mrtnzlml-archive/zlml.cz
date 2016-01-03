@@ -26,7 +26,6 @@ class RouterFactory
 	}
 
 	/**
-	 * TODO: zjednodušit, začíná to být moc přeplácané...
 	 * @return \Nette\Application\IRouter
 	 */
 	public function createRouter()
@@ -58,12 +57,6 @@ class RouterFactory
 			'action' => 'default',
 			'paginator-page' => 1
 		]);
-		//TODO: options - API URL, enable API
-		$router[] = new RestRouter('api/v1[/<presenter>[/<id>]]', [
-			'module' => 'Rest',
-			'presenter' => 'Resource',
-			'action' => 'get',
-		], RestRouter::RESTFUL); //TODO: kanonizace URL
 		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('<action>', 'Single:article');
 		$router[] = new Route('s[/<search .+>]', 'Search:default');

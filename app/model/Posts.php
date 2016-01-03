@@ -153,24 +153,4 @@ class Posts extends Nette\Object
 		$this->dao->delete($entity, $relations, $flush);
 	}
 
-	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 * @param null $limit
-	 * @param null $offset
-	 *
-	 * @return \ArrayIterator
-	 */
-	public function findForApi(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
-	{
-		$query = $this->dao->createQueryBuilder('p')
-			->whereCriteria($criteria)
-			->autoJoinOrderBy((array)$orderBy)
-			->leftJoin('p.tags', 'tt')//t already used?
-			->addSelect('tt')
-			->getQuery();
-		$resultSet = new Kdyby\Doctrine\ResultSet($query);
-		return $resultSet->applyPaging($offset, $limit)->getIterator(Doctrine\ORM\AbstractQuery::HYDRATE_ARRAY);
-	}
-
 }
