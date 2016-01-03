@@ -22,7 +22,6 @@ webloader:
 				- nette-forms/src/assets/netteForms.js
 				- nette.ajax.js/nette.ajax.js
 				- codemirror/lib/codemirror.js
-				- %wwwDir%/js/jquery.qrcode-0.6.0.js
 				- %wwwDir%/js/main.js
 
 services:

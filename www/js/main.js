@@ -26,13 +26,6 @@ $(function () {
 		$('.help').toggle('fast');
 	});
 
-	$('#qr').qrcode({
-		render: 'image',
-		text: document.URL,
-		radius: 0.5,
-		size: 107
-	});
-
 	var disqus_div = $("#disqus_thread");
 	if (disqus_div.size() > 0) {
 		var ds_loaded = false;
