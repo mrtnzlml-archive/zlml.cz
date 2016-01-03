@@ -1,27 +1,42 @@
 {block content}
 	{include '../@octocat-right.latte'}
+	<div class="row load_disqus">
 	{foreach $posts as $post}
-		{if $iterator->odd}<div class="row">{/if}
-		{var $large = array(1, 4, 5, 8, 9)}
-		<div n:class="in_array($iterator->counter, $large) ? 'col-lg-7 col-md-7' : 'col-lg-5 col-md-5'">
-			<h3><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h3>
-			<p>
-				{foreach $post->tags as $tag}
-					<a n:href="Search:default, $tag->name" style="text-decoration:none">
-						<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
-					</a>
-				{/foreach}
-				{if in_array($iterator->counter, $large)}
-					{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:1000}
-				{else}
-					{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:675}
-				{/if}
-				&nbsp;<a n:href=":Single:article $post->slug">přečtěte si více</a>
-			</p>
+		<div n:if="$iterator->first" class="col-lg-8">
+			<h2><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h2>
+			{var $firstPost = $post}
+			{$post->body|texy}
+			<div id="disqus_thread" style="padding-bottom: 30px"
+			     data-disqus-shortname="{$setting->disqus_shortname}"
+			     data-disqus-url="{link //Single:article, $firstPost->slug}">
+			</div>
 		</div>
-		{if $iterator->even || $iterator->last}</div>{/if}
+		<div class="col-lg-4" style="color:#888;height:250px;">
+			<h4><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h4>
+			{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:300}
+		</div>
+		{*{if $iterator->odd}<div class="row">{/if}*}
+		{*{var $large = array(1, 4, 5, 8, 9)}*}
+		{*<div n:class="in_array($iterator->counter, $large) ? 'col-lg-7 col-md-7' : 'col-lg-5 col-md-5'">*}
+			{*<h3><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h3>*}
+			{*<p>*}
+				{*{foreach $post->tags as $tag}*}
+					{*<a n:href="Search:default, $tag->name" style="text-decoration:none">*}
+						{*<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>*}
+					{*</a>*}
+				{*{/foreach}*}
+				{*{if in_array($iterator->counter, $large)}*}
+					{*{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:1000}*}
+				{*{else}*}
+					{*{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:675}*}
+				{*{/if}*}
+				{*&nbsp;<a n:href=":Single:article $post->slug">přečtěte si více</a>*}
+			{*</p>*}
+		{*</div>*}
+		{*{if $iterator->even || $iterator->last}</div>{/if}*}
 	{/foreach}
-	<div class="row col-lg-12 text-center">
+	</div>
+	<div class="row col-lg-12 text-xs-center">
 		{control paginator}
 	</div>
 {/block}

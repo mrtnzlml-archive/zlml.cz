@@ -6,7 +6,7 @@ webloader:
 		default:
 			sourceDir: %clientVendorDir%
 			files:
-				- bootstrap/dist/css/bootstrap.min.css
+#				- bootstrap/dist/css/bootstrap.min.css
 				- codemirror/lib/codemirror.css
 				- %wwwDir%/css/screen.less
 			fileFilters:

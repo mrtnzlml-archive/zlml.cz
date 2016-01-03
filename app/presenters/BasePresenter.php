@@ -71,7 +71,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		/** @var Nette\Bridges\ApplicationLatte\Template $template */
 		$template = parent::createTemplate();
 		$template->registerHelper('texy', function ($input) {
-			$texy = new Texy();
+			$texy = $this->prepareTexy();
 			$html = new Nette\Utils\Html();
 			return $html::el()->setHtml($texy->process($input));
 		});

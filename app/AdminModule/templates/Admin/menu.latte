@@ -1,55 +1,55 @@
 <div class="list-group">
 	<a n:if="!$setting->disable_blog" n:href=":Admin:Admin:default, id => NULL"
 	   n:class="$presenter->isLinkCurrent(':Admin:Admin:default')?'list-group-item active':'list-group-item'">
-		<h4 class="list-group-item-heading">Přidat nový článek</h4>
+		<h5 class="list-group-item-heading">Přidat nový článek</h5>
 
 		<p class="list-group-item-text">Napište nový článek</p>
 	</a>
 
 	<a n:href=":Admin:Admin:pictures"
 	   n:class="$presenter->isLinkCurrent(':Admin:Admin:pictures')?'list-group-item active':'list-group-item'">
-		<span class="badge">{$picturecount}</span>
-		<h4 class="list-group-item-heading">Nahrát nový obrázek</h4>
+		<span class="label label-default label-pill pull-xs-right">{$picturecount}</span>
+		<h5 class="list-group-item-heading">Nahrát nový obrázek</h5>
 
 		<p class="list-group-item-text">Zde nahrajte obrázky</p>
 	</a>
 
 	<a n:if="!$setting->disable_blog" n:href=":Admin:Admin:prehled"
 	   n:class="$presenter->isLinkCurrent(':Admin:Admin:prehled')?'list-group-item active':'list-group-item'">
-		<span class="badge">{=ITEMCOUNT}</span>
-		<h4 class="list-group-item-heading">Přehled článků</h4>
+		<span class="label label-default label-pill pull-xs-right">{=ITEMCOUNT}</span>
+		<h5 class="list-group-item-heading">Přehled článků</h5>
 
 		<p class="list-group-item-text">Podívejte se na starší články</p>
 	</a>
 
 	<a n:href=":Admin:Admin:pages"
 	   n:class="list-group-item,preg_match('/^page[a-z-]*$/i',$presenter->view)?active">
-		<span class="badge">{$pagecount}</span>
-		<h4 class="list-group-item-heading">Stránky</h4>
+		<span class="label label-default label-pill pull-xs-right">{$pagecount}</span>
+		<h5 class="list-group-item-heading">Stránky</h5>
 
 		<p class="list-group-item-text">Vytvořte si nové stránky</p>
 	</a>
 
 	<a n:if="!$setting->disable_blog" n:href=":Admin:Admin:tags"
 	   n:class="$presenter->isLinkCurrent(':Admin:Admin:tags')?'list-group-item active':'list-group-item'">
-		<span class="badge">{$tagcount}</span>
-		<h4 class="list-group-item-heading">Přehled tagů</h4>
+		<span class="label label-default label-pill pull-xs-right">{$tagcount}</span>
+		<h5 class="list-group-item-heading">Přehled tagů</h5>
 
 		<p class="list-group-item-text">Prohlédněte si tagy</p>
 	</a>
 
 	<a n:href=":Admin:Admin:users" n:class="list-group-item,preg_match('/^user[a-z-]*$/i',$presenter->view)?active">
-		<span class="badge">{$usercount}</span>
-		<h4 class="list-group-item-heading">Přehled uživatelů</h4>
+		<span class="label label-default label-pill pull-xs-right">{$usercount}</span>
+		<h5 class="list-group-item-heading">Přehled uživatelů</h5>
 
 		<p class="list-group-item-text">Upravte práva uživatelům</p>
 	</a>
 
 	<a n:href=":Admin:Admin:setting"
 	   n:class="$presenter->isLinkCurrent(':Admin:Admin:setting')?'list-group-item active':'list-group-item'">
-		<h4 class="list-group-item-heading">
+		<h5 class="list-group-item-heading">
 			<span class="glyphicon glyphicon-cog"></span>
 			Nastavení
-		</h4>
+		</h5>
 	</a>
 </div>
