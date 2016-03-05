@@ -2,52 +2,44 @@
 
 {block content}
 	<div class="row">
-		<div class="col-lg-9 col-md-9">
-			<h3>Chcete mě získat pro svůj projekt?</h3>
-            <div class="alert alert-danger">
-                <p>
-                    V současné době již <strong>neposkytuji služby soukromě</strong>, ale specializuji se
-                    na vývoj větších webových aplikacích primárně pomocí Nette Frameworku a dalších pokročilých
-                    technologií. Pokud tedy chcete, abych přiložil svojí ruku k vašemu projektu, kontaktujte prosím
-                    firmu <a n:href="Single:about">ve které právě teď pracuji</a>.
-                </p>
-            </div>
+		<div class="col-lg-6 col-md-6">
 			<p>
-				Níže jsou k nahlédnutí jednoduché projekty, ke kterým jsem se dostal trošku osobněji a nejedná se tedy
-				o firemní reference. Co znamenají jednotlivé štítky?
-			</p>
-			<table class="table table-condensed">
-				{*<tr>*}
-					{*<td><span class="label label-warning">IN PROGRESS</span></td>*}
-					{*<td>Projekt je stále aktivně vyvíjen.</td>*}
-				{*</tr>*}
-				<tr>
-					<td><span class="label label-success">STABLE</span></td>
-					<td>Projekt je funkční a aktivně využívaný.</td>
-				</tr>
-				<tr>
-					<td><span class="label label-default">DEPRECATED</span></td>
-					<td>O tento projekt se již dlouho nestarám.</td>
-				</tr>
-				<tr>
-					<td><span class="label label-danger">EXPERIMENTAL</span></td>
-					<td>Tento projekt je aktivně vyvíjený spíše jen tak pro zábavu.</td>
-				</tr>
-			</table>
-			<p>
-				Přečtěte si o mě <a n:href="Single:about">nějaké další informace</a>.
+				<a n:href="Single:about#talks">Aktivně přednáším</a> a jsem v tom dobrý. Baví mě předávat vědomosti a tak se zaměřuji
+				primárně na školy. Největší zkušenosti mám s přednášením pro studenty vysokých škol, začínám však
+				<abbr title="Vzhledem ke složitosti přednášených témat se na SŠ zatím moc nehrnu..."> experimentovat i se
+				střední školou</abbr>. <strong>Zastupujete školu a máte zájem o přednášku?</strong> Rád se podělím o své vědomosti
+				a srozumitelnou formou plnou praktických ukázek dostanu studenty na tu správnou vlnu. A vzhledem k tomu, že je to
+				můj koníček, tak za to nechci ani korunu. Prohlédněte si <a n:href="Single:about#talks">mé dřívější přednášky</a>.
 			</p>
 		</div>
-		<div class="col-lg-3 col-md-3" style="padding-top:30px">
-			<a href="{$basePath}/img/reference/cert2.jpg" target="_blank">
-				<img src="{$basePath}/img/reference/cert2.jpg" class="img-thumbnail img-responsive"/>
-			</a>
-			<a href="{$basePath}/img/reference/cert.jpg" target="_blank">
-				<img src="{$basePath}/img/reference/cert.jpg" class="img-thumbnail img-responsive"/>
-			</a>
+		<div class="col-lg-6 col-md-6">
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+					<a href="{$basePath}/img/reference/cert2.jpg" target="_blank">
+						<img src="{$basePath}/img/reference/cert2.jpg" class="img-thumbnail img-responsive"/>
+					</a>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<a href="{$basePath}/img/reference/cert.jpg" target="_blank">
+						<img src="{$basePath}/img/reference/cert.jpg" class="img-thumbnail img-responsive"/>
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
-    <hr>
+	<div class="alert alert-danger" style="margin: 25px auto;">
+		<p>
+			<strong>A teď pozor.</strong> V současné době již <strong>neposkytuji služby soukromě</strong>, ale specializuji se
+			na vývoj větších webových aplikacích primárně pomocí Nette Frameworku a dalších pokročilých
+			technologií. Pokud tedy chcete, abych přiložil ruku k vašemu projektu, kontaktujte prosím
+			firmu <a n:href="Single:about">ve které právě teď pracuji</a>.
+		</p>
+	</div>
+
+	<div class="text-xs-center" style="margin: 50px auto">
+		<h2>Vybrané starší projekty</h2>
+	</div>
+
     <h3><img src="{$basePath}/img/loga/odoo.png" width="100" style="margin-top:-12px"/> moduly</h3>
     <p>
         Nějaký čas jsem strávil tvorbou modulů pro systém <a href=https://www.odoo.com/>Odoo</a> v Pythonu. Za své působení jsem stihl
@@ -60,26 +52,22 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://www.fresh-hosting.cz/" target="_blank">www.fresh-hosting.cz<sup>2.0</sup></a>
-				<small style="white-space:nowrap">
-					[ <a href="http://www.fresh-hosting.cz/" target="_blank">navštívit webovou stránku</a> ]
-                    <span class="label label-success">STABLE</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Webová aplikace pro webhostingové služby sloužící ke kompletní obsluze objednávkového procesu,
 				automatického zřízení požadovaných služeb, poskytnutí administrátorského rozhraní a technické podpory.
 				Cílem tohoto hostingu webových PHP aplikací je úplně zrušit balíčky, tzn. veškeré služby si zde
 				návštěvník může nastavit libovolně podle svých potřeb.
 			</p>
-			<p>Použité a využívané služby a nástroje:</p>
-			<ul>
-				<li><a href="http://nette.org/" target="_blank">Nette Framework</a></li>
-				<li><a href="http://www.doctrine-project.org/" target="_blank">Doctrine</a></li>
-				<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
-				<li><a href="http://lesscss.org/" target="_blank">LESS</a></li>
-				<li><a href="http://roundcube.net/" target="_blank">Roundcube</a></li>
-			</ul>
-			<p>Autorům těchto nástrojů a služeb tímto výslovně děkuji.</p>
+			<p>
+				Použité a využívané služby a nástroje:
+				<a href="http://nette.org/" target="_blank">Nette Framework</a>,
+				<a href="http://www.doctrine-project.org/" target="_blank">Doctrine</a>,
+				<a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>,
+				<a href="http://lesscss.org/" target="_blank">LESS</a>,
+				<a href="http://roundcube.net/" target="_blank">Roundcube</a>
+			</p>
 		</div>
 		<div class="col-lg-4 col-md-4">
 			<a href="http://www.fresh-hosting.cz/" target="_blank">
@@ -92,12 +80,9 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://www.orgis.cz/" target="_blank">www.orgis.cz</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://www.orgis.cz/" target="_blank">navštívit webovou stránku</a> ]
-                    <span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Orgis IT je firma která pokrývá celou škálu služeb. Od programování webových a desktopových aplikací,
 				přes správu sítí a outsourcing až po virtualizace a ERP systémy pro ty největší firmy. Orgis IT působí
 				zejména v Plzeňském kraji a v Praze.
@@ -109,7 +94,7 @@
 			</ul>
 			<p>Autorům těchto nástrojů a služeb tímto výslovně děkuji.</p>
             <p>
-                Tento projekt je zároveň asi největším zklamáním, protože jsem na něj byl opravdu pyšný a poté, co jej převzal někdo jiný
+                Tento projekt je zároveň asi největším zklamáním, protože jsem na něj byl opravdu pyšný a poté, co jej převzal někdo jiný,
                 šla jeho kvalita (minimálně z pohledu designu) rapidně dolů. Tak jsem se toho vylekal, až mě to donutilo napsat sem
                 tento text&hellip; :)
             </p>
@@ -125,12 +110,9 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://www.manxis.eu/" target="_blank">www.manxis.eu</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://www.manxis.eu/" target="_blank">navštívit webovou stránku</a> ]
-                    <span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				MANXIS s.r.o. je mladá firma z Plzně, která se specializuje na vývoj netradičních projektů jako
 				jsou UHF RFID řešení, nebo například návrh databází, správa serverů a datové integrace
 				s ostatními systémy, které využívá síť škol v USA.
@@ -153,13 +135,9 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://eshop.iaeste.cz/" target="_blank">eshop.iaeste.cz</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://eshop.iaeste.cz/" target="_blank">navštívit webovou stránku</a> |
-					<a href="https://bitbucket.org/mrtnzlml/iaeste-eshop/issues" target="_blank">issues</a> ]
-                    <span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Tento projekt je již zastaralý. Po lehkých
 				úpravách, ale se zachováním velké části původního programu byl nad tímto eshopem postaven web
 				<a href="http://projekty.iaeste.cz/" target="_blank">projekty.iaeste.cz</a>.
@@ -193,12 +171,9 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://www.fancyshop.cz/" target="_blank">www.fancyshop.cz</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://www.fancyshop.cz/" target="_blank">navštívit webovou stránku</a> ]
-                    <span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Fancyshop je e-shop, který se zabývá prodejem světově známé módní značky Victoria´s Secret.
 				Victoria's Secret je jednou z nejoblíbenějších značek nejen v USA.
 				Na českém trhu a na trhu evropském doposud nedosažitelná.
@@ -222,25 +197,19 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://www.businessservice.cz/" target="_blank">www.businessservice.cz</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://www.businessservice.cz/" target="_blank">navštívit webovou stránku</a> |
-					<a href="https://bitbucket.org/mrtnzlml/business-service/issues" target="_blank">issues</a> ]
-					<span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Business service je společnost, která svým klientům nabízí full servis v mnoha ohledech.
 				Portfolio služeb Business service tvoří grafické práce ( corporate identity, loga, vizitky,&hellip;),
 				marketing, reklama, pořádání event akcí pro firmy, zařizování služebních cest, zprostředkování školení a
 				organizace výběrových řízení. Klienty Business service jsou firmy v Plzni, Praze i v Brně.
 				Společnost Business service je členem Business for Breakfast a Hospodářské komory Plzeňského kraje.
 			</p>
-			<p>Použité a využívané služby a nástroje:</p>
-			<ul>
-				<li><a href="http://nette.org/" target="_blank">Nette Framework</a></li>
-				<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
-			</ul>
-			<p>Autorům těchto nástrojů a služeb tímto výslovně děkuji.</p>
+			<p>Použité a využívané služby a nástroje:
+				<a href="http://nette.org/" target="_blank">Nette Framework</a>,
+				<a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
+			</p>
 		</div>
 		<div class="col-lg-4 col-md-4">
 			<a href="http://www.businessservice.cz/" target="_blank">
@@ -253,13 +222,9 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://www.securitylife.cz/" target="_blank">www.securitylife.cz</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://www.securitylife.cz/" target="_blank">navštívit webovou stránku</a> |
-					<a href="https://bitbucket.org/mrtnzlml/security-life/issues" target="_blank">issues</a> ]
-					<span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Firma Security life vznikla roku 2009. Od té doby si vybudovala dobré jméno u mnoha spokojených
 				zákazníků a firem. Společnost se zabývá instalacemi a servisem kamerových a zabezpečovacích systémů po
 				celé Plzni a širokém okolí. Security life nabízí širokou škálu kvalitních produktů IP kamer, online
@@ -283,25 +248,14 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://boknet.cz/" target="_blank">www.boknet.cz</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://boknet.cz/" target="_blank">navštívit webovou stránku</a> |
-					<a href="https://bitbucket.org/mrtnzlml/bok-net/issues" target="_blank">issues</a> ]
-					<span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Občasnské sdružení Boknet poskytuje svým členům přístup do
 				vlastní počítačové sítě. Důvodem vzniku sdružení byla neuspokojivá nabídka jiného připojení a
 				nevhodný přístup jednotlivých poskytovatelů internetu. Členové občanského sdružení mají k dispozici
 				bezpečný internet.
 			</p>
-			<p>Použité a využívané služby a nástroje:</p>
-			<ul>
-				<li><a href="http://nette.org/" target="_blank">Nette Framework</a></li>
-				<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
-			</ul>
-			<p>Autorům těchto nástrojů a služeb tímto výslovně děkuji.</p>
-			<p>V současné době se o tento web stará bývalý kolega <strong>František Rajtmajer</strong>.</p>
 		</div>
 		<div class="col-lg-4 col-md-4">
 			<a href="http://boknet.cz/" target="_blank">
@@ -314,13 +268,9 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://zlml.cz/" target="_blank">zlml.cz</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://zlml.cz/" target="_blank">navštívit webovou stránku</a> |
-					<a href="https://github.com/mrtnzlml/zlml.cz/issues" target="_blank">issues</a> ]
-					<span class="label label-danger">EXPERIMENTAL</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-success">STABLE</span>
 				Osobní blogovací systém sloužící k občasnému slohovému projevu převážně o technických věcech
 				a novinkách, které jsem v nedávné době potkal. Právě na tomto webu většinou zkouším technologické
 				novinky a vychytávky, které (když se ověří) používám na ostatních stránkách.
@@ -345,13 +295,9 @@
 		<div class="col-lg-8 col-md-8">
 			<h3>
 				<a href="http://wordpress.org/plugins/endora/" target="_blank">Endora plugin pro WordPress</a>
-				<small style="white-space:nowrap">
-					[ <a href="http://wordpress.org/plugins/endora/" target="_blank">navštívit stránku pluginu</a> |
-					<a href="https://bitbucket.org/mrtnzlml/endora/issues" target="_blank">issues</a> ]
-					<span class="label label-default">DEPRECATED</span>
-				</small>
 			</h3>
 			<p>
+				<span class="label label-default">DEPRECATED</span>
 				Plugin umožňuje jednoduchou editaci celkového vzhledu reklamního textu.
 				Změna barvy textu, změna barvy pozadí, změna barvy odkazů, změna velikosti písma,
 				změna písma (celkem 5 druhů), zarovnání reklamy&hellip;
