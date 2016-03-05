@@ -29,3 +29,35 @@ Options -Indexes
 		SetOutputFilter INCLUDES
 	</FilesMatch>
 </IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive on
+
+	ExpiresByType image/jpg "now plus 60 days"
+	ExpiresByType image/png "now plus 60 days"
+	ExpiresByType image/gif "now plus 60 days"
+	ExpiresByType image/jpeg "now plus 60 days"
+
+	ExpiresByType text/css "now plus 1 days"
+
+	ExpiresByType image/x-icon "now plus 1 month"
+
+	ExpiresByType application/pdf "now plus 1 month"
+	ExpiresByType audio/x-wav "now plus 1 month"
+	ExpiresByType audio/mpeg "now plus 1 month"
+	ExpiresByType video/mpeg "now plus 1 month"
+	ExpiresByType video/mp4 "now plus 1 month"
+	ExpiresByType video/quicktime "now plus 1 month"
+	ExpiresByType video/x-ms-wmv "now plus 1 month"
+	ExpiresByType application/x-shockwave-flash "now 1 month"
+
+	ExpiresByType text/javascript "now plus 1 week"
+	ExpiresByType application/x-javascript "now plus 1 week"
+	ExpiresByType application/javascript "now plus 1 week"
+
+	ExpiresByType application/font-woff "access plus 1 month"
+    ExpiresByType application/x-font-woff "access plus 1 month"
+    ExpiresByType font/woff "access plus 1 month"
+
+    ExpiresByType application/font-woff2 "access plus 1 month"
+</IfModule>
