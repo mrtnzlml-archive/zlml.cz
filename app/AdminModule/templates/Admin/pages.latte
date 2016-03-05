@@ -33,10 +33,9 @@
 							</span>
 						</td>
 						<td>
-							<div class="btn-group" style="width:120px">
-								<a n:href=":Admin:Admin:pageEdit, id => $page->id" class="btn btn-info">Edit</a>
-								<a n:href="deletePage! $page->id" class="btn btn-danger"
-								   data-confirm="Opravdu chcete tuto stránku článek?">Delete</a>
+							<div class="btn-group">
+								<a n:href=":Admin:Admin:pageEdit, id => $page->id"><button class="btn btn-info">Edit</button></a>
+								<a n:href="deletePage! $page->id" data-confirm="Opravdu chcete tuto stránku článek?"><button class="btn btn-danger">Delete</button></a>
 							</div>
 						</td>
 					</tr>

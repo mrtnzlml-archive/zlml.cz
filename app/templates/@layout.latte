@@ -1,6 +1,5 @@
-{block |strip|trim}
 <!DOCTYPE html>
-<html lang="cs" dir="ltr">
+<html lang="cs" dir="ltr" n:class="$wfont ? wf-active">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,6 +7,25 @@
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 	{block meta}{/block}
 	<title n:inner-snippet="title">{block title|striptags}BLOG{/block} | Martin Zlámal</title>
+
+	{if !$wfont} {* see: https://www.souki.cz/jak-efektivne-nacitat-webfonty *}
+		<script>
+			WebFontConfig = {
+				google: {
+					families: [ 'Audiowide:400:latin' ],
+					text: 'MartinZlám'
+				},
+				active: function () {
+					document.cookie = 'wfont=1; expires=' + (new Date(new Date().getTime() + 86400000)).toGMTString() + '; path=/'
+				}
+			};
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" async defer></script>
+		<link rel="prefetch" href="https://fonts.googleapis.com/css?family=Audiowide:400:latin&text=MartinZlám">
+	{else}
+		<link href="https://fonts.googleapis.com/css?family=Audiowide:400:latin&text=MartinZlám" rel='stylesheet' type='text/css'>
+	{/if}
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 	{control css}
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
@@ -20,10 +38,10 @@
 
 	<div class="container shadow hidden-print">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<h1><a n:href=":Homepage:">Martin <span style="white-space:nowrap"><span class="transf1">Zlá</span><span class="transf2">mal</span></span></a></h1>
 			</div>
-			<div class="col-lg-6 text-xs-right">
+			<div class="col-lg-4 text-xs-right">
 				{if !$setting->disable_blog}
 					{form search, class => 'form-inline', onsubmit => 'document.getElementById("search").value.length == 0 ? document.getElementById("search").value = "Jakou barvu má mědvěd?" : true'}
 						<div class="input-group">
@@ -109,15 +127,5 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
-	<script>
-		WebFontConfig = {
-			google: {
-				families: [ 'Audiowide:400:latin' ],
-				text: 'MartinZlám'
-			}
-		};
-	</script>
-	<script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" async defer></script>
 </body>
 </html>
-{/block}

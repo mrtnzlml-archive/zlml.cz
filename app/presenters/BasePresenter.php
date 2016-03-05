@@ -5,7 +5,6 @@ namespace App;
 use Latte;
 use Nette;
 use Nette\Application\UI;
-use Texy\Texy;
 use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter
@@ -29,6 +28,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		parent::startup();
 		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
 		$this->template->pages = $this->pages->findBy([]);
+		$this->template->wfont = $this->getHttpRequest()->getCookie('wfont');
 	}
 
 	protected function createComponentSearch()
@@ -42,7 +42,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		return $form;
 	}
 
-	public function searchSucceeded(UI\Form $form, $values)
+	public function searchSucceeded(UI\Form $_, $values)
 	{
 		$this->redirect(':Search:default', $values->search);
 	}
@@ -62,8 +62,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	}
 
 	/**
-	 * @param null $class
-	 *
 	 * @return UI\ITemplate
 	 */
 	protected function createTemplate()

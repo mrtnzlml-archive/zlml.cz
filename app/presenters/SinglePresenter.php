@@ -53,7 +53,7 @@ class SinglePresenter extends BasePresenter
 			$texy = $this->prepareTexy();
 			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
 				$el = $invocation->proceed();
-				if ($el instanceof \TexyHtml && $el->getName() === 'a') {
+				if ($el instanceof \Texy\HtmlElement && $el->getName() === 'a') {
 					$url = new Url($el->attrs['href']);
 					$httpRequest = $this->presenter->getHttpRequest();
 					$uri = $httpRequest->getUrl();
