@@ -10,7 +10,6 @@ vendor-client/*
 !.keep
 
 .htdeployment
-deployment.ini
 deployment.log
 composer.lock
 tests/coverage.html
