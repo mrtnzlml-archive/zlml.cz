@@ -139,7 +139,9 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$em->flush();
 
 		echo "<div class='alert alert-success'><strong>OK</strong> The installation was successful, please press F5 and reload this page again.</div>";
+		ob_end_flush();
 	} catch (\Exception $exc) {
+		ob_end_clean();
 		file_put_contents(__DIR__ . '/../config/config.local.neon', $security);
 		echo "<div class='alert alert-danger'><strong>ERROR (#" . $exc->getCode() . "):</strong> " . $exc->getMessage() . "</div>";
 	}
