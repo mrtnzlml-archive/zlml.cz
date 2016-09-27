@@ -59,7 +59,7 @@ class UserEditForm extends UI\Control
 		$form->addSelect('role', 'Role:', $this->roles)
 			->setDefaultValue($this->account->role);
 		$form->addSubmit('save', 'Uložit změny');
-		$form->onSuccess[] = $this->formSucceeded;
+		$form->onSuccess[] = [$this, 'formSucceeded'];
 		return $form;
 	}
 
