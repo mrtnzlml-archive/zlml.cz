@@ -1,0 +1,25 @@
+{block content}
+	<div class="page-header">
+		<h2>
+			{block title}{$page->title|vlna}{/block}
+			<div class="pull-xs-right hidden-print">
+				<small>
+					<a href="javascript:window.print()" class="visible-lg" style="display: inline !important">tisk&nbsp;<span
+								class="glyphicon glyphicon-print"></span></a>
+					{if $user->isLoggedIn()}
+						<span style="font-size: 25px">\</span>
+						<a n:href=":Admin:Admin:pageEdit $page->id">edit&nbsp;<span
+									class="glyphicon glyphicon-edit"></span></a>
+					{/if}
+				</small>
+			</div>
+		</h2>
+	</div>
+	<div class="row" style="margin-bottom: 10px">
+		<div class="col-lg-12">
+			<div class="article" id="columns">
+				{$body|noescape}
+			</div>
+		</div>
+	</div>
+{/block}
