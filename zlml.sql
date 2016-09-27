@@ -1,4 +1,4 @@
--- Adminer 4.2.3 MySQL dump
+-- Adminer 4.2.1 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -441,11 +441,6 @@ CREATE TABLE `settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `settings` (`id`, `key`, `value`) VALUES
-(1,	'show_content',	'1'),
-(2,	'random_search',	'1'),
-(3,	'show_comments',	'1'),
-(4,	'show_print',	'1'),
-(5,	'disable_blog',	'0'),
 (6,	'disqus_shortname',	'mrtnzlml'),
 (7,	'ga_code',	'UA-39142238-1');
 
@@ -518,4 +513,4 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (1,	'martin',	'$2y$10$39OQqbxEVjby7x1kpRnH8eXjxyM3ARSFhyRrTShmTE8osiCdnbytq',	'admin');
 
--- 2016-09-27 15:08:53
+-- 2016-09-27 15:38:35

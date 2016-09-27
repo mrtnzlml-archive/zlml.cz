@@ -42,18 +42,16 @@
 				<h1><a n:href=":Homepage:">Martin <span style="white-space:nowrap"><span class="transf1">Zlá</span><span class="transf2">mal</span></span></a></h1>
 			</div>
 			<div class="col-lg-4 text-xs-right">
-				{if !$setting->disable_blog}
-					{form search, class => 'form-inline', onsubmit => 'document.getElementById("search").value.length == 0 ? document.getElementById("search").value = "Jakou barvu má mědvěd?" : true'}
-						<div class="input-group">
-							<input n:name="search" type="search" id="search" class="form-control form-control-lg" placeholder="Jakou barvu má mědvěd?">
-							<span class="input-group-btn">
-								<button n:name="send" class="btn btn-default go btn-lg">
-                                    <svg width="15" height="15" style="margin-bottom:-2px;fill:#fff" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
-								</button>
-							</span>
-						</div>
-					{/form}
-				{/if}
+				{form search, class => 'form-inline', onsubmit => 'document.getElementById("search").value.length == 0 ? document.getElementById("search").value = "Jakou barvu má mědvěd?" : true'}
+					<div class="input-group">
+						<input n:name="search" type="search" id="search" class="form-control form-control-lg" placeholder="Jakou barvu má mědvěd?">
+						<span class="input-group-btn">
+							<button n:name="send" class="btn btn-default go btn-lg">
+								<svg width="15" height="15" style="margin-bottom:-2px;fill:#fff" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
+							</button>
+						</span>
+					</div>
+				{/form}
 				<div style="margin-top: 15px;">
                     <svg width="20" height="20" style="margin-bottom:-4px;fill:currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg>
 					<a href="https://twitter.com/mrtnzlml" target="_blank">@mrtnzlml</a>
@@ -68,7 +66,7 @@
 	{snippet menu}
 	<div class="container hidden-print main-nav" style="background:transparent;padding:0">
 		<ul class="nav nav-pills">
-			<li n:if="!$setting->disable_blog" n:class="nav-item, $presenter->isLinkCurrent(':Homepage:') ? active">
+			<li n:class="nav-item, $presenter->isLinkCurrent(':Homepage:') ? active">
 				<a n:href=":Homepage:" class="nav-link"><span class="glyphicon glyphicon-home"></span> home</a>
 			</li>
 			<li n:class="nav-item, $presenter->isLinkCurrent(':Single:about') ? active">
@@ -82,7 +80,7 @@
 					<a n:href=":Single:$page->slug" class="nav-link">{$page->title|lower}</a>
 				</li>
 			{/foreach}
-			<li n:if="$setting->show_content && !$setting->disable_blog" n:class="nav-item, $presenter->isLinkCurrent(':Single:obsah') || $presenter->isLinkCurrent(':Single:tagsah') ? active">
+			<li n:class="nav-item, $presenter->isLinkCurrent(':Single:obsah') || $presenter->isLinkCurrent(':Single:tagsah') ? active">
 				<a n:href=":Single:obsah" class="nav-link">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
 			</li>
 			{if $user->isAllowed('Admin:Admin', 'view')}

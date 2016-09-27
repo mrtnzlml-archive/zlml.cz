@@ -38,7 +38,6 @@ services:
 	- Cntrl\ISignInFactory
 	- Cntrl\IPageFormFactory
 	- Cntrl\IPostFormFactory
-	- Cntrl\ISettingsFormFactory
 	- Cntrl\IUserEditFormFactory
 	- Cntrl\IVisualPaginatorFactory
 	- App\AdminModule\AdminPresenter # Kdyby\Events!
