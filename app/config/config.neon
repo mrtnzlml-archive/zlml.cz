@@ -48,22 +48,12 @@ events:
 		- PostsListener
 		- RestrictListener
 
-console:
-	commands:
-		- App\Console\BlogInstall
-		- App\Console\BlogUpdate
-
-aspects:
-	- SecurityAspect
-
 annotations:
 	ignore:
 		- secured
 
 extensions:
-	aop: Kdyby\Aop\DI\AopExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
-	aspects: Kdyby\Aop\DI\AspectsExtension
 	console: Kdyby\Console\DI\ConsoleExtension
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
 	events: Kdyby\Events\DI\EventsExtension

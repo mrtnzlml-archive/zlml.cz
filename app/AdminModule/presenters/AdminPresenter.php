@@ -192,9 +192,9 @@ class AdminPresenter extends BasePresenter
 				->setType('color')
 				->setValue('#' . $tag->color);
 			$form->addSubmit('update' . $tag->id, 'Změnit barvu')
-				->onClick[] = function ($this) use ($tag) {
-				$this->colorSucceeded($this, $tag->id);
-			};
+				->onClick[] = function ($button) use ($tag) {
+					$this->colorSucceeded($button, $tag->id);
+				};
 		}
 		return $form;
 	}

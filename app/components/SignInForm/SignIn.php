@@ -41,7 +41,7 @@ class SignIn extends UI\Control
 			->setRequired('Zadejte prosím správné heslo.');
 		$form->addCheckbox('remember', 'Zapamatovat si přihlášení');
 		$form->addSubmit('send', 'Přihlásit se');
-		$form->onSuccess[] = $this->signInFormSucceeded;
+		$form->onSuccess[] = [$this, 'signInFormSucceeded'];
 		return $form;
 	}
 

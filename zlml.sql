@@ -516,7 +516,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
-(1,	'martin',	'$2y$10$39OQqbxEVjby7x1kpRnH8eXjxyM3ARSFhyRrTShmTE8osiCdnbytq',	'admin'),
-(2,	'demo',	'$2y$10$2SdneWBxW3y4f2qGKE6fi.dvJzBT4JKdo3Rmrv/2hd66WePZ8EOW2',	'demo');
+(1,	'martin',	'$2y$10$39OQqbxEVjby7x1kpRnH8eXjxyM3ARSFhyRrTShmTE8osiCdnbytq',	'admin');
 
 -- 2016-09-27 15:08:53

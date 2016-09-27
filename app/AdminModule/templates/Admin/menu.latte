@@ -16,7 +16,7 @@
 
 	<a n:if="!$setting->disable_blog" n:href=":Admin:Admin:prehled"
 	   n:class="$presenter->isLinkCurrent(':Admin:Admin:prehled')?'list-group-item active':'list-group-item'">
-		<span class="label label-default label-pill pull-xs-right">{=ITEMCOUNT}</span>
+		<span class="label label-default label-pill pull-xs-right">{constant('ITEMCOUNT')}</span>
 		<h5 class="list-group-item-heading">Přehled článků</h5>
 
 		<p class="list-group-item-text">Podívejte se na starší články</p>

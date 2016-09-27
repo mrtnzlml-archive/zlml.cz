@@ -65,7 +65,7 @@ class PostForm extends UI\Control
 			]);
 		}
 		$form->addSubmit('save', 'Uložit a publikovat');
-		$form->onSuccess[] = $this->postFormSucceeded;
+		$form->onSuccess[] = [$this, 'postFormSucceeded'];
 		return $form;
 	}
 

@@ -38,7 +38,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			->setRequired('Vyplňte co chcete vyhledávat.')
 			->setValue($this->getParameter('search'));
 		$form->addSubmit('send', 'Go!');
-		$form->onSuccess[] = $this->searchSucceeded;
+		$form->onSuccess[] = [$this, 'searchSucceeded'];
 		return $form;
 	}
 
@@ -68,21 +68,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
 		/** @var Nette\Bridges\ApplicationLatte\Template $template */
 		$template = parent::createTemplate();
-		$template->registerHelper('texy', function ($input) {
+		$latte = $template->getLatte();
+		$latte->addFilter('texy', function ($input) {
 			$texy = $this->prepareTexy();
 			$html = new Nette\Utils\Html();
 			return $html::el()->setHtml($texy->process($input));
 		});
-		$template->registerHelper('vlna', function ($string) {
+		$latte->addFilter('vlna', function ($string) {
 			$string = preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;
 		});
-		$template->registerHelper('dateInWords', function ($time) {
+		$latte->addFilter('dateInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
 			$months = [1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 			return $time->format('j. ') . $months[$time->format('n')] . $time->format(' Y');
 		});
-		$template->registerHelper('timeAgoInWords', function ($time) {
+		$latte->addFilter('timeAgoInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
 			$delta = round((time() - $time->getTimestamp()) / 60);
 			if ($delta == 0) return 'před okamžikem';
