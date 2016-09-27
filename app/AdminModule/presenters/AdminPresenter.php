@@ -8,8 +8,12 @@ use Entity;
 use Kdyby;
 use Model;
 use Nette;
+use Nextras\Application\UI\SecuredLinksPresenterTrait;
 
-class AdminPresenter extends BasePresenter {
+class AdminPresenter extends BasePresenter
+{
+
+	use SecuredLinksPresenterTrait;
 
 	public $onBeforeRestrictedFunctionality = [];
 
@@ -22,22 +26,27 @@ class AdminPresenter extends BasePresenter {
 	/** @var \Model\Pages @inject */
 	public $pages;
 
-	/** @var \PageFormFactory @inject */
+	/** @var Cntrl\IPageFormFactory @inject */
 	public $pageFormFactory;
-	/** @var \PostFormFactory @inject */
+	/** @var Cntrl\IPostFormFactory @inject */
 	public $postFormFactory;
-	/** @var \SettingsFormFactory @inject */
+	/** @var Cntrl\ISettingsFormFactory @inject */
 	public $settingsFormFactory;
-	/** @var \UserEditFormFactory @inject */
+	/** @var Cntrl\IUserEditFormFactory @inject */
 	public $userEditFormFactory;
+	/** @var Cntrl\IVisualPaginatorFactory @inject */
+	public $paginatorFactory;
 
 	private $id;
 
-	public function startup() {
-		parent::startup();
+	public function checkRequirements($element)
+	{
+		parent::checkRequirements($element);
 		if (!$this->user->isLoggedIn()) {
 			if ($this->user->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
 				$this->flashMessage('Byli jste odhlášeni z důvodu nečinnosti. Přihlaste se prosím znovu.', 'danger');
+			} else {
+				$this->flashMessage('Pro vstup do této sekce se musíte přihlásit.', 'danger');
 			}
 			$this->redirect(':Sign:in', ['backlink' => $this->storeRequest()]);
 		} elseif (!$this->user->isAllowed($this->name, Model\Authorizator::READ)) {
@@ -46,22 +55,25 @@ class AdminPresenter extends BasePresenter {
 		}
 	}
 
-	public function beforeRender() {
+	public function beforeRender()
+	{
 		parent::beforeRender();
 		$this->template->picturecount = $this->pictures->countBy();
 		$this->template->tagcount = $this->tags->countBy();
 		$this->template->usercount = $this->users->countBy();
 		$this->template->pagecount = $this->pages->countBy();
-		if (!$this->user->isAllowed('Admin:Admin', Model\Authorizator::READ)) {
+		if (!$this->user->isAllowed('Admin:Admin', Model\Authorizator::CREATE)) {
 			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
 		}
 	}
 
-	public function actionDefault($id = NULL) {
+	public function actionDefault($id = NULL)
+	{
 		$this->id = $id;
 	}
 
-	public function renderDefault($id = NULL) {
+	public function renderDefault($id = NULL)
+	{
 		$this->template->tags = $this->tags->findBy([]);
 		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC']);
 		if ($id !== NULL) {
@@ -71,11 +83,13 @@ class AdminPresenter extends BasePresenter {
 		$this->id = $id;
 	}
 
-	public function actionPageEdit($id = NULL) {
+	public function actionPageEdit($id = NULL)
+	{
 		$this->id = $id;
 	}
 
-	public function renderPageEdit($id = NULL) {
+	public function renderPageEdit($id = NULL)
+	{
 		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC']);
 		if ($id !== NULL) {
 			$this->template->editace = TRUE;
@@ -83,55 +97,58 @@ class AdminPresenter extends BasePresenter {
 		$this->id = $id;
 	}
 
-	public function renderPictures() {
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->pictures->countBy();
+	public function renderPictures()
+	{
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->pictures->countBy());
 		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
-	public function renderPrehled() {
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = ITEMCOUNT;
+	public function renderPrehled()
+	{
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount(ITEMCOUNT);
 		$this->template->posts = $this->posts->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
-	public function renderPages() {
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->pages->countBy();
+	public function renderPages()
+	{
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->pages->countBy());
 		$this->template->pages = $this->pages->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
-	public function renderTags() {
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->tags->countBy();
+	public function renderTags()
+	{
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->tags->countBy());
 		$this->template->tags = $this->tags->findBy([], [], $paginator->itemsPerPage, $paginator->offset);
 	}
 
-	public function renderUsers() {
-		$vp = new Cntrl\VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 25;
-		$paginator->itemCount = $this->users->countBy();
+	public function renderUsers()
+	{
+		$paginator = $this->getComponent('paginator')->getPaginator();
+		$paginator->setItemCount($this->users->countBy());
 		$this->template->users = $this->users->findBy([], [], $paginator->itemsPerPage, $paginator->offset);
 	}
 
-	public function actionUserEdit($id = NULL) {
+	public function actionUserEdit($id = NULL)
+	{
 		$this->id = $id;
 	}
 
-	public function renderUserEdit($id = NULL) {
+	public function renderUserEdit($id = NULL)
+	{
 		$this->template->account = $this->users->findOneBy(['id' => $id]);
 	}
 
-	protected function createComponentUserEditForm() {
+	protected function createComponentPaginator()
+	{
+		return $this->paginatorFactory->create();
+	}
+
+	protected function createComponentUserEditForm()
+	{
 		$control = $this->userEditFormFactory->create($this->id);
 		$control->onSave[] = function () {
 			$this->redirect('users');
@@ -139,7 +156,8 @@ class AdminPresenter extends BasePresenter {
 		return $control;
 	}
 
-	protected function createComponentSettingsForm() {
+	protected function createComponentSettingsForm()
+	{
 		$control = $this->settingsFormFactory->create();
 		$control->onSave[] = function () {
 			$this->redirect('setting');
@@ -147,7 +165,8 @@ class AdminPresenter extends BasePresenter {
 		return $control;
 	}
 
-	protected function createComponentPageForm() {
+	protected function createComponentPageForm()
+	{
 		$control = $this->pageFormFactory->create($this->id);
 		$control->onSave[] = function () {
 			$this->redirect('default');
@@ -155,7 +174,8 @@ class AdminPresenter extends BasePresenter {
 		return $control;
 	}
 
-	protected function createComponentPostForm() {
+	protected function createComponentPostForm()
+	{
 		$control = $this->postFormFactory->create($this->id);
 		$control->onSave[] = function () {
 			$this->redirect('default');
@@ -163,7 +183,8 @@ class AdminPresenter extends BasePresenter {
 		return $control;
 	}
 
-	protected function createComponentColor() {
+	protected function createComponentColor()
+	{
 		$form = new Nette\Application\UI\Form;
 		$form->addProtection();
 		foreach ($this->tags->findBy([]) as $tag) {
@@ -171,9 +192,9 @@ class AdminPresenter extends BasePresenter {
 				->setType('color')
 				->setValue('#' . $tag->color);
 			$form->addSubmit('update' . $tag->id, 'Změnit barvu')
-				->onClick[] = function ($this) use ($tag) {
-				$this->colorSucceeded($this, $tag->id);
-			};
+				->onClick[] = function ($button) use ($tag) {
+					$this->colorSucceeded($button, $tag->id);
+				};
 		}
 		return $form;
 	}
@@ -182,7 +203,8 @@ class AdminPresenter extends BasePresenter {
 	 * @param $button
 	 * @param $id
 	 */
-	public function colorSucceeded($button, $id) {
+	public function colorSucceeded($button, $id)
+	{
 		$this->onBeforeRestrictedFunctionality($this);
 		$vals = $button->getForm()->getValues();
 		$newColor = preg_replace('<#>', '', $vals['color' . $id]);
@@ -201,7 +223,8 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleUpdate($title, $content, $tags, $slug) {
+	public function handleUpdate($title, $content, $tags, $slug)
+	{
 		$texy = $this->prepareTexy();
 
 		//podle slugu to není dobrý nápad (budou se množit) - musí se to udělat nějak chytřeji
@@ -225,7 +248,12 @@ class AdminPresenter extends BasePresenter {
 		}
 	}
 
-	public function handleDelete($id) {
+	/**
+	 * @param $id
+	 * @secured
+	 */
+	public function handleDelete($id)
+	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
@@ -236,7 +264,12 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleDeletePage($id) {
+	/**
+	 * @param $id
+	 * @secured
+	 */
+	public function handleDeletePage($id)
+	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->pages->delete($this->pages->findOneBy(['id' => $id]));
@@ -247,7 +280,12 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleDeleteTag($tag_id) {
+	/**
+	 * @param $tag_id
+	 * @secured
+	 */
+	public function handleDeleteTag($tag_id)
+	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->tags->delete($this->tags->findOneBy(['id' => $tag_id]));
@@ -258,7 +296,12 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleDeleteUser($user_id) {
+	/**
+	 * @param $user_id
+	 * @secured
+	 */
+	public function handleDeleteUser($user_id)
+	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->users->delete($this->users->findOneBy(['id' => $user_id]));
@@ -269,7 +312,12 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleRegenerate($tag_id) {
+	/**
+	 * @param $tag_id
+	 * @secured
+	 */
+	public function handleRegenerate($tag_id)
+	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$tag = $this->tags->findOneBy(['id' => $tag_id]);
@@ -282,7 +330,8 @@ class AdminPresenter extends BasePresenter {
 		$this->redirect('this');
 	}
 
-	public function handleUploadReciever() {
+	public function handleUploadReciever()
+	{
 		//ob_start();
 		$uploader = new \UploadHandler();
 		$uploader->allowedExtensions = ["jpeg", "jpg", "png", "gif"];
@@ -310,7 +359,12 @@ class AdminPresenter extends BasePresenter {
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
 	}
 
-	public function handleDeletePicture($id) {
+	/**
+	 * @param $id
+	 * @secured
+	 */
+	public function handleDeletePicture($id)
+	{
 		$this->onBeforeRestrictedFunctionality($this);
 		$picture = $this->pictures->findOneBy(['id' => $id]);
 		@unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);

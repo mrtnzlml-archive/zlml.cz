@@ -1,10 +1,11 @@
 {block content}
+	{include '../@octocat-right.latte'}
 	{foreach $posts as $post}
+
 		{if $iterator->odd}<div class="row">{/if}
 		{var $large = array(1, 4, 5, 8, 9)}
 		<div n:class="in_array($iterator->counter, $large) ? 'col-lg-7 col-md-7' : 'col-lg-5 col-md-5'">
 			<h3><a n:href=":Single:article $post->slug">{$post->title|vlna}</a></h3>
-
 			<p>
 				{foreach $post->tags as $tag}
 					<a n:href="Search:default, $tag->name" style="text-decoration:none">
@@ -20,8 +21,9 @@
 			</p>
 		</div>
 		{if $iterator->even || $iterator->last}</div>{/if}
+
 	{/foreach}
-	<div class="row col-lg-12 text-center">
+	<div class="row col-lg-12 text-xs-center">
 		{control paginator}
 	</div>
 {/block}

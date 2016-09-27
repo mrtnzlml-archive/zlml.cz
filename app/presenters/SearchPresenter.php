@@ -4,14 +4,16 @@ namespace App;
 
 use Nette\Utils\Strings;
 
-class SearchPresenter extends BasePresenter {
+class SearchPresenter extends BasePresenter
+{
 
 	/** @var \Model\Posts @inject */
 	public $posts;
 	/** @var \Model\Tags @inject */
 	public $tags;
 
-	public function renderDefault($search) {
+	public function renderDefault($search)
+	{
 		//FIXME tagy ::: 'publish_date <=' => new \DateTime()
 		$string = Strings::lower(Strings::normalize($search));
 		$string = Strings::replace($string, '/[^\d\w]/u', ' ');

@@ -8,15 +8,14 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="pictures")
+ *
+ * @method setUuid(string)
+ * @method setName(string)
  */
-class Picture extends Doctrine\Entities\BaseEntity {
+class Picture extends Doctrine\Entities\BaseEntity
+{
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
+	use Doctrine\Entities\Attributes\Identifier;
 
 	/** @ORM\Column(type="string", length=40) */
 	protected $uuid;

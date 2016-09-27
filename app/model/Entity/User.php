@@ -8,17 +8,17 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
+ *
+ * @method setUsername(string)
+ * @method setPassword(string)
+ * @method setRole(string)
  */
-class User extends Doctrine\Entities\BaseEntity {
+class User extends Doctrine\Entities\BaseEntity
+{
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
+	use Doctrine\Entities\Attributes\Identifier;
 
-	/** @ORM\Column(unique=true, type="string", length=100) */
+	/** @ORM\Column(unique=TRUE, type="string", length=100) */
 	protected $username;
 
 	/** @ORM\Column(type="string", length=100) */

@@ -20,7 +20,8 @@ use Nette\Utils\Html;
  * @author  Michal Mikoláš <nanuqcz@gmail.com>
  * @license CC BY <http://creativecommons.org/licenses/by/3.0/cz/>
  */
-class AntispamControl extends TextInput {
+class AntispamControl extends TextInput
+{
 
 	/** @var int  minimum delay [sec] to send form */
 	public static $minDelay = 5;
@@ -29,7 +30,8 @@ class AntispamControl extends TextInput {
 	 * Register Antispam to Nette Forms
 	 * @return void
 	 */
-	public static function register() {
+	public static function register()
+	{
 		Form::extensionMethod('addAntispam', function (Form $form, $name = 'spam', $label = 'Toto pole vymažte (antispam):', $msg = 'Byl detekován pokus o spam.') {
 			// "All filled" protection
 			$form[$name] = new AntispamControl($label, NULL, NULL, $msg);
@@ -55,7 +57,8 @@ class AntispamControl extends TextInput {
 	 * @param int null $maxLength
 	 * @param string $msg
 	 */
-	public function __construct($label = '', $cols = NULL, $maxLength = NULL, $msg = '') {
+	public function __construct($label = '', $cols = NULL, $maxLength = NULL, $msg = '')
+	{
 		parent::__construct($label, $cols, $maxLength);
 		$this->setDefaultValue('Toto pole vymažte (antispam)');
 		$this->setAttribute('class', 'form-control input-lg');
@@ -65,7 +68,8 @@ class AntispamControl extends TextInput {
 	/**
 	 * @return TextInput
 	 */
-	public function getControl() {
+	public function getControl()
+	{
 		$control = parent::getControl();
 
 		$control = $this->addAntispamScript($control);
@@ -74,11 +78,13 @@ class AntispamControl extends TextInput {
 
 	/**
 	 * @param Html $control
+	 *
 	 * @return Html
 	 */
-	protected function addAntispamScript(Html $control) {
+	protected function addAntispamScript(Html $control)
+	{
 		$control = Html::el('')->add($control);
-		$control->add(Html::el('script', array('type' => 'text/javascript'))->setHtml("
+		$control->add(Html::el('script', ['type' => 'text/javascript'])->setHtml("
 				// Clear input value
 				var input = document.getElementById('" . $control[0]->id . "');
 				input.value = '';

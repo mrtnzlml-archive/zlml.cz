@@ -5,21 +5,25 @@ namespace Cntrl;
 use Nette;
 use Nette\Application\UI;
 
-class SignIn extends UI\Control {
+class SignIn extends UI\Control
+{
 
 	/** @persistent */
 	public $backlink = '';
 
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 	}
 
-	public function render() {
+	public function render()
+	{
 		$this->template->setFile(__DIR__ . '/SignIn.latte');
 		$this->template->render();
 	}
 
-	public function renderMinimal() {
+	public function renderMinimal()
+	{
 		$this->template->setFile(__DIR__ . '/SignInMinimal.latte');
 		$this->template->render();
 	}
@@ -28,7 +32,8 @@ class SignIn extends UI\Control {
 	 * Sign-in form factory.
 	 * @return Nette\Application\UI\Form
 	 */
-	protected function createComponentSignInForm() {
+	protected function createComponentSignInForm()
+	{
 		$form = new UI\Form;
 		$form->addText('username', 'Username:')
 			->setRequired('Zadejte prosím uživatelské jméno.');
@@ -36,11 +41,12 @@ class SignIn extends UI\Control {
 			->setRequired('Zadejte prosím správné heslo.');
 		$form->addCheckbox('remember', 'Zapamatovat si přihlášení');
 		$form->addSubmit('send', 'Přihlásit se');
-		$form->onSuccess[] = $this->signInFormSucceeded;
+		$form->onSuccess[] = [$this, 'signInFormSucceeded'];
 		return $form;
 	}
 
-	public function signInFormSucceeded(UI\Form $form) {
+	public function signInFormSucceeded(UI\Form $form)
+	{
 		$values = $form->getValues();
 		if ($values->remember) {
 			$this->presenter->getUser()->setExpiration('+ 14 days', FALSE);
@@ -57,4 +63,10 @@ class SignIn extends UI\Control {
 		$this->presenter->redirect(':Admin:Admin:');
 	}
 
+}
+
+interface ISignInFactory
+{
+	/** @return SignIn */
+	function create();
 }

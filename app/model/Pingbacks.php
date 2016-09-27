@@ -10,7 +10,8 @@ use Nette;
  * Class Pingbacks
  * @package Model
  */
-class Pingbacks extends Nette\Object {
+class Pingbacks extends Nette\Object
+{
 
 	/** @var \Kdyby\Doctrine\EntityDao */
 	private $dao;
@@ -18,7 +19,8 @@ class Pingbacks extends Nette\Object {
 	/**
 	 * @param Kdyby\Doctrine\EntityDao $dao
 	 */
-	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
+	public function __construct(Kdyby\Doctrine\EntityDao $dao)
+	{
 		$this->dao = $dao;
 	}
 

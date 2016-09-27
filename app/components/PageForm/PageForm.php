@@ -2,13 +2,15 @@
 
 namespace Cntrl;
 
+use Doctrine;
 use Entity;
 use Kdyby;
 use Model;
 use Nette;
 use Nette\Application\UI;
 
-class PageForm extends UI\Control {
+class PageForm extends UI\Control
+{
 
 	public $onSave = [];
 	//public $onBeforeRestrictedFunctionality = [];
@@ -17,18 +19,21 @@ class PageForm extends UI\Control {
 	private $pages;
 	private $page;
 
-	public function __construct(Model\Pages $pages, $id) {
+	public function __construct($id, Model\Pages $pages)
+	{
 		parent::__construct();
 		$this->pages = $pages;
 		$this->page = $this->pages->findOneBy(['id' => $id]);
 	}
 
-	public function render() {
+	public function render()
+	{
 		$this->template->setFile(__DIR__ . '/PageForm.latte');
 		$this->template->render();
 	}
 
-	protected function createComponentPageForm() {
+	protected function createComponentPageForm()
+	{
 		$form = new UI\Form;
 		$form->addProtection();
 		$form->addText('title', 'Název:')->setRequired('Je zapotřebí vyplnit název stránky.');
@@ -48,7 +53,8 @@ class PageForm extends UI\Control {
 		return $form;
 	}
 
-	public function pageFormSucceeded($form, $vals) {
+	public function pageFormSucceeded($form, $vals)
+	{
 		try {
 			if (!$this->page) {
 				$this->page = new Entity\Page();
@@ -61,7 +67,7 @@ class PageForm extends UI\Control {
 			$this->pages->save($this->page);
 			$this->presenter->flashMessage('Stránka byla úspěšně uložena a publikována.', 'success');
 			$this->onSave();
-		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
+		} catch (Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
 			$this->presenter->flashMessage('Tento URL slug je již v databázi uložen, zvolte prosím jiný.', 'danger');
 		} catch (Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
@@ -70,4 +76,10 @@ class PageForm extends UI\Control {
 		}
 	}
 
+}
+
+interface IPageFormFactory
+{
+	/** @return PageForm */
+	function create($id);
 }

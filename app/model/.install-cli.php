@@ -21,7 +21,9 @@ try {
 
 	$config = new \Nette\Configurator();
 	$container = $config->setTempDirectory(__DIR__ . '/../../temp')
-		->addConfig(__DIR__ . '/../config/config.neon')
+		->addParameters([
+			'appDir' => __DIR__ . '/../../app',
+		])->addConfig(__DIR__ . '/../config/config.neon')
 		->addConfig(__DIR__ . '/../config/config.local.neon')
 		->createContainer();
 

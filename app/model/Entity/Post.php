@@ -9,8 +9,15 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="posts")
+ *
+ * @method setTitle(string)
+ * @method setSlug(string)
+ * @method setBody(string)
  */
-class Post extends Doctrine\Entities\BaseEntity {
+class Post extends Doctrine\Entities\BaseEntity
+{
+
+	use Doctrine\Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\ManyToMany(targetEntity="Tag", inversedBy="posts", cascade={"persist"})
@@ -19,11 +26,13 @@ class Post extends Doctrine\Entities\BaseEntity {
 	 */
 	protected $tags;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
-	public function addTag(Tag $newTag) {
+	public function addTag(Tag $newTag)
+	{
 		$add = TRUE;
 		foreach ($this->tags as $tag) {
 			if ($tag->name == $newTag->name) {
@@ -36,17 +45,10 @@ class Post extends Doctrine\Entities\BaseEntity {
 		}
 	}
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
-
 	/** @ORM\Column(type="text") */
 	protected $title;
 
-	/** @ORM\Column(type="text") */
+	/** @ORM\Column(type="string", unique=TRUE) */
 	protected $slug;
 
 	/** @ORM\Column(type="text") */

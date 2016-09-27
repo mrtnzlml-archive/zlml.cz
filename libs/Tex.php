@@ -28,14 +28,16 @@ use FSHL\Generator;
  * @copyright Copyright (c) 2014 Martin Zlámal
  * @license http://fshl.kukulich.cz/#license
  */
-class Tex implements FSHL\Lexer {
+class Tex implements FSHL\Lexer
+{
 
 	/**
 	 * Returns language name.
 	 *
 	 * @return string
 	 */
-	public function getLanguage() {
+	public function getLanguage()
+	{
 		return 'Tex';
 	}
 
@@ -44,7 +46,8 @@ class Tex implements FSHL\Lexer {
 	 *
 	 * @return string
 	 */
-	public function getInitialState() {
+	public function getInitialState()
+	{
 		return 'OUT';
 	}
 
@@ -53,7 +56,8 @@ class Tex implements FSHL\Lexer {
 	 *
 	 * @return array
 	 */
-	public function getStates() {
+	public function getStates()
+	{
 		return [
 			'OUT' => [
 				[
@@ -67,7 +71,7 @@ class Tex implements FSHL\Lexer {
 				],
 				Generator::STATE_FLAG_NONE,
 				'tex-out',
-				null
+				NULL
 			],
 			'MATH' => [
 				[
@@ -77,7 +81,7 @@ class Tex implements FSHL\Lexer {
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-math',
-				null
+				NULL
 			],
 			'FUNC' => [
 				[
@@ -86,7 +90,7 @@ class Tex implements FSHL\Lexer {
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-func',
-				null
+				NULL
 			],
 			'ATTR1' => [
 				[
@@ -96,7 +100,7 @@ class Tex implements FSHL\Lexer {
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-attr1',
-				null
+				NULL
 			],
 			'ATTR2' => [
 				[
@@ -106,7 +110,7 @@ class Tex implements FSHL\Lexer {
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-attr2',
-				null
+				NULL
 			],
 			'COMMENT' => [
 				[
@@ -115,7 +119,7 @@ class Tex implements FSHL\Lexer {
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-comment',
-				null
+				NULL
 			],
 		];
 	}
@@ -125,7 +129,8 @@ class Tex implements FSHL\Lexer {
 	 *
 	 * @return array
 	 */
-	public function getDelimiters() {
+	public function getDelimiters()
+	{
 		return [];
 	}
 
@@ -134,7 +139,8 @@ class Tex implements FSHL\Lexer {
 	 *
 	 * @return array
 	 */
-	public function getKeywords() {
+	public function getKeywords()
+	{
 		return [];
 	}
 }

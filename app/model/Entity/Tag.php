@@ -8,8 +8,14 @@ use Kdyby\Doctrine;
 /**
  * @ORM\Entity
  * @ORM\Table(name="tags")
+ *
+ * @method setName(string)
+ * @method setColor(string)
  */
-class Tag extends Doctrine\Entities\BaseEntity {
+class Tag extends Doctrine\Entities\BaseEntity
+{
+
+	use Doctrine\Entities\Attributes\Identifier;
 
 	/**
 	 * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags")
@@ -17,16 +23,10 @@ class Tag extends Doctrine\Entities\BaseEntity {
 	 **/
 	protected $posts;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->posts = new \Doctrine\Common\Collections\ArrayCollection();
 	}
-
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
 
 	/** @ORM\Column(type="string", length=50) */
 	protected $name;

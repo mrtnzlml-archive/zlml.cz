@@ -1,23 +1,27 @@
 <?php
 
-class PostsListener extends Nette\Object implements Kdyby\Events\Subscriber {
+class PostsListener extends Nette\Object implements Kdyby\Events\Subscriber
+{
 
 	private $posts;
 	private $postsMirror;
 
-	public function __construct(Model\Posts $posts, Model\PostsMirror $postsMirror) {
+	public function __construct(Model\Posts $posts, Model\PostsMirror $postsMirror)
+	{
 		$this->posts = $posts;
 		$this->postsMirror = $postsMirror;
 	}
 
-	public function getSubscribedEvents() {
+	public function getSubscribedEvents()
+	{
 		return [
 			'Model\Posts::onSave',
 			'Model\Posts::onDelete',
 		];
 	}
 
-	public function onSave($entity_id) {
+	public function onSave($entity_id)
+	{
 		if (!is_numeric($entity_id)) {
 			throw new Nette\InvalidArgumentException('Argument should be numeric ID of the Entity, got ' . gettype($entity_id));
 		}
@@ -33,7 +37,8 @@ class PostsListener extends Nette\Object implements Kdyby\Events\Subscriber {
 		$this->postsMirror->save($entity);
 	}
 
-	public function onDelete($entity_id) {
+	public function onDelete($entity_id)
+	{
 		if (!is_numeric($entity_id)) {
 			throw new Nette\InvalidArgumentException('Argument should be numeric ID of the Entity, got ' . gettype($entity_id));
 		}

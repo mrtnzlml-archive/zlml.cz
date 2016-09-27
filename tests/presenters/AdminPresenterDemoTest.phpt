@@ -6,12 +6,14 @@ use Model;
 use Nette;
 use Tester;
 
-$container = require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 /**
  * @testCase
+ * TODO: spojit s AdminPresenterTest
  */
-class AdminPresenterTest extends Tester\TestCase {
+class AdminPresenterDemoTest extends \CustomTestCase
+{
 
 	/** @var Model\Users */
 	private $users;
@@ -20,61 +22,57 @@ class AdminPresenterTest extends Tester\TestCase {
 
 	private $action;
 
-	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new PresenterTester($container);
-		$this->users = $container->getByType('\Model\Users');
-		$this->articles = $container->getByType('\Model\Posts');
+	public function setUp()
+	{
+		$this->openPresenter('Admin:Admin:');
+		$this->users = $this->getService('\Model\Users');
+		$this->articles = $this->getService('\Model\Posts');
+		$this->logIn(1, 'demo');
 	}
 
-	public function setUp() {
-		$this->tester->init('Admin:Admin');
-		$this->tester->logIn(1, 'demo');
+	public function testRenderDefault()
+	{
+		$this->checkAction($this->action = 'default');
 	}
 
-	public function testRenderDefault() {
-		$this->action = 'default';
-		$this->tester->testAction($this->action);
-	}
-
-	public function testRenderDefaultEdit() {
-		$this->action = 'default';
+	public function testRenderDefaultEdit()
+	{
 		$article = $this->users->findOneBy([]);
-		$this->tester->testAction($this->action, 'GET', array($article->getId()));
+		$this->checkAction($this->action = 'default', [$article->getId()]);
 	}
 
-	public function testRenderPictures() {
-		$this->action = 'pictures';
-		$this->tester->testAction($this->action);
+	public function testRenderPictures()
+	{
+		$this->checkAction($this->action = 'pictures');
 	}
 
-	public function testRenderPrehled() {
-		$this->action = 'prehled';
-		$this->tester->testAction($this->action);
+	public function testRenderPrehled()
+	{
+		$this->checkAction($this->action = 'prehled');
 	}
 
-	public function testRenderTags() {
-		$this->action = 'tags';
-		$this->tester->testAction($this->action);
+	public function testRenderTags()
+	{
+		$this->checkAction($this->action = 'tags');
 	}
 
-	public function testRenderUsers() {
-		$this->action = 'users';
-		$this->tester->testAction($this->action);
+	public function testRenderUsers()
+	{
+		$this->checkAction($this->action = 'users');
 	}
 
-	public function testRenderUserEdit() {
-		$this->action = 'userEdit';
+	public function testRenderUserEdit()
+	{
 		$user = $this->users->findOneBy([]);
-		$this->tester->testAction($this->action, 'GET', array($user->getId()));
+		$this->checkAction($this->action = 'userEdit', [$user->getId()]);
 	}
 
-	public function tearDown() {
-		$this->tester->logOut();
-		$response = $this->tester->test($this->action);
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+	public function tearDown()
+	{
+		$this->logOut();
+		$this->checkRedirect($this->action, '/sign/in');
 	}
 
 }
 
-$test = new AdminPresenterTest($container);
-$test->run();
+(new AdminPresenterDemoTest)->run();

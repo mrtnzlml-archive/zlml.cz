@@ -6,61 +6,65 @@ use Model;
 use Nette;
 use Tester;
 
-$container = require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 /**
  * @testCase
  */
-class SinglePresenterTest extends Tester\TestCase {
+class SinglePresenterTest extends \CustomTestCase
+{
 
 	/** @var Model\Posts */
 	private $posts;
 
-	public function __construct(Nette\DI\Container $container) {
-		$this->tester = new PresenterTester($container, 'Single');
-		$this->posts = $container->getByType('\Model\Posts');
+	public function __construct()
+	{
+		$this->openPresenter('Single:');
+		$this->posts = $this->getService('Model\Posts');
 	}
 
-	public function testRenderAbout() {
-		$this->tester->testAction('about');
+	public function testRenderAbout()
+	{
+		$this->checkAction('about');
 	}
 
 	/** @dataProvider dataArticles */
-	public function testRenderArticles($slug) {
-		$this->tester->testAction('article', 'GET', array('slug' => $slug));
+	public function testRenderArticles($slug)
+	{
+		$this->checkAction('article', ['slug' => $slug]);
 	}
 
-	public function testRedirectEmptyArticle() {
-		$response = $this->tester->test('article');
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+	public function testRedirectEmptyArticle()
+	{
+		$this->checkRedirect('article', '/');
 	}
 
-	public function testNonWebalizedArticle() {
-		$response = $this->tester->test('article', 'GET', array('slug' => 'rčš .rčš 5'));
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
+	public function testNonWebalizedArticle()
+	{
+		$this->checkRedirect('article', '/rcs-rcs-5', ['slug' => 'rčš .rčš 5']);
 	}
 
-	public function testForward() {
-		$response = $this->tester->test('article', 'GET', array('slug' => 'about'));
+	public function testForward()
+	{
+		/** @var Nette\Application\Responses\ForwardResponse $response */
+		$response = $this->check('article', ['slug' => 'about']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\ForwardResponse);
+		//TODO: checkForward method in testbench...
 	}
 
-	public function testRenderDevelop() {
-		$this->tester->testAction('develop');
+	public function testRenderDevelop()
+	{
+		$this->checkAction('develop');
 	}
 
-	public function testRenderObsah() {
-		$this->tester->testAction('obsah');
+	public function testRenderObsah()
+	{
+		$this->checkAction('obsah');
 	}
 
-	public function testRenderReference() {
-		$this->tester->testAction('reference');
-	}
-
-	public function testRandom() {
-		$response = $this->tester->test('default', 'GET', array('do' => 'random'));
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
-
+	public function testRenderReference()
+	{
+		$this->checkAction('reference');
 	}
 
 	///// dataProviders /////
@@ -68,18 +72,18 @@ class SinglePresenterTest extends Tester\TestCase {
 	/**
 	 * @return array of arrays
 	 */
-	public function dataArticles() {
-		$articles = $this->posts->findBy(array(), NULL, 10, 0);
+	public function dataArticles()
+	{
+		$articles = $this->posts->findBy([], NULL, 10, 0);
 		//$articles = $this->posts->findBy(array());
 		//$articles = $this->posts->findOneBy(array());
-		$data = array();
+		$data = [];
 		foreach ($articles as $article) {
-			$data[] = array($article->slug);
+			$data[] = [$article->slug];
 		}
 		return $data;
 	}
 
 }
 
-$test = new SinglePresenterTest($container);
-$test->run();
+(new SinglePresenterTest)->run();

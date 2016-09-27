@@ -9,7 +9,8 @@ use Kdyby\Doctrine;
  * @ORM\Entity
  * @ORM\Table(name="pictures_ext")
  */
-class Picture extends Doctrine\Entities\BaseEntity {
+class Picture extends Doctrine\Entities\BaseEntity
+{
 
 	/**
 	 * @ORM\Id

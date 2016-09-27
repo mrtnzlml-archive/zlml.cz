@@ -11,7 +11,8 @@ use Nette;
  * Class Posts
  * @package Model
  */
-class Posts extends Nette\Object {
+class Posts extends Nette\Object
+{
 
 	public $onSave = [];
 	public $onDelete = [];
@@ -22,19 +23,22 @@ class Posts extends Nette\Object {
 	/**
 	 * @param Kdyby\Doctrine\EntityDao $dao
 	 */
-	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
+	public function __construct(Kdyby\Doctrine\EntityDao $dao)
+	{
 		$this->dao = $dao;
 	}
 
 	/**
 	 * @param null $entity \Entity\Post
 	 * @param null $relations
+	 *
 	 * @return array
 	 *
 	 * @Secure\Create(allow="admin")
 	 * @Secure\Update(allow="admin")
 	 */
-	public function save($entity = NULL, $relations = NULL) {
+	public function save($entity = NULL, $relations = NULL)
+	{
 		$entity = $this->dao->save($entity, $relations);
 		$this->onSave($entity->id);
 		return $entity;
@@ -45,11 +49,13 @@ class Posts extends Nette\Object {
 	 * @param array $orderBy
 	 * @param null $limit
 	 * @param null $offset
+	 *
 	 * @return \ArrayIterator
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
+	{
 		$query = $this->dao->createQueryBuilder('p')
 			->whereCriteria($criteria)
 			->autoJoinOrderBy((array)$orderBy)
@@ -63,76 +69,37 @@ class Posts extends Nette\Object {
 	/**
 	 * @param array $criteria
 	 * @param array $orderBy
+	 *
 	 * @return mixed|null|object
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findOneBy(array $criteria, array $orderBy = null) {
+	public function findOneBy(array $criteria, array $orderBy = NULL)
+	{
 		return $this->dao->findOneBy($criteria, $orderBy);
 	}
 
 	/**
 	 * @param array $criteria
+	 *
 	 * @return mixed
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function countBy(array $criteria = []) {
+	public function countBy(array $criteria = [])
+	{
 		return $this->dao->countBy($criteria);
 	}
 
 	/**
-	 * @param \DateTime $date
-	 * @return mixed|null
-	 * @throws Doctrine\ORM\NonUniqueResultException
-	 *
-	 * @Secure\Read(allow="guest")
-	 */
-	public function findOlder(\DateTime $date) {
-		$query = $this->dao->select()->where('? > date', $date)->order('date DESC')->limit(1);
-		try {
-			return $query->createQuery()->getSingleResult();
-		} catch (Doctrine\ORM\NoResultException $exc) {
-			return NULL;
-		}
-	}
-
-	/**
-	 * @param \DateTime $date
-	 * @return mixed|null
-	 * @throws Doctrine\ORM\NonUniqueResultException
-	 *
-	 * @Secure\Read(allow="guest")
-	 */
-	public function findNewer(\DateTime $date) {
-		$query = $this->dao->select()->where('? < date', $date)->limit(1);
-		try {
-			return $query->createQuery()->getSingleResult();
-		} catch (Doctrine\ORM\NoResultException $exc) {
-			return NULL;
-		}
-	}
-
-	/**
-	 * @return null
-	 *
-	 * @Secure\Read(allow="guest")
-	 */
-	public function rand() {
-		$posts = iterator_to_array($this->findBy(['publish_date <=' => new \DateTime()]));
-		if ($posts) {
-			return $posts[rand(0, count($posts) - 1)];
-		}
-		return NULL;
-	}
-
-	/**
 	 * @param $search
+	 *
 	 * @return array
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function fulltextSearch($search) {
+	public function fulltextSearch($search)
+	{
 		$where = "";
 		$ft_min_word_len = 4;
 		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
@@ -180,27 +147,10 @@ class Posts extends Nette\Object {
 	 *
 	 * @Secure\Delete(allow="admin")
 	 */
-	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
+	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
+	{
 		$this->onDelete($entity->id);
 		$this->dao->delete($entity, $relations, $flush);
-	}
-
-	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 * @param null $limit
-	 * @param null $offset
-	 * @return \ArrayIterator
-	 */
-	public function findForApi(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
-		$query = $this->dao->createQueryBuilder('p')
-			->whereCriteria($criteria)
-			->autoJoinOrderBy((array)$orderBy)
-			->leftJoin('p.tags', 'tt')//t already used?
-			->addSelect('tt')
-			->getQuery();
-		$resultSet = new Kdyby\Doctrine\ResultSet($query);
-		return $resultSet->applyPaging($offset, $limit)->getIterator(Doctrine\ORM\AbstractQuery::HYDRATE_ARRAY);
 	}
 
 }

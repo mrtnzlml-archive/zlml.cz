@@ -9,13 +9,9 @@ use Kdyby\Doctrine;
  * @ORM\Entity
  * @ORM\Table(name="pingbacks")
  */
-class Pingback extends Doctrine\Entities\BaseEntity {
+class Pingback extends Doctrine\Entities\BaseEntity
+{
 
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 */
-	protected $id;
+	use Doctrine\Entities\Attributes\Identifier;
 
 }

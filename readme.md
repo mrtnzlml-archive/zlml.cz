@@ -1,7 +1,7 @@
-Source code of www.zeminem.cz [1.3.1]
+Source code of zlml.cz [1.3.1]
 ====================================
 
-Master branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/www.zeminem.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/www.zeminem.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/www.zeminem.cz)
+Master branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/zlml.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/zlml.cz)
 
 It's tested against at least PHP 5.4.29. The lower version of PHP is not supported, sorry.
 
@@ -16,6 +16,7 @@ What's on the background
 - [Doctrine 2](http://www.doctrine-project.org/) - library primarily focused on database storage and object mapping (using [Kdyby](https://github.com/Kdyby/Doctrine))
 - [Kdyby\Events](https://github.com/Kdyby/Events) - robust events system for Nette Framework
 - [Kdyby\AOP](https://github.com/Kdyby/Aop) - AOP functionality for Nette Framework
+- [Nextras\SecuredLinks](https://github.com/nextras/secured-links) - for better CSRF protection
 - and much more...
 
 Installing
@@ -25,7 +26,7 @@ The best way to install this project is to download latest package with dependen
 1. Install Composer: (see http://getcomposer.org/)
 2. Use Composer:
 
-		composer create-project mrtnzlml/zeminem.cz --stability=dev
+		composer create-project mrtnzlml/zlml.cz --stability=dev
 		
 3. Install Bower: (see http://bower.io/)
 4. Go to the project folder and install client side dependencies:
@@ -48,8 +49,8 @@ your sensitive data. See [security warning](http://nette.org/security-warning).
 Then you have to create database for this website. You can use Adminer tool in
 `http://localhost:8888/adminer` or you can do that manually using command line:
 
-		mysql -u root -e 'create database zeminem;'
-        mysql -u root -D zeminem < sql/zeminem.sql
+		mysql -u root -e 'create database zlml;'
+        mysql -u root -D zlml < sql/zlml.sql
         
 There is also automatic (beta) installer. Just install this project using Composer and open
 it in your favourite browser. I am still working on it...

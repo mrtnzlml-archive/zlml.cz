@@ -8,22 +8,19 @@
 php:
 	date.timezone: Europe/Prague
 
-nette:
-	session:
-		debugger: TRUE
-		expiration: 14 days
-	application:
-		errorPresenter: Error
-		mapping:
-			*: App\*Module\*Presenter
-	container:
-		debugger: TRUE
-		accessors: TRUE
+session:
+	debugger: TRUE
+	expiration: 14 days
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\*Presenter
+
+di:
+	debugger: TRUE
 
 services:
-	doctrine.default.connection:
-		setup:
-			- $throwOldKdybyExceptions(TRUE) #FIXME: https://github.com/Kdyby/Doctrine/commit/4d4da40844827007bdd4911527f72162e0e14537
 	routerFactory: App\RouterFactory
 	router: @routerFactory::createRouter
 	- Model\Authenticator
@@ -36,14 +33,14 @@ services:
 	- Model\Settings(@doctrine.dao(Entity\Setting))
 	- Model\Tags(@doctrine.dao(Entity\Tag))
 	- Model\Users(@doctrine.dao(Entity\User))
-	#- Model\Xmlrpc
 
-	adminMenuFactory: IAdminMenuFactory
-	- ISignInFormFactory
-	- PageFormFactory
-	- PostFormFactory
-	- SettingsFormFactory
-	- UserEditFormFactory
+	adminMenuFactory: Cntrl\IAdminMenuFactory
+	- Cntrl\ISignInFactory
+	- Cntrl\IPageFormFactory
+	- Cntrl\IPostFormFactory
+	- Cntrl\ISettingsFormFactory
+	- Cntrl\IUserEditFormFactory
+	- Cntrl\IVisualPaginatorFactory
 	- App\AdminModule\AdminPresenter # Kdyby\Events!
 
 events:
@@ -51,18 +48,12 @@ events:
 		- PostsListener
 		- RestrictListener
 
-console:
-	commands:
-		- App\Console\BlogInstall
-		- App\Console\BlogUpdate
-
-aspects:
-	- SecurityAspect
+annotations:
+	ignore:
+		- secured
 
 extensions:
-	aop: Kdyby\Aop\DI\AopExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
-	aspects: Kdyby\Aop\DI\AspectsExtension
 	console: Kdyby\Console\DI\ConsoleExtension
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
 	events: Kdyby\Events\DI\EventsExtension

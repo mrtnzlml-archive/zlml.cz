@@ -19,7 +19,7 @@ $security = <<<NEON
 #\n\n
 NEON;
 
-$drivers = array();
+$drivers = [];
 if (extension_loaded('pdo_mysql')) {
 	$drivers['pdo_mysql'] = 'MySQL';
 }
@@ -41,7 +41,7 @@ if (empty($drivers)) {
 $form = new Nette\Forms\Form;
 $form->addSelect('driver', NULL, $drivers);
 $form->addText('host')->setRequired()->setValue('127.0.0.1');
-$form->addText('port')->setDefaultValue('3306');
+$form->addText('port')->setDefaultValue('3306'); //pgsql: 5432
 $form->addText('dbname')->setRequired();
 $form->addText('user')->setRequired();
 $form->addPassword('pass');
@@ -82,7 +82,9 @@ if ($form->isSubmitted() && $form->isValid()) {
 		ob_start();
 		$config = new \Nette\Configurator();
 		$container = $config->setTempDirectory(__DIR__ . '/../../temp')
-			->addConfig(__DIR__ . '/../config/config.neon')
+			->addParameters([
+				'appDir' => __DIR__ . '/../../app',
+			])->addConfig(__DIR__ . '/../config/config.neon')
 			->addConfig(__DIR__ . '/../config/config.local.neon')
 			->createContainer();
 
@@ -107,16 +109,23 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$demo->role = "demo";
 		$em->persist($demo);
 
-		$settingSql = file_get_contents(__DIR__ . '/../../sql/settings-mysql.sql');
-		/** @var PDOStatement $setting */
-		$setting = $conn->prepare($settingSql);
-		$setting->execute();
+		if ($vals->driver == 'pdo_mysql') {
+			$settingSql = file_get_contents(__DIR__ . '/../../sql/settings-mysql.sql');
+			/** @var PDOStatement $setting */
+			$setting = $conn->prepare($settingSql);
+			$setting->execute();
 
-		//Doctrine fulltext workaround:
-		$workaroundSql = file_get_contents(__DIR__ . '/../../sql/fulltext-workaround-mysql.sql');
-		/** @var PDOStatement $workaround */
-		$workaround = $conn->prepare($workaroundSql);
-		$workaround->execute();
+			//Doctrine fulltext workaround:
+			$workaroundSql = file_get_contents(__DIR__ . '/../../sql/fulltext-workaround-mysql.sql');
+			/** @var PDOStatement $workaround */
+			$workaround = $conn->prepare($workaroundSql);
+			$workaround->execute();
+		} else {
+			$settingSql = file_get_contents(__DIR__ . '/../../sql/settings-pgsql.sql');
+			/** @var PDOStatement $setting */
+			$setting = $conn->prepare($settingSql);
+			$setting->execute();
+		}
 
 		$post = new \Entity\Post;
 		$title = 'Welcome to your new blog!';
@@ -130,7 +139,9 @@ if ($form->isSubmitted() && $form->isValid()) {
 		$em->flush();
 
 		echo "<div class='alert alert-success'><strong>OK</strong> The installation was successful, please press F5 and reload this page again.</div>";
+		ob_end_flush();
 	} catch (\Exception $exc) {
+		ob_end_clean();
 		file_put_contents(__DIR__ . '/../config/config.local.neon', $security);
 		echo "<div class='alert alert-danger'><strong>ERROR (#" . $exc->getCode() . "):</strong> " . $exc->getMessage() . "</div>";
 	}

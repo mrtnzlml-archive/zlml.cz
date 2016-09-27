@@ -10,7 +10,8 @@ use Nette;
  * Class Pages
  * @package Model
  */
-class Pages extends Nette\Object {
+class Pages extends Nette\Object
+{
 
 	public $onSave = [];
 	public $onDelete = [];
@@ -21,19 +22,22 @@ class Pages extends Nette\Object {
 	/**
 	 * @param Kdyby\Doctrine\EntityDao $dao
 	 */
-	public function __construct(Kdyby\Doctrine\EntityDao $dao) {
+	public function __construct(Kdyby\Doctrine\EntityDao $dao)
+	{
 		$this->dao = $dao;
 	}
 
 	/**
 	 * @param null $entity
 	 * @param null $relations
+	 *
 	 * @return array
 	 *
 	 * @Secure\Create(allow="admin")
 	 * @Secure\Update(allow="admin")
 	 */
-	public function save($entity = NULL, $relations = NULL) {
+	public function save($entity = NULL, $relations = NULL)
+	{
 		$entity = $this->dao->save($entity, $relations);
 		$this->onSave($entity);
 		return $entity;
@@ -42,11 +46,13 @@ class Pages extends Nette\Object {
 	/**
 	 * @param array $criteria
 	 * @param array $orderBy
+	 *
 	 * @return mixed|null|object
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findOneBy(array $criteria, array $orderBy = null) {
+	public function findOneBy(array $criteria, array $orderBy = NULL)
+	{
 		return $this->dao->findOneBy($criteria, $orderBy);
 	}
 
@@ -55,11 +61,13 @@ class Pages extends Nette\Object {
 	 * @param array $orderBy
 	 * @param null $limit
 	 * @param null $offset
+	 *
 	 * @return array
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
+	{
 		return $this->dao->findBy($criteria, $orderBy, $limit, $offset);
 	}
 
@@ -70,18 +78,21 @@ class Pages extends Nette\Object {
 	 *
 	 * @Secure\Delete(allow="admin")
 	 */
-	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH) {
+	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
+	{
 		$this->dao->delete($entity, $relations, $flush);
 		$this->onDelete($entity);
 	}
 
 	/**
 	 * @param array $criteria
+	 *
 	 * @return mixed
 	 *
 	 * @Secure\Read(allow="guest")
 	 */
-	public function countBy(array $criteria = []) {
+	public function countBy(array $criteria = [])
+	{
 		return $this->dao->countBy($criteria);
 	}
 

@@ -1,17 +1,18 @@
 {block title}OBSAH{/block}
 
 {block content}
+	{include '../@octocat-right.latte'}
 	<style>
 		.label { padding: 0 .5em .2em .5em; }
 		.link { font-size: 18px; padding-left: 2%; text-decoration: none; }
 		.link:hover { text-decoration: underline; }
 	</style>
-	{cache expire => '+20 minutes'}
+	{*{cache expire => '+20 minutes'}*}
 		<div class="row" style="margin-bottom: 20px">
 			<div class="col-lg-10 col-lg-offset-1">
 				<div class="hidden-print">
-					{foreach range(65, 90) as $code}
-						<a href="#letter-{chr($code)}">{chr($code)}</a>{sep}, {/sep}
+					{foreach $letters as $letter}
+						<a href="#letter-{$letter}">{$letter}</a>{sep}, {/sep}
 					{/foreach}
 				</div>
 				{var $last = ''}
@@ -38,10 +39,10 @@
 							</a>
 						{/foreach}
 						<p style="padding-left:4%">{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}</p>
-						{? $last = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}
+						{php $last = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}
 					{/if}
 				{/foreach}
 			</div>
 		</div>
-	{/cache}
+	{*{/cache}*}
 {/block}

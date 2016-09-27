@@ -1,11 +1,11 @@
 {var $robots = "noindex, nofollow"}
 
 {block content}
+	{include '../@octocat-right.latte'}
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
 			{if $tag}
-				<h2>Nalezeno {count($tag->posts)} článků s tagem <span class="label hidden-print"
-				                                                       style="background: #{$tag->color}">{$tag->name}</span>
+				<h2>Nalezeno {count($tag->posts)} článků s tagem <span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 				</h2>
 				{foreach $tag->posts as $post}
 					<a n:href=":Single:article $post->slug"
@@ -15,8 +15,7 @@
 				<hr>
 			{/if}
 			<h2 n:block="title">Výsledky vyhledávání
-				{ifset $search}výrazu „<strong>{$search}</strong>“ v textu{/ifset}
-				{ifset $result}({count($result)} nálezů){/ifset}
+				{ifset $search}výrazu „<strong>{$search}</strong>“{/ifset}
 			</h2>
 			{ifset $error}
 				<div class="alert alert-danger">
@@ -31,15 +30,14 @@
 							<a n:href=":Single:article $r->slug">
 								{$r->title|noescape|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
 							</a>
-							<small class="pull-right" style="white-space:nowrap">{$r->date|dateInWords}
+							<small class="pull-xs-right" style="white-space:nowrap">{$r->date|dateInWords}
 								({$r->date|timeAgoInWords})
 							</small>
 						</h4>
 						<p>
 							{foreach $r->tags as $tag}
 								<a n:href="Search:default, $tag->name" style="text-decoration:none">
-										<span class="label hidden-print"
-										      style="background: #{$tag->color}">{$tag->name}</span>
+										<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 								</a>
 							{/foreach}
 							{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:600|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}

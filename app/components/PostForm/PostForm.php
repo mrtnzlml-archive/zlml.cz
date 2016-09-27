@@ -2,13 +2,15 @@
 
 namespace Cntrl;
 
+use Doctrine;
 use Entity;
 use Kdyby;
 use Model;
 use Nette;
 use Nette\Application\UI;
 
-class PostForm extends UI\Control {
+class PostForm extends UI\Control
+{
 
 	public $onSave = [];
 	//public $onBeforeRestrictedFunctionality = [];
@@ -19,19 +21,22 @@ class PostForm extends UI\Control {
 	private $tags;
 	private $post;
 
-	public function __construct(Model\Posts $posts, Model\Tags $tags, $id) {
+	public function __construct($id, Model\Posts $posts, Model\Tags $tags)
+	{
 		parent::__construct();
 		$this->posts = $posts;
 		$this->tags = $tags;
 		$this->post = $this->posts->findOneBy(['id' => $id]);
 	}
 
-	public function render() {
+	public function render()
+	{
 		$this->template->setFile(__DIR__ . '/PostForm.latte');
 		$this->template->render();
 	}
 
-	protected function createComponentPostForm() {
+	protected function createComponentPostForm()
+	{
 		$form = new UI\Form;
 		$form->addProtection();
 		$form->addText('title', 'Titulek:')->setRequired('Je zapotřebí vyplnit titulek.');
@@ -60,11 +65,12 @@ class PostForm extends UI\Control {
 			]);
 		}
 		$form->addSubmit('save', 'Uložit a publikovat');
-		$form->onSuccess[] = $this->postFormSucceeded;
+		$form->onSuccess[] = [$this, 'postFormSucceeded'];
 		return $form;
 	}
 
-	public function postFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals) {
+	public function postFormSucceeded(UI\Form $form, Nette\Utils\ArrayHash $vals)
+	{
 		try {
 			if (!$this->post) {
 				$this->post = new Entity\Post();
@@ -90,7 +96,7 @@ class PostForm extends UI\Control {
 			$this->posts->save($this->post);
 			$this->presenter->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'success');
 			$this->onSave();
-		} catch (Kdyby\Doctrine\DuplicateEntryException $exc) { //DBALException
+		} catch (Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
 			$this->presenter->flashMessage('Tento URL slug je již v databázi uložen, zvolte prosím jiný.', 'danger');
 		} catch (Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
@@ -99,4 +105,10 @@ class PostForm extends UI\Control {
 		}
 	}
 
+}
+
+interface IPostFormFactory
+{
+	/** @return PostForm */
+	function create($id);
 }

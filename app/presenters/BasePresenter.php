@@ -7,7 +7,8 @@ use Nette;
 use Nette\Application\UI;
 use WebLoader;
 
-abstract class BasePresenter extends Nette\Application\UI\Presenter {
+abstract class BasePresenter extends Nette\Application\UI\Presenter
+{
 
 	/** @var \Model\Posts @inject */
 	public $posts;
@@ -17,52 +18,72 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	public $settings;
 	/** @var \Model\Pages @inject */
 	public $pages;
-	/** @var \WebLoader\LoaderFactory @inject */
+	/** @var \WebLoader\Nette\LoaderFactory @inject */
 	public $webLoader;
 
 	protected $setting;
 
-	public function startup() {
+	public function startup()
+	{
 		parent::startup();
 		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
 		$this->template->pages = $this->pages->findBy([]);
+		$this->template->wfont = $this->getHttpRequest()->getCookie('wfont');
 	}
 
-	protected function createComponentSearch() {
+	protected function createComponentSearch()
+	{
 		$form = new UI\Form;
 		$form->addText('search')
 			->setRequired('Vyplňte co chcete vyhledávat.')
 			->setValue($this->getParameter('search'));
 		$form->addSubmit('send', 'Go!');
-		$form->onSuccess[] = $this->searchSucceeded;
+		$form->onSuccess[] = [$this, 'searchSucceeded'];
 		return $form;
 	}
 
-	public function searchSucceeded(UI\Form $form, $values) {
+	public function searchSucceeded(UI\Form $_, $values)
+	{
 		$this->redirect(':Search:default', $values->search);
 	}
 
+	protected function createComponentSignOutForm()
+	{
+		$form = new UI\Form;
+		$form->addProtection();
+		$form->addSubmit('logout', 'Odhlásit se')
+			->setAttribute('class', 'logout');
+		$form->onSuccess[] = function () {
+			$this->getUser()->logout();
+			$this->flashMessage('Odhlášení bylo úpěšné.', 'info');
+			$this->redirect(':Sign:in');
+		};
+		return $form;
+	}
+
 	/**
-	 * @param null $class
-	 * @return Nette\Templating\ITemplate
+	 * @return UI\ITemplate
 	 */
-	protected function createTemplate($class = NULL) {
-		$template = parent::createTemplate($class);
-		$template->registerHelper('texy', function ($input) {
-			$texy = new \Texy();
+	protected function createTemplate()
+	{
+		/** @var Nette\Bridges\ApplicationLatte\Template $template */
+		$template = parent::createTemplate();
+		$latte = $template->getLatte();
+		$latte->addFilter('texy', function ($input) {
+			$texy = $this->prepareTexy();
 			$html = new Nette\Utils\Html();
 			return $html::el()->setHtml($texy->process($input));
 		});
-		$template->registerHelper('vlna', function ($string) {
+		$latte->addFilter('vlna', function ($string) {
 			$string = preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
 			return $string;
 		});
-		$template->registerHelper('dateInWords', function ($time) {
+		$latte->addFilter('dateInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
 			$months = [1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 			return $time->format('j. ') . $months[$time->format('n')] . $time->format(' Y');
 		});
-		$template->registerHelper('timeAgoInWords', function ($time) {
+		$latte->addFilter('timeAgoInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
 			$delta = round((time() - $time->getTimestamp()) / 60);
 			if ($delta == 0) return 'před okamžikem';
@@ -80,29 +101,21 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		return $template;
 	}
 
-	public function createComponentCss() {
+	protected function createComponentCss()
+	{
 		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv,print');
 	}
 
-	public function createComponentJs() {
+	protected function createComponentJs()
+	{
 		return $this->webLoader->createJavaScriptLoader('default');
-	}
-
-	public function handleRandom() {
-		if (!$this->setting->random_search) {
-			$this->error();
-		}
-		$post = $this->posts->rand();
-		if ($post) {
-			$this->redirect(':Single:article', $post->slug);
-		}
-		$this->redirect(':Homepage:default');
 	}
 
 	/**
 	 * @return \fshlTexy
 	 */
-	protected function prepareTexy() {
+	protected function prepareTexy()
+	{
 		$texy = new \fshlTexy();
 		$texy->addHandler('block', [$texy, 'blockHandler']);
 		$texy->tabWidth = 4;
