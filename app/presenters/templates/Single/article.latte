@@ -59,6 +59,9 @@
 				<div class="alert alert-danger" n:if="!$post->disable_comments && empty($setting->disqus_shortname)">
 					Please setup your disqus shortname in administration&hellip;
 				</div>
+				<div class="alert alert-danger" n:if="$post->disable_comments">
+					Komentáře jsou pod tímto článkem úmyslně zakázané.
+				</div>
 				<div n:if="!$post->disable_comments && !empty($setting->disqus_shortname)"
 					 class="hidden-print">
 					<div class="alert alert-info" style="margin-top: 20px">
