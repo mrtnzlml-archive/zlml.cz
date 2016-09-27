@@ -374,4 +374,9 @@ class AdminPresenter extends BasePresenter
 		$this->redirect('this');
 	}
 
+	public function formatLayoutTemplateFiles()
+	{
+		return [__DIR__ . '/../../presenters/templates/@layout.latte'];
+	}
+
 }
