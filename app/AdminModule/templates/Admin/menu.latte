@@ -22,14 +22,6 @@
 		<p class="list-group-item-text">Podívejte se na starší články</p>
 	</a>
 
-	<a n:href=":Admin:Admin:pages"
-	   n:class="list-group-item,preg_match('/^page[a-z-]*$/i',$presenter->view)?active">
-		<span class="label label-default label-pill pull-xs-right">{$pagecount}</span>
-		<h5 class="list-group-item-heading">Stránky</h5>
-
-		<p class="list-group-item-text">Vytvořte si nové stránky</p>
-	</a>
-
 	<a n:href=":Admin:Admin:tags"
 	   n:class="$presenter->isLinkCurrent(':Admin:Admin:tags')?'list-group-item active':'list-group-item'">
 		<span class="label label-default label-pill pull-xs-right">{$tagcount}</span>

@@ -18,29 +18,27 @@
 				{var $last = ''}
 				{foreach $articles as $article}
 					{if mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8')) === $last}
-						<a n:href=":Single:article $article->slug" class="link" title="{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$article->title}</a>
+						<a n:href=":Single:article $article->slug" class="link">{$article->title}</a>
 						{foreach $article->tags as $tag}
 							<a n:href="Search:default, $tag->name" style="text-decoration:none">
 								<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 							</a>
 						{/foreach}
-						<p style="padding-left:4%">{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}</p>
-						<br>
 					{else}
 						<hr n:if="!$iterator->first">
 						<h2>
 							<a name="letter-{$letter = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}"></a>
 							{$letter}
 						</h2>
-						<a n:href=":Single:article $article->slug" class="link" title="{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">{$article->title}</a>
+						<a n:href=":Single:article $article->slug" class="link">{$article->title}</a>
 						{foreach $article->tags as $tag}
 							<a n:href="Search:default, $tag->name" style="text-decoration:none">
 								<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 							</a>
 						{/foreach}
-						<p style="padding-left:4%">{$article->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}</p>
 						{php $last = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'))}
 					{/if}
+					<br>
 				{/foreach}
 			</div>
 		</div>

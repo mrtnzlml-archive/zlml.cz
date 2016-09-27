@@ -16,8 +16,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	public $session;
 	/** @var \Model\Settings @inject */
 	public $settings;
-	/** @var \Model\Pages @inject */
-	public $pages;
 	/** @var \WebLoader\Nette\LoaderFactory @inject */
 	public $webLoader;
 
@@ -27,7 +25,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
 		parent::startup();
 		$this->template->setting = $this->setting = $this->settings->findAllByKeys();
-		$this->template->pages = $this->pages->findBy([]);
 		$this->template->wfont = $this->getHttpRequest()->getCookie('wfont');
 	}
 

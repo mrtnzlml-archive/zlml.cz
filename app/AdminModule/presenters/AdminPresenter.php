@@ -23,11 +23,7 @@ class AdminPresenter extends BasePresenter
 	public $tags;
 	/** @var \Model\Users @inject */
 	public $users;
-	/** @var \Model\Pages @inject */
-	public $pages;
 
-	/** @var Cntrl\IPageFormFactory @inject */
-	public $pageFormFactory;
 	/** @var Cntrl\IPostFormFactory @inject */
 	public $postFormFactory;
 	/** @var Cntrl\IUserEditFormFactory @inject */
@@ -59,7 +55,6 @@ class AdminPresenter extends BasePresenter
 		$this->template->picturecount = $this->pictures->countBy();
 		$this->template->tagcount = $this->tags->countBy();
 		$this->template->usercount = $this->users->countBy();
-		$this->template->pagecount = $this->pages->countBy();
 		if (!$this->user->isAllowed('Admin:Admin', Model\Authorizator::CREATE)) {
 			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
 		}
@@ -81,20 +76,6 @@ class AdminPresenter extends BasePresenter
 		$this->id = $id;
 	}
 
-	public function actionPageEdit($id = NULL)
-	{
-		$this->id = $id;
-	}
-
-	public function renderPageEdit($id = NULL)
-	{
-		$this->template->pictures = $this->pictures->findBy([], ['created' => 'DESC']);
-		if ($id !== NULL) {
-			$this->template->editace = TRUE;
-		}
-		$this->id = $id;
-	}
-
 	public function renderPictures()
 	{
 		$paginator = $this->getComponent('paginator')->getPaginator();
@@ -107,13 +88,6 @@ class AdminPresenter extends BasePresenter
 		$paginator = $this->getComponent('paginator')->getPaginator();
 		$paginator->setItemCount(ITEMCOUNT);
 		$this->template->posts = $this->posts->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
-	}
-
-	public function renderPages()
-	{
-		$paginator = $this->getComponent('paginator')->getPaginator();
-		$paginator->setItemCount($this->pages->countBy());
-		$this->template->pages = $this->pages->findBy([], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
 	}
 
 	public function renderTags()
@@ -150,15 +124,6 @@ class AdminPresenter extends BasePresenter
 		$control = $this->userEditFormFactory->create($this->id);
 		$control->onSave[] = function () {
 			$this->redirect('users');
-		};
-		return $control;
-	}
-
-	protected function createComponentPageForm()
-	{
-		$control = $this->pageFormFactory->create($this->id);
-		$control->onSave[] = function () {
-			$this->redirect('default');
 		};
 		return $control;
 	}
@@ -247,22 +212,6 @@ class AdminPresenter extends BasePresenter
 		try {
 			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
 			$this->flashMessage('Článek byl úspěšně smazán.', 'success');
-		} catch (\Exception $exc) {
-			$this->flashMessage($exc->getMessage(), 'danger');
-		}
-		$this->redirect('this');
-	}
-
-	/**
-	 * @param $id
-	 * @secured
-	 */
-	public function handleDeletePage($id)
-	{
-		$this->onBeforeRestrictedFunctionality($this);
-		try {
-			$this->pages->delete($this->pages->findOneBy(['id' => $id]));
-			$this->flashMessage('Stránka byla úspěšně smazána.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
 		}

@@ -75,11 +75,6 @@
 			<li n:class="nav-item, $presenter->isLinkCurrent(':Single:reference') ? active">
 				<a n:href=":Single:reference" class="nav-link">reference</a>
 			</li>
-			{foreach $pages as $page}
-				<li n:class="nav-item, $presenter->isLinkCurrent(':Single:$page->slug') ? active">
-					<a n:href=":Single:$page->slug" class="nav-link">{$page->title|lower}</a>
-				</li>
-			{/foreach}
 			<li n:class="nav-item, $presenter->isLinkCurrent(':Single:obsah') || $presenter->isLinkCurrent(':Single:tagsah') ? active">
 				<a n:href=":Single:obsah" class="nav-link">obsah <span class="glyphicon glyphicon-sort-by-alphabet"></span></a>
 			</li>

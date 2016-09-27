@@ -17,9 +17,6 @@ class SinglePresenter extends BasePresenter
 
 	public function renderObsah()
 	{
-		if (!$this->setting->show_content) {
-			$this->error();
-		}
 		$articles = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['title' => 'ASC']);
 		$this->template->articles = $articles;
 
@@ -41,31 +38,12 @@ class SinglePresenter extends BasePresenter
 			$this->redirect('Single:article', $webalized);
 		}
 		$post = $this->posts->findOneBy(['slug' => $webalized, 'publish_date <=' => new \DateTime()]); // zobrazení článku podle slugu
-		$page = $this->pages->findOneBy(['slug' => $webalized]); // zobrazení stránky podle slugu
-		if (!$post && !$page) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
+		if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
 			$this->forward($webalized);
 		} elseif ($post) { // zobrazení klasických článků
 			$texy = $this->prepareTexy();
 			$this->template->post = $post;
 			$this->template->body = $texy->process($post->body);
-		} else { //PAGE
-			$this->setView('page');
-			$texy = $this->prepareTexy();
-			$texy->addHandler('phrase', function ($invocation, $phrase, $content, $modifier, $link) {
-				$el = $invocation->proceed();
-				if ($el instanceof \Texy\HtmlElement && $el->getName() === 'a') {
-					$url = new Url($el->attrs['href']);
-					$httpRequest = $this->presenter->getHttpRequest();
-					$uri = $httpRequest->getUrl();
-					if ($url->authority != $uri->host) {
-						$el->attrs['target'] = '_blank';
-					}
-				}
-				return $el;
-			});
-			$this->template->page = $page;
-			$body = $texy->process($page->body);
-			$this->template->body = $body;
 		}
 	}
 
