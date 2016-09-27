@@ -15,7 +15,6 @@ What's on the background
 - [Webloader](https://github.com/janmarek/WebLoader) - component for smart CSS and JS files loading
 - [Doctrine 2](http://www.doctrine-project.org/) - library primarily focused on database storage and object mapping (using [Kdyby](https://github.com/Kdyby/Doctrine))
 - [Kdyby\Events](https://github.com/Kdyby/Events) - robust events system for Nette Framework
-- [Kdyby\AOP](https://github.com/Kdyby/Aop) - AOP functionality for Nette Framework
 - [Nextras\SecuredLinks](https://github.com/nextras/secured-links) - for better CSRF protection
 - and much more...
 
@@ -27,7 +26,7 @@ The best way to install this project is to download latest package with dependen
 2. Use Composer:
 
 		composer create-project mrtnzlml/zlml.cz --stability=dev
-		
+
 3. Install Bower: (see http://bower.io/)
 4. Go to the project folder and install client side dependencies:
 
