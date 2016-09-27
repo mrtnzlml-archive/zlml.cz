@@ -22,14 +22,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr n:foreach="$users as $user">
+					<tr n:foreach="$users as $userItem">
 						<td>#{$iterator->counter}</td>
-						<td>{$user->username}</td>
-						<td>{$user->role}</td>
+						<td>{$userItem->username}</td>
+						<td>{$userItem->role}</td>
 						<td>
 							<div class="btn-group">
-								<a n:href="userEdit $user->id" class="btn btn-info">Upravit</a>
-								<a n:href="deleteUser! $user->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento účet?">Smazat</a>
+								<a n:href="userEdit $userItem->id" class="btn btn-info">Upravit</a>
+								<a n:href="deleteUser! $userItem->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento účet?">Smazat</a>
 							</div>
 						</td>
 					</tr>
