@@ -1,7 +1,7 @@
 Source code of zlml.cz [2.0]
 ====================================
 
-Master branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/zlml.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/zlml.cz)
+[![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/zlml.cz)
 
 It needs at least PHP 7.0. The lower version of PHP is not supported, sorry - move on.
 
