@@ -20,7 +20,7 @@ class ErrorPresenter extends BasePresenter
 			$code = $exception->getCode();
 			// load template 403.latte or 404.latte or ... 4xx.latte
 			$this->setView(in_array($code, [403, 404, 405, 410, 500]) ? $code : '4xx');
-			$request = $this->parameters['request'];
+			$request = $this->getParameters()['request'];
 			if ($request) {
 				$this->template->test = $request->parameters['action'];
 			}
