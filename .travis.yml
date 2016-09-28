@@ -1,19 +1,15 @@
 language: php
 
+
 php:
   - 7.0
   - 7.1
+
 
 env:
   matrix:
     - DB=mysql
 
-script:
-  - vendor/bin/run-tests -C tests/
-
-after_failure:
-  - cat app/config/config.local.neon;
-  - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
 
 before_script:
   - mysql -u root -e 'create database zlml;'
@@ -22,6 +18,17 @@ before_script:
   - composer install --no-interaction --prefer-dist --no-progress
   - npm install -g bower
   - bower install
+
+
+script:
+  - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --exclude vendor-client --blame
+  - vendor/bin/run-tests -C tests/
+
+
+after_failure:
+  - cat app/config/config.local.neon;
+  - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
+
 
 notifications:
   email: false

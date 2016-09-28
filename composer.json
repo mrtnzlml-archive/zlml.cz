@@ -33,6 +33,7 @@
   },
   "require-dev": {
     "dg/adminer-custom": "dev-master",
+    "jakub-onderka/php-parallel-lint": "^0.9.2",
     "kdyby/doctrine-dbal-batchimport": "dev-master",
     "mrtnzlml/testbench": "dev-transactional-db-tests",
     "nette/tester": "2.0.x-dev as v1.7"
