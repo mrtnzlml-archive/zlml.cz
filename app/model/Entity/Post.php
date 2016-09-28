@@ -1,8 +1,7 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Entity;
 
-use App;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine;
 

@@ -1,16 +1,11 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Model;
 
-use Kdyby;
 use Nette;
 use Nette\Security\Passwords;
 use Nette\Utils\Strings;
 
-/**
- * Class Authenticator
- * @package Model
- */
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator
 {
 
@@ -37,9 +32,9 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 		$user = $this->users->findOneBy(['username' => $username]);
 
 		if (!$user) {
-			throw new Nette\Security\AuthenticationException('Uživatelské jméno není správné.', self::IDENTITY_NOT_FOUND);
+			throw new \Nette\Security\AuthenticationException('Uživatelské jméno není správné.', self::IDENTITY_NOT_FOUND);
 		} elseif (!Passwords::verify($password, $user->password)) {
-			throw new Nette\Security\AuthenticationException('Zadané heslo není správné.', self::INVALID_CREDENTIAL);
+			throw new \Nette\Security\AuthenticationException('Zadané heslo není správné.', self::INVALID_CREDENTIAL);
 		} elseif (Passwords::needsRehash($user->password)) {
 			$user->password = Passwords::hash($password);
 			$this->users->save($user);
@@ -50,8 +45,6 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 
 	/**
 	 * Fixes caps lock accidentally turned on.
-	 *
-	 * @param $password
 	 *
 	 * @return mixed
 	 */

@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
+
+namespace App\Pictures\DI;
 
 use Nette\Application\Routers\Route;
-use Nette\DI;
 use Nette\PhpGenerator\PhpLiteral;
 
-class PictureExtension extends Nette\DI\CompilerExtension
+class PictureExtension extends \Nette\DI\CompilerExtension
 {
 
 	//TODO: instalace do databáze
@@ -17,7 +18,7 @@ class PictureExtension extends Nette\DI\CompilerExtension
 		$builder->getDefinition('nette.presenterFactory')->addSetup('setMapping', [['App' => 'App\\*Module\\*Presenter']]);
 		//Admin Menu:
 		$priorityQueue = new \SplPriorityQueue();
-		$menuItem = new MenuItem();
+		$menuItem = new \Cntrl\MenuItem();
 		$menuItem->setHeading('Nahrát nový obrázek');
 		$menuItem->setText('Zde nahrajte obrázky');
 		$menuItem->setLink(':Admin:pictures');

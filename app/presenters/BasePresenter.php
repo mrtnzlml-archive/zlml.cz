@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App;
 
@@ -12,10 +12,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
 	/** @var \Model\Posts @inject */
 	public $posts;
+
 	/** @var \Nette\Http\Session @inject */
 	public $session;
+
 	/** @var \Model\Settings @inject */
 	public $settings;
+
 	/** @var \WebLoader\Nette\LoaderFactory @inject */
 	public $webLoader;
 
@@ -39,7 +42,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		return $form;
 	}
 
-	public function searchSucceeded(UI\Form $_, $values)
+	public function searchSucceeded(UI\Form $form, $values)
 	{
 		$this->redirect(':Search:default', $values->search);
 	}
@@ -83,16 +86,36 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$latte->addFilter('timeAgoInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
 			$delta = round((time() - $time->getTimestamp()) / 60);
-			if ($delta == 0) return 'před okamžikem';
-			if ($delta == 1) return 'před minutou';
-			if ($delta < 45) return "před $delta minutami";
-			if ($delta < 90) return 'před hodinou';
-			if ($delta < 1440) return 'před ' . round($delta / 60) . ' hodinami';
-			if ($delta < 2880) return 'včera';
-			if ($delta < 43200) return 'před ' . round($delta / 1440) . ' dny';
-			if ($delta < 86400) return 'před měsícem';
-			if ($delta < 525960) return 'před ' . round($delta / 43200) . ' měsíci';
-			if ($delta < 1051920) return 'před rokem';
+			if ($delta == 0) {
+				return 'před okamžikem';
+			}
+			if ($delta == 1) {
+				return 'před minutou';
+			}
+			if ($delta < 45) {
+				return "před $delta minutami";
+			}
+			if ($delta < 90) {
+				return 'před hodinou';
+			}
+			if ($delta < 1440) {
+				return 'před ' . round($delta / 60) . ' hodinami';
+			}
+			if ($delta < 2880) {
+				return 'včera';
+			}
+			if ($delta < 43200) {
+				return 'před ' . round($delta / 1440) . ' dny';
+			}
+			if ($delta < 86400) {
+				return 'před měsícem';
+			}
+			if ($delta < 525960) {
+				return 'před ' . round($delta / 43200) . ' měsíci';
+			}
+			if ($delta < 1051920) {
+				return 'před rokem';
+			}
 			return 'před ' . round($delta / 525960) . ' lety';
 		});
 		return $template;

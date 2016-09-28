@@ -1,8 +1,7 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Cntrl;
 
-use Model;
 use Nette\Application\UI;
 
 class AdminMenu extends UI\Control
@@ -27,10 +26,4 @@ class AdminMenu extends UI\Control
 		$this->contributors[] = $entry;
 	}
 
-}
-
-interface IAdminMenuFactory
-{
-	/** @return AdminMenu */
-	function create();
 }

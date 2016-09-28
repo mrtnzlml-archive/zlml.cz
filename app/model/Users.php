@@ -1,18 +1,16 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Model;
 
 use Kdyby;
 use Nette;
 
-/**
- * Class Users
- * @package Model
- */
 class Users extends Nette\Object
 {
 
-	/** @var \Kdyby\Doctrine\EntityDao */
+	/**
+	 * @var \Kdyby\Doctrine\EntityDao
+	 */
 	private $dao;
 
 	/**
@@ -24,9 +22,6 @@ class Users extends Nette\Object
 	}
 
 	/**
-	 * @param null $entity
-	 * @param null $relations
-	 *
 	 * @return array
 	 */
 	public function save($entity = NULL, $relations = NULL)
@@ -35,11 +30,6 @@ class Users extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 * @param null $limit
-	 * @param null $offset
-	 *
 	 * @return array
 	 */
 	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
@@ -48,9 +38,6 @@ class Users extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 *
 	 * @return mixed|null|object
 	 */
 	public function findOneBy(array $criteria, array $orderBy = NULL)
@@ -59,8 +46,6 @@ class Users extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 *
 	 * @return mixed
 	 */
 	public function countBy(array $criteria = [])
@@ -68,11 +53,6 @@ class Users extends Nette\Object
 		return $this->dao->countBy($criteria);
 	}
 
-	/**
-	 * @param $entity
-	 * @param null $relations
-	 * @param bool $flush
-	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
 	{
 		$this->dao->delete($entity, $relations, $flush);

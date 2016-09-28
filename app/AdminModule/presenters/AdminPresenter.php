@@ -1,11 +1,9 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App\AdminModule;
 
-use App;
 use Cntrl;
 use Entity;
-use Kdyby;
 use Model;
 use Nette;
 use Nextras\Application\UI\SecuredLinksPresenterTrait;
@@ -19,15 +17,19 @@ class AdminPresenter extends BasePresenter
 
 	/** @var \Model\Pictures @inject */
 	public $pictures;
+
 	/** @var \Model\Tags @inject */
 	public $tags;
+
 	/** @var \Model\Users @inject */
 	public $users;
 
 	/** @var Cntrl\IPostFormFactory @inject */
 	public $postFormFactory;
+
 	/** @var Cntrl\IUserEditFormFactory @inject */
 	public $userEditFormFactory;
+
 	/** @var Cntrl\IVisualPaginatorFactory @inject */
 	public $paginatorFactory;
 
@@ -153,10 +155,6 @@ class AdminPresenter extends BasePresenter
 		return $form;
 	}
 
-	/**
-	 * @param $button
-	 * @param $id
-	 */
 	public function colorSucceeded($button, $id)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
@@ -203,7 +201,6 @@ class AdminPresenter extends BasePresenter
 	}
 
 	/**
-	 * @param $id
 	 * @secured
 	 */
 	public function handleDelete($id)
@@ -219,14 +216,13 @@ class AdminPresenter extends BasePresenter
 	}
 
 	/**
-	 * @param $tag_id
 	 * @secured
 	 */
-	public function handleDeleteTag($tag_id)
+	public function handleDeleteTag($tagId)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
-			$this->tags->delete($this->tags->findOneBy(['id' => $tag_id]));
+			$this->tags->delete($this->tags->findOneBy(['id' => $tagId]));
 			$this->flashMessage('Tag byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
@@ -235,14 +231,13 @@ class AdminPresenter extends BasePresenter
 	}
 
 	/**
-	 * @param $user_id
 	 * @secured
 	 */
-	public function handleDeleteUser($user_id)
+	public function handleDeleteUser($userId)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
-			$this->users->delete($this->users->findOneBy(['id' => $user_id]));
+			$this->users->delete($this->users->findOneBy(['id' => $userId]));
 			$this->flashMessage('Uživatel byl úspěšně smazán.', 'success');
 		} catch (\Exception $exc) {
 			$this->flashMessage($exc->getMessage(), 'danger');
@@ -251,14 +246,13 @@ class AdminPresenter extends BasePresenter
 	}
 
 	/**
-	 * @param $tag_id
 	 * @secured
 	 */
-	public function handleRegenerate($tag_id)
+	public function handleRegenerate($tagId)
 	{
 		$this->onBeforeRestrictedFunctionality($this);
 		try {
-			$tag = $this->tags->findOneBy(['id' => $tag_id]);
+			$tag = $this->tags->findOneBy(['id' => $tagId]);
 			$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
 			$this->tags->save($tag);
 			$this->flashMessage('Tag byl úspěšně regenerován.', 'success');
@@ -270,9 +264,8 @@ class AdminPresenter extends BasePresenter
 
 	public function handleUploadReciever()
 	{
-		//ob_start();
 		$uploader = new \UploadHandler();
-		$uploader->allowedExtensions = ["jpeg", "jpg", "png", "gif"];
+		$uploader->allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
 		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');
 		//TODO: picture optimalization (?)
@@ -298,7 +291,6 @@ class AdminPresenter extends BasePresenter
 	}
 
 	/**
-	 * @param $id
 	 * @secured
 	 */
 	public function handleDeletePicture($id)

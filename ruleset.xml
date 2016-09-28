@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<ruleset name="zlml.cz">
+	<!--
+		SEE:
+		- https://github.com/juzna/nette-coding-standard/blob/master/NetteStandard/ruleset.xml
+		- https://gist.github.com/jakubkulhan/b054b89cb207822fcb71
+		- https://github.com/consistence/coding-standard
+		- https://github.com/slevomat/coding-standard
+	-->
+
+	<description>The zlml.cz coding standard.</description>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<!-- Composer vendor: -->
+	<rule ref="./vendor/consistence/coding-standard/Consistence/ruleset.xml">
+		<exclude name="Generic.PHP.LowerCaseConstant"/>
+		<exclude name="Generic.Formatting.SpaceAfterCast"/>
+		<exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman.BraceOnSameLine"/> <!-- better implementation already in: Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine -->
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+		<exclude name="Squiz.Commenting.FunctionComment.WrongStyle"/>
+		<exclude name="Squiz.PHP.Heredoc.NotAllowed"/>
+		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+	</rule>
+
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
+		<exclude name="SlevomatCodingStandard.Files.TypeNameMatchesFileName"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameAfterKeyword"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
+	</rule>
+
+	<!--<rule ref="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces">-->
+		<!--<properties>-->
+			<!--<property name="allowUseFromRootNamespace" value="true"/>-->
+			<!--<property name="namespacesRequiredToUse" type="array" value="Ant"/>-->
+		<!--</properties>-->
+	<!--</rule>-->
+
+	<rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+		<exclude-pattern>*.phpt</exclude-pattern>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
+		<properties>
+			<property name="alwaysUsedPropertiesAnnotations" type="array" value="@ORM\Column,@ORM\Embedded,@ORM\JoinColumn,@ORM\ManyToMany"/>
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+		<properties>
+			<property name="searchAnnotations" value="true"/>
+		</properties>
+	</rule>
+
+	<rule ref="Generic.PHP.UpperCaseConstant"/>
+
+</ruleset>

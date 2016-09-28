@@ -1,8 +1,10 @@
 # WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
 # http://nette.org/security-warning
 
+
 parameters:
 	clientVendorDir: %appDir%/../vendor-client
+
 
 webloader:
 	css:
@@ -26,6 +28,7 @@ webloader:
 				- nette.ajax.js/nette.ajax.js
 				- codemirror/lib/codemirror.js
 				- %wwwDir%/js/main.js
+
 
 services:
 	lessFilter: WebLoader\Filter\LessFilter

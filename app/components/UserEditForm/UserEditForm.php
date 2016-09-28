@@ -1,29 +1,26 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Cntrl;
 
-use Doctrine;
 use Entity;
-use Kdyby;
 use Model;
-use Nette;
 use Nette\Application\UI;
 use Nette\Security\Passwords;
 
 class UserEditForm extends UI\Control
 {
 
-	const DEFAULT_ROLE = 'demo';
+	const DEFAULT_ROLE = 'admin';
 
 	public $onSave = [];
-	//public $onBeforeRestrictedFunctionality = [];
 
 	private $roles = [
-		'demo' => 'Demo účet',
+//		'demo' => 'Demo účet',
 		'admin' => 'Administrátor',
 	];
 
 	private $users;
+
 	private $account;
 
 	public function __construct($id, Model\Users $users)
@@ -63,7 +60,7 @@ class UserEditForm extends UI\Control
 		return $form;
 	}
 
-	public function formSucceeded($_, $vals)
+	public function formSucceeded(UI\Form $form, $vals)
 	{
 		try {
 			$this->account->username = $vals->username;
@@ -77,9 +74,9 @@ class UserEditForm extends UI\Control
 
 			$this->users->save($this->account);
 			$this->presenter->flashMessage('Změny úspěšně uloženy.', 'success');
-		} catch (Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
+		} catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
 			$this->presenter->flashMessage('Uživatel s tímto jménem již existuje. Zvolte prosím jiné.', 'danger');
-		} catch (Nette\Security\AuthenticationException $exc) {
+		} catch (\Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$this->redirect('this');
 			return;
@@ -87,10 +84,4 @@ class UserEditForm extends UI\Control
 		$this->onSave();
 	}
 
-}
-
-interface IUserEditFormFactory
-{
-	/** @return UserEditForm */
-	function create($id);
 }

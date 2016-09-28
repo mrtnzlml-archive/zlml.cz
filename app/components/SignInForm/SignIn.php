@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Cntrl;
 
@@ -49,7 +49,7 @@ class SignIn extends UI\Control
 		}
 		try {
 			$this->presenter->getUser()->login($values->username, $values->password);
-		} catch (Nette\Security\AuthenticationException $e) {
+		} catch (\Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 			return;
 		}
@@ -57,10 +57,4 @@ class SignIn extends UI\Control
 		$this->presenter->redirect(':Admin:Admin:');
 	}
 
-}
-
-interface ISignInFactory
-{
-	/** @return SignIn */
-	function create();
 }

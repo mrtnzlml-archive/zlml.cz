@@ -1,17 +1,17 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App;
 
 use Cntrl\ISignInFactory;
 use Model;
 use Nette;
-use Nette\Http\Url;
 
 class SinglePresenter extends BasePresenter
 {
 
 	/** @var ISignInFactory @inject */
 	public $signInFormFactory;
+
 	/** @var \Model\Tags @inject */
 	public $tags;
 
@@ -53,7 +53,8 @@ class SinglePresenter extends BasePresenter
 		return $this->signInFormFactory->create();
 	}
 
-	public function handleGetEmail() {
+	public function handleGetEmail()
+	{
 		if ($this->isAjax()) {
 			$hidden = 'mrtnzlml@gmail.com'; //TODO: mrtn@zlml.cz
 			$el = Nette\Utils\Html::el('a target=_blank')->href('mailto:' . $hidden)->setText($hidden);

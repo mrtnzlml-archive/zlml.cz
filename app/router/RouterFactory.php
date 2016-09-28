@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App;
 
@@ -42,7 +42,7 @@ class RouterFactory
 		$router[] = new Route('last', [
 			'presenter' => 'Homepage',
 			'action' => 'default',
-			'paginator-page' => ceil($pages / 10)
+			'paginator-page' => ceil($pages / 10),
 		], Route::ONE_WAY);
 		$router[] = new Route('rss', 'Homepage:rss');
 		$router[] = new Route('sitemap.xml', 'Homepage:sitemap');
@@ -55,7 +55,7 @@ class RouterFactory
 		$router[] = new Route("[<paginator-page [$paginator]>]", [
 			'presenter' => 'Homepage',
 			'action' => 'default',
-			'paginator-page' => 1
+			'paginator-page' => 1,
 		]);
 		$router[] = new Route('<slug>', 'Single:article');
 		$router[] = new Route('<action>', 'Single:article');

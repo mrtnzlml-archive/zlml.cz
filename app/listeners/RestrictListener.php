@@ -1,4 +1,10 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
+
+namespace App\Listeners;
+
+use Kdyby;
+use Model;
+use Nette;
 
 class RestrictListener extends Nette\Object implements Kdyby\Events\Subscriber
 {

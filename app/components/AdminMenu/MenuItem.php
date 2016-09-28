@@ -1,14 +1,21 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
-class MenuItem extends Nette\Object
+namespace Cntrl;
+
+class MenuItem
 {
+
+	use \Nette\SmartObject;
 
 	/** @var string */
 	private $badge = NULL;
+
 	/** @var string */
 	private $heading = NULL;
+
 	/** @var string */
 	private $link;
+
 	/** @var string */
 	private $text = NULL;
 

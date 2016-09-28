@@ -1,14 +1,10 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Model;
 
 use Nette;
 use Nette\Security\Permission;
 
-/**
- * Class Authorizator
- * @package Model
- */
 class Authorizator implements Nette\Security\IAuthorizator
 {
 
@@ -38,10 +34,6 @@ class Authorizator implements Nette\Security\IAuthorizator
 	}
 
 	/**
-	 * @param $role
-	 * @param $resource
-	 * @param $privilege
-	 *
 	 * @return bool
 	 */
 	public function isAllowed($role, $resource, $privilege)
@@ -50,9 +42,6 @@ class Authorizator implements Nette\Security\IAuthorizator
 	}
 
 	/**
-	 * @param $role
-	 * @param Nette\Security\User $user
-	 *
 	 * @return bool
 	 */
 	public function isAtLeastInRole($role, Nette\Security\User $user)

@@ -1,12 +1,12 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
-namespace App;
+namespace App\Pictures;
 
 use Cntrl;
 use Entity;
 use Nette;
 
-class PicturesPresenter extends BasePresenter
+class PicturesPresenter extends \App\BasePresenter
 {
 
 	/** @var \Model\Pictures @inject */
@@ -27,7 +27,7 @@ class PicturesPresenter extends BasePresenter
 	public function handleUploadReciever()
 	{
 		$uploader = new \UploadHandler();
-		$uploader->allowedExtensions = ["jpeg", "jpg", "png", "gif"];
+		$uploader->allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
 		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');
 		//TODO: picture optimalization (?)
@@ -75,7 +75,7 @@ class PicturesPresenter extends BasePresenter
 	{
 		$name = $this->getName();
 		$presenter = substr($name, strrpos(':' . $name, ':'));
-		$dir = is_dir(APP_DIR . "/templates") ? APP_DIR : dirname(APP_DIR);
+		$dir = is_dir(APP_DIR . '/templates') ? APP_DIR : dirname(APP_DIR);
 		$list = ["$dir/templates/$presenter/@layout.latte"];
 		do {
 			$list[] = "$dir/templates/@layout.latte";

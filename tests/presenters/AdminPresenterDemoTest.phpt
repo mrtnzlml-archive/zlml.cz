@@ -1,10 +1,8 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Test;
 
 use Model;
-use Nette;
-use Tester;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -20,15 +18,12 @@ class AdminPresenterDemoTest extends \Tester\TestCase
 
 	/** @var Model\Users */
 	private $users;
-	/** @var Model\Posts */
-	private $articles;
 
 	private $action;
 
 	public function setUp()
 	{
 		$this->users = $this->getService(Model\Users::class);
-		$this->articles = $this->getService(Model\Posts::class);
 		$this->logIn(1, 'demo');
 	}
 

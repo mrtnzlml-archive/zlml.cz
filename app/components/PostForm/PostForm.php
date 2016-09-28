@@ -1,10 +1,8 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Cntrl;
 
-use Doctrine;
 use Entity;
-use Kdyby;
 use Model;
 use Nette;
 use Nette\Application\UI;
@@ -13,12 +11,13 @@ class PostForm extends UI\Control
 {
 
 	public $onSave = [];
-	//public $onBeforeRestrictedFunctionality = [];
 
 	/** @var \Model\Posts */
 	private $posts;
+
 	/** @var \Model\Tags */
 	private $tags;
+
 	private $post;
 
 	public function __construct($id, Model\Posts $posts, Model\Tags $tags)
@@ -82,33 +81,27 @@ class PostForm extends UI\Control
 			$this->post->body = $vals->editor;
 			$this->post->disable_comments = $vals->disable_comments;
 			$this->post->draft = FALSE;
-			foreach (array_unique(preg_split('/\s*,\s*/', $vals->tags)) as $tag_name) {
-				$tag = $this->tags->findOneBy(['name' => $tag_name]);
+			foreach (array_unique(preg_split('/\s*,\s*/', $vals->tags)) as $tagName) {
+				$tag = $this->tags->findOneBy(['name' => $tagName]);
 				if (!$tag) {
 					$tag = new Entity\Tag();
-					$tag->name = $tag_name;
+					$tag->name = $tagName;
 					$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
 				}
-				if (!empty($tag_name)) {
+				if (!empty($tagName)) {
 					$this->post->addTag($tag);
 				}
 			}
 			$this->posts->save($this->post);
 			$this->presenter->flashMessage('Příspěvek byl úspěšně uložen a publikován.', 'success');
 			$this->onSave();
-		} catch (Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
+		} catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
 			$this->presenter->flashMessage('Tento URL slug je již v databázi uložen, zvolte prosím jiný.', 'danger');
-		} catch (Nette\Security\AuthenticationException $exc) {
+		} catch (\Nette\Security\AuthenticationException $exc) {
 			$this->presenter->flashMessage('Myslím to vážně, editovat opravdu **ne**můžete!', 'danger');
 			$this->redirect('this');
 			return;
 		}
 	}
 
-}
-
-interface IPostFormFactory
-{
-	/** @return PostForm */
-	function create($id);
 }

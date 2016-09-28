@@ -1,9 +1,6 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Test;
-
-use Nette;
-use Tester;
 
 require __DIR__ . '/../bootstrap.php';
 

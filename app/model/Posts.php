@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Model;
 
@@ -8,13 +8,12 @@ use Nette;
 
 /**
  * TODO: QueryObject
- * Class Posts
- * @package Model
  */
 class Posts extends Nette\Object
 {
 
 	public $onSave = [];
+
 	public $onDelete = [];
 
 	/** @var \Kdyby\Doctrine\EntityDao */
@@ -29,9 +28,6 @@ class Posts extends Nette\Object
 	}
 
 	/**
-	 * @param null $entity \Entity\Post
-	 * @param null $relations
-	 *
 	 * @return array
 	 */
 	public function save($entity = NULL, $relations = NULL)
@@ -42,11 +38,6 @@ class Posts extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 * @param null $limit
-	 * @param null $offset
-	 *
 	 * @return \ArrayIterator
 	 */
 	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
@@ -62,9 +53,6 @@ class Posts extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 *
 	 * @return mixed|null|object
 	 */
 	public function findOneBy(array $criteria, array $orderBy = NULL)
@@ -73,8 +61,6 @@ class Posts extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 *
 	 * @return mixed
 	 */
 	public function countBy(array $criteria = [])
@@ -83,17 +69,15 @@ class Posts extends Nette\Object
 	}
 
 	/**
-	 * @param $search
-	 *
 	 * @return array
 	 */
 	public function fulltextSearch($search)
 	{
-		$where = "";
-		$ft_min_word_len = 4;
+		$where = '';
+		$ftMinWordLen = 4; //MySQL: ft_min_word_len
 		preg_match_all("~[\\pL\\pN_]+('[\\pL\\pN_]+)*~u", stripslashes($search), $matches);
 		foreach ($matches[0] as $part) {
-			if (iconv_strlen($part, "utf-8") < $ft_min_word_len) {
+			if (iconv_strlen($part, 'utf-8') < $ftMinWordLen) {
 				$accents = ['aá', 'cč', 'dď', 'eéě', 'ií', 'nň', 'oó', 'rř', 'sš', 'tť', 'uúů', 'yý', 'zž'];
 				foreach ($accents as $accent) {
 					$part = preg_replace("<[$accent]>iu", "[$accent]+", $part);
@@ -129,11 +113,6 @@ class Posts extends Nette\Object
 		//return $this->findBy(array('id' => $ids));
 	}
 
-	/**
-	 * @param $entity \Entity\Post
-	 * @param null $relations
-	 * @param bool $flush
-	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
 	{
 		$this->onDelete($entity->id);

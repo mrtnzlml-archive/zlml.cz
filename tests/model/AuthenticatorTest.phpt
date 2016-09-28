@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
+
+namespace Test;
 
 use Tester\Assert;
 
@@ -14,7 +16,7 @@ class AuthenticatorTest extends \Tester\TestCase
 
 	public function __construct()
 	{
-		$this->authenticator = $this->getService(Model\Authenticator::class);
+		$this->authenticator = $this->getService(\Model\Authenticator::class);
 	}
 
 	public function testWrongAuthenticate()
@@ -22,13 +24,13 @@ class AuthenticatorTest extends \Tester\TestCase
 		$auth = $this->authenticator;
 		Assert::exception(function () use ($auth) {
 			$auth->authenticate(['invalid_username', 'invalid_password']);
-		}, Nette\Security\AuthenticationException::class, 'Uživatelské jméno není správné.');
+		}, \Nette\Security\AuthenticationException::class, 'Uživatelské jméno není správné.');
 	}
 
 	public function testAuthenticate()
 	{
 		$em = $this->getEntityManager();
-		$userEntity = new Entity\User;
+		$userEntity = new \Entity\User;
 		$userEntity->setUsername('martin');
 		$userEntity->setPassword('password');
 		$userEntity->setRole('what a bad bad model design');
@@ -38,14 +40,14 @@ class AuthenticatorTest extends \Tester\TestCase
 		$auth = $this->authenticator;
 		Assert::exception(function () use ($auth) {
 			$auth->authenticate(['martin', 'invalid_password']);
-		}, Nette\Security\AuthenticationException::class, 'Zadané heslo není správné.');
+		}, \Nette\Security\AuthenticationException::class, 'Zadané heslo není správné.');
 	}
 
 	public function tearDown()
 	{
 		$em = $this->getEntityManager();
-		/** @var Entity\User $user */
-		foreach ($em->getRepository(Entity\User::class)->findBy([
+		/** @var \Entity\User $user */
+		foreach ($em->getRepository(\Entity\User::class)->findBy([
 			'username' => 'martin',
 		]) as $user) {
 			$em->remove($user);

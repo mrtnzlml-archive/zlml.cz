@@ -1,10 +1,8 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App;
 
 use Cntrl\ISignInFactory;
-use Nette;
-use Nette\Application\UI;
 
 /** Sign in/out presenters. */
 class SignPresenter extends BasePresenter

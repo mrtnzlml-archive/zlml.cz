@@ -1,6 +1,6 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
-namespace Ext;
+namespace App\Pictures;
 
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine;

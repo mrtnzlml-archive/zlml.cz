@@ -1,9 +1,8 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Test;
 
 use Model;
-use Nette;
 use Tester;
 
 require __DIR__ . '/../bootstrap.php';
@@ -20,15 +19,11 @@ class AdminPresenterTest extends \Tester\TestCase
 	/** @var Model\Users */
 	private $users;
 
-	/** @var Model\Posts */
-	private $articles;
-
 	private $action = NULL;
 
 	public function setUp()
 	{
 		$this->users = $this->getService(Model\Users::class);
-		$this->articles = $this->getService(Model\Posts::class);
 		$this->logIn(1, 'admin');
 	}
 
@@ -77,7 +72,7 @@ class AdminPresenterTest extends \Tester\TestCase
 				'password' => 'Password',
 				'role' => 'demo',
 			]);
-		}, Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Zadejte prosím heslo ještě jednou pro kontrolu.");
+		}, \Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Zadejte prosím heslo ještě jednou pro kontrolu.");
 
 		Tester\Assert::error(function () {
 			$this->checkForm('Admin:Admin:userEdit', 'userEditForm-form', [
@@ -86,7 +81,7 @@ class AdminPresenterTest extends \Tester\TestCase
 				'passwordVerify' => 'Password2',
 				'role' => 'demo',
 			]);
-		}, Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Hesla se neshodují.");
+		}, \Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Hesla se neshodují.");
 
 		$this->checkForm('Admin:Admin:userEdit', 'userEditForm-form', [
 			'username' => 'Username',

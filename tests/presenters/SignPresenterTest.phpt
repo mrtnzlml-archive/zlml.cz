@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Test;
 
@@ -52,7 +52,7 @@ class SignPresenterTest extends \Tester\TestCase
 				'remember' => TRUE,
 			]);
 			Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		}, Tester\AssertException::class, 'Uživatelské jméno není správné.');
+		}, \Tester\AssertException::class, 'Uživatelské jméno není správné.');
 		Tester\Assert::false($this->user->isLoggedIn());
 
 		Tester\Assert::error(function () {
@@ -62,7 +62,7 @@ class SignPresenterTest extends \Tester\TestCase
 				'remember' => FALSE,
 			]);
 			Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		}, Tester\AssertException::class, 'Uživatelské jméno není správné.');
+		}, \Tester\AssertException::class, 'Uživatelské jméno není správné.');
 		Tester\Assert::false($this->user->isLoggedIn());
 	}
 

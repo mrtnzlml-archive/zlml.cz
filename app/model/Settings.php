@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Model;
 
@@ -6,14 +6,12 @@ use Entity;
 use Kdyby;
 use Nette;
 
-/**
- * Class Settings
- * @package Model
- */
 class Settings extends Nette\Object
 {
 
-	/** @var \Kdyby\Doctrine\EntityDao */
+	/**
+	 * @var \Kdyby\Doctrine\EntityDao
+	 */
 	private $dao;
 
 	/**
@@ -30,7 +28,8 @@ class Settings extends Nette\Object
 	public function save(Nette\Utils\ArrayHash $vals)
 	{
 		foreach ($vals as $key => $value) {
-			if ($entity = $this->findOneBy(['key' => $key])) {
+			$entity = $this->findOneBy(['key' => $key]);
+			if ($entity) {
 				if ($entity->value != $value) {
 					$entity->value = $value;
 					$this->dao->add($entity);
@@ -47,11 +46,6 @@ class Settings extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 * @param null $limit
-	 * @param null $offset
-	 *
 	 * @return array
 	 */
 	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
@@ -60,9 +54,6 @@ class Settings extends Nette\Object
 	}
 
 	/**
-	 * @param array $criteria
-	 * @param array $orderBy
-	 *
 	 * @return mixed|null|object
 	 */
 	public function findOneBy(array $criteria, array $orderBy = NULL)
@@ -71,8 +62,6 @@ class Settings extends Nette\Object
 	}
 
 	/**
-	 * @param array $keys
-	 *
 	 * @return array
 	 */
 	public function findByKeys(array $keys)
@@ -99,8 +88,6 @@ class Settings extends Nette\Object
 	}
 
 	/**
-	 * @param $key
-	 *
 	 * @return int|null|string
 	 */
 	public function findOneByKey($key)

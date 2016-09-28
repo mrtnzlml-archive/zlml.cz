@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Cntrl;
 
@@ -40,7 +40,7 @@ class VisualPaginator extends Nette\Application\UI\Control
 	{
 		$paginator = $this->getPaginator();
 
-		if (NULL !== $options) {
+		if ($options !== NULL) {
 			$paginator->setItemCount($options['count']);
 			$paginator->setItemsPerPage($options['pageSize']);
 		}
@@ -71,8 +71,6 @@ class VisualPaginator extends Nette\Application\UI\Control
 	/**
 	 * Loads state informations.
 	 *
-	 * @param  array
-	 *
 	 * @return void
 	 */
 	public function loadState(array $params)
@@ -81,10 +79,4 @@ class VisualPaginator extends Nette\Application\UI\Control
 		$this->getPaginator()->page = $this->page;
 	}
 
-}
-
-interface IVisualPaginatorFactory
-{
-	/** @return VisualPaginator */
-	function create();
 }
