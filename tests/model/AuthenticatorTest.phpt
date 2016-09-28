@@ -33,7 +33,7 @@ class AuthenticatorTest extends \Tester\TestCase
 		$userEntity = new \Entity\User;
 		$userEntity->setUsername('martin');
 		$userEntity->setPassword('password');
-		$userEntity->setRole('what a bad bad model design');
+		$userEntity->setRole('FIXME:__construct');
 		$em->persist($userEntity);
 		$em->flush();
 
