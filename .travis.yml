@@ -34,7 +34,7 @@ script:
   - RUNLEVEL=10 vendor/bin/run-tests tests/ --colors 1 -C
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp app/ --ignore=bootstrap.php
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php,phpt --encoding=utf-8 --tab-width=4 -sp tests/ --ignore=*/output/*,_temp/*,bootstrap.php
-  - php www/index.php orm:validate-schema --ansi
+  - php www/index.php orm:validate-schema --ansi --debug-mode
 
 
 after_failure:
