@@ -1,0 +1,18 @@
+---
+
+- name: install latest apache2
+  apt: name=apache2 state=latest
+  notify:
+    - restart apache
+
+- name: add site config file
+  template: src=000-default.conf dest=/etc/apache2/sites-available/000-default.conf
+  notify:
+    - restart apache
+
+- name: enable apache2 modules
+  shell: a2enmod rewrite
+  notify:
+    - restart apache
+
+...

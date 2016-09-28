@@ -1,0 +1,7 @@
+[amazon]
+aws-ec2         install_dir=/var/www/html
+
+
+[webservers]
+webserver1      ansible_host=127.0.0.1 ansible_connection=local install_dir=/tmp/zlml_1
+webserver2      ansible_host=127.0.0.1 ansible_connection=local install_dir=/tmp/zlml_2

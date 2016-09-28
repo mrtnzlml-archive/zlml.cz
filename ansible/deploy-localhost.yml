@@ -1,0 +1,11 @@
+---
+
+- name: configure and deploy the webservers and application code
+  hosts: webservers
+  connection: local
+  gather_facts: False
+  roles:
+    - common
+    - webservers
+
+...

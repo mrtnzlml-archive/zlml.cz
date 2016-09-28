@@ -1,0 +1,35 @@
+---
+
+- name: remove original Apache index.hml
+  file: state=absent path=/var/www/html/index.html
+
+- name: ensure clone destination exists
+  file: state=directory path={{ install_dir }}
+
+- name: clone repository
+  git:
+    repo=https://github.com/mrtnzlml/zlml.cz.git
+    dest={{ install_dir }}
+    recursive=yes
+  register: git_result
+
+- name: make log dir writable
+  file: state=directory path={{ install_dir }}/log mode=0777
+
+- name: ensure temp dir exists
+  file: state=directory path={{ install_dir }}/temp mode=0777
+
+- name: clear cache directory
+  when: git_result.changed
+  file: path={{ install_dir }}/temp/cache state=absent
+
+- name: ensure cache directory exists after cleanup
+  when: git_result.changed
+  file: path={{ install_dir }}/temp/cache state=directory
+
+- name: install composer packages
+  when: git_result.changed
+  composer:
+    working_dir: '{{ install_dir }}'
+
+...

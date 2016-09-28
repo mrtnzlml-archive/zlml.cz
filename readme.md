@@ -54,6 +54,11 @@ Then you have to create database for this website. You can use Adminer tool in
 There is also automatic (beta) installer. Just install this project using Composer and open
 it in your favourite browser. I am still working on it...
 
+Deployment
+----------
+
+	ansible-playbook ansible/deploy.yml
+
 Amazing administration
 -----------------------
 ![Administration](www/img/screens/admin.png)

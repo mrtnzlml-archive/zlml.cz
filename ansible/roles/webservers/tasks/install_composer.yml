@@ -1,0 +1,12 @@
+---
+
+- name: download Composer
+  shell: php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+- name: install Composer
+  shell: php composer-setup.php
+
+- name: make Composer executable globally
+  shell: mv composer.phar /usr/local/bin/composer
+
+...

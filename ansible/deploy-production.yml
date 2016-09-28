@@ -1,0 +1,11 @@
+---
+
+- name: configure and deploy the webservers and application code
+  hosts: amazon
+  gather_facts: False
+  sudo: yes
+  roles:
+    - common
+    - webservers
+
+...
