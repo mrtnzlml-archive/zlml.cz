@@ -16,7 +16,7 @@ after_failure:
   - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
 
 before_script:
-  - mysql -u root -e 'create database zlml.cz;'
+  - mysql -u root -e 'create database zlml;'
   - cp tests/config.local.neon app/config/config.local.neon
   - composer selfupdate
   - composer install --no-interaction --prefer-dist --no-progress
