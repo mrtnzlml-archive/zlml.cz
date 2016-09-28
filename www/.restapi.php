@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 
-<?php
+<?php declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 

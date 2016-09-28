@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 //TODO: test pro AOP, jestli jsou všechny \Model\ třídy zabezpečeny v aspektu...
 
@@ -12,7 +12,7 @@ if (!class_exists('Tester\Assert')) {
 $loader = new \Nette\Loaders\RobotLoader();
 $loader->setCacheStorage(new \Nette\Caching\Storages\MemoryStorage());
 $loader->addDirectory(__DIR__ . '/../app');
-$loader->addDirectory(__DIR__ . '/../libs');
+$loader->addDirectory(__DIR__ . '/../src');
 $loader->addDirectory(__DIR__ . '/../tests');
 $loader->register();
 

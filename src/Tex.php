@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * FSHL 2.1.0                                  | Fast Syntax HighLighter |

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 // Access only from localhost:
 if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) || !isset($_SERVER['REMOTE_ADDR']) ||

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 $position = $_SERVER['argc'] - 1;
 

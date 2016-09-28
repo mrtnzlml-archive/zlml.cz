@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 class fshlTexy extends \Texy\Texy
 {
@@ -18,6 +18,7 @@ class fshlTexy extends \Texy\Texy
 		$content = \Texy\Texy::outdent($content);
 
 		//Set correct lexer:
+		$lang = $lang ?: '';
 		switch (strtoupper($lang)) {
 			case 'C':
 			case 'CPP':

@@ -3,7 +3,7 @@ Source code of zlml.cz [1.3.1]
 
 Master branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/zlml.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/zlml.cz)
 
-It's tested against at least PHP 5.4.29. The lower version of PHP is not supported, sorry.
+It needs at least PHP 7.0. The lower version of PHP is not supported, sorry - move on.
 
 What's on the background
 ------------------------
