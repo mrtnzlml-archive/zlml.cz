@@ -4,10 +4,8 @@ namespace App\AdminModule\Components\UserEditForm;
 
 use App\Users\Entities\User;
 use App\Users\Users;
-use Nette\{
-	Application\UI,
-	Security\Passwords
-};
+use Nette\Application\UI;
+use Nette\Security\Passwords;
 
 class UserEditForm extends UI\Control
 {

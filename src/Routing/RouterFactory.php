@@ -4,10 +4,8 @@ namespace App\Routing;
 
 use App\Posts\Posts;
 use Nette;
-use Nette\Application\Routers\{
-	Route,
-	RouteList
-};
+use Nette\Application\Routers\Route;
+use Nette\Application\Routers\RouteList;
 
 /**
  * Router factory.

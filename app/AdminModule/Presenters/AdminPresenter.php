@@ -2,14 +2,13 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\{
-	AdminModule,
-	FrontModule\Components\VisualPaginator\IVisualPaginatorFactory,
-	Pictures\Pictures,
-	Security\Authorizator,
-	Tags\Tags,
-	Users\Users
-};
+use App\AdminModule\Components\PostForm\IPostFormFactory;
+use App\AdminModule\Components\UserEditForm\IUserEditFormFactory;
+use App\FrontModule\Components\VisualPaginator\IVisualPaginatorFactory;
+use App\Pictures\Pictures;
+use App\Security\Authorizator;
+use App\Tags\Tags;
+use App\Users\Users;
 use Nette;
 use Nextras\Application\UI\SecuredLinksPresenterTrait;
 
@@ -27,10 +26,10 @@ class AdminPresenter extends BasePresenter
 	/** @var Users @inject */
 	public $users;
 
-	/** @var AdminModule\Components\PostForm\IPostFormFactory @inject */
+	/** @var IPostFormFactory @inject */
 	public $postFormFactory;
 
-	/** @var AdminModule\Components\UserEditForm\IUserEditFormFactory @inject */
+	/** @var IUserEditFormFactory @inject */
 	public $userEditFormFactory;
 
 	/** @var IVisualPaginatorFactory @inject */
@@ -152,8 +151,8 @@ class AdminPresenter extends BasePresenter
 				->setValue('#' . $tag->color);
 			$form->addSubmit('update' . $tag->id, 'Změnit barvu')
 				->onClick[] = function ($button) use ($tag) {
-				$this->colorSucceeded($button, $tag->id);
-			};
+					$this->colorSucceeded($button, $tag->id);
+				};
 		}
 		return $form;
 	}
@@ -262,7 +261,7 @@ class AdminPresenter extends BasePresenter
 
 	public function handleUploadReciever()
 	{
-		$uploader = new \UploadHandler();
+		$uploader = new \App\Pictures\UploadHandler;
 		$uploader->allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
 		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');

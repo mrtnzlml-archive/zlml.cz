@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace App\Texy;
 
@@ -53,7 +53,7 @@ class FshlTexy extends \Texy\Texy
 				$lexer = new \FSHL\Lexer\Sql;
 				break;
 			case 'TEX':
-				$lexer = new \FSHL\Lexer\Tex;
+				$lexer = new \App\Texy\Tex;
 				break;
 			case 'TEXY':
 				$lexer = new \FSHL\Lexer\Texy;

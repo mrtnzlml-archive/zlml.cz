@@ -1,20 +1,27 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
+
+namespace App\Pictures;
 
 class UploadHandler
 {
 
 	public $allowedExtensions = [];
+
 	public $sizeLimit = NULL;
+
 	public $inputName = 'qqfile';
+
 	public $chunksFolder = 'chunks';
 
 	public $chunksCleanupProbability = 0.001; // Once in 1000 requests on avg
+
 	public $chunksExpireIn = 604800; // One week
 
 	protected $uploadName;
+
 	protected $uuid;
 
-	function __construct()
+	public function __construct()
 	{
 		$this->sizeLimit = $this->toBytes(ini_get('upload_max_filesize'));
 	}
@@ -24,11 +31,13 @@ class UploadHandler
 	 */
 	public function getName()
 	{
-		if (isset($_REQUEST['qqfilename']))
+		if (isset($_REQUEST['qqfilename'])) {
 			return $_REQUEST['qqfilename'];
+		}
 
-		if (isset($_FILES[$this->inputName]))
+		if (isset($_FILES[$this->inputName])) {
 			return $_FILES[$this->inputName]['name'];
+		}
 	}
 
 	/**
@@ -49,12 +58,13 @@ class UploadHandler
 	 *
 	 * @param string $uploadDirectory Target directory.
 	 * @param string $name Overwrites the name of the file.
+	 *
+	 * @return array
 	 */
 	public function handleUpload($uploadDirectory, $name = NULL)
 	{
-
 		if (is_writable($this->chunksFolder) &&
-			1 == mt_rand(1, 1 / $this->chunksCleanupProbability)
+			mt_rand(1, 1 / $this->chunksCleanupProbability) == 1
 		) {
 
 			// Run garbage collection
@@ -67,7 +77,7 @@ class UploadHandler
 			$this->toBytes(ini_get('upload_max_filesize')) < $this->sizeLimit
 		) {
 			$size = max(1, $this->sizeLimit / 1024 / 1024) . 'M';
-			return ['error' => "Server error. Increase post_max_size and upload_max_filesize to " . $size];
+			return ['error' => 'Server error. Increase post_max_size and upload_max_filesize to ' . $size];
 		}
 
 		if ($this->isInaccessible($uploadDirectory)) {
@@ -75,9 +85,9 @@ class UploadHandler
 		}
 
 		if (!isset($_SERVER['CONTENT_TYPE'])) {
-			return ['error' => "No files were uploaded."];
-		} else if (strpos(strtolower($_SERVER['CONTENT_TYPE']), 'multipart/') !== 0) {
-			return ['error' => "Server error. Not a multipart request. Please set forceMultipart to default value (true)."];
+			return ['error' => 'No files were uploaded.'];
+		} elseif (strpos(strtolower($_SERVER['CONTENT_TYPE']), 'multipart/') !== 0) {
+			return ['error' => 'Server error. Not a multipart request. Please set forceMultipart to default value (true).'];
 		}
 
 		// Get size and name
@@ -106,7 +116,7 @@ class UploadHandler
 		$pathinfo = pathinfo($name);
 		$ext = isset($pathinfo['extension']) ? $pathinfo['extension'] : '';
 
-		if ($this->allowedExtensions && !in_array(strtolower($ext), array_map("strtolower", $this->allowedExtensions))) {
+		if ($this->allowedExtensions && !in_array(strtolower($ext), array_map('strtolower', $this->allowedExtensions))) {
 			$these = implode(', ', $this->allowedExtensions);
 			return ['error' => 'File has an invalid extension, it should be one of ' . $these . '.'];
 		}
@@ -116,7 +126,7 @@ class UploadHandler
 
 		$this->uuid = $uuid = $_REQUEST['qquuid'];
 		if ($totalParts > 1) {
-			# chunked upload
+			// chunked upload
 
 			$chunksFolder = $this->chunksFolder;
 			$partIndex = (int)$_REQUEST['qqpartindex'];
@@ -135,7 +145,7 @@ class UploadHandler
 			$success = move_uploaded_file($_FILES[$this->inputName]['tmp_name'], $target);
 
 			// Last chunk saved successfully
-			if ($success AND ($totalParts - 1 == $partIndex)) {
+			if ($success && ($totalParts - 1 == $partIndex)) {
 
 				$target = join(DIRECTORY_SEPARATOR, [$uploadDirectory, $uuid, $name]);
 				//$target = $this->getUniqueTargetPath($uploadDirectory, $name);
@@ -147,7 +157,7 @@ class UploadHandler
 				$target = fopen($target, 'wb');
 
 				for ($i = 0; $i < $totalParts; $i++) {
-					$chunk = fopen($targetFolder . DIRECTORY_SEPARATOR . $i, "rb");
+					$chunk = fopen($targetFolder . DIRECTORY_SEPARATOR . $i, 'rb');
 					stream_copy_to_stream($chunk, $target);
 					fclose($chunk);
 				}
@@ -161,13 +171,12 @@ class UploadHandler
 
 				rmdir($targetFolder);
 
-				return ["success" => TRUE, "uuid" => $uuid];
+				return ['success' => TRUE, 'uuid' => $uuid];
 			}
 
-			return ["success" => TRUE, "uuid" => $uuid];
-
+			return ['success' => TRUE, 'uuid' => $uuid];
 		} else {
-			# non-chunked upload
+			// non-chunked upload
 
 			$target = join(DIRECTORY_SEPARATOR, [$uploadDirectory, $uuid, $name]);
 			//$target = $this->getUniqueTargetPath($uploadDirectory, $name);
@@ -179,12 +188,14 @@ class UploadHandler
 					mkdir(dirname($target));
 				}
 				if (move_uploaded_file($file['tmp_name'], $target)) {
-					return ['success' => TRUE, "uuid" => $uuid];
+					return ['success' => TRUE, 'uuid' => $uuid];
 				}
 			}
 
-			return ['error' => 'Could not save uploaded file.' .
-				'The upload was cancelled, or server error encountered'];
+			return [
+				'error' => 'Could not save uploaded file.' .
+					'The upload was cancelled, or server error encountered',
+			];
 		}
 	}
 
@@ -194,11 +205,12 @@ class UploadHandler
 	 * @param string $uploadDirectory Target directory.
 	 * @params string $name Overwrites the name of the file.
 	 *
+	 * @return array
 	 */
 	public function handleDelete($uploadDirectory, $name = NULL)
 	{
 		if ($this->isInaccessible($uploadDirectory)) {
-			return ['error' => "Server error. Uploads directory isn't writable" . ((!$this->isWindows()) ? " or executable." : ".")];
+			return ['error' => "Server error. Uploads directory isn't writable" . ((!$this->isWindows()) ? ' or executable.' : '.')];
 		}
 
 		$targetFolder = $uploadDirectory;
@@ -210,14 +222,14 @@ class UploadHandler
 		print_r($target);
 		if (is_dir($target)) {
 			$this->removeDir($target);
-			return ["success" => TRUE, "uuid" => $uuid];
+			return ['success' => TRUE, 'uuid' => $uuid];
 		} else {
-			return ["success" => FALSE,
-				"error" => "File not found! Unable to delete.",
-				"path" => $uuid
+			return [
+				'success' => FALSE,
+				'error' => 'File not found! Unable to delete.',
+				'path' => $uuid,
 			];
 		}
-
 	}
 
 	/**
@@ -226,6 +238,8 @@ class UploadHandler
 	 *
 	 * @param string $uploadDirectory Target directory
 	 * @param string $filename The name of the file to use.
+	 *
+	 * @return bool|string
 	 */
 	protected function getUniqueTargetPath($uploadDirectory, $filename)
 	{
@@ -275,13 +289,15 @@ class UploadHandler
 	protected function cleanupChunks()
 	{
 		foreach (scandir($this->chunksFolder) as $item) {
-			if ($item == "." || $item == "..")
+			if ($item == '.' || $item == '..') {
 				continue;
+			}
 
 			$path = $this->chunksFolder . DIRECTORY_SEPARATOR . $item;
 
-			if (!is_dir($path))
+			if (!is_dir($path)) {
 				continue;
+			}
 
 			if (time() - filemtime($path) > $this->chunksExpireIn) {
 				$this->removeDir($path);
@@ -297,15 +313,15 @@ class UploadHandler
 	protected function removeDir($dir)
 	{
 		foreach (scandir($dir) as $item) {
-			if ($item == "." || $item == "..")
+			if ($item == '.' || $item == '..') {
 				continue;
+			}
 
 			if (is_dir($item)) {
-				removeDir($item);
+				$this->removeDir($item);
 			} else {
 				unlink(join(DIRECTORY_SEPARATOR, [$dir, $item]));
 			}
-
 		}
 		rmdir($dir);
 	}
@@ -314,6 +330,8 @@ class UploadHandler
 	 * Converts a given size with units to bytes.
 	 *
 	 * @param string $str
+	 *
+	 * @return int|string
 	 */
 	protected function toBytes($str)
 	{
@@ -322,8 +340,10 @@ class UploadHandler
 		switch ($last) {
 			case 'g':
 				$val *= 1024;
+				//intentionally missing break
 			case 'm':
 				$val *= 1024;
+				//intentionally missing break
 			case 'k':
 				$val *= 1024;
 		}
@@ -340,6 +360,8 @@ class UploadHandler
 	 * otherwise, it checks additionally for executable status (like before).
 	 *
 	 * @param string $directory The target directory to test access
+	 *
+	 * @return bool
 	 */
 	protected function isInaccessible($directory)
 	{

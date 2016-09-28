@@ -2,10 +2,8 @@
 
 namespace App\FrontModule\Presenters;
 
-use App\{
-	Posts\Posts,
-	Settings\Settings
-};
+use App\Posts\Posts;
+use App\Settings\Settings;
 use Latte;
 use Nette;
 use Nette\Application\UI;

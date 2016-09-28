@@ -2,11 +2,9 @@
 
 namespace App\AdminModule\Components\PostForm;
 
-use App\{
-	Posts\Posts,
-	Tags\Tags
-};
-use Entity;
+use App\Posts\Entities\Post;
+use App\Posts\Posts;
+use App\Tags\Tags;
 use Nette;
 use Nette\Application\UI;
 
@@ -75,7 +73,7 @@ class PostForm extends UI\Control
 	{
 		try {
 			if (!$this->post) {
-				$this->post = new Entity\Post();
+				$this->post = new Post;
 				$this->post->date = new \DateTime();
 			}
 			$this->post->publish_date = $vals->publish_date ? new \DateTime($vals->publish_date) : new \DateTime('now');

@@ -2,11 +2,9 @@
 
 namespace App\Pictures;
 
-use App\{
-	AdminModule\Components\AdminMenu\IAdminMenuFactory,
-	FrontModule\Components\VisualPaginator\VisualPaginator
-};
-use Entity;
+use App\AdminModule\Components\AdminMenu\IAdminMenuFactory;
+use App\FrontModule\Components\VisualPaginator\VisualPaginator;
+use App\Pictures\Entities\Picture;
 use Nette;
 
 class PicturesPresenter extends \App\FrontModule\Presenters\BasePresenter
@@ -29,7 +27,7 @@ class PicturesPresenter extends \App\FrontModule\Presenters\BasePresenter
 
 	public function handleUploadReciever()
 	{
-		$uploader = new \UploadHandler();
+		$uploader = new \App\Pictures\UploadHandler;
 		$uploader->allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
 		$uploader->chunksFolder = __DIR__ . '/../../www/chunks';
 		$name = Nette\Utils\Strings::webalize($uploader->getName(), '.');
@@ -38,7 +36,7 @@ class PicturesPresenter extends \App\FrontModule\Presenters\BasePresenter
 		try {
 			$picture = $this->pictures->findOneBy(['uuid' => $uploader->getUuid()]);
 			if (!$picture) { //FIXME: toto není optimální (zejména kvůli rychlosti)
-				$picture = new Entity\Picture();
+				$picture = new Picture;
 			}
 			$picture->uuid = $uploader->getUuid();
 			$picture->name = $name;
@@ -79,7 +77,8 @@ class PicturesPresenter extends \App\FrontModule\Presenters\BasePresenter
 		do {
 			$list[] = "$dir/templates/@layout.latte";
 			$dir = dirname($dir);
-		} while ($dir && ($name = substr($name, 0, strrpos($name, ':'))));
+			$name = substr($name, 0, strrpos($name, ':'));
+		} while ($dir && $name);
 		return $list;
 	}
 

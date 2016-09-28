@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 /**
  * FSHL 2.1.0                                  | Fast Syntax HighLighter |
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  */
 
-namespace FSHL\Lexer;
+namespace App\Texy;
 
 use FSHL;
 use FSHL\Generator;
@@ -71,7 +71,7 @@ class Tex implements FSHL\Lexer
 				],
 				Generator::STATE_FLAG_NONE,
 				'tex-out',
-				NULL
+				NULL,
 			],
 			'MATH' => [
 				[
@@ -81,7 +81,7 @@ class Tex implements FSHL\Lexer
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-math',
-				NULL
+				NULL,
 			],
 			'FUNC' => [
 				[
@@ -90,17 +90,17 @@ class Tex implements FSHL\Lexer
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-func',
-				NULL
+				NULL,
 			],
 			'ATTR1' => [
 				[
 					'LINE' => [Generator::STATE_SELF, Generator::NEXT],
 					'TAB' => [Generator::STATE_SELF, Generator::NEXT],
-					'}' => [Generator::STATE_RETURN, Generator::CURRENT]
+					'}' => [Generator::STATE_RETURN, Generator::CURRENT],
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-attr1',
-				NULL
+				NULL,
 			],
 			'ATTR2' => [
 				[
@@ -110,7 +110,7 @@ class Tex implements FSHL\Lexer
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-attr2',
-				NULL
+				NULL,
 			],
 			'COMMENT' => [
 				[
@@ -119,7 +119,7 @@ class Tex implements FSHL\Lexer
 				],
 				Generator::STATE_FLAG_RECURSION,
 				'tex-comment',
-				NULL
+				NULL,
 			],
 		];
 	}
@@ -143,4 +143,5 @@ class Tex implements FSHL\Lexer
 	{
 		return [];
 	}
+
 }

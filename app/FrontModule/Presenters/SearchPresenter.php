@@ -2,10 +2,8 @@
 
 namespace App\FrontModule\Presenters;
 
-use App\{
-	Posts\Posts,
-	Tags\Tags
-};
+use App\Posts\Posts;
+use App\Tags\Tags;
 use Nette\Utils\Strings;
 
 class SearchPresenter extends BasePresenter
