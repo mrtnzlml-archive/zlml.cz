@@ -22,6 +22,7 @@ env:
 before_script:
   - mysql --version
   - mysql -u root -e 'create database zlml;'
+  - mysql -u root zlml < zlml.sql
   - cp tests/config.local.neon config/config.local.neon
   - composer selfupdate
   - composer install --no-interaction --prefer-dist --no-progress
