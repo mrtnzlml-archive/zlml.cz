@@ -22,7 +22,7 @@ before_script:
 
 script:
   - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --exclude vendor-client --blame
-  - vendor/bin/run-tests -C tests/
+  - RUNLEVEL=10 vendor/bin/run-tests tests/ --colors 1 -C
 
 
 after_failure:
