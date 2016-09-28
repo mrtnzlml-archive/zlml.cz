@@ -9,9 +9,6 @@ vendor-client/*
 !web.config
 !.keep
 
-.htdeployment
-deployment.log
 composer.lock
-tests/coverage.html
 www/webtemp
 config.local.neon
