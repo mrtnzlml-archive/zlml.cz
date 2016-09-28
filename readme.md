@@ -1,4 +1,4 @@
-Source code of zlml.cz [1.3.1]
+Source code of zlml.cz [2.0]
 ====================================
 
 Master branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/zlml.cz) and Develop branch [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=develop)](https://travis-ci.org/mrtnzlml/zlml.cz)
