@@ -1,0 +1,2 @@
+services:
+	- App\Tags\Tags(@doctrine.dao(App\Tags\Entities\Tag))

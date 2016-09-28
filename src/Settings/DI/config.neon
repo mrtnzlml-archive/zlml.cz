@@ -1,0 +1,2 @@
+services:
+	- App\Settings\Settings(@doctrine.dao(App\Settings\Entities\Setting))

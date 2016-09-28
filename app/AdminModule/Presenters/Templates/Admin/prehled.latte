@@ -1,0 +1,50 @@
+{var $robots = 'noindex'}
+{block content}
+	<div class="row">
+		<div class="col-lg-3">
+			{include menu.latte}
+		</div>
+		<div class="col-lg-9">
+			<h2>Přehled článků</h2>
+			{if !count($posts)}
+				<div class="alert alert-info">
+					Žádný příspěvek zatím není vytvořen. Vyzkoušejte to, je to opravdu jednoduché&hellip; (-:
+				</div>
+			{/if}
+			<table class="table">
+				{foreach $posts as $post}
+					<tr>
+						<td>
+							<span n:if="$post->draft" class="label label-success">DRAFT</span>
+							<a n:href=":Front:Single:article $post->slug"
+							   title="{$post->body|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500}">
+								{$post->title}
+							</a>
+						</td>
+						<td>
+							{foreach $post->tags as $tag}
+								<a n:href=":Front:Search:default, $tag->name" style="text-decoration:none">
+									<span class="label hidden-print"
+									      style="background: #{$tag->color}">{$tag->name}</span>
+								</a>
+							{/foreach}
+						</td>
+						<td>
+							<span style="color:grey"><abbr
+										title="Date">{$post->date|date:'j. n. Y h:m'}</abbr></span><br>
+						</td>
+						<td>
+							<div class="btn-group">
+								<a n:href=":Admin:Admin:default, id => $post->id"><button class="btn btn-info">Edit</button></a>
+								<a n:href="delete! $post->id" data-confirm="Opravdu chcete smazat článek?"><button class="btn btn-danger">Delete</button></a>
+							</div>
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+			<div class="row col-lg-12 text-xs-center">
+				{control paginator}
+			</div>
+		</div>
+	</div>
+{/block}

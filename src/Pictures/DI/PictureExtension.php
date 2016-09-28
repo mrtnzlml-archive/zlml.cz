@@ -2,13 +2,17 @@
 
 namespace App\Pictures\DI;
 
+use App\AdminModule\Components\AdminMenu\MenuItem;
 use Nette\Application\Routers\Route;
 use Nette\PhpGenerator\PhpLiteral;
 
-class PictureExtension extends \Nette\DI\CompilerExtension
+class PictureExtension extends \Mrtnzlml\CompilerExtension
 {
 
-	//TODO: instalace do databáze
+	public function loadConfiguration()
+	{
+		$this->addConfig(__DIR__ . '/config.neon');
+	}
 
 	public function beforeCompile()
 	{
@@ -18,7 +22,7 @@ class PictureExtension extends \Nette\DI\CompilerExtension
 		$builder->getDefinition('nette.presenterFactory')->addSetup('setMapping', [['App' => 'App\\*Module\\*Presenter']]);
 		//Admin Menu:
 		$priorityQueue = new \SplPriorityQueue();
-		$menuItem = new \Cntrl\MenuItem();
+		$menuItem = new MenuItem;
 		$menuItem->setHeading('Nahrát nový obrázek');
 		$menuItem->setText('Zde nahrajte obrázky');
 		$menuItem->setLink(':Admin:pictures');

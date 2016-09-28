@@ -1,0 +1,2 @@
+services:
+	- App\Posts\Posts(@doctrine.dao(App\Posts\Entities\Post))

@@ -16,6 +16,7 @@
     "kukulich/fshl": "^2.1",
     "latte/latte": "^2.4",
     "leafo/lessphp": "^0.4",
+    "mrtnzlml/compiler-extension": "^1.0",
     "nette/application": "^2.4",
     "nette/bootstrap": "^2.4",
     "nette/caching": "^2.5",
@@ -23,7 +24,6 @@
     "nette/forms": "^2.4",
     "nette/http": "^2.4",
     "nette/php-generator": "^2.4",
-    "nette/robot-loader": "^2.4",
     "nette/security": "^2.4",
     "nette/tokenizer": "^2.2",
     "nette/utils": "^2.4",
@@ -39,5 +39,21 @@
     "mrtnzlml/testbench": "dev-transactional-db-tests",
     "nette/tester": "2.0.x-dev as v1.7",
     "slevomat/coding-standard": "^1.1"
-  }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": [
+        "app/",
+        "src/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": [
+        "tests/"
+      ]
+    }
+  },
+  "minimum-stability": "stable"
 }
