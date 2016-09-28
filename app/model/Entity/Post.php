@@ -7,7 +7,14 @@ use Kdyby\Doctrine;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="posts")
+ * @ORM\Table(
+ *     name="posts",
+ *     indexes={
+ *          @ORM\Index(columns={"title", "body"}, flags={"fulltext"}),
+ *          @ORM\Index(columns={"title"}, flags={"fulltext"}),
+ *          @ORM\Index(columns={"body"}, flags={"fulltext"})
+ *      }
+ * )
  *
  * @method setTitle(string)
  * @method setSlug(string)

@@ -70,7 +70,7 @@ class AdminPresenterTest extends \Tester\TestCase
 			$this->checkForm('Admin:Admin:userEdit', 'userEditForm-form', [
 				'username' => 'Username',
 				'password' => 'Password',
-				'role' => 'demo',
+				'role' => 'admin',
 			]);
 		}, \Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Zadejte prosím heslo ještě jednou pro kontrolu.");
 
@@ -79,7 +79,7 @@ class AdminPresenterTest extends \Tester\TestCase
 				'username' => 'Username',
 				'password' => 'Password',
 				'passwordVerify' => 'Password2',
-				'role' => 'demo',
+				'role' => 'admin',
 			]);
 		}, \Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Hesla se neshodují.");
 
@@ -87,7 +87,7 @@ class AdminPresenterTest extends \Tester\TestCase
 			'username' => 'Username',
 			'password' => 'Password',
 			'passwordVerify' => 'Password',
-			'role' => 'demo',
+			'role' => 'admin',
 		], '/admin/users');
 
 		//FIXME: Invalid security token for signal 'deleteUser'

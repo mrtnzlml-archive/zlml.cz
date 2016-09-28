@@ -9,7 +9,6 @@ services:
 	- Model\Authorizator
 	- Model\Pictures(@doctrine.dao(Entity\Picture))
 	- Model\Posts(@doctrine.dao(Entity\Post))
-	- Model\PostsMirror(@doctrine.dao(Entity\PostMirror))
 	- Model\Settings(@doctrine.dao(Entity\Setting))
 	- Model\Tags(@doctrine.dao(Entity\Tag))
 	- Model\Users(@doctrine.dao(Entity\User))

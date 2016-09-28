@@ -25,7 +25,6 @@ di:
 
 events:
 	subscribers:
-		- App\Listeners\PostsListener
 		- App\Listeners\RestrictListener
 
 

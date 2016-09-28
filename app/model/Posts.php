@@ -12,10 +12,6 @@ use Nette;
 class Posts extends Nette\Object
 {
 
-	public $onSave = [];
-
-	public $onDelete = [];
-
 	/** @var \Kdyby\Doctrine\EntityDao */
 	private $dao;
 
@@ -33,7 +29,6 @@ class Posts extends Nette\Object
 	public function save($entity = NULL, $relations = NULL)
 	{
 		$entity = $this->dao->save($entity, $relations);
-		$this->onSave($entity->id);
 		return $entity;
 	}
 
@@ -93,7 +88,7 @@ class Posts extends Nette\Object
 		$rsm->addScalarResult('title_score', 'title_score');
 		$rsm->addScalarResult('body_score', 'body_score');
 		$sql = "SELECT id, 5 * MATCH(title) AGAINST (?) AS title_score, MATCH(body) AGAINST (?) AS body_score
-				FROM mirror_posts WHERE MATCH(title, body) AGAINST(? IN BOOLEAN MODE)$where
+				FROM posts WHERE MATCH(title, body) AGAINST(? IN BOOLEAN MODE)$where
 				ORDER BY 5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC";
 		$query = $em->createNativeQuery($sql, $rsm);
 		$query->setParameters([$search, $search, $search, $search, $search]);
@@ -115,7 +110,6 @@ class Posts extends Nette\Object
 
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
 	{
-		$this->onDelete($entity->id);
 		$this->dao->delete($entity, $relations, $flush);
 	}
 
