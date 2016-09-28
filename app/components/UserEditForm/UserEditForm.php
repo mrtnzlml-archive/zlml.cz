@@ -54,8 +54,8 @@ class UserEditForm extends UI\Control
 		$form->addPassword('password', 'Nové heslo k tomuto účtu:')
 			->setRequired('Zadejte prosím své stávající, nebo nové heslo.');
 		$form->addPassword('passwordVerify', 'Heslo pro kontrolu:')
-			->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu')
-			->addRule(UI\Form::EQUAL, 'Hesla se neshodují', $form['password']);
+			->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu.')
+			->addRule(UI\Form::EQUAL, 'Hesla se neshodují.', $form['password']);
 		$form->addSelect('role', 'Role:', $this->roles)
 			->setDefaultValue($this->account->role);
 		$form->addSubmit('save', 'Uložit změny');

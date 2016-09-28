@@ -1,9 +1,8 @@
-#
-# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
-#
-# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
 # http://nette.org/security-warning
-#
+
+includes:
+	- webloader.neon
 
 php:
 	date.timezone: Europe/Prague
@@ -26,7 +25,6 @@ services:
 	- Model\Authenticator
 	- Model\Authorizator
 	- Model\Pictures(@doctrine.dao(Entity\Picture))
-	- Model\Pingbacks(@doctrine.dao(Entity\Pingback))
 	- Model\Posts(@doctrine.dao(Entity\Post))
 	- Model\PostsMirror(@doctrine.dao(Entity\PostMirror))
 	- Model\Settings(@doctrine.dao(Entity\Setting))
@@ -56,6 +54,3 @@ extensions:
 	events: Kdyby\Events\DI\EventsExtension
 	webloader: WebLoader\Nette\Extension
 	- PictureExtension
-
-includes:
-	- webloader.neon

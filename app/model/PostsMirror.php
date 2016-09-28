@@ -30,8 +30,6 @@ class PostsMirror extends Nette\Object
 	 * @param array $orderBy
 	 *
 	 * @return mixed|null|object
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneBy(array $criteria, array $orderBy = NULL)
 	{
@@ -43,9 +41,6 @@ class PostsMirror extends Nette\Object
 	 * @param null $relations
 	 *
 	 * @return array
-	 *
-	 * @Secure\Create(allow="admin")
-	 * @Secure\Update(allow="admin")
 	 */
 	public function save($entity = NULL, $relations = NULL)
 	{
@@ -56,8 +51,6 @@ class PostsMirror extends Nette\Object
 	 * @param $entity
 	 * @param null $relations
 	 * @param bool $flush
-	 *
-	 * @Secure\Delete(allow="admin")
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
 	{

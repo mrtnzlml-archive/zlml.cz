@@ -35,9 +35,9 @@
 							</small>
 						</h4>
 						<p>
-							{foreach $r->tags as $tag}
-								<a n:href="Search:default, $tag->name" style="text-decoration:none">
-										<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+							{foreach $r->tags as $tagEntity}
+								<a n:href="Search:default, $tagEntity->name" style="text-decoration:none">
+										<span class="label hidden-print" style="background: #{$tag->color}">{$tagEntity->name}</span>
 								</a>
 							{/foreach}
 							{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:600|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}

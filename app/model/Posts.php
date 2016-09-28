@@ -33,9 +33,6 @@ class Posts extends Nette\Object
 	 * @param null $relations
 	 *
 	 * @return array
-	 *
-	 * @Secure\Create(allow="admin")
-	 * @Secure\Update(allow="admin")
 	 */
 	public function save($entity = NULL, $relations = NULL)
 	{
@@ -51,8 +48,6 @@ class Posts extends Nette\Object
 	 * @param null $offset
 	 *
 	 * @return \ArrayIterator
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
 	{
@@ -71,8 +66,6 @@ class Posts extends Nette\Object
 	 * @param array $orderBy
 	 *
 	 * @return mixed|null|object
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneBy(array $criteria, array $orderBy = NULL)
 	{
@@ -83,8 +76,6 @@ class Posts extends Nette\Object
 	 * @param array $criteria
 	 *
 	 * @return mixed
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function countBy(array $criteria = [])
 	{
@@ -95,8 +86,6 @@ class Posts extends Nette\Object
 	 * @param $search
 	 *
 	 * @return array
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function fulltextSearch($search)
 	{
@@ -144,8 +133,6 @@ class Posts extends Nette\Object
 	 * @param $entity \Entity\Post
 	 * @param null $relations
 	 * @param bool $flush
-	 *
-	 * @Secure\Delete(allow="admin")
 	 */
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)
 	{

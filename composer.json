@@ -10,6 +10,12 @@
   ],
   "require": {
     "php": ">= 7.0",
+    "janmarek/webloader": "^2.5",
+    "kdyby/annotations": "^2.3",
+    "kdyby/doctrine": "^3.1",
+    "kukulich/fshl": "^2.1",
+    "latte/latte": "^2.4",
+    "leafo/lessphp": "^0.4",
     "nette/application": "^2.4",
     "nette/bootstrap": "^2.4",
     "nette/caching": "^2.5",
@@ -21,19 +27,14 @@
     "nette/security": "^2.4",
     "nette/tokenizer": "^2.2",
     "nette/utils": "^2.4",
-    "latte/latte": "^2.4",
-    "tracy/tracy": "^2.4",
-    "kukulich/fshl": "^2.1",
-    "janmarek/webloader": "^2.5",
-    "leafo/lessphp": "^0.4",
-    "kdyby/annotations": "^2.3",
-    "kdyby/doctrine": "^3.1",
-    "texy/texy": "dev-master",
-    "nextras/secured-links": "^1.3"
+    "nextras/secured-links": "^1.4",
+    "texy/texy": "^2.9",
+    "tracy/tracy": "^2.4"
   },
   "require-dev": {
     "dg/adminer-custom": "dev-master",
-    "nette/tester": "2.0.x-dev as v1.7",
-    "mrtnzlml/testbench": "dev-master"
+    "kdyby/doctrine-dbal-batchimport": "dev-master",
+    "mrtnzlml/testbench": "dev-transactional-db-tests",
+    "nette/tester": "2.0.x-dev as v1.7"
   }
 }

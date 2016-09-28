@@ -11,17 +11,14 @@ require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class ErrorPresenterTest extends \CustomTestCase
+class ErrorPresenterTest extends \Tester\TestCase
 {
 
-	public function __construct()
-	{
-		$this->openPresenter('Error:');
-	}
+	use \Testbench\TPresenter;
 
 	public function testRenderDefault()
 	{
-		$response = $this->check('default', ['exception' => 'ErrorPresenterTest']);
+		$response = $this->check('Error:default', ['exception' => 'ErrorPresenterTest']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 	}

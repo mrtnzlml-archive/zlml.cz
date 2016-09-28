@@ -10,34 +10,31 @@ require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class HomepagePresenterTest extends \CustomTestCase
+class HomepagePresenterTest extends \Tester\TestCase
 {
 
-	public function setUp()
-	{
-		$this->openPresenter('Homepage:');
-	}
+	use \Testbench\TPresenter;
 
 	public function testRenderDefault()
 	{
-		$this->checkAction('default');
+		$this->checkAction('Homepage:default');
 	}
 
 	public function testRenderDefaultPage2()
 	{
-		$this->checkAction('default', [
+		$this->checkAction('Homepage:default', [
 			'paginator-page' => 2,
 		]);
 	}
 
 	public function testRenderRss()
 	{
-		$this->checkRss('rss');
+		$this->checkRss('Homepage:rss');
 	}
 
 	public function testRenderSitemap()
 	{
-		$this->checkSitemap('sitemap');
+		$this->checkSitemap('Homepage:sitemap');
 	}
 
 }

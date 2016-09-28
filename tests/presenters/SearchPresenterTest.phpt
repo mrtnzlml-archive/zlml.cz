@@ -10,39 +10,30 @@ require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class SearchPresenterTest extends \CustomTestCase
+class SearchPresenterTest extends \Tester\TestCase
 {
 
-	public function setUp()
-	{
-		$this->openPresenter('Search:');
-	}
+	use \Testbench\TPresenter;
 
 	public function testRenderDefault()
 	{
-		$this->checkAction('default', ['search' => 'nette']);
+		$this->checkAction('Search:default', ['search' => 'nette']);
 	}
 
 	public function testRenderDefaultEmpty()
 	{
-		$this->checkAction('default', ['search' => 'pritomtodotazupravdepodobnenicvdatabazinenajdu']);
+		$this->checkAction('Search:default', ['search' => 'pritomtodotazupravdepodobnenicvdatabazinenajdu']);
 	}
 
 	public function testSearchForm()
 	{
-//		FIXME:
-		$this->checkForm('default', 'search', [
+		$this->checkForm('Search:default', 'search', [
 			'search' => 'test',
-		]);
-//		$this->checkRedirect('default', '/s/test', 'POST', [
-//			'do' => 'search-submit',
-//		], [
-//			'search' => 'test',
-//		]);
-//		FIXME:
-		$this->checkForm('default', 'search', [
-			'search' => 'ač óR ůz',
-		]);
+		], '/s/test');
+
+//		$this->checkForm('Search:default', 'search', [
+//			'search' => 'ač óR ůz',
+//		], '/s/ač%20óR%20ůz');
 	}
 
 }

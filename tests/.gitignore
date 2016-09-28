@@ -1,1 +1,5 @@
-/temp
+/_temp/
+
+*.actual
+*.expected
+databases.testbench

@@ -26,9 +26,6 @@ class Settings extends Nette\Object
 
 	/**
 	 * @param Nette\Utils\ArrayHash $vals
-	 *
-	 * @Secure\Create(allow="admin")
-	 * @Secure\Update(allow="admin")
 	 */
 	public function save(Nette\Utils\ArrayHash $vals)
 	{
@@ -67,8 +64,6 @@ class Settings extends Nette\Object
 	 * @param array $orderBy
 	 *
 	 * @return mixed|null|object
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneBy(array $criteria, array $orderBy = NULL)
 	{
@@ -79,8 +74,6 @@ class Settings extends Nette\Object
 	 * @param array $keys
 	 *
 	 * @return array
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function findByKeys(array $keys)
 	{
@@ -94,8 +87,6 @@ class Settings extends Nette\Object
 
 	/**
 	 * @return Nette\Utils\ArrayHash
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function findAllByKeys()
 	{
@@ -111,8 +102,6 @@ class Settings extends Nette\Object
 	 * @param $key
 	 *
 	 * @return int|null|string
-	 *
-	 * @Secure\Read(allow="guest")
 	 */
 	public function findOneByKey($key)
 	{

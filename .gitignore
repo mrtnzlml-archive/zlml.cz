@@ -11,4 +11,3 @@ vendor-client/*
 
 composer.lock
 www/webtemp
-config.local.neon

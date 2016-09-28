@@ -7,28 +7,21 @@ php:
 env:
   matrix:
     - DB=mysql
-    - DB=pgsql
-
-matrix:
-  allow_failures:
-    - env: DB=pgsql
 
 script:
-  - vendor/bin/tester tests -p php -s -c tests/php.ini
+  - vendor/bin/run-tests -C tests/
 
 after_failure:
   - cat app/config/config.local.neon;
   - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
 
 before_script:
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -u root -e 'create database blog_mysql;'; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database blog_pgsql;' -U postgres; fi"
+  - mysql -u root -e 'create database zlml.cz;'
+  - cp tests/config.local.neon app/config/config.local.neon
   - composer selfupdate
   - composer install --no-interaction --prefer-dist --no-progress
   - npm install -g bower
   - bower install
-  - sh -c "if [ '$DB' = 'mysql' ]; then php www/index.php -u root -n blog_mysql; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then php www/index.php -u postgres -n blog_pgsql -d pgsql; fi"
 
 notifications:
   email: false

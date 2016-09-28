@@ -11,87 +11,104 @@ require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class AdminPresenterTest extends \CustomTestCase
+class AdminPresenterTest extends \Tester\TestCase
 {
+
+	use \Testbench\TCompiledContainer;
+	use \Testbench\TPresenter;
 
 	/** @var Model\Users */
 	private $users;
+
 	/** @var Model\Posts */
 	private $articles;
 
-	private $action;
+	private $action = NULL;
 
 	public function setUp()
 	{
-		$this->openPresenter('Admin:Admin:');
-		$this->users = $this->getService('\Model\Users');
-		$this->articles = $this->getService('\Model\Posts');
+		$this->users = $this->getService(Model\Users::class);
+		$this->articles = $this->getService(Model\Posts::class);
 		$this->logIn(1, 'admin');
 	}
 
 	public function testRenderDefault()
 	{
-		$this->checkAction($this->action = 'default');
+		$this->checkAction($this->action = 'Admin:Admin:default');
 	}
 
 	public function testRenderDefaultEdit()
 	{
 		$article = $this->users->findOneBy([]);
-		$this->checkAction($this->action = 'default', [$article->getId()]);
+		$this->checkAction($this->action = 'Admin:Admin:default', [$article->getId()]);
 	}
 
 	public function testRenderPictures()
 	{
-		$this->checkAction($this->action = 'pictures');
+		$this->checkAction($this->action = 'Admin:Admin:pictures');
 	}
 
 	public function testRenderPrehled()
 	{
-		$this->checkAction($this->action = 'prehled');
+		$this->checkAction($this->action = 'Admin:Admin:prehled');
 	}
 
 	public function testRenderTags()
 	{
-		$this->checkAction($this->action = 'tags');
+		$this->checkAction($this->action = 'Admin:Admin:tags');
 	}
 
 	public function testRenderUsers()
 	{
-		$this->checkAction($this->action = 'users');
+		$this->checkAction($this->action = 'Admin:Admin:users');
 	}
 
 	public function testRenderUserEdit()
 	{
 		$user = $this->users->findOneBy([]);
-		$this->checkAction($this->action = 'userEdit', [$user->getId()]);
+		$this->checkAction($this->action = 'Admin:Admin:userEdit', [$user->getId()]);
 	}
 
-	/**
-	 * @skip
-	 */
 	public function testRenderUserEditForm()
 	{
-		/*$response = $this->tester->test('userEdit', 'POST', array(
-			'do' => 'userEditForm-form-submit',
-		), array(
+		Tester\Assert::error(function () {
+			$this->checkForm('Admin:Admin:userEdit', 'userEditForm-form', [
+				'username' => 'Username',
+				'password' => 'Password',
+				'role' => 'demo',
+			]);
+		}, Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Zadejte prosím heslo ještě jednou pro kontrolu.");
+
+		Tester\Assert::error(function () {
+			$this->checkForm('Admin:Admin:userEdit', 'userEditForm-form', [
+				'username' => 'Username',
+				'password' => 'Password',
+				'passwordVerify' => 'Password2',
+				'role' => 'demo',
+			]);
+		}, Tester\AssertException::class, "field 'passwordVerify' returned this error(s):\n  - Hesla se neshodují.");
+
+		$this->checkForm('Admin:Admin:userEdit', 'userEditForm-form', [
 			'username' => 'Username',
 			'password' => 'Password',
+			'passwordVerify' => 'Password',
 			'role' => 'demo',
-			'token' => 'token'
-		));
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);*/
-		//FIXME: CSRF
-		/*$user = $this->users->findOneBy(['username' => 'Username']);
-		$response = $this->tester->test('users', 'GET', array(
-			'do' => 'deleteUser',
-		), array(
-			'user_id' => $user->getId(),
-		));
-		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);*/
+		], '/admin/users');
+
+		//FIXME: Invalid security token for signal 'deleteUser'
+//		$user = $this->users->findOneBy(['username' => 'Username']);
+//		$response = $this->checkSignal('Admin:Admin:users', 'deleteUser', [
+//			'user_id' => $user->getId(),
+//		]);
+//		Tester\Assert::true($response instanceof Nette\Application\Responses\RedirectResponse);
 	}
 
 	public function tearDown()
 	{
+		if ($this->action === NULL) {
+			return;
+		}
+
 		$this->logOut();
 		$this->checkRedirect($this->action, '/sign/in');
 	}

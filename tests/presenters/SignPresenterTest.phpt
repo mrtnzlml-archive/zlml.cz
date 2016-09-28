@@ -10,56 +10,60 @@ require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class SignPresenterTest extends \CustomTestCase
+class SignPresenterTest extends \Tester\TestCase
 {
 
-	public function __construct()
+	use \Testbench\TCompiledContainer;
+	use \Testbench\TPresenter;
+
+	/** @var Nette\Security\User */
+	private $user;
+
+	public function setUp()
 	{
-		$this->openPresenter('Sign:');
+		$this->user = $this->getService(Nette\Security\User::class);
 	}
 
 	public function testRenderIn()
 	{
-		$this->checkAction('in');
+		$this->checkAction('Sign:in');
 	}
 
 	public function testRenderLoggedIn()
 	{
 		$this->logIn(1, 'admin');
-		$this->checkRedirect('in', '/admin');
+		$this->checkRedirect('Sign:in', '/admin');
 	}
 
-//	TODO: I have no idea how test it properly...
-//	public function testRenderLogOut()
-//	{
-//		$presenter = $this->getPresenter();
-//		$this->logIn(1, 'admin');
-//		Tester\Assert::true($presenter->user->isLoggedIn());
-//		$this->check('out');
-//		Tester\Assert::false($presenter->user->isLoggedIn());
-//	}
+	public function testRenderLogOut()
+	{
+		$this->logIn(1, 'admin');
+		Tester\Assert::true($this->user->isLoggedIn());
+		$this->checkForm('Admin:Admin:default', 'signOutForm', [], '/sign/in');
+		Tester\Assert::false($this->user->isLoggedIn());
+	}
 
 	public function testSignInForm()
 	{
-		$presenter = $this->getPresenter();
-		$response = $this->check('in', [
-			'do' => 'signInForm-signInForm-submit',
-		], [
-			'username' => 'Username',
-			'password' => 'Password',
-			'remember' => TRUE,
-		]);
-		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::false($presenter->user->isLoggedIn());
-		$response = $this->check('in', [
-			'do' => 'signInForm-signInForm-submit',
-		], [
-			'username' => 'Username',
-			'password' => 'Password',
-			'remember' => FALSE,
-		]);
-		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::false($presenter->user->isLoggedIn());
+		Tester\Assert::error(function () {
+			$response = $this->checkForm('Sign:in', 'signInForm-signInForm', [
+				'username' => 'Username',
+				'password' => 'Password',
+				'remember' => TRUE,
+			]);
+			Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
+		}, Tester\AssertException::class, 'Uživatelské jméno není správné.');
+		Tester\Assert::false($this->user->isLoggedIn());
+
+		Tester\Assert::error(function () {
+			$response = $this->checkForm('Sign:in', 'signInForm-signInForm', [
+				'username' => 'Username',
+				'password' => 'Password',
+				'remember' => FALSE,
+			]);
+			Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
+		}, Tester\AssertException::class, 'Uživatelské jméno není správné.');
+		Tester\Assert::false($this->user->isLoggedIn());
 	}
 
 }

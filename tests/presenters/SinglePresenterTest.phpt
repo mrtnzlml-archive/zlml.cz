@@ -11,60 +11,57 @@ require __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class SinglePresenterTest extends \CustomTestCase
+class SinglePresenterTest extends \Tester\TestCase
 {
+
+	use \Testbench\TCompiledContainer;
+	use \Testbench\TPresenter;
 
 	/** @var Model\Posts */
 	private $posts;
 
 	public function __construct()
 	{
-		$this->openPresenter('Single:');
-		$this->posts = $this->getService('Model\Posts');
+		$this->posts = $this->getService(Model\Posts::class);
 	}
 
 	public function testRenderAbout()
 	{
-		$this->checkAction('about');
+		$this->checkAction('Single:about');
 	}
 
 	/** @dataProvider dataArticles */
 	public function testRenderArticles($slug)
 	{
-		$this->checkAction('article', ['slug' => $slug]);
+		$this->checkAction('Single:article', ['slug' => $slug]);
 	}
 
 	public function testRedirectEmptyArticle()
 	{
-		$this->checkRedirect('article', '/');
+		$this->checkRedirect('Single:article', '/');
 	}
 
 	public function testNonWebalizedArticle()
 	{
-		$this->checkRedirect('article', '/rcs-rcs-5', ['slug' => 'rčš .rčš 5']);
+		$this->checkRedirect('Single:article', '/rcs-rcs-5', ['slug' => 'rčš .rčš 5']);
 	}
 
 	public function testForward()
 	{
 		/** @var Nette\Application\Responses\ForwardResponse $response */
-		$response = $this->check('article', ['slug' => 'about']);
+		$response = $this->check('Single:article', ['slug' => 'about']);
 		Tester\Assert::true($response instanceof Nette\Application\Responses\ForwardResponse);
 		//TODO: checkForward method in testbench...
 	}
 
-	public function testRenderDevelop()
-	{
-		$this->checkAction('develop');
-	}
-
 	public function testRenderObsah()
 	{
-		$this->checkAction('obsah');
+		$this->checkAction('Single:obsah');
 	}
 
 	public function testRenderReference()
 	{
-		$this->checkAction('reference');
+		$this->checkAction('Single:reference');
 	}
 
 	///// dataProviders /////
