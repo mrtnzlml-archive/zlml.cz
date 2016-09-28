@@ -13,8 +13,6 @@ class AdminPresenter extends BasePresenter
 
 	use SecuredLinksPresenterTrait;
 
-	public $onBeforeRestrictedFunctionality = [];
-
 	/** @var \Model\Pictures @inject */
 	public $pictures;
 
@@ -157,7 +155,6 @@ class AdminPresenter extends BasePresenter
 
 	public function colorSucceeded($button, $id)
 	{
-		$this->onBeforeRestrictedFunctionality($this);
 		$vals = $button->getForm()->getValues();
 		$newColor = preg_replace('<#>', '', $vals['color' . $id]);
 		if (ctype_xdigit($newColor) && (strlen($newColor) == 6 || strlen($newColor) == 3)) {
@@ -205,7 +202,6 @@ class AdminPresenter extends BasePresenter
 	 */
 	public function handleDelete($id)
 	{
-		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->posts->delete($this->posts->findOneBy(['id' => $id]));
 			$this->flashMessage('Článek byl úspěšně smazán.', 'success');
@@ -220,7 +216,6 @@ class AdminPresenter extends BasePresenter
 	 */
 	public function handleDeleteTag($tagId)
 	{
-		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->tags->delete($this->tags->findOneBy(['id' => $tagId]));
 			$this->flashMessage('Tag byl úspěšně smazán.', 'success');
@@ -235,7 +230,6 @@ class AdminPresenter extends BasePresenter
 	 */
 	public function handleDeleteUser($userId)
 	{
-		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$this->users->delete($this->users->findOneBy(['id' => $userId]));
 			$this->flashMessage('Uživatel byl úspěšně smazán.', 'success');
@@ -250,7 +244,6 @@ class AdminPresenter extends BasePresenter
 	 */
 	public function handleRegenerate($tagId)
 	{
-		$this->onBeforeRestrictedFunctionality($this);
 		try {
 			$tag = $this->tags->findOneBy(['id' => $tagId]);
 			$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
@@ -295,7 +288,6 @@ class AdminPresenter extends BasePresenter
 	 */
 	public function handleDeletePicture($id)
 	{
-		$this->onBeforeRestrictedFunctionality($this);
 		$picture = $this->pictures->findOneBy(['id' => $id]);
 		@unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
 		@rmdir(__DIR__ . '/../../www/uploads/' . $picture->uuid);

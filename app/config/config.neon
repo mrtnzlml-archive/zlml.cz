@@ -23,11 +23,6 @@ di:
 	debugger: TRUE
 
 
-events:
-	subscribers:
-		- App\Listeners\RestrictListener
-
-
 php:
 	date.timezone: Europe/Prague
 

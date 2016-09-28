@@ -54,7 +54,6 @@ class PicturesPresenter extends \App\BasePresenter
 
 	public function handleDeletePicture($id)
 	{
-		//$this->onBeforeRestrictedFunctionality($this); FIXME
 		$picture = $this->pictures->findOneBy(['id' => $id]);
 		@unlink(__DIR__ . '/../../www/uploads/' . $picture->uuid . DIRECTORY_SEPARATOR . $picture->name);
 		@rmdir(__DIR__ . '/../../www/uploads/' . $picture->uuid);
