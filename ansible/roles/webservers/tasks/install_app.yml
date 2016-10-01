@@ -1,7 +1,7 @@
 ---
 
-- name: remove original Apache index.hml
-  file: state=absent path=/var/www/html/index.html
+#- name: remove original Nginx files
+#  file: state=absent path={{ install_dir }}
 
 - name: ensure clone destination exists
   file: state=directory path={{ install_dir }}
@@ -11,6 +11,8 @@
     repo=https://github.com/mrtnzlml/zlml.cz.git
     dest={{ install_dir }}
     recursive=yes
+    force=yes
+    depth=1
   register: git_result
 
 - name: make log dir writable
@@ -23,13 +25,22 @@
   when: git_result.changed
   file: path={{ install_dir }}/temp/cache state=absent
 
-- name: ensure cache directory exists after cleanup
-  when: git_result.changed
-  file: path={{ install_dir }}/temp/cache state=directory
-
 - name: install composer packages
   when: git_result.changed
   composer:
     working_dir: '{{ install_dir }}'
+    no_dev: no
+
+- name: create configuration
+  template: src=usr/share/nginx/html/config/config.local.neon dest=/usr/share/nginx/html/config/config.local.neon
+
+- name: create directory for Bower components
+  file: state=directory path={{ install_dir }}/vendor-client
+
+- name: install Bower dependencies
+  bower: path={{ install_dir }}
+
+- name: create temp directory for Webloader
+  file: state=directory path={{ install_dir }}/www/webtemp mode=a+w
 
 ...

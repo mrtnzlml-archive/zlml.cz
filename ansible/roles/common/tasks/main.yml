@@ -1,6 +1,6 @@
 ---
 
 - name: install vim
-  apt: name=vim state=latest
+  yum: name=vim state=latest
 
 ...

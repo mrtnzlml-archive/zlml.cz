@@ -1,0 +1,9 @@
+---
+- name: download NodeJS
+  shell: curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+
+- name: install NodeJS
+  yum: name=nodejs state=latest
+
+- name: install Bower
+  shell: npm install -g bower

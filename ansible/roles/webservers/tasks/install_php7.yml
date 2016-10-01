@@ -1,28 +1,14 @@
 ---
 
-- name: add Dotdeb (for PHP7)
-  template: src=dotdeb.list.j2 dest=/etc/apt/sources.list.d/dotdeb.list
-
-- stat: path=dotdeb.gpg
-  register: gpg
-
-- name: fetch Dotdeb GnuPG key
-  when: not gpg.stat.exists
-  shell: wget https://www.dotdeb.org/dotdeb.gpg
-
-- name: install Dotdeb GnuPG key
-  when: not gpg.stat.exists
-  shell: apt-key add dotdeb.gpg
-
-- name: update OS
-  when: not gpg.stat.exists
-  shell: apt update
-
 - name: install PHP7 with modules
-  apt: name={{ item }} state=latest
+  yum: name={{ item }} state=latest
   with_items:
-    - php7.0
-    - php7.0-mysql
-  notify: restart apache
+    - php70
+    - php70-fpm       # PHP FastCGI Process Manager
+    - php70-mysqlnd   # a module for PHP applications that use MySQL databases
+    - php70-pdo       # a database access abstraction module for PHP applications
+
+- name: start FPM
+  service: name=php-fpm state=restarted
 
 ...

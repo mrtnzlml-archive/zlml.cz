@@ -1,9 +1,10 @@
 ---
 
-#- include: install_git.yml
-#- include: install_apache.yml
-#- include: install_php7.yml
-#- include: install_composer.yml
+- include: install_git.yml
+- include: install_nginx.yml
+- include: install_php7.yml
+- include: install_composer.yml
+- include: install_bower.yml
 - include: install_app.yml
 
 ...

@@ -1,0 +1,14 @@
+---
+
+- name: install latest Nginx
+  yum: name=nginx state=latest
+
+- name: add site config file
+  template: src=etc/nginx/nginx.conf dest=/etc/nginx/nginx.conf
+  notify:
+    - restart nginx
+
+- name: start Nginx
+  service: name=nginx state=started
+
+...

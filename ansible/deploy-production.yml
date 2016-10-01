@@ -1,11 +1,14 @@
 ---
 
 - name: configure and deploy the webservers and application code
-  hosts: amazon
+  hosts: amazon-webservers
+  become: yes
   gather_facts: False
-  sudo: yes
   roles:
     - common
     - webservers
+
+#- name: deploy database server #FIXME: migrace!
+#  hosts: amazon-dbservers
 
 ...
