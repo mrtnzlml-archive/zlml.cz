@@ -1,0 +1,35 @@
+{block title}Archive by tags{/block}
+
+{block content}
+	{default $children = '.showArchive($byTags);'}
+	{include @pageHeader.latte, children => $children}
+
+	<div class="wrapper archive clearfix">
+
+		<div class="archive__switch">
+			Did you mean?<br>
+			$this->website-><a n:href=":Front:Archive:">showArticlesByDates();</a>
+		</div>
+
+		<div class="archive__content">
+			{foreach $tags as $tag}
+				<div class="archive__section">
+					<a n:href="Search:default, $tag->name" style="text-decoration:none">
+						<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
+					</a>
+					{foreach $tag->posts as $post}
+						<div class="archive__record">
+							<a class="archive__record__title" n:href="Single:article $post->slug">{$post->title|vlna}</a>
+							<span class="archive__record__date">({$post->date|timeAgoInWords})</span>
+						</div>
+					{/foreach}
+				</div>
+			{/foreach}
+		</div>
+
+		<div class="archive__sidebar">
+			{include @sidebarArchive.latte}
+		</div>
+
+	</div>
+{/block}

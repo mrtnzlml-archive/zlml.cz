@@ -5,14 +5,16 @@ namespace App\AdminModule\Presenters;
 use App\AdminModule\Components\PostForm\IPostFormFactory;
 use App\AdminModule\Components\UserEditForm\IUserEditFormFactory;
 use App\FrontModule\Components\VisualPaginator\IVisualPaginatorFactory;
+use App\Pictures\Entities\Picture;
 use App\Pictures\Pictures;
+use App\Posts\Posts;
 use App\Security\Authorizator;
 use App\Tags\Tags;
 use App\Users\Users;
 use Nette;
 use Nextras\Application\UI\SecuredLinksPresenterTrait;
 
-class AdminPresenter extends BasePresenter
+class AdminPresenter extends \App\FrontModule\Presenters\BasePresenter
 {
 
 	use SecuredLinksPresenterTrait;
@@ -35,7 +37,16 @@ class AdminPresenter extends BasePresenter
 	/** @var IVisualPaginatorFactory @inject */
 	public $paginatorFactory;
 
+	/** @var \App\Posts\Posts */
+	private $posts;
+
 	private $id;
+
+	public function __construct(Posts $posts)
+	{
+		parent::__construct();
+		$this->posts = $posts;
+	}
 
 	public function checkRequirements($element)
 	{
@@ -56,11 +67,19 @@ class AdminPresenter extends BasePresenter
 	public function beforeRender()
 	{
 		parent::beforeRender();
-		$this->template->picturecount = $this->pictures->countBy();
-		$this->template->tagcount = $this->tags->countBy();
-		$this->template->usercount = $this->users->countBy();
 		if (!$this->user->isAllowed('Admin:Admin', Authorizator::CREATE)) {
 			$this->flashMessage('Nacházíte se v **demo** ukázce administrace. Máte právo prohlížet, nikoliv však editovat...', 'info');
+		}
+
+		$wwwDir = $this->context->parameters['wwwDir']; //yeah, fuck it (use decorator)
+		$assetStats = Nette\Utils\Json::decode(file_get_contents($wwwDir . '/dist/webpack-stats.json'));
+		foreach ($assetStats->assetsByChunkName->admin as $file) {
+			if (Nette\Utils\Strings::endsWith($file, 'css')) {
+				$this->template->adminCssFile = $file;
+			}
+			if (Nette\Utils\Strings::endsWith($file, 'js')) {
+				$this->template->adminJsFile = $file;
+			}
 		}
 	}
 
@@ -176,7 +195,7 @@ class AdminPresenter extends BasePresenter
 		$this->redirect('this');
 	}
 
-	public function handleUpdate($title, $content, $tags, $slug)
+	public function handleUpdate($title, $content, $tags)
 	{
 		$texy = $this->prepareTexy();
 
@@ -270,7 +289,7 @@ class AdminPresenter extends BasePresenter
 		try {
 			$picture = $this->pictures->findOneBy(['uuid' => $uploader->getUuid()]);
 			if (!$picture) { //FIXME: toto není optimální (zejména kvůli rychlosti)
-				$picture = new Entity\Picture();
+				$picture = new Picture;
 			}
 			$picture->uuid = $uploader->getUuid();
 			$picture->name = $name;
@@ -298,6 +317,15 @@ class AdminPresenter extends BasePresenter
 		$this->pictures->delete($picture);
 		$this->flashMessage('Obrázek byl úspěšně smazán.', 'success');
 		$this->redirect('this');
+	}
+
+	/**
+	 * Formats layout template file names.
+	 * @return array
+	 */
+	public function formatLayoutTemplateFiles()
+	{
+		return [__DIR__ . '/Templates/@layout.latte'];
 	}
 
 }

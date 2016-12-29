@@ -2,19 +2,32 @@
 
 namespace App\FrontModule\Presenters;
 
-use App\FrontModule\Components\VisualPaginator\VisualPaginator;
+use App\Posts\Posts;
+use App\Social\Twitter\Twitter;
 
 class HomepagePresenter extends BasePresenter
 {
 
+	/**
+	 * @var \App\Social\Twitter\Twitter
+	 */
+	private $twitter;
+
+	/**
+	 * @var \App\Posts\Posts
+	 */
+	private $posts;
+
+	public function __construct(Twitter $twitter, Posts $posts)
+	{
+		parent::__construct();
+		$this->twitter = $twitter;
+		$this->posts = $posts;
+	}
+
 	public function renderDefault()
 	{
-		$vp = new VisualPaginator($this, 'paginator');
-		$paginator = $vp->getPaginator();
-		$paginator->itemsPerPage = 10;
-		$paginator->itemCount = ITEMCOUNT; //see RouterFactory.php
-		$posts = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['date' => 'DESC'], $paginator->itemsPerPage, $paginator->offset);
-		$this->template->posts = $posts;
+		$this->template->twitterProfile = $this->twitter->getPersonalProfileInfo();
 	}
 
 	public function renderRss()

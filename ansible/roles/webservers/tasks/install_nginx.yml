@@ -9,6 +9,9 @@
     - restart nginx
 
 - name: start Nginx
-  service: name=nginx state=started
+  service:
+    name: nginx
+    state: started
+    enabled: yes # whether the service should start on boot
 
 ...

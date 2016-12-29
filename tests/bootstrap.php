@@ -8,6 +8,8 @@ if (!class_exists('Tester\Assert')) {
 }
 
 Testbench\Bootstrap::setup(__DIR__ . '/_temp', function (\Nette\Configurator $configurator) {
+	$configurator->defaultExtensions['extensions'] = \Adeira\ConfigurableExtensionsExtension::class;
+
 	$configurator->addParameters([
 		'appDir' => __DIR__ . '/../app',
 		'wwwDir' => __DIR__ . '/../www',

@@ -30,7 +30,7 @@ class Tags extends Nette\Object
 	}
 
 	/**
-	 * @return array
+	 * @return \ArrayIterator
 	 */
 	public function findBy(array $criteria, array $orderBy = NULL, $limit = NULL, $offset = NULL)
 	{
@@ -41,7 +41,7 @@ class Tags extends Nette\Object
 			->addSelect('p')
 			->getQuery();
 		$resultSet = new Kdyby\Doctrine\ResultSet($query);
-		return $resultSet->applyPaging($offset, $limit);
+		return $resultSet->applyPaging($offset, $limit)->getIterator();
 	}
 
 	/**

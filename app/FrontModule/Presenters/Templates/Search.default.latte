@@ -1,0 +1,60 @@
+{var $robots = "noindex, nofollow"}
+
+{block content}
+	{default $children = ".search(\"$search\");"}
+	{include @pageHeader.latte, children => $children}
+
+	<div class="wrapper">
+		{if $tag}
+			<h2>Nalezeno {count($tag->posts)} článků s tagem <span class="label hidden-print"
+			                                                       style="background: #{$tag->color}">{$tag->name}</span>
+			</h2>
+			{foreach $tag->posts as $post}
+				<a n:href="Single:article $post->slug"
+						title="{$post->body|texy|striptags|truncate:500}">{$post->title}</a>
+				{sep}<strong>#</strong>{/sep}
+			{/foreach}
+		{/if}
+		<h2 n:block="title">Výsledky vyhledávání
+			{ifset $search}výrazu „<strong>{$search}</strong>“{/ifset}
+		</h2>
+		{ifset $error}
+			<div class="alert alert-danger">
+				<strong>{$error}</strong>
+			</div>
+		{/ifset}
+		{ifset $result}
+			{foreach $result as $r}
+				<div class="media">
+					<div class="media-body">
+						<h4 class="media-heading">
+							<a n:href="Single:article $r->slug">
+								{$r->title|noescape|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
+							</a>
+							<small class="pull-xs-right" style="white-space:nowrap">{$r->date|dateInWords}
+								({$r->date|timeAgoInWords})
+							</small>
+						</h4>
+						<p>
+							{foreach $r->tags as $tagEntity}
+								<a n:href="Search:default, $tagEntity->name" style="text-decoration:none">
+									<span class="label hidden-print"
+									      style="background: #{$tagEntity->color}">{$tagEntity->name}</span>
+								</a>
+							{/foreach}
+							{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:600|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
+							&nbsp;<a n:href="Single:article $r->slug">přečtěte si více</a>
+						</p>
+					</div>
+				</div>
+			{/foreach}
+		{/ifset}
+		<h2>Nenašli jste to co hledáte?</h2>
+		<p>Možná to zde opravdu není. Vyzkoušejte však ještě další možnosti:</p>
+		<ul>
+			<li>Navštivte <a n:href=":Front:Homepage:">úvodní stránku</a></li>
+			<li>Podívejte se do <a n:href=":Front:Archive:">archivu</a> tohoto webu &mdash; třeba najdete to co potřebujete</li>
+			<li>Přihlašte se k <a n:href=":Front:Homepage:rss">odběru RSS</a>, aby vám již nic neuteklo</li>
+		</ul>
+	</div>
+{/block}

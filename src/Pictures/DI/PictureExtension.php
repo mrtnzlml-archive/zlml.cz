@@ -3,22 +3,23 @@
 namespace App\Pictures\DI;
 
 use App\AdminModule\Components\AdminMenu\MenuItem;
-use Nette\Application\Routers\Route;
-use Nette\PhpGenerator\PhpLiteral;
 
-class PictureExtension extends \Mrtnzlml\CompilerExtension
+//use Nette\Application\Routers\Route;
+//use Nette\PhpGenerator\PhpLiteral;
+
+class PictureExtension extends \Nette\DI\CompilerExtension
 {
 
-	public function loadConfiguration()
+	public function provideConfig()
 	{
-		$this->addConfig(__DIR__ . '/config.neon');
+		return __DIR__ . '/config.neon';
 	}
 
 	public function beforeCompile()
 	{
 		$builder = $this->getContainerBuilder();
-		$router = $builder->getDefinition('router'); //TODO: route prepend
-		$router->addSetup('offsetSet', [new PhpLiteral('NULL'), new Route('newadmin/pictures[/<id>]', 'App:Pictures:default')]);
+//		$router = $builder->getDefinition('router'); //TODO: route prepend
+//		$router->addSetup('offsetSet', [new PhpLiteral('NULL'), new Route('newadmin/pictures[/<id>]', 'App:Pictures:default')]);
 		$builder->getDefinition('nette.presenterFactory')->addSetup('setMapping', [['App' => 'App\\*Module\\*Presenter']]);
 		//Admin Menu:
 		$priorityQueue = new \SplPriorityQueue();

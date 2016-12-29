@@ -1,0 +1,33 @@
+{block title}Archive by date{/block}
+
+{block content}
+	{default $children = '.showArchive($byDate);'}
+	{include @pageHeader.latte, children => $children}
+
+	<div class="wrapper archive clearfix">
+
+		<div class="archive__switch">
+			Did you mean?<br>
+			$this->website-><a n:href=":Front:Archive:tags">showArticlesByTags();</a>
+		</div>
+
+		<div class="archive__content">
+			{default $knownYears = []}
+			{foreach $posts as $post}
+				{if !in_array(($post->date|date:'Y'), $knownYears)}
+					{php $knownYears[] = ($post->date|date:'Y')}
+					<div class="archive__record__year">{$post->date|date:'Y'}</div>
+				{/if}
+				<div class="archive__record">
+					<a class="archive__record__title" n:href="Single:article $post->slug">{$post->title|vlna}</a>
+					<span class="archive__record__date">({$post->date|timeAgoInWords})</span>
+				</div>
+			{/foreach}
+		</div>
+
+		<div class="archive__sidebar">
+			{include @sidebarArchive.latte}
+		</div>
+
+	</div>
+{/block}

@@ -2,12 +2,12 @@
 
 namespace App\Tags\DI;
 
-class Extension extends \Mrtnzlml\CompilerExtension
+class Extension extends \Nette\DI\CompilerExtension
 {
 
-	public function loadConfiguration()
+	public function provideConfig()
 	{
-		$this->addConfig(__DIR__ . '/config.neon');
+		return __DIR__ . '/config.neon';
 	}
 
 }

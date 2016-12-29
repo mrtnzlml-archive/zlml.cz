@@ -1,21 +1,18 @@
 {var $robots = 'noindex'}
 {block content}
 
-	<div class="row">
-		<div class="col-lg-3">
-			{include menu.latte}
-		</div>
-		<div class="col-lg-9">
-			{if $account}
-				<h2>Úprava uživatele <strong>{$account->username}</strong></h2>
-			{else}
-				<h2>Založení nového uživatele</h2>
-			{/if}
-			<p>
-				Na této stránce můžete pohodlně upravit, nebo vytvořit nového uživatele.
-			</p>
-			{control userEditForm}
-		</div>
+	{default $children = '.administration($'. ($account ? $account->username : 'newUser') .');'}
+	{include ../@pageHeader.latte, children => $children}
+
+	{include menu.latte}
+
+	<div class="adminLayout">
+		{if $account}
+			<h2>Úprava uživatele <strong>{$account->username}</strong></h2>
+		{else}
+			<h2>Založení nového uživatele</h2>
+		{/if}
+		{control userEditForm}
 	</div>
 
 {/block}

@@ -41,58 +41,44 @@
 		.qq-edit-filename-icon { display: none; background: url("../img/edit.gif"); width: 15px; height: 15px; vertical-align: text-bottom; margin-right: 5px; }
 		INPUT.qq-edit-filename.qq-editing ~ .qq-upload-cancel { display: none; }
 	</style>
-	<script type="text/javascript" src="{$basePath}/js/jquery.fineuploader.min.js"></script>
 
-	<div class="row">
-		<div class="col-lg-3">
-			{include menu.latte}
-		</div>
-		<div class="col-lg-9">
-			{if $user->isAllowed('Admin:Admin', 'edit')}
-				<h2>Nahrát nový obrázek</h2>
-				<div id="image-uploader"></div>
-			{else}
-				<div class="alert alert-danger">Jakožto demo uživatel nemůžete nahrávat obrázky.</div>
-			{/if}
+	{default $children = '.administration($uploadPicture);'}
+	{include ../@pageHeader.latte, children => $children}
 
-			<h2 n:if="$pictures">Nahrané obrázky</h2>
-			<table class="table">
-				{snippet pictures}
-					{foreach $pictures as $picture}
-						<tr>
-							<td><img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100"></td>
-							<td>
-								<code style="white-space:pre-wrap">[* {$picture->uuid}/{$picture->name} *]</code>
-								<a href="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" target="_blank">otevřít v novém okně</a>
-							</td>
-							<td>
-								<div class="btn-group">
-									<a n:href="deletePicture! $picture->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento obrázek?">Delete</a>
-								</div>
-							</td>
-						</tr>
-					{/foreach}
-				{/snippet}
-			</table>
-			<div class="row col-lg-12 text-xs-center">
-				{control paginator}
-			</div>
+	{include menu.latte}
+
+	<div class="adminLayout">
+		{if $user->isAllowed('Admin:Admin', 'edit')}
+			<h2>Nahrát nový obrázek</h2>
+			<div id="image-uploader"></div>
+		{else}
+			<div class="alert alert-danger">Jakožto demo uživatel nemůžete nahrávat obrázky.</div>
+		{/if}
+
+		<h2 n:if="$pictures">Nahrané obrázky</h2>
+		<table class="table">
+			{snippet pictures}
+				{foreach $pictures as $picture}
+					<tr>
+						<td><img src="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" width="100"></td>
+						<td>
+							<code style="white-space:pre-wrap">[* {$picture->uuid}/{$picture->name} *]</code>
+							<a href="{$basePath}/uploads/{$picture->uuid}/{$picture->name}" target="_blank">otevřít v novém okně</a>
+						</td>
+						<td>
+							<div class="btn-group">
+								<a n:href="deletePicture! $picture->id" class="btn btn-danger" data-confirm="Opravdu chcete smazat tento obrázek?">Delete</a>
+							</div>
+						</td>
+					</tr>
+				{/foreach}
+			{/snippet}
+		</table>
+		<div class="row col-lg-12 text-xs-center">
+			{control paginator}
 		</div>
 	</div>
 
-	<script>
-		$(function () {
-			$('#image-uploader').fineUploader({
-				//debug: true,
-				request: {
-					endpoint: 'pictures?do=uploadReciever'
-				},
-				retry: { enableAuto: true },
-				chunking: { enabled: true },
-				resume: { enabled: true }
-			});
-		});
-	</script>
 	<script type="text/template" id="qq-template">
 		<div class="qq-uploader-selector qq-uploader">
 			<div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>

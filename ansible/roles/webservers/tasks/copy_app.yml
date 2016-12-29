@@ -1,0 +1,43 @@
+---
+
+#- name: remove original Nginx files
+#  file: state=absent path={{ install_dir }}
+
+- name: ensure clone destination exists
+  file: state=directory path={{ install_dir }}
+
+- name: Set correct ssh key path
+  set_fact: # https://github.com/ansible/ansible-modules-core/issues/18
+    ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file | realpath }}"
+
+- name: rsync tested repository
+  synchronize:
+    mode: push
+    perms: no
+    owner: no # do not preserve owner (nginx owner)
+    group: no
+    recursive: yes
+    src: ./../../../../ # root folder of this project
+    dest: "{{ install_dir }}"
+  register: rsync_result
+
+- name: change file permissions to the nginx
+  file:
+    path: "{{ install_dir }}"
+    owner: nginx
+    recurse: yes
+
+- name: make log dir writable
+  file: state=directory path={{ install_dir }}/log mode=0777
+
+- name: ensure temp dir exists
+  file: state=directory path={{ install_dir }}/temp mode=0777
+
+- name: clear cache directory
+  when: rsync_result.changed
+  file: path={{ install_dir }}/temp/cache state=absent
+
+- name: create application configuration
+  template: src=usr/share/nginx/html/config/config.local.neon dest=/usr/share/nginx/html/config/config.local.neon
+
+...

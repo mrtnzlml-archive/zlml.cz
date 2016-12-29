@@ -8,7 +8,17 @@
     - php70-mysqlnd   # a module for PHP applications that use MySQL databases
     - php70-pdo       # a database access abstraction module for PHP applications
 
+- name: configure PHP-FPM
+  copy:
+    src: roles/webservers/templates/etc/php-fpm-7.0.d/www.conf
+    dest: /etc/php-fpm-7.0.d/www.conf
+
+- command: chown -R nginx:nginx /var/lib/php/7.0/session
+
 - name: start FPM
-  service: name=php-fpm state=restarted
+  service:
+    name: php-fpm
+    state: restarted
+    enabled: yes # whether the service should start on boot
 
 ...

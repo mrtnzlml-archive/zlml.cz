@@ -12,6 +12,6 @@ extensions:
 	router: App\Routing\DI\Extension
 	securityExtension: App\Security\DI\Extension
 	settings: App\Settings\DI\Extension
+	social: App\Social\DI\Extension
 	tags: App\Tags\DI\Extension
 	users: App\Users\DI\Extension
-	webloader: WebLoader\Nette\Extension

@@ -22,7 +22,7 @@ class ErrorPresenter extends BasePresenter
 			$this->setView(in_array($code, [403, 404, 405, 410, 500]) ? $code : '4xx');
 			$request = $this->getParameters()['request'];
 			if ($request) {
-				$this->template->test = $request->parameters['action'];
+				$this->template->failedAction = $request->parameters['action'];
 			}
 			// log to access.log
 			\Tracy\Debugger::log("HTTP code $code: {$exception->getMessage()} in {$exception->getFile()}:{$exception->getLine()}", 'access');

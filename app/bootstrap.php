@@ -3,6 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 $configurator = new \Nette\Configurator;
+$configurator->defaultExtensions['extensions'] = \Adeira\ConfigurableExtensionsExtension::class;
 
 \Kdyby\Console\DI\BootstrapHelper::setupMode($configurator);
 if (getenv('NETTE_DEBUG') === '0' || getenv('NETTE_DEBUG') === '1') {

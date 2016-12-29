@@ -1,0 +1,7 @@
+services:
+	- App\Social\Twitter\Twitter(
+		consumerKey: %%twitter.consumerKey%%,
+		consumerSecret: %%twitter.consumerSecret%%,
+		accessToken: %%twitter.accessToken%%,
+		accessTokenSecret: %%twitter.accessTokenSecret%%
+	)

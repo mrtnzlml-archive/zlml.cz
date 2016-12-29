@@ -1,9 +1,17 @@
 {var $robots = noindex}
 
 {block content}
-<h1 n:block=title>Access Denied</h1>
+	{default $children = '.failGracefully(TRUE);'}
+	{include ../@pageHeader.latte, children => $children}
 
-<p>You do not have permission to view this page. Please try contact the web
-site administrator if you believe you should be able to view this page.</p>
+	<div class="wrapper">
+		<h2 n:block=title>Access Denied</h2>
 
-<p><small>error 403</small></p>
+		<p>You do not have permission to view this page. Please try contact the web
+			site administrator if you believe you should be able to view this page.</p>
+
+		<p>
+			<small>error 403</small>
+		</p>
+	</div>
+{/block}

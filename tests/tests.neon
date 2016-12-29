@@ -2,6 +2,7 @@
 # http://nette.org/security-warning
 
 testbench:
-    prefix: _testbench_zlml_
+    dbprefix: _testbench_zlml_
+    shareDatabase: yes # database will persist between tests
     sqls:
         - %appDir%/../zlml.sql

@@ -17,13 +17,6 @@ class SignPresenter extends \App\FrontModule\Presenters\BasePresenter
 		}
 	}
 
-//	public function actionOut()
-//	{
-//		$this->getUser()->logout();
-//		$this->flashMessage('Odhlášení bylo úpěšné.', 'info');
-//		$this->redirect('in');
-//	}
-
 	/**
 	 * @return \App\AuthModule\Components\SignInForm\SignIn
 	 */

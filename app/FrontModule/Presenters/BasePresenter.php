@@ -2,27 +2,15 @@
 
 namespace App\FrontModule\Presenters;
 
-use App\Posts\Posts;
 use App\Settings\Settings;
-use Latte;
 use Nette;
 use Nette\Application\UI;
-use WebLoader;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
 
-	/** @var Posts @inject */
-	public $posts;
-
-	/** @var \Nette\Http\Session @inject */
-	public $session;
-
 	/** @var Settings @inject */
 	public $settings;
-
-	/** @var \WebLoader\Nette\LoaderFactory @inject */
-	public $webLoader;
 
 	protected $setting;
 
@@ -33,20 +21,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->template->wfont = $this->getHttpRequest()->getCookie('wfont');
 	}
 
-	protected function createComponentSearch()
+	public function beforeRender()
 	{
-		$form = new UI\Form;
-		$form->addText('search')
-			->setRequired('Vyplňte co chcete vyhledávat.')
-			->setValue($this->getParameter('search'));
-		$form->addSubmit('send', 'Go!');
-		$form->onSuccess[] = [$this, 'searchSucceeded'];
-		return $form;
-	}
-
-	public function searchSucceeded(UI\Form $form, $values)
-	{
-		$this->redirect(':Front:Search:default', $values->search);
+		$wwwDir = $this->context->parameters['wwwDir']; //yeah, fuck it (use decorator)
+		$assetStats = Nette\Utils\Json::decode(file_get_contents($wwwDir . '/dist/webpack-stats.json'));
+		foreach ($assetStats->assetsByChunkName->main as $file) {
+			if (Nette\Utils\Strings::endsWith($file, 'css')) {
+				$this->template->cssFile = $file;
+			}
+			if (Nette\Utils\Strings::endsWith($file, 'js')) {
+				$this->template->jsFile = $file;
+			}
+		}
 	}
 
 	protected function createComponentSignOutForm()
@@ -77,21 +63,38 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			return $html::el()->setHtml($texy->process($input));
 		});
 		$latte->addFilter('vlna', function ($string) {
-			$string = preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0
+			$string = preg_replace(
+				'<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i',
+				"$1$2\xc2\xa0$3", //&nbsp; === \xc2\xa0
+				$string
+			);
 			return $string;
 		});
 		$latte->addFilter('dateInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
-			$months = [1 => 'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
+			$months = [
+				1 => 'leden',
+				2 => 'únor',
+				3 => 'březen',
+				4 => 'duben',
+				5 => 'květen',
+				6 => 'červen',
+				7 => 'červenec',
+				8 => 'srpen',
+				9 => 'září',
+				10 => 'říjen',
+				11 => 'listopad',
+				12 => 'prosinec',
+			];
 			return $time->format('j. ') . $months[$time->format('n')] . $time->format(' Y');
 		});
 		$latte->addFilter('timeAgoInWords', function ($time) {
 			$time = Nette\Utils\DateTime::from($time);
 			$delta = round((time() - $time->getTimestamp()) / 60);
-			if ($delta == 0) {
+			if ($delta === 0) {
 				return 'před okamžikem';
 			}
-			if ($delta == 1) {
+			if ($delta === 1) {
 				return 'před minutou';
 			}
 			if ($delta < 45) {
@@ -121,16 +124,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			return 'před ' . round($delta / 525960) . ' lety';
 		});
 		return $template;
-	}
-
-	protected function createComponentCss()
-	{
-		return $this->webLoader->createCssLoader('default')->setMedia('screen,projection,tv,print');
-	}
-
-	protected function createComponentJs()
-	{
-		return $this->webLoader->createJavaScriptLoader('default');
 	}
 
 	/**
@@ -167,7 +160,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		list(, $presenter) = \Nette\Application\Helpers::splitName($this->getName());
 		$dir = dirname($this->getReflection()->getFileName());
 		$dir = is_dir("$dir/Templates") ? $dir : dirname($dir);
-		return ["$dir/Templates/$presenter/$this->view.latte"];
+		return [
+			"$dir/Templates/$presenter/$this->view.latte",
+			"$dir/Templates/$presenter.$this->view.latte",
+		];
 	}
 
 }

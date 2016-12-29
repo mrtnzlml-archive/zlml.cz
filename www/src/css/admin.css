@@ -1,0 +1,100 @@
+.adminMenu {
+	background-color: #ddd;
+	border-bottom: 1px solid #aaa;
+	margin-bottom: 2rem;
+}
+
+.adminMenu li a {
+	display: block;
+	float: left;
+	padding: 1rem 2rem;
+	border-right: 1px solid #aaa;
+	text-decoration: none;
+	color: #333;
+}
+
+.adminMenu li:last-child a {
+	border-right: none;
+}
+
+.adminMenu a:hover {
+	background-color: #888;
+}
+
+.adminMenu li a.active {
+	background-color: #aaa;
+}
+
+.adminMenu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.adminMenu li:before {
+	content: "";
+}
+
+.adminMenu li {
+	display: inline;
+}
+
+.adminLayout {
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+.adminLayout__left {
+	float: left;
+	width: 49%;
+}
+
+.adminLayout__right {
+	float: left;
+	margin-left: 2%;
+	width: 49%;
+}
+
+.adminLayout__right .article {
+	width: 100%;
+}
+
+.CodeMirror {
+	border: 0.0625rem solid #ccc;
+	height: auto;
+	min-height: 18.75rem;
+}
+
+.CodeMirror-scroll {
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+
+.CodeMirror-lines {
+	min-height: 18.75rem;
+}
+
+.help {
+	display: none;
+	max-width: 30%;
+	padding: 0.625rem 1.25rem;
+	background: white;
+	position: absolute;
+	top: 5rem;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 100;
+	box-shadow: 0rem 0rem 0.3125rem 0.0625rem rgba(0, 0, 0, 0.5);
+}
+
+.wrapper--fluid {
+	width: 100%;
+}
+
+.wrapper--fluid .page-header,
+.wrapper--fluid .adminMenu {
+	padding-left: 2%;
+	padding-right: 2%;
+}

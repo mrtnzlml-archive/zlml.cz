@@ -2,12 +2,10 @@
 log/*
 temp/*
 vendor/*
-vendor-client/*
+node_modules/*
 
 !.gitignore
 !.htaccess
-!web.config
 !.keep
 
-composer.lock
-www/webtemp
+yarn-error.log

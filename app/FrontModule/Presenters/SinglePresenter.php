@@ -3,29 +3,23 @@
 namespace App\FrontModule\Presenters;
 
 use App\AuthModule\Components\SignInForm\ISignInFactory;
-use App\Tags\Tags;
+use App\Posts\Posts;
 use Nette;
 
 class SinglePresenter extends BasePresenter
 {
 
-	/** @var ISignInFactory @inject */
-	public $signInFormFactory;
+	/** @var Posts */
+	private $posts;
 
-	/** @var Tags @inject */
-	public $tags;
+	/** @var ISignInFactory */
+	private $signInFormFactory;
 
-	public function renderObsah()
+	public function __construct(Posts $posts, ISignInFactory $signInFactory)
 	{
-		$articles = $this->posts->findBy(['publish_date <=' => new \DateTime()], ['title' => 'ASC']);
-		$this->template->articles = $articles;
-
-		$letters = [];
-		foreach ($articles as $article) {
-			$letter = mb_strtoupper(mb_substr($article->title, 0, 1, 'utf-8'));
-			$letters[$letter] = $letter;
-		}
-		$this->template->letters = $letters;
+		parent::__construct();
+		$this->posts = $posts;
+		$this->signInFormFactory = $signInFactory;
 	}
 
 	public function renderArticle($slug)
@@ -37,7 +31,10 @@ class SinglePresenter extends BasePresenter
 		if ($slug !== $webalized) {
 			$this->redirect('Single:article', $webalized);
 		}
-		$post = $this->posts->findOneBy(['slug' => $webalized, 'publish_date <=' => new \DateTime()]); // zobrazení článku podle slugu
+		$post = $this->posts->findOneBy([
+			'slug' => $webalized,
+			'publish_date <=' => new \DateTime(),
+		]); // zobrazení článku podle slugu
 		if (!$post) { // pokud článek neexistuje (FALSE), pak forward - about, reference, atd...
 			$this->forward($webalized);
 		} elseif ($post) { // zobrazení klasických článků

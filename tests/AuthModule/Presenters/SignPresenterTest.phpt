@@ -50,7 +50,7 @@ class SignPresenterTest extends \Tester\TestCase
 				'username' => 'Username',
 				'password' => 'Password',
 				'remember' => TRUE,
-			]);
+			], FALSE); // do not check path
 			Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		}, \Tester\AssertException::class, 'Uživatelské jméno není správné.');
 		Tester\Assert::false($this->user->isLoggedIn());
@@ -60,7 +60,7 @@ class SignPresenterTest extends \Tester\TestCase
 				'username' => 'Username',
 				'password' => 'Password',
 				'remember' => FALSE,
-			]);
+			], FALSE); // do not check path
 			Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		}, \Tester\AssertException::class, 'Uživatelské jméno není správné.');
 		Tester\Assert::false($this->user->isLoggedIn());

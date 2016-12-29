@@ -1,39 +1,31 @@
-<div class="list-group">
-	<a n:href=":Admin:Admin:default, id => NULL"
-	   n:class="$presenter->isLinkCurrent(':Admin:Admin:default')?'list-group-item active':'list-group-item'">
-		<h5 class="list-group-item-heading">Přidat nový článek</h5>
-
-		<p class="list-group-item-text">Napište nový článek</p>
-	</a>
-
-	<a n:href=":Admin:Admin:pictures"
-	   n:class="$presenter->isLinkCurrent(':Admin:Admin:pictures')?'list-group-item active':'list-group-item'">
-		<span class="label label-default label-pill pull-xs-right">{$picturecount}</span>
-		<h5 class="list-group-item-heading">Nahrát nový obrázek</h5>
-
-		<p class="list-group-item-text">Zde nahrajte obrázky</p>
-	</a>
-
-	<a n:href=":Admin:Admin:prehled"
-	   n:class="$presenter->isLinkCurrent(':Admin:Admin:prehled')?'list-group-item active':'list-group-item'">
-		<span class="label label-default label-pill pull-xs-right">{constant('ITEMCOUNT')}</span>
-		<h5 class="list-group-item-heading">Přehled článků</h5>
-
-		<p class="list-group-item-text">Podívejte se na starší články</p>
-	</a>
-
-	<a n:href=":Admin:Admin:tags"
-	   n:class="$presenter->isLinkCurrent(':Admin:Admin:tags')?'list-group-item active':'list-group-item'">
-		<span class="label label-default label-pill pull-xs-right">{$tagcount}</span>
-		<h5 class="list-group-item-heading">Přehled tagů</h5>
-
-		<p class="list-group-item-text">Prohlédněte si tagy</p>
-	</a>
-
-	<a n:href=":Admin:Admin:users" n:class="list-group-item,preg_match('/^user[a-z-]*$/i',$presenter->view)?active">
-		<span class="label label-default label-pill pull-xs-right">{$usercount}</span>
-		<h5 class="list-group-item-heading">Přehled uživatelů</h5>
-
-		<p class="list-group-item-text">Upravte práva uživatelům</p>
-	</a>
+<div class="adminMenu clearfix">
+	<div class="wrapper--fluid">
+		<ul>
+			<li>
+				<a n:href=":Admin:Admin:default, id => NULL" n:class="$presenter->isLinkCurrent(':Admin:Admin:default')?active">
+					Nový <strong>článek</strong>
+				</a>
+			</li>
+			<li>
+				<a n:href=":Admin:Admin:pictures" n:class="$presenter->isLinkCurrent(':Admin:Admin:pictures')?active">
+					Nový <strong>obrázek</strong>
+				</a>
+			</li>
+			<li>
+				<a n:href=":Admin:Admin:prehled" n:class="$presenter->isLinkCurrent(':Admin:Admin:prehled')?active">
+					Články
+				</a>
+			</li>
+			<li>
+				<a n:href=":Admin:Admin:tags" n:class="$presenter->isLinkCurrent(':Admin:Admin:tags')?active">
+					Tagy
+				</a>
+			</li>
+			<li>
+				<a n:href=":Admin:Admin:users" n:class="preg_match('/^user[a-z-]*$/i',$presenter->view)?active">
+					Uživatelé
+				</a>
+			</li>
+		</ul>
+	</div>
 </div>

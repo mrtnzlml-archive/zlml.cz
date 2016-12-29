@@ -4,6 +4,7 @@ namespace App\AdminModule\Components\PostForm;
 
 use App\Posts\Entities\Post;
 use App\Posts\Posts;
+use App\Tags\Entities\Tag;
 use App\Tags\Tags;
 use Nette;
 use Nette\Application\UI;
@@ -52,8 +53,9 @@ class PostForm extends UI\Control
 			->setValue(implode(', ', $tags));
 		$form->addText('publish_date', 'Datum publikování článku:')->setType('datetime-local');
 		$form->addTextArea('editor', 'Obsah článku:')
-			->setHtmlId('editor')
-			->setRequired('Je zapotřebí napsat nějaký text.');
+			->setHtmlId('editor');
+			//Cannot be required because of CodeMirror - https://github.com/codemirror/CodeMirror-v1/issues/59
+			//->setRequired('Je zapotřebí napsat nějaký text.');
 		$form->addCheckbox('disable_comments', 'Zakázat pod tímto článkem komentáře');
 		if ($this->post) {
 			$form->setDefaults([
@@ -85,9 +87,9 @@ class PostForm extends UI\Control
 			foreach (array_unique(preg_split('/\s*,\s*/', $vals->tags)) as $tagName) {
 				$tag = $this->tags->findOneBy(['name' => $tagName]);
 				if (!$tag) {
-					$tag = new Entity\Tag();
+					$tag = new Tag;
 					$tag->name = $tagName;
-					$tag->color = substr(md5(rand()), 0, 6); //Short and sweet
+					$tag->color = substr(md5('' . mt_rand()), 0, 6); //Short and sweet
 				}
 				if (!empty($tagName)) {
 					$this->post->addTag($tag);

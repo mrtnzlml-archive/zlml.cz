@@ -8,27 +8,24 @@ addons:
       - mysql-client-core-5.6
       - mysql-client-5.6
 
-
-php:
+php: # there is only one version because of automatic deployments (only once)
   - 7.0
-  - 7.1
-
+#  - 7.1
 
 env:
   matrix:
     - DB=mysql
 
-
 before_script:
   - mysql --version
   - mysql -u root -e 'create database zlml;'
   - mysql -u root zlml < zlml.sql
-  - cp tests/config.local.neon config/config.local.neon
+  - cp config/config.local.neon.travis config/config.local.neon
   - composer selfupdate
   - composer install --no-interaction --prefer-dist --no-progress
-  - npm install -g bower
-  - bower install
-
+  - npm install --global yarn
+  - yarn install
+  - yarn run build
 
 script:
   - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --exclude vendor-client --blame
@@ -37,11 +34,22 @@ script:
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php,phpt --encoding=utf-8 --tab-width=4 -sp tests/ --ignore=*/output/*,_temp/*,bootstrap.php
   - php www/index.php orm:validate-schema --ansi --debug-mode
 
-
 after_failure:
   - cat app/config/config.local.neon;
   - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
 
+after_success:
+  - sudo apt-get -qq update
+  - sudo apt-get install python-pip
+  - sudo pip install ansible
+  - openssl aes-256-cbc -K $encrypted_d86c53d6358a_key -iv $encrypted_d86c53d6358a_iv -in ansible/LightsailDefaultPrivateKey.pem.enc -out ansible/LightsailDefaultPrivateKey.pem -d
+  - sudo ansible-playbook ansible/deploy-production.yml -vvv
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - vendor
 
 notifications:
   email: false

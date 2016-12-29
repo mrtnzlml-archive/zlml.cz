@@ -3,9 +3,17 @@
 
 
 doctrine:
-	host: zlml-cz.cef1ywtqp8ab.eu-central-1.rds.amazonaws.com
+	host: 127.0.0.1
 	port: 3306
 	user: root
 	password: rootpass
 	dbname: zlml_cz
 	driver: pdo_mysql
+
+
+social:
+	twitter:
+		consumerKey: ''
+		consumerSecret: ''
+		accessToken: ''
+		accessTokenSecret: ''

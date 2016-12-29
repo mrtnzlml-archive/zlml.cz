@@ -25,11 +25,6 @@ class SinglePresenterTest extends \Tester\TestCase
 		$this->posts = $this->getService(Posts::class);
 	}
 
-	public function testRenderAbout()
-	{
-		$this->checkAction('Front:Single:about');
-	}
-
 	/** @dataProvider dataArticles */
 	public function testRenderArticles($slug)
 	{
@@ -54,15 +49,16 @@ class SinglePresenterTest extends \Tester\TestCase
 		//TODO: checkForward method in testbench...
 	}
 
-	public function testRenderObsah()
+	public function testRenderArchive()
 	{
-		$this->checkAction('Front:Single:obsah');
+		$this->checkAction('Front:Archive:default');
 	}
 
-	public function testRenderReference()
+	public function testRenderArchiveTags()
 	{
-		$this->checkAction('Front:Single:reference');
+		$this->checkAction('Front:Archive:tags');
 	}
+
 
 	///// dataProviders /////
 

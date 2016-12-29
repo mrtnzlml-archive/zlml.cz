@@ -1,6 +1,12 @@
 {var $robots = noindex}
 
 {block content}
-<h1 n:block=title>Oops...</h1>
+	{default $children = '.failGracefully(TRUE);'}
+	{include ../@pageHeader.latte, children => $children}
 
-<p>Your browser sent a request that this server could not understand or process.</p>
+	<div class="wrapper">
+		<h2 n:block=title>Oops...</h2>
+
+		<p>Your browser sent a request that this server could not understand or process.</p>
+	</div>
+{/block}

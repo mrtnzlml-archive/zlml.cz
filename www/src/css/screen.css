@@ -1,0 +1,596 @@
+:root {
+	--red: #d91e18;
+	--red-hover: #cc0700;
+	--dark: #111;
+}
+
+a, a:hover, a:focus {
+	color: var(--red);
+}
+
+a:visited {
+	color: darkred;
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
+a[href^="#error:"] {
+	background: red;
+	color: white;
+}
+
+abbr[title] {
+	cursor: help;
+	border-bottom: 1px dotted #bbb;
+}
+
+/* TODO: nejlepší font na člení! */
+body {
+	font-family: sans-serif;
+	font-weight: 300;
+	font-size: 1.6rem;
+	background-color: #f9f9f9;
+	margin: 0;
+	color: var(--dark);
+}
+
+.wf-active body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+blockquote {
+	margin-left: 1rem;
+	padding-left: 1rem;
+	font-style: italic;
+	border-left: 5px solid #ccc;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+/* =10px */
+html.wait, html.wait * {
+	cursor: wait !important;
+}
+
+h1 a, h1 a:hover, h1 a:focus, h1 a:visited {
+	color: var(--red);
+	text-decoration: none;
+}
+
+h1 > a > span > span {
+	display: inline-block;
+}
+
+@media screen and (min-width: 720px) {
+	h1 > a > span > span.transf2 {
+		position: absolute;
+		top: 2.1rem;
+		transform: rotate(15deg);
+	}
+}
+
+h2 > a, h3 > a, h4 > a,
+h2 > a:visited, h3 > a:visited, h4 > a:visited {
+	text-decoration: none;
+	color: #333;
+}
+
+h2 > a:hover, h3 > a:hover, h4 > a:hover {
+	color: var(--red);
+	text-decoration: none;
+}
+
+h3 > small > a {
+	text-decoration: none;
+	color: #999;
+}
+
+p {
+	hyphens: auto;
+}
+
+pre {
+	line-height: 1.2;
+	padding: 1.5rem;
+	background-color: #f7f7f7;
+	overflow-x: auto;
+	border-left: 1px dashed #ddd;
+}
+
+table {
+	margin-bottom: 0.625rem;
+}
+
+ul {
+	list-style: none;
+}
+
+ul li:before {
+	content: "\2013";
+	margin-right: 1rem;
+}
+
+.clearfix:after, .page-header:after {
+	content: "";
+	display: table;
+	clear: both
+}
+
+.anchor {
+	color: #ddd;
+}
+
+.alert {
+	padding: 1rem 2rem;
+}
+
+.alert p {
+	margin: 0;
+	font-weight: bold;
+}
+
+.alert-info {
+	background-color: #673ab7;
+	color: #fff;
+}
+
+.alert-success {
+	background-color: #8bc34a;
+}
+
+.alert-danger {
+	background-color: #e91e63;
+	color: #fff;
+}
+
+.article {
+	margin: auto;
+	width: 100%;
+}
+
+.article .alert {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.article img {
+	max-width: 100%;
+}
+
+.article .figure > p { /* Texy popisek pod obrázkem */
+	margin-left: 1rem;
+	padding-left: 1rem;
+	border-left: 2px solid #ccc;
+}
+
+@media screen and (min-width: 720px) {
+	.article {
+		margin: auto;
+		width: 90%;
+	}
+}
+
+@media screen and (min-width: 1050px) {
+	.article {
+		float: left;
+		width: 70%;
+	}
+}
+
+.article p {
+	text-align: justify;
+}
+
+.article p > code {
+	background-color: #ffe;
+}
+
+.article h3 {
+	clear: both;
+}
+
+.article .leftAlignedImage {
+	padding: 0.625rem 1.25rem 1.25rem 0;
+	float: left;
+}
+
+.article .rightAlignedImage {
+	padding: 0.625rem 0 1.25rem 1.25rem;
+	float: right;
+}
+
+.article__date {
+	white-space: nowrap;
+	color: gray;
+}
+
+.article__tags {
+	margin-top: 1rem;
+}
+
+.article__title {
+	font-size: 4rem;
+	margin-bottom: 0;
+}
+
+.article__hireMe {
+	background-color: #cddc39;
+	padding: 20px 50px;
+	font-size: 3rem;
+	margin: 5rem auto;
+}
+
+.article__hireMe a {
+	color: var(--dark);
+	text-decoration: none;
+	border-bottom: 1px solid;
+}
+
+.badge a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.wrapper {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding-right: 12px;
+	padding-left: 12px
+}
+
+@media screen and (min-width: 720px) {
+	.wrapper {
+		padding-right: 24px;
+		padding-left: 24px
+	}
+}
+
+.wrapper--smaller {
+	max-width: 960px;
+	margin: 0 auto;
+	padding-right: 12px;
+	padding-left: 12px
+}
+
+.page-header {
+	background-color: #fff;
+	padding-top: 24px;
+	padding-bottom: 24px;
+	border-top: 5px solid var(--red);
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.page-header__title {
+	float: left;
+}
+
+.page-header__title h1 {
+	margin: 0;
+	font-size: 3rem;
+}
+
+.page-header__social {
+	position: relative;
+	float: right;
+	text-align: right;
+}
+
+.sidebar {
+	/* Fuck it! I just want nice article without sidebar. */
+	display: none;
+}
+
+@media screen and (min-width: 1050px) {
+	.sidebar {
+		display: block;
+		color: #666;
+		width: 27%;
+		margin-top: 3rem;
+		margin-left: 3%;
+		float: left;
+	}
+}
+
+.sidebar a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.landing {
+	background-color: #fff;
+	border: 1px solid #f2f2f2;
+	padding: 12px 24px;
+	position: relative;
+	margin-top: 12px;
+	font-size: 2.8rem;
+	font-weight: 300;
+}
+
+.landing p {
+	line-height: 1.5;
+}
+
+.landing h1 {
+	font-size: 5rem;
+	font-weight: 300;
+	margin: -1.0rem auto;
+	letter-spacing: -0.2rem;
+}
+
+@media screen and (min-width: 720px) {
+	.landing h1 {
+		font-size: 10rem;
+	}
+}
+
+.landing__abbr {
+	font-weight: 600;
+}
+
+.landing__abbr--php {
+	color: #8892bf;
+}
+
+.landing__abbr--js {
+	color: #ffb400;
+}
+
+.landing__abbr--nette {
+	color: #3484d2;
+}
+
+.landing__abbr--doctrine {
+	color: #ff833b;
+}
+
+.landing__abbr--react {
+	color: #00d8ff;
+}
+
+.landing__abbr--redis {
+	color: #d82c20;
+}
+
+.landing__contact__email {
+	font-size: 4.5rem;
+	font-weight: bold;
+	margin: 2rem;
+	word-wrap: break-word;
+}
+
+.landing__contact__twitter {
+	border-left: 4px solid #3f51b5;
+	background-color: #e8eaf6;
+	padding: 24px;
+	margin: 24px auto;
+}
+
+.landing__contact__twitter img {
+	display: block;
+	float: left;
+}
+
+.landing__contact__twitter p {
+	margin: 0 0 0 2rem;
+	float: left;
+}
+
+.landing__job {
+	border-left: 4px solid #4caf50;
+	background-color: #e8f5e9;
+	padding: 12px 24px;
+	margin: 24px auto;
+}
+
+.landing__job p {
+	line-height: 1.2;
+	font-size: 2.2rem;
+}
+
+.landing__job p.info {
+	font-size: 1.8rem;
+	margin: 12px auto;
+}
+
+.landing__openSource {
+	margin: 2rem auto;
+	word-wrap: break-word;
+}
+
+.landing__openSource a {
+	color: var(--dark);
+}
+
+.landing__openSource__link {
+	float: left;
+	background: #c8e6c9;
+	padding: 12px 2%;
+	max-width: 100%;
+	margin-top: 1rem;
+}
+
+@media screen and (min-width: 720px) {
+	.landing__openSource__link {
+		margin-right: 1%;
+		max-width: 45%;
+	}
+}
+
+.landing__openSource__link img {
+	width: 2.5rem;
+	margin-bottom: -0.5rem;
+	margin-right: 1rem;
+}
+
+.landing__openSource__link__info {
+	font-size: 1.6rem;
+}
+
+.landing__blogLink {
+	font-size: 2rem;
+	position: absolute;
+	right: -1px;
+	top: -1px;
+	background: #ffb400;
+	padding: 4px 12px 8px 12px;
+}
+
+.landing__blogLink a {
+	color: var(--dark);
+	text-decoration: none;
+	border-bottom: 1px dashed var(--dark);
+}
+
+.archive__content {
+	width: 100%;
+}
+
+@media screen and (min-width: 1050px) {
+	.archive__content {
+		float: left;
+		width: 70%;
+	}
+}
+
+.archive__sidebar {
+	/* Fuck it! I just want nice article without sidebar. */
+	display: none;
+}
+
+@media screen and (min-width: 1050px) {
+	.archive__sidebar {
+		display: block;
+		float: left;
+		margin-left: 3%;
+		width: 27%;
+		color: #666;
+	}
+}
+
+.archive__section {
+	margin-bottom: 2rem;
+}
+
+.archive__record {
+	padding-left: 24px;
+}
+
+.archive__record:last-child {
+	margin-bottom: 2rem;
+}
+
+.archive__record__title {
+	text-decoration: none;
+	font-size: 2.2rem;
+}
+
+.archive__record__date {
+	color: #888;
+	display: inline-block;
+	margin-left: 1rem;
+}
+
+.archive__record__tags {
+	float: right;
+}
+
+.archive__record__year {
+	margin-top: 2rem;
+	font-size: 3.0rem;
+}
+
+.archive__record__year:first-child {
+	margin-top: 0;
+}
+
+.archive__switch {
+	font-size: 2.0rem;
+	margin-top: 24px;
+	margin-bottom: 24px;
+	border-left: 3px solid #888;
+	padding-left: 2rem;
+}
+
+.footer {
+	color: #aaa;
+	text-align: right;
+	margin: 2rem auto;
+}
+
+.footer a {
+	text-decoration: none;
+	color: #aaa;
+}
+
+.footer a:hover {
+	text-decoration: underline;
+}
+
+.form-control, .btn {
+	border-radius: 0;
+}
+
+.highlight {
+	background: #ffa;
+}
+
+.pager {
+	margin-bottom: 0;
+}
+
+.label {
+	padding: 2px 8px;
+	margin-right: 5px;
+	border-radius: 3px;
+}
+
+.label > a, a > .label {
+	color: #fff;
+	text-decoration: none;
+}
+
+.label-default {
+	background-color: #ccc;
+}
+
+.share {
+	margin: 0.625rem auto;
+}
+
+.share > .label {
+	font-size: 1.125rem;
+	font-weight: normal;
+	margin: 0.3125rem;
+	padding: 0.4375rem 0.875rem;
+}
+
+.share > .label > i.fa {
+	padding-left: 0.3125rem;
+	padding-right: 0.625rem;
+}
+
+.list-group a {
+	text-decoration: none;
+}
+
+.logout {
+	background-color: transparent;
+	border: none;
+}
+
+.logout:hover {
+	text-decoration: underline;
+}
+
+.pagination .page-link {
+	color: var(--red);
+}
+
+.pagination .active > .page-link, .pagination .active > .page-link:hover {
+	background-color: var(--red);
+	border-color: #ddd;
+}

@@ -3,12 +3,10 @@
 - name: configure and deploy the webservers and application code
   hosts: amazon-webservers
   become: yes
-  gather_facts: False
+  gather_facts: True # needed for ansible_os_family and so on
   roles:
     - common
     - webservers
-
-#- name: deploy database server #FIXME: migrace!
-#  hosts: amazon-dbservers
+    - dbservers
 
 ...

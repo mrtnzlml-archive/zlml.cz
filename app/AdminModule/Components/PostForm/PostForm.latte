@@ -1,9 +1,10 @@
+{capture $updateUrl}{plink update!}{/capture}
 {form postForm, onsubmit => 'if (window.localStorage) {
 			 	localStorage.removeItem(\'content:\' + location.pathname);
 			 	localStorage.removeItem(\'title:\' + location.pathname);
 			 	localStorage.removeItem(\'slug:\' + location.pathname);
 			 	localStorage.removeItem(\'tags:\' + location.pathname);
-			 }'}
+			 }', data-preview-update-url => $updateUrl}
 	<ul class="error" n:if="$form->errors">
 		<li n:foreach="$form->errors as $error">{$error}</li>
 	</ul>
@@ -37,25 +38,10 @@
 	</div>
 	<div class="form-group">
 		{label editor /}
-		<br>
-
-		<div class="btn-group" role="group">
-			<button type="button" class="btn btn-secondary editor" data-action="**" style="border-bottom:none">
-				<span class="glyphicon glyphicon-bold"></span>
-			</button>
-			<button type="button" class="btn btn-secondary editor" data-action="//" style="border-bottom:none">
-				<span class="glyphicon glyphicon-italic"></span>
-			</button>
-		</div>
-		<div class="btn-group" role="group">
-			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bs-modal-lg" style="border-bottom:none">
-				<span class="glyphicon glyphicon-picture"></span>
-			</button>
-		</div>
 		{input editor, class => "form-control"}
 	</div>
 	<div class="checkbox">
 		{input disable_comments}
 	</div>
-{input save, class => "btn btn-primary form-control"}
+	{input save, data-confirm => 'Uložit a publikovat? Raději se zeptám ještě jednou...'}
 {/form}

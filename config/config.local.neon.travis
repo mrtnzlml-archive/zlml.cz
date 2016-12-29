@@ -1,0 +1,19 @@
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# http://nette.org/security-warning
+
+
+doctrine:
+	host: 127.0.0.1
+	port: 3306
+	user: root
+	password: ''
+	dbname: zlml
+	driver: pdo_mysql
+
+
+social:
+	twitter:
+		consumerKey: ''
+		consumerSecret: ''
+		accessToken: ''
+		accessTokenSecret: ''

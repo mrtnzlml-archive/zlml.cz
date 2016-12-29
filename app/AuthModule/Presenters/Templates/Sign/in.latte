@@ -1,3 +1,6 @@
 {block content}
+	{default $children = '.secured();'}
+	{include ../../../../FrontModule/Presenters/Templates/@pageHeader.latte, children => $children}
+
 	{control signInForm}
 {/block}

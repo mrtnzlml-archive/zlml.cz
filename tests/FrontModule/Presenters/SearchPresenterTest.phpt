@@ -22,17 +22,6 @@ class SearchPresenterTest extends \Tester\TestCase
 		$this->checkAction('Front:Search:default', ['search' => 'pritomtodotazupravdepodobnenicvdatabazinenajdu']);
 	}
 
-	public function testSearchForm()
-	{
-		$this->checkForm('Front:Search:default', 'search', [
-			'search' => 'test',
-		], '/s/test');
-
-//		$this->checkForm('Front:Search:default', 'search', [
-//			'search' => 'ač óR ůz',
-//		], '/s/ač%20óR%20ůz');
-	}
-
 }
 
 (new SearchPresenterTest)->run();

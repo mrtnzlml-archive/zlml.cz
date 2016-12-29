@@ -3,9 +3,9 @@
 namespace App\Routing;
 
 use App\Posts\Posts;
-use Nette;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
+use Nextras\Routing\StaticRouter;
 
 /**
  * Router factory.
@@ -14,11 +14,6 @@ class RouterFactory
 {
 
 	private $posts;
-
-	private $broken_links = [
-		//broken => repaired
-		'feed' => 'Homepage:rss',
-	];
 
 	public function __construct(Posts $posts)
 	{
@@ -36,14 +31,8 @@ class RouterFactory
 		$paginator = implode('|', $range);
 
 		$router = new RouteList;
-		foreach ($this->broken_links as $key => $value) {
-			$router[] = new Route($key, $value, Route::ONE_WAY);
-		}
-		$router[] = new Route('last', [
-			'module' => 'Front',
-			'presenter' => 'Homepage',
-			'action' => 'default',
-			'paginator-page' => ceil($pages / 10),
+		$router[] = new StaticRouter([ //TODO: přesměrovat staré adresy!
+			'Front:Homepage:rss' => 'feed',
 		], Route::ONE_WAY);
 		$router[] = new Route('rss', 'Front:Homepage:rss');
 		$router[] = new Route('sitemap.xml', 'Front:Homepage:sitemap');
@@ -63,8 +52,8 @@ class RouterFactory
 			'action' => 'default',
 			'paginator-page' => 1,
 		]);
+		$router[] = new Route('archive/<action>', 'Front:Archive:default');
 		$router[] = new Route('<slug>', 'Front:Single:article');
-		$router[] = new Route('<action>', 'Front:Single:article');
 		$router[] = new Route('s[/<search .+>]', 'Front:Search:default');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Front:Homepage:default');
 		return $router;
