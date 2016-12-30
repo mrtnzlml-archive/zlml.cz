@@ -32,3 +32,5 @@ Deployment
 	ansible-playbook ansible/deploy-production.yml
 	ansible-playbook ansible/deploy-production.yml --list-hosts
 	ansible all -m ping
+
+    ssh ec2-user@34.195.224.88 -i ansible/LightsailDefaultPrivateKey.pem
