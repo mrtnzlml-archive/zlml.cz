@@ -34,3 +34,10 @@ Deployment
 	ansible all -m ping
 
     ssh ec2-user@34.195.224.88 -i ansible/LightsailDefaultPrivateKey.pem
+
+Encrypting multiple files for Fravis-CI
+---------------------------------------
+https://docs.travis-ci.com/user/encrypting-files/#Encrypting-multiple-files
+
+    tar cvf secrets.tar config/config.local.neon.production ansible/LightsailDefaultPrivateKey.pem
+    travis encrypt-file secrets.tar

@@ -42,8 +42,8 @@ after_success:
   - sudo apt-get -qq update
   - sudo apt-get install python-pip
   - sudo pip install ansible
-  - openssl aes-256-cbc -K $encrypted_d86c53d6358a_key -iv $encrypted_d86c53d6358a_iv -in ansible/LightsailDefaultPrivateKey.pem.enc -out ansible/LightsailDefaultPrivateKey.pem -d
-  - openssl aes-256-cbc -K $encrypted_d86c53d6358a_key -iv $encrypted_d86c53d6358a_iv -in config/config.local.neon.production.enc -out config/config.local.neon.production -d
+  - openssl aes-256-cbc -K $encrypted_5880cf525281_key -iv $encrypted_5880cf525281_iv -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
   - sudo ansible-playbook ansible/deploy-production.yml -vvv
 
 cache:
