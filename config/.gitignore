@@ -1,1 +1,4 @@
 config.local.neon
+
+*.production
+!*.production.enc

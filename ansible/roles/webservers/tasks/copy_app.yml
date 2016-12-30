@@ -38,6 +38,8 @@
   file: path={{ install_dir }}/temp/cache state=absent
 
 - name: create application configuration
-  template: src=usr/share/nginx/html/config/config.local.neon dest=/usr/share/nginx/html/config/config.local.neon
+  copy:
+    src: config/config.local.neon.production
+    dest: /usr/share/nginx/html/config/config.local.neon
 
 ...
