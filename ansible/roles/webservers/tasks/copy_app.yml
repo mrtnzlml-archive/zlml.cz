@@ -39,7 +39,7 @@
 
 - name: create application configuration
   copy:
-    src: config/config.local.neon.production
+    src: ./../config/config.local.neon.production
     dest: /usr/share/nginx/html/config/config.local.neon
 
 ...
