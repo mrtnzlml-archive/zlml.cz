@@ -31,11 +31,23 @@ class RouterFactory
 		$paginator = implode('|', $range);
 
 		$router = new RouteList;
-		$router[] = new StaticRouter([ //TODO: přesměrovat staré adresy!
+
+		// Redirect all old urls
+		$router[] = new SeoRedirectRouter([
+			'Front:Archive:default' => 'obsah',
+			'Front:Homepage:default' => [
+				'about',
+				'reference',
+			],
 			'Front:Homepage:rss' => 'feed',
-		], Route::ONE_WAY);
-		$router[] = new Route('rss', 'Front:Homepage:rss');
-		$router[] = new Route('sitemap.xml', 'Front:Homepage:sitemap');
+			'Front:Single:article,slug=stahnete-si-lepsi-blog' => 'develop',
+		]);
+
+		$router[] = new StaticRouter([
+			'Front:Homepage:rss' => 'rss',
+			'Front:Homepage:sitemap' => 'sitemap.xml',
+		]);
+
 		$router[] = new Route('auth[/<presenter>/<action>[/<id>]]', [
 			'module' => 'Auth',
 			'presenter' => 'Sign',
