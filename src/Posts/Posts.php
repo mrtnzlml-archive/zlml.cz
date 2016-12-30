@@ -2,6 +2,7 @@
 
 namespace App\Posts;
 
+use App\Posts\Entities\Post;
 use Doctrine;
 use Kdyby;
 use Nette;
@@ -83,29 +84,16 @@ class Posts extends Nette\Object
 		}
 
 		$em = $this->dao->getEntityManager();
-		$rsm = new Doctrine\ORM\Query\ResultSetMapping();
-		$rsm->addScalarResult('id', 'id');
-		$rsm->addScalarResult('title_score', 'title_score');
-		$rsm->addScalarResult('body_score', 'body_score');
-		$sql = "SELECT id, 5 * MATCH(title) AGAINST (?) AS title_score, MATCH(body) AGAINST (?) AS body_score
+		$rsm = new Doctrine\ORM\Query\ResultSetMappingBuilder($em);
+		$rsm->addRootEntityFromClassMetadata(Post::class, 'p');
+		$selectClause = $rsm->generateSelectClause(['p' => 'posts']);
+		$sql = "SELECT $selectClause, 5 * MATCH(title) AGAINST (?) AS title_score, MATCH(body) AGAINST (?) AS body_score
 				FROM posts WHERE MATCH(title, body) AGAINST(? IN BOOLEAN MODE)$where
-				ORDER BY 5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC";
+				ORDER BY 5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC
+				LIMIT 25";
 		$query = $em->createNativeQuery($sql, $rsm);
 		$query->setParameters([$search, $search, $search, $search, $search]);
-		$result = $query->getScalarResult();
-		$ids = array_map('current', $result);
-		//FIXME:WARNING: temporary ugly hack because WHERE id IN (79, 10, 45, 54, 62) doesn't keep order
-		$tmp = [];
-		foreach ($ids as $key => $value) {
-			$relevance = $result[$key]['title_score'];
-			$article = $this->findOneBy(['id' => $value, 'publish_date <=' => new \DateTime()]);
-			if (empty($article)) {
-				continue;
-			}
-			$tmp[$key . '#' . $relevance] = $article;
-		}
-		return $tmp;
-		//return $this->findBy(array('id' => $ids));
+		return $query->getResult();
 	}
 
 	public function delete($entity, $relations = NULL, $flush = Kdyby\Persistence\ObjectDao::FLUSH)

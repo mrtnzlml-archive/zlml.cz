@@ -6,12 +6,13 @@
 
 	<div class="wrapper">
 		{if $tag}
-			<h2>Nalezeno {count($tag->posts)} článků s tagem <span class="label hidden-print"
-			                                                       style="background: #{$tag->color}">{$tag->name}</span>
+			<h2>
+				Nalezené články s tagem
+				<span class="label hidden-print" style="background: #{$tag->color}">{$tag->name}</span>
 			</h2>
 			{foreach $tag->posts as $post}
-				<a n:href="Single:article $post->slug"
-						title="{$post->body|texy|striptags|truncate:500}">{$post->title}</a>
+				<a n:href="Single:article $post->slug">{$post->title}</a>
+				{breakIf $iterator->counter === 30}
 				{sep}<strong>#</strong>{/sep}
 			{/foreach}
 		{/if}
@@ -25,27 +26,17 @@
 		{/ifset}
 		{ifset $result}
 			{foreach $result as $r}
-				<div class="media">
-					<div class="media-body">
-						<h4 class="media-heading">
-							<a n:href="Single:article $r->slug">
-								{$r->title|noescape|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
-							</a>
-							<small class="pull-xs-right" style="white-space:nowrap">{$r->date|dateInWords}
-								({$r->date|timeAgoInWords})
-							</small>
-						</h4>
-						<p>
-							{foreach $r->tags as $tagEntity}
-								<a n:href="Search:default, $tagEntity->name" style="text-decoration:none">
-									<span class="label hidden-print"
-									      style="background: #{$tagEntity->color}">{$tagEntity->name}</span>
-								</a>
-							{/foreach}
-							{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:600|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
-							&nbsp;<a n:href="Single:article $r->slug">přečtěte si více</a>
-						</p>
-					</div>
+				<div class="search__record">
+					<a class="search__record__title" n:href="Single:article $r->slug">
+						{$r->title|noescape|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
+					</a>
+					<small class="search__record__date">{$r->date|dateInWords}
+						({$r->date|timeAgoInWords})
+					</small>
+					<p>
+						{$r->body|noescape|texy|striptags|replaceRE:"#&[^\s]*;#":""|truncate:500|replaceRE:"#($search)#i":"<span class='highlight'>$1</span>"}
+						&nbsp;<a n:href="Single:article $r->slug">přečtěte si více</a>
+					</p>
 				</div>
 			{/foreach}
 		{/ifset}

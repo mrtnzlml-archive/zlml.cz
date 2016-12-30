@@ -535,7 +535,7 @@ ul li:before {
 }
 
 .highlight {
-	background: #ffa;
+	background: #ffc;
 }
 
 .pager {
@@ -555,6 +555,21 @@ ul li:before {
 
 .label-default {
 	background-color: #ccc;
+}
+
+.search__record p {
+	margin-top: 0;
+}
+
+.search__record__title {
+	text-decoration: none;
+	font-size: 2.2rem;
+}
+
+.search__record__date {
+	color: #888;
+	display: inline-block;
+	margin-left: 1rem;
 }
 
 .share {

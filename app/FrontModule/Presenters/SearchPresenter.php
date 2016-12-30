@@ -31,7 +31,7 @@ class SearchPresenter extends BasePresenter
 
 		$this->template->tag = $this->tags->findOneBy(['name' => $string]);
 		$result = $this->posts->fulltextSearch($string);
-		if (count($result) == 0) {
+		if (count($result) === 0) {
 			$this->template->search = $search;
 			$this->template->error = 'Nic nebylo nalezeno';
 		} else {
