@@ -1,5 +1,5 @@
 [amazon-webservers]
-54.175.196.175
+52.207.249.144
 
 [amazon-webservers:vars]
 install_dir=/usr/share/nginx/html

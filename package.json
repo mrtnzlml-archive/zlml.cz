@@ -20,7 +20,8 @@
     "webpack-manifest-plugin": "^1.1.0"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "deploy": "ansible-playbook ansible/deploy-production.yml"
   },
   "eslintConfig": {
     "env": {
