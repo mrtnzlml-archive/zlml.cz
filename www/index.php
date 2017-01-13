@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 // Uncomment this line if you must temporarily take down your site for maintenance.
 // require '.maintenance.php';
@@ -10,5 +10,5 @@ try {
 	// Run application.
 	$container->getService('application')->run();
 } catch (\Doctrine\DBAL\Exception\ConnectionException $exc) {
-	require_once(__DIR__ . '/.maintenance.php');
+	require_once __DIR__ . '/.maintenance.php';
 }
