@@ -1,7 +1,6 @@
 {
   "name": "mrtnzlml/zlml.cz",
   "description": "Source code of zlml.cz website",
-  "version": "2.0",
   "homepage": "http://zlml.cz/",
   "license": [
     "BSD-3-Clause",
