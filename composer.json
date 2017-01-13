@@ -15,7 +15,6 @@
     "kdyby/doctrine": "^3.1",
     "kukulich/fshl": "^2.1",
     "latte/latte": "^2.4",
-    "leafo/lessphp": "^0.4",
     "nette/application": "^2.4",
     "nette/bootstrap": "^2.4",
     "nette/caching": "^2.5",
