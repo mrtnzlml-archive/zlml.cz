@@ -8,59 +8,29 @@
     "content-hash": "4d2edc0796df564c55274f64bb022a3d",
     "packages": [
         {
-            "name": "adeira/code-quality",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/adeira/code-quality.git",
-                "reference": "1595457c8a375effdb5ac147a81e23ea06c10060"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/adeira/code-quality/zipball/1595457c8a375effdb5ac147a81e23ea06c10060",
-                "reference": "1595457c8a375effdb5ac147a81e23ea06c10060",
-                "shasum": ""
-            },
-            "require": {
-                "consistence/coding-standard": "^0.12.0",
-                "jakub-onderka/php-parallel-lint": "^0.9.2",
-                "slevomat/coding-standard": "^1.1"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "description": "Source of code quality rules for Adeira packages",
-            "homepage": "http://zlml.cz/",
-            "time": "2016-10-02 12:00:04"
-        },
-        {
             "name": "adeira/compiler-extension",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/adeira/compiler-extension.git",
-                "reference": "edb4e4dea2b431e1e3b3ae7ab30605c135cffaa5"
+                "reference": "fe7b6ff1357454e706e13c1369333e2390127823"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adeira/compiler-extension/zipball/edb4e4dea2b431e1e3b3ae7ab30605c135cffaa5",
-                "reference": "edb4e4dea2b431e1e3b3ae7ab30605c135cffaa5",
+                "url": "https://api.github.com/repos/adeira/compiler-extension/zipball/fe7b6ff1357454e706e13c1369333e2390127823",
+                "reference": "fe7b6ff1357454e706e13c1369333e2390127823",
                 "shasum": ""
             },
             "require": {
-                "adeira/code-quality": "^1.0",
                 "nette/application": "^2.4",
                 "nette/di": "^2.4",
                 "php": "^7.0"
             },
             "require-dev": {
+                "adeira/code-quality": "^1.0",
                 "latte/latte": "^2.4",
                 "nette/bootstrap": "^2.4",
-                "nette/tester": "2.0.x-dev as v1.7"
+                "nette/tester": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -70,71 +40,9 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "time": "2016-12-27 11:50:03"
-        },
-        {
-            "name": "consistence/coding-standard",
-            "version": "0.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/consistence/coding-standard.git",
-                "reference": "827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/consistence/coding-standard/zipball/827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334",
-                "reference": "827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~5.6|~7.0",
-                "squizlabs/php_codesniffer": "~2.7.0"
-            },
-            "require-dev": {
-                "jakub-onderka/php-console-highlighter": "0.3.2",
-                "jakub-onderka/php-parallel-lint": "0.9.2",
-                "phing/phing": "2.14",
-                "phpunit/phpunit": "5.4.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Consistence\\": [
-                        "Consistence"
-                    ]
-                },
-                "classmap": [
-                    "Consistence"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
                 "MIT"
             ],
-            "authors": [
-                {
-                    "name": "Vašek Purchart",
-                    "email": "me@vasekpurchart.cz",
-                    "homepage": "http://vasekpurchart.cz"
-                }
-            ],
-            "description": "Consistence - Coding Standard - PHP Code Sniffer rules",
-            "keywords": [
-                "Coding Standard",
-                "PHPCodeSniffer",
-                "codesniffer",
-                "coding",
-                "cs",
-                "phpcs",
-                "ruleset",
-                "sniffer",
-                "standard"
-            ],
-            "time": "2016-09-06 18:48:54"
+            "time": "2017-01-20 22:20:41"
         },
         {
             "name": "dg/twitter-php",
@@ -318,28 +226,29 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a"
+                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
-                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/1a4fb7e902202c33cce8c55989b945612943c2ba",
+                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "doctrine/coding-standard": "~0.1@dev",
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -380,20 +289,20 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2015-04-14 22:21:58"
+            "time": "2017-01-03 10:49:41"
         },
         {
             "name": "doctrine/common",
-            "version": "v2.7.1",
+            "version": "v2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "5954c297e9d93ff84554906c2fbbc2a133c43941"
+                "reference": "930297026c8009a567ac051fd545bf6124150347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/5954c297e9d93ff84554906c2fbbc2a133c43941",
-                "reference": "5954c297e9d93ff84554906c2fbbc2a133c43941",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/930297026c8009a567ac051fd545bf6124150347",
+                "reference": "930297026c8009a567ac051fd545bf6124150347",
                 "shasum": ""
             },
             "require": {
@@ -453,20 +362,20 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2016-12-03 08:15:01"
+            "time": "2017-01-13 14:02:13"
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.6",
+            "version": "v2.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "a526d0df58daa8ab6802244bf3227f532e0deb45"
+                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/a526d0df58daa8ab6802244bf3227f532e0deb45",
-                "reference": "a526d0df58daa8ab6802244bf3227f532e0deb45",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fc376f7a61498e18520cd6fa083752a4ca08072b",
+                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b",
                 "shasum": ""
             },
             "require": {
@@ -524,7 +433,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-12-04 05:53:43"
+            "time": "2017-01-23 23:17:10"
         },
         {
             "name": "doctrine/inflector",
@@ -776,53 +685,6 @@
                 "orm"
             ],
             "time": "2016-12-18 15:42:34"
-        },
-        {
-            "name": "jakub-onderka/php-parallel-lint",
-            "version": "v0.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JakubOnderka/PHP-Parallel-Lint.git",
-                "reference": "2ead2e4043ab125bee9554f356e0a86742c2d4fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/2ead2e4043ab125bee9554f356e0a86742c2d4fa",
-                "reference": "2ead2e4043ab125bee9554f356e0a86742c2d4fa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "jakub-onderka/php-console-highlighter": "~0.3",
-                "nette/tester": "~1.3"
-            },
-            "suggest": {
-                "jakub-onderka/php-console-highlighter": "Highlight syntax in code snippet"
-            },
-            "bin": [
-                "parallel-lint"
-            ],
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "./"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Jakub Onderka",
-                    "email": "jakub.onderka@gmail.com"
-                }
-            ],
-            "description": "This tool check syntax of PHP files about 20x faster than serial check.",
-            "homepage": "https://github.com/JakubOnderka/PHP-Parallel-Lint",
-            "time": "2015-12-15 10:42:16"
         },
         {
             "name": "kdyby/annotations",
@@ -1294,16 +1156,16 @@
         },
         {
             "name": "latte/latte",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "7d30f7bfd58cb017c47d7e14ed93286ce2ca1bc9"
+                "reference": "b62ee346467e1e2402a43c499cf6047fddc5d321"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/7d30f7bfd58cb017c47d7e14ed93286ce2ca1bc9",
-                "reference": "7d30f7bfd58cb017c47d7e14ed93286ce2ca1bc9",
+                "url": "https://api.github.com/repos/nette/latte/zipball/b62ee346467e1e2402a43c499cf6047fddc5d321",
+                "reference": "b62ee346467e1e2402a43c499cf6047fddc5d321",
                 "shasum": ""
             },
             "require": {
@@ -1356,20 +1218,20 @@
                 "templating",
                 "twig"
             ],
-            "time": "2016-09-27 13:10:19"
+            "time": "2017-01-19 11:06:59"
         },
         {
             "name": "nette/application",
-            "version": "v2.4.3",
+            "version": "v2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/application.git",
-                "reference": "58a8d2288dd2aae755538ccb380af183a356892d"
+                "reference": "3e30a1ec941717668bcdab336d690484700207cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/application/zipball/58a8d2288dd2aae755538ccb380af183a356892d",
-                "reference": "58a8d2288dd2aae755538ccb380af183a356892d",
+                "url": "https://api.github.com/repos/nette/application/zipball/3e30a1ec941717668bcdab336d690484700207cd",
+                "reference": "3e30a1ec941717668bcdab336d690484700207cd",
                 "shasum": ""
             },
             "require": {
@@ -1390,7 +1252,7 @@
                 "mockery/mockery": "^0.9.5",
                 "nette/di": "~2.4",
                 "nette/forms": "~2.4",
-                "nette/robot-loader": "~2.4",
+                "nette/robot-loader": "^2.4.2 || ^3.0",
                 "nette/security": "~2.4",
                 "nette/tester": "~2.0",
                 "tracy/tracy": "^2.4"
@@ -1431,7 +1293,7 @@
             ],
             "description": "Nette Application MVC Component",
             "homepage": "https://nette.org",
-            "time": "2016-12-20 11:12:00"
+            "time": "2017-01-19 10:34:07"
         },
         {
             "name": "nette/bootstrap",
@@ -1625,23 +1487,23 @@
         },
         {
             "name": "nette/di",
-            "version": "v2.4.5",
+            "version": "v2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "b265f305e1fef2dad1cb2e7340b49d274d3dd14c"
+                "reference": "28767a0abef69faa08bfa700e2e3f80ac58ab58e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/b265f305e1fef2dad1cb2e7340b49d274d3dd14c",
-                "reference": "b265f305e1fef2dad1cb2e7340b49d274d3dd14c",
+                "url": "https://api.github.com/repos/nette/di/zipball/28767a0abef69faa08bfa700e2e3f80ac58ab58e",
+                "reference": "28767a0abef69faa08bfa700e2e3f80ac58ab58e",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "nette/neon": "^2.3.3",
-                "nette/php-generator": "^2.4",
-                "nette/utils": "^2.4",
+                "nette/php-generator": "^2.5",
+                "nette/utils": "^2.4.3",
                 "php": ">=5.6.0"
             },
             "conflict": {
@@ -1681,7 +1543,7 @@
             ],
             "description": "Nette Dependency Injection Component",
             "homepage": "https://nette.org",
-            "time": "2016-12-23 10:26:44"
+            "time": "2017-01-15 14:08:41"
         },
         {
             "name": "nette/finder",
@@ -1801,16 +1663,16 @@
         },
         {
             "name": "nette/http",
-            "version": "v2.4.3",
+            "version": "v2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "71602f2ab582312b5ae016a9f0b8df1a8a116f86"
+                "reference": "7727507129934e18c59bdc4060fd32730b0d9e87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/71602f2ab582312b5ae016a9f0b8df1a8a116f86",
-                "reference": "71602f2ab582312b5ae016a9f0b8df1a8a116f86",
+                "url": "https://api.github.com/repos/nette/http/zipball/7727507129934e18c59bdc4060fd32730b0d9e87",
+                "reference": "7727507129934e18c59bdc4060fd32730b0d9e87",
                 "shasum": ""
             },
             "require": {
@@ -1821,7 +1683,7 @@
                 "nette/nette": "<2.2"
             },
             "require-dev": {
-                "nette/di": "^2.4",
+                "nette/di": "^2.4.6",
                 "nette/tester": "~2.0",
                 "tracy/tracy": "^2.4"
             },
@@ -1857,24 +1719,25 @@
             ],
             "description": "Nette HTTP Component",
             "homepage": "https://nette.org",
-            "time": "2016-12-19 14:56:54"
+            "time": "2017-01-18 03:03:04"
         },
         {
             "name": "nette/neon",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/neon.git",
-                "reference": "c40c63f2afa4196844ac40d9d2a2cfb313f76906"
+                "reference": "1a78ff64b1e161ebccc03bdf9366450a69365f5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/neon/zipball/c40c63f2afa4196844ac40d9d2a2cfb313f76906",
-                "reference": "c40c63f2afa4196844ac40d9d2a2cfb313f76906",
+                "url": "https://api.github.com/repos/nette/neon/zipball/1a78ff64b1e161ebccc03bdf9366450a69365f5b",
+                "reference": "1a78ff64b1e161ebccc03bdf9366450a69365f5b",
                 "shasum": ""
             },
             "require": {
                 "ext-iconv": "*",
+                "ext-json": "*",
                 "php": ">=5.6.0"
             },
             "require-dev": {
@@ -1910,20 +1773,20 @@
             ],
             "description": "Nette NEON: parser & generator for Nette Object Notation",
             "homepage": "http://ne-on.org",
-            "time": "2016-06-25 13:59:48"
+            "time": "2017-01-13 08:00:19"
         },
         {
             "name": "nette/php-generator",
-            "version": "v2.4.1",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "e9f4429f5ac526661634242198a1ff394fa5440a"
+                "reference": "3f317dc211953cc93e9efa61598dc074adc3b0de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/e9f4429f5ac526661634242198a1ff394fa5440a",
-                "reference": "e9f4429f5ac526661634242198a1ff394fa5440a",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/3f317dc211953cc93e9efa61598dc074adc3b0de",
+                "reference": "3f317dc211953cc93e9efa61598dc074adc3b0de",
                 "shasum": ""
             },
             "require": {
@@ -1940,7 +1803,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1966,35 +1829,35 @@
             ],
             "description": "Nette PHP Generator",
             "homepage": "https://nette.org",
-            "time": "2016-07-31 13:50:37"
+            "time": "2017-01-13 08:02:14"
         },
         {
             "name": "nette/reflection",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/reflection.git",
-                "reference": "1922f2502e5d2bf6be51859721855e8e72ebde96"
+                "reference": "ca6bafe1f73c19719238b58f91e6a399f281069b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/reflection/zipball/1922f2502e5d2bf6be51859721855e8e72ebde96",
-                "reference": "1922f2502e5d2bf6be51859721855e8e72ebde96",
+                "url": "https://api.github.com/repos/nette/reflection/zipball/ca6bafe1f73c19719238b58f91e6a399f281069b",
+                "reference": "ca6bafe1f73c19719238b58f91e6a399f281069b",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "nette/caching": "~2.2",
-                "nette/utils": "~2.4",
+                "nette/caching": "^2.2 || ^3.0",
+                "nette/utils": "^2.4 || ^3.0",
                 "php": ">=5.6.0"
             },
             "conflict": {
                 "nette/nette": "<2.2"
             },
             "require-dev": {
-                "nette/di": "~2.3",
-                "nette/tester": "~2.0",
-                "tracy/tracy": "^2.3"
+                "nette/di": "^2.4 || ^3.0",
+                "nette/tester": "^2.0",
+                "tracy/tracy": "^2.4"
             },
             "type": "library",
             "extra": {
@@ -2025,7 +1888,7 @@
             ],
             "description": "Nette PHP Reflection Component",
             "homepage": "https://nette.org",
-            "time": "2016-05-17 15:49:34"
+            "time": "2017-01-10 16:10:27"
         },
         {
             "name": "nette/robot-loader",
@@ -2196,16 +2059,16 @@
         },
         {
             "name": "nette/utils",
-            "version": "v2.4.3",
+            "version": "v2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "d552403bd9337eafd646a7e252c0256e281115dc"
+                "reference": "714afb64d0da07d0da7178cbf5680008e4b0180b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/d552403bd9337eafd646a7e252c0256e281115dc",
-                "reference": "d552403bd9337eafd646a7e252c0256e281115dc",
+                "url": "https://api.github.com/repos/nette/utils/zipball/714afb64d0da07d0da7178cbf5680008e4b0180b",
+                "reference": "714afb64d0da07d0da7178cbf5680008e4b0180b",
                 "shasum": ""
             },
             "require": {
@@ -2255,7 +2118,7 @@
             ],
             "description": "Nette Utility Classes",
             "homepage": "https://nette.org",
-            "time": "2017-01-09 20:22:19"
+            "time": "2017-01-16 12:30:14"
         },
         {
             "name": "nextras/secured-links",
@@ -2418,12 +2281,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "8b674956ac0ca9b4c90a98197f244cf81079e084"
+                "reference": "3db4b0df21d1f527304650e717c66af48981f1c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/8b674956ac0ca9b4c90a98197f244cf81079e084",
-                "reference": "8b674956ac0ca9b4c90a98197f244cf81079e084",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/3db4b0df21d1f527304650e717c66af48981f1c4",
+                "reference": "3db4b0df21d1f527304650e717c66af48981f1c4",
                 "shasum": ""
             },
             "conflict": {
@@ -2467,12 +2330,12 @@
                 "phpmailer/phpmailer": ">=5,<5.2.22",
                 "pusher/pusher-php-server": "<2.2.1",
                 "sabre/dav": ">=1.6,<1.6.99|>=1.7,<1.7.11|>=1.8,<1.8.9",
-                "shopware/shopware": "<4.3.7|>=5,<5.1.5",
+                "shopware/shopware": "<4.4|>=5,<5.2.15",
                 "silverstripe/cms": ">=3.1,<3.1.11|>=3,<=3.0.11",
                 "silverstripe/forum": "<=0.6.1|>=0.7,<=0.7.3",
                 "silverstripe/framework": ">=3,<3.3",
                 "silverstripe/userforms": "<3",
-                "simplesamlphp/saml2": ">=1.9,<1.9.1|>=1.10,<1.10.3|>=2.3,<2.3.3",
+                "simplesamlphp/saml2": "<1.8.1|>=1.9,<1.9.1|>=1.10,<1.10.3|>=2,<2.3.3",
                 "simplesamlphp/simplesamlphp": "<1.14.11",
                 "simplesamlphp/simplesamlphp-module-infocard": "<1.0.1",
                 "socalnick/scn-social-auth": "<1.15.2",
@@ -2495,7 +2358,7 @@
                 "thelia/backoffice-default-template": ">=2.1,<2.1.2",
                 "thelia/thelia": ">=2.1.0-beta1,<2.1.3|>=2.1,<2.1.2",
                 "twig/twig": "<1.20",
-                "typo3/cms": ">=6.2,<6.2.29|>=8,<8.4.1|>=7,<7.6.13",
+                "typo3/cms": ">=6.2,<6.2.30|>=8,<8.4.1|>=7,<7.6.13",
                 "typo3/flow": ">=2.3,<2.3.16|>=3,<3.0.10|>=3.1,<3.1.7|>=3.2,<3.2.7|>=3.3,<3.3.5|>=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1",
                 "typo3/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4",
                 "willdurand/js-translation-bundle": "<2.1.1",
@@ -2541,124 +2404,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-01-09 15:59:17"
-        },
-        {
-            "name": "slevomat/coding-standard",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "53c24d3fa620dadc832b6d297f11d908835af97f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/53c24d3fa620dadc832b6d297f11d908835af97f",
-                "reference": "53c24d3fa620dadc832b6d297f11d908835af97f",
-                "shasum": ""
-            },
-            "require": {
-                "jakub-onderka/php-parallel-lint": "^0.9.2",
-                "php": "^5.6|^7.0",
-                "squizlabs/php_codesniffer": "^2.6.0"
-            },
-            "require-dev": {
-                "consistence/coding-standard": "^0.11.0",
-                "phing/phing": "^2.9",
-                "phpstan/phpstan": "0.1",
-                "phpunit/phpunit": "^5.0",
-                "satooshi/php-coveralls": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SlevomatCodingStandard\\": "SlevomatCodingStandard"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Slevomat Coding Standard for PHP_CodeSniffer extends Consistence Coding Standard by providing sniffs with additional checks.",
-            "time": "2016-08-10 15:35:53"
-        },
-        {
-            "name": "squizlabs/php_codesniffer",
-            "version": "2.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "9b324f3a1132459a7274a0ace2e1b766ba80930f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9b324f3a1132459a7274a0ace2e1b766ba80930f",
-                "reference": "9b324f3a1132459a7274a0ace2e1b766ba80930f",
-                "shasum": ""
-            },
-            "require": {
-                "ext-simplexml": "*",
-                "ext-tokenizer": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=5.1.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "bin": [
-                "scripts/phpcs",
-                "scripts/phpcbf"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "CodeSniffer.php",
-                    "CodeSniffer/CLI.php",
-                    "CodeSniffer/Exception.php",
-                    "CodeSniffer/File.php",
-                    "CodeSniffer/Fixer.php",
-                    "CodeSniffer/Report.php",
-                    "CodeSniffer/Reporting.php",
-                    "CodeSniffer/Sniff.php",
-                    "CodeSniffer/Tokens.php",
-                    "CodeSniffer/Reports/",
-                    "CodeSniffer/Tokenizers/",
-                    "CodeSniffer/DocGenerators/",
-                    "CodeSniffer/Standards/AbstractPatternSniff.php",
-                    "CodeSniffer/Standards/AbstractScopeSniff.php",
-                    "CodeSniffer/Standards/AbstractVariableSniff.php",
-                    "CodeSniffer/Standards/IncorrectPatternException.php",
-                    "CodeSniffer/Standards/Generic/Sniffs/",
-                    "CodeSniffer/Standards/MySource/Sniffs/",
-                    "CodeSniffer/Standards/PEAR/Sniffs/",
-                    "CodeSniffer/Standards/PSR1/Sniffs/",
-                    "CodeSniffer/Standards/PSR2/Sniffs/",
-                    "CodeSniffer/Standards/Squiz/Sniffs/",
-                    "CodeSniffer/Standards/Zend/Sniffs/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Greg Sherwood",
-                    "role": "lead"
-                }
-            ],
-            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
-            "homepage": "http://www.squizlabs.com/php-codesniffer",
-            "keywords": [
-                "phpcs",
-                "standards"
-            ],
-            "time": "2016-11-30 04:02:31"
+            "time": "2017-01-24 18:32:04"
         },
         {
             "name": "symfony/console",
@@ -2900,16 +2646,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.4.4",
+            "version": "v2.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "c1ec73ea7661b79aa9fade863b75f8cad9f47bb5"
+                "reference": "f1ec2f25347ca75dbadcb43244a9ac04dea29fc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/c1ec73ea7661b79aa9fade863b75f8cad9f47bb5",
-                "reference": "c1ec73ea7661b79aa9fade863b75f8cad9f47bb5",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/f1ec2f25347ca75dbadcb43244a9ac04dea29fc2",
+                "reference": "f1ec2f25347ca75dbadcb43244a9ac04dea29fc2",
                 "shasum": ""
             },
             "require": {
@@ -2958,28 +2704,135 @@
                 "debugger",
                 "nette"
             ],
-            "time": "2016-12-10 15:04:11"
+            "time": "2017-01-15 13:26:45"
         }
     ],
     "packages-dev": [
+        {
+            "name": "consistence/coding-standard",
+            "version": "0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/consistence/coding-standard.git",
+                "reference": "827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/consistence/coding-standard/zipball/827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334",
+                "reference": "827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.6|~7.0",
+                "squizlabs/php_codesniffer": "~2.7.0"
+            },
+            "require-dev": {
+                "jakub-onderka/php-console-highlighter": "0.3.2",
+                "jakub-onderka/php-parallel-lint": "0.9.2",
+                "phing/phing": "2.14",
+                "phpunit/phpunit": "5.4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Consistence\\": [
+                        "Consistence"
+                    ]
+                },
+                "classmap": [
+                    "Consistence"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vašek Purchart",
+                    "email": "me@vasekpurchart.cz",
+                    "homepage": "http://vasekpurchart.cz"
+                }
+            ],
+            "description": "Consistence - Coding Standard - PHP Code Sniffer rules",
+            "keywords": [
+                "Coding Standard",
+                "PHPCodeSniffer",
+                "codesniffer",
+                "coding",
+                "cs",
+                "phpcs",
+                "ruleset",
+                "sniffer",
+                "standard"
+            ],
+            "time": "2016-09-06 18:48:54"
+        },
         {
             "name": "dg/adminer-custom",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/adminer-custom.git",
-                "reference": "8a62f9e5d378df564bf5c8a542885ea9aa0a9ee4"
+                "reference": "ed80cf19bb435ba5b68d328d1bf433bb7f59ef5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/adminer-custom/zipball/8a62f9e5d378df564bf5c8a542885ea9aa0a9ee4",
-                "reference": "8a62f9e5d378df564bf5c8a542885ea9aa0a9ee4",
+                "url": "https://api.github.com/repos/dg/adminer-custom/zipball/ed80cf19bb435ba5b68d328d1bf433bb7f59ef5e",
+                "reference": "ed80cf19bb435ba5b68d328d1bf433bb7f59ef5e",
                 "shasum": ""
             },
             "type": "project",
             "notification-url": "https://packagist.org/downloads/",
             "description": "Customization for the best database management tool written in PHP, Adminer",
-            "time": "2016-06-01 21:20:39"
+            "time": "2017-01-18 02:32:38"
+        },
+        {
+            "name": "jakub-onderka/php-parallel-lint",
+            "version": "v0.9.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JakubOnderka/PHP-Parallel-Lint.git",
+                "reference": "2ead2e4043ab125bee9554f356e0a86742c2d4fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/2ead2e4043ab125bee9554f356e0a86742c2d4fa",
+                "reference": "2ead2e4043ab125bee9554f356e0a86742c2d4fa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "jakub-onderka/php-console-highlighter": "~0.3",
+                "nette/tester": "~1.3"
+            },
+            "suggest": {
+                "jakub-onderka/php-console-highlighter": "Highlight syntax in code snippet"
+            },
+            "bin": [
+                "parallel-lint"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Onderka",
+                    "email": "jakub.onderka@gmail.com"
+                }
+            ],
+            "description": "This tool check syntax of PHP files about 20x faster than serial check.",
+            "homepage": "https://github.com/JakubOnderka/PHP-Parallel-Lint",
+            "time": "2015-12-15 10:42:16"
         },
         {
             "name": "kdyby/doctrine-dbal-batchimport",
@@ -3280,6 +3133,123 @@
                 "unit"
             ],
             "time": "2017-01-09 19:57:29"
+        },
+        {
+            "name": "slevomat/coding-standard",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slevomat/coding-standard.git",
+                "reference": "53c24d3fa620dadc832b6d297f11d908835af97f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/53c24d3fa620dadc832b6d297f11d908835af97f",
+                "reference": "53c24d3fa620dadc832b6d297f11d908835af97f",
+                "shasum": ""
+            },
+            "require": {
+                "jakub-onderka/php-parallel-lint": "^0.9.2",
+                "php": "^5.6|^7.0",
+                "squizlabs/php_codesniffer": "^2.6.0"
+            },
+            "require-dev": {
+                "consistence/coding-standard": "^0.11.0",
+                "phing/phing": "^2.9",
+                "phpstan/phpstan": "0.1",
+                "phpunit/phpunit": "^5.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SlevomatCodingStandard\\": "SlevomatCodingStandard"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Slevomat Coding Standard for PHP_CodeSniffer extends Consistence Coding Standard by providing sniffs with additional checks.",
+            "time": "2016-08-10 15:35:53"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "9b324f3a1132459a7274a0ace2e1b766ba80930f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9b324f3a1132459a7274a0ace2e1b766ba80930f",
+                "reference": "9b324f3a1132459a7274a0ace2e1b766ba80930f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "scripts/phpcs",
+                "scripts/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "CodeSniffer.php",
+                    "CodeSniffer/CLI.php",
+                    "CodeSniffer/Exception.php",
+                    "CodeSniffer/File.php",
+                    "CodeSniffer/Fixer.php",
+                    "CodeSniffer/Report.php",
+                    "CodeSniffer/Reporting.php",
+                    "CodeSniffer/Sniff.php",
+                    "CodeSniffer/Tokens.php",
+                    "CodeSniffer/Reports/",
+                    "CodeSniffer/Tokenizers/",
+                    "CodeSniffer/DocGenerators/",
+                    "CodeSniffer/Standards/AbstractPatternSniff.php",
+                    "CodeSniffer/Standards/AbstractScopeSniff.php",
+                    "CodeSniffer/Standards/AbstractVariableSniff.php",
+                    "CodeSniffer/Standards/IncorrectPatternException.php",
+                    "CodeSniffer/Standards/Generic/Sniffs/",
+                    "CodeSniffer/Standards/MySource/Sniffs/",
+                    "CodeSniffer/Standards/PEAR/Sniffs/",
+                    "CodeSniffer/Standards/PSR1/Sniffs/",
+                    "CodeSniffer/Standards/PSR2/Sniffs/",
+                    "CodeSniffer/Standards/Squiz/Sniffs/",
+                    "CodeSniffer/Standards/Zend/Sniffs/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2016-11-30 04:02:31"
         }
     ],
     "aliases": [

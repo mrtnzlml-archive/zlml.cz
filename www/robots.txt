@@ -1,1 +1,1 @@
-Sitemap: http://zlml.cz/sitemap.xml
+Sitemap: https://zlml.cz/sitemap.xml
