@@ -33,7 +33,13 @@ Deployment
 	ansible-playbook ansible/deploy-production.yml --list-hosts
 	ansible all -m ping
 
+Database backup
+---------------
+
     ssh ec2-user@34.195.224.88 -i ansible/LightsailDefaultPrivateKey.pem
+    mysqldump -uroot --skip-dump-date --skip-comments --skip-compact zlml_cz > dump.sql
+    exit
+    scp -i ansible/LightsailDefaultPrivateKey.pem ec2-user@34.195.224.88:/home/ec2-user/dump.sql .
 
 Encrypting multiple files for Fravis-CI
 ---------------------------------------
