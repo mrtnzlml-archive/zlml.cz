@@ -476,6 +476,7 @@ ul li:before {
 }
 
 .archive__content {
+	margin-top: 2rem;
 	width: 100%;
 }
 

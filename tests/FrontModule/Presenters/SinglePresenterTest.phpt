@@ -54,12 +54,6 @@ class SinglePresenterTest extends \Tester\TestCase
 		$this->checkAction('Front:Archive:default');
 	}
 
-	public function testRenderArchiveTags()
-	{
-		$this->checkAction('Front:Archive:tags');
-	}
-
-
 	///// dataProviders /////
 
 	/**

@@ -3,7 +3,6 @@
 namespace App\FrontModule\Presenters;
 
 use App\Posts\Posts;
-use App\Tags\Tags;
 
 class ArchivePresenter extends BasePresenter
 {
@@ -13,16 +12,10 @@ class ArchivePresenter extends BasePresenter
 	 */
 	private $posts;
 
-	/**
-	 * @var \App\Tags\Tags
-	 */
-	private $tags;
-
-	public function __construct(Posts $posts, Tags $tags)
+	public function __construct(Posts $posts)
 	{
 		parent::__construct();
 		$this->posts = $posts;
-		$this->tags = $tags;
 	}
 
 	public function renderDefault()
@@ -32,15 +25,6 @@ class ArchivePresenter extends BasePresenter
 			['date' => 'DESC']
 		);
 		$this->template->posts = $posts;
-	}
-
-	public function renderTags()
-	{
-		$tags = $this->tags->findBy(
-			[],
-			['name' => 'ASC']
-		);
-		$this->template->tags = $tags;
 	}
 
 }

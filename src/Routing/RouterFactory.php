@@ -34,7 +34,10 @@ class RouterFactory
 
 		// Redirect all old urls
 		$router[] = new SeoRedirectRouter([
-			'Front:Archive:default' => 'obsah',
+			'Front:Archive:default' => [
+				'obsah',
+				'archive/tags',
+			],
 			'Front:Homepage:default' => [
 				'about',
 				'reference',
