@@ -356,10 +356,16 @@ ul li:before {
 }
 
 .landing__contact__email {
-	font-size: 4.5rem;
-	font-weight: bold;
-	margin: 2rem;
+	font-size: 4rem;
 	word-wrap: break-word;
+	text-align: center;
+}
+
+@media screen and (min-width: 720px) {
+	.landing__contact__email {
+		margin: 2rem;
+		font-size: 7rem;
+	}
 }
 
 .landing__contact__twitter {
@@ -369,14 +375,15 @@ ul li:before {
 	margin: 24px auto;
 }
 
-.landing__contact__twitter img {
-	display: block;
+.landing__contact__twitter .image {
 	float: left;
+	width: 48px;
+	height: 48px;
+	margin-right: 2rem;
 }
 
-.landing__contact__twitter p {
-	margin: 0 0 0 2rem;
-	float: left;
+.landing__contact__twitter .text {
+	margin-top: .3rem;
 }
 
 .landing__job {
@@ -408,15 +415,23 @@ ul li:before {
 .landing__openSource__link {
 	float: left;
 	background: #c8e6c9;
-	padding: 12px 2%;
+	padding: 12px 5%;
 	max-width: 100%;
 	margin-top: 1rem;
+}
+
+.landing__openSource__link img {
+	display: none;
 }
 
 @media screen and (min-width: 720px) {
 	.landing__openSource__link {
 		margin-right: 1%;
 		max-width: 45%;
+		padding: 12px 2%;
+	}
+	.landing__openSource__link img {
+		display: inline-block;
 	}
 }
 
@@ -432,9 +447,6 @@ ul li:before {
 
 .landing__blogLink {
 	font-size: 2rem;
-	position: absolute;
-	right: -1px;
-	top: -1px;
 	background: #ffb400;
 	padding: 4px 12px 8px 12px;
 }
@@ -443,6 +455,24 @@ ul li:before {
 	color: var(--dark);
 	text-decoration: none;
 	border-bottom: 1px dashed var(--dark);
+}
+
+.landing__blogLink--absolute {
+	position: absolute;
+	right: -1px;
+	top: -1px;
+}
+
+.landing__blogLink--large {
+	background-color: #fdf5ce;
+	padding: 1.2rem 0 1.8rem;
+	border-left: 4px solid #ffb400;
+}
+
+.landing .wrapper--overflow {
+	margin-left: -28px;
+	margin-right: -28px;
+	box-shadow: 0 1px 2px #aaa;
 }
 
 .archive__content {

@@ -1,6 +1,6 @@
 {block content}
 	<div class="wrapper--smaller landing">
-		<div class="landing__blogLink">
+		<div class="landing__blogLink landing__blogLink--absolute">
 			<a n:href=":Front:Archive:default">
 				Looking for a <strong>blog</strong>? It's here!
 			</a>
@@ -58,7 +58,7 @@
 			something new&hellip;
 		</p>
 
-		<div class="landing__job" id="hireMe">
+		<div class="landing__job wrapper--overflow" id="hireMe">
 			<p>
 				<strong>Currently I am looking for a new job.</strong> Oh yeah, but wait! I am looking for a special one!
 			</p>
@@ -70,18 +70,18 @@
 			</p>
 			<p class="info">
 				According to my experiences I want to work with relatively clean and testable code preferably in PHP 7
-				or HHVM with tests and CI. I've been in <code>$GLOBALS</code> insane legacy hell for over one year in my previous job and it was
-				enough. I don't want to go back. I am also fine with React or server-side JS and I love to learn new things.
+				or HHVM with tests, CI and DDD in mind. I've been in <code>$GLOBALS</code> insane legacy hell for over one year in my previous job and it was
+				enough. I don't want to go back. I love to learn new things.
 				I just cannot do one thing over and over again. This is not my style&hellip;
 			</p>
 			<p>
-				I will be available around June/July 2017.
+				I will be available around <strong>July 2017</strong>.
 			</p>
 		</div>
 
 		<div class="landing__contact">
 			<p>
-				Do you want to stay in touch with me? That's great!
+				Do you want to stay in touch with me? That's great and I really appreciate it!
 			</p>
 			<p class="landing__contact__email">
 				mrtnzlml@gmail.com
@@ -90,21 +90,30 @@
 				Don't worry, I'll give you my phone number later
 				<abbr title="Or you can be clever and try to Google it...">if you want</abbr>.
 			</p>
-			<div class="landing__contact__twitter clearfix">
-				<a href="https://twitter.com/mrtnzlml">
-					<img src="{$twitterProfile->profileImageUrl()}" alt="Twitter profile image">
-				</a>
-				<p>
+			<div class="landing__contact__twitter clearfix wrapper--overflow">
+				<div class="image">
+					<img src="{$twitterProfile->profileImageUrl()}" alt="Avatar">
+				</div>
+				<div class="text">
 					Become one of my awesome
 					<a href="https://twitter.com/mrtnzlml">{$twitterProfile->followersCount()} <del>unicorns</del> followers</a>
 					on Twitter&hellip;
-				</p>
+				</div>
 			</div>
 			<p>
 				Find more informations about my experiences on my
 				<a href="https://cz.linkedin.com/in/mrtnzlml/">Linkedin</a>. It's great way how to stay in touch if you
 				want.
 			</p>
+
+			<div class="landing__blogLink landing__blogLink--large wrapper--overflow">
+				<div class="wrapper--smaller">
+				<a n:href=":Front:Archive:default">
+					Looking for a <strong>blog</strong>? It's here!
+				</a>
+				</div>
+			</div>
+
 			<p>By the way - this website is also <a href="https://github.com/mrtnzlml/zlml.cz">open-sourced</a>.</p>
 		</div>
 
