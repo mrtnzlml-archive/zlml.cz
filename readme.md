@@ -23,15 +23,15 @@ your sensitive data. See [security warning](http://nette.org/security-warning).
 Then you have to create database for this website. You can use Adminer tool in
 `http://localhost:8888/adminer` or you can do that manually using command line:
 
-		mysql -u root -e 'create database zlml;'
-        mysql -u root -D zlml < sql/zlml.sql
+    mysql -u root -e 'create database zlml;'
+    mysql -u root -D zlml < sql/zlml.sql
 
 Deployment
 ----------
 
-	ansible-playbook ansible/deploy-production.yml
-	ansible-playbook ansible/deploy-production.yml --list-hosts
-	ansible all -m ping
+    ansible-playbook ansible/deploy-production.yml
+    ansible-playbook ansible/deploy-production.yml --list-hosts
+    ansible all -m ping
 
 Database backup
 ---------------
