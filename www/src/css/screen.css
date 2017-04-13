@@ -217,19 +217,6 @@ ul li:before {
 	margin-bottom: 0;
 }
 
-.article__hireMe {
-	background-color: #cddc39;
-	padding: 20px 50px;
-	font-size: 3rem;
-	margin: 5rem auto;
-}
-
-.article__hireMe a {
-	color: var(--dark);
-	text-decoration: none;
-	border-bottom: 1px solid;
-}
-
 .badge a {
 	color: #fff;
 	text-decoration: none;
