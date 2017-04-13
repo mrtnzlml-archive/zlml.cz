@@ -37,12 +37,6 @@
 				{$body|noescape}
 			</div>
 
-			<div class="article__hireMe">
-				<a n:href=":Front:Homepage:#hireMe">
-					Líbí se vám o čem píšu? <strong>Budu to dělat pro Vás!</strong>
-				</a>
-			</div>
-
 			<div class="alert alert-danger" n:if="!$post->disable_comments && empty($setting->disqus_shortname)">
 				Please setup your disqus shortname in administration&hellip;
 			</div>
