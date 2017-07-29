@@ -1,8 +1,0 @@
-# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
-# http://nette.org/security-warning
-
-testbench:
-    dbprefix: _testbench_zlml_
-    shareDatabase: yes # database will persist between tests
-    sqls:
-        - %appDir%/../zlml.sql

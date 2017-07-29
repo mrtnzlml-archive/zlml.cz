@@ -1,12 +1,4 @@
-.idea/*
-log/*
-temp/*
-vendor/*
+.next/*
 node_modules/*
 
 !.gitignore
-!.htaccess
-!.keep
-
-secrets.tar
-yarn-error.log

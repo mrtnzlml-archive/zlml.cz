@@ -1,3 +1,0 @@
-services:
-	- App\Security\Authenticator
-	- App\Security\Authorizator

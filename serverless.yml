@@ -1,0 +1,43 @@
+service: zlml_cz
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: eu-west-1 # Ireland
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: "arn:aws:dynamodb:eu-west-1:*:*"
+
+package:
+  exclude:
+    - ./**
+  include:
+    - .next/*
+
+functions:
+  chatbot:
+    handler: dist/basicLambda.handler # TODO
+    events:
+      - http:
+          path: /
+          method: POST
+          cors: true
+          integration: lambda-proxy
+
+resources:
+  Resources:
+    conversationsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: articles
+        AttributeDefinitions:
+          - AttributeName: articleId
+            AttributeType: S # string
+        KeySchema:
+          - AttributeName: articleId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

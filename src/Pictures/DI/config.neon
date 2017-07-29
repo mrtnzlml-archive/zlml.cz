@@ -1,2 +1,0 @@
-services:
-	- App\Pictures\Pictures(@doctrine.dao(App\Pictures\Entities\Picture))

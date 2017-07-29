@@ -1,4 +1,0 @@
-*.retry
-
-*.pem
-!*.pem.enc

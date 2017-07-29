@@ -1,2 +1,0 @@
-services:
-	- App\Users\Users(@doctrine.dao(App\Users\Entities\User))

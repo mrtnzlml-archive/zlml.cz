@@ -1,34 +1,12 @@
 {
   "dependencies": {
-    "autoprefixer": "^6.6.0",
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "codemirror": "^5.22.0",
-    "css-loader": "^0.26.1",
-    "eslint": "^3.12.2",
-    "eslint-loader": "^1.6.1",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.9.0",
-    "fine-uploader": "^5.11.10",
-    "jquery": "^3.1.1",
-    "nette.ajax.js": "^2.1.0",
-    "postcss-loader": "^1.2.1",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.14.0",
-    "webpack-manifest-plugin": "^1.1.0"
+    "next": "beta",
+    "react": "next",
+    "react-dom": "next"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "deploy": "ansible-playbook ansible/deploy-production.yml"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true
-    },
-    "parserOptions": {
-      "sourceType": "module"
-    }
+    "dev": "next",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
   }
 }
