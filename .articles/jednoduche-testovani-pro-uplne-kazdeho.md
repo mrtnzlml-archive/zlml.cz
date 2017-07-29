@@ -1,7 +1,7 @@
 Konec slibů, článek je tu. Tentokrát se rozepíšu o nástroji [Testbench](https://github.com/mrtnzlml/testbench). Testbench by měl pomoci s rychlým testováním Nette aplikace. Je zaměřen spíše integračně a vhodně doplňuje [Nette\Tester](https://tester.nette.org/), který je zaměřen spíše jednotkově. Myšlenka, která stála za vytvořením tohoto nástroje je velmi prostá - testování je složité. Je složité hlavně pro lidi, kteří dokonale nerozumí problému. Proto je tento nástroj zaměřen na rychlý start pro úplně každého (kdo si prošel alespoň quickstart a chce testovat). To se projevuje v tom, jak je Testbench postaven (viz další povídání). Testbench se sestává z různých nápadů, které jsem všude možně okoukal za posledních X měsíců a něco mě na nich zaujalo. Pojďme se tedy společně podívat jak se Testbench používá a proč ho sám rád používám pro rychlé testy.
 
-Základní nastavení testovacího prostředí
-=====
+# Základní nastavení testovacího prostředí
+
 U každého testování je vhodné testovat v co nejvíce čistém prostředí. Proto je dobrý nápad vytvořit si vlastní bootstrap (`tests/bootstrap.php`), jehož obsah může být velmi jednoduchý:
 
 ```php
@@ -46,8 +46,8 @@ Přesně tak. Když přijde na přetřes práce s databází (zatím jen Doctrin
 
 Toto je asi tak vše, co je potřeba udělat před prvním spuštěním. K dispozici je potom spustitelný skript ve vendoru `vendor/bin/run-tests`, který funguje na Win i na Linuxu a pokud je vše připraveno podle předchozího návodu, tak po spuštění promaže cache testů, nastaví správně Nette\Tester a spustí jej. Zde asi časem budu dělat ještě hodně úprav, ale chci je dělat postupně - jak co bude potřeba.
 
-Testujeme presentery
-=====
+# Testujeme presentery
+
 U testování presenterů to vlastně celé začalo. Napsat si takový základní test na presenter je velmi jednoduché. Stačí použít tu správnou traitu a je půl práce hotovo:
 
 ```php
@@ -99,8 +99,8 @@ K dispozici je ještě AJAX varianta `checkAjaxForm`, která testuje formulář 
 
 V neposlední řadě je možné se v testech přihlašova a odhlašovat podle libosti pomocí metod `logIn` a `logOut`.
 
-Testování komponent
-=====
+# Testování komponent
+
 Tato traita je novější, takže toho neumí tolik (nikdo asi nic dalšího zatím nepotřeboval). V praxi se ale ukázalo jako šikovné ověřit si, že naše skvělá, malá a chytrá komponenta vykresluje to co má. k tomu slouží `checkRenderOutput`:
 
 ```php
@@ -122,8 +122,8 @@ services:
 
 Takových mocků je připravená celá řada, mrkněte se do [kódu](https://github.com/mrtnzlml/testbench/tree/master/src/mocks). Může se hodit...
 
-Práce s databází
-=====
+# Práce s databází
+
 Když začnou mít testy velké ambice a potřebují pracovat s databází, je zde jednoduché řešení ve formě `Testbench\TDoctrine` traity. Jak název napovídá, tak Testbench momentálně podporuje pouze Doctrine, protože s ničím jiným momentálně nepracuju. Ačkoliv je příprava práce s databází asi nejsložitější, tak samotná traita poskytuje pouze jednu metodu na získání EntityManageru:
 
 ```php
@@ -137,12 +137,12 @@ public function testDatabase()
 
 Testbench tedy připravuje čisté izolované databáze, konfiguruje jednotlivé testy a dává k dispozici připravený ObjectManager resp. EntityManager z Kdyby. Teď už se může programátor jakkoliv nad testovací databází vyřádit. Klidně bych přidal i další funkce, ale jak jsem již psal. Nechce se mi přidávat hovadiny. A proč pouze Doctrine? Protože jsem další databáze ještě nenapsal. Ani vlastně nevím jak to udělat správně vzhledem k tomu, že se používají traity. Asi by bylo nejpohodlnější napsat další traitu, třeba `TNetteDatabase` nebo `TDibi`. Stejně tak existuje [tato issue](https://github.com/mrtnzlml/testbench/issues/7) která narážela na skutečnost, že se může traita při MySQL chovat jinak než PostgreSQL. Ani to vlastně nevím jak udělat správně. Takže když nekdo budete mít volnou chvilku, tak ocením jakoukoliv pomoc... :)
 
-Drawbacks
-=====
+# Drawbacks
+
 Nemám rád traity. Jsou sice cool, ale nemám je rád. Hlavně asi kvůli tomuto [bugu v PHP](https://bugs.php.net/bug.php?id=63911). Ale myslím si, že zrovna Testbench je vhodné místo, kde lze traity použít lépe, než cokoliv jiného. Jen je třeba myslet, že může v určitých situacích nastat problém. Zároveň také zatím není stabilní tag této druhé verze, takže zatím používejte `dev-master` (případně existuje RC). Stabilní mám v plánu vydat někdy po tomto článku až sesbírám ohlasy a zapracuju je. Zároveň bych rád také vyřešil již zmiňovanou issue.
 
-Advantages
-=====
+# Advantages
+
 Testbench sám o sobě obsahuje poměrně bohaté testy. Byla by ostuda, kdyby to tak nebylo. Jak jsem se zde snažil popsat, tak napsat nějaké rychlé testy, které odhalí největší chyby je velmi jednoduché. Sám Testbench rád používám. Zejména teď je tato knihovna mojí velkou oporou, protože pracuji s legacy kódem, který je velmi složité otestovat. Jakýkoliv test tedy může zachránit můj zadek a proto se mi i ty nejzákladnější testy na presentery (a hlavně na `UI\Control` komponenty) hodně hodí. Využití ale bude mít i u jednoduchých webů, kde není skoro co testovat, protože aplikace skoro nic nedělá, ale je fajn vědět, jestli ještě všechny stránky fungují. U složitějších webů by měl Testbench poskytnout dostatečnou oporu při konfiguraci prostředí s tím, že v ničem nebrání a je možné dopsat si vlastní testy.
 
 Jsem zvědav, kam co budu ještě přidávat za funkce. Asi to bude hodně kopírovat stav té legacy appky. Ale rád bych to dotáhl až někam k akceptačním testům, pokud to nebude zbytečně složité. To je ale daleká budoucnost.

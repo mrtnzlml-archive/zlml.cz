@@ -10,8 +10,8 @@ Začíná přehlídka několika možných rout. Myslím si, že celá řada př�
 Základ všeho je porozumět tomu, jak se v Nette vytváří [odkazy](http://doc.nette.org/cs/presenters#toc-vytvareni-odkazu).
 Od toho se velmi podobně sestavují obecné routy tak, aby alespoň jedna seděla svým tvarem na daný odkaz.
 
-První kroky
-===========
+# První kroky
+
 Začněme jednoduchou statickou stránkou, která má tuto jednoduchou adresářovou strukturu:
 
 ```
@@ -87,8 +87,8 @@ http://zlml.cz/sitemap.xml
 
 To samé lze udělal pro RSS.
 
-Jdeme do hloubky
-================
+# Jdeme do hloubky
+
 Trošku složitější routování přichází vždy když chcete udělat něco speciálního.
 Například to, aby číslo za URL udávalo číslo stránky v paginatoru:
 

@@ -1,7 +1,7 @@
 Na 85. Poslední sobotě v Praze jsem měl workshop a přednášku o GraphQL. Na konci přednášky padl velmi dobrý dotaz ohledně toho, jestli náhodou netrpí GraphQL v určitých situacích N+1 problémem. Načež jsem odvětil, že to není problém GraphQL, ale že ano. Teď je tedy ten správný čas podívat se na tuto situaci konkrétně a pokusit se ji vyřešit. Skvělé je, že [knihovna, kterou používám](http://webonyx.github.io/graphql-php/) na sebe částečně převzala řešení tohoto nešvaru. Ale o tom až za chvíli...
 
-N+1 problém
-=====
+# N+1 problém
+
 S [N+1 problémem](https://secure.phabricator.com/book/phabcontrib/article/n_plus_one/) se setkal každý, kdo naprogramoval alespoň blog s komentáři. Problém nastává pokud se z databáze netahají všechna potřebná data s předstihem. Například pokud u blogu vytáhneme pouze články a až později budeme iterovat články a tahat k nim komentáře, pak máme N+1 problém. Stane se totiž, že položíme na databázi stejný počet dotazů, jako máme článků.
 
 Řešit se to dá dvojím způsobem. Můžeme použít databázový `JOIN` a v jednom dotázu si vytáhnout vše potřebné (články a kometáře) s tím, že již víme co potřebujeme. A nebo použijeme `IN` klauzuli a druhým dotazem se doptáme na vše potřebné (zbývající komentáře). Tento přístup se pro GraphQL hodí více.
@@ -51,8 +51,8 @@ Toto by se dalo nazvat M*N+M problémem... :) Kdybych totiž posílal jen první
 
 Neříkám, že to dává smysl, ale pokud je API dostatečně kompikované, tak se zde můžou objevit cyklické cesty.
 
-Řešení
-=====
+# Řešení
+
 Podívejme se, jak se tahají jednotlivé záznamy pro konkrétní meteostanici:
 
 ```php

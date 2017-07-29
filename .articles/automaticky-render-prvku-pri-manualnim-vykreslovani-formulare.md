@@ -41,8 +41,8 @@ Ačkoliv to není nikde dané, i v tomto případě se vykreslil další input p
 </form>
 ```
 
-Chytrý antispam prvek
-=====================
+# Chytrý antispam prvek
+
 Po krátkém úvodu (který je zcela jistě každému jasný) se přesuneme k něčemu zdánlivě jinému. Vytvoříme si chytrý antispam prvek a zjistíme, jak se bude při renderování chovat a jestli se vždy chová předvídatelně. A asi nebude překvapením, že se v určité situaci zachová moc moc špatně. Jedná se o delší kód, takže jej [najdete na Gistu](https://gist.github.com/mrtnzlml/95ac7726cf2788d83e3c87bc97dbef3a). Prakticky nejde o nic jiného, než že si vytvoříme vlastní antispam prvek. Tento prvek funguje tak, že vytvoří input ve kterém je nějaký text a pokud je k dispozici javascript, tak jej schová a smaže obsah. V tom případě je kontrola v pořádku, protože tiše předpokládá, že útočníkův robot nebude umět JS. Ačkoliv se to v dnešní době může zdát jako absurdní, tak to pořád funguje velmi dobře. Navíc přidává ještě pár honeypotů a doufá, že někde robot uvízne. Důležité je, že nijak neobtěžuje běžného návštěvníka - prostě to není vůbec vidět.
 
 Napíšeme si jednoduché rozšíření pro DI kontejner, aby bylo možné tento nový prvek používat:
@@ -93,8 +93,8 @@ Je to trošku magie a IDE si s tím neporadí. Proto nebude našeptávat. V tomt
 
 Tak a teď když máme funkční antispam a honeypoty formuláře, je čas kouknout se co se děje při renderování. Nejdříve automatické - pomocí `{control contactForm}`. Zde není co řešit. Prostě se všechny potřebná políčka vyrenderují a vše je tak, jak by mělo být. A co manuální vykreslování? Zde začíná ta nepříjemná část. Nette nemůže vědět, že by měl automaticky vykreslit i další prvky, takže je prostě nevykreslí. Praktická zkušenost je taková, že při manuálním vykreslování prostě antispam přestane fungovat. Zde se musíme ještě zasnažit.
 
-Chytřejší antispam prvek
-========================
+# Chytřejší antispam prvek
+
 Teď musíme jít fakt na dřeň problému. Jak vlastně funguje to automatické renderování inputu při manuálním vykreslování? Existuje něco jako třída `Nette\Bridges\FormsLatte\Runtime`, která má dvě metody: `renderFormBegin` a `renderFormEnd`. Právě druhá zmíněná přidává nějaký vlastní kód a je jedno, jestli se jedná o manuální, nebo automatické renderování formuláře. To by se nám hodilo. Vytvořme si tedy vlastní `Runtime` třídu. Není potřeba aby tato třída dědila od původní. Stačí, když si vykopírujeme metodu `renderFormEnd` a lehounce pozměníme prostřední foreach:
 
 ```php

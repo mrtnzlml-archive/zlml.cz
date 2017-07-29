@@ -1,19 +1,19 @@
-Zadání
-======
+# Zadání
+
 
 Najděte v dostupné literatuře nebo vymyslete co nejlepší algoritmus pro výpočet mediánu.
 Nezapomeňte na citaci zdrojů. Kritéria kvality v sestupném pořadí jsou: výpočetní složitost, 
 jednoduchost a implementační nenáročnost, paměťová spotřeba.
 
-Definice
-========
+# Definice
+
 
 Medián je hodnota, která dělí seřazenou posloupnost na dvě stejně velké (co se množství týče)
 části. Důležitou vlastností mediánu je skutečnost, že není ovlivněn žádnou extrémní hodnotou,
 jako je tomu například u průměru.
 
-Analýza problému
-================
+# Analýza problému
+
 
 Existuje několik způsobů jak daný problém vyřešit. První řešení bude velmi přímočaré. Jedná se
 totiž o způsob, který zřejmě napadne každého jako první.
@@ -77,8 +77,8 @@ menší než medián. Při neshodě pivota s mediánem voláme SELECT rekurzivn�
 než dostaneme požadovaný prvek. Postup hledání se může zdát dost zamotaný a rekurze na
 přehlednosti nepřidává, nicméně tento algoritmus má složitost O(n).
 
-Srovnání zmíněných algoritmů
-============================
+# Srovnání zmíněných algoritmů
+
 
 Hledání mediánu pomocí přímočaré metody vede k seřazení posloupnosti (což nebylo zadáno).
 Kromě toho získáme nejlepší složitost O(NlogN), což nemusí být úplně špatné vzhledem k nejhor
@@ -88,8 +88,8 @@ nejlepší řešení se zdá být metoda vyhledávání SELECT, která nejenže 
 paměť, ale navíc si udržuje lineární složitost což je alespoň podle běžně dostupné literatury
 nejlepší možné řešení.
 
-Závěr
-=====
+# Závěr
+
 
 Nezáleží-li nám na složitosti, nebo paměťové náročnosti, zvolíme přímočarou metodu hledání
 mediánu, která je nejjednodužší na implementaci a pochopení. V opačném případě zvolíme algoritmus

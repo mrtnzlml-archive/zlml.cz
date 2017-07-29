@@ -7,8 +7,8 @@ Celkem rozebírám tyto jednotlivé případy:
   - Metodou "arguments"
 - [All in One](#toc-all-in-one)
 
-Předání parametru z presenteru
-==============================
+# Předání parametru z presenteru
+
 Toto považuji za asi úplně nejčastější požadavek. Komponenta je jednoduchá:
 
 ```php
@@ -62,8 +62,8 @@ class ParameterComponent extends Nette\Application\UI\Control {
 }
 ```
 
-Předání parametru z konfiguračního souboru
-==========================================
+# Předání parametru z konfiguračního souboru
+
 Toto je trošku horší, ale pořád snadno pochopitelné. Kód komponenty bude opět podobný:
 
 ```php
@@ -123,8 +123,8 @@ Vygenerovaný výsledek je stejný. V tomto případě je však nutné dát pozo
 
 Ok, toto je snad jasné. Co to trošku zkomplikovat?
 
-All in One
-==========
+# All in One
+
 Toto snad bude dostatečně krajní případ. Pokusíme se vytvořit továrničku pro komponentu, která bude ke svému vytvoření vyžadovat parametr z configu, parametr z presenteru, službu a opět parametr z configu - vše přesně v tomto pořadí. A nebudu se v tom snažit hledat závislosti. Je vyžadováno něco takového:
 
 ```php

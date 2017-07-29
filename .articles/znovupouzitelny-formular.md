@@ -1,11 +1,11 @@
 Každý kdo nějakou chvíli pracuje s Nette Frameworkem již jistě narazil na prvky, které lze použít v aplikaci opakovaně. Říkejme jim znovupoužitelné komponenty, nebo prostě jen komponenty. Následující text má za úkol ukázat opět maximálně prakticky a uceleně jedno z možných řešení jak k tomuto problému přistupovat a co se mi na tomto řešení líbí, nebo naopak nelíbí.
 
-Motivace
-========
+# Motivace
+
 Proč vůbec přemýšlet o komponentách? Na tuto věc má pravděpodobně dost lidí zcela jiný názor. Pro mě je havní motivací to, že si vyčistím presentery. Chci toho mít v presenterech skutečně tak akorát. Vždyť podle MVP struktury bych v presenterech neměl mít nic složitého. A pak je zde ta znovupoužitelnost. Co když se rozhodnu, že potřebuji použít stejný formulář na více místech? Přece ho nebudu kopírovat. A že takový požadavek je sice často někdo zmíní, ale prakticky není moc reálný? Ale kdepak. Zrovna nedávno jsem vytvářel mnoho stránek a na každé jsem chtěl mít právě kontaktní formulář. To je požadavek na komponentu jako dělaný...
 
-Presenter
-=========
+# Presenter
+
 Vždy když programuji něco takového, tak se nedívám na to, jak je to správně z hlediska OOP a bůh ví čeho všeho ještě. Pro mě je v současné chvíli klíčové to, jak se dané řešení bude používat. Přesenter by tedy mohl vypadat třeba takto:
 
 ```php
@@ -39,8 +39,8 @@ V poslední metodě si daný formulář vytvořím. Teoreticky by stačila pouze
 
 A teď přijde záludná otázka. Co je to ta factory a proč jí vlastně používám?
 
-Factory
-=======
+# Factory
+
 Protože v komponentách velmi často potřebuji nějaké závislosti, musím je tam nějak dostat. K tomu slouží například generované továrničky. Jedná se vlastně pouze o interface:
 
 ```php
@@ -106,8 +106,8 @@ services:
 
 To je vše. Už jsme pouze krůček od funkčního formuláře.
 
-Samotná komponenta
-==================
+# Samotná komponenta
+
 Samotný kód komponenty už není téměř ničím zvláštní, nebo nějak nepochopitelný:
 
 ```php

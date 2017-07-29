@@ -9,8 +9,8 @@ To se moc nepovedlo. Mrzí mě to ze dvou důvodů. Jednak jsem tak nějak slíb
 
 Další už jen krátce abych nezněl moc negativně, protože se mi na barcampu opravdu líbilo a zase tak moc mě tyto věci neštvou. Přístup k netu jen pro přednášející. Měl jsem možnost toho využít, nevyužil jsem, takže o nic nejde, jen bych veřejnou wifi na takových akcích čekal. Další jsou samolepky se jménem při registraci. No já nevím jak ostatním, mě prostě vůbec nedržela a než jsem došel do prvního patra, tak jsem měl na zádech jmenovku se jménem Martina. Bohužel bez čísla. Zdravím Martinu! :-) Poslední věc, která mě mohla dost uzemnit byla ztracená prezentace. Svojí prezentaci jsem na barcamp odeslal předem jak stálo v emailu, ale když jsem se po ní ptal, tak nebyla k nalezení. Naštěstí jsem měl plán B. Uff...
 
-Přednášky
-=========
+# Přednášky
+
 Postupně jsem se snažil projít ty nejzajímavější přednášky. Zde je jejich přehled:
 
 *Machine learning, aneb od našeptávače k porozumění řeči ([Jan Švec .{target:_blank}](https://twitter.com/honza_svec)*) - přednáška o strojovém učení, porozumění řeči a chápání významu psaného i mluveného textu. Některým lidem tato přednáška přišla obsahově zajímavá a skutečně byla, každopádně tyto informace jsem z velké většiny již znal, protože jsem je slyšel již dříve a zase tolik se toho v tomto oboru nemění.
@@ -27,8 +27,8 @@ Postupně jsem se snažil projít ty nejzajímavější přednášky. Zde je jej
 
 Opět musím zopakovat, že mě mrzí absence kamer u ostatních přednášek.
 
-Od Caesara ke QR kódům
-======================
+# Od Caesara ke QR kódům
+
 A konečně k mé přednášce. :-))
 
 <blockquote class="twitter-tweet" lang="en"><p>Přednáška o kódování a Thomasu Youngovi na <a href="https://twitter.com/search?q=%23barcampcz&amp;src=hash">#barcampcz</a> je kulervoucí.</p>&mdash; Pavel Pajkrt (@PavelAbbePajkrt) <a href="https://twitter.com/PavelAbbePajkrt/statuses/455008230444638208">April 12, 2014</a></blockquote>

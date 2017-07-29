@@ -1,7 +1,7 @@
 Každý, kdo postavil pár aplikací, musel vždy řešit ten samý problém. Jakou strukturu by měla aplikace mít? A co když se začne projekt rozrůstat? Měl bych se držet toho jak to dělá [sandbox](https://github.com/nette/sandbox) (resp. [web-project](https://github.com/nette/web-project))? Postupem času jsem dokonvergoval k relativně přijatelnému výsledku a vzhledem k tomu, že projekt na kterém jsem to poprvé pořádně rozjel byl ukočen, [rozhodl jsem se jej zveřejnit](https://github.com/mrtnzlml/CMS-lite). Už je to sice nějaký čas, ale v době největšího vrcholu tohoto projektu jsem jej považoval za takovou osobní špičku. A to hned z několika důvodů. K tomu se ale dostanu postupně. A vezmu to pěkně od těch nejmenších částí.
 
-Presentery a komponenty
-=======================
+# Presentery a komponenty
+
 U presenterů se mi vlastně docela líbí jak to dělá sandbox. Ve složce presenterů jsou logicky presentery a také složka `templates`, která obsahuje šablony právě k těmto presenterům:
 
 ```
@@ -37,8 +37,8 @@ ContactForm/
 
 Dobře, základní stavební kameny jsou položeny. Co by však mělo být okolo. A kde jsou vlastně položeny? Inu pojďme na to opět postupně.
 
-Supercore věci
-==============
+# Supercore věci
+
 Fakt nevím jak to nazvat jinak, protože ke core záležitostem se ještě dostanu. O co tedy jde? Jedná se o části aplikace, které tvoří to nejzákladnější jádro. Jádro, na které je pak možné napojovat další věci. Tuto část aplikace nechávám ve složce `app`:
 
 ```
@@ -59,8 +59,8 @@ app/
 
 Jak je vidět, tak všechny moduly obsahují jen kritický základ. Žádné další presentery. Tak kde je zbytek? Zbytek se nechází v rootu aplikace, konkrétně ve složkách `custom` a `src`. Je celkem jedno jaký je název těchto složek, vtip je v tom nějaké mít a vše sem přesunout. Důvod proč jsou dvě je prostý. Zatímco v `src` jsou části aplikace, které tvoří jádro (tedy spoustu funkčnosti), v `custom` jsou velmi podobné částí aplikace, bez kterých lze však žít. Původní myšlenka byla taková, že se pak custom složka zruší a vše v ní se velmi elegantně rozpadne na composer balíčky. Obě složky jsou však strukturálně stejné, proto budeu řešit jen `custom`.
 
-Business logika
-===============
+# Business logika
+
 Ok, to jsem také nazval pěkně debilně. Alespoň však vysvětlím jednu důležitou věc, se kterou jsem v začátcích bojoval a kterou je potřeba se odnaučit. Sadbox vždy totiž vedl k takovéto podobné struktuře:
 
 ```
@@ -104,8 +104,8 @@ Pages/
 
 A voilà, máme tu zase strukturu složky `app`. Nebo alespoň její obdobu. A v tom je síla toho návrhu. Mělo by už teď být jasnější, proč jsou v `app` právě ty věci co tam jsou. Celém vždy bylo mít v systému místa, které obsahují velmi podobné věci, ale nic dalšího. Drobné niance se zde najdou, to je jasné, ale základ zůstává. Jenže jak to sakra funguje?
 
-Jak to sakra funguje
-====================
+# Jak to sakra funguje
+
 Právě teď je ten správný čas [proklikat si celý systém](https://github.com/mrtnzlml/CMS-lite). Je zřejmé, že už je to trošku komplikovanější a samo od sebe to fungovat nemůže (ani to není žádoucí). Zkušenější už tuší, že celé kouzlo je ve složce `DI`. Zde je tedy mé další doporučení. Až rozsekáte aplikaci do komponent, udělejte to samé s funkcionalitou. A víte co, udělejte to se vším co spolu nějak logicky souvisí. Proto jsem do složky `custom/Pages` umístil vše co patří ke stránkám. Komponenty, doctrine entity, servisní třídy, fasády, ale také presentery. Prostě všechno. Dělejte to tak dlouho, dokud v `app` nezůstane nic.
 
 Tento způsob však s sebou nese celou řadu úskalí. Prvně je to komplikované. A pak je třeba vše napojit. Existují dva způsoby, které mi přijou v pořádku. První je poněkud agresivní, ale jednoduchý. Vychází vlastně z myšlenky [Flame\Modules](http://flame-org.github.io/Modules/). Napíšete si nějaké rozšíření, které bude implementovat nějaký interface. Třeba `IFaviconProvider`. Pak je třeba mít (právě v supercore) rozšíření, které takový interface najde a při vytváření DIC zpracuje. Hodně toho využívají šablony (`custom/Versatile/DI/VersatileExtension.php`). Nebezpečí je však v tom, že se to prostě stane jakmile přidáte toto rozšíření do aplikace. Není zde moc rozumná možnost jak třeba rozšíření deaktivovat. A ještě komplikovanější je pak při vytváření DIC přeba automaticky spustit nějaký SQL dotaz.
@@ -114,8 +114,8 @@ Proto je zde druhý způsob (který jsem pořádně nestihl dodělat). Využív�
 
 A je to. Elegantní instalační systém pluginů pro vaší Nette aplikaci.
 
-Další zajímavé vlastnosti systému
-=================================
+# Další zajímavé vlastnosti systému
+
 Takže to máme peckovou strukturu aplikace, kterou je velmi jednoduché udržovat a rozšířovat + automatickou registraci modulů (pluginů chcete-li). A to jsem teprve na začátku. Proto už jen bodově vypíchnu a připomenu některé zajímavé věci, které všem dávám k dispozici.
 
 1. Každé rozšíření je v Nette nutné registrovat do konfiguračního souboru. To by s tím ale nešlo nělat takové švíky. Proto jsem napsal `\App\Extensions\CoreExtension`, které to dělá automaticky. Není to zrovna ukázka čistého kódu, ale svůj účel to plní dobře. Už touto vlastností jste několik mil před konkurencí... (-:
@@ -139,8 +139,8 @@ A to jsem zde ještě nenapsal vše. Mrkněte se na náhled, nejedná se jen o n
 
 ![](9b3c176d-4884-45c5-95c3-53cac2999d0f/admin.png)
 
-Instalace systému
-=================
+# Instalace systému
+
 Bohužel jsem nevychytal všechny mouchy, půlka věcí zůstala nerozdělána a celý materiál je spíše pro inspiraci. Pokud by si to však někdo chtěl rozjet, dávám k dispozici také poněkud složitější návod na instalaci (viz readme):
 
 - Nainstalujte si [GIT](http://git-scm.com/)

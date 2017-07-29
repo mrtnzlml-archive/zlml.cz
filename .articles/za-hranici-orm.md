@@ -1,15 +1,15 @@
 Již mnohokrát jsem slyšel, že je ORM [antipattern](http://www.zdrojak.cz/clanky/orm-je-antipattern/). Já si to nemyslím. Je to hloupý a uspěchaný názor. V dnešním článku však nechci rozebírat co je a co není antipattern. To je jen zbytečnou ztrátou času. Rád bych ukázal použití jednoho ORM systému, který mě naprosto uchvátil.
 
-Když jsou potřeba firemní procesy
-=================================
+# Když jsou potřeba firemní procesy
+
 Zejména začínající firmy mají na svém startu náročný úkol. Je zapotřebí vytvořit vnitrofiremní procesy, které striktně řídí běh různých akcí jako je například výroba, reklamace, nebo třeba koloběh dokumentů. Ve firmě [taková řešení nabízíme](http://www.orgis.cz/sluzby/in-house) a je o ně velký zájem. Má to svůj smysl. Není žádným tajemstvím, že používáme ERP systém [Odoo](https://www.odoo.com/), protože je to velmi silný nástroj. I přes neuvěřitelnou modifikovatelnost této aplikace je občas zapotřebí sáhnout k daleko více sofistikovanému řešení. Proč? Občas jsou totiž vnitropodnikové procesy velmi složité a navíc jich je velké množství. V takovém případě, je téměř jedinou možností napsat si pro tento ERP systém rozšíření, které tento těžký úkol zvládne.
 
 ![](393212dc-381f-4b3a-a06c-fb5d33d6dc29/workflow.png) *** *Ukázka struktury klasického firemního workflow*
 
 Nechci však psát návod na to, jak si takový modul naprogramovat. O tom třeba někdy příště. Pojďme se raději podívat na to, jak téměř celé Odoo funguje, protože je to skutečně pozoruhodné. Bez kódů to však nepůjde.
 
-Záplava tabulek
-===============
+# Záplava tabulek
+
 Abych byl upřímný, tak jsem se ještě nikdy nesetkal s tím, aby byl **každý** objekt v projektu skutečně realizován tabulkou v databázi. Nebo o tom alespoň nevím. Je to v podstatě jako když máte entity a ty jsou pak skutečně v databázi. Rozdíl je však v tom, že zde je v "entitě" i celá potřebná logika (které většinou moc není) a hlavně žádné jiné objekty nejsou potřeba.
 
 V nejprostším tvaru může tedy třída modulu vypadat skutečně pouze jako entita:
@@ -30,8 +30,8 @@ class project_wkf_activity(osv.osv):
 
 Při programování modulů toto vede k extrémní explozi tabulek v databázi. 500 tabulek uděláte v databázi jako nic. Stačí nainstalovat pár modulů. A to už mi přijde dost netradiční. Kromě modulových tabulek je v základní instalaci asi 100 tabulek, které v sobě drží vše možné, mimo jiné také informace o workflow. A právě definice workflow je to nejzajímavější. Veškerá sranda se totiž odehrává v XML souborech. Ve výsledku stačí pro napsání složitého workflow včetně veškeré logiky pouze XML...
 
-XML programování (-:
-====================
+# XML programování (-:
+
 Když jsem toto poprvé viděl, párkrát jsem se zastavil a přemýšlel jsem, jak to vlastně může fungovat. Je to však velmi jednoduché. V inicializačním souboru modulu si stačí nadefinovat jaké XML soubory se mají načítat. Následuje definice workflow. Žádné psaní okolo. Prostě to hned funguje. Začátek takového workflow může vypadat například takto:
 
 ```html

@@ -35,8 +35,8 @@ And how does it work exactly? At this very moment there is very simple idea in T
 
 This approach is great, because it's possible to generate tests according to the response, but there are some drawbacks as well. It may not be accurate. The most problematic part is parameter (even optional) guessing, because application can response on different parameters differently and it's not possible to figure out if it's expected behavior or not. This means that you always have to look at the generated tests and fix them if needed.
 
-Another improvements and news
-=============================
+# Another improvements and news
+
 I dropped support for PHP 5.4 and 5.5 because [they are dead](http://php.net/supported-versions.php). Currently supported PHP versions are only PHP 5.6 (LTS) and PHP 7.0 until 31 Dec 2018 and 3 Dec 2018 respectively. Deal with it if you are running older PHP. You shouldn't do that anyway.
 
 Another big change has been introduced to the database behavior during tests. Now every single request to the database is going to the fake clean database even if you are not using TDoctrine or TNetteDatabase trait. At the very begining it was expected behavior to create databases only if you are using those traits, but it wasn't programmer friendly and sometimes it causes weird situations. I am working on another completely different transactional approach in [this branch](https://github.com/mrtnzlml/testbench/tree/transactional-db-tests), but it's going to be in next release (maybe). 

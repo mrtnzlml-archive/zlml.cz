@@ -1,11 +1,11 @@
 Vzhledem k tomu, že vzrostl zájem o Vacuum projekty, rozhodl jsem se zde uveřejnit postup jak pracovat s projektem **Vacuum - STATIC** (https://bitbucket.org/mrtnzlml/vacuum-static). Věřím, že je daleko lepší projekt ukázat a lehce popsat, než popsat a lehce ukázat, jak si Nette komunita občas myslí...
 
-Co to vlastně je
-================
+# Co to vlastně je
+
 Vacuum - STATIC je projekt, který vznikl z úplně základního Nette skeletonu, který jsem používal pro jednoduché statické firemní prezentace jako je například http://www.businessservice.cz/. Postupem času jsem dodával vylepšení a když už tento projekt dosáhl svého maxima, rozhodl jsem se do něj napsat jednoduchou administraci. V současné době tedy Vacuum - STATIC vlastně vůbec není statická prezentace. Obsahuje vestavenou SQLite databázi, díky které není potřeba nějaké MySQL databáze. Web prostě funguje zdánlivě bez databáze. Toto je velmi zásadní. Vacuum - STATIC pravděpodobně nikdy nebude mít externí databázi, takže se bude stále tvářit jako jednoduchá webová prezentace, která má však navíc jednoduchou administraci.
 
-Stažení, instalace, spuštění
-============================
+# Stažení, instalace, spuštění
+
 Celý projekt se dá stáhnout různě, asi nejjednodušší je využít funkcionalit GITu:
 
 ```
@@ -51,8 +51,8 @@ php -S localhost:8888 -t www
 
 Funkční Vacuum - STATIC pak naleznete na adrese http://localhost:8888/. Trapně jednoduché a překvapivě funkční. (-: Vzhledem k tomu, že již vidíte funkční stránku, můžete se přihlásit do administrace (link v patičce). Přihlašovací údaje jsou *demo*/*demo*.
 
-Update projektu
-===============
+# Update projektu
+
 Na tomto projektu stále pracuji a čas od času v něm něco doplním nebo upravím. Vzhledem k tomu, že doporučuji použít ke stažení GIT, je update projektu velmi jednoduchý. Stejně jako jsem nedávno zapomněl přidat nahrát dva soubory:
 
 ```

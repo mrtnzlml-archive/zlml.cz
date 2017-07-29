@@ -6,8 +6,8 @@ K dispozici mám momentálně dva procesory, ale budu řešit konkrétně `STM32
 
 A teď konečně o čem budu psát. TIM3 je timer ze skupiny TIM2-5. Jedná se o timer naprosto běžný a obyčejný. Celkem jich je k dispozici 14 ve 4 skupinách podle společných vlastností. Podívat se na ně můžete do [referenční příručky](http://www.st.com/web/en/resource/technical/document/reference_manual/DM00031020.pdf), ale pozor ať se vám z toho nezamotá hlava, je toho tam fak hodně... (-: Ukážeme jak tento timer nastavit tak aby bylo možné blikat diodou jednou za 1000 ms. Navíc k tomu nebudeme využívat výkonu procesoru, ale využijeme přerušení, takže nebudeme procesor vůbec ničím zdržovat. O zrovna čekání procesoru 1000 ms, než bude moci bliknout diodou by byl slušný zabiják výkonu.
 
-Nastavení TIMx a diod
-=====================
+# Nastavení TIMx a diod
+
 Je to jednudché. V souboru `main.c` existuje klasická viod metoda s while smyčkou, která bude na začátku i na konci tohoto programu prázdná:
 
 ```cpp
@@ -81,8 +81,8 @@ if(HAL_TIM_OC_Start_IT(&TimHandle, TIM_CHANNEL_2) != HAL_OK) {
 
 Skvělé na tom je to, že teď už to fakt cvaká a stačí se na to jen pověsit přepínání stavu diod.
 
-Konečně blikáme!
-================
+# Konečně blikáme!
+
 K tomu, aby bylo možné blikat, musíme se chytit callbacku, který je v HAL připraven. Zde se podíváme, jestli je daný kanál aktivní a pokud ano, znamená to, že můžeme něco udělat. V tomto případě tedy nejdříve zapnu diodu a za 100 ms přijde signál druhým kanálem a já ji mohu opět vypnout. Za 1s se celý proces opakuje. Paráda!
 
 ```cpp

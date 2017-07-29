@@ -4,8 +4,8 @@ Právě teď jsem řešil jak vizualizovat nějaká data, která jsou v maticov�
 
 K tomu jak jsem postupoval se dostanu v další části. Teď však ještě pár úvodních slov k tomu, co jsem to vlastně měřil. Cílem měření bylo změřit s využitím jasoměrů hodnoty jasů *L [cd/m^2]* určitých objektů a jejich okolí v pravidelné síti kontrolních bodů při různém osvětlení (denní, sdružené a umělé) a různé vzdálenosti a úhlu. Z těchto jasů je zapotřebí spočítat kontrast *C [-]* a tuto kontrastní mapu také vizualizovat. Je tedy zřejmé, že stačí změřit pár objektů a počet grafů rychle roste.
 
-Vizualizace dat
-===============
+# Vizualizace dat
+
 [* 40a97326-5410-4385-821c-62dc8542387a/3d2.png 300x? >]
 Tato část se sice jmenuje vizualizace dat, ale aby bylo co vizualizovat, je zapotřebí data připravit. Já jsem zvolil JSON formát vstupu, protože se velmi jednoduše parsuje a matici v něm mohu zapsat také jednoduše. Z měření jednoho objektu mi tedy stačí data v tomto formátu:
 

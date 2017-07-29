@@ -1,7 +1,7 @@
 Když jsem dříve připravoval [prezentaci o Nette Frameworku](prednaska-z-nette-na-zcu), hledal jsem nějaký vhodný příklad, na kterém bych demonstroval zranitelnost webových aplikací. Úspešně jsem vyzkoušel pár eshopů a jednu stránku, která slouží ke školním účelům, ale není nijak oficiálně vedená pod univerzitou. Právě zde mě napadlo vyzkoušet také univerzitní systémy. A nestačil jsem se divit.
 
-Pozadí univerzitního přihlašování
-=================================
+# Pozadí univerzitního přihlašování
+
 Veškeré ověřování práv a identit putuje přes WebKDC server. Tento server komunikuje s Kerberosem a dohromady tvoří systém, který umožní přihlášení pomocí univerzitních loginů. Celkově proti tomuto systému nemám vůbec nic. Mám však hodně výhrad k jeho konkrétní implementaci. Konkrétní web servery (tam kde jsou umístěny aplikace vyžadující přihlášení) komunikují se vzdáleným WebKDC serverem. Tento server zajistí korektní ověření uživatele (spolupráce s Kerberos) a vráti informaci o úspěšném ověření. Paráda. Vnitřně velmi sofistikovaný systém funguje a umožňuje SSO (Single Sign-On) napříč celou infrastrukturou. Platí to tedy i pro aplikace mimo univerzitní doménu. Zjednodušeně popsáno, ale tématem tohoto článku není ta část, která [spolehlivě funguje](http://webauth.stanford.edu/), ale ta část, která nefunguje.
 
 ```
@@ -16,8 +16,8 @@ Veškeré ověřování práv a identit putuje přes WebKDC server. Tento server
 
 Jako poměrně zásadní fakt vidím to, že dokud student neklikne na "LOGIN", tak ho tento systém nepřihlásí (většinou). Nachází se tedy na úrovni "WEBAUTH", ale vidí jen omezenou stránku. Jakmile se chce přihlásit, aplikace jej přesměruje na WebKDC login-server, kde může vyplnit své přihlašovací informace, nebo je již přihlášen někdy z dřívější doby a v obou případech je přesměrován zpět na server s webovou aplikací. Už vidíte ten problém? :-)
 
-XSS" onclick="alert(document.cookie); //:-)
-===========================================
+# XSS" onclick="alert(document.cookie); //:-)
+
 Právě komunikace mezi WEBAUTH a WEBKDC je pro ověření naprosto zásadní, ale díky tomu, že zřejmě není nastavena žádná implementační laťka, tzn. že kdokoliv chce přihlašovat pomocí tohoto systému tak si to prostě nějak naprogramuje, vznikají bezpečnostní bublinky. Pravděpodobně neexistuje žádná konvence jak tento systém implementovat, takže neexistují ani takové funkce, jako je třeba ověřování již aktivního přihlášení atd. Může se tedy stát, že budu přihlášen (ověřen) ve webové aplikaci, ale na WEBKDC jsem odhlášen, protože WEBAUTH už se o to v tuto chvíli nestará (ten je přihlášen).
 
 Díky tomuto poznatku mohu velmi jednoduše vše co jsem teď napsal zapomenout, protože se dá celé složité schéma zjednodušit na toto:

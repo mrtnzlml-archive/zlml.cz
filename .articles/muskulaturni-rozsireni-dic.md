@@ -1,7 +1,7 @@
 K čemu je DI rozšíření v Nette a jak se takové rozšíření píše [už víme](http://zlml.cz/rozsireni-pro-dic). Teď se podíváme na způsob, jak pracovat s takovým rozšířením na úplně nové úrovni. Tento článek velké spoustě lidí změní způsob práce a aplikace budou najednou o level výš. Jak řekl jeden z účastníků školení: tak to je geniální... :)
 
-Jak strukturovat aplikaci?
-==========================
+# Jak strukturovat aplikaci?
+
 O tom už jsem se párkrát rozepsal a ještě se také minimálně jednou rozepíšu. Proteď jen rychlý úvod. Za tu dobu co dělám s frameworky jsem došel k tomu, že nemám žádnou složku s názvem `app`. Například struktura [tohoto projektu](https://github.com/adeira/connector) vypadá (zjednodušeně) takto:
 
 ```
@@ -57,8 +57,8 @@ extensions:
 
 Jak je vidět, tak každý balíček ve složce `src` má vlastní rozšíření (můž mít klidně víc rozšíření, ale není to potřeba). Na následujících řádcích ukážu jak takové rozšíření napsat super jednoduše.
 
-Rozšíření bez znalosti Nette\DI
-===============================
+# Rozšíření bez znalosti Nette\DI
+
 Psaní rozšíření pro DIC v Nette může být (a je) poměrně složité. Trošku to chce vědět, jak Nette funguje uvnitř. To samozřejmě dává do rukou obrovský nástroj, ale současně to také klade obrovskou překážku. Přesně z tohoto důvodu vznikl balíček [adeira/compiler-extension](https://github.com/adeira/compiler-extension), který jsem napsal pro lidi ve firmách, kteří se Nette teprve učí, chtějí psát aplikace tak jako já a na prozkoumávání Nette\DI není čas. Záběr tohoto balíčku není jen zde. Sám jsem si ho moc oblíbil a dnes tak píšu rozšíření také (ne vždy, ale dost často).
 
 Myšlenka je taková, že NEON formát umí každý. Pokud ne, tak si stačí prohlédnout [tuto stránku](https://ne-on.org/) a je to všem jasné (používám velmi úspěšně na školeních a přednáškách). Zároveň je snadné naučit o čem je DI, proč se musí v Nette registrovat služby v konfiguračním souboru a jak funguje autowiring. To v zásadě stačí k tomu, aby člověk začal psát aplikace mnohem lépe než dříve. Jenže pokud chce někdo strukturovat aplikaci tak jak to dělám já, tak musí registrovat všechny služby do souboru `services.neon` a těch je desítky až stovky (ne-li tisíce). Navíc je to nesmysl - proč by si takový balíček nemohl nést všechno s sebou (včetně konfigurací)?
@@ -99,8 +99,8 @@ Tuto jednu řádku je nutné umístit třeba do souboru `bootstrap.php` kde se v
 
 To ale není všechno!
 
-Jak se chovají konfigurace balíčků
-==================================
+# Jak se chovají konfigurace balíčků
+
 Asi nejzajímavější na návrhu dependency injection je to, že je možné jednoduše vyměňovat implementace bez zásahu do kódu. Jak se tímto pracuje balíček [adeira/compiler-extension](https://github.com/adeira/compiler-extension)? Představte si, že máte hlavní konfigurační soubor s tímto obsahem:
 
 ```neon
@@ -166,8 +166,8 @@ Navíc se zaregistruje Latte makro. Ačkoliv toto chování funguje dobře, dopo
 
 To ale pořád není všechno!
 
-Malé pozlátko na závěr
-======================
+# Malé pozlátko na závěr
+
 Tento balíček přidává ještě jednu funkci, kterou považuji také za velmi užitečnou. Jak jistě víte, tak rozšíření se dá zaregistrovat pomocí sekce `extensions` a pokud rozšíření zaregistrujete pod nějakým jménem, je možné jej konfigurovat. To ostatně bylo vidět před malou chvílí:
 
 ```neon

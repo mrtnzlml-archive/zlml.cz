@@ -12,8 +12,8 @@ Výhody jsou následující:
 
 Chvíli jsem to zkoumal a existují dvě cesty jak takový repozitář vytvořit. Jedna horší a jedna lepší. Začnu tou (z mého pohledu) horší...
 
-Split repozitáře
-===
+# Split repozitáře
+
 Toto bylo to první po čem jsem šel. Teorie zní následovně. Veškerý kód mám v jednom repozitáři (třeba `adeira/monorepo`) a normálně pracuji na kódu jak jsem zvyklý. Následně spustím nějaký program, který mi repozitář rozdělí pomocí Gitu na jednotlivé dílčí repozitáře. To lze udělat pomocí [subtree](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt) nebo třeba pomocí [splitsh](https://github.com/splitsh/lite) (to používá Symfony).
 
 Výhody jsou zřejmé - dělám na jednom kódu a mám jeden repozitář. To je ostatně to jak jsem monolitický repozitář vydefinoval. Nevýhody už možná tak zřejmé nejsou - mám jen jeden repozitář. Pokud jste alespoň trošičku políbeni Gitem, tak si umíte asi představit, co to znamená pro vydávání nových verzí jednotlivých balíčků. V Gitu totiž nelze mít dva stejné tagy. A to znamená dvě věci: budu vydávat verze nějak strašně složitě, nebo budou mít všechny balíčky stejnou verzi.
@@ -22,8 +22,8 @@ Druhým zmíněným způsobem to dělá Symfony a s veškerou otevřeností si m
 
 Pokud tedy chcete vydávat balíčky kdy se bude často stávat, že má jeden commit několik tagů verzí a nemáte problém s tím, že je nutné pokaždé dopočítat diff z historie pro dílčí projekty, pak je pro vás split zřejmě ta správná volba. V opačném případě je tu varianta se superprojektem.
 
-Superprojekt
-===
+# Superprojekt
+
 Superprojekt na to jde úplně jinak. Využívá tzv. [submoduly](https://git-scm.com/docs/git-submodule) což není nic jiného než ukazatel na jiný **plnohodnotný** Git repozitář. Při této konfiguraci se superprojekt chová jako přepravka na tyto repozitáře. Přesně ví kde jsou a jak s nimi pracovat, ale nehraje si s jejich historií. Vzhledem k tomu, že je v submodulu plnohodnotný Git repozitář, tak mohu pracovat s tagy samostatně a vydávat tak verze samostatně. Není tedy třeba dělat žádné ústupky.
 
 Superprojekt si drží informaci o submodulech v souboru `.gitmodules` jehož obsah vypadá takto (příklad z projektu [adeira/superproject](https://github.com/adeira/superproject)):

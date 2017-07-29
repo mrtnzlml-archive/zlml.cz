@@ -4,8 +4,8 @@ Dnešní článek bude spíše zápisek, protože jsem řešení tohoto problém
 
 Tento panel má sice dobrý důvod, ale existují případy, kde je prostě nadbytečný. Typický případ takové nadbytečnosti je modul Dashboards (technický název `board`) kdy je tento prostor nijak nevyužívaný. Zřejmě by tento problém šel řešit nějaký hackem, ale to prostě není dobře. Problém je [zde](https://github.com/odoo/odoo/blob/8.0/addons/web/static/src/js/views.js#L905). "Special case for Dashboards"...
 
-Jak na to
-=========
+# Jak na to
+
 Asi úplně nejjasnější bude, když popíšu posloupnost kroků, které vedou ke správnému řešení. Nejedná se o nic kompikovaného. Všechny níže uváděné postupy jsou klasické postupy při vývoji modulu. Jen je (do teď) pravděpodobně nikde nenajdete, nebo nad tím zbytečně vytuhnete na zoufale dlouhou dobu. Ostatně [podívejte se](https://searchcode.com/?q=views_switcher%20lang:Javascript), jak je výskyt tohoto kousku užitečného kódu [používaný](https://github.com/odoo/odoo/search?l=javascript&q=views_switcher&type=Code&utf8=%E2%9C%93) v public repozitářích... :-)
 
 <span style="font-size:2em">1.</span> Registrace XML definice v `__openerp__.conf`

@@ -1,7 +1,7 @@
 Před nějakým časem jsem psal o tom, jak vytvořit [znovupoužitený formulář](znovupouzitelny-formular). Nejedná se o nic jiného, než o správné navržení a následné použití komponent, tedy potomků `UI\Control`. Pokud bych měl být upřímný, nemyslím si, že se formuláře nějak často na webu opakují a osobně tento princip používám spíše pro oddělení části aplikace do samostatného balíčku. Tím spíš najde následující ukázka méně použití. Právě mám totiž za úkol navrhnout předělání jedné administrace. Úkolem není hledět na to, jak moc je tento přístup špatný, ale navrhnout řešení, které nahradí stávající 1:1. Tato administrace obsahuje často se opakující (a velmi rozsáhlý) formulář, který se skládá z několika karet. Navíc některé části formuláře spolu vůbec nesouvisí a na každé stránce je formulář trošku jiný (i když je podobnost zřejmá). Vzhledem k tomu, že se jedná o tak rozsáhlý kód, upustil jsem od znovupoužitelného formuláře a navrhnul jsem znovupoužitelné pouze jeho části. A na následujících řádcích nastíním jak.
 
-Na začátku stála komponenta
-===========================
+# Na začátku stála komponenta
+
 Pořád platí, že je samotný formulář komponenta. Na tom se nic nemění. V mém případě se však hodilo udělat si ještě nějaké bázové třídy. Pokusím se ukázky ořezat co nejvíce od zbytečností tak, aby to pokud možno ještě dávalo smysl:
 
 ```php
@@ -79,8 +79,8 @@ class BaseForm extends UI\Form {
 
 Nastavím si zde nějaké věci, které jsou pro každý formulář v administraci obecně společné. Konkrétně tedy CSRF ochranu a pár polí pro události. Události jsem si zde musel nadefinovat sám, běžně se na formuláři volá `onSuccess` událost až po `onClick` ([link](https://api.nette.org/2.3.7/source-Forms.Form.php.html#380-420)), ale zrovna zde jsem to potřeboval obráceně. Hodí se to v okamžiku, kdy chci využívat `onSuccess`, ale v `onClick` už z formuláře třeba přesměrovávám pryč. Vzhledem k tomu, že oba eventy se volají jen při validním odeslání, tak to ničemu nevadí. V této třídě je také vhodné místo pro umístění nějakých dynamických metod do anotací, aby je IDE dobře napovídalo (viz `addTinyMCE`). Byl to dlouhý úvod, ale vše je připraveno a můžeme se vrhnout na kontejnery.
 
-Formulářové kontejnery
-======================
+# Formulářové kontejnery
+
 Osobně [formulářové kontejnery](https://pla.nette.org/cs/dedicnost-vs-kompozice) nemám moc rád. Jsou sice super, ale pohybují se na další úrovni formuláře. Pokud se však s tímto faktem smíříme (a nejlépe z něj uděláme výhodu), pak jsou docela super a zde se skvěle hodí. Můžu si pěkně oddělit například odesílací tlačítka a ty pak vesele používat ve všech formulářích:
 
 ```php
@@ -148,8 +148,8 @@ Jednoduché vykreslitelné formulářové kontejnery. Cool. Abych to rychle zrek
 
 V šabloně `SubmitButtonsContainer.latte` je možné používat normálně `{input ...}` makra a další, jako kdybych pokračoval dál v šabloně jednoho velkého formuláře. Samotné připojené formulářové kontejnery je možné vykreslovat pomocí klasického makra `{control newsForm-submitButtons}` v hlavním formuláři. To je možná trošku nevýhoda, protože kontejnery se připojují do formuláře a stávají se tak podkomponentou. Musím tedy control makro volat stylem *rodič-podkomponenta*.
 
-Znovupoužitelnost vykreslitelných kontejnerů
-============================================
+# Znovupoužitelnost vykreslitelných kontejnerů
+
 Kde je ta znovupoužitelnost? Jak bych udělal to, že použiju třeba odesílací tlačítka (nebo jakoukoliv jinou část formuláře) někde jinde? Jednoduše. Prostě vytvoříme formulář (to je podmínka nutná) a kontejner v něm použijeme:
 
 ```php

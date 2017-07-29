@@ -4,8 +4,8 @@ Nikdy jsem moc nelpěl na PSR-FIG pravidlech. Částečně možná proto, že js
 
 Ale to je otázka a praticky jsem nikdy žádný významný posun ve výkonu nezaregistroval (i když teoreticky nemusím iterovat přes celý vendor, abych našel něco v app). Mnohem významnější je pro mě sada pravidel, kterými se programátor musí při použití PSR-4 řídit. Ty budu postupně popisovat v následujícím textu.
 
-PSR-4 na čistém projektu
-========================
+# PSR-4 na čistém projektu
+
 Nasadit PSR-4 na [čistém projektu](https://github.com/nette/web-project) je jednoduché. Stačí pouze pár jednoduchých kroků. V první řadě odstraníme RobotLoader - nebude vůbec potřeba. To znamená odstranit jej z `composer.json` a smazat z `bootstrap.php`. Teď ale aplikace nefunguje. Vraťme se tedy do `composer.json` a přidáme jednu sekci s definicí PSR-4 autoloaderu:
 
 ```js
@@ -50,8 +50,8 @@ Přejmenujme tedy `\App\RouterFactory` na `\App\Router\RouterFactory`. Nezapome�
 
 Podobné jednoduché úpravy budou fungovat na jakémkoliv projektu, je však zřejmé, že je občas vhodné zasáhnout do adresářové struktury, proto bych doporučoval udělat tyto úpravy co nejdříve (pokud chcete PSR-4).
 
-Composer autoload
-=================
+# Composer autoload
+
 Jak to tedy celé vlastně funguje? Vše to vězí v této první řádce `boostrap.php`:
 
 ```php
@@ -126,8 +126,8 @@ Composer\Autoload\ClassLoader #7553 ▼
 
 Stále je v classmap 349 tříd, ale interně už neexistuje nic jako PSR-4 autoloader a vše se tedy hledá pouze v classmap autoloaderu. S touto ukázkou to musí být všem už naprosto jasné. :)
 
-PSR-4 ve starší aplikaci
-========================
+# PSR-4 ve starší aplikaci
+
 Ve starších (již fungujících) aplikacích je vše samozřejmě stejné. Je však třeba upozornit na další PSR-4 pravidlo, kvůli kterému jsem se dlouho zdráhal přejít. Každá třída totiž musí být ve vlastním souboru. Toto pravidlo je určitě dobré, ale myslím si, že dává smysl připojovat definice generovaných továren do toho samého souboru, jako třeba komponentu kterou vytvářejí. Při přechodu je tedy třeba tyto soubory rozdělit.
 
 Další nepříjemností může být struktura, která na PSR-4 prostě nesedí a bylo by velmi složité vše předělávat. Je však škoda nepoužít Composer autoloader jen kvůli takovému drobnému zádrhelu. V tomto případě je možné použít třeba dříve zmiňovaný classmap:

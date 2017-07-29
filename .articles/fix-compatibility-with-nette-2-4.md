@@ -2,8 +2,8 @@ Právě v těchto dnech přichází další významná minor verze Nette balíč
 
 Zde se tedy nedočtete co je v Nette nového, ale jak co upravit a na co jsem narazil, když jsem tuto kompatibilitu rešil.
 
-Úpravy v Latte
-==============
+# Úpravy v Latte
+
 Jelikož pracuji na starším projektu, který je původem non-Nette, tak je zvykem používat PHP konstanty. Všude. Zatímco dříve stačilo používat `{=NAZEV_KONSTANTY}`, teď je nutné konstantu přímo označit `{=constant('NAZEV_KONSTANTY')}`, aby bylo jednoznačně jasné, že se jedná skutečně o konstantu. Jedna z velmi užitečných vlastností Latte bylo to, že nebyl problém napsat PHP kód do klasických PHP tagů `<?php`. Existovalo makro `{?`, ale dnes je doporučované pouze `{php ...}`. Toto je zároveň jediná věc, která mě štve, protože dříve bylo převádění externích šablon do Latte velmi jednoduché. Tímto se vše komplikuje.
 
 Velké změny jsou pod kaptou Latte. Pokud máte vlastní `Template` objekt (a tedy i vlastní `TemplateFactory`, protože to jinak udělat nejde), doporučuji udělat aktualizaci podle masteru. Asi nejzásadnější změna je právě v `TemplateFactory` při naplňování šablony:
@@ -26,8 +26,8 @@ $latte->addProvider('cacheStorage', $this->cacheStorage);
 
 Nově se používají tzv. providery, které lze získat takto: `$template->getLatte()->getProviders()`. Pokud tedy máte např. vlastní Latte makra, tak ty je zapotřebí změnit v tomto duchu: z `$_control->link(...` na `$this->global->uiControl->link(...`.
 
-Úpravy v Nette
-==============
+# Úpravy v Nette
+
 Relativně nedávnou změnou je absence metody `Nette\Utils\Html::add`. Ta je nahrazena kombinací `addText` resp. `addHtml`. Touto změnou by se mělo zajistit, že programátor nepošle do šablony HTML kód o kterém si myslí, že je escapovaný, ale on ve skutečnosti není.
 
 Asi největší myšlenkový obrat způsobila změna chování rout. Konkrétně `Route::SECURED`. Od samého začátku co dělám s Nette jsem tento příznak chápal blbě a [nejsem sám](https://forum.nette.org/cs/26348-route-secured-nevynucuje-https-100). Nově Nette zachovává takový protokol, s kterým uživatel přišel. Pokud potřebujete aplikaci na HTTPS, tak správné řešení je nastavit toto chování na úrovni serveru, třeba takto:
@@ -49,8 +49,8 @@ $this->link('//:Front:Rss:novinky'); //vygeneruje: https://example.com/rss/novin
 
 Ve stejném smyslu je zapotřebí upravit i [vlastní routery](https://github.com/mrtnzlml/static-router/commit/0b3ab17472cf2d051f7e4b9878354f3446cc55ff). Takže zpátky z šicím strojům opravit si aplikace... :)
 
-Pár dalších drobností a postřehů
-=====================
+# Pár dalších drobností a postřehů
+
 Místo `Nette\Object` je teď možné používat traitu `Nette\SmartObject`. Tato traita se od svého předchůdce liší v několika drobnostech. Více informací je rozepsáno v [tomto vláknu na fóru](https://forum.nette.org/cs/26250-pojdte-otestovat-nette-2-4-rc#p173934). S tím se váže to, že občas je potřeba změnit podobné zápisy: z `$this->reflection` na `$this->getReflection()`. Drtivá část věcí se snad odladila, takže není třeba nic řešit. Jsou však místa (jako ta reflexe), kdy si to raději změním ve svém kódu.
 
 Jak se na fóru dočtete, tak `Nette\SmartObject` nepodporuje [extension methods](https://doc.nette.org/cs/2.3/php-language-enhancements#toc-rozsirujici-metody). To se často využívá u vlastních formulářových prvků. Náhrada je opět jednoduchá a logická:

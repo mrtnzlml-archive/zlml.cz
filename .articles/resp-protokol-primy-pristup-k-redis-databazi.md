@@ -1,7 +1,7 @@
 ![](*RESP*)(http://redis.io/topics/protocol) (**RE**dis **S**erialization **P**rotocol) je něco, s čím se asi většina lidí nepotká. Důvod je prostý. Tento protokol je většinou zabalen hluboko v knihovně, která pracuje s Redis databází. Existují však situace, kdy se tento protokol hodí. Jednou ze situací je stav, kdy potřebujete předat, nebo naopak získat z Redisu nějaká data a všechno ostatní vyjma RESP komunikace je zbytečné zdržování (u mě třeba sypání dat z procesoru přímo do Redisu). Druhý případ nastane v okamžiku, kdy potřebujete zajistit komunikaci klient-server a potřebujete zvolit vhodný formát přenosu informací. Jedná se tedy o použití tohoto protokolu úplně mimo Redis. Důvodů může být celá řada, nejhlavnější by však byl asi ten, že se s RESP formátem dat dá snadno pracovat, protože používá prefixový zápis.
 
-Formát RESP protokolu
-=====================
+# Formát RESP protokolu
+
 RESP používá celkem 5 způsobů jak zaobalit přenášenou informaci. Vždy však platí, že první byte je byte určující o jaký formát se jedná:
 
 - `+` jednoduchý string
@@ -32,8 +32,8 @@ key\r
 
 To je celé, žádná věda v tom není. Je to skutečně jednoduchý protokol a to je super, protože se s ním dá snadno pracovat. Navíc lze poslat celý dlouhý text obsahující více příkazů v jednom spojení.
 
-Implementace v Node.js
-======================
+# Implementace v Node.js
+
 V Node.js by teď měla být realizace velmi jednoduchá. Napíšeme si krátký TCP client, který se nám napojí na Redis databázi (většinou port 6379) a budeme posílat/přijímat data:
 
 ```javascript

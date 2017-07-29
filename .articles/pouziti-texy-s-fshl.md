@@ -1,7 +1,7 @@
 Někdy (hodně dávno) jsem kdesi našel poměrně hezký a jednoduchý postup jak implementovat [Texy .{target:_blank}](http://texy.info/) s použitím [FSHL .{target:_blank}](http://fshl.kukulich.cz/) na webu. Rád bych se zde podělil o postup, který používám již na řadě projektů, které potřebují zvýrazňování syntaxe.
 
-Použití samotného Texy
-======================
+# Použití samotného Texy
+
 Běžně by se Texy zaregistrovalo do šablony jako helper:
 
 ```php
@@ -23,8 +23,8 @@ Tento helper lze i nadále používat. Hodě se například pokud je potřeba Te
 {$post->body|texy|striptags}
 ```
 
-Použití Texy s FSHL
-===================
+# Použití Texy s FSHL
+
 Samotné texy je sice geniální nástroj. Pro samotné zpracování se zvýrazněním se však hodí funkcionalitu Texy rozšířit, jelikož je potřeba zpracovat vstupující text a ty správná místa prohnat také tím správným lexxerem ve FSHL. K tomu dobře poslouží následující třída, která dědí právě od Texy:
 
 ```php
@@ -96,8 +96,8 @@ Výstup lze pak v Latte lehce podchytit a zobrazit:
 {$body|noescape}
 ```
 
-Barvy, barvy, barvičky
-======================
+# Barvy, barvy, barvičky
+
 Programově je sice tělo dokumentu vypsáno s tagy <code>&lt;span&gt;</code> s příslušnou třídou. To se však nijak viditelně neprojeví. Celou krásu udělá teprve CSS. Lze použít výchozí hodoty FSHL a vložit je do vlastního souboru stylů:
 
 ```css

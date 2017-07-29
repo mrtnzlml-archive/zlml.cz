@@ -39,8 +39,8 @@ URL-1
                    '--> URL-5
 ```
 
-Přepočet odkazů
-===============
+# Přepočet odkazů
+
 V tom to vlastně celé vězí. Je nutné při vytváření redirectu najít všechny staré odkazy a změnit je na nové. Vrátíme se však k předchozímu článku a trošku vylepšíme cache. Tedy cache zůstane stejná, ale vylepšíme její invalidaci následovně:
 
 ```php
@@ -93,8 +93,8 @@ public function createRedirect($from, $to)
 
 Dalo by se to optimalizovat z hlediska databázových dotazů lépe, ale jednak to není (zatím nebylo) potřeba a pak se hodí tahat si jednotlivé záznamy postupně právě kvůli invalidace cache. Jak to funguje? V první části si vytáhnu všechny odkazy, které ukazují na odkaz ze kterého budu přesměrovávat. To jsou ty staré, které je třeba zrušit. Ty jsou nahrazeny odkazy na nové stránky a jejich cache je samozřejmě smazána. To je ta důležitější část. V druhé polovině dojde jen k uložení nového přesměrování a opět smazání cache pro tento odkaz. Za povšimnutí stojí funkce `getPartialReference` o které jsem psal už minule. Je to funkce, která nevrací celou entitu, ale pouze nenaplněnou entitu s ID (parciální). Nic víc totiž dost často není potřeba...
 
-Druhá část řešení
-=================
+# Druhá část řešení
+
 Druhá část řešení je již jednoduchá.
 
 > Bude možné vytvořit jakoukoliv adresu, která bude přesměrovávat na jakoukoliv jinou.

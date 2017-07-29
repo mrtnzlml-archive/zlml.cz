@@ -2,8 +2,8 @@
 
 Rád bych tímto všechny čtenáře poprosil o pomoc. Ačkoliv na internetu vystupuji veřejně a nemám s tím problém, jsem velmi háklivý na to, když někdo neoprávněně zneužívá mé osobní informace. Někteří přijmou moji žádost a problém odstraní - viz nedávno zrušená kopie tohoto blogu. Někteří však dělají všechno proto, abych pokračoval v rituálním podpalování válečné sekery a proto jsem neskončil tam kde jsem v minulém článku přestal psát.
 
-Trnitá cesta plná překážek
-==========================
+# Trnitá cesta plná překážek
+
 Je již známá věc, že jistý web má nemalou zásluhu na šíření reklamních emailů křížem krážem. Vzhledem k tomu, že takové email dorazil i ke mě a vzhledem k tomu, že upoutal moji pozornost, začal jsem zbrojit. Při prvních pokusech jsem oťukával jejich systém abych zjistil o co jde. Zde jsem mimo jiné udělal mylný myšlenkový pochod a vše jsem svedl na někoho kdo s tím nemá nic společného. Každopádně po několika minutách jsem měl celkem jasno a udělal jsem velkou chybu. Popsal jsem bezpečnostní chybu reklamního systému na G+, na což někdo velmi rychle zareagoval a já jsem dostal na tento reklamní server ban. Doufám, že to byla jen náhoda...
 
 Toto řešení mi přišlo poněkud směšné, a tak jsem do tohoto systému přes IP anonymizér šťoural stále více. V tuto chvíli jsem to prakticky zabalil, protože chyba byla tak nějak opravena. Systém již při odhlašování nezobrazoval emailovou adresu, takže již nešlo použít něco jako:
@@ -42,8 +42,8 @@ try {
 
 Nejsem žádný extra programátor, ale na takovou věc ani být nemusím. Je asi zřejmé, že by tento program trval poměrně dlouhou dobu. Nemá však smysl řešit nějaké paralelní zpracování, když se o to server při vhodně zvoleném programu postará sám. Napsal jsem tedy celkem tři velmi podobné programy. Jeden bral URL adresy od nízkého čísla, druhý od vysokého a třetí na obě strany od středu číselného intervalu. Právě je 17:00, dávám si něco k jídlu a vyrážím do města na hokej...
 
-Jak to bylo dál?
-================
+# Jak to bylo dál?
+
 Po tom co hokej nedopadl moc dobře, strávil jsem nějaký čas u piva a vrátil jsem se domů. Bylo pozdě a program pořád běžel. Šel jsem spát a ráno do školy. Program stále běžel. V tuto chvíli již 16 hodin. Odhadem až někdy po 20ti hodinách dolování emailových adres z tohoto serveru jsem opět dostal IP ban. V tu chvíli jsem měl však získáno více než čtvrt milionu unikátních emailových adres. Ono to funguje! **Zde bych měl říct, že jsem tyto emailové adresy nedoloval kvůli nějakému zneužití, maximálně z nich udělám nějakou statistiku**... (-: Chtěl jsem také napsat na email který mají vystavený na webu, to bohužel nefungovalo, protože tento email byl pravděpodobně zrušen.
 
 V tuto chvíli adresy stále zpracovávám, protože celý systém psal někdo moc "šikovný" a tak občas systém vrátil místo emailu *Invalid key!* a jindy zase mix náhodných speciálních znaků s čímž jsem nepočítal. Také já jsem byl šikovný, takže jsem sice v programu počítal s unique klíčem, ale v DB jsem ho neudělal a v reklamním systému je jich cca 10% duplicitních.

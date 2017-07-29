@@ -1,7 +1,7 @@
 Čas od času se na Nette fóru najde někdo, kdo hledá vzorový projekt do kterého by se mohl podívat. Vlastně se většinou hledá cokoliv, jakákoliv inspirace. Bohužel se zřejmě všichni bojí toho, že o svůj projekt přijdou, protože v něm někdo najde bezpečnostní chybu. Já se toho také bojím, ale lepší než před tím utíkat je se tomu postavit čelem. A tak je to tady.
 
-Kdokoliv cokoliv
-================
+# Kdokoliv cokoliv
+
 K dispozici je pro nahlédnutí tento blog. A nejen k nahlédnutí, ale také k [volnému používání](develop).
 Na pozadí běží hned několik technologií, které si můžete prakticky osahat:
 

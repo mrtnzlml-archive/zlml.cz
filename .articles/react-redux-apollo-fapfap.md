@@ -2,8 +2,8 @@ Na konci minulého roku jsem začal něco jako virtuální seriál o React vs. P
 
 Ve výsledku jsem hodně rád, že jsem to tak oddaloval, protože jsem to asi tak třikrát celé předělával a konečně mám radost z toho jak to vypadá. Veškeré kódy týkající se [frontendu](https://github.com/adeira/connector-frontend) i [backendu](https://github.com/adeira/connector) jsou jako vždy k dispozici online pod MIT.
 
-Klientské komponenty
-====================
+# Klientské komponenty
+
 Až do nedávné chvíle jsem na straně webového prohlížeče používal pro komunikaci se serverem knihovnu Apollo. Interně Apollo využívá Redux store a já začal hodně vážně zvažovat, že začnu Redux store využívat mnohem více. V tu chvíli už nedávalo moc velký smysl používat Apollo a přišlo mi zajímavější starat se o Redux store sám.
 
 Dříve jsem Apollo používal tak, že existovala vždy nějaká nadřazená komponenta, která se dotazovala serveru a předávala data jiné komponentě. Takže jsem měl komponenty, kterým se říká kontejnery (pouze tahají data) a předávají data pro vykreslení tzv. prezentačním komponentám (pouze vykreslují, ale netahají data).
@@ -55,8 +55,8 @@ Zde začíná být vidět důvod, proč jsem opustil Apollo. Díky tomu, že má
 
 ![](753737db-6bc8-42cf-a46a-228ccba5283a/graphql-komunikace-crop.png) *** Obr. 1: příklad komunikace komponent s API
 
-Server Fetcher
-==============
+# Server Fetcher
+
 V předchozí akci bylo vidět, že se volá funkce `fetch`. To je úplně jednoduchá funkce, která pošle na server GraphQL dotaz a vrátí odpověď (resp. Promise). Vlastně dělá jen to, že pomocí [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) položí dotaz ve správném formátu:
 
 ```javascript
@@ -98,8 +98,8 @@ Teď by tedy mělo být zřejmé následující:
 - souběžně s tělem POST požadavku je nutné odeslat také autorizační hlavičky (pokud to aplikace vyžaduje)
 OK? Možná to bylo rychlé, ale [mrkněte na kód](https://github.com/adeira/connector-frontend) a popř. si to vyzkoušejte. Nic složitého... :)
 
-Přijetí požadavku na PHP serveru
-================================
+# Přijetí požadavku na PHP serveru
+
 Dostáváme se do oblasti, ve které [se vypastí](https://forum.nette.org/cs/28370-data-z-post-request-body-reactjs-appka-se-po-ceste-do-php-ztrati) překvapivě hodně lidí. Na straně serveru je třeba přistupovat k POST datům [trošku jinak](https://github.com/adeira/connector/blob/c501227a4429dba493624ca9fa85745fb5f1839c/instances/Connector/Infrastructure/Delivery/Http/GraphqlEndpoint.php#L62), než by mohlo být zřejmé. K této trošce teorie bude potřeba následující PHP kód:
 
 ```php

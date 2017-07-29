@@ -4,8 +4,8 @@ Velká část článků na tomto blogu jsou reakcí na nějaký reálný problé
 
 Většinou takto vágně to vždy začíná. Následuje stejné kolečko - vysvětlím proč se to tak dělá, popíšu jiný přístup k formulářům, tazatel je spokojen, podívám se do dokumentace, že to tam opravdu je a čekám na další stejný dotaz. Proto si teď dovolím vyzdvihnout nad rámec dokumentace několik základních způsobů, jak s formuláři v Nette pracovat.
 
-První způsob - líný Ota
-===
+# První způsob - líný Ota
+
 Tento způsob zná asi úplně každý. Pro superrychlé vytvoření formuláře jej stačí nadefinovat v presenteru nějak takto:
 
 ```php
@@ -44,8 +44,8 @@ selectNo1=666&send=Odeslat&_do=complicatedForm-submit
 
 V tomto případě metoda `getValue` vrátí hodnotu `NULL` a validace takového formuláře nebude úspěšná. To vyústí v chybovou hlášku `Please select a valid option.` - automaticky. Asi známá vlastnost a do chvíle než řeknu jinak bude platit.
 
-Druhý způsob - nešťastný Karel
-===
+# Druhý způsob - nešťastný Karel
+
 Zde se většina lidí zasekne a nádává. Protože vykreslování formuláře je v předchozím případě moc kostrbatá a vlastní PHP rendery nejsou moc nápomocné, přistoupíme k ručnímu vykreslování (místo `control` makra):
 
 ```
@@ -77,8 +77,8 @@ Proč? Co se děje? Tato definice formuláře totiž není správná. Nette ví,
 
 Na to je třeba dávat velký bacha. Tento způsob je dostatečný snad pro všechno co je potřeba. Prakticky je však nevhodný...
 
-Třetí způsob - kodérka Silvie
-===
+# Třetí způsob - kodérka Silvie
+
 Je velká škoda, že o tomto způsobu neví spousta lidí co potkávám. Kodér většinou vymyslí nádhernou šablonu s formulářem (s mnohem komplikovanějším než je tento):
 
 ```html
@@ -104,8 +104,8 @@ To je ale zbytečné. Existuje lepší způsob pomocí `n:name` makra v Latte. S
 
 Formulář funguje pořád stejně, ale dokonce se i zjednodušil! No nicméně asi je z toho cítit, že pořád je na straně PHP dost práce (vlastně vešká potřebná zodpovědnost) a svoboda v šabloně je jen částečná. Zde přichází ke slovu poslední způsob.
 
-Čtvrtý způsob - bláznivý Joe
-===
+# Čtvrtý způsob - bláznivý Joe
+
 Všechno dříve zmíněné se mi nemusí líbit. Kašlu na nějaké definice v PHP, kašlu na automatické kontroly. Chci prostě vzít formulář od kodéra, odeslat ho a sám si ho zpracovat. Je to tak těžké pochopit?! Není milý Joe. Co to udělat takto - začněme s naroubouváním formuláře (ale jen fomuláře!):
 
 ```html
@@ -146,8 +146,8 @@ To `DATA_LINE` je vhodné pro jednořádkové vstupy, protože se na pozadí pro
 
 Pořád ale platí, že může přijít ze selectu nečekaná hodnota a nelze ničemu věřit. Jedná se však o naprosto svobodný způsob, který je možné kombinovat s předchozím. Pokud tedy máte //"neskutečně složitý formulář"//, který je //"už nakódovaný"// a jeho definice //"má asi 500 řádek"// a je to //"tak komplikované, že se v tom nikdo nevyzná"// a bylo by //"lepší, kdybych si to mohl udělat sám"//, tak vězte, že to jde.
 
-Časté dotazy
-===
+# Časté dotazy
+
 - Použil jsi to někdy ve skutečnosti? Ano.
 - Je tam nějaký problém o kterém bych měl vědět? Krom již zmiňovaného nevím o žádném. Je to prostě růčo fůčo...
 - Proč to není v dokumentaci? [Je to tam.](https://doc.nette.org/en/2.4/forms#toc-manual-rendering)

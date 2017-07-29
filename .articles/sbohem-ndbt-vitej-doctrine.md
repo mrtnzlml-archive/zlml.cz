@@ -2,8 +2,8 @@ Byl jsem požádán, abych napsal nejenom důvod přechodu z Nette Database na D
 
 Následující text používá [Kdyby\Doctrine](https://github.com/Kdyby/Doctrine), nevidím důvod proč ve spojení s Nette používat něco jiného. Je to dobrá knihovna.
 
-Sbohem NDBT
-===========
+# Sbohem NDBT
+
 Nette Database Table a obecně celé Nette Database je úžasná část frameworku a spokojeně jsem ji používal po velmi dlouhou dobu. Nikdy jsem neholdoval pokřikům, že je NDBT zabugované (jako někteří) a i když jsem vyzkoušel i jiné alternativy, vždy jsem se spokojeně vracel právě k NDBT. Použití je velice intuitivní a dobře se s tím zachází:
 
 Model:
@@ -56,8 +56,8 @@ Je to jednoduché a jasné. Takové věci mám prostě rád. V modelové tříd�
 
 A to je věc, která mě dlouhou dobu trápila. Dá se čekat, že když v databázi existuje jakási vazba mezi příspěvkem a tagem, tak že tuto vazbu budu chtít nějak využít. A to pokud možno co nejvíce pohodlně. A co nejvíce pohodlně znamená, že v okamžik, kdy budu pracovat s příspěvkem a vzpomenu si, že potřebuji také tagy, tak tyto tagy také dostanu. Bohužel musím znát také spojovací tabulku, která nemá (minimálně v tomto případě) žádný faktický smysl a celkově práce s takto "dopřivázanou" tabulkou není vůbec pohodlná a už vůbec ne intuitivní. Dává to smysl a asi to tak být musí, takže proti NDBT žádná, ale tak nějak vnitřně jsem hledal něco lepšího (čti více vyhovujícího mým požadavkům).
 
-Vítej Doctrine
-==============
+# Vítej Doctrine
+
 Schválně se snažím vše popisovat podle mých myšlenkových pochodů, proto i nadále budu řešit úplně ten samý problém, jen s použitím Doctrine. Nutno ještě dodat, že Doctrine rozhodně nebyla jasná volba. Opět mi dlouho trvalo, než jsem obecně ORM přišel na chuť. Ještě před Doctrine jsem nějakou dobu experimentoval s [Lean Mapperem](http://www.leanmapper.com/) od Vojtěcha Kohouta (Tharos). Malou nevýhodou je, že téměř veškerá dokumentace je v brutálně dlouhém vláknu na Nette fóru, které má v tuto chvíli **1023 příspěvků**, takže je to občas dřina, ale myslím si, že je to skutečně povedená knihovna. Vojtěch Kohout má skutečně dobré myšlenky. Nicméně jsem prostě chtěl přijít Doctrine na chuť, takže jsem i Lean Mapper opustil. Občas dělám radikální změny, pokud by však někdo vyloženě potřeboval důvod k tomu začít s Doctrine (alespoň dočasně), pak tedy jeden mohu nabídnout. A bude velmi krátký. Vidíte někdy jako požadavek na zaměstnance znalost Lean Mapperu, nebo ActiveRow? Pokud ne, tak začněte s tím co se tam ukazuje často. Doctrine.
 
 Ale zpět k tématu. Pojďme si ukázat modelovou část podle mě:
@@ -160,8 +160,8 @@ class Post extends Doctrine\Entities\BaseEntity {
 
 Zde je právě důležité to, že rovnou ukazuji, kde je entita reprezentující tagy (která vypadá podobně jako tato), jak se k ní dostanu a dokonce jak se má řadit. Tedy všechny tyto informace jsem ze šablony odstranil. Pro mě je to tedy úžasný pokrok, protože jsem dosáhl toho co jsem chtěl. Aby se mi s databází pracovalo dobře.
 
-No dobře, ale...
-================
+# No dobře, ale...
+
 A teď je právě čas na některé dotazy, které vznikly při přípravě tohoto článku. Tak například co když chceš položit vlastní dotaz, v Nette Database je to přeci snadné. V Doctrine [také](https://bitbucket.org/mrtnzlml/www.zeminem.cz/src/05dc03f0781fac574de26e128b6509d870b7b789/app/model/Posts.php?at=master&fileviewer=file-view-default#Posts.php-128). V tom by ORM nemělo nijak zásadně bránit...
 
 Další věc je, že v presenteru stále zůstává jistá závislost na struktuře tabulek. Konkrétně opět mluvím o poli kritérií. Jak se úplně zbavit této závislosti a mít pokud možno vše tak, aby když změním strukturu, tak to změním jen někde a ne všude? K tomu se dají použít třeba query objekty, které v sobě drží podobu potřebného SQL dotazu, takže místo toho, abych stále ťukal ten samý dotaz, jen jinde, tak jej schovám do třídy a právě tu pak používám. Budoucí změna se pak pravděpodobně bude týkat právě pouze toho objektu a případně entit. Ono toto asi nejde úplně odstínit (nebo spíš nevím jak), protože vždy je potřeba data i nahrávat a tedy stanovit určitou hranici mezi tím co je závislé na databázi a co už není. Nicméně uvážím-li, že budu měnit strukturu tabulky třeba kvůli tomu, že chci přidat nová data, stejně budu do kódu muset jít a někde ty data vzít a někam je dát. Proto je toto možná úplně zbytečné řešit, protože tato závislost nikdy nepůjde úplně odstranit.

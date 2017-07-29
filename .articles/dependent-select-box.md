@@ -1,7 +1,7 @@
 Občas je v Nette zapotřebí vyřešit dependent select box. Je to relativně málo častý požadavek a o to méně se o něm dá najít, když je to zrovna potřeba. V zásadě existují dvě řešení. Nudné - poctivé a pak zábavné - špinavé. Podívejme se na to, jak se dá takový dependent select box jednoduše vyřešit.
 
-Čisté řešení
-============
+# Čisté řešení
+
 [* 51d212f2-5aa9-44b9-9085-f6267e1974e9/vystrizek.png >]
 Toto řešení ukazuje jak by se takový problém měl zhruba řešit. Myšlenka je velmi jednoduchá. Prvně potřebujeme data do závislého select boxu. Ty se normálně vyřeší prostřednistvím databáze, v našem případě postačí jednoduché pole.
 
@@ -90,8 +90,8 @@ public function success(UI\Form $form, $vals) {
 
 Čistota spočívá v tom, že požadované hodnoty skutečně získáme. To není úplně samozřejmé, protože v Nette existuje bezpečnostní obranný mechanismus, který zabraňuje odeslání hodnot v select boxu, které na začátku neobsahoval. Pokud něco takového uděláme třeba javascriptem, zíkáme `NULL`. Aby se toto nedělo, musíme takto relativně složitě vyřešit továrničku pro formulář.
 
-Špinavé řešení
-==============
+# Špinavé řešení
+
 Špinavé řešení se od toho čisté o moc neliší. Myšlenka je pořád stejná, tentokrát však stojíme před jiným úkolem. Vezměme si příklad, kdy nám zase až tolik nezáleží na tom, jaké získáme v select boxu hodnoty a chceme ho používat spíše jako text input, kdy nabídneme uživateli nějaký vstup. Typický příklad je text input pro URL adresu API, kdy po zadání kontaktujeme nějaké API a nabídneme v selectu vrácené hodnoty tak, aby je uživatel nemusel psát. Netvrdím, že by to nešlo vyřešit čistě, ale špinavé řešení je v tomto případě pohodlnější, rychlejší a mohu na něm ukázat i něco jiného. Tentokrát si vytvoříme úplně obyčejný formulář, tak jako již mnohokrát. Není potřeba žádného fíglu. Opět si připravíme šablonu pro formulář obdobně jako v předchozím případě. A obdobně doplníme nějaký ten javascript. Zde bych klidně mohl formulář upravit javascriptově, ale mě se hodí zavolat si (po napsání URL adresy) handler, v něm vyřešit vše potřebné a invalidovat část formuláře.
 
 ```javascript

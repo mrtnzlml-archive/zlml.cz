@@ -19,8 +19,8 @@ Struktura webových aplikací je něco, co se neustále mění a stejně s progr
 
 Na první pohled je asi vše jasné. Struktura je téměř identická s tím, co je běžné u začínajících Nette projektů (Nette zde však není vůbec důležité). Za povšimnutí stojí pouze to, že `bootstrap.php` a globální konfigurace jsou na úrovni kořenového adresáře, takže neexistuje žádná složka `app`. Zůstává tedy otázka - kde jsou veškeré kódy a jak je aplikace členěna?
 
-Kontexty
-========
+# Kontexty
+
 Veškerá zábava je právě ve složce `src` (jak se asi dalo čekat):
 
 ```
@@ -54,8 +54,8 @@ src/Devices/
 
 To už je o něco zajímavější a také řádově komplikovanější na pochopení. Dále se totiž dělí aplikace na tři důležité části, kde každá má jiný význam a každá si tedy zaslouží krátký komentář. Začněme pěkně uprostřed.
 
-Doménová vrstva
-===============
+# Doménová vrstva
+
 V doménové vrstvě je pouze obyčejné PHP. Myšlenka je taková, že se zde budu soustředit pouze na návrh modelu v čistém PHP a nebudu to nijak komplikovat zanášením jakýchkoliv frameworků či jiných externích knihoven:
 
 ```
@@ -76,8 +76,8 @@ Nikde zde nenajdete v kódu slovo Nette, Symfony nebo třeba Doctrine (//ve skut
 
 Takto by však aplikace sama o sobě nefungovala. Je potřeba mít zde vazbu na konkrétní implementaci, na konkrétní framework či knihovnu. Od toho slouží další vrstva.
 
-Infrastrukturní vrstva
-======================
+# Infrastrukturní vrstva
+
 Zde není nic jiného, než implementace (implementační detaily). Většinou se jedná o třídy, které nemají žádnou zvláštní nebo složitou logiku. Slouží pouze jako napojení na framework a jako implementace rozhraní z domménové vrstvy. To se silně projeví ve struktuře:
 
 ```
@@ -111,8 +111,8 @@ Asi nejzajímavější je potom složka `Persistence`, která řeší ukládán�
 
 Zbývá poslední vrstva.
 
-Aplikační vrstva
-================
+# Aplikační vrstva
+
 Mít takto myšlenkově oddělené závislosti jednotlivých částí aplikace má spoustu výhod. Důležité je zeptat se: jak budeme tento model ovládat? Odpovědí je právě aplikační vrstva. Ta má za úkol pouze jednu věc. Zpřístupnit doménovou vrstvu širokému okolí. Pokud tedy presenter chce komunikovat s doménovou vrstvou, musí prostřednictvím aplikační vrstvy. Proč musí? Nestačilo by rovnou používat nějaký interface pro repozitář? Stačilo, ale to není dobrý nápad!
 
 Rovnou pracovat s repozitáři není rozumné, protože ty maximálně tahají data z úložiště. To je jejich zodpovědnost, ale co třeba oprávnění a transakce? O to se právě stará aplikační vrstva. Jako příklad budeme chtít vytvořit záznam pro novou meteostanici. Zde konkrétně využívám přístup CQS (Command-Query Separation). Zde existují dva způsoby jak komunikovat. Pomocí dotazů, kdy každý dotaz vrací požadovanou informaci, ale **nemodifikuje data** a pomocí příkazů, které data modifikují, ale **nevrací žádná data zpět**.

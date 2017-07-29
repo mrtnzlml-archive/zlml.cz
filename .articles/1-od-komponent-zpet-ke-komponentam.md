@@ -9,8 +9,8 @@ Systém komponent má však v Nette celou řadu úskalí a temných zákoutí. J
 
 Začal jsem tedy hledat jiné řešení. A než ukážu výsledek, je nutné pochopit kudy jsem šel a kde jsem se cestou popálil...
 
-WebComponents
-=============
+# WebComponents
+
 [Webové komponenty](http://webcomponents.org/) jsou přesně to co jsem hledal. Webová komponenta slouží k rozšíření DOMu o vlastní HTML prvky (stejně tak jako funguje např. `<video>` tag). Pokud chcete vidět obsah takového tagu, doporučuji v Chrome zapnout "Show user agent shadow DOM". Přirozeně jsem šel hned za Polymerem, protože jej již nějaký čas znám. Nikdy jsem si ho však nevyzkoušel na reálném projektu. Minimální definice Polymer elementu vypadá takto:
 
 ```html
@@ -36,8 +36,8 @@ Bylo to super a pak jsem **po několika měsících práce s Polymerem celou apl
 
 Toto je přesně případ se kterým si třeba WebStorm nedokáže poradit. Takže fakticky je to moje chyba, že jsem nepozorný, ale o to více potřebuji, aby když něco udělám blbě, tak mi to pořádně nafackovalo a já hned věděl. Proto jsem Polymer opustil (ano to je jediný důvod) a ačkoliv si myslím, že je to skvělý nápad a webovým komponentám hodně fandím, vydal jsem se o kousek dál.
 
-React
-=====
+# React
+
 Stejně tak jako všichni, tak i já jsem skončil u Reactu. A stydím se za to. Nechci jej používat jen proto, že je to cool. Ale dal jsem mu poprvé velkou šanci i tak (už jej znám dlouho, ale nikdy jsem nepotřeboval). Z mého pohledu: zatímco Polymer umí by default úplně [neuvěřitelně vymakané frontend prostředí](https://beta.webcomponents.org/collection/Polymer/elements), React neumí nic než pracovat s daty. Ale jeden ze zásadních rozdílů je v tom, že je striktní. Takže moje problémy s neexistujícími emlementy řeší JSX by design (kdo zná XHP, tak ví). Vzdal jsem se tedy úžasného nástroje a přešel jsem na něco, co umí v základu jen chytře aktualizovat DOM a vykreslit `div` (takto vypadá nejmenší komponenta, kterou lze v Reactu napsat - ES6):
 
 ```js

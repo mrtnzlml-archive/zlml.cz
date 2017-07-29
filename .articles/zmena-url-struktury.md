@@ -5,8 +5,8 @@ Před úpravou URL struktury jsem definoval několik důležitých bodů, který
 1. Musí zůstat maximální (úplná) zpětná kompatibilita
 2. Výsledné URL musí být maximálně jednoduché a cool
 
-Předtím a potom
-===============
+# Předtím a potom
+
 Důležité je, aby stará URL adresa nekončila chybou 404, ale aby přesměrovala na novou URL.
 RSS je nyní na adrese http://zlml.cz/rss. Původně bylo na adrese http://zlml.cz/homepage/rss.
 Obě dvě adresy fungují stále, rozdíl je v tom, že homepage/rss nyní přesměrovává pomocí 301 na */rss.
@@ -21,8 +21,8 @@ $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default'); //pův
 Ačkoliv je teď druhá routa zbytečná, nechal jsem jí pro případ, že bych měl nějakou URL nezachycenou.
 V tom případě ji zachytí tato obecná.
 
-Zpětná kompatibilita
-====================
+# Zpětná kompatibilita
+
 Stejně tak jako změna adresy RSS, tak si i ostatní adresy musí zachovat stejné vlastnosti viz první bod.
 A vzhledem k tomu, že jsem se rozhodl změnit adresu vyhledávání a tagů, nezbývalo, než další
 dvě routy přidat. Opět záleží na pořadí:
@@ -39,8 +39,8 @@ $router[] = new Route('tag[/<search>]', 'Tag:default', Route::ONE_WAY); //původ
 Opět platí, že funguje jak stará adresa http://zlml.cz/search/nette s přesměrováním 301, tak i nová 
 http://zlml.cz/s/nette. Obdobně je tomu u tagů.
 
-Čarodějnictví!
-==============
+# Čarodějnictví!
+
 Největší sranda však začíná u druhého požadavku. Už dlouho jsem si pohrával s myšlenkou,
 že chci názvy článků a adresy jednotlivých stránek v menu hned za lomítkem jako v kořenovém
 adresáři. Tedy aby článek měl adresu http://zlml.cz/lovec-matematik a stránka http://zlml.cz/about.

@@ -16,8 +16,8 @@ application:
 
 A používat tak třídu `\App\Controllers\HomepageController`. Opět na umístění v adresářové struktuře nezávisle. Pojďme se ale ponořit hlouběji a rozeberme si co vlastně jednotlivé části mappingu znamenají.
 
-Do hlubin regulárů
-==================
+# Do hlubin regulárů
+
 Nejdůležitější metodou je v tomto případě `\Nette\Application\PresenterFactory::setMapping`. V této metodě se ukrývá tento regulární výraz, který kontroluje validitu mappingu (preg_match):
 
 ```
@@ -90,8 +90,8 @@ application:
 
 Takže vše bude mapováno pomocí první masky, ale pro `Admin` modul bude používat MVC jako v druhé ukázce. Tohoto se dá velmi dobře využít pokud stavíte aplikaci pomocí [rozšíření pro DIC](rozsireni-pro-dic). V tomto případě je totiž docela dobrý nápad mít presentery ve vlastní namespace a tedy vytvořit si pro ně nový mapping, který bude mapovat jen tuto část aplikace. Používám to hodně.
 
-Limitující případy
-==================
+# Limitující případy
+
 Co vím, tak existují dva limitující případy s tím, že ten druhý je vyřešen v budoucí verzi Nette Application (zatím jen dev-master). Na první případ narážím velmi často. Bohužel totiž není možné (pokud vím) definovat více mappingů pro jeden modul. Nejde tak vytvořit mapping třeba pro modul API a zároveň mapping, který by využíval stejný modul, ale byl umístěn v úplně jiném namespace (bundle). To je při tvorbě bundles hodně limitující. Tento problém je vyřešen ve skvělé knihovně [librette/presenter-factory](https://github.com/librette/presenter-factory). Celkově se v Librette skrývá spoustu pokladů, jen <del>Kdyby</del> je autor nějak dokumentoval... ;-)
 
 Druhý případ je dobře popsán v [tomto issue](https://github.com/nette/application/issues/101). Totiž jak jsem se letmo zmínil dříve, tak pokud existuje více zanořených modulů, tak se maska pro moduly opakuje. Ale ne tak, jak by bylo občas potřeba. Mějme například tento mapping z issue #101:

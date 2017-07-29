@@ -1,7 +1,7 @@
 Existují knihovny, bez kterých bych si vývoj webových aplikací již téměř nedokázal představit. Jedním z nich je [Kdyby\Console](https://github.com/kdyby/console). Již dříve jsem sice napsal článek o [Nette CliRouteru](nette-2-1-dev-clirouter), ale postupem času a hlavně také díky Doctrine jsem velmi rychle a rád přešel na jiné a dokonalejší řešení. Vzhledem k tomu, že na jednom projektu používám tuto knihovnu velmi hodně a vlastně na ní celý projekt stojí, rád bych alespoň prostřednictvím tohoto článku autorovi poděkoval ([Filip Procházka](https://github.com/fprochazka)). Zároveň bych tímto počínáním rád postupně smazával věčný problém těchto knihoven, protože většinou z hlediska návštěvníka ani není jasné, na co ta knihovna je...
 
-Proč uvažovat o konzoli?
-========================
+# Proč uvažovat o konzoli?
+
 Pro mě je tato otázka celkem jednoduchá, protože mám projekty, které nejedou jen na sdíleném hostingu, ale jsou to samostatně stojící aplikace. Z toho plyne, že je často zapotřebí vykonávat pomocí CRONu velké množství úkolů. Toto je hlavní část, proč vůbec o konzolovém nástroji uvažuju. Použití je totiž velmi jednoduché a právě samotná Doctrine nabízí prostřednictvím Kdyby\Console celou řadu klasických příkazů a je škoda je nevyužívat. Stačí spustit z příkazové řádky `php index.php` u aplikace a pokud jsou příkazy zaregistrovány v konfigu, vypíše se jejich seznam včetně nápověd:
 
 ```
@@ -46,8 +46,8 @@ orm
 ```
 Díky této možnosti je možné rychle validovat Doctrine entity, nebo generovat SQL schéma přímo do databáze. Použití je opět jednoduché, např.: `php index.php orm:info`.
 
-Tvorba vlastního příkazu
-========================
+# Tvorba vlastního příkazu
+
 Prvně je třeba si uvědomit, že tato knihovna je vlastně to samé jako je v [Symfony Console Component](http://symfony.com/doc/current/components/console/introduction.html), tzn. že potřebné informace se dají čerpat právě z této dokumentace a navíc existuje celá sada helperů, jako je například [Progress Bar](http://symfony.com/doc/current/components/console/helpers/progressbar.html), nebo třeba šikovný [Table](http://symfony.com/doc/current/components/console/helpers/table.html). Samotné napsání třídy (Commandu) je pak triviální záležitostí:
 
 ```php
@@ -72,10 +72,10 @@ class BlogInstall extends Command {
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		try {
+        	// Zde vykonáme vše co je potřeba
 			// Zde vykonáme vše co je potřeba
-			// Zde vykonáme vše co je potřeba
-			// Zde vykonáme vše co je potřeba
-			//...
+            // Zde vykonáme vše co je potřeba
+            //...
 			$output->writeLn('<info>[OK] - BLOG:INSTALL</info>');
 			return 0; // zero return code means everything is ok
 		} catch (\Exception $exc) {
@@ -98,8 +98,8 @@ services:
 
 Tento způsob registrace je jedna z věcí, která mě štve a rád bych, kdyby se toto Console naučila hackovat sama a já nemusel tagovat, že se jedná o command. Když je totiž těchto příkazů hodně, konfigurační soubor tímto způsobem poměrně rychle roste na své délce a stává se nepřehledným... (-:
 
-A co je na tom?
-===============
+# A co je na tom?
+
 Vždyť toto umí Symfony. To Kdyby nic jiného neumí? No, tak krom toho, že vůbec řeší integraci do Nette, což je asi hlavní úkol, tak jsou logicky součásti integrace i další části jako jsou například vlastní helpery. Není totiž nic horšího, než když v takovém commandu potřebujete presenter. Ale ono je to vlastně jednoduché:
 
 ```php

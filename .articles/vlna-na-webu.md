@@ -1,11 +1,11 @@
 Vlna je program [Petra Olšáka .{target:_blank}](http://ftp.linux.cz/pub/tex/local/cstug/olsak/vlna/), který slouží k umístění nezalomitelné místo na místo v textu, kde by nemělo dojít k samovolnému zalomení řádku. Tento program slouží k dodatečné úpravě textů napsaných v LaTeXu. V tomto prostředí se nezalomitelná mezera nahrazuje znakem vlnovkou - tildou (~). U webového výstupu se používá zástupná entita <code>&amp;nbsp;</code>.
 
-Kde by měla být nedělitelná mezera
-==================================
+# Kde by měla být nedělitelná mezera
+
 V základu program Vlna umístí tildu za znaky <code>KkSsVvZzOoUuAI</code>. Více toho pokud vím nedělá. Podle Ústavu pro jazyk český AV ČR by však toto pravidlo mělo platit mimo jiné pro znaky <code>KkSsVvZzAaIiOoUu</code>. Neuvažuji další pravidla, která určují další nevhodné výrazy na konci řádku. Mezi tyto pravidla patří například mezery uvnitř číslic, mezery mezi číslicí a značkou, atd. Některá pravidla jsou totiž natolik specifická, že by je bylo náročné (nebo nepraktické) podchytit programově.
 
-Implementace
-============
+# Implementace
+
 O samotné nahrazování se stará následující regulární výraz:
 ```php
 preg_replace('<([^a-zA-Z0-9])([ksvzaiou])\s([a-zA-Z0-9]{1,})>i', "$1$2\xc2\xa0$3", $string); //&nbsp; === \xc2\xa0

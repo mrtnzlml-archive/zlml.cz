@@ -2,8 +2,8 @@ Spousta lidí by se ráda připojovala na API ERP systému [Odoo](https://www.od
 
 Prvně však několik málo slov o co vlastně jde. Odoo je ERP ([Enterprise Resource Planning](http://www.orgis.cz/sluzby/in-house)) systém poměrně bohatý na funkce a má za úkol řešit zejména vnitrofiremní procesy a obecně všechny záležitosti, které se okolo jakékoliv firmy motají. Lze tedy řešit plánování projektů, jejich workflow, rozvrhování času, řízení zakázek, ale také například správu dokumentů, skladové zásoby, mass mailing, nebo tzv. [Point of Sale](https://www.odoo.com/page/point-of-sale) což je jedna z těch nejvíce zajímavých věcí, alespoň z mého pohledu. Zjednodušeně řečeno lze udělat naprosto cokoliv. A co nejde, tak se jednoduše doprogramuje. Aby však šlo udělat cokoliv, je potřeba připojovat se na tento systém vzdáleně, protože občas se hodí propojit stávající webovou aplikaci právě s takovýmto systémem. To může mít několik důvodů. Například chcete mít ve webové aplikaci data sjednocená s ERP systémem, nebo si chcete vzdáleně stahovat faktury, popř. tlačit data do účtovacího systému. Jak již bylo řečeno - možné je naprosto cokoliv.
 
-Hello API!
-==========
+# Hello API!
+
 Odoo poskytuje klasické XML-RPC API. Toto API je velmi jednoduché na obsluhu, nicméně ani tento druh API [není můj favorit](srackoapi). S výhodou tedy můžeme použít lehce modifikovanou funkci [Jakuba Vrány](http://php.vrana.cz/webove-sluzby-v-php-xml-rpc-a-soap.php) pro obsluhu tohoto API (PHP):
 
 ```php
@@ -33,8 +33,8 @@ $uid = xmlrpc("http://.../xmlrpc/common", "login", $data);
 
 Výsledkem volání je unikátní identifikátor uživatele, který si můžeme dočasně někam uložit, aby ho nebylo potřeba zjišťovat pořád znovu. To není potřeba. Nutné ja však upozornit na to, že přes API získáte taková přístupová práva, jaké by měl uživatel, kdyby se přihlašoval normálně pomocí loginu.
 
-Jedeme dál
-==========
+# Jedeme dál
+
 Následuje služba `object`. Ta má na starost práci s databází z hlediska ORM. Ačkoliv má tato služba pouze dvě pro mě zajímavé funkce, užije se s ní nejvíce srandy a patří asi k té nejdůležitější. Zmiňované funkce jsou `execute(db, uid, obj, method, *args, **kw)` a `exec_workflow(db, uid, obj, signal, *args)`. Právě pomocí `execute` lze například vyhledávat v databázi a to tak, že si nejdříve získáme ID hodnoty pro daný výraz a následně si vytáhneme veškeré informace, které jsou potřeba (pokud jsou potřeba). Příklad pro vyhledávání v zákaznících:
 
 ```php
@@ -53,8 +53,8 @@ xmlrpc("http://.../xmlrpc/object", "execute", $data);
 
 Je tedy zřejmé, že pomocí execute můžeme vyhledávat, číst, ale i vytvářet, nebo mazat záznamy (`create`, `search`, `read`, `write`, `unlink`). Zajímavý je způsob zápisu při hledání (<em>ilike</em>). K dispozici jsou následující operátory: `=`, `!=`, `>`, `>=`, `<`, `<=`, `like`, `ilike`, `in`, `not in`, `child_of`, `parent_left`, `parent_right`. Opět se jedná o "samosepopisující" názvy. Nejzajímavější je však právě <em>ilike</em>, který není case sensitive a obaluje dotaz procenty jako je tomu například klasicky v MySQL (`%hledanyvyraz%`). U použíté funkce <em>read</em> lze vyjmenovat jaké sloupce se mají vrátit, nebo se vrátí veškerá data (včetně obrázků v base64).
 
-Pokročilé dotazování
-====================
+# Pokročilé dotazování
+
 Podmínky dotazování lze ještě zpřesnit pomocí logických operátorů (`&` - and, default, `|` - or, `!` - not). Podmínky se zapisují klasicky prefixově, takže pokud chceme například vyhledat zákazníka s nenastavenou češtinou z čech a německa, položíme například následující prefixový dotaz:
 
 ```python

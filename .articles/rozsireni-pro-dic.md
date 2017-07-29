@@ -4,8 +4,8 @@ Své aplikace rozděluji poměrně důsledně na jakési balíčky (bundles - n�
 
 Napsat takto aplikaci většinou zamená zasahovat do nějaký globálních prostor, popřípadě mít vytvořené nějaké body v aplikaci, na které je možné se navěsit. Jelikož však využívám(e) Nette, je nejlepší způsob využít právě rozšíření DIC.
 
-Píšeme první rozšíření DIC
-==========================
+# Píšeme první rozšíření DIC
+
 Celé je to vlastně velmi jednoduché. Třeba do `src/Articles/DI` umístíme třídu `ArticlesExtension`, která dědí od `Nette\DI\CompilerExtension`. Struktura je libovolná, podstatné je, aby třída dědila právě od *CompilerExtension*. Druhá věc, kterou je třeba udělat, je zaregistrování našeho nového rozšíření do DI kontejneru. To uděláme velice jednoduše v konfiguračním souboru:
 
 ```neon
@@ -80,8 +80,8 @@ public function afterCompile(Nette\PhpGenerator\ClassType $class)
 
 Tolik jinak (pro normální lidi) napsáno to, co je v [dokumentaci](https://doc.nette.org/cs/2.3/di-extensions). Mělo by teď být jasné, k čemu je psaní rozšíření pro DIC vůbec dobré a proč by o tom měl člověk vůbec uvažovat. Je zřejmé, že je to zase další složitost navíc, ale když programátor ovládne psaní takových rozšíření, celá aplikace se najednou začne pěkně škatulkovat a rozpadat na jednodušší části. Ostatně takto se píšou všechny normální [addony](https://componette.com/) pro Nette.
 
-Ještě nějaké jednoduché testy
-=============================
+# Ještě nějaké jednoduché testy
+
 Špatný test je sice pořád špatný, zároveň je však lepší, než test žádný. Všímám si však toho, že se o testech hodně a dlouho blábolí, ale když přijde ten správný čas, tak o nich nepadne ani slovo. Proto jsem je začal ve svých ukázkách hodně tlačit a blog nezůstane pozadu. Jak by tedy takový jednoduchý test mohl vypadat? Asi nebude překvapením, když na to použiju svůj [mrtnzlml/testbench](https://github.com/mrtnzlml/testbench), který si může kdokoliv stáhnout a který mi ušetří hodně trápení. K testu mi bude stačit pouze traita `Testbench\TCompiledContainer` a celý test case by mohl vypadat třeba takto:
 
 ```php

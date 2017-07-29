@@ -7,8 +7,8 @@ Nebudu řešit jak je hloupý. Neznám totiž žádnou objektivní stupnici kam 
 
 Rád bych upozornil na to, že nejsem žádný superprogramátor, takže je skutečně možné, že k problému přistupuji špatně. Proto bych byl rád za rozumné podněty a připomínky, nikoliv osobní výstřednosti v komentářích...
 
-1. Odkazy
-=========
+# 1. Odkazy
+
 A hned pěkně z ostra. Jak jsem již zmínil, jsem odkojen na Nette a proto jsem náležitě rozmazlen. Ale rozmazlen v dobrém slova smyslu. Považuji totiž framework za věc, která mi má pomoci. Nikoliv házet klacky pod nohy. Jednou z takových věcí je tvorba odkazů. Jak by to mělo být správně? Přesně tak jak je to v Nette, čili je zapotřebí najký systém, který mi umožní stavět odkazy a zároveň mi umožní je kdykoliv změnit bez zásahu do šablon. Jak je tomu v takovém Exresss.js, webovém frameworku pro Node.js? V Express.js je defaultně šablonovací systém [Jade](http://jade-lang.com/). Nemluvě o tom, jaký je to nešťastný systém, odkazy se v něm vytvářejí zhruba takto:
 
 ```html
@@ -38,8 +38,8 @@ router.get('/', function (req, res) {
 
 Tak to máme celkem 4 místa kde je to pěkně natvrďáka. Proč ne? **Proč jo?** Jistě, existuje možnost jak si to naprogramovat lépe, jinak, znova. Jen si říkám, kde se stala chyba a proč to framework nezvládá nějak lépe?
 
-2. Formuláře
-============
+# 2. Formuláře
+
 Jedna z věcí, která se v tomto světě řeší poněkud laxně jsou formuláře. Na to nejsem zvyklý a trošku mě to děsí. Funguje to zhruba tak, že vytvoříte v šabloně formulář:
 
 ```html
@@ -64,8 +64,8 @@ router.post('/save', function (req, res) {
 
 Jistě, je to jednoduché. Ale to prostě [není ok](http://stackoverflow.com/questions/19030220/is-it-ok-to-work-directly-on-the-data-in-req-body). Kromě toho, že je v kódu opět hard-code, tak se jedná o nádherně "ošetřený" vstup. Takový krásně čistý `$_POST`. Takto si framework nepředstauji. Možná je to proto, že je Express.js ještě moc low-level, možná také proto, že ještě neuzrál.
 
-Není to tak zlé
-===============
+# Není to tak zlé
+
 Musím však utlumit některé pobouřené čtenáře. Nebylo by totiž fér jen něco hejtovat. Bez Node.js bych danou aplikaci naprogramoval jen velmi těžko. Je totiž super, že mohu využít "event-driven, non-blocking I/O model". Toto je však věc, kterou podle mého názoru moc lidí nevyužije, protože jí prostě nepotřebuje. Kolikrát něco takového programujete? Proto když jsem měl na téma Node.js [přednášku](prednaska-na-zcu-node-js), jen velmi těžko jsem lidem vysvětloval k čemu je to vlastně dobré. A právě proto jsem použití Node.js paradoxně neukazoval na webové aplikaci. Třeba proto, že se s ním nepracuje úplně nejlépe, zároveň je však v určitých směrech nenahraditelný.
 
 Ačkoliv jsem tedy začínal jedním hloupým tweetem, není toto rekace na něj a je mi celkem hluboce ukradený. Spíše mě zajímá jestli to co jsem zde popisoval (a celá řada dalších problémů) je normální všední den server-side JS programátora, nebo se s těmito problémy vypořádáváte jinak?

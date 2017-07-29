@@ -22,8 +22,8 @@ Proč je to problém? Protože druhý případ je striktně závislý na použit
 
 [* d6ca5ea3-5c1a-43af-8488-73d4fae836f1/strip-wordpress-550-finalenglish.jpg <]
 
-Jak jsem na to šel
-==================
+# Jak jsem na to šel
+
 Nebudu zde rozebírat přesně důvody proč jsem to udělal tak a ne jinak. Většinou mě to k tomu řešení jasně dovedlo, protože dělat to jinak by bylo nesmyslně složité - pokud vůbec možné. Berte to jako inspiraci. Myslím si, že se to bude ještě nekomu hodit, protože je tento návrhový vzor rozšířen více, než si přiznávám.
 
 V první řadě bylo nutné do projektu přidávat závislosti pomocí Composeru. Jednak se tak projekt trošku vyčistil od zbytečně nakopírovaných knihoven a potom jsem mohl s výhodou používat jednotlivé Nette komponenty. Pak je velmi důležité celý projekt poznat trochu hlouběji. Na to není vždy čas. Začal jsem proto tak, že jsem napojil na systém jednodušší části frameworku jako je třeba Tracy, Cache, Utils, RobotLoader atd. S tím se samozřejmě svezlo několik úprav, jako je například zapnutí error reportingu nebo vypnutí zahazování výjimek a další podobné hovadiny. Samotné zapnutí error reportingu je neskutečný oser, protože se tím ukáže, jak se daná aplikace hrozně sype ([však jsou to jen notices](https://media.giphy.com/media/11c2hRHwmvgFOg/giphy.gif), co se může stát). Každopádně už třeba použitím cache na správných místech a úpravou několik funkcí se aplikace rozjela daleko rychleji.
@@ -52,8 +52,8 @@ $router[] = new Route('[<fakePath .+>]', 'Legacy:default');
 
 Mnohem zajímavější je však implementace Smarty šablonovacího systému. K tomu je vhodné napsat si vlastní implementaci render metody objektu [Template](https://api.nette.org/2.3.5/source-Bridges.ApplicationLatte.Template.php.html). Zde se rozhodne, jak se bude šablona vykreslovat. V mém případě jestli pomocí Latte, nebo Smarty. Je samozřejmě nutné upravit i TemplateFactory hlavně kvůli [této řádce](https://api.nette.org/2.3.5/source-Bridges.ApplicationLatte.TemplateFactory.php.html#56).
 
-Špatné pořadí
-=============
+# Špatné pořadí
+
 Všechno špatně. Teď vím, že jsem měl začít obráceně a nejdříve si na to napsat testy. Alespoň dodatečně (klasicky po prvním problému) jsem si na to ještě napsal jednoduché scénáře pro akceptační testy v Codeception. A pak jsem si měl stát za svým a neústupně odstranit všechny weird věci, protože ty prostě nejsou kompatibilní s moderním frameworkem a způsobuje to jen nepředvídatelné problémy.
 
 Jsou vlastně nějaké výhody takové integrace frameworku do starého systému? Vyjma těch klasických, které přináší framework sám o sobě, je teď možné psát nové věci Nette stylem a využívat všechny možnosti (hlavně asi DIC a Latte). Se starým kódem se kromě vyčištění od hovadin vlastně zase až tak dít nic nebude a je možné jej přepisovat do nového kabátku. Osobně bych nejraději odstranil globální proměnné úplně, to je ale na tak velkém projektu skoro nemožné.

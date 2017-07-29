@@ -1,7 +1,7 @@
 Tento článek ve skutečnosti odstartovalo zdánlivě nesouvisející vlákno na [Nette fóru .{target:_blank}](http://forum.nette.org/cs/19397-ako-sa-zbavit-fid-v-url-ak-sa-nemylim). V tomto vláknu se řeší parametr *_fid* v URL adrese, který tam Nette framework přikládá kvůli flash messages. Tato vlastnost někoho skutečně hodně štve, mě zase až tak moc ne. Jenže když jsem nad tím vláknem chvíli seděl, tak jsem si uvědomil, že mám komentářový systém Disqus implementovaný špatně. Čtěte dál a vyhněte se stejné chybě... (-:
 
-Univerzální kód
-===============
+# Univerzální kód
+
 Disqus poskytuje "by default" univerzální kód, který prakticky pouze zkopírujete na svůj web na požadované místo a je hotovo. Tento kód vypadá zhruba takto:
 
 ```html
@@ -23,8 +23,8 @@ Disqus poskytuje "by default" univerzální kód, který prakticky pouze zkopír
 
 Je to pohodlné, ale je to úplně blbě. Nejenom pro Nette aplikace, ale myslím si, že tak nějak celkově pro všechny aplikace. Fungovat to sice bude, to ano. Ale jen tak zdánlivě. Problém je totiž v tom, že toto nastavení bere jako identifikátor diskuse URL adresu a pokud se jen drobně změní, tak se založí nová diskuse. Přehled těchto diskusí je pak vidět v Disqus administraci. To s sebou nese celou řadu problémů. Diskuse nejde pořádně zamknout a už to, že k jedné stránce může být více diskusí je problém. Každá diskuse totiž musí mít unikátní identifikátor [disqus_identifier .{target:_blank}](https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables) nezávisle na parametrech (pokud ovšem tyto parametry nejsou žádoucí).
 
-Lazy loading
-============
+# Lazy loading
+
 Já jsem sice nepoužil defaultní konfiguraci, ale udělal jsem prakticky tu samou chybu. Teď ale konečně k lazy loadingu. Na svém blogu to již používám dlouhou dobu a myslím si, že se to již osvědčilo. Inspirací k mé implementaci je [tento gist .{target:_blank}](https://gist.github.com/omgmog/2310982).
 
 Stačí umístit následující kód do nějakého souboru *main.js*, který se spouští po načtení stránky:

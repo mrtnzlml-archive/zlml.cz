@@ -8,8 +8,8 @@ Zjednodušeně - nejsem spokojený se svým výstupem, ale jsem rád, že jsem m
 
 Přikládám ještě odkazy na zmiňovaný [referenční manuál](http://www.st.com/web/en/resource/technical/document/reference_manual/DM00031020.pdf) od mikrokontrolérů a dokument pojednávající o myšlence Fog Computingu: [Fog Computing and Its Role in the Internet of Things](http://conferences.sigcomm.org/sigcomm/2012/paper/mcc/p13.pdf).
 
-A co ostatní přednášky?
-=======================
+# A co ostatní přednášky?
+
 No tak všechny skvělé. Já si vážím toho, když někdo vystoupí a ukáže co dělá a je z toho nadšený. Některé přednášky jsem tedy jen proseděl a nic nového jsem se moc nedozvěděl (a to právě nevím, jestli mám od Barcampů čekat). Ne všechny přednášky pro mě mají takovou informační hodnotu. Ale lidem se to líbí, takže za mě dobré.
 
 Součástí Barcampu byl i [Arduino Day 2015](https://day.arduino.cc/#/). Tam jsem byl pouze na přednášce o Superkondenzátorech. Kamarád z toho byl úplně nadšený. Pokud vás zajímá elektronika a nejlépe ještě rádi bastlíte, tak doporučuji vyhledat si záznam. Já osobně považuji za nejlepší přednášky [8 a půl roku přednášení pro Microsoft](https://plzenskybarcamp.cz/2015/prednasky/5cd9cd30) a [Od zadání k release za dva dny: jak se programuje v novinách](https://plzenskybarcamp.cz/2015/prednasky/8eba3b56) aneb jak se hledá balanc mezi náprasem a perfektním kódem... (-:

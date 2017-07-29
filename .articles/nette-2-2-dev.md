@@ -3,8 +3,8 @@ Tato změna s sebou přinesla explozi změn. Na následujících řádcích bych
 některé zásadní změny, které se odehrály a je zapotřebí je upravit, aby bylo možné z verze 2.1-dev
 přejít právě na verzi 2.2-dev.
 
-Nutné úpravy
-============
+# Nutné úpravy
+
 Prvě se změnilo umístění konfigurátoru. Tato změna se samozřejmě týká souboru `bootstrap.php`.
 Nově je konfigurátor v novém umístění:
 
@@ -48,8 +48,8 @@ ale budiž.
 Tolik k podle mého zásadním změnám, které zabrání například spuštění projektu z quickstartu. Nyní
 bych rád poukázal na několik málo změn z celé té exploze, které mě zaujaly.
 
-Další změny
-===========
+# Další změny
+
 Byla odstraněna celá řada zastaralých věcí. Nemá smysl je rozebírat. Je jich hodně a zastaralé jsou
 už od 2.1. Každopádně například makro `n:input` se stalo zastaralé a k dispozici je nové makro
 `{inputError}`, které ošéfuje vykreslení chybové hlášky u příslušného políčka. Jééj! :-)
@@ -60,8 +60,8 @@ předpokládám souvisí s:
 <blockquote class="twitter-tweet" lang="en"><p>Chtěl jsem v rychlosti udělat příklad, jak v <a href="https://twitter.com/search?q=%23netteFw&amp;src=hash">#netteFw</a> renderovat formuláře s Twitter Bootstrapem.&#10;&#10;Zabitej den a překopaný Nette…</p>&mdash; geekovo (@geekovo) <a href="https://twitter.com/geekovo/statuses/409064701369516032">December 6, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Konečně!
-========
+# Konečně!
+
 Světlo světa spatřil nový [quickstart](http://doc.nette.org/cs/2.1/quickstart) v češtině pro dnes již téměř nekatuální verzi 2.0.13.
 Věřím tomu, že se jedná o daleko přínosnější věc, než psaní pokročilých návodů v angličtině
 (navazujících na quickstart) a doufám, že tento počin pomůže pár lidí popostrčit dál...

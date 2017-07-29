@@ -4,8 +4,8 @@ Dnešním článkem navazuji na dřívější článek [Čteme QR kódy bez čte
 
 Levý obrázek je kód o kterém bude celou dobu řeč.
 
-Trocha nezbytné teorie
-======================
+# Trocha nezbytné teorie
+
 [* 0dd271b6-21ea-4c3c-a447-723b76257b50/datamatrix-key.png <]
 
 Tento kód je oproti QR kódu velmi jednoduchý, takže i teorie bude stručná. Veškerá data a korekce chyb je ukryta uvnitř rámu, který je z části plný. To umožňuje čtečkám poznat kde všude je ještě kód a jak je natočen. Z pohledu "ručního" čtení je tato část nezajímavá. Modře jsou zvýrazněny 4 bity, které k ničemu neslouží a zaplňují jen prázdné místo. Ne vždy je tento úkaz vidět. Bohužel tentokrát nemám k dispozici originální specifikaci, takže nevím jakým přesným pravidlům to podléhá.
@@ -14,8 +14,8 @@ Nejpodstatnější jsou však červeně zarámované oblasti. Všechny mají tak
 
 Data se v kódu čtou podle čísel, tedy podél takové diagonální vlnovky a to až do obrazce s číslem 5. Tento obrazec určuje konec zprávy. V našem případě se tedy jedná o zprávu, která má 4 znaky. A jak už to tak bývá, tak jsou všechny znaky přenášeny v binárním formátu. Zbytek kódu, který není nijak zvýrazněn je klasicky Reed–Solomon korekce chyb. Možná bych o tomto mechanismu také mohl někdy napsat článek. Nicméně napovažuji to za úplně jednoduchá záležitost, takže si to zatím nechám v zásobě.
 
-Hrajeme si na čtečku
-====================
+# Hrajeme si na čtečku
+
 
 Přečíst zprávu v takto teoreticky rozebraném kódu už je otázka chvilky. Najdříve si vytáhneme všechny potřebné části. V tomto případě je zbytečné řešit pátý člen, jelikož se jedná o poslední ukončovací. Jeho hodnota je 129 v desítkové soustavě. Získané útvary jsou vidět na obrázku níže.
 

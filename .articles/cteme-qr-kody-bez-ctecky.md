@@ -2,8 +2,8 @@
 
 Patříte mezi lidi, kteří se nespokojí pouze se čtečkou QR kódů, ale chcete vědět jak fungují? Nebo co víc jak je přečíst bez použité takové čtečky? Tak to jste na správné adrese. Dnes budu řešit zejména právě čtení QR kódu bez použití čtečky. Celou dobu budu řešit tento QR kód na levé straně, takže doporučuji nepoužívat telefon a počkat až na konec, kde se jeho obsah dozvíte. Zároveň se nebudu nijak opírat o korekci chyb a další jinak důležité věci, ale budu se co nejvíce soustředit právě na přečtení kódu bez použití jakéhokoliv přístroje. Pojďme na to...
 
-Trocha nezbytné teorie
-======================
+# Trocha nezbytné teorie
+
 [* 312d5904-ab94-4877-9743-8ec902fbc50a/qrcode-parts.png <]
 
 QR kód asi viděl každý. Stejně tak předpokládám, že spoustu lidí tuší, že QR kód dodržuji určitá pravidla, aby jej šlo přečíst strojově. Jedná se zejména o "finder pattern", tedy ty velké čtverce, které slouží k zaměření čtečky a určení orientace kódu. Díky tomu, že jsou tři, tak lze QR kód přečíst i pokud je vzhůru nohama. Dalším významným prvkem jsou separátory, které obklopují právě tyto čtverce a slouží k oddělení zaměřovačů od zbytku kódu. Žlutě jsem zvýraznil tzv. "timing patterns". Ty se táhnout z rohu do rohu zaměřovacích čtverců, kdy se celou dobu střídá černá a bílá barva a slouží opět pro čtečky například k určení velikosti celého kódu. Na takto malém kódu nejsou žádní informace i verzi, ani korekční body.
@@ -64,8 +64,8 @@ To může vypadat děsivě, ale hned vysvětlím. Podle toho jakou má kód mask
 [* 63e85abb-b86a-4877-9640-fb70b4cd2542/qrcode-important.png 300x300 <]
 [* 3951a3ea-5f53-4af9-9c01-a45fd71dd5b0/qrcode-unmasked.png 300x300 *]
 
-Hrajeme si na čtečku
-====================
+# Hrajeme si na čtečku
+
 [* 0ed74ba7-ddec-40da-ab12-4e6b8d82103c/qrcode-decode.png <]
 
 Předchozí část byla možná trošku složitější, ale když se na to podíváte zpětně je to vlastně velice jednoduché. Stačí přečíst 3 bity z celého kódu, provést jednoduchý XOR a jak se ukáže dále, tak stačí invertovat pouze jeden sloupec, protože více jich není potřeba.

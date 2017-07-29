@@ -1,7 +1,7 @@
 Kdysi mi někdo řekl, že správný programátor by měl být tak trošku děvka pro všechno. Nestačí jen umět PHP. Nestačí jen umět JavaScript. S tímto názorem jsem od samého začátku souhlasil. Ostatně je to jeden z důvodů, proč se občas zajímám i o věci, které v nejbližší době nevyužiju a zase tolik jim nerozumím (také to podle toho pak vypadá). Jednou z takových věcí je [React](http://facebook.github.io/react/index.html). Nedávno jsem si hrál také s [PhantomJS](http://phantomjs.org/) a když už jsme u toho, tak ani [NodeJS mi není cizí](http://www.slideshare.net/MartinZlmal/nodejs-42314371). A co se stane, když se jednoho večera rozhodnete spojit všechno dohromady? Něco šíleného... (-:
 
-Krátké seznámení
-================
+# Krátké seznámení
+
 Vzhledem k tomu, že tento blog byl vždy zacílen spíše na začátečníky, bylo by vhodné jednotlivé projekty krátce přiblížit.
 
 [React](http://facebook.github.io/react/index.html) vytvořený Facebookem se sám prezentuje jako knihovna pro stavění uživatelských rozhraní. V sekci [Why React?](http://facebook.github.io/react/docs/why-react.html) se lze však dočíst zajímavější skorodefinici: *"Many people choose to think of React as the **V** in MVC."* Celá myšlenka Reactu je postavená na komponentách. A já mám [komponenty rád](https://doc.nette.org/cs/components). Myslím si, že je to dobrý směr jak udržet v aplikaci chaos na rozumné úrovni. Než abych to zde však dlouhosáhle popisoval, doporučuji pojet si [Getting Started](http://facebook.github.io/react/docs/getting-started.html).
@@ -10,8 +10,8 @@ Vzhledem k tomu, že tento blog byl vždy zacílen spíše na začátečníky, b
 
 No a konečně [NodeJS](https://nodejs.org/en/) - JavaScriptové prostředí pro server. Zatímco ostatní jej využívají pro tvorbu aplikací, které jsou napsány v JS prakticky kompletně (server,  klient), já jej využíval kvůli svým vlastnostem spíše na rychlou komunikaci elektronika - server. To se mi na JS líbí. Dnes se nechají napsat i velmi složité věci pomocí pár řádek, ale třeba práce s časem a datumem bude vždy oser... (-:
 
-Něco šíleného
-=============
+# Něco šíleného
+
 [* e80e305e-8431-4c0e-9c79-5db761c22608/199aff3.jpg 300x? >]
 
 To je tak když se sejde několik věcí najednou. Vytvořit si faktury, otestovat aplikaci, neustálý přirozený hlad po NodeJS. A pak to přišlo. Co si tak vytvořit [generátor faktur](https://github.com/mrtnzlml/js-invoice-generator), který bude samotnou fakturu stavět pomocí Reactu, server bude tvořit NodeJS a PDF budu generovat tak, že si tu stránku otevřu v PhantomJS a uložím (čímž snad získám velmi přesný výsledek)? Samozřejmě jsem se pokukoval i po již hotových řešeních jako je třeba [Fakturiod](https://www.fakturoid.cz/). A kdybych byl jen o kousek línější, tak bych asi nic takového netvořil. Nakonec jsem se však pouze inspiroval [peckovým designem jedné z jejich faktur](https://www.fakturoid.cz/blog/2015/08/25/nova-verejna-stranka-faktury) (protože k designu mám asi tak daleko jako k Praze z Azor) s tím, že jí komplet napíšu znova pomocí komponent v Reactu a budu se modlit, aby to nikoho z Fakturoidu (až si tento článek přečte) neurazilo... (-:
@@ -64,8 +64,8 @@ React.render(React.createElement(LikeButton, null), document.getElementById('rea
 
 Pokud se vrátím zpět k faktuře, tak její HTML [je také velmi jednoduché](https://github.com/mrtnzlml/js-invoice-generator/blob/master/invoice.html) a celá sranda se odehrává [zde](https://github.com/mrtnzlml/js-invoice-generator/blob/master/src/react-invoice.js). Zde jsem si také schválně chtěl vyzkoušet, jak reálně funguje [Inline Styles](https://facebook.github.io/react/tips/inline-styles.html). Samotná faktura je tedy tvořena pouze krátkým HTML a pěknou kopou JavaScriptu. Žádné CSS. Abych řekl pravdu, tak se mi s tím moc dobře nepracuje, ale to je dáno spíše tím, že zase až tolik CSS nehovím a proto bylo místy komplikované přemýšlet nad tím jak funguje React a zároveň držet v hlavě to, jak má faktura nakonec vypadat. Koukal jsem se, jak se to řeší na jiných webech jedoucích na Reactu a asi se o zase až tak nepoužívá. Ale konec naříkání. Podívejte se [na výsledek](https://github.com/mrtnzlml/js-invoice-generator/blob/master/invoice.pdf).
 
-QR kód
-======
+# QR kód
+
 Ještě bych se rád zaměřil na samotný QR kód, který je na faktuře ([komponenta](https://github.com/mrtnzlml/js-invoice-generator/blob/master/src/react-invoice.js#L246-L269)). Použil jsem [stejnou knihovnu](https://larsjung.de/jquery-qrcode/), kterou používám zde na blogu v záhlaví (nejlepší). Protože se jedná o QR, tak se nedá čekat, že by obsahoval něco složitého ([podrobný popis formátu](http://qr-platba.cz/pro-vyvojare/specifikace-formatu/)):
 
 ```

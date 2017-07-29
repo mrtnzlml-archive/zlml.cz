@@ -1,7 +1,7 @@
 Z [minulého dílu](1-od-komponent-zpet-ke-komponentam) by mělo být všem jasné, jak jsem se dostal až sem. Od PHP komponent k webovým komponentám, které vlastně nejsou skutečné webové komponenty, ale jen kus JS kódu, který implementuje vlastní způsob webových komponent - React. Jsem přesvědčen o tom, že pro další pokračování je nutné vysvětlit, jak taková aplikace funguje. Takže...
 
-Jak taková aplikace funguje?
-============================
+# Jak taková aplikace funguje?
+
 Jestli mě něco na JS světě už dlouhou dobu děsí, tak je to skutečnost, že vlastně nikdo neví, jak by taková aplikace měla vypadat. Ačkoliv je mnoho lidí přesvědčeno o své pravdě, neuvědomují si subjektivitu jejich tvrzení. Z toho důvodu je teď milion implementací a návrhů a každý to dělá trošku jinak. Pokud to však vezmu co nejvíce objektivně, tak by se taková aplikace dala popsat následovně:
 
 - v prohlížeči běží JS kód, který se stará o vykreslování stránky s využitím veškeré síly JavaScriptu
@@ -12,8 +12,8 @@ Proč mi na serveru běží PHP, když hodně lidí preferuje mít JS i na serve
 
 No a jak už titulek tohoto článku napovídá, tak mnou navrhovaný způsob je právě **GraphQL** ([link](http://graphql.org/)).
 
-GraphQL queries
-===============
+# GraphQL queries
+
 GraphQL je nesmírně chytrý způsob jak se ptát API a přitom je to tak jednoduché, až mi přijde hloupé o tom psát. Pomocí GraphQL se lze serveru zeptat přímo na konkrétní věci. Tedy jako když se ptáte REST API, ale s tím rozdílem, že součástí požadavku je i informace o tom, co má API vrátit. Je dokonce možné zeptat se i více "endpointů" najednou. Zkuste si toto v REST API... :) Naopak GraphQL vyžaduje explicitní vyjmenování toho co chcete, takže jednoduše (pokud vím) nelze napsat dotaz, který by vrátil vše co daný endpoint umí.
 
 Pojďme si to trošku vyzkoušet. Jako dobré hřiště pro dotazy poslouží [tato online aplikace](http://graphql-swapi.parseapp.com/). Dotazy se vždy posílají na jednu adresu (vetšinou `/graphql`) s tím, že se mění pouze obsah zprávy, který putuje v POST. To je velký rozdíl oproti REST API. Zde je jen jedna adresa, ale memí se obsah dotazu. Právě to přidává na dynamice dotazování - nejsme limitování na URL adresy. Takže když chceme vytáhnout z API např. všechny filmy, pošleme tento dotaz:
@@ -174,8 +174,8 @@ export default Row;
 
 Nechápu proč si někdo říká React programátor... :))
 
-GraphQL mutations
-=================
+# GraphQL mutations
+
 Dobré API však potřebuje ještě minimálně jedu věc - možnost modifikace dat. K tomu slouží mutace. Zde opět musí aplikace (Nette) nadefinovat jaké jsou "endpointy" a jaké mají parametry. Taková mutace potom může vrátit nějaký datový typ a zde se to chová úplně stejně jako //queries//.
 
 Tak kupříkladu přihlášení. Z mého pohledu je to mutace, protože měním stav aplikace a proto má moje aplikace připravenou tuto mutaci (toto je skutečný příklad z projektu [adeira/connector](https://github.com/adeira/connector) pokud se chcete šťourat v kódu):

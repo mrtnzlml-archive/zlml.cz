@@ -6,8 +6,8 @@ Zodpovím (nebo alespoň nastíním odpovědi na) následující otázky:
 - proč má Nette dva request objekty
 - kde se bere životní cyklus presenteru
 
-Start aplikace
-==============
+# Start aplikace
+
 Nedávno jsem dostal v práci na starost implementovat Nette do jednoho legacy projektu. Už jsem tu o tom [psal](navrhovy-vzor-legacy-code). Byl to nesmírně vyčerpávající úkol, ale už mám hotovo a jsem ve fázi nekonečného refaktoringu. Jednou z prvních věcí, které bylo nutné vyřešit byl start aplikace z jednoho místa. Toto naštěstí řeší [web-project](https://github.com/nette/web-project) (nebo [sandbox](https://github.com/nette/sandbox) chcete-li) už v základu takto (`.htaccess`):
 
 ```
@@ -32,8 +32,8 @@ $application->run();
 
 V tomto souboru vše začíná a také končí. Totiž zavolá se ještě minimálně `\Tracy\Debugger::shutdownHandler`, `\Nette\Http\Session::clean` a `\Nette\Http\Response::__destruct`, ale zůstaňme u toho, že zde vše začíná a také končí. O co v indexu vlastně jde? Hned přeskočím první řádku, ačkoliv se jedná o nezanedbatelnou část. Z bootrapu získáme hotovou instanci [DIC](https://doc.nette.org/cs/2.3/dependency-injection), resp. přímého potomka. Následuje vytažení [Application](https://api.nette.org/2.3.7/Nette.Application.Application.html) a naškytnutí aplikace pomocí metody `run`. To je předpokládám všem jasné, proto jsem to vzal letem světem. Cílem tohoto článku je však popsání právě `run` metod.
 
-Run, run!
-=========
+# Run, run!
+
 Metoda `\Nette\Application\Application::run` vypadá přesně takto:
 
 ```php
@@ -102,8 +102,8 @@ class NanoPresenter extends Nette\Object implements Nette\Application\IPresenter
 
 V běžném presenteru se toho však děje samozřejmě mnohem více. Právě v metodě `run` se schovává celý dobře známý životní cyklus presenteru. Než se však dostanu k reálnému příkladu, začnu na tomto jednoduchém. `NanoPresenter` vrací pouze `TextResponse` s obyčejným textem. Tato odpověď je předána zpět do `processRequest` a následně je hned zavoláno `\Nette\Application\IResponse::send` což v tomto konkrétním případě vyústí v obyčejné echo. Co se však děje v běžném presenteru?
 
-Vykreslení šablony
-==================
+# Vykreslení šablony
+
 Presenter, který dědí od `\Nette\Application\UI\Presenter` dělá téměř to samé. Jediný rozdíl je v tom, že presenter vlastně vykreslitelná komponenta, takže si vezme šablonu a předá ji stejně jako v předchozím případě do `TextResponse`. Zde je oproti mému `NanoPresenter` příkladu malý implementační rozdíl, ale ve výsledku presenter tak jako tak `TextResponse` vrátí zpět `Application` objektu do `processRequest` metody. Dále se opět zavolá `\Nette\Application\Responses\TextResponse::send`, tentokrát však nedojde k obyčejnému echu, ale spustí se renderování předané šablony (`\Nette\Application\UI\ITemplate`). Většinou to tedy propadne na Latte, ale to samozřejmě není podmínkou.
 
 ```php

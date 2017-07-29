@@ -2,8 +2,8 @@ In past few months, I moved completely from PHP backend to the JavaScript semi-f
 
 Here at Kiwi.com (Prague), we are working on a lot of projects but one of them is more often pronounced - [the chatbot](http://www.czechcrunch.cz/2017/05/brnenske-kiwi-com-otevira-v-praze-novou-pobocku-se-zamerenim-na-umelou-inteligenci/). This chatbot should help our customer support to manage tasks more easily. But the interesting part is that this application is **completely serverless**. This is how it works.
 
-It's just a function
-=====
+# It's just a function
+
 The whole chatbot is just a function. Quite long and complicated one though. It's written in Node.js (ECMAScript 2017 - ES8 with a shit-ton of transpilers) and it runs on AWS Lambda. One of the best parts of the serverless is its deployment. We are using [Serverless Framework](https://serverless.com/) and that means that deployment to the serverless infrastructure is as easy as writing `serverless deploy`:
 
 ```
@@ -34,8 +34,8 @@ What does this framework do? Firstly it creates a ZIP file with the already tran
 
 The interesting part is that you can extend CloudFormation template however you want. In your case, we are just creating DynamoDB tables but I think you can do whatever you want (means whatever CloudFormation is able to do).
 
-Dazzle me
-=====
+# Dazzle me
+
 I'll show you just a simplified serverless definition (without the DynamoDB because it's too long), but the overall picture should be clear. The whole serverless infrastructure is defined in `serverless.yml`:
 
 ```neon
@@ -71,8 +71,8 @@ DynamoDB and other services can be defined in the `resources` section. You just 
 
 And that's it. This is your "ready for production" environment. The last thing you have to do is just write the Lambda function for the chatbot. Easy...
 
-Chatbot AWS Lambda function
-=====
+# Chatbot AWS Lambda function
+
 Since we are using so called `lambda-proxy` integration you have to take care of the inputs and outputs in your code on your own. But it's recommended and you should definitely do that.
 
 ```javascript

@@ -44,5 +44,6 @@ function texy2markdown(s) {
   s = s.replace(/^\/--+([^]*?)^\\--+/gm, '```$1```'); // /--
   s = s.replace(/^```code\n/gm, '```\n');
   s = s.replace(/^```code (.+)/gm, '```$1');
+  s = s.replace(/^(.+\n)=+/gm, '# $1'); // heading
   return s;
 }

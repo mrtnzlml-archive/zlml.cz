@@ -1,7 +1,7 @@
 Možná pracujete na nějakém projektu, který používá jiný šablonovací systém než je Latte, ale Latte se vám natolik líbí, že ho chcete používat také. Nebo naopak používáte Latte, ale *<abbr title="Smarty? Twig? Wtf? Omg?">[doplň název šablonovacího systému]</abbr>* se vám natolik líbí, že ho chcete používat také. A nebo prostě nemáte na výběr a musíte používat více šablonovacích systémů. V takovém případě existuje asi jediné přímočaré řešení a tím je vlastní implementace `Nette\Application\UI\ITemplate`.
 
-TemplateFactory
-===============
+# TemplateFactory
+
 Ono to vlastně zase až tak přímočaré není. Je v tom totiž malý háček. V současné době fungují Latte šablony tak, že existuje továrna `TemplateFactory`, jejíž úkolem je vytvářet `Template` objekty. Originální implementace, kterou používá většina lidí (`Nette\Bridges\ApplicationLatte\Template`) pouze deleguje renderování přímo na Latte. Nabízelo by se tedy nahradit tento objekt svým vlastním a delegovat renderování jednak na Latte a jednak třeba na Smarty. Háček je však v tom, že `Template` není služba zaregistrovaná v DIC, takže není jednoduché ji nahradit.
 
 Proto aby bylo možné nahradit objekt `Template` vlastním, je nutné nahradit také `TemplateFactory`. Tento objekt vytváří nové instance třídy `Template` a tyto objekty dále nastavuje (přidává filtry, makra, proměnné, providery, prostě Nette specific věci). Nešvar s nahrazováním celé továrničky se už pár lidí [snažilo vyřešit](https://github.com/nette/application/issues/141), ale nikdy to nikdo nedotáhl do konce (včetně mě). Jak to tedy udělat teď?
@@ -28,8 +28,8 @@ services:
 
 Tento zápis zajistí to, že se nejen `TemplateFactory` přidá do DI kontejneru, ale zároveň se nahradí původní implementace (proto to `latte.templateFactory` - důležité).
 
-Template
-========
+# Template
+
 Samotný `Template` objekt už je pak prkotina. Stačí pouze změnit implementaci metody `render`. Já osobně jsem to řešil tak, že podle toho jaká přijde koncovka souboru, tak nabídnu ten správný engine pro vykreslení. Třeba nějak takto:
 
 ```php
@@ -68,8 +68,8 @@ public function __set($name, $value)
 
 Teď je totiž možné používat klasické `$this->template->variable = 'xyz';` a tato proměnná bude k dispozici bez ohledu na způsob vykreslení.
 
-Gotchas a benefity
-==================
+# Gotchas a benefity
+
 Každý teď tedy může používat například v komponentách `$this->template->render('***.tpl');` a zároveň mít třeba layout v Latte. Je to fuk. A to je cool. Je však třeba mít neustále na mysli, že nelze jednotlivé vykreslovací způsoby používat úplně nahodile. Styčiný bod je render metoda. Nelze tedy například používat include v Latte a vyžadovat tam šablonu ze Smarty.
 
 Asi největší nachytávka jsou snippety. Na to jak udělat podporu snippetů do Smarty se můžeme podívat jindy - není to nic složitého. Problém byl však u kombinování jednotlivých způsobů vykreslení a předávání `snippetMode` příznaku. `snippetMode` vlastně říká, jestli se má šablona vykreslit jako snippet (tedy jen podčásti) a vrátit v payloadu. Když jsem však použil komponentu ve Smarty (vlastní `{control name=test}`) a v této komponentě normální Latte šablonu obsahující snippety, tak to prostě nemohlo fungovat. Asi nejjednoušší řešení bylo v tomto případě trošku ohnout `Template` a `snippetMode` prostě přes tu aplikaci protlačit:

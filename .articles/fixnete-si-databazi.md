@@ -1,7 +1,7 @@
 Možná to znáte. Již nějaký čas nepoužíváte žádný SQL soubor a strukturu databáze si generujete z entit pomocí Doctrine. Je to super, rychlé a funguje to. Paráda. Jenže málokterá databáze se obejde bez nějakých inicializačních dat. Jenže jak na to?
 
-První přístup
-=============
+# První přístup
+
 Nebudu ho popisovat moc dlouho, protože ukazuje přesně to, co nechci ukázat. Jendoduše si napíšete nějaké to SQL, které pak nahrnete do databáze. Třeba nějak takto:
 
 ```sql
@@ -16,8 +16,8 @@ To jak si to pošlete do databáze je celkem jedno. Jestli ručně, nebo přes P
 
 Ale jsou i projekty, kde jsem to udělal rovnou pořádně (i když jsou jen na jedné databázi).
 
-Lepší přístup pomocí fixtures
-=============================
+# Lepší přístup pomocí fixtures
+
 Znáte [Doctrine Data Fixtures Extension](https://github.com/doctrine/data-fixtures)? Neznáte? Tak to doporučuji, protože vám pomohou vyřešit přesně tento problém. Lépe tuto knihovnu poznáte pomocí composeru:
 
 ```

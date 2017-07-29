@@ -1,7 +1,7 @@
 A jak už to tak bývá, tak opět ohnutý pro Nette. Tentokráte inspirovaný řešením ISPConfigu.
 
-Můžeš tohle, nesmíš tamto
-=========================
+# Můžeš tohle, nesmíš tamto
+
 
 Samotný CRON zápis je velmi rozmanitý a proto se omezím pouze na základní požadavky:
 

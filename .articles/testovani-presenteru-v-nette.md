@@ -3,8 +3,8 @@ Nemá smysl zabývat se tím, jestli testovat, nebo ne. Na to už si každý př
 V následujících odstavcích bych rád předvedl myšlenku jak si
 ušetřit pár řádek kódu při testech (\Nette\Tester).
 
-Nezbytná teorie
-===============
+# Nezbytná teorie
+
 
 Pro testování presenterů je zapotřebí získat továrnu na presentery PresenterFactory
 a následně daný presenter vyrobit. Například takto:
@@ -42,8 +42,8 @@ $dom = \Tester\DomQuery::fromHtml($html);
 \Tester\Assert::true($dom->has('title'));
 ```
 
-Psaní, psaní, psaní...
-======================
+# Psaní, psaní, psaní...
+
 
 Předchozí teorie je zapotřebí opakovat pro každý presenter. Už jen proto, že je třeba
 vytvořit pokaždé nový požadavek. Nicméně je jasné, že to po otestování FrontModule

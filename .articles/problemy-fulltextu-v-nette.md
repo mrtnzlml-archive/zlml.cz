@@ -6,8 +6,8 @@ V diskusi pod článkem zmíňka o tom, jak ošetřit případ, kdy databáze ne
 která jsou kratší než je hodnota **ft_min_word_len**. Implementace pro Nette nebude nijak zvlášť
 rozdílná, avšak i zde existuje minimálně jedna zrádnost.
 
-Nette, ty jedna zrádná bestie...
-================================
+# Nette, ty jedna zrádná bestie...
+
 
 Pro dotazování využívám databázovou vrstvu \Nette\Database, což je rozšíření (nadstavba) pro PDO.
 S oblibou také využívám fluid zápis a spoléhám na automatické ošetření vstupů. A zde je právě kámen úrazu.

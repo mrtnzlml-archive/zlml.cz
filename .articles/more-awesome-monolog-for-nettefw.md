@@ -2,8 +2,8 @@ Nedávno mi přišel požadavek na vytvoření takového jednoduchého způsobu,
 
 Jedna z nejdůležitějších myšlenek byla, že časem bude pravděpodobně potřeba logovat do databáze i další akce, než je jen přihlašování. Druhým velmi silným faktorem (který ovlivnil celé řešení) bylo, že používáme [Monolog](https://github.com/Seldaek/monolog). Konkrétně Kdyby\Monolog rozšíření.
 
-Kdyby Monolog
-=============
+# Kdyby Monolog
+
 Znáte tuto knihovnu ([GitHub](https://github.com/Kdyby/Monolog))? Věřím, že ano. Kolem Kdyby knihoven byl velký hype. Velká síla této knihovny je v tom, že se dokáže velmi jednoduše napojit na Tracy a to takovým způsobem, že můžete používat Monolog bez BC breaku (tedy pomocí `Tracy\Debugger::log()`). Větším přiblížením k Monologu jako takovému, je pak používání služby `Kdyby\Monolog\Logger` resp. `Monolog\Logger` jako závislosti v konstruktoru.
 
 Kdyby logger pak obsahuje tato nastavení (ne všechny jsou v dokumentaci):
@@ -21,8 +21,8 @@ monolog:
 
 Pro programátora je asi nejzajímavější možnost nastavit si vlastní [handlery](https://github.com/Seldaek/monolog/blob/master/doc/02-handlers-formatters-processors.md#handlers) a [procesory](https://github.com/Seldaek/monolog/blob/master/doc/02-handlers-formatters-processors.md#processors). Pozornějšímu oku však neunikne, že toto nastavení funguje globálně pro celou aplikaci. Jenže občas se hodí mít více loggerů a každý mít nastavený jinak. Nevím, jestli jsem náhodou Kdyby\Monolog nepochopil špatně, ale jedinou šancí jak toho dosáhnout, je nenastavoval logger v configu, vytvořit si vlastní `Logger` objekty a ty si nastavit (`pushHandler`, `pushProcessor` a `setFormatter` u handlerů). A to je naprd.
 
-Adeira Monolog
-================
+# Adeira Monolog
+
 Mít více vlastních loggerů už se mi párkrát hodilo. A právě i zde by bylo super mít objekt, který mi umožní jednoduše něco zalogovat do databáze. Zároveň je však super propojení s Tracy, které má tak skvělě vyřešené Kdyby\Monolog. Jak z toho vybruslit? Vlastním Composer balíčkem. Než se dostanu k samotné instalaci a nastavení, ukážu zde, jak jsem využil vlastní logger. Pořád však mějte na paměti, že si kdykoliv musím být schopen sáhnout na původní `Kdyby\Monolog\Logger` a vesele logovat podle globálního nastavení!
 
 Prvně jsem si vytvořil vlastní logger:
@@ -100,8 +100,8 @@ Veškeré logy se tedy uloží až v okamžiku, kdy aplikace ukončuje svůj ži
 $this->usersAuditLogger->addInfo("User with login '$login' logged into administration.");
 ```
 
-Instalace a nastavení balíčku
-=============================
+# Instalace a nastavení balíčku
+
 Ok, cool - jak to použiju? Úplně jednoduše:
 
 ```
