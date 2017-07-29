@@ -1,14 +1,33 @@
 service: zlml_cz
 
+plugins:
+  - serverless-dynamodb-autoscaling
+
 provider:
   name: aws
   runtime: nodejs6.10
   region: eu-west-1 # Ireland
+  stage: production
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:*
       Resource: "arn:aws:dynamodb:eu-west-1:*:*"
+
+custom:
+  capacities:
+    - table: articlesTable
+      read: &AUTOSCALE_CONFIG
+        minimum: 1
+        maximum: 1000
+        usage: 0.7
+      write:
+        <<: *AUTOSCALE_CONFIG
+    - table: picturesTable
+      read:
+        <<: *AUTOSCALE_CONFIG
+      write:
+        <<: *AUTOSCALE_CONFIG
 
 package:
   exclude:
@@ -17,7 +36,7 @@ package:
     - .next/*
 
 functions:
-  chatbot:
+  blog:
     handler: dist/basicLambda.handler # TODO
     events:
       - http:
@@ -28,7 +47,7 @@ functions:
 
 resources:
   Resources:
-    conversationsTable:
+    articlesTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: articles
@@ -37,6 +56,19 @@ resources:
             AttributeType: S # string
         KeySchema:
           - AttributeName: articleId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    picturesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: pictures
+        AttributeDefinitions:
+          - AttributeName: pictureId
+            AttributeType: S # string
+        KeySchema:
+          - AttributeName: pictureId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
