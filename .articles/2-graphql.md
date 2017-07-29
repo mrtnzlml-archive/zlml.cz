@@ -5,7 +5,7 @@ Z [minulého dílu](1-od-komponent-zpet-ke-komponentam) by mělo být všem jasn
 Jestli mě něco na JS světě už dlouhou dobu děsí, tak je to skutečnost, že vlastně nikdo neví, jak by taková aplikace měla vypadat. Ačkoliv je mnoho lidí přesvědčeno o své pravdě, neuvědomují si subjektivitu jejich tvrzení. Z toho důvodu je teď milion implementací a návrhů a každý to dělá trošku jinak. Pokud to však vezmu co nejvíce objektivně, tak by se taková aplikace dala popsat následovně:
 
 - v prohlížeči běží JS kód, který se stará o vykreslování stránky s využitím veškeré síly JavaScriptu
-- //volitelně//: JS kód posílá do prohlížeče třeba NodeJS server, který dokáže vyrenderovat JS a poslat rovnou hotovou stránku do prohlížeče (včetně připravených dat)
+- _volitelně_: JS kód posílá do prohlížeče třeba NodeJS server, který dokáže vyrenderovat JS a poslat rovnou hotovou stránku do prohlížeče (včetně připravených dat)
 - na serveru běží kód (v mém případě Nette), který čeká na co se ho JS kód zeptá prostřednictvím (GraphQL) API a podle toho odpoví
 
 Proč mi na serveru běží PHP, když hodně lidí preferuje mít JS i na serveru? Protože jsem skálopevně přesvědčen, že dokážu v PHP napsat lepší aplikaci s využitím veškerých myšlenek DDD co zvládnu pochopit (narozdíl od JS). End of story...
@@ -176,7 +176,7 @@ Nechápu proč si někdo říká React programátor... :))
 
 # GraphQL mutations
 
-Dobré API však potřebuje ještě minimálně jedu věc - možnost modifikace dat. K tomu slouží mutace. Zde opět musí aplikace (Nette) nadefinovat jaké jsou "endpointy" a jaké mají parametry. Taková mutace potom může vrátit nějaký datový typ a zde se to chová úplně stejně jako //queries//.
+Dobré API však potřebuje ještě minimálně jedu věc - možnost modifikace dat. K tomu slouží mutace. Zde opět musí aplikace (Nette) nadefinovat jaké jsou "endpointy" a jaké mají parametry. Taková mutace potom může vrátit nějaký datový typ a zde se to chová úplně stejně jako _queries_.
 
 Tak kupříkladu přihlášení. Z mého pohledu je to mutace, protože měním stav aplikace a proto má moje aplikace připravenou tuto mutaci (toto je skutečný příklad z projektu [adeira/connector](https://github.com/adeira/connector) pokud se chcete šťourat v kódu):
 

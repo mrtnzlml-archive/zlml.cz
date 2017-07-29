@@ -12,7 +12,7 @@ VALUES
 ('option3', 'value3');
 ```
 
-To jak si to pošlete do databáze je celkem jedno. Jestli ručně, nebo přes PHP. Pořád někde zůstává SQL. Proč mi to vadí? Tak třeba zde na blogu je nějaká instalace. A protože jsem se ještě nedokopal k tomu to přepsat, tak musím mít tyto soubory dva. Jeden pro MySQL a druhý pro PosgreSQL. //(Jo správně, blog jde nainstalovat na více databází...)// A to je voser.
+To jak si to pošlete do databáze je celkem jedno. Jestli ručně, nebo přes PHP. Pořád někde zůstává SQL. Proč mi to vadí? Tak třeba zde na blogu je nějaká instalace. A protože jsem se ještě nedokopal k tomu to přepsat, tak musím mít tyto soubory dva. Jeden pro MySQL a druhý pro PosgreSQL. _(Jo správně, blog jde nainstalovat na více databází...)_ A to je voser.
 
 Ale jsou i projekty, kde jsem to udělal rovnou pořádně (i když jsou jen na jedné databázi).
 

@@ -144,7 +144,7 @@ To `DATA_LINE` je vhodné pro jednořádkové vstupy, protože se na pozadí pro
 ", '  '))
 ```
 
-Pořád ale platí, že může přijít ze selectu nečekaná hodnota a nelze ničemu věřit. Jedná se však o naprosto svobodný způsob, který je možné kombinovat s předchozím. Pokud tedy máte //"neskutečně složitý formulář"//, který je //"už nakódovaný"// a jeho definice //"má asi 500 řádek"// a je to //"tak komplikované, že se v tom nikdo nevyzná"// a bylo by //"lepší, kdybych si to mohl udělat sám"//, tak vězte, že to jde.
+Pořád ale platí, že může přijít ze selectu nečekaná hodnota a nelze ničemu věřit. Jedná se však o naprosto svobodný způsob, který je možné kombinovat s předchozím. Pokud tedy máte _"neskutečně složitý formulář"_, který je _"už nakódovaný"_ a jeho definice _"má asi 500 řádek"_ a je to _"tak komplikované, že se v tom nikdo nevyzná"_ a bylo by _"lepší, kdybych si to mohl udělat sám"_, tak vězte, že to jde.
 
 # Časté dotazy
 
@@ -157,6 +157,6 @@ Pořád ale platí, že může přijít ze selectu nečekaná hodnota a nelze ni
 - I ve staré EN verzi? [Ano](https://doc.nette.org/en/2.1/forms)
 - Šlo by to udělat i bez `getHttpData`? Ano, ale už v tom nevidím moc velký smysl.
 - Proč? To už bych mohl rovnou pracovat s `$_POST`, ale tato metoda mě pěkně odstíní a [ošetří celou řadu potřebných věcí](https://api.nette.org/2.4/source-Forms.Form.php.html#385-403).
-- Ale ve //{$frameworkName}// se to dělá jinak a lépe! Použij tedy //{$frameworkName}// nebo jeho podčást.
+- Ale ve _{$frameworkName}_ se to dělá jinak a lépe! Použij tedy _{$frameworkName}_ nebo jeho podčást.
 
 :)

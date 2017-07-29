@@ -84,7 +84,7 @@ Composer se k tomu potom chová tak, že místo toho aby hledal submodul někde 
 <?php return require dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php';
 ```
 
-Každý submodul teď tedy funguje (v mém případě) ze superprojektu a lze např. spustit testy napříč celým jmenným prostorem Adeira. Super je, že díky tomu všechny balíčky používají jednotné verze knihoven a nezastarávají. Nedokážu úplně domyslet jaké jsou důsledky mého počínání, ale je to //1)// nejlepší rozhodnutí co jsem zde udělal nebo //2)// největší hovadina a budu to muset zrušit. Uklidňuje mě, že tento způsob používají daleko větší projekty a mlaskají si blahem.
+Každý submodul teď tedy funguje (v mém případě) ze superprojektu a lze např. spustit testy napříč celým jmenným prostorem Adeira. Super je, že díky tomu všechny balíčky používají jednotné verze knihoven a nezastarávají. Nedokážu úplně domyslet jaké jsou důsledky mého počínání, ale je to _1)_ nejlepší rozhodnutí co jsem zde udělal nebo _2)_ největší hovadina a budu to muset zrušit. Uklidňuje mě, že tento způsob používají daleko větší projekty a mlaskají si blahem.
 
 Podobně mám udělaný ještě příkaz `adeira:eject`, který aktualizuje verze závislostí v jednotlivých submodulech podle hlavního repozitáře a příkaz `adeira:create`, který vytvoří nový submodul podle připravených šablon.
 

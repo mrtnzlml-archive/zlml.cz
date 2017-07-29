@@ -72,7 +72,7 @@ src/Devices/DomainModel/
 └── Wind.php
 ```
 
-Nikde zde nenajdete v kódu slovo Nette, Symfony nebo třeba Doctrine (//ve skutečnosti to tam je, ale to je chyba//). Jsou to prostě úplně obyčejné objekty, které mají za úkol řešit nějaký konkrétní problém onoho konkrétního kontextu a nic víc. Díky tomu je psaní testů na tuto část aplikace naprosto triviální. Když někde existuje nějaká závislost, tak je zprostředkována pomocí rozhraní, takže vyměnit implementaci v testech je díky tomuto striktnímu rozdělení opravdu hračka.
+Nikde zde nenajdete v kódu slovo Nette, Symfony nebo třeba Doctrine (_ve skutečnosti to tam je, ale to je chyba_). Jsou to prostě úplně obyčejné objekty, které mají za úkol řešit nějaký konkrétní problém onoho konkrétního kontextu a nic víc. Díky tomu je psaní testů na tuto část aplikace naprosto triviální. Když někde existuje nějaká závislost, tak je zprostředkována pomocí rozhraní, takže vyměnit implementaci v testech je díky tomuto striktnímu rozdělení opravdu hračka.
 
 Takto by však aplikace sama o sobě nefungovala. Je potřeba mít zde vazbu na konkrétní implementaci, na konkrétní framework či knihovnu. Od toho slouží další vrstva.
 
@@ -107,7 +107,7 @@ src/Devices/Infrastructure/
 
 Trošku se to komplike, že? Po chvilce studování to však dává celé smysl. Tak třeba `Delivery` - je potřeba doručit nějakou šablonu prostřednictvím presenteru, poslat JSON nebo komunikovat s CLI. Proto je zde vždy vazba na konkrétní technologii (o tom ostatně celá tato vrstva je). Podobně napojení na DI. Může se zdát, že to vždy bude Nette, ale pokud bych podobným stylem vydával i Composer knihovny, tak je jednoduché dodělat podporu i pro další frameworky - kód je na to připraven.
 
-Asi nejzajímavější je potom složka `Persistence`, která řeší ukládání dat //někam//. V mém případě je to primárně Doctrine, takže se zde musím hodně zasnažit, abych dokázal dříve vytvořené objekty uložit do databáze a přitom o tom žádný z těchto objektů netušil (občas dřina, ale všechno jde). Ale implementací může být více - třeba v obyčejné paměti PHP. Což je super strategie pro testování. V testech (pokud to není smyslem toho testu) nepotřebuji pracovat přímo s pomalou databází, takže nahradit její implementaci za ukládání do paměti bude super rychlé.
+Asi nejzajímavější je potom složka `Persistence`, která řeší ukládání dat _někam_. V mém případě je to primárně Doctrine, takže se zde musím hodně zasnažit, abych dokázal dříve vytvořené objekty uložit do databáze a přitom o tom žádný z těchto objektů netušil (občas dřina, ale všechno jde). Ale implementací může být více - třeba v obyčejné paměti PHP. Což je super strategie pro testování. V testech (pokud to není smyslem toho testu) nepotřebuji pracovat přímo s pomalou databází, takže nahradit její implementaci za ukládání do paměti bude super rychlé.
 
 Zbývá poslední vrstva.
 
