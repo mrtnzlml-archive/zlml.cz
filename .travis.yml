@@ -1,3 +1,14 @@
+language: node_js
+node_js:
+  - "6"
+
+script:
+  - yarn
+  - yarn build
+#  - node -e 'require("./services/Lambda.js").handler({}, null, () => {})' || exit 1
+  - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+  - serverless deploy # TODO: master only
+
 cache:
   yarn: true
   directories:

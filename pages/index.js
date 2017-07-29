@@ -5,7 +5,7 @@ import Logo from '../components/Logo';
 
 export default () =>
   <Layout>
-    <Link prefetch href="/archive">
+    <Link prefetch href={{ pathname: 'archive' }}>
       <a>
         Looking for a <strong>blog</strong>? It's here!
       </a>

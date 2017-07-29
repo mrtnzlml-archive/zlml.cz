@@ -1,7 +1,8 @@
-service: zlml_cz
+service: zlmlcz
 
 plugins:
   - serverless-dynamodb-autoscaling
+  - serverless-offline
 
 provider:
   name: aws
@@ -33,15 +34,23 @@ package:
   exclude:
     - ./**
   include:
-    - .next/*
+    - .next/**
+    - node_modules/** # TODO: remove
+    - services/Lambda.js
+    - services/Application.js
 
 functions:
   blog:
-    handler: dist/basicLambda.handler # TODO
+    handler: services/Lambda.handler
     events:
       - http:
+          path: /{proxy+}
+          method: GET
+          cors: true
+          integration: lambda-proxy
+      - http:
           path: /
-          method: POST
+          method: GET
           cors: true
           integration: lambda-proxy
 
