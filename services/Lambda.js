@@ -7,5 +7,12 @@ const server = awsServerlessExpress.createServer(
   Application.createExpressApp()
 );
 
-exports.handler = (event, context) =>
-  awsServerlessExpress.proxy(server, event, context);
+exports.handler = (event, context) => {
+  /** Immediate response for WarmUP plugin */
+  if (event.source === 'serverless-plugin-warmup') {
+    console.log('WarmUP - Lambda is warm!');
+    return callback(null, 'Lambda is warm!');
+  }
+
+  return awsServerlessExpress.proxy(server, event, context);
+};

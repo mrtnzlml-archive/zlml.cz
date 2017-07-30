@@ -12,6 +12,7 @@
     "serverless": "^1.18.1",
     "serverless-dynamodb-autoscaling": "^0.3.0",
     "serverless-offline": "^3.15.3",
+    "serverless-plugin-warmup": "^3.0.5-rc.1",
     "stylis": "^3.2.8"
   },
   "scripts": {

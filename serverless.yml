@@ -3,6 +3,7 @@ service: zlmlcz
 plugins:
   - serverless-dynamodb-autoscaling
   - serverless-offline
+  - serverless-plugin-warmup
 
 provider:
   name: aws
@@ -14,8 +15,22 @@ provider:
       Action:
         - dynamodb:*
       Resource: "arn:aws:dynamodb:eu-west-1:*:*"
+    - Effect: 'Allow'
+      Action:
+        - 'lambda:InvokeFunction'
+      Resource:
+      - Fn::Join:
+        - ':'
+        - - arn:aws:lambda
+          - Ref: AWS::Region
+          - Ref: AWS::AccountId
+          - function:${self:service}-${opt:stage, self:provider.stage}-*
 
 custom:
+  custom:
+    warmup:
+      schedule: 'rate(1 minute)'
+      prewarm: true
   capacities:
     - table: articlesTable
       read: &AUTOSCALE_CONFIG
@@ -42,6 +57,7 @@ package:
 
 functions:
   blog:
+    warmup: true
     handler: services/Lambda.handler
     events:
       - http:
