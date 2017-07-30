@@ -7,7 +7,7 @@ export default () =>
   <Layout>
     <Logo />
 
-    <Link href={{ pathname: 'article', query: { article: 1 } }}>
+    <Link href={{ pathname: 'article', query: { article: 1 } }} as="article-slug">
       <a>Article 1</a>
     </Link>
     <Link href={{ pathname: 'article', query: { article: 2 } }}>

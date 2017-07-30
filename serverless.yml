@@ -31,13 +31,14 @@ custom:
         <<: *AUTOSCALE_CONFIG
 
 package:
-  exclude:
-    - ./**
-  include:
-    - .next/**
-    - node_modules/** # TODO: remove
-    - services/Lambda.js
-    - services/Application.js
+  excludeDevDependencies: false
+#  exclude:
+#    - ./**
+#  include:
+#    - .next/**
+#    - node_modules/** # TODO: remove
+#    - services/Lambda.js
+#    - services/Application.js
 
 functions:
   blog:

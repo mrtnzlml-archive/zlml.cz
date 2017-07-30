@@ -3,11 +3,12 @@ node_js:
   - "6"
 
 script:
-  - yarn
+  - yarn install
   - yarn build
-#  - node -e 'require("./services/Lambda.js").handler({}, null, () => {})' || exit 1
+#  - NODE_ENV=production node -e 'require("./services/Lambda.js").handler({}, { succeed: ()=>{} })' || exit 1
   - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
   - serverless deploy # TODO: master only
+  - curl -s --head  --request GET https://adeira.cz | grep "200 OK" > /dev/null || exit 1
 
 cache:
   yarn: true
@@ -15,4 +16,6 @@ cache:
     - node_modules
 
 notifications:
-  email: false
+  email:
+    on_success: change
+    on_failure: always

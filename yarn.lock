@@ -3472,6 +3472,10 @@ makeerror@1.0.x:
   dependencies:
     tmpl "1.0.x"
 
+marked@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
+
 maximatch@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/maximatch/-/maximatch-0.1.0.tgz#86cd8d6b04c9f307c05a6b9419906d0360fb13a2"
@@ -4905,7 +4909,7 @@ styled-jsx@^1.0.8:
     string-hash "1.1.1"
     stylis "3.2.8"
 
-stylis@3.2.8:
+stylis@3.2.8, stylis@^3.2.8:
   version "3.2.8"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.2.8.tgz#9b23a3e06597f7944a3d9ae880d5796248b8784f"
 

@@ -2,6 +2,7 @@
   "dependencies": {
     "aws-serverless-express": "^3.0.2",
     "express": "^4.15.3",
+    "marked": "^0.3.6",
     "next": "beta",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
@@ -10,12 +11,13 @@
     "jest": "^20.0.4",
     "serverless": "^1.18.1",
     "serverless-dynamodb-autoscaling": "^0.3.0",
-    "serverless-offline": "^3.15.3"
+    "serverless-offline": "^3.15.3",
+    "stylis": "^3.2.8"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "NODE_ENV=development node services/Server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production yarn serverless offline",
     "test": "jest"
   }
 }

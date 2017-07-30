@@ -5,11 +5,27 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-function createServer() {
-  const server = express();
-  // add middleware, custom routing, whatever
-  server.get('*', (req, res) => handle(req, res));
-  return server;
-}
+const createExpressApp = () => {
+  const expressApp = express();
 
-module.exports = createServer();
+  expressApp.get('/archive', (req, res) => {
+    const actualPage = '/archive';
+    app.render(req, res, actualPage);
+  });
+
+  expressApp.get('/:slug', (req, res) => {
+    const actualPage = '/article';
+    // TODO: 404
+    const queryParams = { article: req.params.slug };
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  expressApp.get('*', (req, res) => {
+    return handle(req, res);
+  });
+
+  return expressApp;
+};
+
+exports.createExpressApp = createExpressApp;
+exports.app = app;

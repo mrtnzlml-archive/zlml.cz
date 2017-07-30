@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import stylis from 'stylis';
 
 import Wrapper from '../components/Wrapper';
 import Colors from '../services/Colors';
@@ -11,7 +12,9 @@ export default ({ children, title = 'This is the default title' }) =>
       </title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <style global jsx>{`
+      <link rel="icon" href="/static/favicon.ico"/>
+      {/* Do not use styled-jsx here: https://github.com/zeit/next.js/issues/885 */}
+      <style>{stylis('', `
         body {
           font-family: sans-serif;
           font-weight: 300;
@@ -48,7 +51,7 @@ export default ({ children, title = 'This is the default title' }) =>
           background: red;
           color: white;
         }
-      `}</style>
+      `)}</style>
     </Head>
 
     <Wrapper>
