@@ -1,10 +1,17 @@
+// @flow
+
 import Head from 'next/head';
 import stylis from 'stylis';
 
 import Wrapper from '../components/Wrapper';
 import Colors from '../services/Colors';
 
-export default ({ children, title = 'This is the default title' }) =>
+type Props = {
+  children?: Object,
+  title?: string,
+};
+
+export default ({ children, title = 'This is the default title' }: Props) =>
   <div>
     <Head>
       <title>
@@ -12,9 +19,12 @@ export default ({ children, title = 'This is the default title' }) =>
       </title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <link rel="icon" href="/static/favicon.ico"/>
+      <link rel="icon" href="/static/favicon.ico" />
       {/* Do not use styled-jsx here: https://github.com/zeit/next.js/issues/885 */}
-      <style>{stylis('', `
+      <style>
+        {stylis(
+          '',
+          `
         body {
           font-family: sans-serif;
           font-weight: 300;
@@ -51,14 +61,19 @@ export default ({ children, title = 'This is the default title' }) =>
           background: red;
           color: white;
         }
-      `)}</style>
+      `,
+        )}
+      </style>
     </Head>
 
     <Wrapper>
       {children}
 
       <footer>
-        <p>By the way - this website is also <a href="https://github.com/mrtnzlml/zlml.cz">open-sourced</a>.</p>
+        <p>
+          By the way - this website is also{' '}
+          <a href="https://github.com/mrtnzlml/zlml.cz">open-sourced</a>.
+        </p>
       </footer>
     </Wrapper>
   </div>;

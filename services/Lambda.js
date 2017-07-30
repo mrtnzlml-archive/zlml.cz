@@ -1,18 +1,23 @@
+// @flow
+
 process.env.NODE_ENV = 'production';
 
-const awsServerlessExpress = require('aws-serverless-express');
+const ASE = require('aws-serverless-express');
 const Application = require('./Application');
 
-const server = awsServerlessExpress.createServer(
-  Application.createExpressApp()
-);
+const server = ASE.createServer(Application.createExpressApp());
 
-exports.handler = (event, context) => {
+// TODO: transpilovat (a nejlépe zabalit)
+
+exports.handler = (
+  event: Object,
+  context: ?Object,
+  callback: (error: null, success: string) => void,
+) => {
   /** Immediate response for WarmUP plugin */
   if (event.source === 'serverless-plugin-warmup') {
-    console.log('WarmUP - Lambda is warm!');
     return callback(null, 'Lambda is warm!');
   }
 
-  return awsServerlessExpress.proxy(server, event, context);
+  return ASE.proxy(server, event, context);
 };

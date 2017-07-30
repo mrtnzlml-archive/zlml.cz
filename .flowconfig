@@ -1,0 +1,6 @@
+[ignore]
+<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-remove-prop-types/.*
+<PROJECT_ROOT>/node_modules/config-chain/.*
+
+[libs]
+./config/flow-typed

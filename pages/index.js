@@ -1,3 +1,5 @@
+// @flow
+
 import Link from 'next/link';
 
 import Layout from '../components/Layout';
@@ -7,7 +9,7 @@ export default () =>
   <Layout>
     <Link prefetch href="/archive">
       <a>
-        Looking for a <strong>blog</strong>? It's here!
+        Looking for a <strong>blog</strong>? It&apos;s here!
       </a>
     </Link>
 
@@ -16,14 +18,17 @@ export default () =>
     <Logo />
 
     <p>
-      And I love modern JS (working with ECMAScript 2017+ on a daily basis) and clever ideas&hellip;
+      And I love modern JS (working with ECMAScript 2017+ on a daily basis) and
+      clever ideas&hellip;
       <br />
       {/* TODO: wording */}
       Even this website runs on ES8 and AWS Lambda...
       <br />
-      I am doing it for about {new Date().getFullYear() - 2011} years and I really enjoy clean and testable code.
+      I am doing it for about {new Date().getFullYear() - 2011} years and I
+      really enjoy clean and testable code.
       <br />
-      My &hearts; beats for open-source. Have a look at my work (unfortunately most of my work is in private Gitlab):
+      My &hearts; beats for open-source. Have a look at my work (unfortunately
+      most of my work is in private Gitlab):
     </p>
 
     <a href="https://github.com/mrtnzlml/">
@@ -58,8 +63,8 @@ export default () =>
     </p>
 
     <p>
-      Do you want to stay in touch with me? That's great and I really appreciate
-      it!
+      Do you want to stay in touch with me? That&apos;s great and I really
+      appreciate it!
     </p>
     <p>mrtnzlml@gmail.com</p>
 
@@ -74,7 +79,7 @@ export default () =>
     <p>
       <Link prefetch href="/archive">
         <a>
-          Looking for a <strong>blog</strong>? It's here!
+          Looking for a <strong>blog</strong>? It&apos;s here!
         </a>
       </Link>
     </p>

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="wrapper"
+    data-jsx={112239217}
+  >
+    WRAPPED
+    <footer>
+      <p>
+        By the way - this website is also
+         
+        <a
+          href="https://github.com/mrtnzlml/zlml.cz"
+        >
+          open-sourced
+        </a>
+        .
+      </p>
+    </footer>
+  </div>
+</div>
+`;

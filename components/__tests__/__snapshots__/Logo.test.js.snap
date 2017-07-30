@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<h1
+  data-jsx={64577691}
+>
+  <a
+    data-jsx={64577691}
+  >
+    Martin Zlámal
+  </a>
+</h1>
+`;

@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": "commonjs",
+        "targets": {
+          "node": "6.10.2"
+        }
+      }
+    ],
+    "next/babel",
+    "flow"
+  ]
+}

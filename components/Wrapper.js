@@ -1,4 +1,10 @@
-export default ({ children }) =>
+// @flow
+
+type Props = {
+  children?: Object,
+};
+
+export default ({ children }: Props) =>
   <div className="wrapper">
     {children}
     <style jsx>{`

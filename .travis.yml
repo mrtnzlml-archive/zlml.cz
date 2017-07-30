@@ -4,6 +4,7 @@ node_js:
 
 script:
   - yarn install
+  - yarn test-ci
   - yarn build
 #  - NODE_ENV=production node -e 'require("./services/Lambda.js").handler({}, { succeed: ()=>{} })' || exit 1
   - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY

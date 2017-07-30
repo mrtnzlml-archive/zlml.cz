@@ -1,3 +1,5 @@
+// @flow
+
 const express = require('express');
 const next = require('next');
 
@@ -16,7 +18,7 @@ const createExpressApp = () => {
   expressApp.get('/:slug', (req, res) => {
     const actualPage = '/article';
     // TODO: 404
-    const queryParams = { article: req.params.slug };
+    const queryParams = { id: 1 /*req.params.slug*/ }; // TODO find the ID (based on slug) - because of server rendering
     app.render(req, res, actualPage, queryParams);
   });
 

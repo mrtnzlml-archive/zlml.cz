@@ -1,10 +1,10 @@
+// @flow
+
 import Colors from '../services/Colors';
 
 export default () =>
   <h1>
-    <a>
-      Martin Zlámal
-    </a>
+    <a>Martin Zlámal</a>
     <style jsx>{`
       h1 a,
       h1 a:hover,

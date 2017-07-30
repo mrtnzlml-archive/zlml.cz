@@ -1,19 +1,52 @@
+// @flow
+
 import Link from 'next/link';
 
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
 
-export default () =>
+type Props = {
+  articles: Array<Object>,
+};
+
+const Archive = ({ articles }: Props) =>
   <Layout>
     <Logo />
 
-    <Link href={{ pathname: 'article', query: { article: 1 } }} as="article-slug">
-      <a>Article 1</a>
-    </Link>
-    <Link href={{ pathname: 'article', query: { article: 2 } }}>
-      <a>Article 2</a>
-    </Link>
-    <Link href={{ pathname: 'article', query: { article: 3 } }}>
-      <a>Article 3</a>
-    </Link>
+    {articles.map(article =>
+      <Link
+        key={article.id}
+        href={{ pathname: 'article', query: { id: article.id } }}
+        as={article.slug}
+      >
+        <a>
+          {article.title}
+        </a>
+      </Link>,
+    )}
   </Layout>;
+
+Archive.getInitialProps = async function() {
+  // TODO: await storage
+  return {
+    articles: [
+      {
+        id: 1,
+        title: 'AAA',
+        slug: 'a-a-a',
+      },
+      {
+        id: 2,
+        title: 'BBB',
+        slug: 'b-b-b',
+      },
+      {
+        id: 3,
+        title: 'CCC',
+        slug: 'c-c-c',
+      },
+    ],
+  };
+};
+
+export default Archive;
