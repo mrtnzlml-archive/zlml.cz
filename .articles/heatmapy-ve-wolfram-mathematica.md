@@ -1,4 +1,10 @@
-[* 1bb55605-d567-4fe0-b1d1-69e921940e0d/heatmap1.png ?x300 <]
+---
+id: fc390f36-af8a-43af-a34c-619f305e288c
+timestamp: 1414243893000
+title: Heatmapy ve Wolfram Mathematica
+slug: heatmapy-ve-wolfram-mathematica
+---
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/1bb55605-d567-4fe0-b1d1-69e921940e0d/heatmap1.png)
 
 Právě teď jsem řešil jak vizualizovat nějaká data, která jsou v maticovém formátu. Pro mé účely jsou prakticky dva grafy. Prvním grafem je heatmapa (viz obrázek) a druhým klasický 3D graf, který data reprezentuje stejně dobře (možná lépe), ale v určitých případech je špatně čitelný. Zejména pak když není možnost s grafem otáčet. V mém případě bylo zapotřebí poměrně velké množství grafů, které jsem nakonec minimalizoval na počet 40, takže bylo nemožné je vykreslovat ručně. Zvlášť pokud jsem zajistit, že budou všechny grafy stejné.
 
@@ -6,7 +12,7 @@ K tomu jak jsem postupoval se dostanu v další části. Teď však ještě pár
 
 # Vizualizace dat
 
-[* 40a97326-5410-4385-821c-62dc8542387a/3d2.png 300x? >]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/40a97326-5410-4385-821c-62dc8542387a/3d2.png)
 Tato část se sice jmenuje vizualizace dat, ale aby bylo co vizualizovat, je zapotřebí data připravit. Já jsem zvolil JSON formát vstupu, protože se velmi jednoduše parsuje a matici v něm mohu zapsat také jednoduše. Z měření jednoho objektu mi tedy stačí data v tomto formátu:
 
 ```javascript
@@ -41,7 +47,7 @@ FrameLabel -> {{HoldForm[OKNA], HoldForm[DVEŘE]}, {HoldForm[PODLAHA], HoldForm[
 PlotLabel -> RawBoxes["Tabule - umělé osvětlení, zezadu (kontrast, Lp = 59.7)"], LabelStyle -> {GrayLevel[0]}]
 ```
 
-[* 79b1a8e3-1efc-42b0-bb79-3409b9acd49d/3d.png <]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/79b1a8e3-1efc-42b0-bb79-3409b9acd49d/3d.png)
 
 Kromě nastavování popisek a záhlaví, tak je důležitý hlavně blok kde jsou data. V tomto grafu není žádná zrada. Malá zrada číhá až v 3D grafech. Zde je háček v tom, že občas relativně malá plocha grafu ustřelí mimo průměrnou hodnotu všech bodů a na grafu dojde k oříznutí. Aby se tomuto efektu předešlo, je bezpodmínečně nutné nastavit grafu `PlotRange -> All`. Tím se vykreslí celý graf nezávisle na tom, jaké obsahuje extrémní hodnoty. Je však otázka jestli je to žádoucí. V mém případě ano, ale umím si přestavit případy, kdy by velká špička totálně zničila celý graf a bylo by výhodnější spičku oříznout.
 

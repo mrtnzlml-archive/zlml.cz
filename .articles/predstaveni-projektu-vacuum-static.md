@@ -1,3 +1,9 @@
+---
+id: a2fb86da-448c-407d-98a7-b5a7b172042e
+timestamp: 1390929034000
+title: Představení projektu Vacuum - STATIC
+slug: predstaveni-projektu-vacuum-static
+---
 Vzhledem k tomu, že vzrostl zájem o Vacuum projekty, rozhodl jsem se zde uveřejnit postup jak pracovat s projektem **Vacuum - STATIC** (https://bitbucket.org/mrtnzlml/vacuum-static). Věřím, že je daleko lepší projekt ukázat a lehce popsat, než popsat a lehce ukázat, jak si Nette komunita občas myslí...
 
 # Co to vlastně je

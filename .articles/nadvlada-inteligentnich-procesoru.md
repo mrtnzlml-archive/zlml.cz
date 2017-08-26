@@ -1,3 +1,9 @@
+---
+id: 3979a0f0-f8ed-45c3-8311-d48e563a49b1
+timestamp: 1416264254000
+title: Nadvláda inteligentních procesorů
+slug: nadvlada-inteligentnich-procesoru
+---
 Pár dní zpátky jsem tweetoval o tom, nad čím právě teď trávím asi nejvíce času. Cílem celého mého snažení je dostat data z procesoru, který obsluhuje různé periferie na základní desce až do webového prohlížeče a zpět - vše v reálném čase. Právě dnes jsem dosáhl prvního milníku, tedy dostal jsem nějaká skutečně smysluplná data do prohlížeče a rád bych zde nastínil jak jsem postupoval a jaké technologie jsem volil. Již dříve se totiž ukázalo, že některé reakce na mé články jsou skutečně konstruktivní a tedy i velmi přínosné... (-:
 
 <blockquote class="twitter-tweet" lang="en"><p>Procesor ➡Ethernet ➡NodeJS ➡Redis ➡ExpressJS ➡Socket.IO ➡Browser ✅ <a href="http://t.co/MAIlmMZEL9">pic.twitter.com/MAIlmMZEL9</a></p>&mdash; Martin Zlámal (@mrtnzlml) <a href="https://twitter.com/mrtnzlml/status/531104236571230208">November 8, 2014</a></blockquote>

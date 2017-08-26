@@ -1,4 +1,10 @@
-[* 1fc11f25-abc2-453e-abb4-adb31d0ccf17/datamatrix.png <]
+---
+id: f9727676-c2eb-4ee0-b86d-8126663f007d
+timestamp: 1402842853000
+title: Čteme Data Matrix bez čtečky
+slug: cteme-data-matrix-bez-ctecky
+---
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/1fc11f25-abc2-453e-abb4-adb31d0ccf17/datamatrix.png)
 
 Dnešním článkem navazuji na dřívější článek [Čteme QR kódy bez čtečky](cteme-qr-kody-bez-ctecky), ve kterém jsem řešil čtení QR kódu bez použití jakéhokoliv čtecího zařízení. A dnes budu řešit téměř to samé, ale s jiným kódem. Data Matrix není tolik známý, ale myslím si, že patří, hned po QR kódech, mezi nejpoužívanější kódy vůbec. Po tomto článku si jich zajisté začnete všímat více. Naposledy jsem jej viděl na balíčku od jahod... (-: Opět platí, že hlavním cílem je kód přečíst, nikoliv mu úplně porozumět, takže nebudu rozebírat velké detaily.
 
@@ -6,7 +12,7 @@ Levý obrázek je kód o kterém bude celou dobu řeč.
 
 # Trocha nezbytné teorie
 
-[* 0dd271b6-21ea-4c3c-a447-723b76257b50/datamatrix-key.png <]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/0dd271b6-21ea-4c3c-a447-723b76257b50/datamatrix-key.png)
 
 Tento kód je oproti QR kódu velmi jednoduchý, takže i teorie bude stručná. Veškerá data a korekce chyb je ukryta uvnitř rámu, který je z části plný. To umožňuje čtečkám poznat kde všude je ještě kód a jak je natočen. Z pohledu "ručního" čtení je tato část nezajímavá. Modře jsou zvýrazněny 4 bity, které k ničemu neslouží a zaplňují jen prázdné místo. Ne vždy je tento úkaz vidět. Bohužel tentokrát nemám k dispozici originální specifikaci, takže nevím jakým přesným pravidlům to podléhá.
 
@@ -19,7 +25,7 @@ Data se v kódu čtou podle čísel, tedy podél takové diagonální vlnovky a 
 
 Přečíst zprávu v takto teoreticky rozebraném kódu už je otázka chvilky. Najdříve si vytáhneme všechny potřebné části. V tomto případě je zbytečné řešit pátý člen, jelikož se jedná o poslední ukončovací. Jeho hodnota je 129 v desítkové soustavě. Získané útvary jsou vidět na obrázku níže.
 
-![](76028c59-4e5f-42f4-a411-3452844a30d2/last.png)
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/76028c59-4e5f-42f4-a411-3452844a30d2/last.png)
 
 Čísla určují pozici bitů v binárním čísle. Po přepsání do binární podoby mají znaky následující hodnoty:
 

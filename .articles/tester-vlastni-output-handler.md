@@ -1,3 +1,9 @@
+---
+id: 45b197e5-9e04-43d5-b48e-58f9a7f90887
+timestamp: 1478454487000
+title: "Tester: vlastní Output Handler"
+slug: tester-vlastni-output-handler
+---
 Output Handler umožňuje změnit finální podobu výstupu z Nette Testeru. Výstup může [vypadat například takto](https://travis-ci.org/adeira/connector/jobs/173698139). Osobně se mi tento výstup líbí víc, protože místo teček rovnou vidím co se skutečně spouští. Může se to hodit a sám jsem se přistil, že občas spouštím testy takto:
 
 ```

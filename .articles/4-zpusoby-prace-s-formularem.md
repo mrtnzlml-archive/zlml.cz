@@ -1,3 +1,9 @@
+---
+id: ad9d4e96-b786-4f75-a6ca-96c85746cef7
+timestamp: 1488109164000
+title: 4 způsoby práce s formulářem v šabloně
+slug: 4-zpusoby-prace-s-formularem
+---
 Velká část článků na tomto blogu jsou reakcí na nějaký reálný problém. Nehledě na to, kde jsem (třeba na včerejším [React workshopu](http://blog.id-sign.com/react-workshop/)), tak odpovídám na dotazy ohledně Nette. Je to v pořádku, rád pomůžu. Jsou však dotazy, které se neustále opakují. Toto je jeden z nich:
 
 > Formuláře v Nette jsou strašný voser. Jak to dělat lépe?

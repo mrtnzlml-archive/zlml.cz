@@ -1,3 +1,9 @@
+---
+id: 97b1917b-d6ed-4305-a543-3bdde9b298c9
+timestamp: 1487322556000
+title: Hexagonální architektura
+slug: hexagonalni-architektura
+---
 Struktura webových aplikací je něco, co se neustále mění a stejně s programátorem i zdokonaluje. Před více než rokem jsem se o jedné z možných struktur PHP aplikace [trošku rozepsal](jeste-lepsi-struktura-nette-aplikace). A teď si ukážeme další alternativu, která je [k proklikání zde](https://github.com/adeira/connector/tree/2169296c8da4a50bf4f928e94e756f3b23afea24). Nejedná se o nic převratného. Tento přístup mě však v poslední době hodně baví a dá se na něm naučit zase něco nového. Jedná se vlastně o tento adresářový strom (zjednodušeně):
 
 ```

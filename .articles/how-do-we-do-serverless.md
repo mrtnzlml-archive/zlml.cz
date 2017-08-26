@@ -1,3 +1,9 @@
+---
+id: 2151f134-7f0e-43c0-8382-eab9d336b7ee
+timestamp: 1500731161000
+title: How do we do serverless?
+slug: how-do-we-do-serverless
+---
 In past few months, I moved completely from PHP backend to the JavaScript semi-frontend (not really backend but definitely not frontend - somewhere between). And I am glad I did it because finally, I can try every cool technology I always wanted but haven't had the opportunity. And one of these technologies is a serverless approach. It basically means that you still have servers but you are not taking care of the bare metal but you'll rather get computational power with all the fancy stuff like auto-scaling, high availability, related services orchestration and so on.
 
 Here at Kiwi.com (Prague), we are working on a lot of projects but one of them is more often pronounced - [the chatbot](http://www.czechcrunch.cz/2017/05/brnenske-kiwi-com-otevira-v-praze-novou-pobocku-se-zamerenim-na-umelou-inteligenci/). This chatbot should help our customer support to manage tasks more easily. But the interesting part is that this application is **completely serverless**. This is how it works.

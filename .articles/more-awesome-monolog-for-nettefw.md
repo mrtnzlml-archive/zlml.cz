@@ -1,3 +1,9 @@
+---
+id: f856b454-c4a5-4271-8888-521ef1358f45
+timestamp: 1470502440000
+title: More awesome Monolog for #nettefw
+slug: more-awesome-monolog-for-nettefw
+---
 Nedávno mi přišel požadavek na vytvoření takového jednoduchého způsobu, jak logovat uživatelské akce - konkrétně zatím jen přihlášení uživatele (do databáze). Mohl jsem to udělat jednoduše a prostě to někam do kódu nahákovat. A nebo jsem to mohl udělat tak, jak jsem to také nakonec udělal - složitě. Samozřejmě je třeba dopředu dostatečně promyslet, jestli to za tu práci stojí, ale měl jsem dostatek argumentů proto, že ano.
 
 Jedna z nejdůležitějších myšlenek byla, že časem bude pravděpodobně potřeba logovat do databáze i další akce, než je jen přihlašování. Druhým velmi silným faktorem (který ovlivnil celé řešení) bylo, že používáme [Monolog](https://github.com/Seldaek/monolog). Konkrétně Kdyby\Monolog rozšíření.

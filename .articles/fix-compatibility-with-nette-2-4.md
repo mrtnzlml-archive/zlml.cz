@@ -1,3 +1,9 @@
+---
+id: 7f009c6b-998c-4cef-8797-cf1853ac5ea7
+timestamp: 1466343012000
+title: Fix compatibility with Nette 2.4
+slug: fix-compatibility-with-nette-2-4
+---
 Právě v těchto dnech přichází další významná minor verze Nette balíčků do vašich vendorů. Událo se velké množství změn a to zejména pod kapotou. To si však s sebou nese určitou daň a tou je potřeba učinit pár úprav v kódu, které zajistí kompatibilitu. Těchto úprav není mnoho. A když už jsou, tak na ně Nette upozorní třeba prostřednictvím `E_USER_DEPRECATED`. Pokud však pracujete se složitější aplikací, která třeba nebyla původně postavená na Nette, může být taková úprava docela lopota.
 
 Zde se tedy nedočtete co je v Nette nového, ale jak co upravit a na co jsem narazil, když jsem tuto kompatibilitu rešil.

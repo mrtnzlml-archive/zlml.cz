@@ -2,10 +2,12 @@
 
 exports[`renders correctly 1`] = `
 <h1
-  data-jsx={64577691}
+  data-jsx={4185821776}
 >
   <a
-    data-jsx={64577691}
+    data-jsx={4185821776}
+    href="/"
+    onClick={[Function]}
   >
     Martin Zlámal
   </a>

@@ -1,3 +1,9 @@
+---
+id: af8c8824-3542-4019-8dc1-dbea1e985808
+timestamp: 1347738626000
+title: Lovec matematik
+slug: lovec-matematik
+---
 Znáte následující hádanku?
 
 Lovec ráno vyrazí na lov. Nejprve jde 10 km na jih, poté 10 km na západ a nakonec 10 km na sever. V cíli své cesty zjišťuje, že se vrátil na stejné místo, ze kterého ráno vyšel. Tam zastřelil medvěda. Jakou měl medvěd barvu?

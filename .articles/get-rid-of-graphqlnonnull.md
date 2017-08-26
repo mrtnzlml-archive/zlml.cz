@@ -1,3 +1,9 @@
+---
+id: ce9721e7-697b-4834-bb4c-89977f1b8399
+timestamp: 1497708814000
+title: Get rid of GraphQLNonNull
+slug: get-rid-of-graphqlnonnull
+---
 I mean not all of the occurrences but at least in GraphQL fields. This is exactly what we did in [Kiwi.com](https://www.kiwi.com/us/) while working on GraphQL API.
 
 This idea didn't come out of nowhere. Actually, I've been thinking about it for a while but after [GraphQL-Europe](https://graphql-europe.org/) I have been convinced (unfortunately I haven't been there personally). But you may ask why? Why would I do that?

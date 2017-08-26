@@ -1,4 +1,5 @@
 .next/*
+.serverless/*
 node_modules/*
 
 !.gitignore

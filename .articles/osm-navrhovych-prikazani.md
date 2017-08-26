@@ -1,3 +1,9 @@
+---
+id: 6ef2212c-312f-45c5-a31b-bb9a7327ff42
+timestamp: 1356472874000
+title: Osm návrhových přikázání
+slug: osm-navrhovych-prikazani
+---
 Právě mám rozečtenou knihu, která popisuje návrhové vzory v PHP. Mimo jiné autor popisuje pravidla při návrhu softwaru, která jsou prokládána velkým množstvím ukázek a vysvětlivek. Celkem je na třiceti stranách knihy (kde je rozebírán návrh) schován následující seznam pravidel.
 
 1. Přístup k údajům vždy v rámci třídy zapouzdřete a poskytněte metody, pomocí nichž lze dané údaje získat.

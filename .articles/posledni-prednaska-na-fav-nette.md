@@ -1,3 +1,9 @@
+---
+id: 45d3a9a8-d3e9-482c-b582-4dc3773de0c2
+timestamp: 1418241190000
+title: Poslední přednáška na FAV - Nette
+slug: posledni-prednaska-na-fav-nette
+---
 Tak a je to... (-:
 
 Zveřejňuji mojí poslední přednášku v tomto roce, kterou jsem měl na ZČU na fakultě aplikovaných věd pro studenty předmětu KIV/WEB. Tentokrát jsem si pohrál trošku se zvukem, takže by to oproti [minulému týdnu](prednaska-na-zcu-node-js) mělo být o mnoho lepší.

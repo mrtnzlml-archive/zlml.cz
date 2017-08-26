@@ -1,3 +1,9 @@
+---
+id: 9b774295-d6af-413e-9431-6a05bdedfd7e
+timestamp: 1454786953000
+title: Jednoduché testování pro úplně každého
+slug: jednoduche-testovani-pro-uplne-kazdeho
+---
 Konec slibů, článek je tu. Tentokrát se rozepíšu o nástroji [Testbench](https://github.com/mrtnzlml/testbench). Testbench by měl pomoci s rychlým testováním Nette aplikace. Je zaměřen spíše integračně a vhodně doplňuje [Nette\Tester](https://tester.nette.org/), který je zaměřen spíše jednotkově. Myšlenka, která stála za vytvořením tohoto nástroje je velmi prostá - testování je složité. Je složité hlavně pro lidi, kteří dokonale nerozumí problému. Proto je tento nástroj zaměřen na rychlý start pro úplně každého (kdo si prošel alespoň quickstart a chce testovat). To se projevuje v tom, jak je Testbench postaven (viz další povídání). Testbench se sestává z různých nápadů, které jsem všude možně okoukal za posledních X měsíců a něco mě na nich zaujalo. Pojďme se tedy společně podívat jak se Testbench používá a proč ho sám rád používám pro rychlé testy.
 
 # Základní nastavení testovacího prostředí

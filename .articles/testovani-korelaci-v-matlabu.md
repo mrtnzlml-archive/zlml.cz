@@ -1,3 +1,9 @@
+---
+id: 04fd5b1a-eb64-4a48-b0db-47e4509d4ab8
+timestamp: 1480773916000
+title: Testování korelací v MATLABu
+slug: testovani-korelaci-v-matlabu
+---
 Čím více mi proteklo kódu pod prsty, tím více mě testování baví. Nebaví mě psát super skvělé testy, ale baví mě brát testy jako součást vývoje. Mnohdy je to dokonce nejpohodlnější způsob. Na následujících řádcích ukážu jak se dá napsat algoritmus pro [korelaci velkého množství dat](https://en.wikipedia.org/wiki/Correlation_and_dependence) a hlavně **jak jej otestovat**. Konkrétně půjde o Pearsonův korelační koeficient.
 
 Pearsonův korelační koeficient lze popsat velmi jednoduchým vzorcem (podíl kovariance a směrodatných odchylek souborů dat - viz wiki). Implementace tohoto vzorce v MATLABu může vypadat třeba takto:

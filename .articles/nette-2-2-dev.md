@@ -1,3 +1,9 @@
+---
+id: 58e7368b-0db4-498f-8184-fc4877ba32ba
+timestamp: 1387113023000
+title: Nette 2.2-dev
+slug: nette-2-2-dev
+---
 Nedávno byla změněna vývojová verze Nette Frameworku na 2.2-dev (https://github.com/nette/nette/commit/3a426255084163ec1a2f324ea0d3e9b3139adccc).
 Tato změna s sebou přinesla explozi změn. Na následujících řádcích bych rád přiblížil
 některé zásadní změny, které se odehrály a je zapotřebí je upravit, aby bylo možné z verze 2.1-dev

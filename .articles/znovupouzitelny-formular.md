@@ -1,3 +1,9 @@
+---
+id: 34ecd347-57b2-4e4f-9a99-b77edbec7df1
+timestamp: 1399974862000
+title: Znovupoužitelný formulář
+slug: znovupouzitelny-formular
+---
 Každý kdo nějakou chvíli pracuje s Nette Frameworkem již jistě narazil na prvky, které lze použít v aplikaci opakovaně. Říkejme jim znovupoužitelné komponenty, nebo prostě jen komponenty. Následující text má za úkol ukázat opět maximálně prakticky a uceleně jedno z možných řešení jak k tomuto problému přistupovat a co se mi na tomto řešení líbí, nebo naopak nelíbí.
 
 # Motivace

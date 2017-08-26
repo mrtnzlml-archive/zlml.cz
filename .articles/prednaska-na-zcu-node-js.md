@@ -1,3 +1,9 @@
+---
+id: 5ed9400f-ee4e-4a62-b563-1cf97565ac87
+timestamp: 1417636504000
+title: Přednáška na ZČU - Node.js
+slug: prednaska-na-zcu-node-js
+---
 Jak jsem slíbil, tak zveřejňuji přenášku na téma **Node.js**, kterou jsem měl dnes na Západočeské univerzitě pro lidi studující předmět **KIV/WEB**, tedy Webové aplikace. Tato přednáška volně navazuje na předchozí obsah tohoto předmětu. Studenti se pozvolna seznamují s webovým prostředím od úplně základní práce s HTML a CSS až k pokročilým webovým frameworkům. Podívejte se na záznam této přednášky:
 
 <iframe width="640" height="360" src="//www.youtube.com/embed/eakg5THIbcI" frameborder="0" allowfullscreen></iframe>

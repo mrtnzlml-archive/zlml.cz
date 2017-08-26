@@ -1,3 +1,9 @@
+---
+id: 66b21edb-b3c2-426c-a1f4-80b189562720
+timestamp: 1436098908000
+title: Dynamické routování URL adres
+slug: dynamicke-routovani-url-adres
+---
 A když říkám dynamické, tak tím myslím opravdu kompletně. Jinými slovy to znamená, že chceme jakoukoliv cestu za doménou přeložit na jakýkoliv interní požadavek ([Application\Request](http://api.nette.org/2.3.3/Nette.Application.Request.html)). Kousek routovací tabulky tedy může vypadat následovně:
 
 ```
@@ -17,7 +23,7 @@ Pokusím se to vysvětlit trošku jinak než je to vysvětlováno jinde. Větši
 
 Tento interface má dvě metody - `match` a `constructUrl`. Metoda `match` má za úkol přeložit HTTP request na již zmíněný [Application\Request](http://api.nette.org/2.3.3/Nette.Application.Request.html). Jedná se tedy o překlad ve směru šipky viz zadání. Podívejte se, jak to řeší třída Route, v tomto konkrétním prípadě však bude potřeba pracovat s databází a napsat si jinou logiku. Oproti tomu metoda `constructUrl` má přesně opačný úkol. Překládá příchozí Application request na (absolutní) URL adresu.
 
-[* 9ab04acb-febc-4901-aaad-5b554f77e529/vystrizek.png 610x? <]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/9ab04acb-febc-4901-aaad-5b554f77e529/vystrizek.png)
 
 Zatímco Route dokáže tyto překlady sestavit pouze z masky routy a namapovat je na interní odkazy v aplikaci, v tomto případě bude nutná databáze. Po chvíli laborování a asi pěti variantách jsem nakonec udělal ústupek a zvolil tu nejjednodušší (ale dostatečnou) variantu viz obrázek. Stačí si tedy uchovávat cestu, interní odkaz a interní ID. To je vše, co by mělo být potřeba.
 

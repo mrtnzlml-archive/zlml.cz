@@ -1,3 +1,9 @@
+---
+id: 5330469a-da65-4195-8c9a-2afccbd6078d
+timestamp: 1484849186000
+title: Vy ještě nemáte svůj superprojekt?!
+slug: vy-jeste-nemate-svuj-superprojekt
+---
 Nenechte se ošálit. Superprojekt je skutečně [oficiální název](https://git-scm.com/docs/git-submodule#git-submodule-add) pro Git projekty, které virtuálně obsahují další podprojekty (tzv. submoduly). Jedná se o skvělý způsob jak vytvořit jeden velký repozitář a spravovat v něm mnoho knihoven. Následující text proto bude zajímavý pro programátory, kteří vydávají knihovny podobně jako to dělám já s [projektem Adeira](https://github.com/adeira).
 
 Začněme však krátkou motivací. Tomuto způsobu vývoje resp. tomu jednomu konkrétnímu repozitáři se velmi často říká "monolith repository". Vývoj v jednom repozitáři by měl minimalizovat režii, která je nutná pro obskakování mnoha repozitářů. Důležité však je uvědomit si hned na začátku, že jeden monolitický repozitář rozhodně neznamená jeden monolitický kód. Pořád se bavíme o vydávání mnoha Composer balíčků (například), ale jejich údržba a vývoj probíhá v jednom okně jednoho IDE. Pouze finální produkt je množství dílčích repozitářů!

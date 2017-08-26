@@ -9,3 +9,5 @@ TODO:
 
 - RSS
 - 404
+- https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-4
+- warmup nefunguje?

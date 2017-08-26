@@ -1,6 +1,12 @@
+---
+id: db4ac671-20f0-4c4b-b551-129b719fd510
+timestamp: 1413669750000
+title: Nastavení TIM3 na STM32F207xx
+slug: nastaveni-tim3-na-stm32f207xx
+---
 Tento článek už mám dlouhou dobu v hlavě, ale nikdy jsem se neodvážil jej sepsat. Má to svůj smysl. Jedná se o poměrně náročnou problematiku, kterou si myslím, že moc lidí nechápe. Rád bych tedy tímto popíchnul čtenáře o zpětnou vazbu a pokud by se ukázalo, že to smysl má, pokračoval bych někam dál do složitějších věcí, protože toto bude ve výsledku směšně jednoduché... (-:
 
-[* f34b6d82-9aaf-4089-afe6-81993d596885/stm32.png 400x? <]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/f34b6d82-9aaf-4089-afe6-81993d596885/stm32.png)
 
 K dispozici mám momentálně dva procesory, ale budu řešit konkrétně `STM32F207xx`. Ten druhý je ze `4xx` řady, ale díky novým Cube knihovnám není v programech žádný rozdíl. Alespoň ne v tom, co bu ukazovat dnes. [STM32F207](http://www.st.com/web/catalog/mmc/FM141/SC1169/SS1575/LN9/PF245085) je procesor založený na 32-bit ARM(R) Cortex(R)-M3 od STMicroelecronics. Jedná se o procesor s 120 MHz jádrem, 1024 kB flash pamětí na program a 128 kB SRAM. Celkově se jedná o poměrně výkonnou mršku na které se toho nechá upočítat poměrně hodně a hlavně dokáže ovládat velké množství rozmanitých periferií viz obrázek. Na obrázku je přesně ta samá eval deska s tím samým procesorem, na kterou právě teď koukám. Nejzajímavější bude teď však právě onen procesor, který je uprostřed desky a SMD diody, které nejsou téměř vůbec vidět. Ty jsou umístěny nad Wakeup tlačítkem téměř pod displejem.
 

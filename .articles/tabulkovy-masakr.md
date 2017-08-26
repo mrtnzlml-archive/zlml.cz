@@ -1,3 +1,9 @@
+---
+id: 6dcf0031-975d-4eb2-85d6-e4e00d02dd4a
+timestamp: 1349557092000
+title: Tabulkový masakr
+slug: tabulkovy-masakr
+---
 Určitě znáte HTML a tím pádem znáte i tabulky. Pro jistotu připomenutí.
 Tabulka se v HTML tvoří párovým tagem <code>&lt;table&gt;&lt;/table&gt;</code>, její řádky jsou <code>&lt;tr&gt;&lt;/tr&gt;</code> a buňky <code>&lt;td&gt;&lt;/td&gt;</code>. Buňky mají volitelné atributy <code>rowspan</code> a <code>colspan</code>. Tyto atributy určují, kolik bude buňka zabírat místa v řádce, resp. ve sloupci. Tyto znalosti stačí k pochopení pojmu "tabulkový paradox".
 

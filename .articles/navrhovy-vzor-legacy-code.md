@@ -1,3 +1,9 @@
+---
+id: 23efba3e-e7da-496e-a75f-5e9f736879e6
+timestamp: 1440940560000
+title: Návrhový vzor Legacy code
+slug: navrhovy-vzor-legacy-code
+---
 Asi každý se k tomuto návrovému vzoru jednou dostane. Zatím jsem vždy takovou práci striktně odmítal, ale tentokrát šlo o jinou situaci a svolil jsem k poklesu od OOP frameworku ke špagetě. Ačkoliv má pojem "legacy code" celou řadu definic, já osobně jej chápu jako kód, který je prostě starý. Vhodnější by však bylo asi říci, že se jedná o kód se kterým teď musím pracovat, ale nenapsal jsem ho. Zůstaňme však u první definice. Zde platí, že (stejně tak jako jakýkoliv jiný navrhový vzor) obsahuje celou řadu opakujících se poznávacích prvků.
 
 Například mezi vývojáři panuje pozoruhodná pasivita. Nikdo se nepostaví na zadní a nepřijde s něčím novým. Nemyslím novou fičuru, ale nějakou systémovou věc. Na druhou stranu se to dá pochopit. Je to ta nejdražší změna a zase až tak ničemu to z vnějšího pohledu neprospěje. Nepovažuji to za správný přístup, ale taková je asi realita. Bohužel se pak často argumentuje (totální) zpětnou kompatibilitou. Dále tento návrhový vzor předpokládá, že se používá nějaký vypíčený verzovací systém a nikoho to netrápí (viz pozoruhodná pasivita vývojářů). O coding standardu ani nemluvě a globální prostor je samozřejmostí. No a pak samozřejmě klasické věci jako RY přístup (opak [DRY](https://cs.wikipedia.org/wiki/Don%27t_repeat_yourself) - Don't Repeat Yourself), šablonovací systém (pokud vůbec existuje) je stejně debilní jako ten verzovací a v neposlední řadě neotestovaný/neotestovatelný kód.
@@ -20,7 +26,7 @@ dump($x); //y
 
 Proč je to problém? Protože druhý případ je striktně závislý na použitém kontextu. Tím pádem tato pseudoglobální proměnná funguje ve špagetě, ale když chcete takový kód jinak uspořádat a nedej bože ještě obalit, tak je to problém. Vzhledem k tomu, že bylo mým úkolem integrovat [Nette Framework](https://nette.org/) do takového systému, musel jsem trošku upravit start aplikace a tím jsem hodně věcí rozbil.
 
-[* d6ca5ea3-5c1a-43af-8488-73d4fae836f1/strip-wordpress-550-finalenglish.jpg <]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/d6ca5ea3-5c1a-43af-8488-73d4fae836f1/strip-wordpress-550-finalenglish.jpg)
 
 # Jak jsem na to šel
 

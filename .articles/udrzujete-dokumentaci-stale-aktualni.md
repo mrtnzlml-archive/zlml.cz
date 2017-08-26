@@ -1,3 +1,9 @@
+---
+id: f920c5cc-780f-4fee-b9a6-88d39d4cd2ac
+timestamp: 1391460655000
+title: Udržujete dokumentaci stále aktuální?
+slug: udrzujete-dokumentaci-stale-aktualni
+---
 Již dlouho si v hlavě pohrávám s jednou myšlenkou, kterou stále nemohu dovést do zdárného konce. Již na samém začátku jsem již však věděl, že se zajisté nezalíbí velké skupině programátorů. Přesto si myslím, že má něco do sebe. Jen jsem ji ještě nedomyslel tak, aby jsem s ním byl spokojen. Třeba bude mít někdo nějaký geniální nápad.
 
 # Na začátku byl problém

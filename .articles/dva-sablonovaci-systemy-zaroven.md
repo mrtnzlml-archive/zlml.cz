@@ -1,3 +1,9 @@
+---
+id: bc0e2a48-6c0d-4dcb-b686-ac5eecc11c88
+timestamp: 1469950790000
+title: Dva šablonovací systémy zároveň
+slug: dva-sablonovaci-systemy-zaroven
+---
 Možná pracujete na nějakém projektu, který používá jiný šablonovací systém než je Latte, ale Latte se vám natolik líbí, že ho chcete používat také. Nebo naopak používáte Latte, ale *<abbr title="Smarty? Twig? Wtf? Omg?">[doplň název šablonovacího systému]</abbr>* se vám natolik líbí, že ho chcete používat také. A nebo prostě nemáte na výběr a musíte používat více šablonovacích systémů. V takovém případě existuje asi jediné přímočaré řešení a tím je vlastní implementace `Nette\Application\UI\ITemplate`.
 
 # TemplateFactory

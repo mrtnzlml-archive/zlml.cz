@@ -1,3 +1,9 @@
+---
+id: b4aa1f09-6047-4f30-a609-5ffbf61fc6c0
+timestamp: 1397388682000
+title: Plzeňský Barcamp - láska na první pohled
+slug: plzensky-barcamp-laska-na-prvni-pohled
+---
 Ačkoliv jsem z dřívějších barcampů sledoval záznamy, tak jsem byl fakticky na barcampu úplně poprvé a rovnou jsem měl tu čest přednášet. Než se však dostanu k samotné přednášce, rád bych zde napsal nějaký feedback. Celkově jsem z Plzeňského Barcampu skutečně nadšen. Skvělá atmosféra, fajn lidi, spoustu jídla, alkoholu možná až moc... :-))
 
 Na druhou stranu došlo i k pár přešlapům. Některé mě mrzí více, jiné ani tak ne, každopádně... Skutečně mě mrzí to, že nebyla nahrávána na video každá přednáška.

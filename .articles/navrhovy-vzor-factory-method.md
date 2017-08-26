@@ -1,3 +1,9 @@
+---
+id: 5920d80f-a65c-40e0-9648-6a95bac6ab87
+timestamp: 1356648759000
+title: Návrhový vzor Factory Method
+slug: navrhovy-vzor-factory-method
+---
 Návrhový vzor Factory Method má za úkol definovat rozhraní pro vytváření objektů s tím, že vlastní tvorbu instancí přenechává potomkům. Samotný návrhový vzor tedy tvoří například tyto dvě třídy.
 
 ```php

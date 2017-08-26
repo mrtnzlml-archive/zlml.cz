@@ -1,3 +1,9 @@
+---
+id: 700bba3f-043d-4d84-b62f-7436e189f808
+timestamp: 1420324989000
+title: Dva příklady toho, proč není JS připravený
+slug: dva-priklady-toho-proc-neni-js-pripraveny
+---
 Tento článek nastartoval jeden hloupý tweet. Měl jsem jej na "to do" listu již nějaký čas, ale čekal jsem až to někdo tweetne... (-:
 
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/MartinSadovy">@MartinSadovy</a> Možná ale to není podstatné. Podstatné je, že JS běží v prohlížeči i na serveru. Isomorphism ftw. PHP je evoluční mrtvola.</p>&mdash; Daniel Steigerwald (@steida) <a href="https://twitter.com/steida/status/551431843560824832">January 3, 2015</a></blockquote>

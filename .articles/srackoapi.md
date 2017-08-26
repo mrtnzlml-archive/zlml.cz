@@ -1,3 +1,9 @@
+---
+id: 54e244cd-2b74-4532-b36c-74a7827aa231
+timestamp: 1405627130000
+title: SračkoAPI
+slug: srackoapi
+---
 Následující řádky budou čistý hate na několik tvůrců API, který má posloužit budoucím tvůrcům API. Sám totiž musím obsluhovat několik služeb a získávat z nich data. A ačkoliv se nebráním složitostem, některé věci jsou tak absurdní, že až rozum zůstává stát...
 
 No to si ze mě děláte...
@@ -21,7 +27,7 @@ A takových perel je tam nespočet. Potřebujete vědět, jestli proběhla funkc
 ---------------------
 Rychlá otázka k zamyšlení. Jak uděláte API, aby bylo možné jej snadno testovat? Změníte například přístupové údaje na testovací, nebo budete posílat nějaký testovací token? OK. Myšlenka je jasná. Kdykoliv se to dá snadno přehodit např. změnou jednoho hesla do ostrého režimu. Jenom v debilním API se metody pro testování jmenují jinak, než metody pro ostré použití. Kurva! To je další věc, která to celé nepříjemně zkomplikuje.
 
-[* d10561e0-aeec-4dae-a21e-17eb7c4ca36d/gif.gif <]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/d10561e0-aeec-4dae-a21e-17eb7c4ca36d/gif.gif)
 Dobře, poslední příklad. Nedávno jsem zase něco nevyčetl z dokumentace. Napsal jsem tedy na technickou podporu ať mi poradí, že to tam nemají napsané. Konkrétně se jednalo o povolené vstupní hodnoty do jedné funkce. Na odpověď jsem čekal dva dny, což by ani tak nevadilo, ale hodně jsem se nasmál u odpovědi, která přišla v tomto formátu (původně zapsáno pod sebou):
 
 ```

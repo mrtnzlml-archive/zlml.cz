@@ -1,3 +1,9 @@
+---
+id: 103fd545-2922-4c42-b50c-6387a1f05d48
+timestamp: 1475925989000
+title: Automatický render prvků při manuálním vykreslování formuláře
+slug: automaticky-render-prvku-pri-manualnim-vykreslovani-formulare
+---
 Je čas na nějakou tu Nette divočinu. Podívejme se pod drobnohledem na to, jak funguje vykreslování prvků formuláře. Nejprve si vytvoříme úplně jednoduchý formulář, který bude obsahovat jeden prvek:
 
 ```php

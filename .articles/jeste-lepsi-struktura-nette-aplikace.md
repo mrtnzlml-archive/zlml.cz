@@ -1,3 +1,9 @@
+---
+id: 8474ac83-61b4-4afe-b0d5-ca7ba4e62501
+timestamp: 1444573684000
+title: Ještě lepší struktura Nette aplikace
+slug: jeste-lepsi-struktura-nette-aplikace
+---
 Každý, kdo postavil pár aplikací, musel vždy řešit ten samý problém. Jakou strukturu by měla aplikace mít? A co když se začne projekt rozrůstat? Měl bych se držet toho jak to dělá [sandbox](https://github.com/nette/sandbox) (resp. [web-project](https://github.com/nette/web-project))? Postupem času jsem dokonvergoval k relativně přijatelnému výsledku a vzhledem k tomu, že projekt na kterém jsem to poprvé pořádně rozjel byl ukočen, [rozhodl jsem se jej zveřejnit](https://github.com/mrtnzlml/CMS-lite). Už je to sice nějaký čas, ale v době největšího vrcholu tohoto projektu jsem jej považoval za takovou osobní špičku. A to hned z několika důvodů. K tomu se ale dostanu postupně. A vezmu to pěkně od těch nejmenších částí.
 
 # Presentery a komponenty
@@ -137,7 +143,7 @@ Je toho fakt ranec, co pouštím na obdiv i kritiku. Proto ještě stručněji p
 
 A to jsem zde ještě nenapsal vše. Mrkněte se na náhled, nejedná se jen o nějaký marný pokus:
 
-![](9b3c176d-4884-45c5-95c3-53cac2999d0f/admin.png)
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/9b3c176d-4884-45c5-95c3-53cac2999d0f/admin.png)
 
 # Instalace systému
 

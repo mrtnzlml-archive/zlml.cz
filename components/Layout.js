@@ -25,43 +25,43 @@ export default ({ children, title = 'This is the default title' }: Props) =>
         {stylis(
           '',
           `
-        body {
-          font-family: sans-serif;
-          font-weight: 300;
-          font-size: 1.6rem;
-          background-color: #f9f9f9;
-          margin: 0;
-          color: ${Colors.dark};
-        }
+          body {
+            font-family: sans-serif;
+            font-weight: 300;
+            font-size: 1.6rem;
+            background-color: #f9f9f9;
+            margin: 0;
+            color: ${Colors.dark};
+          }
 
-        html {
-          font-size: 62.5%;
-        }
+          html {
+            font-size: 62.5%;
+          }
 
-        p {
-          hyphens: auto;
-        }
+          p {
+            hyphens: auto;
+          }
 
-        a,
-        a:hover,
-        a:focus {
-          color: ${Colors.red};
-        }
+          a,
+          a:hover,
+          a:focus {
+            color: ${Colors.red};
+          }
 
-        a:visited {
-          color: darkred;
-        }
+          a:visited {
+            color: darkred;
+          }
 
-        a:hover,
-        a:focus {
-          text-decoration: underline;
-        }
+          a:hover,
+          a:focus {
+            text-decoration: underline;
+          }
 
-        a[href^="#error:"] {
-          background: red;
-          color: white;
-        }
-      `,
+          a[href^="#error:"] {
+            background: red;
+            color: white;
+          }
+          `,
         )}
       </style>
     </Head>

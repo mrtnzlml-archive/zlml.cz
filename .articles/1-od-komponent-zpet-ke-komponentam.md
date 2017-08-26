@@ -1,3 +1,9 @@
+---
+id: 462e4010-090c-4622-bbd9-295948c71609
+timestamp: 1481912287000
+title: Od komponent zpět ke komponentám
+slug: 1-od-komponent-zpet-ke-komponentam
+---
 On: *A budeš o tom psát nějaké články?*<br>
 Já: *No tak jako mohl bych... :)*
 

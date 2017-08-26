@@ -1,3 +1,9 @@
+---
+id: 2894e1f9-8a47-48b9-bcea-40bf4fdb3724
+timestamp: 1387385662000
+title: Přednáška z Nette na ZČU
+slug: prednaska-z-nette-na-zcu
+---
 Dnes jsem měl tu čest přednášet na ZČU studentům předmětu KIV/WEB - Webové aplikace.
 Přednášku a i celé povídání jsem se snažil chopit velmi realisticky, prakticky a pro studenty, 
 kteří s tvorbou webových aplikací teprve začínají. Doufám, ze bylo mé povídání

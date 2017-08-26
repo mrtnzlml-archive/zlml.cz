@@ -1,3 +1,9 @@
+---
+id: 3e9279b1-89aa-4813-9beb-7bc9f8044dff
+timestamp: 1375043798000
+title: Testování presenterů v Nette
+slug: testovani-presenteru-v-nette
+---
 Tak toto je přesně to téma o kterém se naustále mluví, ale tím to z velké části končí.
 Nemá smysl zabývat se tím, jestli testovat, nebo ne. Na to už si každý přijde sám.
 V následujících odstavcích bych rád předvedl myšlenku jak si

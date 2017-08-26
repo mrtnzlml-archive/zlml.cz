@@ -1,6 +1,12 @@
+---
+id: e469395b-c4f9-42db-bcf2-b2f1bc49f2e7
+timestamp: 1413406213000
+title: Fígloidní odstranění záhlaví modulu
+slug: figloidni-odstraneni-zahlavi-modulu
+---
 Dnešní článek bude spíše zápisek, protože jsem řešení tohoto problému hledal neskutečně dlouho a jak se později ukázalo, tak řešení je sice jednoduché, ale je zakořeněné hluboko v jádru Odoo ERP systému. O co jde. Občas je potřeba schovat záhlaví (viz obrázek) u některých modulů.
 
-[* ddfc321c-2190-4cf6-98a9-89852713e626/vystrizek.png 500x? <]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/ddfc321c-2190-4cf6-98a9-89852713e626/vystrizek.png)
 
 Tento panel má sice dobrý důvod, ale existují případy, kde je prostě nadbytečný. Typický případ takové nadbytečnosti je modul Dashboards (technický název `board`) kdy je tento prostor nijak nevyužívaný. Zřejmě by tento problém šel řešit nějaký hackem, ale to prostě není dobře. Problém je [zde](https://github.com/odoo/odoo/blob/8.0/addons/web/static/src/js/views.js#L905). "Special case for Dashboards"...
 

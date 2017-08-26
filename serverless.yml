@@ -1,9 +1,9 @@
 service: zlmlcz
 
 plugins:
-  - serverless-dynamodb-autoscaling
-  - serverless-offline
+#  - serverless-offline
   - serverless-plugin-warmup
+  - serverless-prune-plugin
 
 provider:
   name: aws
@@ -11,10 +11,6 @@ provider:
   region: eu-west-1 # Ireland
   stage: production
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:*
-      Resource: "arn:aws:dynamodb:eu-west-1:*:*"
     - Effect: 'Allow'
       Action:
         - 'lambda:InvokeFunction'
@@ -31,29 +27,19 @@ custom:
     warmup:
       schedule: 'rate(1 minute)'
       prewarm: true
-  capacities:
-    - table: articlesTable
-      read: &AUTOSCALE_CONFIG
-        minimum: 1
-        maximum: 1000
-        usage: 0.7
-      write:
-        <<: *AUTOSCALE_CONFIG
-    - table: picturesTable
-      read:
-        <<: *AUTOSCALE_CONFIG
-      write:
-        <<: *AUTOSCALE_CONFIG
+  prune: # prune old Lambda functions
+    automatic: true
+    number: 3 # number of versions to keep
 
 package:
   excludeDevDependencies: false
-#  exclude:
-#    - ./**
-#  include:
-#    - .next/**
-#    - node_modules/** # TODO: remove
-#    - services/Lambda.js
-#    - services/Application.js
+  exclude:
+    - ./**
+  include:
+    - .next/**
+    - node_modules/** # TODO: remove
+    - services/**
+    - package.json
 
 functions:
   blog:
@@ -70,32 +56,3 @@ functions:
           method: GET
           cors: true
           integration: lambda-proxy
-
-resources:
-  Resources:
-    articlesTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: articles
-        AttributeDefinitions:
-          - AttributeName: articleId
-            AttributeType: S # string
-        KeySchema:
-          - AttributeName: articleId
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-    picturesTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: pictures
-        AttributeDefinitions:
-          - AttributeName: pictureId
-            AttributeType: S # string
-        KeySchema:
-          - AttributeName: pictureId
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1

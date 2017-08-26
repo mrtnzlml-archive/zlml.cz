@@ -1,4 +1,10 @@
-[* dd9f40eb-4a68-4b9d-9b09-e59a6beec7c8/screenshot-from-2015-12-09-17-54-49.png >]
+---
+id: e05a6170-c3ca-427d-bf0c-e9b088aa541c
+timestamp: 1449682578000
+title: ZČU - Nette je fajn, ale máme raději Javu
+slug: zcu-nette-je-fajn-ale-mame-radeji-javu
+---
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/dd9f40eb-4a68-4b9d-9b09-e59a6beec7c8/screenshot-from-2015-12-09-17-54-49.png)
 
 Dnes jsem měl opět tu čest přednášet studentům předmětu KIV/WEB na fakultě aplikovaných věd (ZČU) o tom, jak se dají dělat webové aplikace pomocí webového frameworku. Je to vždy skvělý zážitek.
 

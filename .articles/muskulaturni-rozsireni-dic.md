@@ -1,3 +1,9 @@
+---
+id: 8119640e-e954-435c-9a95-ff14bf73634b
+timestamp: 1482501056000
+title: Muskulaturní rozšíření DIC
+slug: muskulaturni-rozsireni-dic
+---
 K čemu je DI rozšíření v Nette a jak se takové rozšíření píše [už víme](http://zlml.cz/rozsireni-pro-dic). Teď se podíváme na způsob, jak pracovat s takovým rozšířením na úplně nové úrovni. Tento článek velké spoustě lidí změní způsob práce a aplikace budou najednou o level výš. Jak řekl jeden z účastníků školení: tak to je geniální... :)
 
 # Jak strukturovat aplikaci?

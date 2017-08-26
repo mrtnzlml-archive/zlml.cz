@@ -2,5 +2,13 @@
 <PROJECT_ROOT>/node_modules/babel-plugin-transform-react-remove-prop-types/.*
 <PROJECT_ROOT>/node_modules/config-chain/.*
 
+[lints]
+all=error
+
+[include]
+
 [libs]
 ./config/flow-typed
+
+[options]
+module.name_mapper='^../.articles/.database.json$' -> '<PROJECT_ROOT>/config/stub/GeneralStub.js'

@@ -1,3 +1,9 @@
+---
+id: 00ea90cf-cd53-48f0-959a-bb1a2264344d
+timestamp: 1443869668000
+title: Crazy JavaScript PDF generator
+slug: crazy-javascript-pdf-generator
+---
 Kdysi mi někdo řekl, že správný programátor by měl být tak trošku děvka pro všechno. Nestačí jen umět PHP. Nestačí jen umět JavaScript. S tímto názorem jsem od samého začátku souhlasil. Ostatně je to jeden z důvodů, proč se občas zajímám i o věci, které v nejbližší době nevyužiju a zase tolik jim nerozumím (také to podle toho pak vypadá). Jednou z takových věcí je [React](http://facebook.github.io/react/index.html). Nedávno jsem si hrál také s [PhantomJS](http://phantomjs.org/) a když už jsme u toho, tak ani [NodeJS mi není cizí](http://www.slideshare.net/MartinZlmal/nodejs-42314371). A co se stane, když se jednoho večera rozhodnete spojit všechno dohromady? Něco šíleného... (-:
 
 # Krátké seznámení
@@ -12,7 +18,7 @@ No a konečně [NodeJS](https://nodejs.org/en/) - JavaScriptové prostředí pro
 
 # Něco šíleného
 
-[* e80e305e-8431-4c0e-9c79-5db761c22608/199aff3.jpg 300x? >]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/e80e305e-8431-4c0e-9c79-5db761c22608/199aff3.jpg)
 
 To je tak když se sejde několik věcí najednou. Vytvořit si faktury, otestovat aplikaci, neustálý přirozený hlad po NodeJS. A pak to přišlo. Co si tak vytvořit [generátor faktur](https://github.com/mrtnzlml/js-invoice-generator), který bude samotnou fakturu stavět pomocí Reactu, server bude tvořit NodeJS a PDF budu generovat tak, že si tu stránku otevřu v PhantomJS a uložím (čímž snad získám velmi přesný výsledek)? Samozřejmě jsem se pokukoval i po již hotových řešeních jako je třeba [Fakturiod](https://www.fakturoid.cz/). A kdybych byl jen o kousek línější, tak bych asi nic takového netvořil. Nakonec jsem se však pouze inspiroval [peckovým designem jedné z jejich faktur](https://www.fakturoid.cz/blog/2015/08/25/nova-verejna-stranka-faktury) (protože k designu mám asi tak daleko jako k Praze z Azor) s tím, že jí komplet napíšu znova pomocí komponent v Reactu a budu se modlit, aby to nikoho z Fakturoidu (až si tento článek přečte) neurazilo... (-:
 

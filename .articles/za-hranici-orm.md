@@ -1,10 +1,16 @@
+---
+id: 773516e7-b186-4441-9de4-0ce12bdc37b3
+timestamp: 1406926545000
+title: Za hranicí ORM
+slug: za-hranici-orm
+---
 Již mnohokrát jsem slyšel, že je ORM [antipattern](http://www.zdrojak.cz/clanky/orm-je-antipattern/). Já si to nemyslím. Je to hloupý a uspěchaný názor. V dnešním článku však nechci rozebírat co je a co není antipattern. To je jen zbytečnou ztrátou času. Rád bych ukázal použití jednoho ORM systému, který mě naprosto uchvátil.
 
 # Když jsou potřeba firemní procesy
 
 Zejména začínající firmy mají na svém startu náročný úkol. Je zapotřebí vytvořit vnitrofiremní procesy, které striktně řídí běh různých akcí jako je například výroba, reklamace, nebo třeba koloběh dokumentů. Ve firmě [taková řešení nabízíme](http://www.orgis.cz/sluzby/in-house) a je o ně velký zájem. Má to svůj smysl. Není žádným tajemstvím, že používáme ERP systém [Odoo](https://www.odoo.com/), protože je to velmi silný nástroj. I přes neuvěřitelnou modifikovatelnost této aplikace je občas zapotřebí sáhnout k daleko více sofistikovanému řešení. Proč? Občas jsou totiž vnitropodnikové procesy velmi složité a navíc jich je velké množství. V takovém případě, je téměř jedinou možností napsat si pro tento ERP systém rozšíření, které tento těžký úkol zvládne.
 
-![](393212dc-381f-4b3a-a06c-fb5d33d6dc29/workflow.png) *** *Ukázka struktury klasického firemního workflow*
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/393212dc-381f-4b3a-a06c-fb5d33d6dc29/workflow.png) *Ukázka struktury klasického firemního workflow*
 
 Nechci však psát návod na to, jak si takový modul naprogramovat. O tom třeba někdy příště. Pojďme se raději podívat na to, jak téměř celé Odoo funguje, protože je to skutečně pozoruhodné. Bez kódů to však nepůjde.
 

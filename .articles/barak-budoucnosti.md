@@ -1,3 +1,9 @@
+---
+id: 47afe102-bda4-448a-895e-fb948bdd9206
+timestamp: 1427631321000
+title: Barák budoucnosti
+slug: barak-budoucnosti
+---
 Aneb jak jsem poprvé a naposledy přešlápl. Je to jednoduché, nebudeme si nic nalhávat. Ještě jsem nepochopil smysl Barcampu. A tak se stalo, že jsem si připravil povídání o něčem, co nikdo moc nechápal. Jistě že mě to trošku mrzí, zároveň mi však přijde absurdní, že někdo přijde na přednášku, kde jsem upozorňoval v anotaci na použité technologie, které budou ve vyprávění zahrnuty a pak jsem slyšel, že někdo vůbec nevěděl o čem je řeč. To je ale kapitola sama pro sebe... (-:
 
 Poučím se a děkuji za feedback. Bylo to tak půl na půl. Půl lidí mi opakovala vlastně jednu a tu samou věc. Že to bylo moc složité. Že bylo potřeba znát hodně věcí okolo, aby se mohl člověk chytat. To je jeden z důvodů, proč už si nikdy nevezmu takovou přednášku na akci jako je Barcamp. Spektrum posluchačů totiž bylo extrémní. Od lidí úplně mimo mísu až po lidi, kteří této problematice perfektně rozumí (lépe než já). Proto jsem rád i za druhou polovinu feedbacku. Potkal jsem se totiž zhruba se stejným počtem lidí, ale s obráceným postojem, takže jsem měl prostor některé věci ještě dovysvětlit a vyjasnit. Bylo fakt super, když mě někdo zastavil na chodbě a chtěl vědět jak je technicky možné pořešit některé věci o kterých jsem mluvil, nebo si chtěl povídat o tom, jak jsou ty koncentrátory vlastně implementované a jak to funguje podrobněji, **že se mu to líbí!**

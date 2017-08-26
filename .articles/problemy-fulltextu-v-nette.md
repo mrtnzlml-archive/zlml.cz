@@ -1,3 +1,9 @@
+---
+id: 17782730-319b-40ea-92d0-e33c84b32e29
+timestamp: 1375215333000
+title: Problémy fulltextu v Nette
+slug: problemy-fulltextu-v-nette
+---
 Nedávno jsem psal o tom, jak využívat fulltext indexy na InnoDB tabulkách (http://zlml.cz/using-fulltext-searching-with-innodb).
 Není to nic převratného, ale každý den se to také nedělá. Zmínil jsem také, jak vyhledávat, což
 bylo řešení [Jakuba Vrány .{target:_blank}](http://php.vrana.cz/fulltextove-vyhledavani-v-mysql.php).

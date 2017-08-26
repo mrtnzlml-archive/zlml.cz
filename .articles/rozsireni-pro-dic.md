@@ -1,3 +1,9 @@
+---
+id: 6b057983-39a9-4328-a526-2dfb03babbbb
+timestamp: 1457796154000
+title: Rozšíření pro DIC
+slug: rozsireni-pro-dic
+---
 Jednu z věcí, které jsem zde na blogu moc nepopsal jsou rozšíření pro DIC (Dependency Injection Container, potomek `Nette\DI\Container`). A protože se chci vrátit jednodušším článkům, zaměřím se na úplně základy. Jaká je motivace k psaní rozšíření DIC a co to vlastně je?
 
 Své aplikace rozděluji poměrně důsledně na jakési balíčky (bundles - název ze Symfony). Cílem je rozškatulkovat celou aplikaci podle logických celků, tzn. každý bundle by se měl starat pouze o tu svojí věc a zároveň si s sebou nést vše potřebné. Jedná se o balíčky typu *Articles*, který se stará (jak sám název napovídá) pouze a jenom o články, nebo *Eshop*, *GoPay*, *Media*, *Users*, atd. Výhodou tohoto přístupu je to, že mohu kdykoliv z balíčku udělat Composer balíček a úplně ho oddělit od aplikace. Zároveň některé balíčky směřují k jednoduchému oddělení do [microservices](http://martinfowler.com/articles/microservices.html). Nevýhodou je pak to, že je to oproti běžným způsobům jak navrhovat aplikaci poměrně složité.

@@ -1,3 +1,9 @@
+---
+id: 16cdfe07-444b-48ee-ae7a-ff85893edba5
+timestamp: 1376166681000
+title: Fluent interface a PCRE
+slug: fluent-interface-a-pcre
+---
 Na následujících řádcích předvedu dvě věci. První je úžasný nápad jak vytvářet regulární výrazy pomocí fluent zápisu ([inspirace .{target:_blank}](https://github.com/VerbalExpressions/PHPVerbalExpressions/blob/master/VerbalExpressions.php)), což je druhá věc o které bych se rád zmínil.
 
 # Regulární výrazy jsou peklo

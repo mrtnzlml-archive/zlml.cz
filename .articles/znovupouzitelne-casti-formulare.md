@@ -1,3 +1,9 @@
+---
+id: d0a905ac-329a-46a9-899b-bfe7518519c4
+timestamp: 1448405176000
+title: Znovupoužitelné části formuláře
+slug: znovupouzitelne-casti-formulare
+---
 Před nějakým časem jsem psal o tom, jak vytvořit [znovupoužitený formulář](znovupouzitelny-formular). Nejedná se o nic jiného, než o správné navržení a následné použití komponent, tedy potomků `UI\Control`. Pokud bych měl být upřímný, nemyslím si, že se formuláře nějak často na webu opakují a osobně tento princip používám spíše pro oddělení části aplikace do samostatného balíčku. Tím spíš najde následující ukázka méně použití. Právě mám totiž za úkol navrhnout předělání jedné administrace. Úkolem není hledět na to, jak moc je tento přístup špatný, ale navrhnout řešení, které nahradí stávající 1:1. Tato administrace obsahuje často se opakující (a velmi rozsáhlý) formulář, který se skládá z několika karet. Navíc některé části formuláře spolu vůbec nesouvisí a na každé stránce je formulář trošku jiný (i když je podobnost zřejmá). Vzhledem k tomu, že se jedná o tak rozsáhlý kód, upustil jsem od znovupoužitelného formuláře a navrhnul jsem znovupoužitelné pouze jeho části. A na následujících řádcích nastíním jak.
 
 # Na začátku stála komponenta

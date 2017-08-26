@@ -1,3 +1,9 @@
+---
+id: 112c84ae-680a-4d72-8aa3-96e8efeb8f1d
+timestamp: 1488119652000
+title: Jak na lokální CSS pro React
+slug: jak-na-lokalni-css-pro-react
+---
 Když jsem opouštěl koncept [webových komponent](1-od-komponent-zpet-ke-komponentam) a přecházel jsem k Reactu, tak mě nejvíce mrzelo, že přijdu o všechny zajímavé vlastnosti shadow DOMu. Ve webových komponentách se to má tak, že jak JS tak CSS jsou součástí jedné šablony a neovlivňují globální prostor. To je u Reactu bez problému z pohledu JS. Z pohledu CSS je to však jiná pohádka. Jakýkoliv styl definovaný v rámci komponenty se definuje pro celou aplikaci. Příklad jednoduché hlavičky:
 
 ```js

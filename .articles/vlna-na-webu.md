@@ -1,3 +1,9 @@
+---
+id: 2abb97d9-9844-4467-b7cb-56844462425b
+timestamp: 1391288978000
+title: Vlna na webu
+slug: vlna-na-webu
+---
 Vlna je program [Petra Olšáka .{target:_blank}](http://ftp.linux.cz/pub/tex/local/cstug/olsak/vlna/), který slouží k umístění nezalomitelné místo na místo v textu, kde by nemělo dojít k samovolnému zalomení řádku. Tento program slouží k dodatečné úpravě textů napsaných v LaTeXu. V tomto prostředí se nezalomitelná mezera nahrazuje znakem vlnovkou - tildou (~). U webového výstupu se používá zástupná entita <code>&amp;nbsp;</code>.
 
 # Kde by měla být nedělitelná mezera

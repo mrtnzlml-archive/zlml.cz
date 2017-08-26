@@ -1,3 +1,9 @@
+---
+id: 30938e58-9de3-403e-a862-493564630ddd
+timestamp: 1375126671000
+title: Using fulltext searching with InnoDB
+slug: using-fulltext-searching-with-innodb
+---
 Sometimes is quite useful to use InnoDB engine. 
 Unfortunately InnoDB is good for tables with foreign keys, but useless for fulltext search. 
 You can't create fulltext index on InnoDB tables, but you can create this index on MyISAM tables. 

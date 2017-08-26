@@ -1,3 +1,9 @@
+---
+id: 52dfa065-130b-4c37-81aa-289bd6ceee9e
+timestamp: 1392936502000
+title: Kde se berou spamy?
+slug: kde-se-berou-spamy
+---
 <div class="alert alert-info">Tento článek navazuje na článek [Stáhněte si zdarma 897457 emailových adres](stahnete-si-zdarma-897457-emailovych-adres) z ledna tohoto roku. Přečtěte si jej prosím, ať víte o co jde.</div>
 
 Rád bych tímto všechny čtenáře poprosil o pomoc. Ačkoliv na internetu vystupuji veřejně a nemám s tím problém, jsem velmi háklivý na to, když někdo neoprávněně zneužívá mé osobní informace. Někteří přijmou moji žádost a problém odstraní - viz nedávno zrušená kopie tohoto blogu. Někteří však dělají všechno proto, abych pokračoval v rituálním podpalování válečné sekery a proto jsem neskončil tam kde jsem v minulém článku přestal psát.

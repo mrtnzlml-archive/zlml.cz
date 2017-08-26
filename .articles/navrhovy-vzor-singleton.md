@@ -1,3 +1,9 @@
+---
+id: e9cd5692-13b4-495f-a63d-1dd5f4923fcb
+timestamp: 1356550681000
+title: Návrhový vzor Singleton
+slug: navrhovy-vzor-singleton
+---
 Návrhový vzor Singleton je velmi známý. Má za úkol zajistit, že bude z určité třídy existovat pouze jedna instance. K této instanci poskytne globální přístupový bod. Jednoduché zadání, ale samotná implementace může být v PHP zákeřná. Proč? Tak prvně záleží na tom, jak budeme u návrhu striktní.
 
 ```php

@@ -1,3 +1,9 @@
+---
+id: 334c8bae-af8a-4b17-9735-dfba909f5fa1
+timestamp: 1447611844000
+title: Od indexu až po presenter
+slug: od-indexu-az-po-presenter
+---
 Když jsem se učil pracovat s Nette Frameworkem, musel jsem v začátcích hodně přivírat oči a říkat si "prostě to tak je". Hodně věcí bylo zahaleno do tmy. Teď už to tak naštěstí není, ale stále se stává, že mi někdo napíše a děkuje za poodhalení a vysvětlení toho, jak to funguje na pozadí (za což zase děkuji já). Pokusím se tedy pokračovat a vrátím se na úplný začátek - do `index.php` a poodhalím, jak probíhá start takové běžné aplikace. A jako vždy - co nejjednodušeji.
 
 Zodpovím (nebo alespoň nastíním odpovědi na) následující otázky:

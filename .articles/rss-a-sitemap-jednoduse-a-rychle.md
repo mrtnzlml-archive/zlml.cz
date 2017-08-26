@@ -1,3 +1,9 @@
+---
+id: 71e8347e-9bdb-4d81-a323-203be472f0ad
+timestamp: 1376169022000
+title: RSS a Sitemap jednoduše a rychle
+slug: rss-a-sitemap-jednoduse-a-rychle
+---
 Pár článků zpět jsem ukazoval několik příkladů, jak tvořit různé routy. Ukazoval jsem routy pro RSS i sitemap.xml. Nikde jsem však zatím neukazoval jak je to jednoduše realizovatelné. Dokonce tak jednoduše, že je škoda tyto soubory nevyužít na jakémkoliv webu, protože mají poměrně velký potenciál.
 
 Začněme HomepagePresenterem (DEV Nette):

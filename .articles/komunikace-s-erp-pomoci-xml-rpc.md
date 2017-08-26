@@ -1,3 +1,9 @@
+---
+id: ec59389a-b2a2-4033-bbc6-f778efe7095a
+timestamp: 1409163060000
+title: Komunikace s ERP pomocí XML-RPC
+slug: komunikace-s-erp-pomoci-xml-rpc
+---
 Spousta lidí by se ráda připojovala na API ERP systému [Odoo](https://www.odoo.com/), ne vždy je to však procházka růžovým sadem, protože se očekává místy až přehnaná interní znalost tohoto systému. Přitom je to zbytečné. V dnešním článku se pokusím zdokumentovat právě tuto žalostně zdokumentovanou stránku věci tak, aby to zvládl každý alespoň trochu zdatný programátor.
 
 Prvně však několik málo slov o co vlastně jde. Odoo je ERP ([Enterprise Resource Planning](http://www.orgis.cz/sluzby/in-house)) systém poměrně bohatý na funkce a má za úkol řešit zejména vnitrofiremní procesy a obecně všechny záležitosti, které se okolo jakékoliv firmy motají. Lze tedy řešit plánování projektů, jejich workflow, rozvrhování času, řízení zakázek, ale také například správu dokumentů, skladové zásoby, mass mailing, nebo tzv. [Point of Sale](https://www.odoo.com/page/point-of-sale) což je jedna z těch nejvíce zajímavých věcí, alespoň z mého pohledu. Zjednodušeně řečeno lze udělat naprosto cokoliv. A co nejde, tak se jednoduše doprogramuje. Aby však šlo udělat cokoliv, je potřeba připojovat se na tento systém vzdáleně, protože občas se hodí propojit stávající webovou aplikaci právě s takovýmto systémem. To může mít několik důvodů. Například chcete mít ve webové aplikaci data sjednocená s ERP systémem, nebo si chcete vzdáleně stahovat faktury, popř. tlačit data do účtovacího systému. Jak již bylo řečeno - možné je naprosto cokoliv.

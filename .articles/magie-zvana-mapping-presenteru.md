@@ -1,3 +1,9 @@
+---
+id: 098b3cf2-dc80-4c7f-b02b-c5918cc1c94c
+timestamp: 1459632882000
+title: Magie zvaná mapping presenterů
+slug: magie-zvana-mapping-presenteru
+---
 Ona to vlastně ani není taková magie jako to není nikde pořádně popsané. Než se pustím to obludných složitostí, bylo by vhodné zmínit se co to vlastně mapping presenterů je. Viděli jste někde toto v konfiguraci?
 
 ```neon

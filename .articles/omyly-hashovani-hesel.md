@@ -1,3 +1,9 @@
+---
+id: 2f77a602-c2d5-4dd1-baee-d033fedad75e
+timestamp: 1393074151000
+title: Omyly hashování hesel
+slug: omyly-hashovani-hesel
+---
 Někdy minulý rok jsem si četl prezentaci [Michala Špačka .{target:_blank}](http://www.michalspacek.cz/) o [hashování hesel .{target:_blank}](http://www.slideshare.net/spaze/hashe-hesla-develcz-2013) a byl jsem z toho poněkud zklamán. Naprosto souhlasím se vším co tam je, přesto však nemám rád, když se dojde k závěrům, které sice na první pohled dávají smysl a fakt dobře se tak dá argumentovat, ale ve výsledku jsou podle mého názoru některé opravdu chybné. Nedávno kolem mě tato prezentace proplula znova a protože již mám celkem setříděné myšlenky, rozhodl jsem se je sepsat.
 
 Tímto článkem nehodlám hatit již zmíněnou prezentaci. Naopak se chci opřít do všech prezentací a výstupů, které něco tvrdí a není to tak docela pravda. Zároveň je také nutno říct, že nebudu řešit funkce typu MD5, protože doufám, že všichni v dnešní době vědí, že funkce MD5 prostě není určena na hashování hesel. Přesto si neodpustím několik vět i o konkrétních implementačních problémech.

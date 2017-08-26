@@ -1,3 +1,9 @@
+---
+id: 2de31894-6830-48d7-a34f-9eaa72abc44b
+timestamp: 1382391734000
+title: LaTeX šablona
+slug: latex-sablona
+---
 Všiml si také někdo, že většina uživatelů WYSIWYG textového editoru typu Word v něm menšinu času píší a většinu času se snaží ohnout editor tak, aby dělal to co má? Tak přesně toto mě přestalo bavit a začal jsem všechny práce sázet v LaTeXu. Pro psaní mám vytvořenou následující šablonu, kterou s výhodou používám a zatím jsou na ní od kontrolujících dobré ohlasy (pokud si toho někdo všiml).
 
 ```tex

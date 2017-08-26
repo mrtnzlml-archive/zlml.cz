@@ -1,3 +1,9 @@
+---
+id: c7509237-b0ee-42d7-95e6-5dba3e937a4c
+timestamp: 1430044733000
+title: Doctrine pro non-doctrine programátory
+slug: doctrine-pro-non-doctrine-programatory
+---
 A také o tom proč jsem se ptal kdo studoval, studuje, nebo bude studovat elektrotechnickou fakultu a proč jsem si až pak uvědomil, že jsem se vlastně zeptal úplně blbě.
 
 Ale napřed k samotné přednášce. Nemá smysl zde psát dlouhosáhlé slohy o tom co jsem říkal, počkejte si na video. Pár slov si však neodpustím. Myslím si, že jsem málo zdůraznil to, aby si každý koho to alespoň trošku zajímá Doctrine vyzkoušel. Ale ne jen tak si něco uložit a přečíst z databáze. Já jsem si například přepsal tento blog. Kompletně. Udělejte něco podobného. Teprve potom se ukáže jaké jsou výhody/nevýhody a hlavně - teprve teď se můžete rozhodnout co vám více sedí, protože už máte vyřešené nějaké konkrétní problémy, ne jen modelové situace. Výměnou za hvězdičku se můžete inspirovat například [zde](https://github.com/mrtnzlml/zlml.cz).

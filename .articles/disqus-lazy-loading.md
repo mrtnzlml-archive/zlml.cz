@@ -1,3 +1,9 @@
+---
+id: 76a53072-7779-478d-9557-c9f855ebce4d
+timestamp: 1402601786000
+title: Disqus lazy loading
+slug: disqus-lazy-loading
+---
 Tento článek ve skutečnosti odstartovalo zdánlivě nesouvisející vlákno na [Nette fóru .{target:_blank}](http://forum.nette.org/cs/19397-ako-sa-zbavit-fid-v-url-ak-sa-nemylim). V tomto vláknu se řeší parametr *_fid* v URL adrese, který tam Nette framework přikládá kvůli flash messages. Tato vlastnost někoho skutečně hodně štve, mě zase až tak moc ne. Jenže když jsem nad tím vláknem chvíli seděl, tak jsem si uvědomil, že mám komentářový systém Disqus implementovaný špatně. Čtěte dál a vyhněte se stejné chybě... (-:
 
 # Univerzální kód

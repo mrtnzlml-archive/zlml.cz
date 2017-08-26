@@ -1,3 +1,9 @@
+---
+id: b18ce753-bbfc-4de4-9c2e-3c71c379d25a
+timestamp: 1390822437000
+title: Stáhněte si zdarma 897457 emailových adres
+slug: stahnete-si-zdarma-897457-emailovych-adres
+---
 V následujícím článku bych rád nastínil problematiku newsletterů nejen z programátorského hlediska <s>a také bych se rád opřel do bezpečnosti společnosti Wedos, které mnoho lidí tolik věří</s>... (-:
 
 <span style="color:green">Tento projekt pravděpodobně nemá se společností Wedos nic společného jak jsem si zřejmě mylně myslel.</span>

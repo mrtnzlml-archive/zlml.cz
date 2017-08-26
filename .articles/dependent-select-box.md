@@ -1,8 +1,14 @@
+---
+id: 420ed8a1-f8bb-42eb-9f8d-356783765357
+timestamp: 1414868997000
+title: Dependent select box
+slug: dependent-select-box
+---
 Občas je v Nette zapotřebí vyřešit dependent select box. Je to relativně málo častý požadavek a o to méně se o něm dá najít, když je to zrovna potřeba. V zásadě existují dvě řešení. Nudné - poctivé a pak zábavné - špinavé. Podívejme se na to, jak se dá takový dependent select box jednoduše vyřešit.
 
 # Čisté řešení
 
-[* 51d212f2-5aa9-44b9-9085-f6267e1974e9/vystrizek.png >]
+![](https://zlmlcz-media.s3-eu-west-1.amazonaws.com/51d212f2-5aa9-44b9-9085-f6267e1974e9/vystrizek.png)
 Toto řešení ukazuje jak by se takový problém měl zhruba řešit. Myšlenka je velmi jednoduchá. Prvně potřebujeme data do závislého select boxu. Ty se normálně vyřeší prostřednistvím databáze, v našem případě postačí jednoduché pole.
 
 ```php

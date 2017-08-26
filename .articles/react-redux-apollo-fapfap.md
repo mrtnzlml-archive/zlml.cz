@@ -1,3 +1,9 @@
+---
+id: 6952eca3-3942-4bfa-b68e-432772912eca
+timestamp: 1490538013000
+title: React + Redux - Apollo =  FapFap
+slug: react-redux-apollo-fapfap
+---
 Na konci minulého roku jsem začal něco jako virtuální seriál o React vs. PHP aplikaci. Včera jsem na Poslední sobotě byl upozorněn na to, že už asi nepokračuju. To není pravda - pouze jsem je přestal číslovat... :) Po [GraphQL](2-graphql), vyřešení [N+1 problému](reseni-n-1-problemu-v-graphql), [architektuře serverové části](hexagonalni-architektura) a [omezení CSS kontextu](jak-na-lokalni-css-pro-react) v React komponentách je čas podívat se podrobněji na komunikaci se serverem.
 
 Ve výsledku jsem hodně rád, že jsem to tak oddaloval, protože jsem to asi tak třikrát celé předělával a konečně mám radost z toho jak to vypadá. Veškeré kódy týkající se [frontendu](https://github.com/adeira/connector-frontend) i [backendu](https://github.com/adeira/connector) jsou jako vždy k dispozici online pod MIT.
@@ -52,8 +58,6 @@ export const loadAllCameras = () => {
 ```
 
 Zde začíná být vidět důvod, proč jsem opustil Apollo. Díky tomu, že mám teď v ruce veškeré akce a reducery, tak mohu pohodlně spouštět a řetězit akce jak se mi zachce. Až Redux spustí tuto akci (resp. [Redux Thunk](https://github.com/gaearon/redux-thunk)), tak si jen najde ten správný reducer (podle typu `ALL_CAMERAS_LOADING` resp. `ALL_CAMERAS_LOAD_SUCCESS`), ten upraví obsah Redux úložiště a protože máme deklarativní React, tak se data automaticky překreslí.
-
-![](753737db-6bc8-42cf-a46a-228ccba5283a/graphql-komunikace-crop.png) *** Obr. 1: příklad komunikace komponent s API
 
 # Server Fetcher
 

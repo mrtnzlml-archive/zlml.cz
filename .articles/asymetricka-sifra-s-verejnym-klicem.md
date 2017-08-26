@@ -1,3 +1,9 @@
+---
+id: cec65f8d-f2c5-4820-8ca6-3c6c9c7b1e72
+timestamp: 1347049798000
+title: Asymetrická šifra s veřejným klíčem
+slug: asymetricka-sifra-s-verejnym-klicem
+---
 O veřejné distribuci klíčů jsem již dříve psal. Pojďme se však podívat nejen na samotnou distribuci, ale i na myšlenku asymetrického šifrování. Prvně je však třeba vysvětlit několik důležitých věcí. Začněme tím, co vlastně znamená asymetrická šifra. Před myšlenkou asymetrického šifrování, jejíž autorem je Whitfield Diffie, se používalo výhradně šifrování symetrické, což znamená, že proces dešifrování zakódované zprávy je přesně opačný k procesu šifrování. Asymetrické šifrování však zavádí myšlenku použití jiného klíče na šifrování a jiného na dešifrování.
 
 Jak to vyřešit? Jak je možné použít jiný klíč na šifrování a jiný na dešifrování? Již existoval koncept, který umožňoval výměnu  klíčů veřejně (a bezpečně). Stále byl však na principu synchronní komunikace odesílatele a příjemce, což nebylo optimální řešení a proto byl vymyšlen způsob jak tento problém obejít. Myšlenka byla jednoduchá. Příjemce musí vytvořit veřejný klíč, který následně zveřejní tak, aby byl veřejný opravdu pro všechny. V tomto případě je jasné, že by to nemělo smysl, pokud by se nepoužívala jednosměrná funkce šifrování, což je další pravidlo. A zároveň opět onen příjemce musí mít svůj tajný klíč, který dokáže informaci zašifrovanou veřejným klíčem dešifrovat. Z toho je patrná ta asymetričnost šifry. Nepoužívám stejný klíč na zašifrování a dešifrování jako u jiných šifer.

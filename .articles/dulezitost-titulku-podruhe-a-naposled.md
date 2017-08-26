@@ -1,3 +1,9 @@
+---
+id: c8de8345-cdb5-4580-966a-96b1331479c3
+timestamp: 1382390436000
+title: Důležitost titulku podruhé (a naposled)
+slug: dulezitost-titulku-podruhe-a-naposled
+---
 Také bych mohl začít slovy: "Jsem to ale trouba." V následujících několika odstavcích bych rád navázal na článek, kde jsem upozorňoval na to, jak je <code>title</code> tag důležitý (http://zlml.cz/portal-zcu-docasne-mimo-provoz). Což jsem si ostatně nechtěně vyzkoušel.
 
 # Jak málo stačí k umístění ve vyhledávači

@@ -1,3 +1,9 @@
+---
+id: 314fff27-204c-449e-9975-572db54475a2
+timestamp: 1375611559000
+title: Routování v Nette - prakticky
+slug: routovani-v-nette-prakticky
+---
 <div class="alert alert-success">Tento článek byl naposledy revidován, aktualizován a rozšířen <strong>27. června 2014</strong>...</div>
 
 V následujícím článku se budu opírat o teorii napsanou v [dokumentaci](http://doc.nette.org/cs/routing).

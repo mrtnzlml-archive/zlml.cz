@@ -1,3 +1,9 @@
+---
+id: 3d580b09-b622-4a72-a912-a2205994b051
+timestamp: 1392999129000
+title: Jaký email je nejvíce využívaný?
+slug: jaky-email-je-nejvice-vyuzivany
+---
 Včera jsem psal o bezpečnostní chybě, která umožňuje získat podle mého názoru nezanedbatelně velký vzorek emailových adres. Krom toho, že bych byl rád, aby byla tato chyba opravena, nemám co jiného s touto kolekcí adres dělat. Tak jsem se rozhodl vytvořit nějakou statistiku. Svým způsobem se totiž jedná o dosti specifické uživatele, protože se pravděpodobně jedná z naprosté většiny pouze o ČR a SK uživatele, takže kdo čeká, že bude např. gmail umístěn nějak dobře, možná bude překvapen.
 
 A protože po diskusích krouží mnoho rádoby matematiků, rád bych teď přesně definoval všechny vstupní a výstupní hodnoty včetně jejich chyb, čímž doufám minimalizuji to, že výsledky někdo špatně pochopí. Všechny data jsou brány z kolekce čítající **384 392 unikátních** emailových adres s tím, že uvažuji zejména u rozložení poskytovatelů emailových schránek chybu 1%. Je to dáno tím, že vstupní data nejsou úplně korektní a ukazuje se, že se dost často vyskytují emaily jako `@seznam.czsms`, `@seznam.cztel`, `@seznam.czwww`, `@seznam.czweb`, `@senam.cz` atd. Většinu takových prohřešků jsem se snažil eliminovat, každopádně není to dokonalé. Osobně bych chybu odhadoval na desetiny, možná ani ne setiny procenta, ale raději ji nechávám větší. Tato chyba je v prvním grafu také graficky znázorněna. Zajímavé je také to, že někteří lidé evidentně chápu input pro zadání emailu jako deník, takže jsou schopni napsat do tohoto řádku všechny své emailové adresy. Stojí za zamyšlení jak správně navrhovat formuláře... Dále jsou pak z výpočtů zastoupení četnosti znaků prvních písmen emailových adres vypuštěny čísla, takže tato dílčí statistika počítá s o něco menší vstupní kolekcí 382 338 emailových adres.

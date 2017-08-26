@@ -1,3 +1,9 @@
+---
+id: dbf85219-5173-4c7b-924a-636e86172b93
+timestamp: 1382905620000
+title: Změna URL struktury
+slug: zmena-url-struktury
+---
 Rád bych tímto upozornil na změny URL adres na tomto webu. A zároveň k technické povaze tohoto webu
 prozradím i bližší informace ze zákulisí.
 

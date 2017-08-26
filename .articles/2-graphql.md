@@ -1,3 +1,9 @@
+---
+id: 95683b6a-7c7b-4ecf-b2a0-5730b2f85216
+timestamp: 1483183709000
+title: GraphQL
+slug: 2-graphql
+---
 Z [minulého dílu](1-od-komponent-zpet-ke-komponentam) by mělo být všem jasné, jak jsem se dostal až sem. Od PHP komponent k webovým komponentám, které vlastně nejsou skutečné webové komponenty, ale jen kus JS kódu, který implementuje vlastní způsob webových komponent - React. Jsem přesvědčen o tom, že pro další pokračování je nutné vysvětlit, jak taková aplikace funguje. Takže...
 
 # Jak taková aplikace funguje?

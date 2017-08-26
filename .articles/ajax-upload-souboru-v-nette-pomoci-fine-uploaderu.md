@@ -1,3 +1,9 @@
+---
+id: 40b5dd33-13a2-447e-b352-256bc1afd9cd
+timestamp: 1377116084000
+title: AJAX upload souborů v Nette pomocí Fine Uploaderu
+slug: ajax-upload-souboru-v-nette-pomoci-fine-uploaderu
+---
 <div class="alert alert-danger">Následující text řeší starší verzi FineUploaderu `3.*`, nikoliv nejnovější. Hledáte-li aktuálnější návod, přečtěte si prosím http://zlml.cz/ajax-upload-souboru-v-nette-pomoci-fine-uploaderu-2...</div>
 
 A je zde další ukázka vlastní práce, která se může hodit i někomu dalšímu. Tentokrát půjde o ajaxové

@@ -1,3 +1,9 @@
+---
+id: 529dbd88-7b85-4e8a-9954-90aef87980cd
+timestamp: 1471811573000
+title: 10 obsesí na WebExpu 2016
+slug: 10-obsesi-na-webexpu-2016
+---
 **Obsese** ž. *kniž.* chorobně utkvělá představa, myšlenka; *med.* nutkavé jevy, nejčastěji myšlenky, popudy k jednání apod., jež jsou nesmyslné a bezdůvodně ovládají mysl nemocného, ačkoliv se je snaží potlačit
 
 **Obsession** it's kind of like a passion for something that crosses the line into crazy territory ([source](https://www.vocabulary.com/dictionary/obsession))

@@ -1,3 +1,9 @@
+---
+id: 3d718b54-4cf2-40dd-8d54-fe865a3655d1
+timestamp: 1419375234000
+title: RESP protokol - přímý přístup k Redis databázi
+slug: resp-protokol-primy-pristup-k-redis-databazi
+---
 ![](*RESP*)(http://redis.io/topics/protocol) (**RE**dis **S**erialization **P**rotocol) je něco, s čím se asi většina lidí nepotká. Důvod je prostý. Tento protokol je většinou zabalen hluboko v knihovně, která pracuje s Redis databází. Existují však situace, kdy se tento protokol hodí. Jednou ze situací je stav, kdy potřebujete předat, nebo naopak získat z Redisu nějaká data a všechno ostatní vyjma RESP komunikace je zbytečné zdržování (u mě třeba sypání dat z procesoru přímo do Redisu). Druhý případ nastane v okamžiku, kdy potřebujete zajistit komunikaci klient-server a potřebujete zvolit vhodný formát přenosu informací. Jedná se tedy o použití tohoto protokolu úplně mimo Redis. Důvodů může být celá řada, nejhlavnější by však byl asi ten, že se s RESP formátem dat dá snadno pracovat, protože používá prefixový zápis.
 
 # Formát RESP protokolu

@@ -1,3 +1,9 @@
+---
+id: 90a00b9f-47cd-4a93-bb59-13a8e1893ab3
+timestamp: 1436618301000
+title: Hierarchický router
+slug: hierarchicky-router
+---
 Tento článek volně navazuje na [předchozí](dynamicke-routovani-url-adres). Zde jsem ukázal, jak vytvořit routy tak, aby bylo možné mít zcela libovolnou adresu a routovat ji na jakoukoliv akci v aplikaci. Dnes to trošku vylepšíme. Přidáme totiž další dva požadavky s tím, že první je ten důležitější:
 
 1. Když se změní adresa (například článku), musí se stará přesměrovat na novou. To se může dít opakovaně a nechceme mít mnohonásobný redirect. Redirect může být maximálně jeden a to pro jakoukoliv starou (i původní) adresu.

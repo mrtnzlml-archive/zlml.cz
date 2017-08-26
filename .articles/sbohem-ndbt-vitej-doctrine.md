@@ -1,3 +1,9 @@
+---
+id: 6f2ba373-daf2-4569-bbd7-09e437f18975
+timestamp: 1394562840000
+title: Sbohem NDBT, vítej Doctrine
+slug: sbohem-ndbt-vitej-doctrine
+---
 Byl jsem požádán, abych napsal nejenom důvod přechodu z Nette Database na Doctrine, ale obecně co mě k tomu vedlo a jak takový přechod vlastně učinit. Na úvod bych však chtěl zdůraznit, že nejsem žádný extra programátor, vlastně to ani nestuduji, takže vše co budu ukazovat a vysvětlovat je tedy z mého pohledu a lecjakého OOP znalce by tento text mohl pobouřit... (-:
 
 Následující text používá [Kdyby\Doctrine](https://github.com/Kdyby/Doctrine), nevidím důvod proč ve spojení s Nette používat něco jiného. Je to dobrá knihovna.

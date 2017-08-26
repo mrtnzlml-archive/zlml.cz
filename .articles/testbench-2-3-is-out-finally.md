@@ -1,3 +1,9 @@
+---
+id: 8e78cf63-c20a-4fc9-b19e-46984abcb314
+timestamp: 1469363764000
+title: Testbench 2.3 is out (finally)
+slug: testbench-2-3-is-out-finally
+---
 Yeah, you heard that correctly. Testbench 2.3 has been released and it brings a lot of new features. I don't want to write about small bugfixes but about real improvements in testing environment. There was always one important mission in Testbench - to make testing easier for newcomers. And I am happy to show you biggest feature in this release: **scaffold**.
 
 Imagine you have your own application but without tests (this is the best situation for scaffolding). Now you can generate whole testing environment using this single command:

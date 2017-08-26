@@ -1,3 +1,9 @@
+---
+id: ad86363a-dc6d-4c7d-b334-a82424354134
+timestamp: 1485965763000
+title: Řešení N+1 problému v GraphQL
+slug: reseni-n-1-problemu-v-graphql
+---
 Na 85. Poslední sobotě v Praze jsem měl workshop a přednášku o GraphQL. Na konci přednášky padl velmi dobrý dotaz ohledně toho, jestli náhodou netrpí GraphQL v určitých situacích N+1 problémem. Načež jsem odvětil, že to není problém GraphQL, ale že ano. Teď je tedy ten správný čas podívat se na tuto situaci konkrétně a pokusit se ji vyřešit. Skvělé je, že [knihovna, kterou používám](http://webonyx.github.io/graphql-php/) na sebe částečně převzala řešení tohoto nešvaru. Ale o tom až za chvíli...
 
 # N+1 problém

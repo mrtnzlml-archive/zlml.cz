@@ -1,3 +1,9 @@
+---
+id: 73daaba4-4b37-440f-b4e7-375de01a03c8
+timestamp: 1394985629000
+title: Orion login stojí za prd
+slug: orion-login-stoji-za-prd
+---
 Když jsem dříve připravoval [prezentaci o Nette Frameworku](prednaska-z-nette-na-zcu), hledal jsem nějaký vhodný příklad, na kterém bych demonstroval zranitelnost webových aplikací. Úspešně jsem vyzkoušel pár eshopů a jednu stránku, která slouží ke školním účelům, ale není nijak oficiálně vedená pod univerzitou. Právě zde mě napadlo vyzkoušet také univerzitní systémy. A nestačil jsem se divit.
 
 # Pozadí univerzitního přihlašování

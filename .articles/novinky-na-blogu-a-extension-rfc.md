@@ -1,3 +1,9 @@
+---
+id: d0b9d1c4-61c7-49d1-9f10-e645525a5726
+timestamp: 1405252851000
+title: Novinky na blogu a extension RFC
+slug: novinky-na-blogu-a-extension-rfc
+---
 Kdo pravidelně sleduje [můj twitter](https://twitter.com/mrtnzlml), tak už to ví. A je to skvělé! Včera jsem totiž [mergnul](https://github.com/mrtnzlml/zlml.cz/commit/b21775df522271e81302d2987ff44d5285b245eb) důležitou část tohoto blogu a tím vydal verzi 1.1 snad stable... (-: Jedná se o celkem významný krok, ale stále je to nic oproti tomu co mám v plánu. V dnešním článku bych se rád podělil o většinu zajímavých novinek a v druhé části bych rád požádat o pomoc s rozvinutím jednoho zajímavého nápadu.
 
 # Novinky v release 1.1

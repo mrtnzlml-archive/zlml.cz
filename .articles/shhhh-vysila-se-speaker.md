@@ -1,3 +1,9 @@
+---
+id: 1b9f9c28-3652-47e8-ba52-9ffcb7455f18
+timestamp: 1474881018000
+title: Shhhh - vysílá se speaker
+slug: shhhh-vysila-se-speaker
+---
 Takové bylo téma celého Webexpa 2016 - shhhh. Nebo alespoň páteční části. Pro ty nejlepší a nejzajímavější řečníky byl totiž připraven velký sál, kam se podle cedulek na dveřích vejde až 2500 lidí. A nápad to byl zcela zajisté skvělý. Ovšem jen do chvíle, než začala první přednáška. V davu lidí totiž existuje efekt, kdy pokud něco říkám a jsem špatně slyšet - začnu mluvit více nahlas. A tak to udělá každý. Takže to byl první den **megašrumec**. A do toho přednášky. Úplně si dovedu představit, že to byla pro přednášející jedna z nejnáročnějších přednášek vůbec. I ze strany posluchače to bylo náročné - dokonce jsem párkrát přestal vnímat přednášku, protože to bylo fakt maso. Nechtělo se mi vracet se do toho sálu zpět na další skvělé přednášky. V sobotu už to bylo relativně ok.
 
 Ale řešit hluk, když jsem si mohl poslechnout spoustu skvělých přednášek by bylo malicherné. Věc se má tak. Pokaždé, když jedu na nějakou akci tohoto typu, jsem na vážkách. Na jednu stranu vím, že si poslechnu nějakou úžasnou přednášku a budu z toho úplně paf. Pak jsou zde však takové u kterých si člověk říká - proč to je na Webexpu? A přesně to se stalo.

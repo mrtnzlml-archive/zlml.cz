@@ -1,3 +1,9 @@
+---
+id: 847a3113-3989-46a4-9486-41bf0d49fe16
+timestamp: 1460891805000
+title: PSR-4 autoloader aplikace
+slug: psr-4-autoloader-aplikace
+---
 Nikdy jsem moc nelpěl na PSR-FIG pravidlech. Částečně možná proto, že jsem je nikdy moc nechápal, částečně možná proto, že nemám rád, když mi někdo něco nutí. Nekterá pravidla jsou ale docela fajn (i když se vždy něco najde). Jedním z jich je [PSR-4: Improved Autoloading](http://www.php-fig.org/psr/psr-4/). Jenže proč řešit nějaký autoloading, když v Nette funguje skvěle, ani o tom člověk neví? Fakticky jsou v každém sandboxu použity minimálně 2 autoloadery a mohl bych se tedy ohánět rychlostí, protože:
 
 > *If there must be multiple autoload functions, spl_autoload_register() allows for this. It effectively creates a queue of autoload functions, and runs through each of them in the order they are defined. By contrast, __autoload() may only be defined once. ([zdroj](http://php.net/manual/en/function.spl-autoload-register.php)*)

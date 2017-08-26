@@ -7,13 +7,8 @@ const Application = require('./Application');
 
 const server = ASE.createServer(Application.createExpressApp());
 
-// TODO: transpilovat (a nejlépe zabalit)
-
-exports.handler = (
-  event: Object,
-  context: ?Object,
-  callback: (error: null, success: string) => void,
-) => {
+// $FlowFixMe (this file is not transpiled therefore it's not possible to use Flow)
+exports.handler = (event, context, callback) => {
   /** Immediate response for WarmUP plugin */
   if (event.source === 'serverless-plugin-warmup') {
     return callback(null, 'Lambda is warm!');

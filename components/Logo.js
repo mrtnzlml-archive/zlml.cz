@@ -1,10 +1,14 @@
 // @flow
 
+import Link from 'next/link';
+
 import Colors from '../services/Colors';
 
 export default () =>
   <h1>
-    <a>Martin Zlámal</a>
+    <Link prefetch href="/">
+      <a>Martin Zlámal</a>
+    </Link>
     <style jsx>{`
       h1 a,
       h1 a:hover,
@@ -12,6 +16,7 @@ export default () =>
       h1 a:visited {
         color: ${Colors.red};
         text-decoration: none;
+        font-size: 10rem;
       }
     `}</style>
   </h1>;

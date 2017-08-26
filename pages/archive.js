@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
+import ArticlesDatabase from '../.articles/.database.json';
 
 type Props = {
   articles: Array<Object>,
@@ -28,24 +29,16 @@ const Archive = ({ articles }: Props) =>
 
 Archive.getInitialProps = async function() {
   // TODO: await storage
+  const articles = [];
+  for (const article of ArticlesDatabase) {
+    articles.push({
+      id: article.attributes.id,
+      title: article.attributes.title,
+      slug: article.attributes.slug,
+    });
+  }
   return {
-    articles: [
-      {
-        id: 1,
-        title: 'AAA',
-        slug: 'a-a-a',
-      },
-      {
-        id: 2,
-        title: 'BBB',
-        slug: 'b-b-b',
-      },
-      {
-        id: 3,
-        title: 'CCC',
-        slug: 'c-c-c',
-      },
-    ],
+    articles: articles,
   };
 };
 

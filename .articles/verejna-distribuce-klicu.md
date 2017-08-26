@@ -1,3 +1,9 @@
+---
+id: e0783b28-8a1a-400c-b91b-547b4c372fbe
+timestamp: 1387710504000
+title: Veřejná distribuce klíčů
+slug: verejna-distribuce-klicu
+---
 <blockquote>
   Inspirací a zdrojem informací pro tento článek byla kniha <strong>Simona Singha</strong> - Kniha kódu a šifer.
   <small>Utajování od starého Egypta po kvantovou kryptografii</small>

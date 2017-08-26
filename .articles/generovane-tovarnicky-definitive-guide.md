@@ -1,3 +1,9 @@
+---
+id: 55c2f8a2-9b13-46e2-b919-128c0c95a40d
+timestamp: 1427231722000
+title: Generované továrničky - definitive guide
+slug: generovane-tovarnicky-definitive-guide
+---
 No dobře, možná ne úplně definitivní, ale užitečná příručka snad. Pokusím se zde rozebrat všechny potřebné stavy generovaných továrniček, které považuji za důležité a jejich co nejjednodušší zápis v configu. Jedná se hlavně o pohled z hlediska předávání parametrů. Doufám, že to ještě někdo doplní o nějaké vylepšení, nebo další příklad, abych mohl tento seznam rozšířit. To je jeden ze dvou důvodů tohoto typu článků. Ten druhý je, abych měl kam odkazovat, až se mě někdo bude opět ptát.
 
 Celkem rozebírám tyto jednotlivé případy:

@@ -1,3 +1,9 @@
+---
+id: c8a25638-706f-4849-8965-d4aa66144ffc
+timestamp: 1432200241000
+title: Fixněte si databázi
+slug: fixnete-si-databazi
+---
 Možná to znáte. Již nějaký čas nepoužíváte žádný SQL soubor a strukturu databáze si generujete z entit pomocí Doctrine. Je to super, rychlé a funguje to. Paráda. Jenže málokterá databáze se obejde bez nějakých inicializačních dat. Jenže jak na to?
 
 # První přístup
