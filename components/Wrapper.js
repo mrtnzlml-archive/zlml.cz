@@ -4,13 +4,13 @@ type Props = {
   children?: Object,
 };
 
-export default ({ children }: Props) =>
+export default ({ children }: Props) => (
   <div className="wrapper">
     {children}
     <style jsx>{`
       .wrapper {
         background: white;
-        max-width: 1100px;
+        max-width: 900px;
         margin: 0 auto;
         padding-right: 12px;
         padding-left: 12px;
@@ -25,4 +25,5 @@ export default ({ children }: Props) =>
         }
       }
     `}</style>
-  </div>;
+  </div>
+);

@@ -1,22 +1,30 @@
 const fs = require('fs');
 const fm = require('front-matter');
 
-let allArticles = [];
-let filenames = fs.readdirSync(__dirname);
+let allArticleTitles = [];
+let allArticleBodies = {};
 
-filenames.forEach(function(filename) {
+fs.readdirSync(__dirname).forEach(function(filename) {
   if (!!filename.match(/.md$/)) {
-    let content = fs.readFileSync(`${__dirname}/${filename}`, 'utf-8');
-    allArticles.push(fm(content));
+    let content = fm(fs.readFileSync(`${__dirname}/${filename}`, 'utf-8'));
+    allArticleTitles.push(content.attributes);
+    allArticleBodies[content.attributes.id] = content;
   }
 });
 
-console.error(allArticles);
-allArticles = allArticles.sort((a, b) => {
-  if (a.attributes.timestamp < b.attributes.timestamp) return +1;
-  if (a.attributes.timestamp > b.attributes.timestamp) return -1;
+console.error(allArticleTitles);
+allArticleTitles = allArticleTitles.sort((a, b) => {
+  if (a.timestamp < b.timestamp) return +1;
+  if (a.timestamp > b.timestamp) return -1;
   return 0;
 });
 
-console.error(allArticles);
-fs.writeFileSync(`${__dirname}/.database.json`, JSON.stringify(allArticles));
+console.error(allArticleTitles);
+fs.writeFileSync(
+  `${__dirname}/.articleTitles.json`,
+  JSON.stringify(allArticleTitles),
+);
+fs.writeFileSync(
+  `${__dirname}/.articleBodies.json`,
+  JSON.stringify(allArticleBodies),
+);

@@ -2,10 +2,10 @@
 
 exports[`renders correctly 1`] = `
 <h1
-  data-jsx={4185821776}
+  className="jsx-1149569184"
 >
   <a
-    data-jsx={4185821776}
+    className="jsx-1149569184"
     href="/"
     onClick={[Function]}
   >

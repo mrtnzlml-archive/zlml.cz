@@ -2,6 +2,7 @@
 
 const express = require('express');
 const next = require('next');
+const Articles = require('../.articles/.articleTitles.json');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -17,9 +18,13 @@ const createExpressApp = () => {
 
   expressApp.get('/:slug', (req, res) => {
     const actualPage = '/article';
-    // TODO: 404
-    const queryParams = { id: 1 /*req.params.slug*/ }; // TODO find the ID (based on slug) - because of server rendering
-    app.render(req, res, actualPage, queryParams);
+    const article = findBySlug(req.params.slug);
+    if (article) {
+      const queryParams = { id: article.id };
+      app.render(req, res, actualPage, queryParams);
+    } else {
+      return handle(req, res);
+    }
   });
 
   expressApp.get('*', (req, res) => {
@@ -31,3 +36,8 @@ const createExpressApp = () => {
 
 exports.createExpressApp = createExpressApp;
 exports.app = app;
+
+function findBySlug(slug) {
+  // $FlowAllowNextLineWithExplanation: property `find` not found in CommonJS exports
+  return Articles.find(article => article.slug === slug);
+}

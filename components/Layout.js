@@ -6,17 +6,17 @@ import stylis from 'stylis';
 import Wrapper from '../components/Wrapper';
 import Colors from '../services/Colors';
 
+import Paragraph from '../components/markup/Paragraph';
+
 type Props = {
   children?: Object,
   title?: string,
 };
 
-export default ({ children, title = 'This is the default title' }: Props) =>
+export default ({ children, title = 'This is the default title' }: Props) => (
   <div>
     <Head>
-      <title>
-        {title}
-      </title>
+      <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="icon" href="/static/favicon.ico" />
@@ -28,7 +28,7 @@ export default ({ children, title = 'This is the default title' }: Props) =>
           body {
             font-family: sans-serif;
             font-weight: 300;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             background-color: #f9f9f9;
             margin: 0;
             color: ${Colors.dark};
@@ -36,10 +36,6 @@ export default ({ children, title = 'This is the default title' }: Props) =>
 
           html {
             font-size: 62.5%;
-          }
-
-          p {
-            hyphens: auto;
           }
 
           a,
@@ -70,10 +66,11 @@ export default ({ children, title = 'This is the default title' }: Props) =>
       {children}
 
       <footer>
-        <p>
+        <Paragraph>
           By the way - this website is also{' '}
           <a href="https://github.com/mrtnzlml/zlml.cz">open-sourced</a>.
-        </p>
+        </Paragraph>
       </footer>
     </Wrapper>
-  </div>;
+  </div>
+);

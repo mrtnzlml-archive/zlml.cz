@@ -1,55 +1,52 @@
 // @flow
 
-import Link from 'next/link';
-
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
 
-export default () =>
+import Paragraph from '../components/markup/Paragraph';
+import Link from '../components/markup/Link';
+
+export default () => (
   <Layout>
     <Link prefetch href="/archive">
-      <a>
-        Looking for a <strong>blog</strong>? It&apos;s here!
-      </a>
+      Looking for a <strong>blog</strong>? It&apos;s here!
     </Link>
-    <p>¡Hola! My name is</p>
+    <Paragraph>¡Hola! My name is</Paragraph>
     <Logo />
-    <p>
+    <Paragraph>
       And I love modern JS and clever ideas. I work with ES2017+ (and Flow and
       GraphQL) on a daily basis and I really enjoy it.
-    </p>
-    <p>
+    </Paragraph>
+    <Paragraph>
       I am also very interested in serverless technologies and that&apos;s why
       this blog runs on AWS Lambda environment.
-    </p>
-    <p>
+    </Paragraph>
+    <Paragraph>
       I&apos;ve started as a PHP programmer {new Date().getFullYear() - 2011}{' '}
       years ago and even though I love PHP, I do enjoy modern JS environment
-      much more.
-    </p>
-    <p>
+      much more. It&apos;s probably because it&apos;s much more dynamic.
+    </Paragraph>
+    <Paragraph>
       My &hearts; beats for open-source and testable code. Have a look{' '}
       <a href="https://github.com/mrtnzlml/">at my work</a> (unfortunately most
       of my work is in private Kiwi.com Gitlab).
-    </p>
+    </Paragraph>
     {/* TODO: co dělám (kiwi.com) a co ještě umím (NoSQL, Doctrine, ...) */}
-    <p>
+    <Paragraph>Right now I am traveling around the world.</Paragraph>
+    <Paragraph>
       Do you want to stay in touch with me? That&apos;s great and I really
-      appreciate it!
-    </p>
-    <p>mrtnzlml@gmail.com</p>
-    <p>
-      Become one of my awesome
-      <a href="https://twitter.com/mrtnzlml">
-        TODO <del>unicorns</del> followers
-      </a>
-      on Twitter&hellip;
-    </p>
-    <p>
+      appreciate it!{' '}
+      <Link href="https://twitter.com/mrtnzlml">
+        Here is my Twitter account
+      </Link>{' '}
+      so you can follow my jurney.
+    </Paragraph>
+    <Paragraph>
       <Link prefetch href="/archive">
         <a>
           Looking for a <strong>blog</strong>? It&apos;s here!
         </a>
       </Link>
-    </p>
-  </Layout>;
+    </Paragraph>
+  </Layout>
+);

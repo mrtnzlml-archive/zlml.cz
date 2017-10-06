@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import Colors from '../services/Colors';
 
-export default () =>
+export default () => (
   <h1>
     <Link prefetch href="/">
       <a>Martin Zlámal</a>
@@ -19,4 +19,5 @@ export default () =>
         font-size: 10rem;
       }
     `}</style>
-  </h1>;
+  </h1>
+);

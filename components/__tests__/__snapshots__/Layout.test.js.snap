@@ -3,12 +3,17 @@
 exports[`renders correctly 1`] = `
 <div>
   <div
-    className="wrapper"
-    data-jsx={3382400623}
+    className="jsx-2213994124 wrapper"
   >
     CONTENT
     <footer>
-      <p>
+      <p
+        style={
+          Object {
+            "fontSize": "2rem",
+          }
+        }
+      >
         By the way - this website is also
          
         <a
