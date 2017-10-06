@@ -41,7 +41,7 @@ Database backup
     exit
     scp -i ansible/LightsailDefaultPrivateKey.pem ec2-user@34.195.224.88:/home/ec2-user/dump.sql .
 
-Encrypting multiple files for Fravis-CI
+Encrypting multiple files for Travis-CI
 ---------------------------------------
 https://docs.travis-ci.com/user/encrypting-files/#Encrypting-multiple-files
 
