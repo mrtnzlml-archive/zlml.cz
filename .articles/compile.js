@@ -1,5 +1,13 @@
 const fs = require('fs');
 const fm = require('front-matter');
+const marked = require('marked');
+
+const renderer = new marked.Renderer();
+renderer.heading = function(text, level) {
+  const actualLevel = level + 1;
+  const escapedHeading = text.toLowerCase().replace(/[^\w]+/g, '-');
+  return `<h${actualLevel} id="${escapedHeading}">${text} <a href="#${escapedHeading}">#</a></h${actualLevel}>`;
+};
 
 let allArticleTitles = [];
 
@@ -13,6 +21,7 @@ fs.readdirSync(sourcesDirectory).forEach(function(filename) {
     console.error(`> ${content.attributes.title}`);
 
     delete content.frontmatter;
+    content.body = marked(content.body, { renderer: renderer })
     fs.writeFileSync(
       `${__dirname}/compiled/${content.attributes.slug}.js`,
       `export default ${JSON.stringify(content, null, 2)}\n`,
