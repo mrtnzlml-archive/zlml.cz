@@ -2,7 +2,7 @@
 
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
-import ArticlesDatabase from '../.articles/.articleTitles.json';
+import ArticlesDatabase from '../.articles/archive.json';
 
 import Link from '../components/markup/Link';
 
@@ -14,16 +14,19 @@ const Archive = ({ articles }: Props) => (
   <Layout>
     <Logo />
 
-    {articles.map(article => (
-      <div key={article.id}>
-        <Link
-          href={{ pathname: 'article', query: { id: article.id } }}
-          as={article.slug}
-        >
-          {article.title}
-        </Link>
-      </div>
-    ))}
+    {articles.map((article, index) => {
+      return (
+        <div key={article.id}>
+          <Link
+            href={{ pathname: 'article', query: { slug: article.slug } }}
+            as={article.slug}
+            prefetch={index === 0}
+          >
+            {article.title}
+          </Link>
+        </div>
+      );
+    })}
   </Layout>
 );
 

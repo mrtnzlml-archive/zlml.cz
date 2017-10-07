@@ -12,10 +12,8 @@ export default ({ children }: Props) => (
         background: white;
         max-width: 900px;
         margin: 0 auto;
-        padding-right: 12px;
-        padding-left: 12px;
+        padding: 12px;
         box-shadow: 0 1px 2px #aaa;
-        margin-top: 12px;
       }
 
       @media screen and (min-width: 720px) {

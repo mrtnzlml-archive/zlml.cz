@@ -13,7 +13,7 @@ all=error
 ./config/flow-typed
 
 [options]
+module.ignore_non_literal_requires=true
 module.name_mapper='^../.articles/.[a-zA-Z]+.json$' -> '<PROJECT_ROOT>/config/stub/GeneralArrayStub.js'
-
 suppress_comment= \\(.\\|\n\\)*\\$FlowAllowNextLineInThisTest\\:\\s?.+
 suppress_comment= \\(.\\|\n\\)*\\$FlowAllowNextLineWithExplanation\\:\\s?.+

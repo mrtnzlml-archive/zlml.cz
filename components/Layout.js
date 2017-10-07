@@ -6,8 +6,6 @@ import stylis from 'stylis';
 import Wrapper from '../components/Wrapper';
 import Colors from '../services/Colors';
 
-import Paragraph from '../components/markup/Paragraph';
-
 type Props = {
   children?: Object,
   title?: string,
@@ -62,15 +60,6 @@ export default ({ children, title = 'This is the default title' }: Props) => (
       </style>
     </Head>
 
-    <Wrapper>
-      {children}
-
-      <footer>
-        <Paragraph>
-          By the way - this website is also{' '}
-          <a href="https://github.com/mrtnzlml/zlml.cz">open-sourced</a>.
-        </Paragraph>
-      </footer>
-    </Wrapper>
+    <Wrapper>{children}</Wrapper>
   </div>
 );
