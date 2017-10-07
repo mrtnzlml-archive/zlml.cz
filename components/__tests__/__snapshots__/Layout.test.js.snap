@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <div>
   <div
-    className="jsx-2784329286 wrapper"
+    className="jsx-2774550859 wrapper"
   >
     CONTENT
   </div>

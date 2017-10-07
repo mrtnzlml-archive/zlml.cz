@@ -7,6 +7,7 @@ import Logo from '../components/Logo';
 
 import Link from '../components/markup/Link';
 import Paragraph from '../components/markup/Paragraph';
+import Strong from '../components/markup/Strong';
 
 const renderer = new marked.Renderer();
 renderer.heading = function(text, level) {
@@ -32,12 +33,23 @@ const Article = ({ article }: Props) => {
     <Layout>
       <Logo />
       <style jsx global>{`
+        .article blockquote {
+          margin-left: 1rem;
+          padding-left: 1rem;
+          font-style: italic;
+          border-left: 5px solid #ccc;
+        }
         .article p {
           hyphens: auto;
           text-align: justify;
         }
         .article pre {
           overflow-y: auto;
+          line-height: 1.2;
+          padding: 1.5rem;
+          background-color: #f7f7f7;
+          overflow-x: auto;
+          border-left: 1px dashed #ddd;
         }
       `}</style>
       <LinkBack />
@@ -48,7 +60,13 @@ const Article = ({ article }: Props) => {
           __html: marked(article.body, { renderer: renderer }),
         }}
       />
-      <Paragraph>Comments? Twitter!</Paragraph>
+      <Paragraph>
+        {/* TODO: Twitter share link: */}
+        <Strong>
+          Do you have comments? That&apos;s great! Tweet them so everyone can
+          hear you&hellip;
+        </Strong>
+      </Paragraph>
       <LinkBack />
     </Layout>
   );

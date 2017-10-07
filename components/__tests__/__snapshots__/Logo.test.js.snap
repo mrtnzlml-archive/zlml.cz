@@ -1,15 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<h1
-  className="jsx-1149569184"
+Array [
+  <p
+    style={
+        Object {
+            "fontSize": "2rem",
+            "hyphens": "auto",
+            "textAlign": "justify",
+          }
+    }
 >
-  <a
-    className="jsx-1149569184"
-    href="/"
-    onClick={[Function]}
-  >
-    Martin Zlámal
-  </a>
-</h1>
+    ¡Hola! My name is
+</p>,
+  <h1
+    className="jsx-2345896288"
+>
+    <span
+        className="jsx-2999761039"
+    >
+        <a
+            className="jsx-2999761039"
+            href="/"
+            onClick={[Function]}
+        >
+            Martin Zlámal
+        </a>
+    </span>
+</h1>,
+]
 `;

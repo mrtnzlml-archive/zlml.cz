@@ -40,13 +40,6 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-blockquote {
-	margin-left: 1rem;
-	padding-left: 1rem;
-	font-style: italic;
-	border-left: 5px solid #ccc;
-}
-
 html {
 	font-size: 62.5%;
 }
@@ -87,18 +80,6 @@ h2 > a:hover, h3 > a:hover, h4 > a:hover {
 h3 > small > a {
 	text-decoration: none;
 	color: #999;
-}
-
-p {
-	hyphens: auto;
-}
-
-pre {
-	line-height: 1.2;
-	padding: 1.5rem;
-	background-color: #f7f7f7;
-	overflow-x: auto;
-	border-left: 1px dashed #ddd;
 }
 
 table {

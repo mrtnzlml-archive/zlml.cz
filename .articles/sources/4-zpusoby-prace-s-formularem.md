@@ -146,8 +146,7 @@ $form->getHttpData($form::DATA_LINE, 'selectNo1')
 To `DATA_LINE` je vhodné pro jednořádkové vstupy, protože se na pozadí provede následující ošetření:
 
 ```php
-\Nette\Utils\Strings::trim(strtr($value, "\r
-", '  '))
+\Nette\Utils\Strings::trim(strtr($value, "\r\n", '  '))
 ```
 
 Pořád ale platí, že může přijít ze selectu nečekaná hodnota a nelze ničemu věřit. Jedná se však o naprosto svobodný způsob, který je možné kombinovat s předchozím. Pokud tedy máte _"neskutečně složitý formulář"_, který je _"už nakódovaný"_ a jeho definice _"má asi 500 řádek"_ a je to _"tak komplikované, že se v tom nikdo nevyzná"_ a bylo by _"lepší, kdybych si to mohl udělat sám"_, tak vězte, že to jde.

@@ -18,8 +18,8 @@ export default ({ children }: Props) => (
 
       @media screen and (min-width: 720px) {
         .wrapper {
-          padding-right: 24px;
-          padding-left: 24px;
+          padding-right: 36px;
+          padding-left: 36px;
         }
       }
     `}</style>

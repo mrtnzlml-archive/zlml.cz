@@ -14,13 +14,15 @@ const Archive = ({ articles }: Props) => (
   <Layout>
     <Logo />
 
-    {articles.map((article, index) => {
+    {articles.map(article => {
       return (
         <div key={article.id}>
+          <span style={{ color: '#aaa', paddingRight: '1rem' }}>
+            {article.date}
+          </span>
           <Link
             href={{ pathname: 'article', query: { slug: article.slug } }}
             as={article.slug}
-            prefetch={index === 0}
           >
             {article.title}
           </Link>
@@ -37,6 +39,7 @@ Archive.getInitialProps = async function() {
       id: article.id,
       title: article.title,
       slug: article.slug,
+      date: new Date(article.timestamp).toISOString().slice(0, 10),
     });
   }
   return {

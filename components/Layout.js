@@ -24,7 +24,7 @@ export default ({ children, title = 'This is the default title' }: Props) => (
           '',
           `
           body {
-            font-family: sans-serif;
+            font-family: Helvetica, Arial, Sans-Serif;
             font-weight: 300;
             font-size: 1.8rem;
             background-color: #f9f9f9;
@@ -34,26 +34,6 @@ export default ({ children, title = 'This is the default title' }: Props) => (
 
           html {
             font-size: 62.5%;
-          }
-
-          a,
-          a:hover,
-          a:focus {
-            color: ${Colors.red};
-          }
-
-          a:visited {
-            color: darkred;
-          }
-
-          a:hover,
-          a:focus {
-            text-decoration: underline;
-          }
-
-          a[href^="#error:"] {
-            background: red;
-            color: white;
           }
           `,
         )}
