@@ -1,10 +1,11 @@
 // @flow
 
-import Layout from '../components/Layout';
-import Logo from '../components/Logo';
 import ArticlesDatabase from '../.articles/archive.json';
 
+import Layout from '../components/Layout';
+import Logo from '../components/Logo';
 import Link from '../components/markup/Link';
+import Strong from '../components/markup/Strong';
 
 type Props = {
   articles: Array<Object>,
@@ -14,17 +15,18 @@ const Archive = ({ articles }: Props) => (
   <Layout>
     <Logo />
 
-    {articles.map(article => {
+    {articles.map((article, index) => {
       return (
         <div key={article.id}>
           <span style={{ color: '#aaa', paddingRight: '1rem' }}>
             {article.date}
           </span>
           <Link
-            href={{ pathname: 'article', query: { slug: article.slug } }}
+            href={`/p/${article.slug}`}
             as={article.slug}
+            prefetch={index === 0} // prefetch first article
           >
-            {article.title}
+            {index === 0 ? <Strong>{article.title}</Strong> : article.title}
           </Link>
         </div>
       );

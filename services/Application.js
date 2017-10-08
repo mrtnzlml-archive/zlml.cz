@@ -10,14 +10,15 @@ const handle = app.getRequestHandler();
 const createExpressApp = () => {
   const expressApp = express();
 
-  expressApp.get('/archive', (req, res) => {
-    const actualPage = '/archive';
-    app.render(req, res, actualPage);
+  const singlePages = ['/archive', '/rss'];
+  singlePages.forEach(page => {
+    expressApp.get(page, (req, res) => {
+      app.render(req, res, page);
+    });
   });
 
   expressApp.get('/:slug', (req, res) => {
-    const actualPage = '/article';
-    app.render(req, res, actualPage, { slug: req.params.slug });
+    app.render(req, res, `/p/${req.params.slug}`);
   });
 
   expressApp.get('*', (req, res) => {

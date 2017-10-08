@@ -75,6 +75,9 @@ export default () => {
         By the way - this website is also{' '}
         <Link href="https://github.com/mrtnzlml/zlml.cz">open-sourced</Link>.
       </Paragraph>
+      <Paragraph>
+        <Link href="https://zlml.cz/rss">RSS</Link>
+      </Paragraph>
     </Layout>
   );
 };

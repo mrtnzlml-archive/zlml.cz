@@ -14,17 +14,26 @@ let allArticleTitles = [];
 const sourcesDirectory = `${__dirname}/sources`;
 fs.readdirSync(sourcesDirectory).forEach(function(filename) {
   if (!!filename.match(/.md$/)) {
-    let content = fm(
+    const content = fm(
       fs.readFileSync(`${sourcesDirectory}/${filename}`, 'utf-8'),
     );
-    allArticleTitles.push(content.attributes);
+    delete content.frontmatter;
+    content.body = marked(content.body, { renderer: renderer });
+
+    allArticleTitles.push(
+      Object.assign({}, content.attributes, {
+        preview: content.body.replace(/<[^>]+>/g, '').substr(0, 150) + '...',
+      }),
+    );
     console.error(`> ${content.attributes.title}`);
 
-    delete content.frontmatter;
-    content.body = marked(content.body, { renderer: renderer })
     fs.writeFileSync(
-      `${__dirname}/compiled/${content.attributes.slug}.js`,
-      `export default ${JSON.stringify(content, null, 2)}\n`,
+      `${__dirname}/../pages/p/${content.attributes.slug}.js`,
+      `// @flow\n\nimport WithPost from '../../components/WithPost';\n\nexport default WithPost(${JSON.stringify(
+        content,
+        null,
+        2,
+      )});\n`,
     );
   }
 });

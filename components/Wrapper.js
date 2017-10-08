@@ -13,6 +13,7 @@ export default ({ children }: Props) => (
         max-width: 900px;
         margin: 0 auto;
         padding: 12px;
+        padding-bottom: 36px;
         box-shadow: 0 1px 2px #aaa;
       }
 

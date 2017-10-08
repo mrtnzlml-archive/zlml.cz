@@ -7,7 +7,7 @@ import Colors from '../../services/Colors';
 export default (props: Object) => {
   return (
     <span>
-      <style jsx>{`
+      <style jsx global>{`
         a,
         a:hover,
         a:focus {
@@ -18,11 +18,6 @@ export default (props: Object) => {
         a:hover,
         a:focus {
           text-decoration: underline;
-        }
-
-        a[href^='#error:'] {
-          background: red;
-          color: white;
         }
       `}</style>
       <Link {...props}>

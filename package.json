@@ -3,6 +3,7 @@
     "aws-serverless-express": "^3.0.2",
     "express": "^4.15.3",
     "front-matter": "^2.2.0",
+    "lodash": "^4.17.4",
     "marked": "^0.3.6",
     "next": "^4.0.0-beta.3",
     "react": "^16.0.0",
@@ -17,6 +18,7 @@
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-flow": "^6.23.0",
+    "cross-env": "^5.0.5",
     "eslint": "^4.3.0",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-config-prettier": "^2.3.0",
@@ -30,9 +32,11 @@
     "jest": "^20.0.4",
     "prettier": "^1.5.3",
     "react-test-renderer": "^16.0.0",
-    "serverless-offline": "^3.15.3"
+    "serverless-offline": "^3.15.3",
+    "webpack-bundle-analyzer": "^2.9.0"
   },
   "scripts": {
+    "analyze": "cross-env ANALYZE=1 next build",
     "build": "next build",
     "dev": "NODE_ENV=development node services/Server.js",
     "lint": "eslint .",
