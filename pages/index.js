@@ -1,5 +1,7 @@
 // @flow
 
+import PropTypes from 'prop-types';
+
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
 import Link from '../components/markup/Link';
@@ -19,7 +21,11 @@ const SectionHeading = ({ children }) => (
   </div>
 );
 
-export default () => {
+SectionHeading.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+function Homepage() {
   return (
     <Layout>
       <Logo />
@@ -80,4 +86,10 @@ export default () => {
       </Paragraph>
     </Layout>
   );
+}
+
+Homepage.propTypes = {
+  children: PropTypes.element.isRequired,
 };
+
+export default Homepage;

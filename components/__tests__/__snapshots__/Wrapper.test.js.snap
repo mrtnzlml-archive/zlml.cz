@@ -3,9 +3,11 @@
 exports[`renders correctly 1`] = `
 <div>
   <div
-    className="jsx-3673821632 wrapper"
+    className="jsx-1307704868 wrapper"
   >
-    WRAPPED
+    <span>
+      WRAPPED
+    </span>
   </div>
 </div>
 `;

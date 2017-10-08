@@ -1,31 +1,30 @@
 {
   "env": {
+    "browser": true,
     "node": true,
     "jest": true
   },
   "extends": [
-    "airbnb-base",
-    "eslint:recommended",
-    "prettier",
-    "prettier/react",
+    "standard",
     "plugin:flowtype/recommended",
-    "plugin:jest/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard"
   ],
-  "parser": "babel-eslint",
+  "plugins": [
+    "flowtype",
+    "react",
+    "prettier",
+    "standard"
+  ],
   "parserOptions": {
+    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
   },
-  "plugins": [
-    "import",
-    "jest",
-    "prettier",
-    "react",
-    "flowtype",
-    "promise"
-  ],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -37,14 +36,6 @@
         "trailingComma": "all"
       }
     ],
-    "promise/always-return": "warn",
-    "promise/no-return-wrap": "error",
-    "promise/param-names": "error",
-    "promise/catch-or-return": "error",
-    "promise/no-nesting": "warn",
-    "promise/no-promise-in-callback": "warn",
-    "promise/no-callback-in-promise": "warn",
-    "promise/avoid-new": "off",
     "flowtype/require-valid-file-annotation": [
       "error",
       "always", {
@@ -52,7 +43,5 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "react/display-name": "off"
   }
 }

@@ -1,10 +1,10 @@
 // @flow
 
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 import Colors from '../../services/Colors';
 
-export default (props: Object) => {
+export default function Link(props: Object) {
   return (
     <span>
       <style jsx global>{`
@@ -20,9 +20,9 @@ export default (props: Object) => {
           text-decoration: underline;
         }
       `}</style>
-      <Link {...props}>
+      <NextLink {...props}>
         <a>{props.children}</a>
-      </Link>
+      </NextLink>
     </span>
   );
-};
+}

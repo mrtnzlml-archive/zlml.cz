@@ -1,5 +1,5 @@
 // @flow
 
-export default ({ children }: { children: Object }) => (
-  <strong>{children}</strong>
-);
+export default function Strong({ children }: { children: Object }) {
+  return <strong>{children}</strong>;
+}

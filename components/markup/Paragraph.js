@@ -6,6 +6,6 @@ const style = {
   hyphens: 'auto',
 };
 
-export default ({ children }: { children: Object }) => (
-  <p style={style}>{children}</p>
-);
+export default function Paragraph({ children }: { children: Object }) {
+  return <p style={style}>{children}</p>;
+}

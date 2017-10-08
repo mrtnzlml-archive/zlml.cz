@@ -7,6 +7,12 @@ import Wrapper from '../Layout';
 
 it('renders correctly', () => {
   expect(
-    renderer.create(<Wrapper>WRAPPED</Wrapper>).toJSON(),
+    renderer
+      .create(
+        <Wrapper>
+          <span>WRAPPED</span>
+        </Wrapper>,
+      )
+      .toJSON(),
   ).toMatchSnapshot();
 });
