@@ -39,6 +39,7 @@ package:
     - .next/**
     - node_modules/** # TODO: remove
     - services/**
+    - static/**
     - package.json
 
 functions:
