@@ -6,3 +6,7 @@ Source code of zlml.cz
 ```
 node .articles/compile.js
 ```
+
+Things to do:
+
+- get rid of `aws-serverless-express` - it's fucking leaking shit

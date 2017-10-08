@@ -30,7 +30,7 @@ export default function WithPost(options: Props) {
   return class PostPage extends React.Component {
     render() {
       return (
-        <Layout>
+        <Layout title={options.attributes.title}>
           <Logo />
           <style jsx global>{`
             .article blockquote {

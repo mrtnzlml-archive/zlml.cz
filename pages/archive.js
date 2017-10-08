@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Archive = ({ articles }: Props) => (
-  <Layout>
+  <Layout title="Archive">
     <Logo />
 
     {articles.map((article, index) => {

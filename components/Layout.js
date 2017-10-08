@@ -16,10 +16,12 @@ type Props = {
   title?: string,
 };
 
-export default ({ children, title = 'This is the default title' }: Props) => (
+const defaultTitle = 'Martin Zlámal';
+
+export default ({ children, title }: Props) => (
   <div>
     <Head>
-      <title>{title}</title>
+      <title>{title ? `${title} | ${defaultTitle}` : defaultTitle}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="icon" href="/static/favicon.ico" />
