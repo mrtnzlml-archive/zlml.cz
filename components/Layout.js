@@ -1,10 +1,15 @@
 // @flow
 
 import Head from 'next/head';
-import stylis from 'stylis';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 
 import Wrapper from '../components/Wrapper';
 import Colors from '../services/Colors';
+
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 type Props = {
   children?: Object,
@@ -20,9 +25,7 @@ export default ({ children, title = 'This is the default title' }: Props) => (
       <link rel="icon" href="/static/favicon.ico" />
       {/* Do not use styled-jsx here: https://github.com/zeit/next.js/issues/885 */}
       <style>
-        {stylis(
-          '',
-          `
+        {`
           body {
             font-family: Helvetica, Arial, Sans-Serif;
             font-weight: 300;
@@ -35,9 +38,9 @@ export default ({ children, title = 'This is the default title' }: Props) => (
           html {
             font-size: 62.5%;
           }
-          `,
-        )}
+        `}
       </style>
+      <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
     </Head>
 
     <Wrapper>{children}</Wrapper>
