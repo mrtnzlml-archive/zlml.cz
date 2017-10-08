@@ -10,3 +10,4 @@ node .articles/compile.js
 Things to do:
 
 - get rid of `aws-serverless-express` - it's fucking leaking shit
+- https://www.datadoghq.com/pricing/

@@ -18,7 +18,6 @@ Na druhý den jsem se vyloženě těšil. A to hlavně z toho důvodu, že byl p
 
 Jak den pomalu pokračoval a já se ustavičně dostával z jednoho limbo stavu do dalšího, pomalu (díky Nina Zakharenko a Marko Iskander) se blížila poslední přednáška. Opět jsem nevěděl co čekat a plánoval jsem poté jít ještě na jednu přednášku. Ale to jsem ještě nevěděl, že mě čeká nejlepší přednáška vůbec a že nebudu schopen utrhnout se a neúčastnit se rozhovoru s Michaelem Loppem. Víte, že **jsem volatile**? Já to nevěděl. Vlastně jsem ani nevěděl co to je. Věděl jsem, že je něco špatně - že jsem tak tošku buřič. A tak jsem hledal způsob jak se polepšit. Většina lidí je totiž **stable**, tak bych měl být také. No ne? **Špatně!** Teď už to neberu jako takovou nevýhodu a jsem za to vlastně i rád. Stable mi prostě nesedí (alespoň ne zatím). Jen jsem musel počkat několik let abych pochopil sám sebe.
 
-```html
 <div id="presentation-embed-38898202"></div>
 <script src='http://slideslive.com/embed_presentation.js'></script>
 <script>
@@ -27,7 +26,6 @@ Jak den pomalu pokračoval a já se ustavičně dostával z jednoho limbo stavu 
         autoPlay: false // change to true to autoplay the embedded presentation
     });
 </script>
-```
 
 <br>
 **Děkuji Webexpo 2016.** Děkuji za skvělou lekci o mé povaze, děkuji za skvělé řečníky. Každé Webexpo bylo historicky tím největším Webexpem. A já to naprosto chápu a nepochybuji, že trend bude i nadále stejný. Díky také moderátorům. Daniel Čech? Jasně - o tom snad nikdo nepochyboval, ale byl jsem příjemně překvapen ze vstupů Pavlíny Louženské - **skvělé**.
