@@ -21,7 +21,9 @@ const defaultTitle = 'Martin Zlámal';
 export default ({ children, title }: Props) => (
   <div>
     <Head>
-      <title>{title ? `${title} | ${defaultTitle}` : defaultTitle}</title>
+      <title>
+        {title !== undefined ? `${title} | ${defaultTitle}` : defaultTitle}
+      </title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="icon" href="/static/favicon.ico" />
