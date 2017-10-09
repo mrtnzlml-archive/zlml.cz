@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Znovupoužitelný formulář
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Každý kdo nějakou chvíli pracuje s Nette Frameworkem již jistě narazil na prvky, které lze použít v aplikaci opakovaně. Říkejme jim znovupoužitelné komponenty, nebo prostě jen komponenty. Následující text má za úkol ukázat opět maximálně prakticky a uceleně jedno z možných řešení jak k tomuto problému přistupovat a co se mi na tomto řešení líbí, nebo naopak nelíbí.</p>
+        <h2 id=\\"motivace\\">Motivace <a href=\\"#motivace\\">#</a></h2><p>Proč vůbec přemýšlet o komponentách? Na tuto věc má pravděpodobně dost lidí zcela jiný názor. Pro mě je havní motivací to, že si vyčistím presentery. Chci toho mít v presenterech skutečně tak akorát. Vždyť podle MVP struktury bych v presenterech neměl mít nic složitého. A pak je zde ta znovupoužitelnost. Co když se rozhodnu, že potřebuji použít stejný formulář na více místech? Přece ho nebudu kopírovat. A že takový požadavek je sice často někdo zmíní, ale prakticky není moc reálný? Ale kdepak. Zrovna nedávno jsem vytvářel mnoho stránek a na každé jsem chtěl mít právě kontaktní formulář. To je požadavek na komponentu jako dělaný...</p>
+        <h2 id=\\"presenter\\">Presenter <a href=\\"#presenter\\">#</a></h2><p>Vždy když programuji něco takového, tak se nedívám na to, jak je to správně z hlediska OOP a bůh ví čeho všeho ještě. Pro mě je v současné chvíli klíčové to, jak se dané řešení bude používat. Přesenter by tedy mohl vypadat třeba takto:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        class AdminPresenter extends BasePresenter {
+        
+            /** @var \\\\ActualityFactory @inject */
+            public $actualityFactory;
+        
+            private $id;
+        
+            public function actionAktualita($id = NULL) {
+                $this-&gt;id = $id;
+            }
+        
+            protected function createComponentForm() {
+                $control = $this-&gt;actualityFactory-&gt;create($this-&gt;id);
+                $control[&#39;form&#39;]-&gt;onSuccess[] = function () {
+                    $this-&gt;redirect(&#39;default&#39;);
+                };
+                return $control;
+            }
+        
+        }
+        </code></pre>
+        <p>Mám tedy presenter, který je například pro administraci a jednu podstránku, která bude sloužit jak pro editaci aktuality, tak i pro přidání nové aktuality. Proto je parametrem <em>action</em> právě <code>id = NULL</code>. Tim totiž říkám, že může přijít jako parametr <em>ID</em> aktuality (v tom případě ji budu chtít upravovat), nebo toto <em>ID</em> nebude předáno a v tom případě bude hodnota <em>NULL</em> a budu s tím později patřičně nakládat.</p>
+        <p>V poslední metodě si daný formulář vytvořím. Teoreticky by stačila pouze první řádka. Přidávám však ještě další chování do pole <code>onSuccess[]</code>, protože chci komponentu používat na více místech, ale pokaždé po úspěchu přesměrovat na jinou stránku. Zde je jedna z věcí které se mi nelíbí. A to je právě to volání <code>$control[&#39;form&#39;]-&gt;onSuccess[] = ...</code>. Musím totiž vědět jak je pojmenovaný formulář uvnitř komponenty, což mě ale je skutečnosti vůbec nezajímá. Mnohem raději bych byl třeba za zápis <code>$control-&gt;onSuccess[] = ...</code>. Chápu, že se nemusí použít komponenta pouze na fomulář, ale přesto. <strong>Neznáte někdo lepší řešení?</strong></p>
+        <p>A teď přijde záludná otázka. Co je to ta factory a proč jí vlastně používám?</p>
+        <h2 id=\\"factory\\">Factory <a href=\\"#factory\\">#</a></h2><p>Protože v komponentách velmi často potřebuji nějaké závislosti, musím je tam nějak dostat. K tomu slouží například generované továrničky. Jedná se vlastně pouze o interface:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        interface IActualityFactory {
+        
+            /** @return \\\\Cntrl\\\\Actuality */
+            public function create();
+        
+        }
+        </code></pre>
+        <p>Nette se této továrničky chytí a vytvoří zhruba tento kód:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        final class SystemContainer_IActualityFactoryImpl_58_IActualityFactory implements IActualityFactory {
+        
+            private $container;
+        
+            public function __construct(Nette\\\\DI\\\\Container $container) {
+                $this-&gt;container = $container;
+            }
+        
+            public function create() {
+                $service = new Cntrl\\\\Actuality;
+                return $service;
+            }
+        
+        }
+        </code></pre>
+        <p>Zde je tedy (když bude potřeba) možné vytvořit nějaké závislosti a v metodě <code>create()</code> je komponentě předat. To vše lze udělat automaticky a Nette se o to postará. Dokonce lze předávat i parametry z konfiguračního souboru. Je to nesmírně elegantní řešení. Kdybych továrničky nepoužil, musel bych vytvářet ručně komponentu, to by ale znamenalo, že bych také musel předávat všechny závislosti ručně a jen bych si tím přidělal práci. Zkuste si vytvořit komponentu bez použití factory. Je nesmysl tahat si v presenteru nepotřebné závislosti přes presenter... Jak však předat parametry z presenteru? Netuším, jestli to lze nějak generovanou továrničku naučit, nic nám však nebrání napsat si vlastní factory:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        class ActualityFactory extends Nette\\\\Object {
+        
+            private $actualities;
+        
+            public function __construct(App\\\\Actualities $actualities) {
+                $this-&gt;actualities = $actualities;
+            }
+        
+            public function create($id) {
+                return new \\\\Cntrl\\\\Actuality($this-&gt;actualities, $id);
+            }
+        
+        }
+        </code></pre>
+        <p>Je jasně vidět, že tato ručně napsaná factory vypadá velmi podobně jako automaticky vygenerovaná, ale navíc teď můžu předat metodě <code>create($id)</code> parametr, což je přesně to co potřebuji viz presenter. Chci si předat číslo aktuality a nevidím důvod proč bych to měl dělat až v komponentě. Komponenta potřebuje <em>ID</em> aktuality, ale kde ho vezme nemusí řešit. Je otázka, jestli bych si už rovnou neměl vytáhnout data z databáze v presenteru. Takto se mi to ale zatím líbí víc...</p>
+        <p>Ručně vytvořenou factory musíme ještě zaregistrovat v konfiguračním souboru:</p>
+        <pre><code class=\\"lang-neon\\">services:
+            - ActualityFactory
+        </code></pre>
+        <p>To je vše. Už jsme pouze krůček od funkčního formuláře.</p>
+        <h2 id=\\"samotn-komponenta\\">Samotná komponenta <a href=\\"#samotn-komponenta\\">#</a></h2><p>Samotný kód komponenty už není téměř ničím zvláštní, nebo nějak nepochopitelný:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        namespace Cntrl;
+        
+        use App;
+        use Entity;
+        use Nette\\\\Application\\\\UI;
+        use Nette;
+        
+        class Actuality extends UI\\\\Control {
+        
+            private $actualities;
+            private $actuality;
+        
+            public function __construct(App\\\\Actualities $actualities, $id) {
+                parent::__construct();
+                $this-&gt;actualities = $actualities;
+                $this-&gt;actuality = $this-&gt;actualities-&gt;findOneBy([&#39;id&#39; =&gt; $id]);
+            }
+        
+            public function render() {
+                $this-&gt;template-&gt;setFile(__DIR__ . &#39;/Actuality.latte&#39;);
+                $this-&gt;template-&gt;render();
+            }
+        
+            protected function createComponentForm() {
+                $form = new UI\\\\Form;
+                $form-&gt;addText(&#39;headline&#39;, &#39;Titulek:&#39;);
+                $form-&gt;addTextArea(&#39;text&#39;, &#39;Text:&#39;);
+                $form-&gt;addSubmit(&#39;send&#39;, &#39;Uložit&#39;);
+                if($this-&gt;actuality) { //výchozí hodnoty jen pokud aktualita již existuje
+                    $form-&gt;setDefaults(array(
+                        &#39;headline&#39; =&gt; $this-&gt;actuality-&gt;headline,
+                        &#39;text&#39; =&gt; $this-&gt;actuality-&gt;text,
+                    ));
+                }
+                $form-&gt;onSuccess[] = $this-&gt;actualityFormSucceeded;
+                return $form;
+            }
+        
+            public function actualityFormSucceeded(UI\\\\Form $form) {
+                $values = $form-&gt;getValues();
+                try {
+                    if(!$this-&gt;actuality) { //pokud ještě neexistuje vytvořím novou entitu
+                        $this-&gt;actuality = new Entity\\\\Actuality();
+                    }
+                    $this-&gt;actuality-&gt;headline = $values-&gt;headline;
+                    $this-&gt;actuality-&gt;text = $values-&gt;text;
+                    $this-&gt;actuality-&gt;date = new \\\\DateTime();
+                    $this-&gt;actualities-&gt;save($this-&gt;actuality);
+                    $this-&gt;presenter-&gt;flashMessage(&#39;Aktualita byla úspěšně uložena.&#39;, &#39;success&#39;);
+                } catch (\\\\Exception $exc) {
+                    $this-&gt;presenter-&gt;flashMessage($exc-&gt;getMessage(), &#39;danger&#39;);
+                }
+                //žádný redirect, až v presenteru!
+            }
+        
+        }
+        </code></pre>
+        <p>V konstruktoru jednak získám nějakou modelovou třídu pro práci s databází (o to se krom factory  vůbec nestarám) a také <em>ID</em>, které přišlo z presenteru. A rovnou toto <em>ID</em> použiju k vytáhnutí si dat z databáze, protože konstruktor se spustí vždy a já také vím, že tyto data budu vždy potřebovat. V <code>render()</code> metodě pouze předám šablonu komponenty, která ve své nejprimitivnější podobě může vypada pouze takto:</p>
+        <pre><code>{control form}
+        </code></pre><p>Ostatně stejný kód mohu použít pro šablonu do které předávám komponentu z presenteru. Výsledkem celého snažení je tedy poměrně jednoduchý přesenter a jedna stránka na které je formulář, který zvládne jak editaci, tak vytváření nového záznamu v databázi.</p>
+        <p>Používáte nějaké lepší (jiné) řešení? Podělte se o něj... :-)</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fznovupouzitelny-formular%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

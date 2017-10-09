@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Poslední přednáška na FAV - Nette
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Tak a je to... (-:</p>
+        <p>Zveřejňuji mojí poslední přednášku v tomto roce, kterou jsem měl na ZČU na fakultě aplikovaných věd pro studenty předmětu KIV/WEB. Tentokrát jsem si pohrál trošku se zvukem, takže by to oproti <a href=\\"prednaska-na-zcu-node-js\\">minulému týdnu</a> mělo být o mnoho lepší.</p>
+        <p>Tématem této přednášky byl můj oblíbený Nette Framework, konkrétně ve verzi 2.3-dev. Cílem bylo seznámit studenty se základní myšlenkou MVC/P a rychle nastínit o co vlastně v Nette jde a  jak se v něm staví jednoduché aplikace. Přednáška nakonec utekla rychleji než jsem čekal a nemohl jsem ukázat vše, proto jsem připravil repozitář na <a href=\\"https://github.com/mrtnzlml/kivweb-nette-fcbk\\">GitHubu</a> ze kterého by mělo být vše jasné (pokud není, můžete se ještě dodatečně ptát).</p>
+        <p>Konec písmenek, podívejte se sami:</p>
+        <iframe width=\\"640\\" height=\\"360\\" src=\\"//www.youtube.com/embed/GdATlrmoPRM\\" frameborder=\\"0\\" allowfullscreen></iframe>
+        
+        <p>A samozřejmě nesmí chybět samotná prezentace:</p>
+        <iframe src=\\"//www.slideshare.net/slideshow/embed_code/42574181\\" width=\\"752\\" height=\\"462\\" frameborder=\\"0\\" marginwidth=\\"0\\" marginheight=\\"0\\" scrolling=\\"no\\" style=\\"border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;\\" allowfullscreen> </iframe>
+        
+        <p>Opět také děkuji <a href=\\"http://honzacerny.com/\\">Honzovi <em>chemix</em> Černému</a> za zapůjčení kamery.</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fposledni-prednaska-na-fav-nette%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

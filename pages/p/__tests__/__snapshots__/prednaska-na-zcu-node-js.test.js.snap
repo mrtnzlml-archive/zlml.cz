@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Přednáška na ZČU - Node.js
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Jak jsem slíbil, tak zveřejňuji přenášku na téma <strong>Node.js</strong>, kterou jsem měl dnes na Západočeské univerzitě pro lidi studující předmět <strong>KIV/WEB</strong>, tedy Webové aplikace. Tato přednáška volně navazuje na předchozí obsah tohoto předmětu. Studenti se pozvolna seznamují s webovým prostředím od úplně základní práce s HTML a CSS až k pokročilým webovým frameworkům. Podívejte se na záznam této přednášky:</p>
+        <iframe width=\\"640\\" height=\\"360\\" src=\\"//www.youtube.com/embed/eakg5THIbcI\\" frameborder=\\"0\\" allowfullscreen></iframe>
+        
+        <p>A prohlédněte si také připravenou prezentaci:</p>
+        <iframe src=\\"//www.slideshare.net/slideshow/embed_code/42314371\\" width=\\"752\\" height=\\"460\\" frameborder=\\"0\\" marginwidth=\\"0\\" marginheight=\\"0\\" scrolling=\\"no\\" style=\\"border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;\\" allowfullscreen> </iframe>
+        
+        <p>Rád bych také poděkoval <a href=\\"http://honzacerny.com/\\">Honzovi <em>chemix</em> Černému</a> za zapůjčení kamery.</p>
+        <p>A příště? Příště se podíváme na skvělý PHP framework <a href=\\"http://nette.org/\\">Nette</a>! Tak doufám, že opět dorazíte... (-:</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fprednaska-na-zcu-node-js%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

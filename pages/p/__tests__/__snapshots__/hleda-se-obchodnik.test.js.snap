@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Hledá se obchodník
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Tentokrát nebudu psát o ničem technickém, ale vezmu to hned od druhé věty vážně. Do <a href=\\"http://www.orgis.cz/\\">Orgis IT</a> scháníme obchodníka primárně pro Prahu / Plzeň pro rozšíření obchodního teamu. Po dlouhém rozmýšlení máme jasno co požadujeme. Nejedná se o nic zvláštního. Klasicky vyžadujeme samostatnost, pružnost a spolehlivost. To jsou celkem běžné požadavky, takže nemá smysl je zde řešit. Má však smysl řešit obchodní náplň. Jelikož se jedná o IT firmu, byl by vhodný alespoň základní přehled o tom co Orgis IT nabízí. Primárně se teď zaměřujeme na serverová řešení (opravdu velká) a vnitropodnikové ERP systémy o které je největší zájem. Jelikož se jedná o místy dost kompikovanou záležitost na pochopení, obchodník projde odborným zaškolením a i po zaškolení bude obchodník úzce spolupracovat se silnou technickou podporou a s lidmi z technické specifikace.</p>
+        <p>Životopisy zasílejte na <span style=\\"font-size:25px\\"><a href=\\"mailto:hr@orgis.cz\\">hr@orgis.cz</a></span></p>
+        <p>Uvítáme dlouhodobou spolupráci, protože se jedná o velice dynamický obor, kde je potřeba nemalá časová investice jak z naší strany, tak ze strany obchodníka. V případě oboustranné spokojenosti rádi navážeme spolupráci i pro rozvoj na zahraničním trhu. Preferujeme práci především na ŽL, kdy bude výše odměn závislá na obratu. Tato výše není omezena pásmově, ani žádnou horní hranicí.</p>
+        <p>Btw, stav se pro více informací a zajdeme někam na pivko... (-:
+        <br>
+        (Plzeň)</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fhleda-se-obchodnik%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Vzhůru dolů! A pak zase nahoru...
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Na relativně dlouhou dobu jsem se teď odmlčel. Psal jsem totiž někam jinam než na blog a svůj příděl písmenek na měsíc jsem odevzdával právě tam. Ale stálo to za to. Totiž jak se to vezme. Projděme si sled událostí. Událost první. Poprvé jsem <a href=\\"http://www.slideshare.net/MartinZlmal/nodejs-42314371\\">představil</a> svůj projekt na FAV, kde studenty zaujal a na konci přednášky se kolem samotného projektu utvořil hlouček zvědavců toužící prohlédnout si zařízení lépe. Událost druhá. Představil jsem tento projekt <a href=\\"http://www.slideshare.net/MartinZlmal/barcamp2015\\">širší veřejnosti</a> na Barcampu v Plzni a získal jsem velkou spoustu negativních reakcí. Samotná zadávající firma se dále přestala o tento projekt více zajímat a musel jsem se s tím chvíli pasovat, abych věděl na čem jsem. Událost třetí. I když mi to chvíli trvalo, tak jsem se vzpamatoval, implementoval jsem ještě několik cool věcí a tento projekt uvedl do finální fáze, kdy bych byl ochoten se s ním pochlubit před odborným publikem. Tak jsem také u SZZ udělal a práci úspěšně obhájil. Událost čtvrtá a poslední. Tato práce <a href=\\"http://www.abb.cz/cawp/seitp202/67b19426a3ab3b8fc1257e6e004f2d33.aspx\\">vyhrála soutěž</a> ABB University Award 2015 - soutěž o nejlepší technicky zaměřenou vysokoškolskou práci v ČR.</p>
+        <p>Proč to vůbec říkám? Abych si trošku zamachroval... (-: Ale také proto, abych s lehkým úšklebkem poděkoval všem lidem, díky kterým jsem se chvíli cítil fakt špatně a díky kterým jsem tu práci po Barcampu přihlásil do soutěže. Chtěl jsem vědět, jestli je to fakt taková sračka a bude to jasná tečka za mým snažením, nebo ta práce (resp. myšlenka) má nějaký smysl. A smysl to mělo. Hodnotil se nápad, zpracování a to jak jsem to ústně přednesl (pravděpodobně). Pokud máte čas, tak si tuto práci můžete přečíst. Budu rád pokud tak (alespoň nějak rychle) učiníte a můžeme si o tom popovídat více.</p>
+        <iframe src=\\"//www.slideshare.net/slideshow/embed_code/key/q1xdPbSZTIUXQ\\" width=\\"600\\" height=\\"750\\" frameborder=\\"0\\" marginwidth=\\"0\\" marginheight=\\"0\\" scrolling=\\"no\\" style=\\"border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;\\" allowfullscreen> </iframe>
+        
+        <p>Co celá práce velmi jednoduše řečeno řeší? Jak co nejrychleji dostat data z nějaké elektroniky (koncentrátoru) až do webové aplikace a zpět. K tomu by mělo být (a je) možné změnit zapojení sítě, tzn. jedná se o logickou síť, která není závislá ani na fyzickém zapojení, ani na použitých zařízeních a technologiích. Ve výsledku je to triviální problém, ale ne každý jej dokáže vstřebat, nebo si něco takového vůbec připustit.</p>
+        <p>Co dál ještě nevím. Uvidím, jestli se to nějaké firmě zalíbí více, než té současné a bude schopna se za to postavit. Pokud ne, tak celý nápad postrádá smysl a vrhnul bych se asi do nějakých myšlenek uvedených ke konci práce, jako je například <a href=\\"https://en.wikipedia.org/wiki/Li-Fi\\">Li-Fi</a>, nebo částečně decentralizovaný přístup sítě. Jedno vím ale jistě. Na Barcamp už s tím ani nepáchnu... :-))</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fvzhuru-dolu-a-pak-zase-nahoru%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

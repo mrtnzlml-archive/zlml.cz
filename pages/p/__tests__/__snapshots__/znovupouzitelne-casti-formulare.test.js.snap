@@ -1,0 +1,268 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Znovupoužitelné části formuláře
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Před nějakým časem jsem psal o tom, jak vytvořit <a href=\\"znovupouzitelny-formular\\">znovupoužitený formulář</a>. Nejedná se o nic jiného, než o správné navržení a následné použití komponent, tedy potomků <code>UI\\\\Control</code>. Pokud bych měl být upřímný, nemyslím si, že se formuláře nějak často na webu opakují a osobně tento princip používám spíše pro oddělení části aplikace do samostatného balíčku. Tím spíš najde následující ukázka méně použití. Právě mám totiž za úkol navrhnout předělání jedné administrace. Úkolem není hledět na to, jak moc je tento přístup špatný, ale navrhnout řešení, které nahradí stávající 1:1. Tato administrace obsahuje často se opakující (a velmi rozsáhlý) formulář, který se skládá z několika karet. Navíc některé části formuláře spolu vůbec nesouvisí a na každé stránce je formulář trošku jiný (i když je podobnost zřejmá). Vzhledem k tomu, že se jedná o tak rozsáhlý kód, upustil jsem od znovupoužitelného formuláře a navrhnul jsem znovupoužitelné pouze jeho části. A na následujících řádcích nastíním jak.</p>
+        <h2 id=\\"na-za-tku-st-la-komponenta\\">Na začátku stála komponenta <a href=\\"#na-za-tku-st-la-komponenta\\">#</a></h2><p>Pořád platí, že je samotný formulář komponenta. Na tom se nic nemění. V mém případě se však hodilo udělat si ještě nějaké bázové třídy. Pokusím se ukázky ořezat co nejvíce od zbytečností tak, aby to pokud možno ještě dávalo smysl:</p>
+        <pre><code class=\\"lang-php\\">class NewsForm extends BaseControl {
+        
+            /** @var News|NULL */
+            private $news;
+        
+            public function __construct($news) {
+                parent::__construct();
+                $this-&gt;news = $news;
+            }
+        
+            public function render() {
+                $this-&gt;template-&gt;render(__DIR__ . &#39;/NewsForm.latte&#39;);
+            }
+        
+            protected function createComponentNewsForm() {
+                $form = $this-&gt;form;
+                // nastavení společných prvků formuláře
+                return $form
+            }
+        
+        }
+        </code></pre>
+        <p>K tomu (třeba) nějaká ta generovaná továrnička a komponenta tak jak ji známe všichni je hotova. Bude však nutné rozklíčovat, co se děje třeba pod třídou <code>BaseControl</code>. Jedná se o jednoduchého předka, který krom dalších věcí obsahuje hlavně toto:</p>
+        <pre><code class=\\"lang-php\\">abstract class BaseControl extends UI\\\\Control {
+        
+            /** @var BaseForm */
+            protected $form;
+        
+            public function __construct() {
+                parent::__construct();
+                $this-&gt;form = new BaseForm;
+            }
+        
+            protected function attached($obj) {
+                parent::attached($obj);
+                if ($obj instanceof UI\\\\Presenter) {
+                    $this-&gt;form-&gt;addComponent(new SubmitButtonsContainer, &#39;submitButtons&#39;);
+                    $this-&gt;form-&gt;addComponent(new AnotherContainer, &#39;another&#39;);
+                }
+            }
+        
+        }
+        </code></pre>
+        <p>Zde se vytvoří nějaký formulář (s kterým pak pracuji v komponentě) a po připojení formuláře k presenteru se připojí i nějaké formulářové kontejnery. Než se však k těmto kontejnerům dostanu, tak by bylo dobré prozradit i co se děje v třídě <code>BaseForm</code>. Popravdě nic moc:</p>
+        <pre><code class=\\"lang-php\\">/**
+         * @method addTinyMCE($name, $label = NULL, $cols = NULL, $rows = NULL)
+         */
+        class BaseForm extends UI\\\\Form {
+        
+            /** @var callable[] */
+            public $onSaveAndStay;
+        
+            /** @var callable[] */
+            public $onSaveAndExit;
+        
+            /** @var callable[] called BEFORE onClick event */
+            public $onSuccess;
+        
+            public function __construct() {
+                parent::__construct();
+                $this-&gt;addProtection();
+            }
+        
+        }
+        </code></pre>
+        <p>Nastavím si zde nějaké věci, které jsou pro každý formulář v administraci obecně společné. Konkrétně tedy CSRF ochranu a pár polí pro události. Události jsem si zde musel nadefinovat sám, běžně se na formuláři volá <code>onSuccess</code> událost až po <code>onClick</code> (<a href=\\"https://api.nette.org/2.3.7/source-Forms.Form.php.html#380-420\\">link</a>), ale zrovna zde jsem to potřeboval obráceně. Hodí se to v okamžiku, kdy chci využívat <code>onSuccess</code>, ale v <code>onClick</code> už z formuláře třeba přesměrovávám pryč. Vzhledem k tomu, že oba eventy se volají jen při validním odeslání, tak to ničemu nevadí. V této třídě je také vhodné místo pro umístění nějakých dynamických metod do anotací, aby je IDE dobře napovídalo (viz <code>addTinyMCE</code>). Byl to dlouhý úvod, ale vše je připraveno a můžeme se vrhnout na kontejnery.</p>
+        <h2 id=\\"formul-ov-kontejnery\\">Formulářové kontejnery <a href=\\"#formul-ov-kontejnery\\">#</a></h2><p>Osobně <a href=\\"https://pla.nette.org/cs/dedicnost-vs-kompozice\\">formulářové kontejnery</a> nemám moc rád. Jsou sice super, ale pohybují se na další úrovni formuláře. Pokud se však s tímto faktem smíříme (a nejlépe z něj uděláme výhodu), pak jsou docela super a zde se skvěle hodí. Můžu si pěkně oddělit například odesílací tlačítka a ty pak vesele používat ve všech formulářích:</p>
+        <pre><code class=\\"lang-php\\">class SubmitButtonsContainer extends BaseFormContainer {
+        
+            private $form;
+        
+            public function attached($obj) {
+                parent::attached($obj);
+                if ($obj instanceof BaseForm) {
+                    $this-&gt;form = $obj;
+                    $obj-&gt;onSuccess[] = function (BaseForm $form) {
+                        $path = $this-&gt;lookupPath(BaseForm::class);
+                        dump($form-&gt;getValues()-&gt;$path); // další zpracování hodnot
+                    };
+                }
+            }
+        
+            public function render() {
+                $this-&gt;template-&gt;_form = $this; // kvůli formulářovým makrům v šabloně
+                $this-&gt;template-&gt;render(__DIR__ . &#39;/SubmitButtonsContainer.latte&#39;);
+            }
+        
+            protected function configure() {
+                $this-&gt;addSubmit(&#39;saveAndStay&#39;, &#39;Uložit a zůstat&#39;)-&gt;onClick[] = function (SubmitButton $button) {
+                    $form = $button-&gt;getForm();
+                    $this-&gt;form-&gt;onSuccess($form, $form-&gt;getValues());
+                    $this-&gt;form-&gt;onSaveAndStay($form, $form-&gt;getValues());
+                };
+            }
+        
+        }
+        </code></pre>
+        <p>Pokud sledujete fórum, tak vám je tento návrh jistě povědomý. Jedná se o <a href=\\"https://forum.nette.org/cs/11747-skladani-komponent-a-formulare#p84652\\">slavné řešení pod čarou</a>. Přesně toto se odehrává v rodičovské třídě <code>BaseFormContainer</code>. Doplnil jsem si do této třídy však jednu malou vychytávku. Chtěl jsem totiž, aby každý kontejner mohl mít vlastní šablonu. To běžně není možné. Kontejner tedy mohu vykreslovat pomocí dobře známého makra <code>{control ...}</code> (což nedělá nic jiného, než že se zavolá metoda <code>render</code>). Jenže co je <code>$this-&gt;template</code>? Bázový kontejner jsem musel rozšířit ještě o vhodnou část z <code>UI\\\\Control</code>, která se stará o vykreslování:</p>
+        <pre><code class=\\"lang-php\\">abstract class BaseFormContainer extends Forms\\\\Container {
+        
+            /** @var UI\\\\ITemplateFactory */
+            private $templateFactory;
+        
+            /** @var UI\\\\ITemplate */
+            private $template;
+        
+            public function injectTemplateFactory(UI\\\\ITemplateFactory $templateFactory) {
+                $this-&gt;templateFactory = $templateFactory;
+            }
+        
+            abstract public function render();
+        
+            public function getTemplate() {
+                // bla bla, mrkni na: https://api.nette.org/2.3.7/source-Application.UI.Control.php.html#45
+                return $this-&gt;template;
+            }
+        
+            protected function createTemplate() {
+                /** @var UI\\\\ITemplateFactory $templateFactory */
+                $templateFactory = $this-&gt;templateFactory ?: $this-&gt;lookup(UI\\\\Presenter::class)-&gt;getTemplateFactory();
+                return $templateFactory-&gt;createTemplate(NULL);
+            }
+        </code></pre>
+        <p>Jednoduché vykreslitelné formulářové kontejnery. Cool. Abych to rychle zrekapituloval. Máme jednoduchou komponentu na formulář, která dědí od <code>BaseControl</code>. Tato třída připojuje ve vhodný čas formulářové kontejnery, které se umí vykreslit (což běžně nejde).</p>
+        <p>V šabloně <code>SubmitButtonsContainer.latte</code> je možné používat normálně <code>{input ...}</code> makra a další, jako kdybych pokračoval dál v šabloně jednoho velkého formuláře. Samotné připojené formulářové kontejnery je možné vykreslovat pomocí klasického makra <code>{control newsForm-submitButtons}</code> v hlavním formuláři. To je možná trošku nevýhoda, protože kontejnery se připojují do formuláře a stávají se tak podkomponentou. Musím tedy control makro volat stylem <em>rodič-podkomponenta</em>.</p>
+        <h2 id=\\"znovupou-itelnost-vykresliteln-ch-kontejner-\\">Znovupoužitelnost vykreslitelných kontejnerů <a href=\\"#znovupou-itelnost-vykresliteln-ch-kontejner-\\">#</a></h2><p>Kde je ta znovupoužitelnost? Jak bych udělal to, že použiju třeba odesílací tlačítka (nebo jakoukoliv jinou část formuláře) někde jinde? Jednoduše. Prostě vytvoříme formulář (to je podmínka nutná) a kontejner v něm použijeme:</p>
+        <pre><code class=\\"lang-php\\">protected function createComponentTest() {
+            $form = new UI\\\\Form;
+            $form-&gt;addComponent(new AnotherContainer, &#39;another&#39;);
+            $form-&gt;addSubmit(&#39;odeslat&#39;, &#39;Odeslat&#39;);
+            $form-&gt;onSuccess[] = function ($_, ArrayHash $values) {
+                dump($values);
+            };
+            return $form;
+        }
+        </code></pre>
+        <p>K tomu třeba nějaká taková šablona:</p>
+        <pre><code>{form test}
+            {control test-another}
+            {input odeslat}
+        {/form}
+        </code></pre><p>Formulář se samozřejmě vykreslí i při obyčejném <code>{control test}</code>, ale bez šablony kontejneru (píšu si nápad na vylepšení). Vlastně je ta myšlenka docela jednoduchá, že? Jen je třeba dát pozor na to, že kontejner takto umisťuje formulářové prvky na jinou úroveň.</p>
+        <p>Malá poznámka na závěr, která je sice mimo, ale může se hodit. Občas je potřeba zajistit si někde inject závislostí, ale z nějakého důvodu je to problematické. Může se jednat třeba o závislost v abstraktní rodičovské třídě. V takovém případě je možné v configu nastavit <a href=\\"https://github.com/dg/nette-di/blob/master/tests/DI/DecoratorExtension.basic.phpt\\">decorator</a>:</p>
+        <pre><code class=\\"lang-neon\\">decorator:
+            BaseFormContainer:
+                inject: on
+        </code></pre>
+        <p><del>Příště se podíváme znovu na <a href=\\"dependent-select-box\\">Dependent select box</a>. Původní článek si totiž zaslouží důkladnou revizi a po krátké anketě jsem byl přesvědčen, že bude lepší napsat nový článek a podívat se na celý problém podrobněji.</del> <span style=\\"color:green\\">Podívejte se raději na <a href=\\"https://github.com/NasExt/DependentSelectBox\\">tento doplněk</a>, který závislý select box řeší jinak - možná lépe.</span></p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fznovupouzitelne-casti-formulare%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

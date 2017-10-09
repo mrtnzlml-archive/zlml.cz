@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Stáhněte si lepší blog
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Čas od času se na Nette fóru najde někdo, kdo hledá vzorový projekt do kterého by se mohl podívat. Vlastně se většinou hledá cokoliv, jakákoliv inspirace. Bohužel se zřejmě všichni bojí toho, že o svůj projekt přijdou, protože v něm někdo najde bezpečnostní chybu. Já se toho také bojím, ale lepší než před tím utíkat je se tomu postavit čelem. A tak je to tady.</p>
+        <h2 id=\\"kdokoliv-cokoliv\\">Kdokoliv cokoliv <a href=\\"#kdokoliv-cokoliv\\">#</a></h2><p>K dispozici je pro nahlédnutí tento blog. A nejen k nahlédnutí, ale také k <a href=\\"develop\\">volnému používání</a>.
+        Na pozadí běží hned několik technologií, které si můžete prakticky osahat:</p>
+        <ul>
+        <li>Nette Framework (<a href=\\"http://nette.org/\\">nette.org .{target:_blank}</a>)</li>
+        <li>Nette Tester (<a href=\\"http://tester.nette.org/\\">tester.nette.org .{target:_blank}</a>)</li>
+        <li>Texy <em>(je sexy)</em> (<a href=\\"http://texy.info/\\">texy.info .{target:_blank}</a>)</li>
+        <li>FSHL (<a href=\\"http://fshl.kukulich.cz/\\">fshl.kukulich.cz .{target:_blank}</a>)</li>
+        <li>Webloader (<a href=\\"http://addons.nette.org/janmarek/webloader\\">addons.nette.org .{target:_blank}</a>)</li>
+        <li>Kdyby\\\\Doctrine 2 (<a href=\\"https://github.com/Kdyby/Doctrine\\">GitHub</a>)</li>
+        </ul>
+        <p>K dispozici je i databáze, protože si myslím, že bych se i s únikem databáze neměl nijak ohrozit... :-) Účelem tohoto nápadu a následně rozhodnutí je poskytnout pokud možno funkční a aktivní projekt, který staví právě na těchto technologiích. Důvodem je pak moje zkušenost s tvrdým začátkem. Mám příležitost občas pracovat s někým kdo se přesně toto chce naučit, bohužel pár lidí už to prostě vzdalo, protože je toho <em>moc</em> a není mnoho lidí kteří skutečně pomohou (rozhodně ne na fóru). Snažím se tedy zaplnit toto prázdné místo a nabídnout tento blog jako jeden z možných začátků. Mimochodem neříkám, že moje řešení je nejlepší, nebo správné. Je jedno z možných a funkčních. Stáhnout si jej můžete ze své oblíbené verzovací služby:</p>
+        <pre><code class=\\"lang-html\\">&lt;div class=&quot;row&quot; style=&quot;margin-top:50px;margin-bottom:50px&quot;&gt;
+            &lt;div class=&quot;col-lg-6 col-md-6 col-sm-6 text-right&quot;&gt;
+                &lt;a class=&quot;btn btn-default&quot; href=&quot;https://bitbucket.org/mrtnzlml/zlml.cz&quot; target=&quot;_blank&quot;&gt;
+                    &lt;img src=&quot;/img/loga/bitbucket.png&quot;&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;col-lg-6 col-md-6 col-sm-6&quot;&gt;
+                &lt;a class=&quot;btn btn-default&quot; href=&quot;https://github.com/mrtnzlml/zlml.cz&quot; target=&quot;_blank&quot;&gt;
+                    &lt;img src=&quot;/img/loga/github.png&quot;&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        </code></pre>
+        <p>Podrobnější popis najdete na <a href=\\"develop\\">samostatné stránce</a> věnované tomuto projektu. Byl bych moc rád, kdybych touto cestou pouze nenabídl něco chybějícího, ale také získal zpětnou vazbu. Nestojím o pochvaly. Ty samozřejmě potěší, ale mnohem přínosnější jsou praktické poznámky k implementaci, nebo funkcím. Nad takovou věcí se vždy rád zamyslím...</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fstahnete-si-lepsi-blog%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

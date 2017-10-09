@@ -67,7 +67,7 @@ class Layout extends React.Component {
 
 Layout.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default Layout;

@@ -10,7 +10,8 @@ it('renders correctly', () => {
     renderer
       .create(
         <Layout>
-          <span>CONTENT</span>
+          <span>aaa</span>
+          <span>bbb</span>
         </Layout>,
       )
       .toJSON(),

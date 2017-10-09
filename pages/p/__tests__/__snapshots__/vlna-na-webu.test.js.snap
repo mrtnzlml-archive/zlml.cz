@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Vlna na webu
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Vlna je program <a href=\\"http://ftp.linux.cz/pub/tex/local/cstug/olsak/vlna/\\">Petra Olšáka .{target:_blank}</a>, který slouží k umístění nezalomitelné místo na místo v textu, kde by nemělo dojít k samovolnému zalomení řádku. Tento program slouží k dodatečné úpravě textů napsaných v LaTeXu. V tomto prostředí se nezalomitelná mezera nahrazuje znakem vlnovkou - tildou (~). U webového výstupu se používá zástupná entita <code>&amp;nbsp;</code>.</p>
+        <h2 id=\\"kde-by-m-la-b-t-ned-liteln-mezera\\">Kde by měla být nedělitelná mezera <a href=\\"#kde-by-m-la-b-t-ned-liteln-mezera\\">#</a></h2><p>V základu program Vlna umístí tildu za znaky <code>KkSsVvZzOoUuAI</code>. Více toho pokud vím nedělá. Podle Ústavu pro jazyk český AV ČR by však toto pravidlo mělo platit mimo jiné pro znaky <code>KkSsVvZzAaIiOoUu</code>. Neuvažuji další pravidla, která určují další nevhodné výrazy na konci řádku. Mezi tyto pravidla patří například mezery uvnitř číslic, mezery mezi číslicí a značkou, atd. Některá pravidla jsou totiž natolik specifická, že by je bylo náročné (nebo nepraktické) podchytit programově.</p>
+        <h2 id=\\"implementace\\">Implementace <a href=\\"#implementace\\">#</a></h2><p>O samotné nahrazování se stará následující regulární výraz:</p>
+        <pre><code class=\\"lang-php\\">preg_replace(&#39;&lt;([^a-zA-Z0-9])([ksvzaiou])\\\\s([a-zA-Z0-9]{1,})&gt;i&#39;, &quot;$1$2\\\\xc2\\\\xa0$3&quot;, $string); //&amp;nbsp; === \\\\xc2\\\\xa0
+        </code></pre>
+        <p>Tento výraz říká, že nestojí-li bezprostředně před sadou znaků <code>KkSsVvZzAaIiOoUu</code> jiný alfanumerický znak a stojí-li za touto sadou jakýkoliv alfanumerický znak oddělený bílým znakem bude tento znak nahrazen entitou <code>&amp;nbsp;</code>. V konkrétní implementaci lze zaregistrovat Vlnu jako helper pro Latte šablony například takto (obsahuje i registraci Texy helperu):</p>
+        <pre><code class=\\"lang-php\\">/**
+         * @param null $class
+         * @return Nette\\\\Templating\\\\ITemplate
+         */
+        protected function createTemplate($class = NULL) {
+            $template = parent::createTemplate($class);
+            $texy = new \\\\Texy();
+            $template-&gt;registerHelper(&#39;texy&#39;, callback($texy, &#39;process&#39;));
+            $template-&gt;registerHelper(&#39;vlna&#39;, function ($string) {
+                $string = preg_replace(&#39;&lt;([^a-zA-Z0-9])([ksvzaiou])\\\\s([a-zA-Z0-9]{1,})&gt;i&#39;, &quot;$1$2\\\\xc2\\\\xa0$3&quot;, $string); //&amp;nbsp; === \\\\xc2\\\\xa0
+                return $string;
+            });
+            return $template;
+        }
+        </code></pre>
+        <p>Vlna se pak v Latte šablonách používá jako jakýkoliv jiný helper:</p>
+        <pre><code>{$post-&gt;title|vlna}
+        </code></pre><p>Ještě by možná stálo za to vrátit se k tomu, jaké problémy by způsobovala implementace i dalších pravidel a jak by to bylo náročné. Ještě nad tím budu přemýšlet, každopádně již teď mě napadají určité problémy. Například u čísel. Jak přesně identifikovat, kdy se má použít nedělitelná mezera a kdy ne? Možná je toto právě ten důvod, proč takové rozšířené chování program Vlna nepodporuje...</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fvlna-na-webu%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

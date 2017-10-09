@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Stáhněte si zdarma 897457 emailových adres
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>V následujícím článku bych rád nastínil problematiku newsletterů nejen z programátorského hlediska <s>a také bych se rád opřel do bezpečnosti společnosti Wedos, které mnoho lidí tolik věří</s>... (-:</p>
+        <p><span style=\\"color:green\\">Tento projekt pravděpodobně nemá se společností Wedos nic společného jak jsem si zřejmě mylně myslel.</span></p>
+        <h2 id=\\"na-za-tku-byl-email\\">Na začátku byl email <a href=\\"#na-za-tku-byl-email\\">#</a></h2><p>Jednoho dne mi přišel email, který byl automaticky filtrován jako spam. Vzhledem k tomu, že když mě něco štve, tak to řeším, spam jsem otevřel a hledal odkaz na odhlášení. Ten byl dobře umístěn, stačilo kliknout a hotovo. Každý přece ví, že to takto má být. Když je odhlášení delší, než kliknutí na spam v email klientovi, je to problém. Bohužel tento odkaz vedlo na doménu <code>m-letter.eu</code>. Mě samozřejmě zajímá jak jsem se dostal do takového spam listu a jelikož jsem byl odkázán na mě neznámou doménu, byl jsem velmi rozezlen.</p>
+        <p><s>Zde je nutné říct, že jsem dříve jednal, než pátral. Nakonec se ukázalo, že jsem byl možná v tomto listu oprávněně, jelikož se jedná o doménu, ze které zřejmě Wedos odesílá podobné reklamní emaily, takže je dost pravděpodobné, že jsem s tím dříve souhlasil.</s></p>
+        <p><span style=\\"color:green\\">Při hlubším pátrání jsem zjistil, že jsem stále nic nezjistil. Chybně jsem tento problém svedl na někoho jiného, což mě odvedlo na špatnou kolej. Stále tedy nevím, kde jsem se na tomto spam listu vzal a opět to beru osobně. Není mi to jedno...</span></p>
+        <h2 id=\\"ne-tvi-program-tora\\">Neštvi programátora <a href=\\"#ne-tvi-program-tora\\">#</a></h2><p>Celý reklamní systém je udělán dosti nešťastně, takže než abych pátral jak jsem se tam dostal, soustředil jsem se na něco jiného, co pro mě z pohledu programátora webových aplikací bylo dost zajímavé. URL adresa. Celá adresa pro odhlášení je v následujícím formátu:</p>
+        <pre><code>http://www.m-letter.eu/odh.html?c=XXXXXXX&amp;s=53&amp;q=51
+        </code></pre><p>Kde <strong>XXXXXXX</strong> je číslo zhruba od 1300486 do 2197943. To mě zaujalo a tak jsem toto číslo začal měnit. A ukázalo se, že jsem odhlašoval další lidi. V té době ještě tato stránka vypsala informaci o úspěšném odhlášení včetně emailu, který byl odhlášen. Vzhledem k tomu, že stránka je velmi jednoduchá, lze programově stejně jednoduše získat onu emailovou adresu.</p>
+        <p>Jen si představte program, který iteruje tuto URL adresu a jen sbírá emaily. 897457. To je počet emailů které takto získáte. <strong>897457</strong>. Navíc tímto celý systém znehodnotíte, protože všechny odhlásíte. A pro takový počet emailů to již není zanedbatelné.</p>
+        <h2 id=\\"to-m-b-t-jako-oprava-\\">To má být jako oprava? <a href=\\"#to-m-b-t-jako-oprava-\\">#</a></h2><p>Nejde mi zrovna o to znehodnotit celý čupr dupr systém na spamování, ale proč ne. Tato informace se poměrně rychle rozšířila a o pár minut později mi byl odepřen přístup na tento server. Navíc výpis byl pozměněn tak, aby již nešlo stáhnout téměř 900 000 emailových adres. Nicméně celý systém zřejmě stále funguje stejně, takže můžete jednoduše iterovat URL adresy a tím celý systém znehodnotit:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        for ($i=2197943; $i &gt; 1300486; $i--) {
+            file_get_contents(&quot;http://www.m-letter.eu/odh.html?c=$i&amp;s=53&amp;q=51&quot;);
+        }
+        </code></pre>
+        <p>Doporučuji spustit v příkazové řádce, kde není nastaven pro PHP timeout. Iterace je schválně pozpátku, protože se dá předpokládat, že ty nejnovější záznamy mají větší číslo a ty s malým číslem už dost možná nebudou aktuální. Celý program jsem měl daleko složitější, vzhledem k tomu, že jsem byl připraven na stáhnutí všech emailů. Po změně výpisu již většina programu není potřeba a stačí tedy tři řádky pro znehodnocení celého nezanedbatelně velkého systému.</p>
+        <p><s>Dejme tedy někomu z Wedos čas na opravu a pak hurá na hromadný lynč.</s> <span style=\\"color:green\\">Opět stejný problém jako předtím. Doufám, že mám tentokrát pravdu...</span> Sice jde jen o emailové adresy, ale vzpomeňte si na to až zase budete nadávat na spam, nebo souhlasit s tím, že vaše emailová adresa nebude nikde uveřejněna.</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fstahnete-si-zdarma-897457-emailovych-adres%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

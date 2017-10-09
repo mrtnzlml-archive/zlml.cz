@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      RSS a Sitemap jednoduše a rychle
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Pár článků zpět jsem ukazoval několik příkladů, jak tvořit různé routy. Ukazoval jsem routy pro RSS i sitemap.xml. Nikde jsem však zatím neukazoval jak je to jednoduše realizovatelné. Dokonce tak jednoduše, že je škoda tyto soubory nevyužít na jakémkoliv webu, protože mají poměrně velký potenciál.</p>
+        <p>Začněme HomepagePresenterem (DEV Nette):</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        class HomepagePresenter extends BasePresenter {
+        
+            /** @var \\\\Model\\\\Posts @inject */
+            public $posts;
+        
+            public function renderRss() {
+                $this-&gt;template-&gt;posts = $this-&gt;posts-&gt;getAllPosts()-&gt;order(&#39;date DESC&#39;)-&gt;limit(50);
+            }
+        
+            public function renderSitemap() {
+                $this-&gt;template-&gt;sitemap = $this-&gt;posts-&gt;getAllPosts();
+            }
+        
+        }
+        </code></pre>
+        <p>Tímto říkám, že do šablon <code>rss.latte</code> a <code>sitemap.latte</code> předávám všechny články, nebo jen některé, protože nechci dělat dump celé databáze pro RSS.</p>
+        <p>Pro úplnost ještě \\\\Model\\\\Posts:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        namespace Model;
+        
+        class Posts extends \\\\Nette\\\\Object {
+        
+            /** @var \\\\Nette\\\\Database\\\\SelectionFactory @inject */
+            public $sf;
+        
+            /**
+             * @return Nette\\\\Database\\\\Table\\\\Selection
+             */
+            public function getAllPosts() {
+                return $this-&gt;sf-&gt;table(&#39;posts&#39;);
+            }
+        
+        }
+        </code></pre>
+        <p>A následují samotné šablony, které musí dodržovat určitý formát, takže se lehce odlišují od normálních šablon. Sitemap.latte:</p>
+        <pre><code class=\\"lang-html\\">{contentType application/xml}
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        
+        &lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
+            {foreach $sitemap as $s}
+                &lt;url&gt;
+                    &lt;loc&gt;{link //Single:article $s-&gt;id}&lt;/loc&gt;
+                &lt;/url&gt;
+            {/foreach}
+        &lt;/urlset&gt;
+        </code></pre>
+        <p>Rss.latte:</p>
+        <pre><code class=\\"lang-html\\">{contentType application/xml}
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        
+        &lt;rss version=&quot;2.0&quot;&gt;
+            &lt;channel&gt;
+                &lt;title&gt;Martin Zlámal [BLOG]&lt;/title&gt;
+                &lt;link&gt;{link //:Homepage:default}&lt;/link&gt;
+                &lt;description&gt;Nejnovější články na blogu.&lt;/description&gt;
+                &lt;language&gt;cs&lt;/language&gt;
+        
+                &lt;item n:foreach=&quot;$posts as $post&quot;&gt;
+                    &lt;title&gt;{$post-&gt;title}&lt;/title&gt;
+                    &lt;link&gt;{link //:Single:article $post-&gt;id}&lt;/link&gt;
+                    &lt;description&gt;{$post-&gt;body|texy|striptags}&lt;/description&gt;
+                &lt;/item&gt;
+            &lt;/channel&gt;
+        &lt;/rss&gt;
+        </code></pre>
+        <p>A pro úplnou úplnost i router:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        namespace App;
+        use Nette;
+        use Nette\\\\Application\\\\Routers\\\\Route;
+        use Nette\\\\Application\\\\Routers\\\\RouteList;
+        use Nette\\\\Application\\\\Routers\\\\SimpleRouter;
+        
+        class RouterFactory {
+        
+            /**
+             * @return \\\\Nette\\\\Application\\\\IRouter
+             */
+            public function createRouter() {
+                $router = new RouteList();
+                $router[] = new Route(&#39;sitemap.xml&#39;, &#39;Homepage:sitemap&#39;);
+                // na RSS se dá odkazovat normálně bez routeru, nebo:
+                $router[] = new Route(&#39;rss.xml&#39;, &#39;Homepage:rss&#39;);
+                //...
+                $router[] = new Route(&#39;&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, &#39;Homepage:default&#39;);
+                return $router;
+            }
+        
+        }
+        </code></pre>
+        <p>Jednoduché a na pár řádek. Jen vědět jak na to... (-:</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Frss-a-sitemap-jednoduse-a-rychle%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

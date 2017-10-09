@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Asymetrická šifra s veřejným klíčem
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>O veřejné distribuci klíčů jsem již dříve psal. Pojďme se však podívat nejen na samotnou distribuci, ale i na myšlenku asymetrického šifrování. Prvně je však třeba vysvětlit několik důležitých věcí. Začněme tím, co vlastně znamená asymetrická šifra. Před myšlenkou asymetrického šifrování, jejíž autorem je Whitfield Diffie, se používalo výhradně šifrování symetrické, což znamená, že proces dešifrování zakódované zprávy je přesně opačný k procesu šifrování. Asymetrické šifrování však zavádí myšlenku použití jiného klíče na šifrování a jiného na dešifrování.</p>
+        <p>Jak to vyřešit? Jak je možné použít jiný klíč na šifrování a jiný na dešifrování? Již existoval koncept, který umožňoval výměnu  klíčů veřejně (a bezpečně). Stále byl však na principu synchronní komunikace odesílatele a příjemce, což nebylo optimální řešení a proto byl vymyšlen způsob jak tento problém obejít. Myšlenka byla jednoduchá. Příjemce musí vytvořit veřejný klíč, který následně zveřejní tak, aby byl veřejný opravdu pro všechny. V tomto případě je jasné, že by to nemělo smysl, pokud by se nepoužívala jednosměrná funkce šifrování, což je další pravidlo. A zároveň opět onen příjemce musí mít svůj tajný klíč, který dokáže informaci zašifrovanou veřejným klíčem dešifrovat. Z toho je patrná ta asymetričnost šifry. Nepoužívám stejný klíč na zašifrování a dešifrování jako u jiných šifer.</p>
+        <p>Tomuto systému se říká RSA (Ronald Riverst, Adi Shamir, Leonard Adleman). Pojďme se na něj teď podívat matematicky, protože teorie je moc obecná (a matematika zase složitá). Odesílatel zprávy si musí zvolit dvě velmi velká prvočísla (A, B). Tyto prvočísla mezi sebou vynásobí a dostane další ještě větší číslo (AB). Násobení je zcela triviální jednosměrná operace a systém RSA si zakládá na tom, že faktorizovat velké číslo je v reálním čase prakticky nemožné. Dále si odesílatel zvolí číslo C a to uveřejní společně s číslem AB. Toto jsou informace, které má každý k dispozici. Pro šifrování je nutné zprávu převést na číslo M (například binárně). Toto číslo se poté dosadí podle vzorce &quot;šifra&quot;= M^C (mod AB). Zpětně se pak informace dá velmi snadno dostat obráceným postupem se znalostí onoho součinu prvočísel zvolených na začátku. Bez znalosti těchto prvočísel je dešifrování téměř nemožné, což však také není úplně pravda viz poslední odstavec.</p>
+        <p>Je zřejmé, že úspěch šifry spočívá ve zvolení dostatečně velkých prvočísel a mocnitele C, který by vzhledem k prvočíslům neměl mít žádného společného dělitele. Resp. přesněji čísla C a (A-1) * (B-1). Při představení RSA byl pro jeho reprezentaci uveřejněn zašifrovaný text s veřejným klíčem. Soutěžním úkolem bylo faktorizovat veřejný klíč na dvě složky a poté zprávu dešifrovat. Faktorizace trvala ve výsledku celkem 17 let, kdy tým 600 dobrovolníků oznámil 26. dubna 1994 činitele veřejného klíče. A jaký že byl ten klíč?</p>
+        <pre><code>N = 114 381 625 757 888 867 669 235 779 976 146 612 010 218 296 721 242 362 562 561 842 935 706 935 245 733 897 830 597 123 563 958 705 058 989 075 147 599 290 026 879 543 541
+        </code></pre><p>Dílčí prvočísla si nechám jako tajemství? (-:</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fasymetricka-sifra-s-verejnym-klicem%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

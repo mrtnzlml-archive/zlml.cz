@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      How do we do serverless?
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>In past few months, I moved completely from PHP backend to the JavaScript semi-frontend (not really backend but definitely not frontend - somewhere between). And I am glad I did it because finally, I can try every cool technology I always wanted but haven&#39;t had the opportunity. And one of these technologies is a serverless approach. It basically means that you still have servers but you are not taking care of the bare metal but you&#39;ll rather get computational power with all the fancy stuff like auto-scaling, high availability, related services orchestration and so on.</p>
+        <p>Here at Kiwi.com (Prague), we are working on a lot of projects but one of them is more often pronounced - <a href=\\"http://www.czechcrunch.cz/2017/05/brnenske-kiwi-com-otevira-v-praze-novou-pobocku-se-zamerenim-na-umelou-inteligenci/\\">the chatbot</a>. This chatbot should help our customer support to manage tasks more easily. But the interesting part is that this application is <strong>completely serverless</strong>. This is how it works.</p>
+        <h2 id=\\"it-39-s-just-a-function\\">It&#39;s just a function <a href=\\"#it-39-s-just-a-function\\">#</a></h2><p>The whole chatbot is just a function. Quite long and complicated one though. It&#39;s written in Node.js (ECMAScript 2017 - ES8 with a shit-ton of transpilers) and it runs on AWS Lambda. One of the best parts of the serverless is its deployment. We are using <a href=\\"https://serverless.com/\\">Serverless Framework</a> and that means that deployment to the serverless infrastructure is as easy as writing <code>serverless deploy</code>:</p>
+        <pre><code>$ serverless deploy --stage staging
+        Serverless: Packaging service...
+        Serverless: Uploading CloudFormation file to S3...
+        Serverless: Uploading artifacts...
+        Serverless: Uploading service .zip file to S3...
+        Serverless: Validating template...
+        Serverless: Updating Stack...
+        Serverless: Checking Stack update progress...
+        ..........
+        Serverless: Stack update finished...
+        Service Information
+        service: chatbot
+        stage: staging
+        region: eu-west-1
+        api keys:
+          None
+        endpoints:
+          POST - https://secret.eu-west-1.amazonaws.com/staging/
+        functions:
+          chatbot: chatbot-staging-chatbot
+        Serverless: Removing old service versions...
+        </code></pre><p>What does this framework do? Firstly it creates a ZIP file with the already transpiled and tested code. It also creates <a href=\\"https://aws.amazon.com/cloudformation/\\">AWS CloudFormation</a> template and uploads it to the AWS S3 storage. Now the magic happens. The new environment is created/updated thanks to the CloudFormation template. In our case, it means that it creates API Gateways, Lambda functions, and DynamoDB tables. This way you can invoke Lambda function just by calling URL address.</p>
+        <p>The interesting part is that you can extend CloudFormation template however you want. In your case, we are just creating DynamoDB tables but I think you can do whatever you want (means whatever CloudFormation is able to do).</p>
+        <h2 id=\\"dazzle-me\\">Dazzle me <a href=\\"#dazzle-me\\">#</a></h2><p>I&#39;ll show you just a simplified serverless definition (without the DynamoDB because it&#39;s too long), but the overall picture should be clear. The whole serverless infrastructure is defined in <code>serverless.yml</code>:</p>
+        <pre><code class=\\"lang-neon\\">service: chatbot
+        
+        provider:
+          name: aws
+          runtime: nodejs6.10
+          region: eu-west-1 # Ireland
+        
+        functions:
+          chatbot:
+            handler: dist/basicLambda.handler
+            events:
+              - http:
+                  path: /
+                  method: POST
+                  cors: true
+                  integration: lambda-proxy
+        </code></pre>
+        <p>It&#39;s quite self-explanatory. It&#39;s like a scenario: just create AWS Lambda function from <code>dist/basicLambda.js</code> file and on <code>POST</code> invoke a function in that file called <code>handler</code> (and yeah, also support CORS please). Since we are executing only transpiled and tested code it&#39;s a good idea to upload just that file:</p>
+        <pre><code class=\\"lang-neon\\">package:
+          exclude:
+            - ./**
+          include:
+            - dist/*
+        </code></pre>
+        <p>DynamoDB and other services can be defined in the <code>resources</code> section. You just have to make sure that you&#39;ll setup IAM role permissions as well.</p>
+        <p>And that&#39;s it. This is your &quot;ready for production&quot; environment. The last thing you have to do is just write the Lambda function for the chatbot. Easy...</p>
+        <h2 id=\\"chatbot-aws-lambda-function\\">Chatbot AWS Lambda function <a href=\\"#chatbot-aws-lambda-function\\">#</a></h2><p>Since we are using so called <code>lambda-proxy</code> integration you have to take care of the inputs and outputs in your code on your own. But it&#39;s recommended and you should definitely do that.</p>
+        <pre><code class=\\"lang-javascript\\">export async function handler(
+          event: Object,
+          context: ?Object,
+          callback: (error: null, success: Object) =&gt; void,
+        ) {
+          // error handling and so on...
+        
+          callback(null, {
+            statusCode: 200,
+            headers: {
+              &#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;, // manual CORS (because of lambda-proxy)
+            },
+            body: JSON.stringify({
+              response: &quot;Sorry, I didn&#39;t understand your question. Say that again?&quot;,
+            }),
+          });
+        }
+        </code></pre>
+        <p>Now, for me, this was always so confusing. It&#39;s because you hear - just run the function on AWS Lambda. But what does it mean? You have your shiny program full of classes and files and not only one function to run. Well, this is why you have Webpack right? You just inline everything into one file with all the mangling and uglifying and you are almost ready. The last thing is to expose your program via one handler and for AWS Lambda it should be in form of CommonJS (Webpack fragment):</p>
+        <pre><code class=\\"lang-javascript\\">output: {
+          path: path.resolve(appDirectory, &#39;dist&#39;),
+          filename: &#39;[name].js&#39;,
+          libraryTarget: &quot;commonjs2&quot;,
+        },
+        </code></pre>
+        <p>And that&#39;s it. This is how we do serverless (not only for chatbot). You should definitely try it if you are courageous enough.</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fhow-do-we-do-serverless%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

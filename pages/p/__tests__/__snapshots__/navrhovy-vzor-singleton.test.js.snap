@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Návrhový vzor Singleton
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Návrhový vzor Singleton je velmi známý. Má za úkol zajistit, že bude z určité třídy existovat pouze jedna instance. K této instanci poskytne globální přístupový bod. Jednoduché zadání, ale samotná implementace může být v PHP zákeřná. Proč? Tak prvně záleží na tom, jak budeme u návrhu striktní.</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        class Object {
+            private static $instance = null;
+            public static function getInstance() {
+                if(self::$instance === null) {
+                    self::$instance = new self;
+                }
+                return self::$instance;
+            }
+        }
+        </code></pre>
+        <p>Takovouto třídu lze totiž rovnou prohlásit za návrhový vzor Singleton. Dává to smysl, protože můžeme zavolat:</p>
+        <pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
+        $obj2 = Object::getInstance();
+        </code></pre>
+        <p>Tím se pokusíme vytvořit dvě instance této třídy, ve skutečnosti se však vytvoří jen jedna. Tyto objekty jsou identické, což lze dokázat jednoduchou zkouškou:</p>
+        <pre><code class=\\"lang-php\\">if($obj1 === $obj2) {
+            echo &#39;$obj1 === $obj2&#39;; //TRUE
+        } else {
+            echo &#39;$obj1 !== $obj2&#39;;
+        }
+        </code></pre>
+        <p>Singleton to je a nikdo nemůže říct ne. Jak jsem však již psal, záleží na tom, jak budeme u návrhu striktní, protože by to nebylo PHP, kdyby neexistovalo několik otazníků a háčků. Pravděpodobně spoustu lidí totiž napadne, že metoda <code>getInstance()</code> je sice hezká, ale vůbec ji nemusím použít. V takovém případě celý princip Singletona padá.</p>
+        <pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
+        $obj2 = new Object();
+        
+        if($obj1 === $obj2) {
+            echo &#39;$obj1 === $obj2&#39;;
+        } else {
+            echo &#39;$obj1 !== $obj2&#39;; //TRUE
+        }
+        </code></pre>
+        <p>To je jasné, zatím ve třídě neexistuje žádný mechanismus, který by zakázal používání konstruktoru. K tomu je potřeba pouze malá úprava třídy.</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        class Object {
+            private static $instance = null;
+            public static function getInstance() {
+                if(self::$instance === null) {
+                    self::$instance = new self;
+                }
+                return self::$instance;
+            }
+            protected function __construct() {}
+        }
+        </code></pre>
+        <p>V tento moment již nepůjde objekt vytvořit pomocí operátoru <code>new</code>. Případný pokus skončí fatální chybou. Nebylo by to však PHP, kdyby neexistovalo několik dalších otazníků a háčků. S ledovým klidem si totiž mohu první vytvořený objekt naklonovat a tím opět získám dvě nezávislé instance jedné třídy. Ale to jsem přece nechtěl!</p>
+        <pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
+        $obj2 = clone $obj1;
+        
+        if($obj1 === $obj2) {
+            echo &#39;$obj1 === $obj2&#39;;
+        } else {
+            echo &#39;$obj1 !== $obj2&#39;; //TRUE
+        }
+        </code></pre>
+        <p>Proti tomuto postupu se mohu bránit opět podobným způsobem jako u konstruktoru.</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        class Object {
+            private static $instance = null;
+            public static function getInstance() {
+                if(self::$instance === null) {
+                    self::$instance = new self;
+                }
+                return self::$instance;
+            }
+            protected function __construct() {}
+            private function __clone() {}
+        }
+        </code></pre>
+        <p>Pokus o naklonování již vytvořené instance pomocí metody <code>getInstance()</code> skončí opět fatální chybou. Jenže nebylo by to PHP, kdyby... Co se stane, když vytoření objekt serializuji a pak ho zase deserializuji?</p>
+        <pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
+        $obj2 = unserialize(serialize($obj1));
+        
+        if($obj1 === $obj2) {
+            echo &#39;$obj1 === $obj2&#39;;
+        } else {
+            echo &#39;$obj1 !== $obj2&#39;; //TRUE
+        }
+        </code></pre>
+        <p>To už začíná být poněkud otravné. Ale tak dobře, i to se dá ošéfovat.</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        class Object {
+            private static $instance = null;
+            public static function getInstance() {
+                if(self::$instance === null) {
+                    self::$instance = new self;
+                }
+                return self::$instance;
+            }
+            protected function __construct() {}
+            private function __clone() {}
+            private function __wakeup() {}
+        }
+        </code></pre>
+        <p>Toto už sice vrátí jen warning, ale víme o tom. Schválně jsem nepsal, že se to vše dá ošetřit, protože je to spíše zákaz (popř. upozornění). Je samozřejmě možné (lepší) vracet různé vyjímky atd. Stejně tak je spousta variant jak psát přítupové modifikátory k metodám. To jednoduše vše zaleží na tom, co od Singleton objektu očekáváme a kdo objekt používá, protože jak jsem již psal, úplně klidně stačí Singleton s jednou metodou <code>getInstance()</code>. Svoji funkci plní, tečka.</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        class Object {
+            private static $instance = null;
+            public static function getInstance() {
+                if(self::$instance === null) {
+                    self::$instance = new self;
+                }
+                return self::$instance;
+            }
+            protected function __construct() {}
+            public final function __clone() {
+                throw new Exception(&#39;Objekt nelze klonovat!&#39;);
+            }
+            public final function __wakeup() {
+                throw new Exception(&#39;Objekt nelze deserializovat!&#39;);
+            }
+        }
+        </code></pre>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fnavrhovy-vzor-singleton%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

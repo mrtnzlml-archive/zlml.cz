@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Vy ještě nemáte svůj superprojekt?!
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Nenechte se ošálit. Superprojekt je skutečně <a href=\\"https://git-scm.com/docs/git-submodule#git-submodule-add\\">oficiální název</a> pro Git projekty, které virtuálně obsahují další podprojekty (tzv. submoduly). Jedná se o skvělý způsob jak vytvořit jeden velký repozitář a spravovat v něm mnoho knihoven. Následující text proto bude zajímavý pro programátory, kteří vydávají knihovny podobně jako to dělám já s <a href=\\"https://github.com/adeira\\">projektem Adeira</a>.</p>
+        <p>Začněme však krátkou motivací. Tomuto způsobu vývoje resp. tomu jednomu konkrétnímu repozitáři se velmi často říká &quot;monolith repository&quot;. Vývoj v jednom repozitáři by měl minimalizovat režii, která je nutná pro obskakování mnoha repozitářů. Důležité však je uvědomit si hned na začátku, že jeden monolitický repozitář rozhodně neznamená jeden monolitický kód. Pořád se bavíme o vydávání mnoha Composer balíčků (například), ale jejich údržba a vývoj probíhá v jednom okně jednoho IDE. Pouze finální produkt je množství dílčích repozitářů!</p>
+        <p>Výhody jsou následující:</p>
+        <ul>
+        <li>změny v API napříč celou knihovnou je možné dělat rovnou (nikoliv postupně balíček co balíček)</li>
+        <li>veškeré změny Git repozitáře lze vyřešit jedním šmahem (commit, push) a není tedy potřeba dělat to ručně postupně</li>
+        <li>tím, že se vše dělá na jednom místě, tak by vývoj měl být pružnější a jistější</li>
+        <li>perfektně se vyřeší vlastní závislosti - říkám dej mi <code>moje-knihovna</code>, nikoliv <code>moje-knihovna:v2.5.3</code></li>
+        <li>celkově se celá monorepo obluda chová podobně jako jeden balíček, ale lze jej vydávat jako mnoho Composer balíčků</li>
+        <li>lze otestovat veškerý namespace (třeba <code>nette/*</code>) najednou</li>
+        </ul>
+        <p>Chvíli jsem to zkoumal a existují dvě cesty jak takový repozitář vytvořit. Jedna horší a jedna lepší. Začnu tou (z mého pohledu) horší...</p>
+        <h2 id=\\"split-repozit-e\\">Split repozitáře <a href=\\"#split-repozit-e\\">#</a></h2><p>Toto bylo to první po čem jsem šel. Teorie zní následovně. Veškerý kód mám v jednom repozitáři (třeba <code>adeira/monorepo</code>) a normálně pracuji na kódu jak jsem zvyklý. Následně spustím nějaký program, který mi repozitář rozdělí pomocí Gitu na jednotlivé dílčí repozitáře. To lze udělat pomocí <a href=\\"https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt\\">subtree</a> nebo třeba pomocí <a href=\\"https://github.com/splitsh/lite\\">splitsh</a> (to používá Symfony).</p>
+        <p>Výhody jsou zřejmé - dělám na jednom kódu a mám jeden repozitář. To je ostatně to jak jsem monolitický repozitář vydefinoval. Nevýhody už možná tak zřejmé nejsou - mám jen jeden repozitář. Pokud jste alespoň trošičku políbeni Gitem, tak si umíte asi představit, co to znamená pro vydávání nových verzí jednotlivých balíčků. V Gitu totiž nelze mít dva stejné tagy. A to znamená dvě věci: budu vydávat verze nějak strašně složitě, nebo budou mít všechny balíčky stejnou verzi.</p>
+        <p>Druhým zmíněným způsobem to dělá Symfony a s veškerou otevřeností si myslím, že to není dobře. To totiž znamená, že budu vydávat verze ve kterých se <strong>vůbec nic nezměnilo</strong>. Nevěříte? Symfony to dělá běžně (<a href=\\"https://github.com/symfony/security-http/compare/v2.8.11...v2.8.14\\">2.8.11...2.8.14</a>, <a href=\\"https://github.com/symfony/ldap/compare/v2.8.5...v2.8.15\\">v2.8.5...v2.8.15</a>). Když se nic nezměnilo, tak nemá smysl vydávat verzi (nebo?). Takto SemVer verzování nefunguje... Ale uvědomuji si, že jsou lidé, kteří toto budou obhajovat do morku kosti a že se jedná o můj subjektivní názor. Mnohem více mě trápí to, jak si subtree hraje s historií. Ačkoliv dokumentace tvrdí, že subtree vždy vrátí pro stejnou historii stejné výsledné SHA, tak z pokusů můžu potvrdit, že to není pravda (nezkoumal jsem dál proč). A to je hodně špatně - na všech repozitářích mám naštěstí zabezpečenou master větev, abych nemohl udělat force push. Lépe k tomu přistupuje Splitsh, který je navíc násobně rychlejší. Ten však zase neumí pracovat s historií, která byla pomocí subtree přidána. Možná znáte subsplit - to je ale jen obálka nad subtree (takže stejně pomalé).</p>
+        <p>Pokud tedy chcete vydávat balíčky kdy se bude často stávat, že má jeden commit několik tagů verzí a nemáte problém s tím, že je nutné pokaždé dopočítat diff z historie pro dílčí projekty, pak je pro vás split zřejmě ta správná volba. V opačném případě je tu varianta se superprojektem.</p>
+        <h2 id=\\"superprojekt\\">Superprojekt <a href=\\"#superprojekt\\">#</a></h2><p>Superprojekt na to jde úplně jinak. Využívá tzv. <a href=\\"https://git-scm.com/docs/git-submodule\\">submoduly</a> což není nic jiného než ukazatel na jiný <strong>plnohodnotný</strong> Git repozitář. Při této konfiguraci se superprojekt chová jako přepravka na tyto repozitáře. Přesně ví kde jsou a jak s nimi pracovat, ale nehraje si s jejich historií. Vzhledem k tomu, že je v submodulu plnohodnotný Git repozitář, tak mohu pracovat s tagy samostatně a vydávat tak verze samostatně. Není tedy třeba dělat žádné ústupky.</p>
+        <p>Superprojekt si drží informaci o submodulech v souboru <code>.gitmodules</code> jehož obsah vypadá takto (příklad z projektu <a href=\\"https://github.com/adeira/superproject\\">adeira/superproject</a>):</p>
+        <pre><code class=\\"lang-js\\">[submodule &quot;Component/compiler-extension&quot;]
+            path = Component/compiler-extension
+            url = git@github.com:adeira/compiler-extension.git
+        [submodule &quot;Component/monolog&quot;]
+            path = Component/monolog
+            url = git@github.com:adeira/monolog.git
+        [submodule &quot;Component/code-quality&quot;]
+            path = Component/code-quality
+            url = git@github.com:adeira/code-quality.git
+        [submodule &quot;Component/workflow&quot;]
+            path = Component/workflow
+            url = git@github.com:adeira/workflow.git
+        [submodule &quot;Component/presenter-factory&quot;]
+            path = Component/presenter-factory
+            url = git@github.com:adeira/presenter-factory.git
+        </code></pre>
+        <p>Skvelé je, že má Git vestavěnou podporu pro submoduly, takže to není nic přes ruku. Jen je třeba zapomenout na první část tohoto článku a začít o submodulech přemýšlet úplně jinak. Každý submodul má vlastní složku <code>.git</code> a je tedy nutné dělat commity v rámci každého submodulu zvlášť. Naštěstí PhpStorm umí udělat commit hromadně, takže pokud se provádí změna ve všech balíčcích, tak lze vše commitnout najednout. V superprojektu se commitují pouze složky, které obsahují submodul. Ty žijí v rámci Gitu ve speciálním módu <code>160000</code> který říká, že se jedná o složku, která ukazuje na konkrétní commit v konkrétním submodulu (jiném repozitáři). GitHub pak vytvoří takto hezké <a href=\\"https://github.com/adeira/superproject/tree/master/Component\\">symlinky do jiného repozitáře</a>.</p>
+        <blockquote>
+        <p>Pamatujte, že zdrojem pravdy je v superprojektu vždy submodul a ten existuje v konkrétním repozitáři! Nemáte tedy k dispozici monolitický repozitář, ale způsob jak ovládat mnoho repozitářů z jednoho místa. Pracovat s těmito repozitáři lze naprosto nezávisle na superprojektu a <strong>nikdy se nedostanete do nekonzistentního stavu</strong>.</p>
+        </blockquote>
+        <p>Zdrojem pravdy jsou tedy cílové repozitáře, což je super, protože o to jde. Software vydávám jako samostatný balíček odkud si jej mohou uživatelé nebo Composer stáhnout. Zde jsou vlastní testy, readme i verze. Nemělo by se stát, že vydám rozbitou verzi, protože ji vydávám vždy nad konkrétním repoitářem, nikoliv nad monorepozitářem. Superprojekt se nemůže dostat do nekonzistence se submoduly, protože na ně jen ukazuje. To znamená, že neexistuje jeden kód na dvou místech (to třeba v Symfony není pravda).</p>
+        <p>Git Push ze superprojektu je ideální spouštět s tímto přepínačem:</p>
+        <pre><code>git push --recurse-submodules=on-demand
+        </code></pre><p>V tomto případě se nejdříve odešlou na vzdálený server submoduly (jen pokud je to potřeba) a až následně se aktualizují ukazatele v superprojektu. O tom jak pracovat se submoduly existuje <a href=\\"https://git-scm.com/book/en/v2/Git-Tools-Submodules\\">dlouhatánský článek</a> - pokud chcete Git ovládat ještě více, tak doporučuji pročíst.</p>
+        <p>Osobně jsem superprojekt dotlačil ještě o kousek dál. Teď už je jedno jestli se bavíme o &quot;split&quot; typu nebo &quot;super&quot; typu - bude to stejné. Všechny balíčky existují v nějaké složce a každý má vlastní Composer závislosti a vlastní testy. Zkombinoval jsem více přístupů jak obstarávat všechny závislosti a nejvíce se mi líbil zbůsob jakým to řeší <a href=\\"https://github.com/beberlei/composer-monorepo-plugin\\">beberlei/composer-monorepo-plugin</a>. Dělám to tak, že jsem si vytvořil Composer příkaz:</p>
+        <pre><code>composer adeira:collect
+        </code></pre><p>Tento příkaz projde všechny submoduly a přečte si co mají napsáno v souboru <code>composer.json</code>. Následně vygeneruje v hlavním balíčku soubor <code>composer.json</code>, který obsahuje všechny požadavky (<code>require</code> i <code>require-dev</code>) ze submodulů. Podobně to udělá i s autoloadery. Navíc vygeneruje speciální sekci <code>replace</code> takto:</p>
+        <pre><code class=\\"lang-js\\">&quot;replace&quot;: {
+            &quot;adeira/code-quality&quot;: &quot;self.version&quot;,
+            &quot;adeira/compiler-extension&quot;: &quot;self.version&quot;,
+            &quot;adeira/monolog&quot;: &quot;self.version&quot;,
+            &quot;adeira/presenter-factory&quot;: &quot;self.version&quot;,
+            &quot;adeira/workflow&quot;: &quot;self.version&quot;
+        }
+        </code></pre>
+        <p>Composer se k tomu potom chová tak, že místo toho aby hledal submodul někde pomocí závislostí, tak sáhne rovnou po submodulu (tak to dělá i Symfony a moc se mi o líbí). K tomu všemu ještě balíčkům přegeneruje soubory <code>vendor/autoload.php</code> s tímto obsahem:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php return require dirname(dirname(dirname(__DIR__))) . &#39;/vendor/autoload.php&#39;;
+        </code></pre>
+        <p>Každý submodul teď tedy funguje (v mém případě) ze superprojektu a lze např. spustit testy napříč celým jmenným prostorem Adeira. Super je, že díky tomu všechny balíčky používají jednotné verze knihoven a nezastarávají. Nedokážu úplně domyslet jaké jsou důsledky mého počínání, ale je to <em>1)</em> nejlepší rozhodnutí co jsem zde udělal nebo <em>2)</em> největší hovadina a budu to muset zrušit. Uklidňuje mě, že tento způsob používají daleko větší projekty a mlaskají si blahem.</p>
+        <p>Podobně mám udělaný ještě příkaz <code>adeira:eject</code>, který aktualizuje verze závislostí v jednotlivých submodulech podle hlavního repozitáře a příkaz <code>adeira:create</code>, který vytvoří nový submodul podle připravených šablon.</p>
+        <p>Věřím, že pokud vydáváte mnoho knihoven, tak vám tento způsob ušetří hodně práce a začnete jej zavádět. Ve výsledku je jedno jakou z cest se vydáte - důležité je, že se vydáte... :)</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fvy-jeste-nemate-svuj-superprojekt%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

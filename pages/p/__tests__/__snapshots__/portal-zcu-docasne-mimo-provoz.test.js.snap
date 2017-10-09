@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Portál ZČU dočasně mimo provoz
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Zvolit správný titulek pro webovou stránku je naprosto klíčové.
+        Mnozí programátoři si to neuvědomují a ti ostatní chybují.
+        Titulek je jedna z nejdůležitějších věcí, podle které se
+        lidé rozhodují jestli na web vstoupit, nebo ne. Proto je třeba mít
+        <code>title</code> tag na každé stránce jiný a je potřeba myslet
+        i na stránky, které se zase až tak často nezobrazují.
+        Je totiž docela smůla, když vás google bot indexuje během profylaxe
+        serverů:</p>
+        <div class=\\"alert alert-danger\\">Tak dlouho jsem s tímto blogem experimentoval, až jsem o obrázek 
+        přišel. :-( Představte si tedy prosím screen vyhledávání na kterém je portál ZČU se zaindexovaným
+        title &quot;Portál ZČU dočasně mimo provoz&hellip;&quot;</div>
+        
+        <p>Web má poté odpuzující titulek, i když už dávno funguje.
+        Nutno však říct, že je to občas problém ohlídat.
+        Tak alespoň to pobaví... (-:</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fportal-zcu-docasne-mimo-provoz%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

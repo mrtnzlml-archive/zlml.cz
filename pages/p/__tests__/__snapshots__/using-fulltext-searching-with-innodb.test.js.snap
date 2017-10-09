@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Using fulltext searching with InnoDB
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Sometimes is quite useful to use InnoDB engine. 
+        Unfortunately InnoDB is good for tables with foreign keys, but useless for fulltext search. 
+        You can&#39;t create fulltext index on InnoDB tables, but you can create this index on MyISAM tables. 
+        Unfortunately you can&#39;t create foreign keys on MyISAM. It&#39;s starting to be quite embarassing. 
+        Let me show you how to search via fulltext on InnoDB tables.</p>
+        <p>In fact it&#39;s not possible to use fulltext index on InnoDB tables, 
+        but there is possible workaround. At first you need a classic InnoDB structure. 
+        For example database of  blog:</p>
+        <pre><code class=\\"lang-sql\\">SET NAMES utf8;
+        SET foreign_key_checks = 0;
+        SET time_zone = &#39;SYSTEM&#39;;
+        SET sql_mode = &#39;NO_AUTO_VALUE_ON_ZERO&#39;;
+        
+        DROP TABLE IF EXISTS \`posts\`;
+        CREATE TABLE \`posts\` (
+          \`id\` int(11) NOT NULL AUTO_INCREMENT,
+          \`title\` text NOT NULL,
+          \`body\` text NOT NULL,
+          \`date\` datetime NOT NULL,
+          \`release_date\` datetime NOT NULL,
+          PRIMARY KEY (\`id\`),
+          UNIQUE KEY \`title_3\` (\`title\`(200))
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        
+        DROP TABLE IF EXISTS \`tags\`;
+        CREATE TABLE \`tags\` (
+          \`id\` int(11) NOT NULL AUTO_INCREMENT,
+          \`name\` varchar(50) NOT NULL,
+          \`color\` varchar(6) NOT NULL,
+          PRIMARY KEY (\`id\`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        
+        DROP TABLE IF EXISTS \`posts_tags\`;
+        CREATE TABLE \`posts_tags\` (
+          \`id\` int(11) NOT NULL AUTO_INCREMENT,
+          \`tag_id\` int(11) NOT NULL,
+          \`post_id\` int(11) NOT NULL,
+          PRIMARY KEY (\`id\`),
+          KEY \`tag_id\` (\`tag_id\`),
+          KEY \`post_id\` (\`post_id\`),
+          CONSTRAINT \`posts_tags_ibfk_1\` FOREIGN KEY (\`tag_id\`) REFERENCES \`tags\` (\`id\`),
+          CONSTRAINT \`posts_tags_ibfk_2\` FOREIGN KEY (\`post_id\`) REFERENCES \`posts\` (\`id\`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </code></pre>
+        <p>Now we have pretty simple database structure with InnoDB tables with foreign keys. 
+        It would be nice to be able search on database table <strong>posts</strong> using fulltext search:</p>
+        <pre><code class=\\"lang-sql\\">SELECT *
+        FROM posts
+        WHERE MATCH(title, body) AGAINST (&#39;something&#39; IN BOOLEAN MODE);
+        </code></pre>
+        <p>But it is not possible. It returns something like:</p>
+        <blockquote>
+        <p>  Error in query: The used table type doesn&#39;t support FULLTEXT indexes</p>
+        </blockquote>
+        <p>Let&#39;s create another one table with triggers and fulltext indexes. 
+        We need to create mirror table. For example:</p>
+        <pre><code class=\\"lang-sql\\">DROP TABLE IF EXISTS \`mirror_posts\`;
+        CREATE TABLE \`mirror_posts\` (
+          \`id\` int(11) NOT NULL AUTO_INCREMENT,
+          \`title\` text NOT NULL,
+          \`body\` text NOT NULL,
+          PRIMARY KEY (\`id\`),
+          FULLTEXT KEY \`title_body\` (\`title\`,\`body\`),
+          FULLTEXT KEY \`title\` (\`title\`),
+          FULLTEXT KEY \`body\` (\`body\`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        </code></pre>
+        <p>And than we need to create triggers:</p>
+        <pre><code class=\\"lang-sql\\">DELIMITER ;;
+        
+        CREATE TRIGGER \`insert_posts\` AFTER INSERT ON \`posts\` FOR EACH ROW
+        INSERT INTO mirror_posts VALUES (NEW.id, NEW.title, NEW.body);;
+        
+        CREATE TRIGGER \`update_posts\` AFTER UPDATE ON \`posts\` FOR EACH ROW
+        UPDATE mirror_posts SET
+            id = NEW.id,
+            title = NEW.title,
+            body = NEW.body
+        WHERE id = OLD.id;;
+        
+        CREATE TRIGGER \`delete_posts\` AFTER DELETE ON \`posts\` FOR EACH ROW
+        DELETE FROM mirror_posts WHERE id = OLD.id;;
+        </code></pre>
+        <p>It means, that we copy all of events and data from table <strong>posts</strong> to the table <strong>mirror_posts</strong>.
+        Finally we can use more complex fulltext search feature:</p>
+        <pre><code class=\\"lang-sql\\">SELECT *
+        FROM mirror_posts
+        WHERE MATCH(title, body) AGAINST (&#39;something&#39; IN BOOLEAN MODE)
+        ORDER BY 5 * MATCH(title) AGAINST (&#39;something&#39;) + MATCH(body) AGAINST (&#39;something&#39;) DESC;
+        </code></pre>
+        <p>As I said, this is just workaround, not solution. 
+        Sometimes it&#39;s bad practice, because you need copy of indexed columns. 
+        But it works. And for small blogs it&#39;s sufficient.</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fusing-fulltext-searching-with-innodb%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

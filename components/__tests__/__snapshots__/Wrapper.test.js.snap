@@ -6,7 +6,10 @@ exports[`renders correctly 1`] = `
     className="jsx-1307704868 wrapper"
   >
     <span>
-      WRAPPED
+      aaa
+    </span>
+    <span>
+      bbb
     </span>
   </div>
 </div>

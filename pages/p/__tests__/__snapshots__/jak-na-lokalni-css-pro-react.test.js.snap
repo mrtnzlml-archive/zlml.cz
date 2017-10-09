@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Jak na lokální CSS pro React
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Když jsem opouštěl koncept <a href=\\"1-od-komponent-zpet-ke-komponentam\\">webových komponent</a> a přecházel jsem k Reactu, tak mě nejvíce mrzelo, že přijdu o všechny zajímavé vlastnosti shadow DOMu. Ve webových komponentách se to má tak, že jak JS tak CSS jsou součástí jedné šablony a neovlivňují globální prostor. To je u Reactu bez problému z pohledu JS. Z pohledu CSS je to však jiná pohádka. Jakýkoliv styl definovaný v rámci komponenty se definuje pro celou aplikaci. Příklad jednoduché hlavičky:</p>
+        <pre><code class=\\"lang-js\\">import React from &#39;react&#39;;
+        import &#39;./Header.css&#39;;
+        
+        export default () =&gt;
+          &lt;div className=&quot;header&quot;&gt;
+              {/* další JSX hlavičky */}
+          &lt;/div&gt;
+        </code></pre>
+        <p>Kdy CSS soubor obsahuje styly pro header:</p>
+        <pre><code class=\\"lang-css\\">.header {
+          /* nějaké ty styly */
+        }
+        </code></pre>
+        <p>Díky Webpacku je možné takto načítat CSS styly v komponentě, ale <code>.header</code> je k dispozici v celé aplikaci (pokud je tam komponenta použita). Pak ale komponenty trošku postrádají smysl a mohl bych to klidně zase patlat v jednom hlavním CSS souboru. Vlastně jsem vůbec nic nezískal a musím si dávat velký pozor na to, co dělám.</p>
+        <p>Naštěstí existuje jednoduché řešení a tím jsou <a href=\\"https://github.com/css-modules/css-modules\\">CSS moduly</a>. Stačí pouze trošku změnit Webpack nastavení a chování CSS se kompletně změní. Zatímco původní nastavení bylo takové:</p>
+        <pre><code class=\\"lang-js\\">module.exports = {
+          module: {
+            rules: [
+              {
+                test: /\\\\.css$/,
+                loader: &#39;style-loader!css-loader?importLoaders=1!postcss-loader&#39;
+              }
+            ]
+          }
+        }
+        </code></pre>
+        <p>Tak nové bude vypadat takto:</p>
+        <pre><code class=\\"lang-js\\">module.exports = {
+          module: {
+            rules: [
+              {
+                test: /\\\\.css$/,
+                use: [
+                  {
+                    loader: &#39;style-loader&#39;
+                  },
+                  {
+                    loader: &#39;css-loader&#39;,
+                    options: {
+                      importLoaders: 1,
+                      modules: true, // Enable/Disable CSS Modules
+                      localIdentName: &#39;[name]__[local]--[hash:base64:5]&#39;,
+                    }
+                  },
+                  {
+                    loader: &#39;postcss-loader&#39;
+                  }
+                ]
+              }
+            ]
+          }
+        }
+        </code></pre>
+        <p>Je to vlastně ta samá konfigurace, jen jsem zapnul CSS moduly. Od této chvíle se veškeré CSS chovají lokálně pouze pro danou komponentu. Je třeba jen upravit použití těchto nových stylů v komponentě:</p>
+        <pre><code class=\\"lang-js\\">import React from &#39;react&#39;;
+        import styles from &#39;./Header.css&#39;;
+        
+        export default () =&gt;
+          &lt;div className={styles.header}&gt;
+              {/* další JSX hlavičky */}
+          &lt;/div&gt;
+        </code></pre>
+        <p>Co se stane s výstupem? Místo CSS třídy se budou generovat (+-) unikátní idenfikátory (s nějakou nápovědou pro development):</p>
+        <pre><code class=\\"lang-html\\">&lt;div class=&quot;Header__header--3dxwh&quot;&gt;
+          &lt;!-- další HTML hlavičky --&gt;
+        &lt;/div&gt;
+        </code></pre>
+        <p>Resp. na produkci kde není nastaveno <code>localIdentName</code> takto:</p>
+        <pre><code class=\\"lang-html\\">&lt;div class=&quot;_3dxwhqIVz2ZHHrfQ6crpKp&quot;&gt;
+          &lt;!-- další HTML hlavičky --&gt;
+        &lt;/div&gt;
+        </code></pre>
+        <p>Tím se zajistí, že CSS bude fungovat jen v rámci jedné komponenty. Jenže to není úplně ultimátní řešení. Některé styly je dobré mít dostupné v celé aplikaci. No tak třeba styly základních HTML elementů jsou stále definovány jako globální. Pokud však potřebujeme nějakou CSS třídu, tak je to možné pomocí <code>:global</code> prefixu:</p>
+        <pre><code class=\\"lang-css\\">:global .clearfix:after {
+          content: &quot;&quot;;
+          display: table;
+          clear: both;
+        }
+        
+        :global .wrapper--fluid {
+          margin-left: 5rem;
+          margin-right: 5rem;
+        }
+        </code></pre>
+        <p>Ačkoliv je z tohoto útržku vidět pozůstatek BEM zápisu, tak už to prakticky není potřeba.</p>
+        <p>Podívejte se, jak vypadá <a href=\\"https://github.com/adeira/connector-frontend/commit/e3106bd84952da4350af0d9a9329a3f747724571\\">taková změna</a> v jednom commitu. To řekne více než 1000 slov... :)</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fjak-na-lokalni-css-pro-react%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

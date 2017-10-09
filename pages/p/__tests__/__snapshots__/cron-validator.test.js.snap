@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      CRON validátor
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>A jak už to tak bývá, tak opět ohnutý pro Nette. Tentokráte inspirovaný řešením ISPConfigu.</p>
+        <h2 id=\\"m-e-tohle-nesm-tamto\\">Můžeš tohle, nesmíš tamto <a href=\\"#m-e-tohle-nesm-tamto\\">#</a></h2><p>Samotný CRON zápis je velmi rozmanitý a proto se omezím pouze na základní požadavky:</p>
+        <ol>
+        <li>obecně jsou povolené znaky <code>0-9</code>, <code>čárka</code>, <code>*</code>, <code>-</code>, <code>/</code></li>
+        <li><code>čárka</code>, <code>-</code> a <code>/</code> nesmí být nikdy vedle sebe</li>
+        <li><code>x</code>, <code>x-y</code>, <code>x/y</code>, <code>x-y/z</code>, <code>*/x</code>, kde x,y,z jsou čísla z povolených časových rozsahů</li>
+        <li>povolený rozsah pro minuty: <strong>0-59</strong></li>
+        <li>povolený rozsah pro hodiny: <strong>0-23</strong></li>
+        <li>povolený rozsah pro dny měsíce: <strong>1-31</strong></li>
+        <li>povolený rozsah pro měsíce: <strong>1-12</strong></li>
+        <li>povolený rozsah pro dny v týdnu: <strong>0-6</strong></li>
+        </ol>
+        <p>To je myslím slušný výčet pravidel pro zvalidování jednoho příkazu.
+        Úkolem tohoto článku není ukázat jak tvořit a zpracovávat formulář, ale bude vhodné
+        umístit sem celý kód alespoň vytvoření:</p>
+        <pre><code class=\\"lang-php\\">/**
+          * @return Nette\\\\Application\\\\UI\\\\Form
+          */
+        protected function createComponentAddCron() {
+            $form = new Nette\\\\Application\\\\UI\\\\Form;
+            $form-&gt;addProtection();
+            $form-&gt;addText(&#39;minutes&#39;, &#39;Minuty:&#39;)
+                -&gt;addRule(\\\\Fresh\\\\ValidateCron::MINUTES, &#39;Nevalidní CRON zápis - minuty.&#39;);
+            $form-&gt;addText(&#39;hours&#39;, &#39;Hodiny:&#39;)
+                -&gt;addRule(\\\\Fresh\\\\ValidateCron::HOURS, &#39;Nevalidní CRON zápis - hodiny.&#39;);
+            $form-&gt;addText(&#39;mdays&#39;, &#39;Dny měsíce:&#39;)
+                -&gt;addRule(\\\\Fresh\\\\ValidateCron::MDAYS, &#39;Nevalidní CRON zápis - mdays.&#39;);
+            $form-&gt;addText(&#39;months&#39;, &#39;Měsíce:&#39;)
+                -&gt;addRule(\\\\Fresh\\\\ValidateCron::MONTHS, &#39;Nevalidní CRON zápis - měsíce.&#39;);
+            $form-&gt;addText(&#39;wdays&#39;, &#39;Dny v týdnu:&#39;)
+                -&gt;addRule(\\\\Fresh\\\\ValidateCron::WDAYS, &#39;Nevalidní CRON zápis - wdays.&#39;);
+            $form-&gt;addText(&#39;command&#39;, &#39;Příkaz:&#39;)
+                -&gt;setRequired(&#39;Vyplňte prosím příkaz, který bude CRON spouštět.&#39;);
+            $form-&gt;addSubmit(&#39;save&#39;, &#39;Přidat nový CRON&#39;);
+            $form-&gt;onSuccess[] = $this-&gt;addCronSucceeded;
+            return $form;
+        }
+        </code></pre>
+        <p>A rovnou bez hloupých povídání celý validátor:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        namespace Fresh;
+        
+        /**
+         * Class ValidateCron - inspired by ISPConfig
+         * @package Fresh
+         */
+        class ValidateCron extends \\\\Nette\\\\Object {
+        
+                const MINUTES = &#39;\\\\Fresh\\\\ValidateCron::validateMinutes&#39;;
+                const HOURS = &#39;\\\\Fresh\\\\ValidateCron::validateHours&#39;;
+                const MDAYS = &#39;\\\\Fresh\\\\ValidateCron::validateMdays&#39;;
+                const MONTHS = &#39;\\\\Fresh\\\\ValidateCron::validateMonths&#39;;
+                const WDAYS = &#39;\\\\Fresh\\\\ValidateCron::validateWdays&#39;;
+        
+                public static function validateMinutes(\\\\Nette\\\\Forms\\\\IControl $control) {
+                        return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 0, 59);
+                }
+        
+                public static function validateHours(\\\\Nette\\\\Forms\\\\IControl $control) {
+                        return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 0, 23);
+                }
+        
+                public static function validateMdays(\\\\Nette\\\\Forms\\\\IControl $control) {
+                        return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 1, 31);
+                }
+        
+                public static function validateMonths(\\\\Nette\\\\Forms\\\\IControl $control) {
+                        if($control-&gt;getValue() != &#39;@reboot&#39;) { // allow value @reboot in month field
+                                return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 1, 12);
+                        } else {
+                                return TRUE;
+                        }
+                }
+        
+                public static function validateWdays(\\\\Nette\\\\Forms\\\\IControl $control) {
+                        return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 0, 6);
+                }
+        
+                private static function validateTimeFormat($value, $min_entry = 0, $max_entry = 0) {
+                        if (preg_match(&quot;&#39;^[0-9\\\\-\\\\,\\\\/\\\\*]+$&#39;&quot;, $value) == false) { // allowed characters are 0-9, comma, *, -, /
+                                return FALSE;
+                        } elseif (preg_match(&quot;&#39;[\\\\-\\\\,\\\\/][\\\\-\\\\,\\\\/]&#39;&quot;, $value) == true) { // comma, - and / never stand together
+                                return FALSE;
+                        }
+                        $time_list = explode(&quot;,&quot;, $value);
+                        foreach ($time_list as $entry) {
+                                // possible value combinations:
+                                // x               =&gt;      ^(\\\\d+)$
+                                // x-y             =&gt;      ^(\\\\d+)\\\\-(\\\\d+)$
+                                // x/y             =&gt;      ^(\\\\d+)\\\\/([1-9]\\\\d*)$
+                                // x-y/z           =&gt;      ^(\\\\d+)\\\\-(\\\\d+)\\\\/([1-9]\\\\d*)$
+                                // */x             =&gt;      ^\\\\*\\\\/([1-9]\\\\d*)$
+                                // combined regex  =&gt;      ^(\\\\d+|\\\\*)(\\\\-(\\\\d+))?(\\\\/([1-9]\\\\d*))?$
+                                if (preg_match(&quot;&#39;^(((\\\\d+)(\\\\-(\\\\d+))?)|\\\\*)(\\\\/([1-9]\\\\d*))?$&#39;&quot;, $entry, $matches) == false) {
+                                        return FALSE;
+                                }
+                                // matches contains:
+                                // 1       =&gt;      * or value or x-y range
+                                // 2       =&gt;      unused
+                                // 3       =&gt;      value if [1] != *
+                                // 4       =&gt;      empty if no range was used
+                                // 5       =&gt;      2nd value of range if [1] != * and range was used
+                                // 6       =&gt;      empty if step was not used
+                                // 7       =&gt;      step
+                                if ($matches[1] == &quot;*&quot;) {
+                                        // not to check
+                                } else {
+                                        if ($matches[3] &lt; $min_entry || $matches[3] &gt; $max_entry) { // check if value is in allowed range
+                                                return FALSE;
+                                        } elseif (isset($matches[4]) &amp;&amp; ($matches[5] &lt; $min_entry || $matches[5] &gt; $max_entry || $matches[5] &lt;= $matches[3])) {
+                                                // check if value is in allowed range and not less or equal to first value
+                                                return FALSE;
+                                        }
+                                }
+                                if (isset($matches[6]) &amp;&amp; ($matches[7] &lt; 2 || $matches[7] &gt; $max_entry - 1)) { // check if step value is valid
+                                        return FALSE;
+                                }
+                        } // end foreach entry loop
+                        return TRUE;
+                }
+        
+        }
+        </code></pre>
+        <p>Validátorem navrácené errory lze vykreslit například takto ručně (nově v DEV Nette):</p>
+        <pre><code class=\\"lang-html\\">{form $form}
+        
+        &lt;ul class=&quot;error&quot; n:if=&quot;$form-&gt;allErrors&quot;&gt;
+                &lt;li n:foreach=&quot;$form-&gt;allErrors as $error&quot;&gt;{$error}&lt;/li&gt;
+        &lt;/ul&gt;
+        
+        ...
+        
+        {/form}
+        </code></pre>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fcron-validator%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

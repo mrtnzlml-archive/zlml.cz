@@ -10,7 +10,8 @@ it('renders correctly', () => {
     renderer
       .create(
         <Wrapper>
-          <span>WRAPPED</span>
+          <span>aaa</span>
+          <span>bbb</span>
         </Wrapper>,
       )
       .toJSON(),

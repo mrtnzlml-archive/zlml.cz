@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Důležitost titulku podruhé (a naposled)
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Také bych mohl začít slovy: &quot;Jsem to ale trouba.&quot; V následujících několika odstavcích bych rád navázal na článek, kde jsem upozorňoval na to, jak je <code>title</code> tag důležitý (<a href=\\"http://zlml.cz/portal-zcu-docasne-mimo-provoz\\">http://zlml.cz/portal-zcu-docasne-mimo-provoz</a>). Což jsem si ostatně nechtěně vyzkoušel.</p>
+        <h2 id=\\"jak-m-lo-sta-k-um-st-n-ve-vyhled-va-i\\">Jak málo stačí k umístění ve vyhledávači <a href=\\"#jak-m-lo-sta-k-um-st-n-ve-vyhled-va-i\\">#</a></h2><p>Tag <code>title</code> je jeden z nejvíce důležitých prvků na webové stránce. Zároveň je však jeden z nejvíce opomíjených. Proč se však opět vracím k již dávno vyřešenému problému? Krátce poté co jsem napsal onen osudný článek, mohl jsem pozorovat krásný efekt o kterém jsem psal. Vytvořil jsem totiž článek, jehož URL adresa měla změní <code>...cz/portal-zcu-docasne-mimo-provoz</code> a ve vyhledávači jsem vystupoval s titulkem <code>Portál ZČU dočasně mimo provoz | Martin Zlámal</code>.</p>
+        <p>S tímto článkem jsem se okamžitě dostal na první stránku ve vyhledávači a dodnes pozoruji ve statistikách doslova tisíce zobrazení (což je na velikost mého bezvýznamného blogu opravdu hodně) na různé kombinace slov <strong>portal</strong> a <strong>zcu</strong>. Celkem jsem napočítal 7 variant což už chce zapojit fantazii pro spojení dvou slov tolika způsoby.</p>
+        <h2 id=\\"jen-e-nen-zobrazen-jako-zobrazen-\\">Jenže není zobrazení jako zobrazení <a href=\\"#jen-e-nen-zobrazen-jako-zobrazen-\\">#</a></h2><p>Možná by z toho měl kde kdo radost, ale mě osobně to moc nenadchlo. Je třeba se zamyslet nad tím, jaká je z tohoto zobrazení asi návštěvnost, když jsem jednak na pozici až pod tím správným portálem a pak má článek takový titulek, na který nikdo z vyhledávání dobrovolně nepřistoupí. Mizivou.</p>
+        <p>Oproti tomu naopak články, které byly napsány vyloženě z důvodu zájmu (<a href=\\"http://zlml.cz/routovani-v-nette-prakticky\\">http://zlml.cz/routovani-v-nette-prakticky</a>) mají mnohem větší procento prokliků. A to nelze srovnávat počty zobrazení jednotlivých článků. Každopádně zdaleka největšího CTR dosahují články, ve jsou popsány návrhové vzory v PHP (např. <a href=\\"http://zlml.cz/navrhovy-vzor-factory-method\\">http://zlml.cz/navrhovy-vzor-factory-method</a>).</p>
+        <p>Rád bych z tohoto pozorování vyvodil jednoduchý závěr, který je však myslím více než jasný. Nemá smysl psát o jakémkoliv nápadu, ale má smysl psát o tématech, o které je evidentní zájem, což lze ve statistikách snadno pozorovat. Snad jen jednou za čas je zajímavé vybočit z řady a sledovat reakce návštěvníků.</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fdulezitost-titulku-podruhe-a-naposled%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

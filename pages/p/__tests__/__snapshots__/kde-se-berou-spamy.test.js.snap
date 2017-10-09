@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Kde se berou spamy?
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<div class=\\"alert alert-info\\">Tento článek navazuje na článek <a href=\\"stahnete-si-zdarma-897457-emailovych-adres\\">Stáhněte si zdarma 897457 emailových adres</a> z ledna tohoto roku. Přečtěte si jej prosím, ať víte o co jde.</div>
+        
+        <p>Rád bych tímto všechny čtenáře poprosil o pomoc. Ačkoliv na internetu vystupuji veřejně a nemám s tím problém, jsem velmi háklivý na to, když někdo neoprávněně zneužívá mé osobní informace. Někteří přijmou moji žádost a problém odstraní - viz nedávno zrušená kopie tohoto blogu. Někteří však dělají všechno proto, abych pokračoval v rituálním podpalování válečné sekery a proto jsem neskončil tam kde jsem v minulém článku přestal psát.</p>
+        <h2 id=\\"trnit-cesta-pln-p-ek-ek\\">Trnitá cesta plná překážek <a href=\\"#trnit-cesta-pln-p-ek-ek\\">#</a></h2><p>Je již známá věc, že jistý web má nemalou zásluhu na šíření reklamních emailů křížem krážem. Vzhledem k tomu, že takové email dorazil i ke mě a vzhledem k tomu, že upoutal moji pozornost, začal jsem zbrojit. Při prvních pokusech jsem oťukával jejich systém abych zjistil o co jde. Zde jsem mimo jiné udělal mylný myšlenkový pochod a vše jsem svedl na někoho kdo s tím nemá nic společného. Každopádně po několika minutách jsem měl celkem jasno a udělal jsem velkou chybu. Popsal jsem bezpečnostní chybu reklamního systému na G+, na což někdo velmi rychle zareagoval a já jsem dostal na tento reklamní server ban. Doufám, že to byla jen náhoda...</p>
+        <p>Toto řešení mi přišlo poněkud směšné, a tak jsem do tohoto systému přes IP anonymizér šťoural stále více. V tuto chvíli jsem to prakticky zabalil, protože chyba byla tak nějak opravena. Systém již při odhlašování nezobrazoval emailovou adresu, takže již nešlo použít něco jako:</p>
+        <pre><code class=\\"lang-php\\">preg_match(&#39;#&lt;b&gt;(.+)&lt;/b&gt;#&#39;, file_get_contents(&quot;http://www.m-letter.eu/odh.html?c=$i&amp;s=53&amp;q=51&quot;), $match);
+        </code></pre>
+        <p>Na necelý měsíc jsem to pustil z hlavy až včera jsem si na tento web opět vzpomněl. Také jsem byl již na jiné IP adrese což se mi stává celkem často, takže jsem opět vyzkoušel to co před měsícem a světe div se, bezpečností chyba opět funguje. To mě rozproudilo ještě víc, takže jsem opět usedl k editoru a začal jsem psát program, abych si ověřil, že jsem nekecal:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        try {
+            $db = new PDO(&#39;mysql:dbname=emails;host=127.0.0.1&#39;, &#39;root&#39;, &#39;&#39;);
+            $stmt = $db-&gt;prepare(&quot;INSERT INTO emails (url_id, email) VALUES (:url_id, :email)
+                                    ON DUPLICATE KEY UPDATE url_id= :url_id, email= :email&quot;);
+            $stmt-&gt;bindParam(&#39;:url_id&#39;, $url_id);
+            $stmt-&gt;bindParam(&#39;:email&#39;, $email);
+        
+            //1300486 - 2197943
+            for ($i=2197943; $i &gt; 1300486; $i--) {
+                preg_match(&#39;#&lt;b&gt;(.+)&lt;/b&gt;#&#39;, file_get_contents(&quot;http://www.m-letter.eu/odh.html?c=$i&amp;s=53&amp;q=51&quot;), $match);
+                if (preg_match(&quot;#@#&quot;, $match[1])) {
+                    $url_id = $i;
+                    $email = $match[1];
+                    echo $i . &#39;: &#39; . $email . &quot;
+        &quot;;
+                    $stmt-&gt;execute();
+                }
+            }
+        
+        } catch (PDOException $e) {
+            echo &#39;Connection failed: &#39; . $e-&gt;getMessage();
+        }
+        </code></pre>
+        <p>Nejsem žádný extra programátor, ale na takovou věc ani být nemusím. Je asi zřejmé, že by tento program trval poměrně dlouhou dobu. Nemá však smysl řešit nějaké paralelní zpracování, když se o to server při vhodně zvoleném programu postará sám. Napsal jsem tedy celkem tři velmi podobné programy. Jeden bral URL adresy od nízkého čísla, druhý od vysokého a třetí na obě strany od středu číselného intervalu. Právě je 17:00, dávám si něco k jídlu a vyrážím do města na hokej...</p>
+        <h2 id=\\"jak-to-bylo-d-l-\\">Jak to bylo dál? <a href=\\"#jak-to-bylo-d-l-\\">#</a></h2><p>Po tom co hokej nedopadl moc dobře, strávil jsem nějaký čas u piva a vrátil jsem se domů. Bylo pozdě a program pořád běžel. Šel jsem spát a ráno do školy. Program stále běžel. V tuto chvíli již 16 hodin. Odhadem až někdy po 20ti hodinách dolování emailových adres z tohoto serveru jsem opět dostal IP ban. V tu chvíli jsem měl však získáno více než čtvrt milionu unikátních emailových adres. Ono to funguje! <strong>Zde bych měl říct, že jsem tyto emailové adresy nedoloval kvůli nějakému zneužití, maximálně z nich udělám nějakou statistiku</strong>... (-: Chtěl jsem také napsat na email který mají vystavený na webu, to bohužel nefungovalo, protože tento email byl pravděpodobně zrušen.</p>
+        <p>V tuto chvíli adresy stále zpracovávám, protože celý systém psal někdo moc &quot;šikovný&quot; a tak občas systém vrátil místo emailu <em>Invalid key!</em> a jindy zase mix náhodných speciálních znaků s čímž jsem nepočítal. Také já jsem byl šikovný, takže jsem sice v programu počítal s unique klíčem, ale v DB jsem ho neudělal a v reklamním systému je jich cca 10% duplicitních.</p>
+        <p>Žádám tedy o pomoc. Víte komu patří emailová adresa <code>b2bdm@email.cz</code>? Komu patří <code>m-letter.eu</code>? Kdo zneužívá tak obrovské množství emailových adres? A kde je vůbec bere? Skutečně mě to zajímá, protože takto je to těžko představitelné, ale několik set tisíc adres je skutečně obrovské množství a já stále nevím, kde jsem se tam vzal...</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fkde-se-berou-spamy%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

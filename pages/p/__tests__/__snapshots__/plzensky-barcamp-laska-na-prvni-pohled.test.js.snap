@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Plzeňský Barcamp - láska na první pohled
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Ačkoliv jsem z dřívějších barcampů sledoval záznamy, tak jsem byl fakticky na barcampu úplně poprvé a rovnou jsem měl tu čest přednášet. Než se však dostanu k samotné přednášce, rád bych zde napsal nějaký feedback. Celkově jsem z Plzeňského Barcampu skutečně nadšen. Skvělá atmosféra, fajn lidi, spoustu jídla, alkoholu možná až moc... :-))</p>
+        <p>Na druhou stranu došlo i k pár přešlapům. Některé mě mrzí více, jiné ani tak ne, každopádně... Skutečně mě mrzí to, že nebyla nahrávána na video každá přednáška.</p>
+        <p><blockquote class=\\"twitter-tweet\\" lang=\\"en\\"><p><a href=\\"https://twitter.com/eshopkonzultant\\">@eshopkonzultant</a> Honzo, máme to v plánu. Pokud nám ho nic nenaruší, chtěli bychom určitě záznamy dodat nejdéle do měsíce po skončení akce.</p>&mdash; Plzeňský Barcamp (@PlzenskyBarcamp) <a href=\\"https://twitter.com/PlzenskyBarcamp/statuses/454275681665687552\\">April 10, 2014</a></blockquote></p>
+        <script async src=\\"//platform.twitter.com/widgets.js\\" charset=\\"utf-8\\"></script>
+        
+        <p>To se moc nepovedlo. Mrzí mě to ze dvou důvodů. Jednak jsem tak nějak slíbil, že má přednáška bude potom na netu, to však není ten závažnější problém. Daleko více mě mrzí fakt, že se teď nemohu podívat na přednášky ostatních protože jsem byl jinde. Na barcampu bylo totiž spoustu zajímavých témat.</p>
+        <p>Další už jen krátce abych nezněl moc negativně, protože se mi na barcampu opravdu líbilo a zase tak moc mě tyto věci neštvou. Přístup k netu jen pro přednášející. Měl jsem možnost toho využít, nevyužil jsem, takže o nic nejde, jen bych veřejnou wifi na takových akcích čekal. Další jsou samolepky se jménem při registraci. No já nevím jak ostatním, mě prostě vůbec nedržela a než jsem došel do prvního patra, tak jsem měl na zádech jmenovku se jménem Martina. Bohužel bez čísla. Zdravím Martinu! :-) Poslední věc, která mě mohla dost uzemnit byla ztracená prezentace. Svojí prezentaci jsem na barcamp odeslal předem jak stálo v emailu, ale když jsem se po ní ptal, tak nebyla k nalezení. Naštěstí jsem měl plán B. Uff...</p>
+        <h2 id=\\"p-edn-ky\\">Přednášky <a href=\\"#p-edn-ky\\">#</a></h2><p>Postupně jsem se snažil projít ty nejzajímavější přednášky. Zde je jejich přehled:</p>
+        <p><em>Machine learning, aneb od našeptávače k porozumění řeči (<a href=\\"https://twitter.com/honza_svec\\">Jan Švec .{target:_blank}</a></em>) - přednáška o strojovém učení, porozumění řeči a chápání významu psaného i mluveného textu. Některým lidem tato přednáška přišla obsahově zajímavá a skutečně byla, každopádně tyto informace jsem z velké většiny již znal, protože jsem je slyšel již dříve a zase tolik se toho v tomto oboru nemění.</p>
+        <p><em>Procesory letajici, tikajici, hrajici a komunikujici (<a href=\\"https://twitter.com/crawlerdev\\">Radek Voltr .{target:_blank}</a></em>) - to je zase opak toho prvního. Některým lidem to nepřišlo moc zajímavé, protože tyto věci znají. Já je tolik neznám a i z důvodu svých budoucích prací do školy pro mě byla tato přednáška přínosným přehledem toho jak lze nacpat slušný výpočetní výkon na malou mršku.</p>
+        <p><em>Virtualizace a cloudy v dnešním IT (<a href=\\"http://www.orgis.cz/cs/\\">Milan Brych .{target:_blank}</a></em>) - nejvíce debatované a kontroverzní téma. Každopádně Milan se toho ujal dobře a ačkoliv tam bylo spoustu lidí z oboru, tak i v publiku došlo k debatám lidí s naprosto odlišným názorem. A zpětně musím dodat, že jednoznačně souhlasím s tím, že cloud jako takový je cloudem teprve tehdy, pokud je geograficky rozložen a má dostatečnou redundanci strojů. Někdo na přednášce zmiňoval cloud funkci u NAS serverů. V tu chvíli jsem se musel pousmát...</p>
+        <p><em>Věrnostní program a jeho odvrácená tvář (<a href=\\"https://twitter.com/mmencl\\">Marek Mencl .{target:_blank}</a></em>) - asi nejlepší přenáška. Zpětný pohled za projektem, který sice nějak dopadl, ale jeho průběh nebyl úplně hladký. Přednáška byla plná reálných problémů z praxe. Super. Prostě super. Jestli bude záznam, tak doporučuji!</p>
+        <p><em>Pracujte v trenýrkách z kavárny. Nebo ne? (<a href=\\"https://twitter.com/davidsmehlik\\">David Šmehlík .{target:_blank}</a></em>) - abych byl upřímný, tak na tuto přednášku jsem šel jen proto, že jsem neměl kam jinam a vybral jsem tak nejmenší zlo. Každopádně rychle jsem zjistil, že jsem udělal dobře, protože celé povídání bylo velmi zajímavé a motivující. I přes původní nedůvěru považuji tuto přednášku za druhou nejlepší. Sorry, Marek byl lepší... :-))</p>
+        <p><em>O e-shopech, o automatickém výpočtu nabídek za prokliky na Heurece a o tom, kde je problém doopravdy (<a href=\\"https://twitter.com/michaljanik\\">Michal Janík .{target:_blank}</a></em>) - zde to bylo celkem jednoduché. Jít na populární blbost (dle zpětných názorů ostatních), nebo na SEO (jak slyším SEO, tak utíkám), nebo na prezentaci neúspěšného portálu? Vybral jsem si tedy přednášku o e-shopech. Nejsem eshopista, takže to pro mě nemělo takovou přidanou hodnotu a myslím si, že kdokoliv nad problémy obchodu přemýšlí, tak dokonverguje ke stejným závěrům jako jsou v prezentaci. Každopádně říct, že to bylo nezajímavé by bylo nejen nefér, ale ani by to nebyla pravda.</p>
+        <p>Opět musím zopakovat, že mě mrzí absence kamer u ostatních přednášek.</p>
+        <h2 id=\\"od-caesara-ke-qr-k-d-m\\">Od Caesara ke QR kódům <a href=\\"#od-caesara-ke-qr-k-d-m\\">#</a></h2><p>A konečně k mé přednášce. :-))</p>
+        <p><blockquote class=\\"twitter-tweet\\" lang=\\"en\\"><p>Přednáška o kódování a Thomasu Youngovi na <a href=\\"https://twitter.com/search?q=%23barcampcz&amp;src=hash\\">#barcampcz</a> je kulervoucí.</p>&mdash; Pavel Pajkrt (@PavelAbbePajkrt) <a href=\\"https://twitter.com/PavelAbbePajkrt/statuses/455008230444638208\\">April 12, 2014</a></blockquote></p>
+        <script async src=\\"//platform.twitter.com/widgets.js\\" charset=\\"utf-8\\"></script>
+        
+        <p>A zde je:</p>
+        <iframe src=\\"http://www.slideshare.net/slideshow/embed_code/33460846\\" width=\\"752\\" height=\\"460\\" frameborder=\\"0\\" marginwidth=\\"0\\" marginheight=\\"0\\" scrolling=\\"no\\" style=\\"border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;\\" allowfullscreen> </iframe>
+        
+        <p>Děkuji všem posluchačům. Byl jsem skutečně nadšen, když za mnou pak někdo v průběhu dne přišel a děkoval. To bylo kouzelné. Nesmírně si toho vážím. Každopádně abych se jen nevychvaloval, tak cítím určitý dluh vůči posluchačům, protože ačkoliv se mi s tím Luboš Majner i Milan Brych snažili pomoct (díky!), tak jsem nedokázal závěrečnou problematiku úplně objasnit. A vzhledem k tomu, že jsem se pak ještě o těchto věcech několikrát bavil, tak přibližně tuším v čem byly problémy.</p>
+        <p>Tak prvně padl dotaz z kterého bylo jasné, že jsem něco řekl fakt špatně. Proč to šifrovat tak složitě? Proč neposlat rovnou surovou zprávu, když to nejde odposlechnout? To je velice jednoduché. Je sice pravda, že (alespoň v současné době) kvantový signál nelze odposlechnout, nic však nebrání Evě zastřelit Boba a zprávu si jednoduše přečíst. To se u šifrovaného signálu nemůže stát.</p>
+        <p>A jak je tedy možné že ten signál nelze odposlechnout? Jde o to, že přenášená zpráva není ve formě informace, ale přenáší se pomocí nějakého fyzikálního principu. Takže se nelze připojit na optický kabel aniž by to nebylo zjistitelné. Každopádně jsem rád za závěrečnou diskusi, jelikož byla velmi přínosná a uvědomil jsem si věci, které jsem předtím neřešil. Například komunikaci po veřejném kanálu a ověření, že Alice skutečně mluví s Bobem a ne s Evou. Přečtěte si článek tento <a href=\\"http://aldebaran.cz/bulletin/2005_14_kry.php\\">http://aldebaran.cz/bulletin/2005_14_kry.php .{target:_blank}</a>. Konkrétně poslední část o spolehlivosti metody. Již rozumím padlým dotazům a dávám posluchačům za pravdu. Beru to jako poučení a příští rok už budu tento problém schopen podat ještě líp. Doufám... :-)</p>
+        <p>Jo a přišel si to poslechnout i David Grudl. Yaaay! :-D</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fplzensky-barcamp-laska-na-prvni-pohled%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

@@ -27,6 +27,7 @@ fs.readdirSync(sourcesDirectory).forEach(function(filename) {
     );
     console.error(`> ${content.attributes.title}`);
 
+    // article
     fs.writeFileSync(
       `${__dirname}/../pages/p/${content.attributes.slug}.js`,
       `// @flow\n\nimport WithPost from '../../components/WithPost';\n\nexport default WithPost(${JSON.stringify(
@@ -34,6 +35,28 @@ fs.readdirSync(sourcesDirectory).forEach(function(filename) {
         null,
         2,
       )});\n`,
+    );
+
+    // test for this article
+    fs.writeFileSync(
+      `${__dirname}/../pages/p/__tests__/${content.attributes.slug}.test.js`,
+      `// @flow
+
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Router from 'next/router';
+
+// Workaround for "No router instance found. You should only use "next/router" inside the client side of your app."
+Router.router = {
+  prefetch: () => {},
+};
+
+import Article from '../${content.attributes.slug}';
+
+it('renders correctly', () => {
+  expect(renderer.create(<Article />).toJSON()).toMatchSnapshot();
+});
+`,
     );
   }
 });

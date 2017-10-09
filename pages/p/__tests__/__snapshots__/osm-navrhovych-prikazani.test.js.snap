@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Osm návrhových přikázání
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Právě mám rozečtenou knihu, která popisuje návrhové vzory v PHP. Mimo jiné autor popisuje pravidla při návrhu softwaru, která jsou prokládána velkým množstvím ukázek a vysvětlivek. Celkem je na třiceti stranách knihy (kde je rozebírán návrh) schován následující seznam pravidel.</p>
+        <ol>
+        <li>Přístup k údajům vždy v rámci třídy zapouzdřete a poskytněte metody, pomocí nichž lze dané údaje získat.</li>
+        <li>Svá rozhraní navrhujte tak, aby je bylo možné později rozšířit.</li>
+        <li>V metodách tříd nezapouzdřujte jen údaje, ale také algoritmy, díky čemuž budou komplexní operace implementované centrálně na jednom místě.</li>
+        <li>Znovupoužitelnost kódu je lepší než duplicitní kód.</li>
+        <li>Vyvarujte se monolitickým strukturám a rozložte je na co nejmenší části, které mohou být implementované nezávisle na sobě. Pokud používáte rozsáhlé příkazy <code>if/elseif/else</code> nebo <code>switch</code>, popřemýšlejte, zda by se nedaly nahradit zaměnitelnými třídami.</li>
+        <li>Dědění vede k neflexibilním strukturám. Na kombinaci různých funkcí používejte raději kompozice objektů.</li>
+        <li>Vždy programujte vůči rozhraní, a nikdy ne vůči konkrétní implementaci.</li>
+        <li>Vyhýbejte se těsným závislostem mezi jednotlivými třídami aplikace a vždy upřednostňujte volné vazby tříd.</li>
+        </ol>
+        <p>Další seznam který všichni znají, ale málokdo ho úplně dodržuje. (-:</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fosm-navrhovych-prikazani%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

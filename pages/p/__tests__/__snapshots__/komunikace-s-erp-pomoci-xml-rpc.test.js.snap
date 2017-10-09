@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Komunikace s ERP pomocí XML-RPC
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Spousta lidí by se ráda připojovala na API ERP systému <a href=\\"https://www.odoo.com/\\">Odoo</a>, ne vždy je to však procházka růžovým sadem, protože se očekává místy až přehnaná interní znalost tohoto systému. Přitom je to zbytečné. V dnešním článku se pokusím zdokumentovat právě tuto žalostně zdokumentovanou stránku věci tak, aby to zvládl každý alespoň trochu zdatný programátor.</p>
+        <p>Prvně však několik málo slov o co vlastně jde. Odoo je ERP (<a href=\\"http://www.orgis.cz/sluzby/in-house\\">Enterprise Resource Planning</a>) systém poměrně bohatý na funkce a má za úkol řešit zejména vnitrofiremní procesy a obecně všechny záležitosti, které se okolo jakékoliv firmy motají. Lze tedy řešit plánování projektů, jejich workflow, rozvrhování času, řízení zakázek, ale také například správu dokumentů, skladové zásoby, mass mailing, nebo tzv. <a href=\\"https://www.odoo.com/page/point-of-sale\\">Point of Sale</a> což je jedna z těch nejvíce zajímavých věcí, alespoň z mého pohledu. Zjednodušeně řečeno lze udělat naprosto cokoliv. A co nejde, tak se jednoduše doprogramuje. Aby však šlo udělat cokoliv, je potřeba připojovat se na tento systém vzdáleně, protože občas se hodí propojit stávající webovou aplikaci právě s takovýmto systémem. To může mít několik důvodů. Například chcete mít ve webové aplikaci data sjednocená s ERP systémem, nebo si chcete vzdáleně stahovat faktury, popř. tlačit data do účtovacího systému. Jak již bylo řečeno - možné je naprosto cokoliv.</p>
+        <h2 id=\\"hello-api-\\">Hello API! <a href=\\"#hello-api-\\">#</a></h2><p>Odoo poskytuje klasické XML-RPC API. Toto API je velmi jednoduché na obsluhu, nicméně ani tento druh API <a href=\\"srackoapi\\">není můj favorit</a>. S výhodou tedy můžeme použít lehce modifikovanou funkci <a href=\\"http://php.vrana.cz/webove-sluzby-v-php-xml-rpc-a-soap.php\\">Jakuba Vrány</a> pro obsluhu tohoto API (PHP):</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        function xmlrpc($url, $method, $params = array(), $types = array(), $encoding = &#39;utf-8&#39;) {
+            foreach ($types as $key =&gt; $val) {
+                xmlrpc_set_type($params[$key], $val);
+            }
+            $context = stream_context_create(array(&#39;http&#39; =&gt; array(
+                &#39;method&#39; =&gt; &quot;POST&quot;,
+                &#39;header&#39; =&gt; &quot;Content-Type: text/xml&quot;,
+                &#39;content&#39; =&gt; xmlrpc_encode_request($method, $params, array(&#39;encoding&#39; =&gt; $encoding))
+            )));
+            return xmlrpc_decode(file_get_contents($url, false, $context), $encoding);
+        }
+        </code></pre>
+        <p>Následuje krátká odbočka k tomu, co vše je možné přes API udělat. Opět bych mohl napsat, že cokoliv, ale zde už si nejsem jist a proto následuje výpis funkcí, které je možné přes api volat a hlavně které považuji za důležité. Existují totiž 4 služby a každá obsahuje jiné metody. Nejhlavnější služba je <code>common</code>. Zde jsou k dispozici mimo jiné funkce <code>login(db, login, password)</code>, <code>about(extended=False)</code>, <code>timezone_get(db, login, password)</code> a <code>version()</code>. Většina funkcí se dostatečně popisuje sama, pozor však na funkci &quot;about&quot;, protože ta v době psaní tohoto článku <a href=\\"https://github.com/odoo/odoo/pull/2028\\">obsahovala chybu</a>. Je tedy zřejmé, že tato skupina funkcí se hodí pro zalogování do systému, nebo pro zjištění časového pásma, popř. verze systému. Pojďme se tedy přihlásit:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        //...
+        $data = array(&#39;database&#39;, &#39;username&#39;, &#39;password&#39;);
+        $uid = xmlrpc(&quot;http://.../xmlrpc/common&quot;, &quot;login&quot;, $data);
+        </code></pre>
+        <p>Výsledkem volání je unikátní identifikátor uživatele, který si můžeme dočasně někam uložit, aby ho nebylo potřeba zjišťovat pořád znovu. To není potřeba. Nutné ja však upozornit na to, že přes API získáte taková přístupová práva, jaké by měl uživatel, kdyby se přihlašoval normálně pomocí loginu.</p>
+        <h2 id=\\"jedeme-d-l\\">Jedeme dál <a href=\\"#jedeme-d-l\\">#</a></h2><p>Následuje služba <code>object</code>. Ta má na starost práci s databází z hlediska ORM. Ačkoliv má tato služba pouze dvě pro mě zajímavé funkce, užije se s ní nejvíce srandy a patří asi k té nejdůležitější. Zmiňované funkce jsou <code>execute(db, uid, obj, method, *args, **kw)</code> a <code>exec_workflow(db, uid, obj, signal, *args)</code>. Právě pomocí <code>execute</code> lze například vyhledávat v databázi a to tak, že si nejdříve získáme ID hodnoty pro daný výraz a následně si vytáhneme veškeré informace, které jsou potřeba (pokud jsou potřeba). Příklad pro vyhledávání v zákaznících:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        //...
+        $data = array($database, $uid, $password, &#39;res.partner&#39;, &#39;search&#39;, [[&#39;name&#39;, &#39;ilike&#39;, &#39;hledanyvyraz&#39;]]);
+        $ids = xmlrpc(&quot;http://.../xmlrpc/object&quot;, &quot;execute&quot;, $data); //získáme IDčka
+        
+        $data = array($database, $uid, $password, &#39;res.partner&#39;, &#39;read&#39;, $ids, [&#39;image&#39;, &#39;display_name&#39;, &#39;function&#39;, &#39;email&#39;]);
+        $users = xmlrpc(&quot;http://.../xmlrpc/object&quot;, &quot;execute&quot;, $data); //získáme zákazníky
+        
+        //ukázka vytváření klienta:
+        $data = array($database, $uid, $password, &#39;res.partner&#39;, &#39;create&#39;, [&#39;name&#39; =&gt; &#39;John Doe&#39;]);
+        xmlrpc(&quot;http://.../xmlrpc/object&quot;, &quot;execute&quot;, $data);
+        </code></pre>
+        <p>Je tedy zřejmé, že pomocí execute můžeme vyhledávat, číst, ale i vytvářet, nebo mazat záznamy (<code>create</code>, <code>search</code>, <code>read</code>, <code>write</code>, <code>unlink</code>). Zajímavý je způsob zápisu při hledání (<em>ilike</em>). K dispozici jsou následující operátory: <code>=</code>, <code>!=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>like</code>, <code>ilike</code>, <code>in</code>, <code>not in</code>, <code>child_of</code>, <code>parent_left</code>, <code>parent_right</code>. Opět se jedná o &quot;samosepopisující&quot; názvy. Nejzajímavější je však právě <em>ilike</em>, který není case sensitive a obaluje dotaz procenty jako je tomu například klasicky v MySQL (<code>%hledanyvyraz%</code>). U použíté funkce <em>read</em> lze vyjmenovat jaké sloupce se mají vrátit, nebo se vrátí veškerá data (včetně obrázků v base64).</p>
+        <h2 id=\\"pokro-il-dotazov-n-\\">Pokročilé dotazování <a href=\\"#pokro-il-dotazov-n-\\">#</a></h2><p>Podmínky dotazování lze ještě zpřesnit pomocí logických operátorů (<code>&amp;</code> - and, default, <code>|</code> - or, <code>!</code> - not). Podmínky se zapisují klasicky prefixově, takže pokud chceme například vyhledat zákazníka s nenastavenou češtinou z čech a německa, položíme například následující prefixový dotaz:</p>
+        <pre><code class=\\"lang-python\\">[(&#39;name&#39;,&#39;=&#39;,&#39;Adam&#39;),&#39;!&#39;,(&#39;language.code&#39;,&#39;=&#39;,&#39;cs_CZ&#39;),&#39;](&#39;,(&#39;country_id.code&#39;,&#39;=&#39;,&#39;CZ&#39;),(&#39;country_id.code&#39;,&#39;=&#39;,&#39;DE&#39;))
+        # ekvivalentní k:
+        [(&#39;name&#39;,&#39;=&#39;,&#39;Adam&#39;),(&#39;language.code&#39;,&#39;!=&#39;,&#39;cs_CZ&#39;),&#39;](&#39;,(&#39;country_id.code&#39;,&#39;=&#39;,&#39;CZ&#39;),(&#39;country_id.code&#39;,&#39;=&#39;,&#39;DE&#39;))
+        </code></pre>
+        <p>To v jakých modulech (<em>res.partner</em>) se bude vyhledávat právě záleží na tom, co je naintalováno za moduly a je třeba vědět jak jsou interně označeny, což je podle mého nešťastné, ale zde je přehled těch nejčastějších</p>
+        <ul>
+        <li>Zákazníci: <code>res.partner</code></li>
+        <li>Telefonáty: <code>crm.phonecall</code>, obch. příležitosti - <code>crm.lead</code></li>
+        <li>Produkty: <code>product.template</code>, kategorie produktů - <code>product.category</code></li>
+        <li>Projekty: <code>project.project</code>, úkoly - <code>project.task</code>, tagy - <code>project.category</code></li>
+        <li>Faktury: <code>account.invoice</code>, smlouvy - <code>account.analytic.account</code></li>
+        <li>Zaměstnanci: <code>hr.employee</code>, výdaje - <code>hr.expense.expense</code></li>
+        <li>Znalostní báze: <code>document.directory</code></li>
+        <li>Kalendář: <code>calendar.event</code></li>
+        </ul>
+        <p>Je svělé, že stačilo pár ukázek a s celým ERP lze dělat téměř cokoliv. Tím to však nekončí, protože existují ještě dvě skupiny příkazů. Třetí skupinou je skupina pro obsluhu a generování reportů <code>report</code>. Tato skupina mi v současné chvíli nepřijde natolik zajímavá, ale jmenovitě se jedná o funkce <code>report</code>, <code>report_get</code> a <code>render_report</code>. Mnohem zajímavější, ačkoliv možná trošku vyšší dívčí, je skupina pro přímou práci s databází ERP. Jedná se o skupinu <code>db</code> a ta ovládá právě instance celého ERP. Tyto funkce nejsou přímo pro zákazníky, ani obsluhu ERP, ale spíše pro administrátory serverů, tzn. je nutné autorizovat se master helem. Databáze lze mazat, vytvářet, přesouvat, zálohovat, migrovat, duplikovat atd. viz následující výčet funkcí: <code>create</code>, <code>drop</code>, <code>dump</code>, <code>restore</code>, <code>rename</code>, <code>change_admin_password</code>, <code>migrate_databases</code>, <code>create_database</code> a <code>duplicate_database</code>. Zejména pak třeba <em>rename</em> se hodí, protože tato operace nejde jinak vykonat. U všech zmíněných funkcí je nutné se ověřit. U následujících informativních to nuté není: <code>db_exist</code>, <code>list</code>, <code>list_lang</code>, <code>server_version</code>. Velký pozor na funkci <em>db_exist</em>. Ve skutečnosti totiž kontroluje, jestli se lze k databázi připojit, nikoliv jestli existuje, což nutně nemusí být jedno a to samé...</p>
+        <p>Pokud si chcete o dané problematice přečíst více, doporučuji tuto zastaralou <a href=\\"https://doc.odoo.com/6.1/developer/12_api/\\">dokumentaci</a>. Je dobrá, nikoliv však postačující. Obsahuje však ukázky i pro jiné programovací jazyky, než je PHP. Doufám, že tento článek vyjasnil všechny zákoutí komunikace s API ERP systému Odoo... (-:</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fkomunikace-s-erp-pomoci-xml-rpc%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

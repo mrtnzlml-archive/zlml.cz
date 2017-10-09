@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      LaTeX šablona
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Všiml si také někdo, že většina uživatelů WYSIWYG textového editoru typu Word v něm menšinu času píší a většinu času se snaží ohnout editor tak, aby dělal to co má? Tak přesně toto mě přestalo bavit a začal jsem všechny práce sázet v LaTeXu. Pro psaní mám vytvořenou následující šablonu, kterou s výhodou používám a zatím jsou na ní od kontrolujících dobré ohlasy (pokud si toho někdo všiml).</p>
+        <pre><code class=\\"lang-tex\\">\\\\documentclass[12pt]{article} % use larger type; default would be 10pt
+        \\\\usepackage[czech]{babel}
+        \\\\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+        
+        %%% PAGE DIMENSIONS
+        \\\\usepackage{geometry} % to change the page dimensions
+        % \\\\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+        \\\\geometry{a4paper}
+        
+        \\\\usepackage{graphicx} % support the \\\\includegraphics command and options
+        \\\\usepackage{wrapfig} % support the wrapfigure section
+        
+        \\\\usepackage{hyperref} % links in \\\\tableofcontents
+        \\\\hypersetup{
+            colorlinks,
+            citecolor=black,
+            filecolor=black,
+            linkcolor=black,
+            urlcolor=black
+        }
+        
+        % \\\\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+        
+        %%% PACKAGES
+        \\\\usepackage{booktabs} % for much better looking tables
+        \\\\usepackage{array} % for better arrays (eg matrices) in maths
+        %\\\\usepackage{paralist} % very flexible &amp; customisable lists (eg. enumerate/itemize, etc.)
+        \\\\usepackage{verbatim} % adds environment for commenting out blocks of text &amp; for better verbatim
+        \\\\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+        % These packages are all incorporated in the memoir class to one degree or another...
+        \\\\usepackage{tikz} % graphs
+        \\\\usepackage{pgfplots}
+        \\\\usepackage{float}
+        
+        %%% HEADERS &amp; FOOTERS
+        \\\\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+        \\\\pagestyle{fancy} % options: empty , plain , fancy
+        \\\\renewcommand{\\\\headrulewidth}{0pt} % customise the layout...
+        \\\\lhead{}\\\\chead{}\\\\rhead{}
+        \\\\lfoot{}\\\\cfoot{\\\\thepage}\\\\rfoot{}
+        
+        %%% SECTION TITLE APPEARANCE
+        \\\\usepackage{sectsty}
+        \\\\allsectionsfont{\\\\sffamily\\\\mdseries\\\\upshape} % (See the fntguide.pdf for font help)
+        % (This matches ConTeXt defaults)
+        
+        %%% ToC (table of contents) APPEARANCE
+        \\\\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+        \\\\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+        \\\\renewcommand{\\\\cftsecfont}{\\\\rmfamily\\\\mdseries\\\\upshape}
+        \\\\renewcommand{\\\\cftsecpagefont}{\\\\rmfamily\\\\mdseries\\\\upshape} % No bold!
+        
+        ewcommand{\\\\bigsize}{\\\\fontsize{35pt}{20pt}\\\\selectfont}
+        
+        %%% END Article customizations
+        
+        \\\\begin{document}
+        
+            ...
+        
+        \\\\end{document}
+        </code></pre>
+        <p>Jsem relativně LaTeX nováčkem, proto by mě zajímalo. Používáte nějakou jinou šablonu? Lepší?</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Flatex-sablona%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

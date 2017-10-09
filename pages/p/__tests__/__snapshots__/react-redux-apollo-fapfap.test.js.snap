@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      React + Redux - Apollo =  FapFap
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Na konci minulého roku jsem začal něco jako virtuální seriál o React vs. PHP aplikaci. Včera jsem na Poslední sobotě byl upozorněn na to, že už asi nepokračuju. To není pravda - pouze jsem je přestal číslovat... :) Po <a href=\\"2-graphql\\">GraphQL</a>, vyřešení <a href=\\"reseni-n-1-problemu-v-graphql\\">N+1 problému</a>, <a href=\\"hexagonalni-architektura\\">architektuře serverové části</a> a <a href=\\"jak-na-lokalni-css-pro-react\\">omezení CSS kontextu</a> v React komponentách je čas podívat se podrobněji na komunikaci se serverem.</p>
+        <p>Ve výsledku jsem hodně rád, že jsem to tak oddaloval, protože jsem to asi tak třikrát celé předělával a konečně mám radost z toho jak to vypadá. Veškeré kódy týkající se <a href=\\"https://github.com/adeira/connector-frontend\\">frontendu</a> i <a href=\\"https://github.com/adeira/connector\\">backendu</a> jsou jako vždy k dispozici online pod MIT.</p>
+        <h2 id=\\"klientsk-komponenty\\">Klientské komponenty <a href=\\"#klientsk-komponenty\\">#</a></h2><p>Až do nedávné chvíle jsem na straně webového prohlížeče používal pro komunikaci se serverem knihovnu Apollo. Interně Apollo využívá Redux store a já začal hodně vážně zvažovat, že začnu Redux store využívat mnohem více. V tu chvíli už nedávalo moc velký smysl používat Apollo a přišlo mi zajímavější starat se o Redux store sám.</p>
+        <p>Dříve jsem Apollo používal tak, že existovala vždy nějaká nadřazená komponenta, která se dotazovala serveru a předávala data jiné komponentě. Takže jsem měl komponenty, kterým se říká kontejnery (pouze tahají data) a předávají data pro vykreslení tzv. prezentačním komponentám (pouze vykreslují, ale netahají data).</p>
+        <p>Myšlenka kontejnerů a prezentačních komponent pořád zůstává. Rozdíl je teď v tom, že místo toho, aby kontejner získával data prostřednictvím Apolla, tak je připojen k Redux úložišti a v okamžiku připojení komponenty do DOMu se spustí Redux akce pro načtení dat:</p>
+        <pre><code class=\\"lang-javascript\\">export const AllCamerasContainer = class extends React.Component {
+        
+          componentWillMount() {
+            this.props.dispatch(loadAllCameras());
+          }
+        
+          render = () =&gt; { /* ... */ }
+        
+        };
+        
+        export default connect()(AllCamerasContainer);
+        </code></pre>
+        <p>Funkce <code>this.props.dispatch</code> je k dispozici díky nadřazené komponentě, která se vytváří pripojením k Redux úložišti pomocí <code>connect()</code>.</p>
+        <p>Redux funguje tak, že se pomocí funkce <code>dispatch</code> vyvolá nějaká akce/příkaz (zde načtení všech kamer), ta prolítne reducerama což jsou úplně obyčejné funkce, které umí měnit podobu stavu Redux úložiště a následně se tento nový stav uloží a komponenta se automaticky překreslí. Důležité je, že Redux si vlastně drží stav všech komponent u sebe v jednom velkém globálním úložišti a akce resp. reducery slouží pro alespoň trošku rozumné ovládání jeho obsahu. Zároveň Redux úložiště nemá z hlediska kódu <strong>nic společného s Reactem</strong>. Redux je ke komponentě nějak napojen, ale může fungovat úplně bez Reactu.</p>
+        <p>Funkce <code>loadAllCameras</code> slouží pro vytvoření objektu reprezentující nějakou akci. Ta se potom spouští pomocí <code>dispatch</code>. Akce je obyčejný JS objekt, který si nese informaci o typu akce + nějaká další dodatečná data. Pokud však chci data teprve načíst, je nutné vytvářet místo objektu funkci, která tak učiní:</p>
+        <pre><code class=\\"lang-javascript\\">// relies on Redux Thunk middleware
+        export const loadAllCameras = () =&gt; {
+          return dispatch =&gt; {
+        
+            dispatch({ // spuštění akce (což je jen obyčejný objekt) uvnitř jiné akce
+              type: ALL_CAMERAS_LOADING,
+            });
+        
+            fetch(allCamerasQuery).then(({data}) =&gt; { // funkce pro získání dat (kvůli tomu je nutný Thunk)
+        
+              dispatch({ // opět jen obyčejná akce spuštěná uvnitř jiné akce
+                type: ALL_CAMERAS_LOAD_SUCCESS,
+                cameras: data.allCameras,
+              });
+        
+            });
+          }
+        };
+        </code></pre>
+        <p>Zde začíná být vidět důvod, proč jsem opustil Apollo. Díky tomu, že mám teď v ruce veškeré akce a reducery, tak mohu pohodlně spouštět a řetězit akce jak se mi zachce. Až Redux spustí tuto akci (resp. <a href=\\"https://github.com/gaearon/redux-thunk\\">Redux Thunk</a>), tak si jen najde ten správný reducer (podle typu <code>ALL_CAMERAS_LOADING</code> resp. <code>ALL_CAMERAS_LOAD_SUCCESS</code>), ten upraví obsah Redux úložiště a protože máme deklarativní React, tak se data automaticky překreslí.</p>
+        <h2 id=\\"server-fetcher\\">Server Fetcher <a href=\\"#server-fetcher\\">#</a></h2><p>V předchozí akci bylo vidět, že se volá funkce <code>fetch</code>. To je úplně jednoduchá funkce, která pošle na server GraphQL dotaz a vrátí odpověď (resp. Promise). Vlastně dělá jen to, že pomocí <a href=\\"https://github.com/matthew-andrews/isomorphic-fetch\\">isomorphic-fetch</a> položí dotaz ve správném formátu:</p>
+        <pre><code class=\\"lang-javascript\\">return fetch(config.apiAddress, {
+          method: &#39;POST&#39;,
+          body: JSON.stringify({
+            query: graphQuery, // přichází jako argument fetcheru
+            variables: variables, // dtto
+            operationName: operationName // dtto
+          }),
+          headers
+        }).then(response =&gt; response.json())
+          .then(json =&gt; {
+            return json; // zde budou příchozí data z API
+          });
+        </code></pre>
+        <p>Poskládat potřebné hlavičky je otázkou několika málo sekund:</p>
+        <pre><code class=\\"lang-javascript\\">let headers = {
+          Accept: &#39;*/*&#39;,
+          &#39;Content-Type&#39;: &#39;application/json&#39;
+        };
+        let token = Authenticator.getToken(); // localStorage
+        if (token !== null) {
+          headers.authorization = token;
+        }
+        </code></pre>
+        <p>Asi by bylo možné vracet rovnou pole <code>data</code>, které GraphQL API vrací, aby nebylo nutné dělat destructing v akcích, ale to už jsou jen kosmetické detaily.</p>
+        <p>Teď by tedy mělo být zřejmé následující:</p>
+        <ul>
+        <li>v Reactu existují kontejnery, což jsou komponenty, které <strong>tahají data</strong></li>
+        <li>existují také prezentační komponenty, které <strong>jen vykreslují data</strong> podle <code>props</code></li>
+        <li>kontejnery získávají data z Redux úložiště spuštěním akce při připojování kontejneru do DOMu (<code>componentWillMount</code>)</li>
+        <li>součástí spuštění akce může být načtení těchto dat do úložiště (pokud tam již nejsou)</li>
+        <li>na server se požadavky posílají jako jednoduchý POST s tělem obsahujícím GraphQL dotaz</li>
+        <li>souběžně s tělem POST požadavku je nutné odeslat také autorizační hlavičky (pokud to aplikace vyžaduje)
+        OK? Možná to bylo rychlé, ale <a href=\\"https://github.com/adeira/connector-frontend\\">mrkněte na kód</a> a popř. si to vyzkoušejte. Nic složitého... :)</li>
+        </ul>
+        <h2 id=\\"p-ijet-po-adavku-na-php-serveru\\">Přijetí požadavku na PHP serveru <a href=\\"#p-ijet-po-adavku-na-php-serveru\\">#</a></h2><p>Dostáváme se do oblasti, ve které <a href=\\"https://forum.nette.org/cs/28370-data-z-post-request-body-reactjs-appka-se-po-ceste-do-php-ztrati\\">se vypastí</a> překvapivě hodně lidí. Na straně serveru je třeba přistupovat k POST datům <a href=\\"https://github.com/adeira/connector/blob/c501227a4429dba493624ca9fa85745fb5f1839c/instances/Connector/Infrastructure/Delivery/Http/GraphqlEndpoint.php#L62\\">trošku jinak</a>, než by mohlo být zřejmé. K této trošce teorie bude potřeba následující PHP kód:</p>
+        <pre><code class=\\"lang-php\\">&lt;?php
+        
+        var_dump(
+          $_POST,
+          file_get_contents(&#39;php://input&#39;)
+        );
+        </code></pre>
+        <p>Co se stane, pokud odešleme POST požadavek obsahující JSON třeba pomocí konzole v prohlížeči?</p>
+        <pre><code class=\\"lang-javascript\\">var xhr = new XMLHttpRequest();
+        xhr.open(&quot;POST&quot;, &quot;test.php&quot;, true);
+        xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;);
+        xhr.send(&quot;{a:&#39;b&#39;}&quot;);
+        </code></pre>
+        <p>Vrátí se tato odpoveď:</p>
+        <pre><code>array(1) {
+          [&quot;{a:&#39;b&#39;}&quot;]=&gt;
+          string(0) &quot;&quot;
+        }
+        string(7) &quot;{a:&#39;b&#39;}&quot;
+        </code></pre><p>Obsah <code>$_POST</code> pole může být zvláštní, ale s tím by se dalo žít. Vzhledem k tomu, že se požadavek posílá jako formulář, tak se očekává trošku jiný formát dat:</p>
+        <pre><code class=\\"lang-javascript\\">xhr.send(&quot;a=1&amp;b=2&quot;);
+        </code></pre>
+        <p>V tomto případě pole pěkně expanduje:</p>
+        <pre><code>array(2) {
+          [&quot;a&quot;]=&gt;
+          string(1) &quot;1&quot;
+          [&quot;b&quot;]=&gt;
+          string(1) &quot;2&quot;
+        }
+        string(7) &quot;a=1&amp;b=2&quot;
+        </code></pre><p>Co se však stane, pokud změníme hlavičku požadavku <code>Content-Type</code>?</p>
+        <pre><code class=\\"lang-javascript\\">var xhr = new XMLHttpRequest();
+        xhr.open(&quot;POST&quot;, &quot;test.php&quot;, true);
+        xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/json; charset=UTF-8&quot;);
+        xhr.send(&quot;a=1&amp;b=2&quot;);
+        </code></pre>
+        <p>POST pole bude zcela prázdné! (nikoliv však <code>php://input</code>)</p>
+        <pre><code>array(0) {
+        }
+        string(7) &quot;a=1&amp;b=2&quot;
+        </code></pre><p>Jak je totiž psáno v dokumentaci, tak <code>$_POST</code> neobsahuje všechna data, která jsou na server odeslána jako POST, nýbrž:</p>
+        <blockquote>
+        <p>An associative array of variables passed to the current script via the HTTP POST method <strong>when using application/x-www-form-urlencoded or multipart/form-data as the HTTP Content-Type</strong> in the request.</p>
+        </blockquote>
+        <p>Druhá polovina věty je extrémně důležitá. Také je z předchozích ukázek vidět, že jediné místo, kde jsou data k dispozici je právě input stream <code>php://input</code>. Z toho důvodu je na serveru k JSON datům nutné přistupovat rovnou přímo pomocí <code>file_get_contents(&#39;php://input&#39;)</code> (tak to dělá vnitřně <code>Nette/Http/RequestFactory</code>) nebo pomocí <code>$httpRequest-&gt;getRawBody()</code>, což je úplně to samé, jen více schované a více objektové.</p>
+        <p>Nyní již stačí pouze ověřit uživatele, jestli se může API vůbec ptát, získat JSON, rozparsovat dotaz a poslat jej nějaké GraphQL knihovně ať se postará o všechny strasti tohoto API. Vše je vidět v tomto jednoduchém <a href=\\"https://github.com/adeira/connector/blob/c501227a4429dba493624ca9fa85745fb5f1839c/instances/Connector/Infrastructure/Delivery/Http/GraphqlEndpoint.php\\">GraphQL endpointu</a>.</p>
+        <p>Kdyby někdo prahnul po pořádné náloži uceleného textu, tak je možné sledovat <a href=\\"https://github.com/mrtnzlml/dp-latex/blob/master/main.pdf\\">tento soubor</a> (stále rozdělaný), který jednou začas trošku povyroste. Nějaké základní znalosti problematicky jsou nutné, ale použitý jazyk by měl být srozumitelný většině lidí. Připomínky jsou vítány, než bude pozdě... :)</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Freact-redux-apollo-fapfap%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;

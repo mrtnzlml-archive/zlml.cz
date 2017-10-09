@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="jsx-1307704868 wrapper"
+  >
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      ¡Hola! My name is
+    </p>
+    <h1
+      className="jsx-2345896288"
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
+    </h1>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+    <h1
+      className="jsx-1056554702"
+    >
+      Od komponent zpět ke komponentám
+    </h1>
+    <div
+      className="jsx-1056554702 article"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>On: <em>A budeš o tom psát nějaké články?</em><br>
+        Já: <em>No tak jako mohl bych... :)</em></p>
+        <p>...a tak tedy začínám krátký seriál a uvidím kam se za těch pár dílů dostanu.</p>
+        <p>Jednou z bezesporu nejzajímavějších vlastností Nette Frameworku jsou komponenty (myslím potomky <code>Nette\\\\Application\\\\UI\\\\Control</code>). Komponenta je logický prvek na stránce, který umožňuje uschovat způsob vykreslování nějakého elementu stránky. Prakticky jsem začal komponenty využívat téměř ke všemu a čím více komponent, tím jsem spokojenější. Na stránce je potom místo mnoha složitých šablon mnohdy velmi rozvětvený strom komponent, kdy každá komponenta řeší jak vykreslit třeba část hlavičky (klidně i ve více variantách).</p>
+        <p>Systém komponent má však v Nette celou řadu úskalí a temných zákoutí. Jedním z největších problémů považuji to, že si komponenta nenese vše s sebou. Zejména pak styly a javascript. Ačkoliv jsem tento problém řešil pokaždé a vždy nějakým jiným originálním způsobem, vždy jsem došel ke stavu aplikace, který se mi z nějakého důvodu moc nelíbil.</p>
+        <p>Začal jsem tedy hledat jiné řešení. A než ukážu výsledek, je nutné pochopit kudy jsem šel a kde jsem se cestou popálil...</p>
+        <h2 id=\\"webcomponents\\">WebComponents <a href=\\"#webcomponents\\">#</a></h2><p><a href=\\"http://webcomponents.org/\\">Webové komponenty</a> jsou přesně to co jsem hledal. Webová komponenta slouží k rozšíření DOMu o vlastní HTML prvky (stejně tak jako funguje např. <code>&lt;video&gt;</code> tag). Pokud chcete vidět obsah takového tagu, doporučuji v Chrome zapnout &quot;Show user agent shadow DOM&quot;. Přirozeně jsem šel hned za Polymerem, protože jej již nějaký čas znám. Nikdy jsem si ho však nevyzkoušel na reálném projektu. Minimální definice Polymer elementu vypadá takto:</p>
+        <pre><code class=\\"lang-html\\">&lt;dom-module id=&quot;element-name&quot;&gt;
+          &lt;template&gt;
+            &lt;style&gt;/* ... */&lt;/style&gt;
+          &lt;/template&gt;
+          &lt;script&gt;
+            Polymer({
+              is: &#39;element-name&#39;,
+            });
+          &lt;/script&gt;
+        &lt;/dom-module&gt;
+        </code></pre>
+        <p>K dispozici tedy budu mít v HTML element <code>&lt;element-name/&gt;</code> (pozor: název musí obsahovat pomlčku). Následně bude mít komponenta definovaný způsob vykreslování, vlastní styly i vlastní JS chování. Super. Pokud chcete něco takového implementovat pomocí Nette komponent - vzdejte to rovnou. Neříkám, že by to nešlo, ale jednak je to složité a jednak bude supersložité řešit věci jako je <a href=\\"https://www.polymer-project.org/1.0/docs/tools/optimize-for-production\\">vulkanizace a použití Crisperu</a>. Rychle jsem tedy opustil cestu vytváření komponent na straně serveru a vše jsem předal javascriptu.</p>
+        <p>Bylo to super a pak jsem <strong>po několika měsících práce s Polymerem celou aplikaci rozerval na kousky a přepsal ji do něčeho jiného</strong>. Nikdy jsem nezažil nic tak vyčerpávajícího jako práci s Polymerem. HTML se totiž bohužel chová tak, že pokud nějaký element nezná, tak jej ignoruje. A prakticky jakákoliv chyba typu &quot;proč to nejde&quot; byla způsobena práce tímto. Každý element je třeba importovat a ačkoliv IDE dokáže hodně pomoci, tak existují případy, kdy to prostě nefunguje a jen kvůli tomu, že jsem si prvek nenaimportoval...</p>
+        <pre><code class=\\"lang-html\\">&lt;input is=&quot;my-input&quot;&gt;
+        </code></pre>
+        <p>Toto je přesně případ se kterým si třeba WebStorm nedokáže poradit. Takže fakticky je to moje chyba, že jsem nepozorný, ale o to více potřebuji, aby když něco udělám blbě, tak mi to pořádně nafackovalo a já hned věděl. Proto jsem Polymer opustil (ano to je jediný důvod) a ačkoliv si myslím, že je to skvělý nápad a webovým komponentám hodně fandím, vydal jsem se o kousek dál.</p>
+        <h2 id=\\"react\\">React <a href=\\"#react\\">#</a></h2><p>Stejně tak jako všichni, tak i já jsem skončil u Reactu. A stydím se za to. Nechci jej používat jen proto, že je to cool. Ale dal jsem mu poprvé velkou šanci i tak (už jej znám dlouho, ale nikdy jsem nepotřeboval). Z mého pohledu: zatímco Polymer umí by default úplně <a href=\\"https://beta.webcomponents.org/collection/Polymer/elements\\">neuvěřitelně vymakané frontend prostředí</a>, React neumí nic než pracovat s daty. Ale jeden ze zásadních rozdílů je v tom, že je striktní. Takže moje problémy s neexistujícími emlementy řeší JSX by design (kdo zná XHP, tak ví). Vzdal jsem se tedy úžasného nástroje a přešel jsem na něco, co umí v základu jen chytře aktualizovat DOM a vykreslit <code>div</code> (takto vypadá nejmenší komponenta, kterou lze v Reactu napsat - ES6):</p>
+        <pre><code class=\\"lang-js\\">import React from &#39;react&#39;;
+        
+        export default () =&gt; &lt;div&gt;Alenka&lt;/div&gt;
+        </code></pre>
+        <p>V Reactu jsou dva druhy komponent - tzv. kontejnery a samotné prezentační komponenty. Toto rozdělení mi také vyhovuje, protože se hezky separují závislosti (kontejner pouze tahá data a prezentační komponenta pouze vykresluje vytažená data). Navíc si taková komponenta nese i vlastní styly (což se ne všem líbí, ale já tleskám):</p>
+        <pre><code class=\\"lang-js\\">import &#39;./AuthorizedBase.css&#39;;
+        </code></pre>
+        <p>Podobně je možné importovat i obrázky a další zdroje díky Webpacku (neuvěřitelně WTF WOW nástroj). Webpack je právě nástroj, který řeší většinu bolístek, které jsem řešil složitě u Nette komponent.</p>
+        <p>Ačkoliv zrovna v mém případě React docela dává smysl, protože se bude hodně pracovat s daty, použil bych je i na místě, kde to totálně nedává smysl (tedy třeba na blog). Je to totiž způsob jak pracovat s frontendem takovým způsobem, jaký jsem dlouho hledal (navíc je React jednoduchý). Má to však jedno velké ALE.</p>
+        <p>Pokud bych vzal React a začal jej používat rovnou tak jak je, tak bych vytvořil pěknou hovadinu. Je potřeba milion dalších podpůrných služeb a vychytávek jako je třeba server-rendering a code-splitting. Bez těchto věcí, které je potřeba vyřešit, to nemá ani smysl zkoušet. Na to upozorňuji rovnou. Souhlasím s tím, že dělat to bez toho by byla prostě <a href=\\"https://medium.com/@vojta/airbanko-v%C3%ADte-pro%C4%8D-m%C3%A1te-posran%C3%BD-web-629d96946576#.tshx84cqg\\">ultrapíčovina</a>. Z toho by mělo být patrné, že nechci profitovat ani tak třeba z chytrých aktualizací DOMu, ale ze způsobu jak se pracuje v Reactu s komponentami. Ve výsledku bude naprosto v pořádku, když nepůjde poznat, že je stránka napsána v Reactu (čehož asi stejně nedosáhnu). Důležité je dodržovat rozdělení komponent podle jejich účelu (tahání dat vs. vykreslování).</p>
+        <p>Toto byl jen krátký úvod. V dalších dílech se podívám na to, jak tahat data ze serveru pomocí GraphQL a jakou použít knihovnu. Zároveň je potřeba vyřešit napojení na Nette backend (protože PHP mě pořád moc baví... :)). Podíváme se také na routování, autorizaci modelové vrstvy, strukturu aplikace, renderování na serveru, testování, Webpack, code-splitting a další a další... Stay tuned. :)</p>
+        ",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <strong>
+        Do you have any comments? That's great!
+         
+        <span
+          className="jsx-364771521"
+        >
+          <a
+            className="jsx-364771521"
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2F1-od-komponent-zpet-ke-komponentam%20cc%20%40mrtnzlml"
+            onClick={[Function]}
+          >
+            Tweet them
+          </a>
+        </span>
+         
+        so everyone can hear you…
+      </strong>
+    </p>
+    <p
+      style={
+        Object {
+          "fontSize": "2rem",
+          "hyphens": "auto",
+          "textAlign": "justify",
+        }
+      }
+    >
+      <span
+        className="jsx-364771521"
+      >
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
+    </p>
+  </div>
+</div>
+`;
