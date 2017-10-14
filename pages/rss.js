@@ -23,9 +23,7 @@ Rss.getInitialProps = ({ res }) => {
   }
 
   res.writeHead(200, {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-    },
+    'Content-Type': 'application/xml; charset=utf-8',
   });
   res.write(`<?xml version="1.0" encoding="UTF-8"?>
   <rss version="2.0">
