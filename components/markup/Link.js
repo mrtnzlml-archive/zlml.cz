@@ -1,10 +1,21 @@
 // @flow
 
+import React from 'react';
 import NextLink from 'next/link';
 
 import Colors from '../../services/Colors';
 
-export default function Link(props: Object) {
+type Props = {
+  href: string,
+  children: React.Children,
+  // may contain other props (it's not exact type)
+};
+
+export default function Link(props: Props) {
+  let isExternal = false;
+  if (/^https?:\/\//i.test(props.href)) {
+    isExternal = true;
+  }
   return (
     <span>
       <style jsx global>{`
@@ -20,9 +31,13 @@ export default function Link(props: Object) {
           text-decoration: underline;
         }
       `}</style>
-      <NextLink {...props}>
-        <a>{props.children}</a>
-      </NextLink>
+      {isExternal ? (
+        <a {...props}>{props.children}</a>
+      ) : (
+        <NextLink {...props}>
+          <a>{props.children}</a>
+        </NextLink>
+      )}
     </span>
   );
 }

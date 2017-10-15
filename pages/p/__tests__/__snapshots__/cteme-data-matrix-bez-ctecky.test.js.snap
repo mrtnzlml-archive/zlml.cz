@@ -98,9 +98,8 @@ exports[`renders correctly 1`] = `
           className="jsx-364771521"
         >
           <a
-            className="jsx-364771521"
+            className="jsx-364771521 "
             href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fcteme-data-matrix-bez-ctecky%20cc%20%40mrtnzlml"
-            onClick={[Function]}
           >
             Tweet them
           </a>
