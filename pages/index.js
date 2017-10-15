@@ -22,7 +22,7 @@ const SectionHeading = ({ children }) => (
 );
 
 SectionHeading.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 function Homepage() {
@@ -87,9 +87,5 @@ function Homepage() {
     </Layout>
   );
 }
-
-Homepage.propTypes = {
-  children: PropTypes.element.isRequired,
-};
 
 export default Homepage;
