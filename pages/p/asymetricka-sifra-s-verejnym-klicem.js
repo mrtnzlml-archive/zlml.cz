@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "cec65f8d-f2c5-4820-8ca6-3c6c9c7b1e72",
     "timestamp": 1347049798000,
     "title": "Asymetrická šifra s veřejným klíčem",
     "slug": "asymetricka-sifra-s-verejnym-klicem"

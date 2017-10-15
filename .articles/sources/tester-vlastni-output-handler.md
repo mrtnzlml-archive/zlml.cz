@@ -1,5 +1,4 @@
 ---
-id: 45b197e5-9e04-43d5-b48e-58f9a7f90887
 timestamp: 1478454487000
 title: "Tester: vlastní Output Handler"
 slug: tester-vlastni-output-handler

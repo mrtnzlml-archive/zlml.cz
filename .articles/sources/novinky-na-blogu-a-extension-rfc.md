@@ -1,5 +1,4 @@
 ---
-id: d0b9d1c4-61c7-49d1-9f10-e645525a5726
 timestamp: 1405252851000
 title: Novinky na blogu a extension RFC
 slug: novinky-na-blogu-a-extension-rfc

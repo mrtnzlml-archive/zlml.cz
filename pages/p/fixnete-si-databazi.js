@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "c8a25638-706f-4849-8965-d4aa66144ffc",
     "timestamp": 1432200241000,
     "title": "Fixněte si databázi",
     "slug": "fixnete-si-databazi"

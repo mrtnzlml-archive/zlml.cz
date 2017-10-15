@@ -1,5 +1,4 @@
 ---
-id: 3979a0f0-f8ed-45c3-8311-d48e563a49b1
 timestamp: 1416264254000
 title: Nadvláda inteligentních procesorů
 slug: nadvlada-inteligentnich-procesoru

@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "773516e7-b186-4441-9de4-0ce12bdc37b3",
     "timestamp": 1406926545000,
     "title": "Za hranicí ORM",
     "slug": "za-hranici-orm"

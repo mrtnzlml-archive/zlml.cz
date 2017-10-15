@@ -1,5 +1,4 @@
 ---
-id: 112c84ae-680a-4d72-8aa3-96e8efeb8f1d
 timestamp: 1488119652000
 title: Jak na lokální CSS pro React
 slug: jak-na-lokalni-css-pro-react

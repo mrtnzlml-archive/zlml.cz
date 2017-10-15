@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "55c2f8a2-9b13-46e2-b919-128c0c95a40d",
     "timestamp": 1427231722000,
     "title": "Generované továrničky - definitive guide",
     "slug": "generovane-tovarnicky-definitive-guide"

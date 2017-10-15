@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "54e244cd-2b74-4532-b36c-74a7827aa231",
     "timestamp": 1405627130000,
     "title": "SračkoAPI",
     "slug": "srackoapi"

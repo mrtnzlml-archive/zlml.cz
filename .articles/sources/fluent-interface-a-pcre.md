@@ -1,5 +1,4 @@
 ---
-id: 16cdfe07-444b-48ee-ae7a-ff85893edba5
 timestamp: 1376166681000
 title: Fluent interface a PCRE
 slug: fluent-interface-a-pcre

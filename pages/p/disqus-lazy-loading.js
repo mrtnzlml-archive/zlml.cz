@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "76a53072-7779-478d-9557-c9f855ebce4d",
     "timestamp": 1402601786000,
     "title": "Disqus lazy loading",
     "slug": "disqus-lazy-loading"

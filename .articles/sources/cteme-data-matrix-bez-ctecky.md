@@ -1,5 +1,4 @@
 ---
-id: f9727676-c2eb-4ee0-b86d-8126663f007d
 timestamp: 1402842853000
 title: Čteme Data Matrix bez čtečky
 slug: cteme-data-matrix-bez-ctecky

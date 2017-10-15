@@ -1,5 +1,4 @@
 ---
-id: fc390f36-af8a-43af-a34c-619f305e288c
 timestamp: 1414243893000
 title: Heatmapy ve Wolfram Mathematica
 slug: heatmapy-ve-wolfram-mathematica

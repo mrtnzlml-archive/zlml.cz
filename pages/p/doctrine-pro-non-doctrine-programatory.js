@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "c7509237-b0ee-42d7-95e6-5dba3e937a4c",
     "timestamp": 1430044733000,
     "title": "Doctrine pro non-doctrine programátory",
     "slug": "doctrine-pro-non-doctrine-programatory"

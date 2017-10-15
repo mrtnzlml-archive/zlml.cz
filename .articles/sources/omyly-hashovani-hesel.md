@@ -1,5 +1,4 @@
 ---
-id: 2f77a602-c2d5-4dd1-baee-d033fedad75e
 timestamp: 1393074151000
 title: Omyly hashování hesel
 slug: omyly-hashovani-hesel

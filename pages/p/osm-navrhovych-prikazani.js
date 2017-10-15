@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "6ef2212c-312f-45c5-a31b-bb9a7327ff42",
     "timestamp": 1356472874000,
     "title": "Osm návrhových přikázání",
     "slug": "osm-navrhovych-prikazani"

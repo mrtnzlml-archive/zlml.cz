@@ -1,5 +1,4 @@
 ---
-id: 30938e58-9de3-403e-a862-493564630ddd
 timestamp: 1375126671000
 title: Using fulltext searching with InnoDB
 slug: using-fulltext-searching-with-innodb

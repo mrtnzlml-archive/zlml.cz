@@ -1,5 +1,4 @@
 ---
-id: 00ea90cf-cd53-48f0-959a-bb1a2264344d
 timestamp: 1443869668000
 title: Crazy JavaScript PDF generator
 slug: crazy-javascript-pdf-generator

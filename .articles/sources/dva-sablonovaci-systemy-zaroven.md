@@ -1,5 +1,4 @@
 ---
-id: bc0e2a48-6c0d-4dcb-b686-ac5eecc11c88
 timestamp: 1469950790000
 title: Dva šablonovací systémy zároveň
 slug: dva-sablonovaci-systemy-zaroven

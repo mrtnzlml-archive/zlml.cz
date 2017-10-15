@@ -1,5 +1,4 @@
 ---
-id: e05a6170-c3ca-427d-bf0c-e9b088aa541c
 timestamp: 1449682578000
 title: ZČU - Nette je fajn, ale máme raději Javu
 slug: zcu-nette-je-fajn-ale-mame-radeji-javu

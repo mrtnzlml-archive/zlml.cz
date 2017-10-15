@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "2151f134-7f0e-43c0-8382-eab9d336b7ee",
     "timestamp": 1500731161000,
     "title": "How do we do serverless?",
     "slug": "how-do-we-do-serverless"

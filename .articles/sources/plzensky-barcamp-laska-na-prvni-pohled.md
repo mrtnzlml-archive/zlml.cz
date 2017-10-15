@@ -1,5 +1,4 @@
 ---
-id: b4aa1f09-6047-4f30-a609-5ffbf61fc6c0
 timestamp: 1397388682000
 title: Plzeňský Barcamp - láska na první pohled
 slug: plzensky-barcamp-laska-na-prvni-pohled

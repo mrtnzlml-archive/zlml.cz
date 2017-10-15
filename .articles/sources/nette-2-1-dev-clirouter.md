@@ -1,5 +1,4 @@
 ---
-id: 01c2866b-fd82-4562-ab63-dbab3505ee8e
 timestamp: 1363554156000
 title: Nette 2.1-dev CliRouter
 slug: nette-2-1-dev-clirouter

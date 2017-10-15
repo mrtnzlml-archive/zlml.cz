@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "6f2ba373-daf2-4569-bbd7-09e437f18975",
     "timestamp": 1394562840000,
     "title": "Sbohem NDBT, vítej Doctrine",
     "slug": "sbohem-ndbt-vitej-doctrine"

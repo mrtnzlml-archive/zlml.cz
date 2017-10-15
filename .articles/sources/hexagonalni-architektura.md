@@ -1,5 +1,4 @@
 ---
-id: 97b1917b-d6ed-4305-a543-3bdde9b298c9
 timestamp: 1487322556000
 title: Hexagonální architektura
 slug: hexagonalni-architektura

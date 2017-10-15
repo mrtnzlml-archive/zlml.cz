@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "e469395b-c4f9-42db-bcf2-b2f1bc49f2e7",
     "timestamp": 1413406213000,
     "title": "Fígloidní odstranění záhlaví modulu",
     "slug": "figloidni-odstraneni-zahlavi-modulu"

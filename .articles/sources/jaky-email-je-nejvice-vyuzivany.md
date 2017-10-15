@@ -1,5 +1,4 @@
 ---
-id: 3d580b09-b622-4a72-a912-a2205994b051
 timestamp: 1392999129000
 title: Jaký email je nejvíce využívaný?
 slug: jaky-email-je-nejvice-vyuzivany

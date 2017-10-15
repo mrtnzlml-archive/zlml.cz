@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "73daaba4-4b37-440f-b4e7-375de01a03c8",
     "timestamp": 1394985629000,
     "title": "Orion login stojí za prd",
     "slug": "orion-login-stoji-za-prd"

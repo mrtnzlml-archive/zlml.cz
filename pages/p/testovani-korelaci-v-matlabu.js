@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "04fd5b1a-eb64-4a48-b0db-47e4509d4ab8",
     "timestamp": 1480773916000,
     "title": "Testování korelací v MATLABu",
     "slug": "testovani-korelaci-v-matlabu"

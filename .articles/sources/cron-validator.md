@@ -1,5 +1,4 @@
 ---
-id: a285c880-267e-4070-9139-98b86d63772e
 timestamp: 1375044812000
 title: CRON validátor
 slug: cron-validator

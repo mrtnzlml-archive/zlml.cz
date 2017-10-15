@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "40b5dd33-13a2-447e-b352-256bc1afd9cd",
     "timestamp": 1377116084000,
     "title": "AJAX upload souborů v Nette pomocí Fine Uploaderu",
     "slug": "ajax-upload-souboru-v-nette-pomoci-fine-uploaderu"

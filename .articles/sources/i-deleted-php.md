@@ -1,5 +1,4 @@
 ---
-id: ff640dd7-f33a-4521-843f-215db280c5f2
 timestamp: 1507943214291
 title: I deleted PHP
 slug: i-deleted-php

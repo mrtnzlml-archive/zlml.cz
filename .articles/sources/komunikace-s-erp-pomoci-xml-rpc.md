@@ -1,5 +1,4 @@
 ---
-id: ec59389a-b2a2-4033-bbc6-f778efe7095a
 timestamp: 1409163060000
 title: Komunikace s ERP pomocí XML-RPC
 slug: komunikace-s-erp-pomoci-xml-rpc

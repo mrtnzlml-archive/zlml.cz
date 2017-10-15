@@ -1,5 +1,4 @@
 ---
-id: 103fd545-2922-4c42-b50c-6387a1f05d48
 timestamp: 1475925989000
 title: Automatický render prvků při manuálním vykreslování formuláře
 slug: automaticky-render-prvku-pri-manualnim-vykreslovani-formulare

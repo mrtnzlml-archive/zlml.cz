@@ -17,7 +17,7 @@ const Archive = ({ articles }: Props) => (
 
     {articles.map((article, index) => {
       return (
-        <div key={article.id}>
+        <div key={article.slug}>
           <span style={{ color: '#aaa', paddingRight: '1rem' }}>
             {article.date}
           </span>
@@ -38,7 +38,6 @@ Archive.getInitialProps = async function() {
   const articles = [];
   for (const article of ArticlesDatabase) {
     articles.push({
-      id: article.id,
       title: article.title,
       slug: article.slug,
       date: new Date(article.timestamp).toISOString().slice(0, 10),

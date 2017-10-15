@@ -1,5 +1,4 @@
 ---
-id: 58e7368b-0db4-498f-8184-fc4877ba32ba
 timestamp: 1387113023000
 title: Nette 2.2-dev
 slug: nette-2-2-dev

@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "34ecd347-57b2-4e4f-9a99-b77edbec7df1",
     "timestamp": 1399974862000,
     "title": "Znovupoužitelný formulář",
     "slug": "znovupouzitelny-formular"

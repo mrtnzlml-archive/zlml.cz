@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "66b21edb-b3c2-426c-a1f4-80b189562720",
     "timestamp": 1436098908000,
     "title": "Dynamické routování URL adres",
     "slug": "dynamicke-routovani-url-adres"

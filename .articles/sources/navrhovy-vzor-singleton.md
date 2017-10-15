@@ -1,5 +1,4 @@
 ---
-id: e9cd5692-13b4-495f-a63d-1dd5f4923fcb
 timestamp: 1356550681000
 title: Návrhový vzor Singleton
 slug: navrhovy-vzor-singleton

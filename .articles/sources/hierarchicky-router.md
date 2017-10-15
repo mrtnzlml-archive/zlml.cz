@@ -1,5 +1,4 @@
 ---
-id: 90a00b9f-47cd-4a93-bb59-13a8e1893ab3
 timestamp: 1436618301000
 title: Hierarchický router
 slug: hierarchicky-router

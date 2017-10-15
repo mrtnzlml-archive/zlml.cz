@@ -1,5 +1,4 @@
 ---
-id: 2894e1f9-8a47-48b9-bcea-40bf4fdb3724
 timestamp: 1387385662000
 title: Přednáška z Nette na ZČU
 slug: prednaska-z-nette-na-zcu

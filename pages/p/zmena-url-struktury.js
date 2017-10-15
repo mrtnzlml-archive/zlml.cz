@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "dbf85219-5173-4c7b-924a-636e86172b93",
     "timestamp": 1382905620000,
     "title": "Změna URL struktury",
     "slug": "zmena-url-struktury"

@@ -1,5 +1,4 @@
 ---
-id: 52dfa065-130b-4c37-81aa-289bd6ceee9e
 timestamp: 1392936502000
 title: Kde se berou spamy?
 slug: kde-se-berou-spamy

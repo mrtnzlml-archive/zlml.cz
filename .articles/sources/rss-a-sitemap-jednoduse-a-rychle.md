@@ -1,5 +1,4 @@
 ---
-id: 71e8347e-9bdb-4d81-a323-203be472f0ad
 timestamp: 1376169022000
 title: RSS a Sitemap jednoduše a rychle
 slug: rss-a-sitemap-jednoduse-a-rychle

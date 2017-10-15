@@ -1,5 +1,4 @@
 ---
-id: 3e9279b1-89aa-4813-9beb-7bc9f8044dff
 timestamp: 1375043798000
 title: Testování presenterů v Nette
 slug: testovani-presenteru-v-nette

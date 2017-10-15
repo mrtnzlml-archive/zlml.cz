@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "8119640e-e954-435c-9a95-ff14bf73634b",
     "timestamp": 1482501056000,
     "title": "Muskulaturní rozšíření DIC",
     "slug": "muskulaturni-rozsireni-dic"

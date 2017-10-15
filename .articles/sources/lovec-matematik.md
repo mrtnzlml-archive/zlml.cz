@@ -1,5 +1,4 @@
 ---
-id: af8c8824-3542-4019-8dc1-dbea1e985808
 timestamp: 1347738626000
 title: Lovec matematik
 slug: lovec-matematik

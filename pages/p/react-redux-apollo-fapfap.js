@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "6952eca3-3942-4bfa-b68e-432772912eca",
     "timestamp": 1490538013000,
     "title": "React + Redux - Apollo =  FapFap",
     "slug": "react-redux-apollo-fapfap"

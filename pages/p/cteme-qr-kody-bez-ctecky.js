@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "ef0027e0-1814-4c1f-9fcd-395b68cfcb85",
     "timestamp": 1393588145000,
     "title": "Čteme QR kódy bez čtečky",
     "slug": "cteme-qr-kody-bez-ctecky"

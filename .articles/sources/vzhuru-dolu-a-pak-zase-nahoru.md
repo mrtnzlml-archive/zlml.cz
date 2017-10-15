@@ -1,5 +1,4 @@
 ---
-id: 425908f8-6a85-43fa-a029-b4615b7635ae
 timestamp: 1435428633000
 title: Vzhůru dolů! A pak zase nahoru...
 slug: vzhuru-dolu-a-pak-zase-nahoru

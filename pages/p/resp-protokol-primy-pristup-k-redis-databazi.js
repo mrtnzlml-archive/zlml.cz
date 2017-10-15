@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "3d718b54-4cf2-40dd-8d54-fe865a3655d1",
     "timestamp": 1419375234000,
     "title": "RESP protokol - přímý přístup k Redis databázi",
     "slug": "resp-protokol-primy-pristup-k-redis-databazi"

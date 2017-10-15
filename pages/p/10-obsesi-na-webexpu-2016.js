@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "529dbd88-7b85-4e8a-9954-90aef87980cd",
     "timestamp": 1471811573000,
     "title": "10 obsesí na WebExpu 2016",
     "slug": "10-obsesi-na-webexpu-2016"

@@ -1,5 +1,4 @@
 ---
-id: 17782730-319b-40ea-92d0-e33c84b32e29
 timestamp: 1375215333000
 title: Problémy fulltextu v Nette
 slug: problemy-fulltextu-v-nette

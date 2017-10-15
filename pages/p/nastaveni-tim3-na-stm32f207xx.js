@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "db4ac671-20f0-4c4b-b551-129b719fd510",
     "timestamp": 1413669750000,
     "title": "Nastavení TIM3 na STM32F207xx",
     "slug": "nastaveni-tim3-na-stm32f207xx"

@@ -1,5 +1,4 @@
 ---
-id: 62e5abe0-44b9-407d-9582-39b8ff2bd176
 timestamp: 1411922332000
 title: Hledá se obchodník
 slug: hleda-se-obchodnik

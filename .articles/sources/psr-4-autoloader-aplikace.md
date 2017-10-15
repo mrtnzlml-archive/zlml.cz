@@ -1,5 +1,4 @@
 ---
-id: 847a3113-3989-46a4-9486-41bf0d49fe16
 timestamp: 1460891805000
 title: PSR-4 autoloader aplikace
 slug: psr-4-autoloader-aplikace

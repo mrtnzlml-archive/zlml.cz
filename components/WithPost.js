@@ -18,7 +18,6 @@ const LinkBack = () => (
 
 type Props = {
   attributes: {
-    id: string,
     timestamp: number,
     title: string,
     slug: string,

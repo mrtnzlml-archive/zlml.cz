@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "6b057983-39a9-4328-a526-2dfb03babbbb",
     "timestamp": 1457796154000,
     "title": "Rozšíření pro DIC",
     "slug": "rozsireni-pro-dic"

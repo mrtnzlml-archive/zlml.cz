@@ -1,5 +1,4 @@
 ---
-id: f856b454-c4a5-4271-8888-521ef1358f45
 timestamp: 1470502440000
 title: More awesome Monolog for #nettefw
 slug: more-awesome-monolog-for-nettefw

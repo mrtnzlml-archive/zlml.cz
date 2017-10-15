@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "95683b6a-7c7b-4ecf-b2a0-5730b2f85216",
     "timestamp": 1483183709000,
     "title": "GraphQL",
     "slug": "2-graphql"

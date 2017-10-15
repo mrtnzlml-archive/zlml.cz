@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "5920d80f-a65c-40e0-9648-6a95bac6ab87",
     "timestamp": 1356648759000,
     "title": "Návrhový vzor Factory Method",
     "slug": "navrhovy-vzor-factory-method"

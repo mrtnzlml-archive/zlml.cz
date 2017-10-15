@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "8e78cf63-c20a-4fc9-b19e-46984abcb314",
     "timestamp": 1469363764000,
     "title": "Testbench 2.3 is out (finally)",
     "slug": "testbench-2-3-is-out-finally"

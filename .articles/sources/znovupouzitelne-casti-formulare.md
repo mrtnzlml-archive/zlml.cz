@@ -1,5 +1,4 @@
 ---
-id: d0a905ac-329a-46a9-899b-bfe7518519c4
 timestamp: 1448405176000
 title: Znovupoužitelné části formuláře
 slug: znovupouzitelne-casti-formulare

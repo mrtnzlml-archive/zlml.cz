@@ -1,5 +1,4 @@
 ---
-id: bd6cef8f-9b0a-48ff-a700-2aa32d89a32b
 timestamp: 1391334426000
 title: Použití Texy s FSHL
 slug: pouziti-texy-s-fshl

@@ -1,5 +1,4 @@
 ---
-id: d9072c23-be9d-4f6a-a89c-565595c73b84
 timestamp: 1375087004000
 title: Třída pro připojení k FIO API
 slug: trida-pro-pripojeni-k-fio-api

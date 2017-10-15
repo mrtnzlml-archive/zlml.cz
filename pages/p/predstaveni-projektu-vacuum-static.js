@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "a2fb86da-448c-407d-98a7-b5a7b172042e",
     "timestamp": 1390929034000,
     "title": "Představení projektu Vacuum - STATIC",
     "slug": "predstaveni-projektu-vacuum-static"

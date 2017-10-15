@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "0939f66b-9d4b-4646-b787-76fa294fd2c4",
     "timestamp": 1353707019000,
     "title": "Výpočet mediánu",
     "slug": "vypocet-medianu"

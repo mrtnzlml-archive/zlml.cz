@@ -1,5 +1,4 @@
 ---
-id: ce9721e7-697b-4834-bb4c-89977f1b8399
 timestamp: 1497708814000
 title: Get rid of GraphQLNonNull
 slug: get-rid-of-graphqlnonnull

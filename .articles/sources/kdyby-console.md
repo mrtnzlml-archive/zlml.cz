@@ -1,5 +1,4 @@
 ---
-id: 827f7559-3d1a-4888-a6fb-4b421a6d7bd5
 timestamp: 1409409052000
 title: Kdyby\\Console
 slug: kdyby-console

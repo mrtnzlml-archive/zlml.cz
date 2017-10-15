@@ -1,5 +1,4 @@
 ---
-id: 5330469a-da65-4195-8c9a-2afccbd6078d
 timestamp: 1484849186000
 title: Vy ještě nemáte svůj superprojekt?!
 slug: vy-jeste-nemate-svuj-superprojekt

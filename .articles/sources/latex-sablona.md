@@ -1,5 +1,4 @@
 ---
-id: 2de31894-6830-48d7-a34f-9eaa72abc44b
 timestamp: 1382391734000
 title: LaTeX šablona
 slug: latex-sablona

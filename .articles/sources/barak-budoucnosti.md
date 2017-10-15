@@ -1,5 +1,4 @@
 ---
-id: 47afe102-bda4-448a-895e-fb948bdd9206
 timestamp: 1427631321000
 title: Barák budoucnosti
 slug: barak-budoucnosti

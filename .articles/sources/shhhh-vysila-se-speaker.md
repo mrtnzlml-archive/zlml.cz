@@ -1,5 +1,4 @@
 ---
-id: 1b9f9c28-3652-47e8-ba52-9ffcb7455f18
 timestamp: 1474881018000
 title: Shhhh - vysílá se speaker
 slug: shhhh-vysila-se-speaker

@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "7f009c6b-998c-4cef-8797-cf1853ac5ea7",
     "timestamp": 1466343012000,
     "title": "Fix compatibility with Nette 2.4",
     "slug": "fix-compatibility-with-nette-2-4"

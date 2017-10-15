@@ -1,5 +1,4 @@
 ---
-id: 420ed8a1-f8bb-42eb-9f8d-356783765357
 timestamp: 1414868997000
 title: Dependent select box
 slug: dependent-select-box

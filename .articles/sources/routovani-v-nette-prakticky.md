@@ -1,5 +1,4 @@
 ---
-id: 314fff27-204c-449e-9975-572db54475a2
 timestamp: 1375611559000
 title: Routování v Nette - prakticky
 slug: routovani-v-nette-prakticky

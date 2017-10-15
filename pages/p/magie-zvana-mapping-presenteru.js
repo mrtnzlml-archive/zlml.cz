@@ -4,7 +4,6 @@ import WithPost from '../../components/WithPost';
 
 export default WithPost({
   "attributes": {
-    "id": "098b3cf2-dc80-4c7f-b02b-c5918cc1c94c",
     "timestamp": 1459632882000,
     "title": "Magie zvaná mapping presenterů",
     "slug": "magie-zvana-mapping-presenteru"
