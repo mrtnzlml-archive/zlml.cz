@@ -32,4 +32,3 @@ node .articles/compile.js
 
 - get rid of `aws-serverless-express` - it's fucking leaking shit
 - https://www.datadoghq.com/pricing/
-- broken link on homepage "somewhere on this planet" -> Twitter instead of Nomadlist (?)
