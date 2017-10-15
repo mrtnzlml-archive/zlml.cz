@@ -54,18 +54,6 @@ class Layout extends React.Component {
               html {
                 font-size: 62.5%;
               }
-
-              a,
-              a:hover,
-              a:focus {
-                color: ${Colors.red};
-                text-decoration: none;
-              }
-
-              a:hover,
-              a:focus {
-                text-decoration: underline;
-              }
             `}
           </style>
           <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />

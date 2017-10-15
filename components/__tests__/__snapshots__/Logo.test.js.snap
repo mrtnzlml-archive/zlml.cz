@@ -16,13 +16,17 @@ Array [
   <h1
     className="jsx-2345896288"
 >
-    <a
-        className="jsx-2345896288"
-        href="/"
-        onClick={[Function]}
+    <span
+        className="jsx-364771521"
     >
-        Martin Zlámal
-    </a>
+        <a
+            className="jsx-364771521"
+            href="/"
+            onClick={[Function]}
+        >
+            Martin Zlámal
+        </a>
+    </span>
 </h1>,
 ]
 `;

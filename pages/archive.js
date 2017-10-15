@@ -1,10 +1,10 @@
 // @flow
 
-import Link from 'next/link';
-
 import ArticlesDatabase from '../.articles/archive.json';
+
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
+import Link from '../components/markup/Link';
 import Strong from '../components/markup/Strong';
 
 type Props = {
@@ -26,9 +26,7 @@ const Archive = ({ articles }: Props) => (
             as={article.slug}
             prefetch={index === 0} // prefetch first article
           >
-            <a>
-              {index === 0 ? <Strong>{article.title}</Strong> : article.title}
-            </a>
+            {index === 0 ? <Strong>{article.title}</Strong> : article.title}
           </Link>
         </div>
       );

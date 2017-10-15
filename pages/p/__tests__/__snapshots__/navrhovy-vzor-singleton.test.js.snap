@@ -19,13 +19,17 @@ exports[`renders correctly 1`] = `
     <h1
       className="jsx-2345896288"
     >
-      <a
-        className="jsx-2345896288"
-        href="/"
-        onClick={[Function]}
+      <span
+        className="jsx-364771521"
       >
-        Martin Zlámal
-      </a>
+        <a
+          className="jsx-364771521"
+          href="/"
+          onClick={[Function]}
+        >
+          Martin Zlámal
+        </a>
+      </span>
     </h1>
     <p
       style={
@@ -36,12 +40,17 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <a
-        href="/archive"
-        onClick={[Function]}
+      <span
+        className="jsx-364771521"
       >
-        ← back to the archive
-      </a>
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
     </p>
     <h1
       className="jsx-1056554702"
@@ -182,12 +191,16 @@ exports[`renders correctly 1`] = `
       <strong>
         Do you have any comments? That's great!
          
-        <a
-          className="jsx-1056554702"
-          href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fnavrhovy-vzor-singleton%20cc%20%40mrtnzlml"
+        <span
+          className="jsx-364771521"
         >
-          Tweet them
-        </a>
+          <a
+            className="jsx-364771521 "
+            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fnavrhovy-vzor-singleton%20cc%20%40mrtnzlml"
+          >
+            Tweet them
+          </a>
+        </span>
          
         so everyone can hear you…
       </strong>
@@ -201,12 +214,17 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <a
-        href="/archive"
-        onClick={[Function]}
+      <span
+        className="jsx-364771521"
       >
-        ← back to the archive
-      </a>
+        <a
+          className="jsx-364771521"
+          href="/archive"
+          onClick={[Function]}
+        >
+          ← back to the archive
+        </a>
+      </span>
     </p>
   </div>
 </div>
