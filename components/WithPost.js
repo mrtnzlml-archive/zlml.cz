@@ -1,17 +1,17 @@
 // @flow
 
 import React from 'react';
+import Link from 'next/link';
 
 import Layout from './Layout';
 import Logo from './Logo';
-import Link from './markup/Link';
 import Paragraph from './markup/Paragraph';
 import Strong from './markup/Strong';
 
 const LinkBack = () => (
   <Paragraph>
     <Link prefetch href="/archive">
-      &larr; back to the archive
+      <a>&larr; back to the archive</a>
     </Link>
   </Paragraph>
 );
@@ -63,13 +63,13 @@ export default function WithPost(options: Props) {
           <Paragraph>
             <Strong>
               Do you have any comments? That&apos;s great!{' '}
-              <Link
+              <a
                 href={`https://twitter.com/home?status=${encodeURIComponent(
                   `https://zlml.cz/${options.attributes.slug}`,
                 )}%20cc%20%40mrtnzlml`}
               >
                 Tweet them
-              </Link>{' '}
+              </a>{' '}
               so everyone can hear you&hellip;
             </Strong>
           </Paragraph>

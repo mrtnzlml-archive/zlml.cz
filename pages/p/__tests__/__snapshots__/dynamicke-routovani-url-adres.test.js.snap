@@ -19,17 +19,13 @@ exports[`renders correctly 1`] = `
     <h1
       className="jsx-2345896288"
     >
-      <span
-        className="jsx-364771521"
+      <a
+        className="jsx-2345896288"
+        href="/"
+        onClick={[Function]}
       >
-        <a
-          className="jsx-364771521"
-          href="/"
-          onClick={[Function]}
-        >
-          Martin Zlámal
-        </a>
-      </span>
+        Martin Zlámal
+      </a>
     </h1>
     <p
       style={
@@ -40,17 +36,12 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <span
-        className="jsx-364771521"
+      <a
+        href="/archive"
+        onClick={[Function]}
       >
-        <a
-          className="jsx-364771521"
-          href="/archive"
-          onClick={[Function]}
-        >
-          ← back to the archive
-        </a>
-      </span>
+        ← back to the archive
+      </a>
     </p>
     <h1
       className="jsx-1056554702"
@@ -146,16 +137,12 @@ exports[`renders correctly 1`] = `
       <strong>
         Do you have any comments? That's great!
          
-        <span
-          className="jsx-364771521"
+        <a
+          className="jsx-1056554702"
+          href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fdynamicke-routovani-url-adres%20cc%20%40mrtnzlml"
         >
-          <a
-            className="jsx-364771521 "
-            href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fdynamicke-routovani-url-adres%20cc%20%40mrtnzlml"
-          >
-            Tweet them
-          </a>
-        </span>
+          Tweet them
+        </a>
          
         so everyone can hear you…
       </strong>
@@ -169,17 +156,12 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <span
-        className="jsx-364771521"
+      <a
+        href="/archive"
+        onClick={[Function]}
       >
-        <a
-          className="jsx-364771521"
-          href="/archive"
-          onClick={[Function]}
-        >
-          ← back to the archive
-        </a>
-      </span>
+        ← back to the archive
+      </a>
     </p>
   </div>
 </div>

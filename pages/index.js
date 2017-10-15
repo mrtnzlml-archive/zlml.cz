@@ -1,10 +1,10 @@
 // @flow
 
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
-import Link from '../components/markup/Link';
 import Paragraph from '../components/markup/Paragraph';
 import Strong from '../components/markup/Strong';
 
@@ -37,7 +37,9 @@ function Homepage() {
         also very interested in <Strong>serverless technologies</Strong> and
         that&apos;s why this{' '}
         <Link prefetch href="/archive">
-          <Strong>blog</Strong>
+          <a>
+            <Strong>blog</Strong>
+          </a>
         </Link>{' '}
         runs on <Strong>AWS Lambda</Strong> environment.
       </Paragraph>
@@ -51,25 +53,23 @@ function Homepage() {
       <SectionHeading>What I love</SectionHeading>
       <Paragraph>
         My &hearts; beats for open-source and testable code. Have a look{' '}
-        <Link href="https://github.com/mrtnzlml/">at my work</Link>{' '}
-        (unfortunately most of my work is in private <Strong>Kiwi.com</Strong>{' '}
-        Gitlab). This is why <Strong>I am not looking for a new job</Strong> - I
-        love Kiwi.com.
+        <a href="https://github.com/mrtnzlml/">at my work</a> (unfortunately
+        most of my work is in private <Strong>Kiwi.com</Strong> Gitlab). This is
+        why <Strong>I am not looking for a new job</Strong> - I love Kiwi.com.
       </Paragraph>
       <Paragraph>
         After my studies I decided to travel. You can probably find me{' '}
-        <Link href="https://nomadlist.com/@mrtnzlml">
-          somewhere on this planet
-        </Link>. Do you want to stay in touch with me? That&apos;s great and I
-        really appreciate it!{' '}
-        <Link href="https://twitter.com/mrtnzlml">
-          Here is my Twitter account
-        </Link>{' '}
-        so you can follow my journeys.
+        <a href="https://nomadlist.com/@mrtnzlml">somewhere on this planet</a>.
+        Do you want to stay in touch with me? That&apos;s great and I really
+        appreciate it!{' '}
+        <a href="https://twitter.com/mrtnzlml">Here is my Twitter account</a> so
+        you can follow my journeys.
       </Paragraph>
       <Paragraph>
         <Link prefetch href="/archive">
-          Looking for a <strong>blog archive</strong>? It&apos;s here!
+          <a>
+            Looking for a <strong>blog archive</strong>? It&apos;s here!
+          </a>
         </Link>
       </Paragraph>
       <Paragraph>Here is your kitten for making it through:</Paragraph>
@@ -79,10 +79,12 @@ function Homepage() {
       />
       <Paragraph>
         By the way - this website is also{' '}
-        <Link href="https://github.com/mrtnzlml/zlml.cz">open-sourced</Link>.
+        <a href="https://github.com/mrtnzlml/zlml.cz">open-sourced</a>.
       </Paragraph>
       <Paragraph>
-        <Link href="https://zlml.cz/rss">RSS</Link>
+        <Link href="/rss">
+          <a>RSS</a>
+        </Link>
       </Paragraph>
     </Layout>
   );

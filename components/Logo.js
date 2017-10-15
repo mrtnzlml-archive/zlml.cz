@@ -1,14 +1,15 @@
 // @flow
 
+import Link from 'next/link';
+
 import Colors from '../services/Colors';
-import Link from '../components/markup/Link';
 import Paragraph from '../components/markup/Paragraph';
 
 export default () => [
   <Paragraph key="pre-heading">¡Hola! My name is</Paragraph>,
   <h1 key="heading">
     <Link prefetch href="/">
-      Martin Zlámal
+      <a>Martin Zlámal</a>
     </Link>
     <style jsx>{`
       h1 {
