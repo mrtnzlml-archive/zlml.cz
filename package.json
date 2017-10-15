@@ -43,6 +43,7 @@
     "build": "next build",
     "dev": "NODE_ENV=development node services/Server.js",
     "lint": "eslint .",
+    "publish": "node .articles/compile.js",
     "start": "NODE_ENV=production yarn serverless offline",
     "test": "jest",
     "test-ci": "yarn run typecheck && yarn run lint && yarn run test -- --ci --color",

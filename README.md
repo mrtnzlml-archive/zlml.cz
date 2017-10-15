@@ -18,9 +18,13 @@ yarn dev
 
 # Publish article
 
+Create new MD file in `.articles/sources` with appropriate file headers and the article content. After finishing just run this command:
+
 ```
-node .articles/compile.js
+yarn run publish
 ```
+
+It will generate new page with tests in `pages/p` folder. Now just push it to the Git and that's it...
 
 # What's inside
 
