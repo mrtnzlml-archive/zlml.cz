@@ -5,3 +5,15 @@ exports[`renders correctly 1`] = `
   TEST
 </strong>
 `;
+
+exports[`renders correctly 2`] = `
+<strong
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+>
+  TEST
+</strong>
+`;

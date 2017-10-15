@@ -1,5 +1,9 @@
 // @flow
 
-export default function Strong({ children }: { children: Object }) {
-  return <strong>{children}</strong>;
+type Props = {
+  children: Object,
+};
+
+export default function Strong(props: Props) {
+  return <strong {...props} />;
 }

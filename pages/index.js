@@ -7,6 +7,7 @@ import Logo from '../components/Logo';
 import Link from '../components/markup/Link';
 import Paragraph from '../components/markup/Paragraph';
 import Strong from '../components/markup/Strong';
+import Colors from '../services/Colors';
 
 const SectionHeading = ({ children }) => (
   <div
@@ -50,7 +51,8 @@ function Homepage() {
 
       <SectionHeading>What I love</SectionHeading>
       <Paragraph>
-        My &hearts; beats for open-source and testable code. Have a look{' '}
+        My <Strong style={{ color: Colors.red }}>&hearts;</Strong> beats for
+        open-source and testable code. Have a look{' '}
         <Link href="https://github.com/mrtnzlml/">at my work</Link>{' '}
         (unfortunately most of my work is in private <Strong>Kiwi.com</Strong>{' '}
         Gitlab). This is why <Strong>I am not looking for a new job</Strong> - I
@@ -68,21 +70,18 @@ function Homepage() {
         so you can follow my journeys.
       </Paragraph>
       <Paragraph>
-        <Link prefetch href="/archive">
-          Looking for a <strong>blog archive</strong>? It&apos;s here!
+        By the way - this website is also{' '}
+        <Link href="https://github.com/mrtnzlml/zlml.cz">open-sourced</Link> and
+        properly tested{' '}
+        <Link href="https://travis-ci.org/mrtnzlml/zlml.cz">
+          <img
+            src="https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master"
+            style={{ verticalAlign: 'text-top' }}
+          />
         </Link>
       </Paragraph>
-      <Paragraph>Here is your kitten for making it through:</Paragraph>
-      <img
-        style={{ width: '100%' }}
-        src="https://s3-eu-west-1.amazonaws.com/zlmlcz-media/kitten.jpg"
-      />
       <Paragraph>
-        By the way - this website is also{' '}
-        <Link href="https://github.com/mrtnzlml/zlml.cz">open-sourced</Link>.
-      </Paragraph>
-      <Paragraph>
-        <Link href="https://zlml.cz/rss">RSS</Link>
+        <Link href="https://zlml.cz/rss">Blog RSS</Link>
       </Paragraph>
     </Layout>
   );

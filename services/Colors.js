@@ -1,7 +1,6 @@
 // @flow
 
 export default {
-  red: '#d91e18',
-  redHover: '#cc0700',
+  red: '#e53935',
   dark: '#111',
 };

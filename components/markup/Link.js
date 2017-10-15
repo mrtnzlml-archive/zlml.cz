@@ -28,7 +28,9 @@ export default function Link(props: Props) {
 
         a:hover,
         a:focus {
-          text-decoration: underline;
+          text-decoration: none;
+          color: #fff;
+          background: ${Colors.red};
         }
       `}</style>
       {isExternal ? (
