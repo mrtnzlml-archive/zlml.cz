@@ -20,10 +20,10 @@ exports[`renders correctly 1`] = `
       className="jsx-2345896288"
     >
       <span
-        className="jsx-2676083331"
+        className="jsx-3140515621"
       >
         <a
-          className="jsx-2676083331"
+          className="jsx-3140515621"
           href="/"
           onClick={[Function]}
         >
@@ -41,10 +41,10 @@ exports[`renders correctly 1`] = `
       }
     >
       <span
-        className="jsx-2676083331"
+        className="jsx-3140515621"
       >
         <a
-          className="jsx-2676083331"
+          className="jsx-3140515621"
           href="/archive"
           onClick={[Function]}
         >
@@ -86,10 +86,10 @@ exports[`renders correctly 1`] = `
         Do you have any comments? That's great!
          
         <span
-          className="jsx-2676083331"
+          className="jsx-3140515621"
         >
           <a
-            className="jsx-2676083331 "
+            className="jsx-3140515621 "
             href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fprednaska-na-zcu-node-js%20cc%20%40mrtnzlml"
           >
             Tweet them
@@ -109,10 +109,10 @@ exports[`renders correctly 1`] = `
       }
     >
       <span
-        className="jsx-2676083331"
+        className="jsx-3140515621"
       >
         <a
-          className="jsx-2676083331"
+          className="jsx-3140515621"
           href="/archive"
           onClick={[Function]}
         >

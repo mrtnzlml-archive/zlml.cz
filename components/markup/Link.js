@@ -31,6 +31,10 @@ export default function Link(props: Props) {
           text-decoration: none;
           color: #fff;
           background: ${Colors.red};
+          margin-left: -0.4rem;
+          margin-right: -0.4rem;
+          padding-left: 0.4rem;
+          padding-right: 0.4rem;
         }
       `}</style>
       {isExternal ? (
