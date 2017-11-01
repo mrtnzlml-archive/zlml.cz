@@ -72,7 +72,7 @@ GraphQL is enabling technology. It enables you to move forward much faster in a 
 
 And it actually goes much further. GraphQL is not only way how to fetch data. GraphQL is way how to describe your needs and it starts with the graphical designs. Stop building "lorem ipsum" interfaces and start using real data while designing. The "lorem ipsum" is bullshit anyway because it never works as expected. I am waiting for tools like this and I cannot wait what will be the next step in applications development.
 
-## Nuggets of awesomeness (alphabetically):
+## Nuggets of awesomeness (alphabetically)
 
 - [Apollo GraphQL code generator](https://github.com/apollographql/apollo-codegen)
 - [Gest - sensible GraphQL testing](https://github.com/mfix22/gest)
