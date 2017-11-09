@@ -18,7 +18,16 @@ fs.readdirSync(sourcesDirectory).forEach(function(filename) {
       fs.readFileSync(`${sourcesDirectory}/${filename}`, 'utf-8'),
     );
     delete content.frontmatter;
-    content.body = marked(content.body, { renderer: renderer });
+    content.body = marked(content.body, {
+      renderer: renderer,
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: false,
+      smartLists: true,
+      smartypants: false,
+    });
 
     allArticleTitles.push(
       Object.assign({}, content.attributes, {

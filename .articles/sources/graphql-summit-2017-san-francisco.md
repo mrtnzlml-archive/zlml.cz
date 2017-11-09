@@ -10,10 +10,10 @@ GraphQL Summit was really a great eye-opener. I never thought about GraphQL in t
 
 I **love** serverless technology. But sometimes it's driving me crazy because there is a lot of edge cases when being serverless is actually a big limitation. And it's not going to be better in the future. Sure, you can be still serverless but the new trend is to build some kind of proxy (using Docker for example) for your GraphQL API. And it makes sense. One of the first projects using this strategy is [Apollo Engine](https://www.apollographql.com/engine/) (replacement for deprecated Apollo Optics). Apollo Engine behaves really like a caching proxy for your API so you can:
 
-1) measure performance of your queries and fields of types
-2) log all errors in GraphQL responses
-3) return cached responses without even invoking your GraphQL backend
-4) theoretically make persistent connections (WS) and measure the performance of your subscriptions
+1. measure performance of your queries and fields of types
+2. log all errors in GraphQL responses
+3. return cached responses without even invoking your GraphQL backend
+4. theoretically make persistent connections (WS) and measure the performance of your subscriptions
 
 The last point is not real yet. But it may be very real in the future. Especially the possibility to make persistent connections for subscriptions is very important (one of the serverless architecture limitations). The measurement is performed by extending the GraphQL response with additional metadata defined in this [unofficial specification](https://github.com/apollographql/apollo-tracing) (still fully compatible with official specification). You can similarly control the [cache expiration](https://github.com/apollographql/apollo-cache-control) in the proxy. I like it, it's clever but no longer completely serverless! On the other hand, even Serverless Framework is not going to be completely "serverless" (see [serverless/event-gateway](https://github.com/serverless/event-gateway)). It has very similar design characteristics and I am kinda glad that the trend is not to force serverless technology everywhere.
 
