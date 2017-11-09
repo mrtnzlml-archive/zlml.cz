@@ -1,13 +1,13 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import NextLink from 'next/link';
 
 import Colors from '../../services/Colors';
 
 type Props = {
   href: string,
-  children: React.Children,
+  children: React.Node,
   // may contain other props (it's not exact type)
 };
 

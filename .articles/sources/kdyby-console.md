@@ -1,6 +1,6 @@
 ---
 timestamp: 1409409052000
-title: Kdyby\\Console
+title: Kdyby\Console
 slug: kdyby-console
 ---
 Existují knihovny, bez kterých bych si vývoj webových aplikací již téměř nedokázal představit. Jedním z nich je [Kdyby\Console](https://github.com/kdyby/console). Již dříve jsem sice napsal článek o [Nette CliRouteru](nette-2-1-dev-clirouter), ale postupem času a hlavně také díky Doctrine jsem velmi rychle a rád přešel na jiné a dokonalejší řešení. Vzhledem k tomu, že na jednom projektu používám tuto knihovnu velmi hodně a vlastně na ní celý projekt stojí, rád bych alespoň prostřednictvím tohoto článku autorovi poděkoval ([Filip Procházka](https://github.com/fprochazka)). Zároveň bych tímto počínáním rád postupně smazával věčný problém těchto knihoven, protože většinou z hlediska návštěvníka ani není jasné, na co ta knihovna je...

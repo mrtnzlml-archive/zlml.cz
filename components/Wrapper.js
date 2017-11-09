@@ -1,7 +1,9 @@
 // @flow
 
+import * as React from 'react';
+
 type Props = {
-  children?: Object,
+  children?: React.Node,
 };
 
 export default function Wrapper({ children }: Props) {

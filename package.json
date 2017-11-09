@@ -46,7 +46,7 @@
     "publish": "node .articles/compile.js",
     "start": "NODE_ENV=production yarn serverless offline",
     "test": "jest",
-    "test-ci": "yarn run typecheck && yarn run lint && yarn run test -- --ci --color",
+    "test-ci": "yarn run lint && yarn run typecheck && yarn run test -- --ci --color",
     "typecheck": "flow check --color=always"
   }
 }

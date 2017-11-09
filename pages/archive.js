@@ -1,11 +1,13 @@
 // @flow
 
-import ArticlesDatabase from '../.articles/archive.json';
+import * as React from 'react';
 
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
 import Link from '../components/markup/Link';
 import Strong from '../components/markup/Strong';
+
+import ArticlesDatabase from '../.articles/archive.json';
 
 type Props = {
   articles: Array<Object>,

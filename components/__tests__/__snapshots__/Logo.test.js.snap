@@ -4,29 +4,29 @@ exports[`renders correctly 1`] = `
 Array [
   <p
     style={
-        Object {
-            "fontSize": "2rem",
-            "hyphens": "auto",
-            "textAlign": "justify",
-          }
+      Object {
+        "fontSize": "2rem",
+        "hyphens": "auto",
+        "textAlign": "justify",
+      }
     }
->
+  >
     ¡Hola! My name is
-</p>,
+  </p>,
   <h1
     className="jsx-2345896288"
->
+  >
     <span
-        className="jsx-3140515621"
+      className="jsx-3140515621"
     >
-        <a
-            className="jsx-3140515621"
-            href="/"
-            onClick={[Function]}
-        >
-            Martin Zlámal
-        </a>
+      <a
+        className="jsx-3140515621"
+        href="/"
+        onClick={[Function]}
+      >
+        Martin Zlámal
+      </a>
     </span>
-</h1>,
+  </h1>,
 ]
 `;

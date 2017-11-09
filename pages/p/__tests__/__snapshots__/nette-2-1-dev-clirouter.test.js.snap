@@ -62,94 +62,94 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Routování CLI((Command Line Interface)) aplikací je oblast, o které se v Nette moc nemluví. A když mluví, tak divně (nebo staře). Což na jednu stranu dává smysl, protože tato routa existuje už od roku 2009. Na druhou stranu je to zvláštní, protože je stále experimentální.</p>
-        <blockquote>
-        <p>The unidirectional router for CLI.</p>
-        <p>(experimental)</p>
-        </blockquote>
-        <p>Dokonce se už mluvilo o tom, že se zruší. No snad se to nestane...</p>
-        <p>Proč o tom mluvím? Rád bych ukázal, jak se dá v nastávající verzi Nette tato routa použít. V nové verzi Nette se již routy nepíší do bootsrap.php jak tomu bylo (alespoň myslím) dříve. Tentokrát je v adresářové struktuře soubor router/<strong>RouterFactory.php</strong>, který se právě o routování postará. Tento soubor může vypadat například takto:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        namespace App;
-        
-        use Nette,
-            Nette\\\\Application\\\\Routers\\\\RouteList,
-            Nette\\\\Application\\\\Routers\\\\Route,
-            Nette\\\\Application\\\\Routers\\\\CliRouter;
-        
-        /**
-         * Router factory.
-         */
-        class RouterFactory {
-        
-            private $container;
-        
-            public function __construct(Nette\\\\DI\\\\Container $container) {
-                $this-&gt;container = $container;
-            }
-        
-            /**
-             * @return \\\\Nette\\\\Application\\\\IRouter
-             */
-            public function createRouter() {
-                $router = new RouteList();
-                if ($this-&gt;container-&gt;parameters[&#39;consoleMode&#39;]) {
-                    $router[] = new CliRouter(array(&#39;action&#39; =&gt; &#39;Cli:Cli:cron&#39;));
-                } else {
-                    $router[] = new Route(&#39;rss.xml&#39;, &#39;Front:Blog:rss&#39;);
-                    $router[] = new Route(&#39;user/&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, array(
-                        &#39;module&#39; =&gt; &#39;User&#39;,
-                        &#39;presenter&#39; =&gt; &#39;Board&#39;,
-                        &#39;action&#39; =&gt; &#39;default&#39;,
-                    ));
-                    $router[] = new Route(&#39;&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, array(
-                        &#39;module&#39; =&gt; &#39;Front&#39;,
-                        &#39;presenter&#39; =&gt; &#39;Homepage&#39;,
-                        &#39;action&#39; =&gt; &#39;default&#39;,
-                    ));
-                }
-                return $router;
-            }
-        
+<blockquote>
+<p>The unidirectional router for CLI.</p>
+<p>(experimental)</p>
+</blockquote>
+<p>Dokonce se už mluvilo o tom, že se zruší. No snad se to nestane...</p>
+<p>Proč o tom mluvím? Rád bych ukázal, jak se dá v nastávající verzi Nette tato routa použít. V nové verzi Nette se již routy nepíší do bootsrap.php jak tomu bylo (alespoň myslím) dříve. Tentokrát je v adresářové struktuře soubor router/<strong>RouterFactory.php</strong>, který se právě o routování postará. Tento soubor může vypadat například takto:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+namespace App;
+
+use Nette,
+    Nette\\\\Application\\\\Routers\\\\RouteList,
+    Nette\\\\Application\\\\Routers\\\\Route,
+    Nette\\\\Application\\\\Routers\\\\CliRouter;
+
+/**
+ * Router factory.
+ */
+class RouterFactory {
+
+    private $container;
+
+    public function __construct(Nette\\\\DI\\\\Container $container) {
+        $this-&gt;container = $container;
+    }
+
+    /**
+     * @return \\\\Nette\\\\Application\\\\IRouter
+     */
+    public function createRouter() {
+        $router = new RouteList();
+        if ($this-&gt;container-&gt;parameters[&#39;consoleMode&#39;]) {
+            $router[] = new CliRouter(array(&#39;action&#39; =&gt; &#39;Cli:Cli:cron&#39;));
+        } else {
+            $router[] = new Route(&#39;rss.xml&#39;, &#39;Front:Blog:rss&#39;);
+            $router[] = new Route(&#39;user/&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, array(
+                &#39;module&#39; =&gt; &#39;User&#39;,
+                &#39;presenter&#39; =&gt; &#39;Board&#39;,
+                &#39;action&#39; =&gt; &#39;default&#39;,
+            ));
+            $router[] = new Route(&#39;&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, array(
+                &#39;module&#39; =&gt; &#39;Front&#39;,
+                &#39;presenter&#39; =&gt; &#39;Homepage&#39;,
+                &#39;action&#39; =&gt; &#39;default&#39;,
+            ));
         }
-        </code></pre>
-        <p>Toto je reálná funkční ukázka (ze které jsem něco nepodstatného umazal). Jak je vidět, tak aplikaci mám rozdělenou na moduly, takže defaultní routa ukazuje do modulu Front, pak je k dispozici User modul, link na RSS a konečně CliRouter, který se naroutuje pouze v případě, že běží aplikace v konzolovém módu (CLI).</p>
-        <p>Pokud se teď přesunu k presenterové části modulu Cli, mohu zde umístit dvě třídy. Klasický BasePresenter, který bude pro jistotu kontrolovat, jestli se opravdu jedná o consoleMode například takto:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        namespace App\\\\CliModule;
-        
-        use Nette;
-        
-        abstract class BasePresenter extends Nette\\\\Application\\\\UI\\\\Presenter {
-        
-            public function startup() {
-                parent::startup();
-                if (!$this-&gt;context-&gt;parameters[&#39;consoleMode&#39;]) {
-                    throw new Nette\\\\Security\\\\AuthenticationException;
-                }
-            }
-        
+        return $router;
+    }
+
+}
+</code></pre>
+<p>Toto je reálná funkční ukázka (ze které jsem něco nepodstatného umazal). Jak je vidět, tak aplikaci mám rozdělenou na moduly, takže defaultní routa ukazuje do modulu Front, pak je k dispozici User modul, link na RSS a konečně CliRouter, který se naroutuje pouze v případě, že běží aplikace v konzolovém módu (CLI).</p>
+<p>Pokud se teď přesunu k presenterové části modulu Cli, mohu zde umístit dvě třídy. Klasický BasePresenter, který bude pro jistotu kontrolovat, jestli se opravdu jedná o consoleMode například takto:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+namespace App\\\\CliModule;
+
+use Nette;
+
+abstract class BasePresenter extends Nette\\\\Application\\\\UI\\\\Presenter {
+
+    public function startup() {
+        parent::startup();
+        if (!$this-&gt;context-&gt;parameters[&#39;consoleMode&#39;]) {
+            throw new Nette\\\\Security\\\\AuthenticationException;
         }
-        </code></pre>
-        <p>No a pak už stačí jen CliPresenter, který bude dědit od BasePresenteru, takže vždy dojde ke kontrole. Zde stačí metoda action*(), která se spustí podle naroutování. V mém případě se tedy jedná o actionCron():</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        namespace App\\\\CliModule;
-        
-        use Nette;
-        
-        class CliPresenter extends BasePresenter {
-        
-            public function actionCron() {
-                echo &#39;FUNGUJU!&#39;;
-                $this-&gt;terminate();
-            }
-        
-        }
-        </code></pre>
-        <p>A teď to nejdůležitější! Aplikace se spustí pomocí terminálu jednoduchým příkazem <code>php index.php</code>. Samozřejmě je nutné ukázat na index Nette aplikace. No a samozřejmě se mohu odkázat i na jinou část aplikace dopsání parametru. Pokud bych chtěl podle výše uvedených souborů přejít na hlavní stránku, stačí napsat pouze <code>php index.php Front:Homepage:default</code>.</p>
-        ",
+    }
+
+}
+</code></pre>
+<p>No a pak už stačí jen CliPresenter, který bude dědit od BasePresenteru, takže vždy dojde ke kontrole. Zde stačí metoda action*(), která se spustí podle naroutování. V mém případě se tedy jedná o actionCron():</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+namespace App\\\\CliModule;
+
+use Nette;
+
+class CliPresenter extends BasePresenter {
+
+    public function actionCron() {
+        echo &#39;FUNGUJU!&#39;;
+        $this-&gt;terminate();
+    }
+
+}
+</code></pre>
+<p>A teď to nejdůležitější! Aplikace se spustí pomocí terminálu jednoduchým příkazem <code>php index.php</code>. Samozřejmě je nutné ukázat na index Nette aplikace. No a samozřejmě se mohu odkázat i na jinou část aplikace dopsání parametru. Pokud bych chtěl podle výše uvedených souborů přejít na hlavní stránku, stačí napsat pouze <code>php index.php Front:Homepage:default</code>.</p>
+",
         }
       }
     />

@@ -62,79 +62,79 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Nedávno jsem psal o tom, jak využívat fulltext indexy na InnoDB tabulkách (<a href=\\"http://zlml.cz/using-fulltext-searching-with-innodb\\">http://zlml.cz/using-fulltext-searching-with-innodb</a>).
-        Není to nic převratného, ale každý den se to také nedělá. Zmínil jsem také, jak vyhledávat, což
-        bylo řešení <a href=\\"http://php.vrana.cz/fulltextove-vyhledavani-v-mysql.php\\">Jakuba Vrány .{target:_blank}</a>.</p>
-        <p>V diskusi pod článkem zmíňka o tom, jak ošetřit případ, kdy databáze nevrací výsledky pro slova,
-        která jsou kratší než je hodnota <strong>ft_min_word_len</strong>. Implementace pro Nette nebude nijak zvlášť
-        rozdílná, avšak i zde existuje minimálně jedna zrádnost.</p>
-        <h2 id=\\"nette-ty-jedna-zr-dn-bestie-\\">Nette, ty jedna zrádná bestie... <a href=\\"#nette-ty-jedna-zr-dn-bestie-\\">#</a></h2><p>Pro dotazování využívám databázovou vrstvu \\\\Nette\\\\Database, což je rozšíření (nadstavba) pro PDO.
-        S oblibou také využívám fluid zápis a spoléhám na automatické ošetření vstupů. A zde je právě kámen úrazu.
-        Nette je místy až příliš důkladné (což je dobře), ale v tomto případě to znemožňuje korektní
-        použití <strong>REGEXP</strong>.</p>
-        <p>Běžný kód pro fultextové dotazování může vypadat takto:</p>
-        <pre><code class=\\"lang-php\\">/** @var Nette\\\\Database\\\\SelectionFactory @inject */
-        public $sf;
-        
-        $this-&gt;sf-&gt;table(&#39;mirror_posts&#39;)
-            -&gt;where(&quot;MATCH(title, body) AGAINST (? IN BOOLEAN MODE)&quot;, $search)
-            -&gt;order(&quot;5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC&quot;, $search, $search)
-            -&gt;limit(50);
-        </code></pre>
-        <p>Což vygeneruje přibližně přesně následující:</p>
-        <pre><code class=\\"lang-sql\\">SELECT \`id\`, \`title\`, \`body\` 
-        FROM \`mirror_posts\` 
-        WHERE (MATCH(\`title\`, \`body\`) AGAINST (&#39;api&#39; IN BOOLEAN MODE)) 
-        ORDER BY 5 * MATCH(\`title\`) AGAINST (&#39;api&#39;) + MATCH(\`body\`) AGAINST (&#39;api&#39;) DESC 
-        LIMIT 50
-        </code></pre>
-        <p>Bohužel tento dotaz nevrátí nic. Je to právě kvůli hodnotě <strong>ft_min_word_len</strong>, kterou mám nastavenou
-        na 4. Takže můžu změnit tuto hodnotu, a nebo pro všechny slova, která jsou kratší než 4 znaky
-        poskládám složitější dotaz:</p>
-        <pre><code class=\\"lang-php\\">$where = &quot;&quot;;
-        //$ft_min_word_len = mysql_result(mysql_query(&quot;SHOW VARIABLES LIKE &#39;ft_min_word_len&#39;&quot;), 0, 1);
-        $ft_min_word_len = 4;
-        preg_match_all(&quot;~[\\\\\\\\pL\\\\\\\\pN_]+(&#39;[\\\\\\\\pL\\\\\\\\pN_]+)*~u&quot;, stripslashes($search), $matches);
-        foreach ($matches[0] as $part) {
-            if (iconv_strlen($part, &quot;utf-8&quot;) &lt; $ft_min_word_len) {
-                $regexp = &quot;REGEXP &#39;[[:&lt;:]]&quot; . addslashes($part) . &quot;[[:&gt;:]]&#39;&quot;;
-                $where .= &quot; OR (title $regexp OR body $regexp)&quot;;
-            }
-        }
-        </code></pre>
-        <p>A doplníme fluidní dotaz:</p>
-        <pre><code class=\\"lang-php\\">...
-        -&gt;where(&quot;MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where&quot;, $search) //přidáno $where
-        ...
-        </code></pre>
-        <p>Nyní budu vyhledávat stejný výraz a to automaticky poskládaným dotazem:</p>
-        <pre><code class=\\"lang-sql\\">SELECT \`id\` 
-        FROM \`mirror_posts\` 
-        WHERE (MATCH(\`title\`, \`body\`) AGAINST (&#39;api&#39; IN BOOLEAN MODE) OR (\`title\` REGEXP &#39;[[:&lt;:]]\`api\`[[:&gt;:]]&#39; OR \`body\` REGEXP &#39;[[:&lt;:]]\`api\`[[:&gt;:]]&#39;)) 
-        ORDER BY 5 * MATCH(\`title\`) AGAINST (&#39;api&#39;) + MATCH(\`body\`) AGAINST (&#39;api&#39;) DESC 
-        LIMIT 50
-        </code></pre>
-        <p>Bohužel, ani tento dotaz nevrátí strávný výsledek, ačkoliv se tváří, že by měl.
-        Důvodem jsou zpětné uvozovky v regulárním výrazu <strong>&#39;&#39;[[:&lt;:]]<code>api</code>[[:&gt;:]]&#39;&#39;</strong>.</p>
-        <p>Řešení je zřejmě několik. Například poskládat si tento dotaz sám. Ovšem to není ta nejbezpečnější cesta.
-        Escapování je zrádné a zrovna vyhledávání je jedna z nejvíce používaných věcí, kdy se uživatel
-        přímo ptá databáze. Existuje však vyčůranější způsob.</p>
-        <p>Co jsem tak vypozoroval, tak Nette se sice o escapování snaží, ale neescapuje výraz zapsaný pomocí
-        <em>strtoupper()</em>. Tzn. že stačí změnit tvorbu výrazu:</p>
-        <pre><code class=\\"lang-php\\">$regexp = &quot;REGEXP &#39;[[:&lt;:]]&quot; . addslashes(strtoupper($part)) . &quot;[[:&gt;:]]&#39;&quot;;
-        </code></pre>
-        <p>A dotaz se následně poskládá strávně:</p>
-        <pre><code class=\\"lang-sql\\">SELECT \`id\`, \`title\`, \`body\` 
-        FROM \`mirror_posts\` 
-        WHERE (MATCH(\`title\`, \`body\`) AGAINST (&#39;api&#39; IN BOOLEAN MODE) OR (\`title\` REGEXP &#39;[[:&lt;:]]API[[:&gt;:]]&#39; OR \`body\` REGEXP &#39;[[:&lt;:]]API[[:&gt;:]]&#39;)) 
-        ORDER BY 5 * MATCH(\`title\`) AGAINST (&#39;api&#39;) + MATCH(\`body\`) AGAINST (&#39;api&#39;) DESC 
-        LIMIT 50
-        </code></pre>
-        <p>To že je část výrazu jiná než ve skutečnosti nevadí. Nevím jestli je case-insensitive chování
-        vlastnost REGEXP, ale tabulkou s postfixem <strong>_ci</strong> se také nic nezkazí.</p>
-        <p>Jen mě tak napadá, proč se to chová tak zvláštně. Uspokojuji se tím, že zpětná uvozovka
-        není úplně součástí escapování, takže se není čeho bát (a první regulár v PHP také nepustí vše),
-        ale je to divné.</p>
-        ",
+Není to nic převratného, ale každý den se to také nedělá. Zmínil jsem také, jak vyhledávat, což
+bylo řešení <a href=\\"http://php.vrana.cz/fulltextove-vyhledavani-v-mysql.php\\">Jakuba Vrány .{target:_blank}</a>.</p>
+<p>V diskusi pod článkem zmíňka o tom, jak ošetřit případ, kdy databáze nevrací výsledky pro slova,
+která jsou kratší než je hodnota <strong>ft_min_word_len</strong>. Implementace pro Nette nebude nijak zvlášť
+rozdílná, avšak i zde existuje minimálně jedna zrádnost.</p>
+<h2 id=\\"nette-ty-jedna-zr-dn-bestie-\\">Nette, ty jedna zrádná bestie... <a href=\\"#nette-ty-jedna-zr-dn-bestie-\\">#</a></h2><p>Pro dotazování využívám databázovou vrstvu \\\\Nette\\\\Database, což je rozšíření (nadstavba) pro PDO.
+S oblibou také využívám fluid zápis a spoléhám na automatické ošetření vstupů. A zde je právě kámen úrazu.
+Nette je místy až příliš důkladné (což je dobře), ale v tomto případě to znemožňuje korektní
+použití <strong>REGEXP</strong>.</p>
+<p>Běžný kód pro fultextové dotazování může vypadat takto:</p>
+<pre><code class=\\"lang-php\\">/** @var Nette\\\\Database\\\\SelectionFactory @inject */
+public $sf;
+
+$this-&gt;sf-&gt;table(&#39;mirror_posts&#39;)
+    -&gt;where(&quot;MATCH(title, body) AGAINST (? IN BOOLEAN MODE)&quot;, $search)
+    -&gt;order(&quot;5 * MATCH(title) AGAINST (?) + MATCH(body) AGAINST (?) DESC&quot;, $search, $search)
+    -&gt;limit(50);
+</code></pre>
+<p>Což vygeneruje přibližně přesně následující:</p>
+<pre><code class=\\"lang-sql\\">SELECT \`id\`, \`title\`, \`body\` 
+FROM \`mirror_posts\` 
+WHERE (MATCH(\`title\`, \`body\`) AGAINST (&#39;api&#39; IN BOOLEAN MODE)) 
+ORDER BY 5 * MATCH(\`title\`) AGAINST (&#39;api&#39;) + MATCH(\`body\`) AGAINST (&#39;api&#39;) DESC 
+LIMIT 50
+</code></pre>
+<p>Bohužel tento dotaz nevrátí nic. Je to právě kvůli hodnotě <strong>ft_min_word_len</strong>, kterou mám nastavenou
+na 4. Takže můžu změnit tuto hodnotu, a nebo pro všechny slova, která jsou kratší než 4 znaky
+poskládám složitější dotaz:</p>
+<pre><code class=\\"lang-php\\">$where = &quot;&quot;;
+//$ft_min_word_len = mysql_result(mysql_query(&quot;SHOW VARIABLES LIKE &#39;ft_min_word_len&#39;&quot;), 0, 1);
+$ft_min_word_len = 4;
+preg_match_all(&quot;~[\\\\\\\\pL\\\\\\\\pN_]+(&#39;[\\\\\\\\pL\\\\\\\\pN_]+)*~u&quot;, stripslashes($search), $matches);
+foreach ($matches[0] as $part) {
+    if (iconv_strlen($part, &quot;utf-8&quot;) &lt; $ft_min_word_len) {
+        $regexp = &quot;REGEXP &#39;[[:&lt;:]]&quot; . addslashes($part) . &quot;[[:&gt;:]]&#39;&quot;;
+        $where .= &quot; OR (title $regexp OR body $regexp)&quot;;
+    }
+}
+</code></pre>
+<p>A doplníme fluidní dotaz:</p>
+<pre><code class=\\"lang-php\\">...
+-&gt;where(&quot;MATCH(title, body) AGAINST (? IN BOOLEAN MODE)$where&quot;, $search) //přidáno $where
+...
+</code></pre>
+<p>Nyní budu vyhledávat stejný výraz a to automaticky poskládaným dotazem:</p>
+<pre><code class=\\"lang-sql\\">SELECT \`id\` 
+FROM \`mirror_posts\` 
+WHERE (MATCH(\`title\`, \`body\`) AGAINST (&#39;api&#39; IN BOOLEAN MODE) OR (\`title\` REGEXP &#39;[[:&lt;:]]\`api\`[[:&gt;:]]&#39; OR \`body\` REGEXP &#39;[[:&lt;:]]\`api\`[[:&gt;:]]&#39;)) 
+ORDER BY 5 * MATCH(\`title\`) AGAINST (&#39;api&#39;) + MATCH(\`body\`) AGAINST (&#39;api&#39;) DESC 
+LIMIT 50
+</code></pre>
+<p>Bohužel, ani tento dotaz nevrátí strávný výsledek, ačkoliv se tváří, že by měl.
+Důvodem jsou zpětné uvozovky v regulárním výrazu <strong>&#39;&#39;[[:&lt;:]]<code>api</code>[[:&gt;:]]&#39;&#39;</strong>.</p>
+<p>Řešení je zřejmě několik. Například poskládat si tento dotaz sám. Ovšem to není ta nejbezpečnější cesta.
+Escapování je zrádné a zrovna vyhledávání je jedna z nejvíce používaných věcí, kdy se uživatel
+přímo ptá databáze. Existuje však vyčůranější způsob.</p>
+<p>Co jsem tak vypozoroval, tak Nette se sice o escapování snaží, ale neescapuje výraz zapsaný pomocí
+<em>strtoupper()</em>. Tzn. že stačí změnit tvorbu výrazu:</p>
+<pre><code class=\\"lang-php\\">$regexp = &quot;REGEXP &#39;[[:&lt;:]]&quot; . addslashes(strtoupper($part)) . &quot;[[:&gt;:]]&#39;&quot;;
+</code></pre>
+<p>A dotaz se následně poskládá strávně:</p>
+<pre><code class=\\"lang-sql\\">SELECT \`id\`, \`title\`, \`body\` 
+FROM \`mirror_posts\` 
+WHERE (MATCH(\`title\`, \`body\`) AGAINST (&#39;api&#39; IN BOOLEAN MODE) OR (\`title\` REGEXP &#39;[[:&lt;:]]API[[:&gt;:]]&#39; OR \`body\` REGEXP &#39;[[:&lt;:]]API[[:&gt;:]]&#39;)) 
+ORDER BY 5 * MATCH(\`title\`) AGAINST (&#39;api&#39;) + MATCH(\`body\`) AGAINST (&#39;api&#39;) DESC 
+LIMIT 50
+</code></pre>
+<p>To že je část výrazu jiná než ve skutečnosti nevadí. Nevím jestli je case-insensitive chování
+vlastnost REGEXP, ale tabulkou s postfixem <strong>_ci</strong> se také nic nezkazí.</p>
+<p>Jen mě tak napadá, proč se to chová tak zvláštně. Uspokojuji se tím, že zpětná uvozovka
+není úplně součástí escapování, takže se není čeho bát (a první regulár v PHP také nepustí vše),
+ale je to divné.</p>
+",
         }
       }
     />

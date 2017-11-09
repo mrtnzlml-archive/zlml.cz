@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 
 import Layout from './Layout';
 import Logo from './Logo';
@@ -26,7 +26,7 @@ type Props = {
 };
 
 export default function WithPost(options: Props) {
-  return class PostPage extends React.Component {
+  return class PostPage extends React.Component<{}> {
     render() {
       return (
         <Layout title={options.attributes.title}>

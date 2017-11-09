@@ -62,89 +62,89 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<div class=\\"alert alert-danger\\">Následující text řeší starší verzi FineUploaderu <code>3.*</code>, nikoliv nejnovější. Hledáte-li aktuálnější návod, přečtěte si prosím <a href=\\"http://zlml.cz/ajax-upload-souboru-v-nette-pomoci-fine-uploaderu-2\\">http://zlml.cz/ajax-upload-souboru-v-nette-pomoci-fine-uploaderu-2</a>...</div>
-        
-        <p>A je zde další ukázka vlastní práce, která se může hodit i někomu dalšímu. Tentokrát půjde o ajaxové
-        nahrávání souborů v Nette pomocí <a href=\\"http://fineuploader.com/\\">Fine Uploaderu .{target:_blank}</a>.
-        Obecně to není moc jednoduchá sranda, ale uvidíte, že to zase není taková věda...</p>
-        <p>A jak už to tak dělávám, lepší než spoustu povídání je spousta ukázek. Prvně je potřeba nalinkovat
-        soubory Fine Uploaderu, nette.ajaxu a vlastního javascriptového souboru:</p>
-        <pre><code class=\\"lang-html\\">&lt;script src=&quot;{$basePath}/js/jquery.fineuploader-3.7.0.min.js&quot;&gt;&lt;/script&gt;
-        &lt;script src=&quot;{$basePath}/js/nette.ajax.js&quot;&gt;&lt;/script&gt;
-        &lt;script src=&quot;{$basePath}/js/main.js&quot;&gt;&lt;/script&gt;
-        </code></pre>
-        <p>Použití samotného Fine Uploaderu je nesmírně jednoduché. Nejdříve je třeba vytvořit element na který
-        se uploader později zavěsí a případně tlačítko na upload, pokud nechceme soubory uploadovat rovnou:</p>
-        <pre><code class=\\"lang-html\\">&lt;div id=&quot;image-uploader&quot;{ifset $selected} data-id=&quot;{$selected}&quot;{/ifset}&gt;&lt;/div&gt;
-        &lt;div id=&quot;triggerUpload&quot;&gt;Nahrát obrázky&lt;/div&gt;
-        </code></pre>
-        <p>Přichází na řadu samotné oživení uploaderu pomocí javascriptu (soubor main.js):</p>
-        <pre><code class=\\"lang-javascript\\">$(function () {
-            if ($(&#39;#image-uploader&#39;).length != 0) { //test existence elementu
-                $.nette.ext(&#39;uploader&#39;, {
-                    complete: function () { //zavěšení na konec ajaxového požadavku
-                        var uploader = $(&#39;#image-uploader&#39;).fineUploader({
-                            request: {
-                                endpoint: &#39;product/default/&#39; + $(&#39;#image-uploader&#39;).data(&#39;id&#39;) + &#39;?do=upload&#39;
-                            },
-                            text: {
-                                uploadButton: &#39;Klikněte, nebo přetáhněte obrázky&#39;,
-                                cancelButton: &#39;zrušit&#39;,
-                                failUpload: &#39;Nahrání obrázku se nezdařilo&#39;,
-                                dragZone: &#39;Přetáhněte soubory sem&#39;,
-                                dropProcessing: &#39;Zpracovávám přetažené soubory...&#39;,
-                                formatProgress: &#39;{percent}% z {total_size}&#39;,
-                                waitingForResponse: &#39;Zpracovávám...&#39;
-                            },
-                            autoUpload: false,
-                            failedUploadTextDisplay: {
-                                mode: &#39;custom&#39;,
-                                maxChars: 70,
-                                responseProperty: &#39;error&#39;,
-                                enableTooltip: true
-                            }
-                        });
-                        $(&#39;#triggerUpload&#39;).click(function () {
-                            uploader.fineUploader(&#39;uploadStoredFiles&#39;);
-                        });
+
+<p>A je zde další ukázka vlastní práce, která se může hodit i někomu dalšímu. Tentokrát půjde o ajaxové
+nahrávání souborů v Nette pomocí <a href=\\"http://fineuploader.com/\\">Fine Uploaderu .{target:_blank}</a>.
+Obecně to není moc jednoduchá sranda, ale uvidíte, že to zase není taková věda...</p>
+<p>A jak už to tak dělávám, lepší než spoustu povídání je spousta ukázek. Prvně je potřeba nalinkovat
+soubory Fine Uploaderu, nette.ajaxu a vlastního javascriptového souboru:</p>
+<pre><code class=\\"lang-html\\">&lt;script src=&quot;{$basePath}/js/jquery.fineuploader-3.7.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;{$basePath}/js/nette.ajax.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;{$basePath}/js/main.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Použití samotného Fine Uploaderu je nesmírně jednoduché. Nejdříve je třeba vytvořit element na který
+se uploader později zavěsí a případně tlačítko na upload, pokud nechceme soubory uploadovat rovnou:</p>
+<pre><code class=\\"lang-html\\">&lt;div id=&quot;image-uploader&quot;{ifset $selected} data-id=&quot;{$selected}&quot;{/ifset}&gt;&lt;/div&gt;
+&lt;div id=&quot;triggerUpload&quot;&gt;Nahrát obrázky&lt;/div&gt;
+</code></pre>
+<p>Přichází na řadu samotné oživení uploaderu pomocí javascriptu (soubor main.js):</p>
+<pre><code class=\\"lang-javascript\\">$(function () {
+    if ($(&#39;#image-uploader&#39;).length != 0) { //test existence elementu
+        $.nette.ext(&#39;uploader&#39;, {
+            complete: function () { //zavěšení na konec ajaxového požadavku
+                var uploader = $(&#39;#image-uploader&#39;).fineUploader({
+                    request: {
+                        endpoint: &#39;product/default/&#39; + $(&#39;#image-uploader&#39;).data(&#39;id&#39;) + &#39;?do=upload&#39;
+                    },
+                    text: {
+                        uploadButton: &#39;Klikněte, nebo přetáhněte obrázky&#39;,
+                        cancelButton: &#39;zrušit&#39;,
+                        failUpload: &#39;Nahrání obrázku se nezdařilo&#39;,
+                        dragZone: &#39;Přetáhněte soubory sem&#39;,
+                        dropProcessing: &#39;Zpracovávám přetažené soubory...&#39;,
+                        formatProgress: &#39;{percent}% z {total_size}&#39;,
+                        waitingForResponse: &#39;Zpracovávám...&#39;
+                    },
+                    autoUpload: false,
+                    failedUploadTextDisplay: {
+                        mode: &#39;custom&#39;,
+                        maxChars: 70,
+                        responseProperty: &#39;error&#39;,
+                        enableTooltip: true
                     }
                 });
+                $(&#39;#triggerUpload&#39;).click(function () {
+                    uploader.fineUploader(&#39;uploadStoredFiles&#39;);
+                });
             }
-        
-            $.nette.init(); //inicializace nette.ajax
         });
-        </code></pre>
-        <p>Protože jsem v mém případě donačítal tento upload element ajaxově, musel jsem script pro uploader
-        zavěsit na nette.ajax událost complete. Tato obálka se dá smazat a spouštět klasicky
-        při události document.ready. Je zde spoustu, pro samotnou funkčnost, zbytečného kódu.
-        Podstatný je pouze request:endpoint, který ukazuje na URL adresu aplikace, kde čeká Nette handle.
-        Ten může vypadat například takto:</p>
-        <pre><code class=\\"lang-php\\">public function handleUpload($id) {
-            $allowedExtensions = array(&quot;jpeg&quot;, &quot;jpg&quot;, &quot;png&quot;, &quot;gif&quot;); //například pro obrázky
-            $uploader = new \\\\qqFileUploader($allowedExtensions);
-            //...
-            try {
-                $result = $uploader-&gt;handleUpload(__DIR__ . &#39;/../../../www/uploads/&#39; . $id . &#39;/default&#39;, NULL);
-                $result[&#39;uploadName&#39;] = $uploader-&gt;getUploadName();
-                //...
-            } catch (\\\\Exception $exc) {
-                $this-&gt;sendResponse(new \\\\Nette\\\\Application\\\\Responses\\\\JsonResponse(array(
-                    &#39;error&#39; =&gt; $exc-&gt;getMessage(),
-                )));
-            }
-            $this-&gt;invalidateControl();
-            $this-&gt;sendResponse(new \\\\Nette\\\\Application\\\\Responses\\\\JsonResponse($result));
-        }
-        </code></pre>
-        <p>Opět jsem vypustil části, které nejsou úplně důležité pro samotnou funkčnost. Jde pouze o to mít
-        připravenou handle metodu, která převezme například ID, důležité však je, že spouští metodu handleUpload()
-        a odesílá JSON odpověď a to jak errorovou, tak normální, což je následně na straně klienta vyhodnoceno
-        jako úspěšný upload.</p>
-        <p>V kódu je zmíněna také třída qqFileUploader. Tu naleznete například na <a href=\\"https://github.com/Widen/fine-uploader-server\\">GitHubu .{target:_blank}</a> a nejenom pro PHP. Já jsem si tuto třídu obohatil pouze
-        o webalize názvů souborů.</p>
-        <p>A to je vlastně úplně celé. Stačí tedy spustit Fine Uploader na straně klienta například
-        podle oficiálních návodů, endpoint nastavit na nějaký handle v aplikaci a ten správně použít.
-        To konkrétně obnáší odeslání JSON odpovědi o úspěšném zpracování obrázku.</p>
-        ",
+    }
+
+    $.nette.init(); //inicializace nette.ajax
+});
+</code></pre>
+<p>Protože jsem v mém případě donačítal tento upload element ajaxově, musel jsem script pro uploader
+zavěsit na nette.ajax událost complete. Tato obálka se dá smazat a spouštět klasicky
+při události document.ready. Je zde spoustu, pro samotnou funkčnost, zbytečného kódu.
+Podstatný je pouze request:endpoint, který ukazuje na URL adresu aplikace, kde čeká Nette handle.
+Ten může vypadat například takto:</p>
+<pre><code class=\\"lang-php\\">public function handleUpload($id) {
+    $allowedExtensions = array(&quot;jpeg&quot;, &quot;jpg&quot;, &quot;png&quot;, &quot;gif&quot;); //například pro obrázky
+    $uploader = new \\\\qqFileUploader($allowedExtensions);
+    //...
+    try {
+        $result = $uploader-&gt;handleUpload(__DIR__ . &#39;/../../../www/uploads/&#39; . $id . &#39;/default&#39;, NULL);
+        $result[&#39;uploadName&#39;] = $uploader-&gt;getUploadName();
+        //...
+    } catch (\\\\Exception $exc) {
+        $this-&gt;sendResponse(new \\\\Nette\\\\Application\\\\Responses\\\\JsonResponse(array(
+            &#39;error&#39; =&gt; $exc-&gt;getMessage(),
+        )));
+    }
+    $this-&gt;invalidateControl();
+    $this-&gt;sendResponse(new \\\\Nette\\\\Application\\\\Responses\\\\JsonResponse($result));
+}
+</code></pre>
+<p>Opět jsem vypustil části, které nejsou úplně důležité pro samotnou funkčnost. Jde pouze o to mít
+připravenou handle metodu, která převezme například ID, důležité však je, že spouští metodu handleUpload()
+a odesílá JSON odpověď a to jak errorovou, tak normální, což je následně na straně klienta vyhodnoceno
+jako úspěšný upload.</p>
+<p>V kódu je zmíněna také třída qqFileUploader. Tu naleznete například na <a href=\\"https://github.com/Widen/fine-uploader-server\\">GitHubu .{target:_blank}</a> a nejenom pro PHP. Já jsem si tuto třídu obohatil pouze
+o webalize názvů souborů.</p>
+<p>A to je vlastně úplně celé. Stačí tedy spustit Fine Uploader na straně klienta například
+podle oficiálních návodů, endpoint nastavit na nějaký handle v aplikaci a ten správně použít.
+To konkrétně obnáší odeslání JSON odpovědi o úspěšném zpracování obrázku.</p>
+",
         }
       }
     />
