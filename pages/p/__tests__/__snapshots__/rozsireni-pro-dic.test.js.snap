@@ -62,88 +62,88 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Jednu z věcí, které jsem zde na blogu moc nepopsal jsou rozšíření pro DIC (Dependency Injection Container, potomek <code>Nette\\\\DI\\\\Container</code>). A protože se chci vrátit jednodušším článkům, zaměřím se na úplně základy. Jaká je motivace k psaní rozšíření DIC a co to vlastně je?</p>
-        <p>Své aplikace rozděluji poměrně důsledně na jakési balíčky (bundles - název ze Symfony). Cílem je rozškatulkovat celou aplikaci podle logických celků, tzn. každý bundle by se měl starat pouze o tu svojí věc a zároveň si s sebou nést vše potřebné. Jedná se o balíčky typu <em>Articles</em>, který se stará (jak sám název napovídá) pouze a jenom o články, nebo <em>Eshop</em>, <em>GoPay</em>, <em>Media</em>, <em>Users</em>, atd. Výhodou tohoto přístupu je to, že mohu kdykoliv z balíčku udělat Composer balíček a úplně ho oddělit od aplikace. Zároveň některé balíčky směřují k jednoduchému oddělení do <a href=\\"http://martinfowler.com/articles/microservices.html\\">microservices</a>. Nevýhodou je pak to, že je to oproti běžným způsobům jak navrhovat aplikaci poměrně složité.</p>
-        <p>Napsat takto aplikaci většinou zamená zasahovat do nějaký globálních prostor, popřípadě mít vytvořené nějaké body v aplikaci, na které je možné se navěsit. Jelikož však využívám(e) Nette, je nejlepší způsob využít právě rozšíření DIC.</p>
-        <h2 id=\\"p-eme-prvn-roz-en-dic\\">Píšeme první rozšíření DIC <a href=\\"#p-eme-prvn-roz-en-dic\\">#</a></h2><p>Celé je to vlastně velmi jednoduché. Třeba do <code>src/Articles/DI</code> umístíme třídu <code>ArticlesExtension</code>, která dědí od <code>Nette\\\\DI\\\\CompilerExtension</code>. Struktura je libovolná, podstatné je, aby třída dědila právě od <em>CompilerExtension</em>. Druhá věc, kterou je třeba udělat, je zaregistrování našeho nového rozšíření do DI kontejneru. To uděláme velice jednoduše v konfiguračním souboru:</p>
-        <pre><code class=\\"lang-neon\\">extensions:
-            - Ant\\\\Articles\\\\DI\\\\ArticlesExtension
-        </code></pre>
-        <p>V tuto chvíli je již rozšíření funkční a Nette s ním počítá. Jen zatím nic neumí. To napravíme velmi rychle, nejdříve však trošku nezbytné teorie. Takto zaregistrované rozšíření se zpracovává pouze v okamžiku kompilace DIC. Na toto je důležité myslet - je to jedna z nejčastějších chyb začátečníků. Ono to dává smysl. Je to rozšíření DIC. Kontejner se tedy jednou nějak pomocí rozšíření upraví, vygeneruje, uloží a hotovo.</p>
-        <p>Druhá důležitá informace se týká životního cyklu rozšíření. Při kompilaci (generování) DIC se každé zaregistrované rozšíření volá celkem třikrát a pokaždé se spustí jiná metoda. Je to podobné jako <a href=\\"https://doc.nette.org/cs/2.3/presenters#toc-zivotni-cyklus-presenteru\\">životní cyklus presenteru</a>.</p>
-        <p>První volanou metodou je <code>loadConfiguration</code> a volá se v okamžiku, kdy Nette začne s rozšířením pracovat. V tu chvíli je již k dispozici konfigurace jednoho konkrétního rozšíření. Kde se ale tato konfigurace vezme? Tak to se musíme vráti kousek zpět a rozšíření zaregistrovat trošku jinak:</p>
-        <pre><code class=\\"lang-neon\\">extensions:
-            articles: Ant\\\\Articles\\\\DI\\\\ArticlesExtension
-        </code></pre>
-        <p>Díky tomu, že je rozšíření pojmenované a ne anonymní jako to bylo doposud, můžeme rozšíření předat libovolnou vlastní konfiguraci:</p>
-        <pre><code class=\\"lang-neon\\">articles:
-            option_1: value_1
-            option_2: value_2
-            # ...
-        </code></pre>
-        <p>A přesně tyto hodnoty (<code>option_1</code>, <code>option_2</code>) můžeme získat jako pole pomocí metody <code>$this-&gt;getConfig()</code> v rozšíření. K čemu se tedy <code>loadConfiguration</code> hodí? Jedná se o místo, kde je vhodné načíst (a zvalidovat) konfiguraci. Já osobně nejraději načítám extra config, který si s sebou nese samo rozšíření, takže se mi rozšíření zjednoduší na:</p>
-        <pre><code class=\\"lang-php\\">public function loadConfiguration()
-        {
-            $this-&gt;addConfig(__DIR__ . &#39;/services.neon&#39;);
-        }
-        </code></pre>
-        <p>Kde <code>services.neon</code> obsahuje třeba:</p>
-        <pre><code class=\\"lang-neon\\">services:
-            - Ant\\\\Articles\\\\Components\\\\IArticlesGridFactory
-            # ...
-        </code></pre>
-        <p>Je to jednudché a chápe to každý kdo chápe konfigurace. Jen pozor na to, že funkce <code>addConfig</code> jsem si napsal sám. Mrkněte se do <a href=\\"https://doc.nette.org/cs/2.3/di-extensions#toc-loadconfiguration\\">dokumentace</a> jak se to dá udělat. Pokud se někomu nelíbí mít u každého rozšíření vlastní config, je možné vše napsat v rozšíření ručně. Zde také odkážu na dokumentaci.</p>
-        <p>Když už je konfigurace všeho připravena, přichází ke slovu druhá funkce <code>beforeCompile</code>. Ta se volá v okamžiku, kdy už je skoro vše připraveno, ale ještě se kontejner negeneruje. Já osobně tento čas využívám například k registraci presenter mappingu pro jednotlivé bundly:</p>
-        <pre><code class=\\"lang-php\\">public function beforeCompile()
-        {
-            $builder = $this-&gt;getContainerBuilder();
-            $builder-&gt;getDefinition($builder-&gt;getByType(IPresenterFactory::class))-&gt;addSetup(
-                &#39;setMapping&#39;,
-                [[&#39;Articles&#39; =&gt; &#39;Ant\\\\Articles\\\\*Module\\\\Presenters\\\\*Presenter&#39;]]
-            );
-        }
-        </code></pre>
-        <p>Tím jsem chtěl ukázat, že se jedná o místo, kde je vhodné upravovat již připravené služby a různě je ještě donastavit s tím, že až se zavolají metody <code>beforeCompile</code> nad každým rozšířením, přijde ke slovu poslední metoda a tou je <code>afterCompile</code>. Tato metoda dostává v parametrem <code>Nette\\\\PhpGenerator\\\\ClassType</code> což je jinak řečeno vygenerovaný DI kontejner v paměti, tedy ještě neuložený do souboru (cache). Existuje tedy ještě poslední možnost jak s DIC ještě něco udělat. Stačí využít síly <code>Nette\\\\PhpGenerator</code> a můžete tvořit kouzla. Většinou se však poupravuje metoda DIC <code>initialize</code> třeba jako to dělá <code>Nette\\\\DI\\\\Extensions\\\\ConstantsExtension</code> nebo <a href=\\"https://api.nette.org/2.3.9/source-DI.Extensions.PhpExtension.php.html#19-48\\">PhpExtension</a>:</p>
-        <pre><code class=\\"lang-php\\">public function afterCompile(Nette\\\\PhpGenerator\\\\ClassType $class)
-        {
-            foreach ($this-&gt;getConfig() as $name =&gt; $value) {
-                $class-&gt;getMethod(&#39;initialize&#39;)-&gt;addBody(&#39;define(?, ?);&#39;, array($name, $value));
-            }
-        }
-        </code></pre>
-        <p><em>Initialize</em> je totiž metoda, která se volá jako jedna z <a href=\\"https://api.nette.org/2.3.9/source-Bootstrap.Configurator.php.html#224\\">prvních vůbec</a>.</p>
-        <p>Tolik jinak (pro normální lidi) napsáno to, co je v <a href=\\"https://doc.nette.org/cs/2.3/di-extensions\\">dokumentaci</a>. Mělo by teď být jasné, k čemu je psaní rozšíření pro DIC vůbec dobré a proč by o tom měl člověk vůbec uvažovat. Je zřejmé, že je to zase další složitost navíc, ale když programátor ovládne psaní takových rozšíření, celá aplikace se najednou začne pěkně škatulkovat a rozpadat na jednodušší části. Ostatně takto se píšou všechny normální <a href=\\"https://componette.com/\\">addony</a> pro Nette.</p>
-        <h2 id=\\"je-t-n-jak-jednoduch-testy\\">Ještě nějaké jednoduché testy <a href=\\"#je-t-n-jak-jednoduch-testy\\">#</a></h2><p>Špatný test je sice pořád špatný, zároveň je však lepší, než test žádný. Všímám si však toho, že se o testech hodně a dlouho blábolí, ale když přijde ten správný čas, tak o nich nepadne ani slovo. Proto jsem je začal ve svých ukázkách hodně tlačit a blog nezůstane pozadu. Jak by tedy takový jednoduchý test mohl vypadat? Asi nebude překvapením, když na to použiju svůj <a href=\\"https://github.com/mrtnzlml/testbench\\">mrtnzlml/testbench</a>, který si může kdokoliv stáhnout a který mi ušetří hodně trápení. K testu mi bude stačit pouze traita <code>Testbench\\\\TCompiledContainer</code> a celý test case by mohl vypadat třeba takto:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        namespace Ant\\\\Tests\\\\Articles;
-        
-        use Ant\\\\Articles\\\\Components\\\\IArticlesGridFactory;
-        use Tester\\\\Assert;
-        
-        require __DIR__ . &#39;/../bootstrap.php&#39;;
-        
-        /**
-         * @testCase
-         */
-        class Extension extends \\\\Tester\\\\TestCase
-        {
-        
-            use \\\\Testbench\\\\TCompiledContainer;
-        
-            public function testFunctionality()
-            {
-                $articlesGridFactory = $this-&gt;getService(IArticlesGridFactory::class);
-                Assert::type(&#39;Ant\\\\Articles\\\\Components\\\\IArticlesGridFactory&#39;, $articlesGridFactory);
-                Assert::type(&#39;Ant\\\\Articles\\\\Components\\\\ArticlesGrid&#39;, $articlesGridFactory-&gt;create(NULL));
-            }
-        
-        }
-        
-        (new Extension)-&gt;run();
-        </code></pre>
-        <p>Co to vlastně testuje? Podívejte se na obsah <code>service.neon</code>, kde jsem dříve v rozšíření přidával najkou generovanou továrničku <code>IArticlesGridFactory</code>. V první řadě si tak otestuji, že je zaregistrována správně a že ji kontejner zná. Když mám továrničku, tak mohu ještě otestovat, jestli je vůbec možné vytvořit komponentu pro kterou je tato továrna určena. To už je skoro nadbytečný test, protože to bych si měl asi otestovat až v testu pro komponentu, ale tak proč ne.</p>
-        <p>To nebylo tak složité, že? A navíc je to celé pokryté testy. Nádhera... :)</p>
-        ",
+<p>Své aplikace rozděluji poměrně důsledně na jakési balíčky (bundles - název ze Symfony). Cílem je rozškatulkovat celou aplikaci podle logických celků, tzn. každý bundle by se měl starat pouze o tu svojí věc a zároveň si s sebou nést vše potřebné. Jedná se o balíčky typu <em>Articles</em>, který se stará (jak sám název napovídá) pouze a jenom o články, nebo <em>Eshop</em>, <em>GoPay</em>, <em>Media</em>, <em>Users</em>, atd. Výhodou tohoto přístupu je to, že mohu kdykoliv z balíčku udělat Composer balíček a úplně ho oddělit od aplikace. Zároveň některé balíčky směřují k jednoduchému oddělení do <a href=\\"http://martinfowler.com/articles/microservices.html\\">microservices</a>. Nevýhodou je pak to, že je to oproti běžným způsobům jak navrhovat aplikaci poměrně složité.</p>
+<p>Napsat takto aplikaci většinou zamená zasahovat do nějaký globálních prostor, popřípadě mít vytvořené nějaké body v aplikaci, na které je možné se navěsit. Jelikož však využívám(e) Nette, je nejlepší způsob využít právě rozšíření DIC.</p>
+<h2 id=\\"p-eme-prvn-roz-en-dic\\">Píšeme první rozšíření DIC <a href=\\"#p-eme-prvn-roz-en-dic\\">#</a></h2><p>Celé je to vlastně velmi jednoduché. Třeba do <code>src/Articles/DI</code> umístíme třídu <code>ArticlesExtension</code>, která dědí od <code>Nette\\\\DI\\\\CompilerExtension</code>. Struktura je libovolná, podstatné je, aby třída dědila právě od <em>CompilerExtension</em>. Druhá věc, kterou je třeba udělat, je zaregistrování našeho nového rozšíření do DI kontejneru. To uděláme velice jednoduše v konfiguračním souboru:</p>
+<pre><code class=\\"lang-neon\\">extensions:
+    - Ant\\\\Articles\\\\DI\\\\ArticlesExtension
+</code></pre>
+<p>V tuto chvíli je již rozšíření funkční a Nette s ním počítá. Jen zatím nic neumí. To napravíme velmi rychle, nejdříve však trošku nezbytné teorie. Takto zaregistrované rozšíření se zpracovává pouze v okamžiku kompilace DIC. Na toto je důležité myslet - je to jedna z nejčastějších chyb začátečníků. Ono to dává smysl. Je to rozšíření DIC. Kontejner se tedy jednou nějak pomocí rozšíření upraví, vygeneruje, uloží a hotovo.</p>
+<p>Druhá důležitá informace se týká životního cyklu rozšíření. Při kompilaci (generování) DIC se každé zaregistrované rozšíření volá celkem třikrát a pokaždé se spustí jiná metoda. Je to podobné jako <a href=\\"https://doc.nette.org/cs/2.3/presenters#toc-zivotni-cyklus-presenteru\\">životní cyklus presenteru</a>.</p>
+<p>První volanou metodou je <code>loadConfiguration</code> a volá se v okamžiku, kdy Nette začne s rozšířením pracovat. V tu chvíli je již k dispozici konfigurace jednoho konkrétního rozšíření. Kde se ale tato konfigurace vezme? Tak to se musíme vráti kousek zpět a rozšíření zaregistrovat trošku jinak:</p>
+<pre><code class=\\"lang-neon\\">extensions:
+    articles: Ant\\\\Articles\\\\DI\\\\ArticlesExtension
+</code></pre>
+<p>Díky tomu, že je rozšíření pojmenované a ne anonymní jako to bylo doposud, můžeme rozšíření předat libovolnou vlastní konfiguraci:</p>
+<pre><code class=\\"lang-neon\\">articles:
+    option_1: value_1
+    option_2: value_2
+    # ...
+</code></pre>
+<p>A přesně tyto hodnoty (<code>option_1</code>, <code>option_2</code>) můžeme získat jako pole pomocí metody <code>$this-&gt;getConfig()</code> v rozšíření. K čemu se tedy <code>loadConfiguration</code> hodí? Jedná se o místo, kde je vhodné načíst (a zvalidovat) konfiguraci. Já osobně nejraději načítám extra config, který si s sebou nese samo rozšíření, takže se mi rozšíření zjednoduší na:</p>
+<pre><code class=\\"lang-php\\">public function loadConfiguration()
+{
+    $this-&gt;addConfig(__DIR__ . &#39;/services.neon&#39;);
+}
+</code></pre>
+<p>Kde <code>services.neon</code> obsahuje třeba:</p>
+<pre><code class=\\"lang-neon\\">services:
+    - Ant\\\\Articles\\\\Components\\\\IArticlesGridFactory
+    # ...
+</code></pre>
+<p>Je to jednudché a chápe to každý kdo chápe konfigurace. Jen pozor na to, že funkce <code>addConfig</code> jsem si napsal sám. Mrkněte se do <a href=\\"https://doc.nette.org/cs/2.3/di-extensions#toc-loadconfiguration\\">dokumentace</a> jak se to dá udělat. Pokud se někomu nelíbí mít u každého rozšíření vlastní config, je možné vše napsat v rozšíření ručně. Zde také odkážu na dokumentaci.</p>
+<p>Když už je konfigurace všeho připravena, přichází ke slovu druhá funkce <code>beforeCompile</code>. Ta se volá v okamžiku, kdy už je skoro vše připraveno, ale ještě se kontejner negeneruje. Já osobně tento čas využívám například k registraci presenter mappingu pro jednotlivé bundly:</p>
+<pre><code class=\\"lang-php\\">public function beforeCompile()
+{
+    $builder = $this-&gt;getContainerBuilder();
+    $builder-&gt;getDefinition($builder-&gt;getByType(IPresenterFactory::class))-&gt;addSetup(
+        &#39;setMapping&#39;,
+        [[&#39;Articles&#39; =&gt; &#39;Ant\\\\Articles\\\\*Module\\\\Presenters\\\\*Presenter&#39;]]
+    );
+}
+</code></pre>
+<p>Tím jsem chtěl ukázat, že se jedná o místo, kde je vhodné upravovat již připravené služby a různě je ještě donastavit s tím, že až se zavolají metody <code>beforeCompile</code> nad každým rozšířením, přijde ke slovu poslední metoda a tou je <code>afterCompile</code>. Tato metoda dostává v parametrem <code>Nette\\\\PhpGenerator\\\\ClassType</code> což je jinak řečeno vygenerovaný DI kontejner v paměti, tedy ještě neuložený do souboru (cache). Existuje tedy ještě poslední možnost jak s DIC ještě něco udělat. Stačí využít síly <code>Nette\\\\PhpGenerator</code> a můžete tvořit kouzla. Většinou se však poupravuje metoda DIC <code>initialize</code> třeba jako to dělá <code>Nette\\\\DI\\\\Extensions\\\\ConstantsExtension</code> nebo <a href=\\"https://api.nette.org/2.3.9/source-DI.Extensions.PhpExtension.php.html#19-48\\">PhpExtension</a>:</p>
+<pre><code class=\\"lang-php\\">public function afterCompile(Nette\\\\PhpGenerator\\\\ClassType $class)
+{
+    foreach ($this-&gt;getConfig() as $name =&gt; $value) {
+        $class-&gt;getMethod(&#39;initialize&#39;)-&gt;addBody(&#39;define(?, ?);&#39;, array($name, $value));
+    }
+}
+</code></pre>
+<p><em>Initialize</em> je totiž metoda, která se volá jako jedna z <a href=\\"https://api.nette.org/2.3.9/source-Bootstrap.Configurator.php.html#224\\">prvních vůbec</a>.</p>
+<p>Tolik jinak (pro normální lidi) napsáno to, co je v <a href=\\"https://doc.nette.org/cs/2.3/di-extensions\\">dokumentaci</a>. Mělo by teď být jasné, k čemu je psaní rozšíření pro DIC vůbec dobré a proč by o tom měl člověk vůbec uvažovat. Je zřejmé, že je to zase další složitost navíc, ale když programátor ovládne psaní takových rozšíření, celá aplikace se najednou začne pěkně škatulkovat a rozpadat na jednodušší části. Ostatně takto se píšou všechny normální <a href=\\"https://componette.com/\\">addony</a> pro Nette.</p>
+<h2 id=\\"je-t-n-jak-jednoduch-testy\\">Ještě nějaké jednoduché testy <a href=\\"#je-t-n-jak-jednoduch-testy\\">#</a></h2><p>Špatný test je sice pořád špatný, zároveň je však lepší, než test žádný. Všímám si však toho, že se o testech hodně a dlouho blábolí, ale když přijde ten správný čas, tak o nich nepadne ani slovo. Proto jsem je začal ve svých ukázkách hodně tlačit a blog nezůstane pozadu. Jak by tedy takový jednoduchý test mohl vypadat? Asi nebude překvapením, když na to použiju svůj <a href=\\"https://github.com/mrtnzlml/testbench\\">mrtnzlml/testbench</a>, který si může kdokoliv stáhnout a který mi ušetří hodně trápení. K testu mi bude stačit pouze traita <code>Testbench\\\\TCompiledContainer</code> a celý test case by mohl vypadat třeba takto:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+namespace Ant\\\\Tests\\\\Articles;
+
+use Ant\\\\Articles\\\\Components\\\\IArticlesGridFactory;
+use Tester\\\\Assert;
+
+require __DIR__ . &#39;/../bootstrap.php&#39;;
+
+/**
+ * @testCase
+ */
+class Extension extends \\\\Tester\\\\TestCase
+{
+
+    use \\\\Testbench\\\\TCompiledContainer;
+
+    public function testFunctionality()
+    {
+        $articlesGridFactory = $this-&gt;getService(IArticlesGridFactory::class);
+        Assert::type(&#39;Ant\\\\Articles\\\\Components\\\\IArticlesGridFactory&#39;, $articlesGridFactory);
+        Assert::type(&#39;Ant\\\\Articles\\\\Components\\\\ArticlesGrid&#39;, $articlesGridFactory-&gt;create(NULL));
+    }
+
+}
+
+(new Extension)-&gt;run();
+</code></pre>
+<p>Co to vlastně testuje? Podívejte se na obsah <code>service.neon</code>, kde jsem dříve v rozšíření přidával najkou generovanou továrničku <code>IArticlesGridFactory</code>. V první řadě si tak otestuji, že je zaregistrována správně a že ji kontejner zná. Když mám továrničku, tak mohu ještě otestovat, jestli je vůbec možné vytvořit komponentu pro kterou je tato továrna určena. To už je skoro nadbytečný test, protože to bych si měl asi otestovat až v testu pro komponentu, ale tak proč ne.</p>
+<p>To nebylo tak složité, že? A navíc je to celé pokryté testy. Nádhera... :)</p>
+",
         }
       }
     />

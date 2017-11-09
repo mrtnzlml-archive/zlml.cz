@@ -62,59 +62,59 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Tento článek ve skutečnosti odstartovalo zdánlivě nesouvisející vlákno na <a href=\\"http://forum.nette.org/cs/19397-ako-sa-zbavit-fid-v-url-ak-sa-nemylim\\">Nette fóru .{target:_blank}</a>. V tomto vláknu se řeší parametr <em>_fid</em> v URL adrese, který tam Nette framework přikládá kvůli flash messages. Tato vlastnost někoho skutečně hodně štve, mě zase až tak moc ne. Jenže když jsem nad tím vláknem chvíli seděl, tak jsem si uvědomil, že mám komentářový systém Disqus implementovaný špatně. Čtěte dál a vyhněte se stejné chybě... (-:</p>
-        <h2 id=\\"univerz-ln-k-d\\">Univerzální kód <a href=\\"#univerz-ln-k-d\\">#</a></h2><p>Disqus poskytuje &quot;by default&quot; univerzální kód, který prakticky pouze zkopírujete na svůj web na požadované místo a je hotovo. Tento kód vypadá zhruba takto:</p>
-        <pre><code class=\\"lang-html\\">&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-        &lt;script type=&quot;text/javascript&quot;&gt;
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = &#39;&#39;; // required: replace it with your forum shortname
-        
-            /* * * DON&#39;T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
-                dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
-                (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
-            })();
-        &lt;/script&gt;
-        &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
-        &lt;a href=&quot;http://disqus.com&quot; class=&quot;dsq-brlink&quot;&gt;comments powered by &lt;span class=&quot;logo-disqus&quot;&gt;Disqus&lt;/span&gt;&lt;/a&gt;
-        </code></pre>
-        <p>Je to pohodlné, ale je to úplně blbě. Nejenom pro Nette aplikace, ale myslím si, že tak nějak celkově pro všechny aplikace. Fungovat to sice bude, to ano. Ale jen tak zdánlivě. Problém je totiž v tom, že toto nastavení bere jako identifikátor diskuse URL adresu a pokud se jen drobně změní, tak se založí nová diskuse. Přehled těchto diskusí je pak vidět v Disqus administraci. To s sebou nese celou řadu problémů. Diskuse nejde pořádně zamknout a už to, že k jedné stránce může být více diskusí je problém. Každá diskuse totiž musí mít unikátní identifikátor <a href=\\"https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables\\">disqus_identifier .{target:_blank}</a> nezávisle na parametrech (pokud ovšem tyto parametry nejsou žádoucí).</p>
-        <h2 id=\\"lazy-loading\\">Lazy loading <a href=\\"#lazy-loading\\">#</a></h2><p>Já jsem sice nepoužil defaultní konfiguraci, ale udělal jsem prakticky tu samou chybu. Teď ale konečně k lazy loadingu. Na svém blogu to již používám dlouhou dobu a myslím si, že se to již osvědčilo. Inspirací k mé implementaci je <a href=\\"https://gist.github.com/omgmog/2310982\\">tento gist .{target:_blank}</a>.</p>
-        <p>Stačí umístit následující kód do nějakého souboru <em>main.js</em>, který se spouští po načtení stránky:</p>
-        <pre><code class=\\"lang-javascript\\">var disqus_div = $(&quot;#disqus_thread&quot;);
-        if (disqus_div.size() &gt; 0) {
-            var ds_loaded = false,
-            top = $(&#39;.load_disqus&#39;).offset().top, //upravit podle potřeby
-            disqus_data = disqus_div.data(),
-            check = function () {
-                if (!ds_loaded &amp;&amp; $(window).scrollTop() + $(window).height() &gt; top) {
-                    ds_loaded = true;
-                    for (var key in disqus_data) {
-                        if (key.substr(0, 6) == &#39;disqus&#39;) {
-                            window[&#39;disqus_&#39; + key.replace(&#39;disqus&#39;, &#39;&#39;).toLowerCase()] = disqus_data[key];
-                        }
-                    }
-                    var dsq = document.createElement(&#39;script&#39;);
-                    dsq.type = &#39;text/javascript&#39;;
-                    dsq.async = true;
-                    dsq.src = &#39;http://&#39; + window.disqus_shortname + &#39;.disqus.com/embed.js&#39;;
-                    (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
+<h2 id=\\"univerz-ln-k-d\\">Univerzální kód <a href=\\"#univerz-ln-k-d\\">#</a></h2><p>Disqus poskytuje &quot;by default&quot; univerzální kód, který prakticky pouze zkopírujete na svůj web na požadované místo a je hotovo. Tento kód vypadá zhruba takto:</p>
+<pre><code class=\\"lang-html\\">&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = &#39;&#39;; // required: replace it with your forum shortname
+
+    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
+        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
+        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
+    })();
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href=&quot;http://disqus.com&quot; class=&quot;dsq-brlink&quot;&gt;comments powered by &lt;span class=&quot;logo-disqus&quot;&gt;Disqus&lt;/span&gt;&lt;/a&gt;
+</code></pre>
+<p>Je to pohodlné, ale je to úplně blbě. Nejenom pro Nette aplikace, ale myslím si, že tak nějak celkově pro všechny aplikace. Fungovat to sice bude, to ano. Ale jen tak zdánlivě. Problém je totiž v tom, že toto nastavení bere jako identifikátor diskuse URL adresu a pokud se jen drobně změní, tak se založí nová diskuse. Přehled těchto diskusí je pak vidět v Disqus administraci. To s sebou nese celou řadu problémů. Diskuse nejde pořádně zamknout a už to, že k jedné stránce může být více diskusí je problém. Každá diskuse totiž musí mít unikátní identifikátor <a href=\\"https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables\\">disqus_identifier .{target:_blank}</a> nezávisle na parametrech (pokud ovšem tyto parametry nejsou žádoucí).</p>
+<h2 id=\\"lazy-loading\\">Lazy loading <a href=\\"#lazy-loading\\">#</a></h2><p>Já jsem sice nepoužil defaultní konfiguraci, ale udělal jsem prakticky tu samou chybu. Teď ale konečně k lazy loadingu. Na svém blogu to již používám dlouhou dobu a myslím si, že se to již osvědčilo. Inspirací k mé implementaci je <a href=\\"https://gist.github.com/omgmog/2310982\\">tento gist .{target:_blank}</a>.</p>
+<p>Stačí umístit následující kód do nějakého souboru <em>main.js</em>, který se spouští po načtení stránky:</p>
+<pre><code class=\\"lang-javascript\\">var disqus_div = $(&quot;#disqus_thread&quot;);
+if (disqus_div.size() &gt; 0) {
+    var ds_loaded = false,
+    top = $(&#39;.load_disqus&#39;).offset().top, //upravit podle potřeby
+    disqus_data = disqus_div.data(),
+    check = function () {
+        if (!ds_loaded &amp;&amp; $(window).scrollTop() + $(window).height() &gt; top) {
+            ds_loaded = true;
+            for (var key in disqus_data) {
+                if (key.substr(0, 6) == &#39;disqus&#39;) {
+                    window[&#39;disqus_&#39; + key.replace(&#39;disqus&#39;, &#39;&#39;).toLowerCase()] = disqus_data[key];
                 }
-            };
-            $(window).scroll(check);
-            check();
+            }
+            var dsq = document.createElement(&#39;script&#39;);
+            dsq.type = &#39;text/javascript&#39;;
+            dsq.async = true;
+            dsq.src = &#39;http://&#39; + window.disqus_shortname + &#39;.disqus.com/embed.js&#39;;
+            (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
         }
-        </code></pre>
-        <p>Tím to však nekončí. Je samozřejmě nutné určit kde se Disqus bude zobrazovat:</p>
-        <pre><code class=\\"lang-html\\">&lt;div class=&quot;hidden-print&quot;&gt;
-            &lt;div id=&quot;disqus_thread&quot; data-disqus-shortname=&quot;mrtnzlml&quot; data-disqus-url=&quot;{link //this}&quot;&gt;&lt;/div&gt;
-            &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
-            &lt;a href=&quot;http://disqus.com&quot; class=&quot;dsq-brlink&quot;&gt;comments powered by &lt;span class=&quot;logo-disqus&quot;&gt;Disqus&lt;/span&gt;&lt;/a&gt;
-        &lt;/div&gt;
-        </code></pre>
-        <p>Klíčový je zde právě data atribut <em>disqus-url</em>. No a aby byl kod kompletní, tak je zapotřebí někam umístit CSS trídu <em>.load_disqus</em>. Tu doporučuji umístit někam nad diskusi a tím myslím třeba o celou viditelnou stránku. Disqus se tak začne načítat o něco dříve, než k němu čtenář doscrolluje, takže se stihne načíst a nebude to rušit. Ve výsledku se tedy Disqus nenačítá po otevření stránky, takže je načtení svižné, ale po např. přečtení článku je již načtený...</p>
-        <p>A co vy? Máte Disqus na svém webu implementovaný správně? (-:</p>
-        ",
+    };
+    $(window).scroll(check);
+    check();
+}
+</code></pre>
+<p>Tím to však nekončí. Je samozřejmě nutné určit kde se Disqus bude zobrazovat:</p>
+<pre><code class=\\"lang-html\\">&lt;div class=&quot;hidden-print&quot;&gt;
+    &lt;div id=&quot;disqus_thread&quot; data-disqus-shortname=&quot;mrtnzlml&quot; data-disqus-url=&quot;{link //this}&quot;&gt;&lt;/div&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+    &lt;a href=&quot;http://disqus.com&quot; class=&quot;dsq-brlink&quot;&gt;comments powered by &lt;span class=&quot;logo-disqus&quot;&gt;Disqus&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Klíčový je zde právě data atribut <em>disqus-url</em>. No a aby byl kod kompletní, tak je zapotřebí někam umístit CSS trídu <em>.load_disqus</em>. Tu doporučuji umístit někam nad diskusi a tím myslím třeba o celou viditelnou stránku. Disqus se tak začne načítat o něco dříve, než k němu čtenář doscrolluje, takže se stihne načíst a nebude to rušit. Ve výsledku se tedy Disqus nenačítá po otevření stránky, takže je načtení svižné, ale po např. přečtení článku je již načtený...</p>
+<p>A co vy? Máte Disqus na svém webu implementovaný správně? (-:</p>
+",
         }
       }
     />

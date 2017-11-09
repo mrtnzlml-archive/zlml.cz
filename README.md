@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/zlml.cz)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mrtnzlml/zlml.cz.svg)](https://greenkeeper.io/)
+
 # Install
 
 ```

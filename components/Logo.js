@@ -1,5 +1,7 @@
 // @flow
 
+import * as React from 'react';
+
 import Colors from '../services/Colors';
 import Link from '../components/markup/Link';
 import Paragraph from '../components/markup/Paragraph';

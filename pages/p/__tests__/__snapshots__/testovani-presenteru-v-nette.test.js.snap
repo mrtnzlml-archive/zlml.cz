@@ -62,120 +62,120 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Tak toto je přesně to téma o kterém se naustále mluví, ale tím to z velké části končí.
-        Nemá smysl zabývat se tím, jestli testovat, nebo ne. Na to už si každý přijde sám.
-        V následujících odstavcích bych rád předvedl myšlenku jak si
-        ušetřit pár řádek kódu při testech (\\\\Nette\\\\Tester).</p>
-        <h2 id=\\"nezbytn-teorie\\">Nezbytná teorie <a href=\\"#nezbytn-teorie\\">#</a></h2><p>Pro testování presenterů je zapotřebí získat továrnu na presentery PresenterFactory
-        a následně daný presenter vyrobit. Například takto:</p>
-        <pre><code class=\\"lang-php\\">$presenterFactory = $this-&gt;container-&gt;getByType(&#39;Nette\\\\Application\\\\IPresenterFactory&#39;);
-        $this-&gt;presenter = $presenterFactory-&gt;createPresenter(&#39;Front:Homepage&#39;);
-        </code></pre>
-        <p>K tomu je zapotřebí \\\\Nette\\\\DI\\\\Container, který získáme například v konstruktoru, nebo
-        pomocí inject anotace.</p>
-        <p>Následně je třeba vytvořit požadavek, ten spustit a testovat výslednou odpověď:</p>
-        <pre><code class=\\"lang-php\\">$request = new \\\\Nette\\\\Application\\\\Request($this-&gt;presName, $method, $params, $post);
-        $response = $this-&gt;presenter-&gt;run($request);
-        </code></pre>
-        <p>Právě nad vrácenou odpovědí lze spustit testovací sadu, která bude testovat, 
-        zda byla například získána textová odpověď a tedy jestli se jedná o šablonu:</p>
-        <pre><code class=\\"lang-php\\">\\\\Tester\\\\Assert::true($response instanceof \\\\Nette\\\\Application\\\\Responses\\\\TextResponse);
-        \\\\Tester\\\\Assert::true($response-&gt;getSource() instanceof \\\\Nette\\\\Templating\\\\ITemplate);
-        </code></pre>
-        <p>Je také vhodné otestovat samotný HTML kód. Již mě to párkrát upozornilo na
-        nevalidní kód, což se může stát, pokud se šablona skládá z hodně include částí.
-        Nevalidní ve smyslu například dvojité HTML ukončovací značky:</p>
-        <pre><code class=\\"lang-php\\">$html = (string)$response-&gt;getSource();
-        $dom = \\\\Tester\\\\DomQuery::fromHtml($html);
-        \\\\Tester\\\\Assert::true($dom-&gt;has(&#39;title&#39;));
-        </code></pre>
-        <h2 id=\\"psan-psan-psan-\\">Psaní, psaní, psaní... <a href=\\"#psan-psan-psan-\\">#</a></h2><p>Předchozí teorie je zapotřebí opakovat pro každý presenter. Už jen proto, že je třeba
-        vytvořit pokaždé nový požadavek. Nicméně je jasné, že to po otestování FrontModule
-        začne být lehce kopírovací nuda.</p>
-        <p>Je tedy vhodné vytvořit si třídu, která ušetří spoustu řádek.
-        Můj první návrh vypadá přibližně takto:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        namespace Test;
-        
-        class Presenter extends \\\\Nette\\\\Object {
-        
-                private $container;
-                private $presenter;
-                private $presName;
-        
-                public function __construct(\\\\Nette\\\\DI\\\\Container $container) {
-                        $this-&gt;container = $container;
-                }
-        
-                /**
-                 * @param $presName string Fully qualified presenter name.
-                 */
-                public function init($presName) {
-                        $presenterFactory = $this-&gt;container-&gt;getByType(&#39;Nette\\\\Application\\\\IPresenterFactory&#39;);
-                        $this-&gt;presenter = $presenterFactory-&gt;createPresenter($presName);
-                        $this-&gt;presenter-&gt;autoCanonicalize = FALSE;
-                        $this-&gt;presName = $presName;
-                }
-        
-                public function test($action, $method = &#39;GET&#39;, $params = array(), $post = array()) {
-                        $params[&#39;action&#39;] = $action;
-                        $request = new \\\\Nette\\\\Application\\\\Request($this-&gt;presName, $method, $params, $post);
-                        $response = $this-&gt;presenter-&gt;run($request);
-                        return $response;
-                }
-        
-                public function testAction($action, $method = &#39;GET&#39;, $params = array(), $post = array()) {
-                        $response = $this-&gt;test($action, $method, $params, $post);
-        
-                        \\\\Tester\\\\Assert::true($response instanceof \\\\Nette\\\\Application\\\\Responses\\\\TextResponse);
-                        \\\\Tester\\\\Assert::true($response-&gt;getSource() instanceof \\\\Nette\\\\Templating\\\\ITemplate);
-        
-                        $html = (string)$response-&gt;getSource();
-                        $dom = \\\\Tester\\\\DomQuery::fromHtml($html);
-                        \\\\Tester\\\\Assert::true($dom-&gt;has(&#39;title&#39;));
-        
-                        return $response;
-                }
-        
-                public function testForm($action, $method = &#39;POST&#39;, $post = array()) {
-                        $response = $this-&gt;test($action, $method, $post);
-        
-                        \\\\Tester\\\\Assert::true($response instanceof \\\\Nette\\\\Application\\\\Responses\\\\RedirectResponse);
-        
-                        return $response;
-                }
-        
+Nemá smysl zabývat se tím, jestli testovat, nebo ne. Na to už si každý přijde sám.
+V následujících odstavcích bych rád předvedl myšlenku jak si
+ušetřit pár řádek kódu při testech (\\\\Nette\\\\Tester).</p>
+<h2 id=\\"nezbytn-teorie\\">Nezbytná teorie <a href=\\"#nezbytn-teorie\\">#</a></h2><p>Pro testování presenterů je zapotřebí získat továrnu na presentery PresenterFactory
+a následně daný presenter vyrobit. Například takto:</p>
+<pre><code class=\\"lang-php\\">$presenterFactory = $this-&gt;container-&gt;getByType(&#39;Nette\\\\Application\\\\IPresenterFactory&#39;);
+$this-&gt;presenter = $presenterFactory-&gt;createPresenter(&#39;Front:Homepage&#39;);
+</code></pre>
+<p>K tomu je zapotřebí \\\\Nette\\\\DI\\\\Container, který získáme například v konstruktoru, nebo
+pomocí inject anotace.</p>
+<p>Následně je třeba vytvořit požadavek, ten spustit a testovat výslednou odpověď:</p>
+<pre><code class=\\"lang-php\\">$request = new \\\\Nette\\\\Application\\\\Request($this-&gt;presName, $method, $params, $post);
+$response = $this-&gt;presenter-&gt;run($request);
+</code></pre>
+<p>Právě nad vrácenou odpovědí lze spustit testovací sadu, která bude testovat, 
+zda byla například získána textová odpověď a tedy jestli se jedná o šablonu:</p>
+<pre><code class=\\"lang-php\\">\\\\Tester\\\\Assert::true($response instanceof \\\\Nette\\\\Application\\\\Responses\\\\TextResponse);
+\\\\Tester\\\\Assert::true($response-&gt;getSource() instanceof \\\\Nette\\\\Templating\\\\ITemplate);
+</code></pre>
+<p>Je také vhodné otestovat samotný HTML kód. Již mě to párkrát upozornilo na
+nevalidní kód, což se může stát, pokud se šablona skládá z hodně include částí.
+Nevalidní ve smyslu například dvojité HTML ukončovací značky:</p>
+<pre><code class=\\"lang-php\\">$html = (string)$response-&gt;getSource();
+$dom = \\\\Tester\\\\DomQuery::fromHtml($html);
+\\\\Tester\\\\Assert::true($dom-&gt;has(&#39;title&#39;));
+</code></pre>
+<h2 id=\\"psan-psan-psan-\\">Psaní, psaní, psaní... <a href=\\"#psan-psan-psan-\\">#</a></h2><p>Předchozí teorie je zapotřebí opakovat pro každý presenter. Už jen proto, že je třeba
+vytvořit pokaždé nový požadavek. Nicméně je jasné, že to po otestování FrontModule
+začne být lehce kopírovací nuda.</p>
+<p>Je tedy vhodné vytvořit si třídu, která ušetří spoustu řádek.
+Můj první návrh vypadá přibližně takto:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+namespace Test;
+
+class Presenter extends \\\\Nette\\\\Object {
+
+        private $container;
+        private $presenter;
+        private $presName;
+
+        public function __construct(\\\\Nette\\\\DI\\\\Container $container) {
+                $this-&gt;container = $container;
         }
-        </code></pre>
-        <p>Testování samotných presenterů je pak již otázkou několika málo řádek:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        namespace Test;
-        
-        $container = require __DIR__ . &#39;/../bootstrap.php&#39;;
-        
-        class HomepagePresenterTest extends \\\\Tester\\\\TestCase {
-        
-                public function __construct(\\\\Nette\\\\DI\\\\Container $container) {
-                        $this-&gt;tester = new \\\\Test\\\\Presenter($container);
-                }
-        
-                public function setUp() {
-                        $this-&gt;tester-&gt;init(&#39;Front:Homepage&#39;);
-                }
-        
-                public function testRenderDefault() {
-                        $this-&gt;tester-&gt;testAction(&#39;default&#39;);
-                }
-        
+
+        /**
+         * @param $presName string Fully qualified presenter name.
+         */
+        public function init($presName) {
+                $presenterFactory = $this-&gt;container-&gt;getByType(&#39;Nette\\\\Application\\\\IPresenterFactory&#39;);
+                $this-&gt;presenter = $presenterFactory-&gt;createPresenter($presName);
+                $this-&gt;presenter-&gt;autoCanonicalize = FALSE;
+                $this-&gt;presName = $presName;
         }
-        
-        id(new HomepagePresenterTest($container))-&gt;run();
-        </code></pre>
-        <p>Takto chápu testování presenterů v Nette já. Dále budu směrovat testy tak, abych nemusel psát téměř nic
-        a měl jsem otestováno téměř všechno. Myslím si, že toto je jediná cesta jak se přinutit k testování.
-        Nelze se již vymlouvat na to, že je to spousta psaní navíc. Není.</p>
-        ",
+
+        public function test($action, $method = &#39;GET&#39;, $params = array(), $post = array()) {
+                $params[&#39;action&#39;] = $action;
+                $request = new \\\\Nette\\\\Application\\\\Request($this-&gt;presName, $method, $params, $post);
+                $response = $this-&gt;presenter-&gt;run($request);
+                return $response;
+        }
+
+        public function testAction($action, $method = &#39;GET&#39;, $params = array(), $post = array()) {
+                $response = $this-&gt;test($action, $method, $params, $post);
+
+                \\\\Tester\\\\Assert::true($response instanceof \\\\Nette\\\\Application\\\\Responses\\\\TextResponse);
+                \\\\Tester\\\\Assert::true($response-&gt;getSource() instanceof \\\\Nette\\\\Templating\\\\ITemplate);
+
+                $html = (string)$response-&gt;getSource();
+                $dom = \\\\Tester\\\\DomQuery::fromHtml($html);
+                \\\\Tester\\\\Assert::true($dom-&gt;has(&#39;title&#39;));
+
+                return $response;
+        }
+
+        public function testForm($action, $method = &#39;POST&#39;, $post = array()) {
+                $response = $this-&gt;test($action, $method, $post);
+
+                \\\\Tester\\\\Assert::true($response instanceof \\\\Nette\\\\Application\\\\Responses\\\\RedirectResponse);
+
+                return $response;
+        }
+
+}
+</code></pre>
+<p>Testování samotných presenterů je pak již otázkou několika málo řádek:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+namespace Test;
+
+$container = require __DIR__ . &#39;/../bootstrap.php&#39;;
+
+class HomepagePresenterTest extends \\\\Tester\\\\TestCase {
+
+        public function __construct(\\\\Nette\\\\DI\\\\Container $container) {
+                $this-&gt;tester = new \\\\Test\\\\Presenter($container);
+        }
+
+        public function setUp() {
+                $this-&gt;tester-&gt;init(&#39;Front:Homepage&#39;);
+        }
+
+        public function testRenderDefault() {
+                $this-&gt;tester-&gt;testAction(&#39;default&#39;);
+        }
+
+}
+
+id(new HomepagePresenterTest($container))-&gt;run();
+</code></pre>
+<p>Takto chápu testování presenterů v Nette já. Dále budu směrovat testy tak, abych nemusel psát téměř nic
+a měl jsem otestováno téměř všechno. Myslím si, že toto je jediná cesta jak se přinutit k testování.
+Nelze se již vymlouvat na to, že je to spousta psaní navíc. Není.</p>
+",
         }
       }
     />

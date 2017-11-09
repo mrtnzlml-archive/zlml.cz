@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.2",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-flow": "^6.23.0",
     "cross-env": "^5.0.5",
@@ -25,14 +25,14 @@
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jest": "^20.0.3",
+    "eslint-plugin-jest": "^21.3.2",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-prettier": "^2.1.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
-    "flow-bin": "^0.51.1",
-    "jest": "^20.0.4",
+    "flow-bin": "^0.59.0",
+    "jest": "^21.2.1",
     "prettier": "^1.5.3",
     "react-test-renderer": "^16.1.0",
     "serverless-offline": "^3.15.3",
@@ -46,7 +46,7 @@
     "publish": "node .articles/compile.js",
     "start": "NODE_ENV=production yarn serverless offline",
     "test": "jest",
-    "test-ci": "yarn run typecheck && yarn run lint && yarn run test -- --ci --color",
+    "test-ci": "yarn run lint && yarn run typecheck && yarn run test -- --ci --color",
     "typecheck": "flow check --color=always"
   }
 }

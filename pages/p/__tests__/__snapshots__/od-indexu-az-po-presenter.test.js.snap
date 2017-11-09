@@ -62,96 +62,96 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Když jsem se učil pracovat s Nette Frameworkem, musel jsem v začátcích hodně přivírat oči a říkat si &quot;prostě to tak je&quot;. Hodně věcí bylo zahaleno do tmy. Teď už to tak naštěstí není, ale stále se stává, že mi někdo napíše a děkuje za poodhalení a vysvětlení toho, jak to funguje na pozadí (za což zase děkuji já). Pokusím se tedy pokračovat a vrátím se na úplný začátek - do <code>index.php</code> a poodhalím, jak probíhá start takové běžné aplikace. A jako vždy - co nejjednodušeji.</p>
-        <p>Zodpovím (nebo alespoň nastíním odpovědi na) následující otázky:</p>
-        <ul>
-        <li>proč redirect vyvolává AbortException</li>
-        <li>jak napsat vlastní NanoPresenter</li>
-        <li>proč má Nette dva request objekty</li>
-        <li>kde se bere životní cyklus presenteru</li>
-        </ul>
-        <h2 id=\\"start-aplikace\\">Start aplikace <a href=\\"#start-aplikace\\">#</a></h2><p>Nedávno jsem dostal v práci na starost implementovat Nette do jednoho legacy projektu. Už jsem tu o tom <a href=\\"navrhovy-vzor-legacy-code\\">psal</a>. Byl to nesmírně vyčerpávající úkol, ale už mám hotovo a jsem ve fázi nekonečného refaktoringu. Jednou z prvních věcí, které bylo nutné vyřešit byl start aplikace z jednoho místa. Toto naštěstí řeší <a href=\\"https://github.com/nette/web-project\\">web-project</a> (nebo <a href=\\"https://github.com/nette/sandbox\\">sandbox</a> chcete-li) už v základu takto (<code>.htaccess</code>):</p>
-        <pre><code>&lt;IfModule mod_rewrite.c&gt;
-            RewriteEngine On
-        
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteCond %{REQUEST_FILENAME} !-d
-            RewriteRule !\\\\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\\\\.gz|map)$ index.php [L]
-        &lt;/IfModule&gt;
-        </code></pre><p>Čímž se velmi rychle dostáváme k prvnímu bodu, kterým je <code>index.php</code>:</p>
-        <pre><code class=\\"lang-php\\">/** @var \\\\Nette\\\\DI\\\\Container $container */
-        $container = require __DIR__ . &#39;/../app/bootstrap.php&#39;;
-        /** @var \\\\Nette\\\\Application\\\\Application $application */
-        $application = $container-&gt;getByType(\\\\Nette\\\\Application\\\\Application::class);
-        $application-&gt;run();
-        </code></pre>
-        <p>V tomto souboru vše začíná a také končí. Totiž zavolá se ještě minimálně <code>\\\\Tracy\\\\Debugger::shutdownHandler</code>, <code>\\\\Nette\\\\Http\\\\Session::clean</code> a <code>\\\\Nette\\\\Http\\\\Response::__destruct</code>, ale zůstaňme u toho, že zde vše začíná a také končí. O co v indexu vlastně jde? Hned přeskočím první řádku, ačkoliv se jedná o nezanedbatelnou část. Z bootrapu získáme hotovou instanci <a href=\\"https://doc.nette.org/cs/2.3/dependency-injection\\">DIC</a>, resp. přímého potomka. Následuje vytažení <a href=\\"https://api.nette.org/2.3.7/Nette.Application.Application.html\\">Application</a> a naškytnutí aplikace pomocí metody <code>run</code>. To je předpokládám všem jasné, proto jsem to vzal letem světem. Cílem tohoto článku je však popsání právě <code>run</code> metod.</p>
-        <h2 id=\\"run-run-\\">Run, run! <a href=\\"#run-run-\\">#</a></h2><p>Metoda <code>\\\\Nette\\\\Application\\\\Application::run</code> vypadá přesně takto:</p>
-        <pre><code class=\\"lang-php\\">public function run()
-        {
+<p>Zodpovím (nebo alespoň nastíním odpovědi na) následující otázky:</p>
+<ul>
+<li>proč redirect vyvolává AbortException</li>
+<li>jak napsat vlastní NanoPresenter</li>
+<li>proč má Nette dva request objekty</li>
+<li>kde se bere životní cyklus presenteru</li>
+</ul>
+<h2 id=\\"start-aplikace\\">Start aplikace <a href=\\"#start-aplikace\\">#</a></h2><p>Nedávno jsem dostal v práci na starost implementovat Nette do jednoho legacy projektu. Už jsem tu o tom <a href=\\"navrhovy-vzor-legacy-code\\">psal</a>. Byl to nesmírně vyčerpávající úkol, ale už mám hotovo a jsem ve fázi nekonečného refaktoringu. Jednou z prvních věcí, které bylo nutné vyřešit byl start aplikace z jednoho místa. Toto naštěstí řeší <a href=\\"https://github.com/nette/web-project\\">web-project</a> (nebo <a href=\\"https://github.com/nette/sandbox\\">sandbox</a> chcete-li) už v základu takto (<code>.htaccess</code>):</p>
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule !\\\\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\\\\.gz|map)$ index.php [L]
+&lt;/IfModule&gt;
+</code></pre><p>Čímž se velmi rychle dostáváme k prvnímu bodu, kterým je <code>index.php</code>:</p>
+<pre><code class=\\"lang-php\\">/** @var \\\\Nette\\\\DI\\\\Container $container */
+$container = require __DIR__ . &#39;/../app/bootstrap.php&#39;;
+/** @var \\\\Nette\\\\Application\\\\Application $application */
+$application = $container-&gt;getByType(\\\\Nette\\\\Application\\\\Application::class);
+$application-&gt;run();
+</code></pre>
+<p>V tomto souboru vše začíná a také končí. Totiž zavolá se ještě minimálně <code>\\\\Tracy\\\\Debugger::shutdownHandler</code>, <code>\\\\Nette\\\\Http\\\\Session::clean</code> a <code>\\\\Nette\\\\Http\\\\Response::__destruct</code>, ale zůstaňme u toho, že zde vše začíná a také končí. O co v indexu vlastně jde? Hned přeskočím první řádku, ačkoliv se jedná o nezanedbatelnou část. Z bootrapu získáme hotovou instanci <a href=\\"https://doc.nette.org/cs/2.3/dependency-injection\\">DIC</a>, resp. přímého potomka. Následuje vytažení <a href=\\"https://api.nette.org/2.3.7/Nette.Application.Application.html\\">Application</a> a naškytnutí aplikace pomocí metody <code>run</code>. To je předpokládám všem jasné, proto jsem to vzal letem světem. Cílem tohoto článku je však popsání právě <code>run</code> metod.</p>
+<h2 id=\\"run-run-\\">Run, run! <a href=\\"#run-run-\\">#</a></h2><p>Metoda <code>\\\\Nette\\\\Application\\\\Application::run</code> vypadá přesně takto:</p>
+<pre><code class=\\"lang-php\\">public function run()
+{
+    try {
+        $this-&gt;onStartup($this);
+        $this-&gt;processRequest($this-&gt;createInitialRequest());
+        $this-&gt;onShutdown($this);
+    } catch (\\\\Exception $e) {
+        $this-&gt;onError($this, $e);
+        if ($this-&gt;catchExceptions &amp;&amp; $this-&gt;errorPresenter) {
             try {
-                $this-&gt;onStartup($this);
-                $this-&gt;processRequest($this-&gt;createInitialRequest());
-                $this-&gt;onShutdown($this);
+                $this-&gt;processException($e);
+                $this-&gt;onShutdown($this, $e);
+                return;
             } catch (\\\\Exception $e) {
                 $this-&gt;onError($this, $e);
-                if ($this-&gt;catchExceptions &amp;&amp; $this-&gt;errorPresenter) {
-                    try {
-                        $this-&gt;processException($e);
-                        $this-&gt;onShutdown($this, $e);
-                        return;
-                    } catch (\\\\Exception $e) {
-                        $this-&gt;onError($this, $e);
-                    }
-                }
-                $this-&gt;onShutdown($this, $e);
-                throw $e;
             }
         }
-        </code></pre>
-        <p>Pro přehlednost to ještě zjednoduším a vyhodím vše, co pro samotné spuštění aplikace není nezbytně nutné:</p>
-        <pre><code class=\\"lang-php\\">public function run()
-        {
-            try {
-                $this-&gt;processRequest($this-&gt;createInitialRequest());
-            } catch (\\\\Exception $e) {
-                if ($this-&gt;catchExceptions &amp;&amp; $this-&gt;errorPresenter) {
-                    $this-&gt;processException($e);
-                    return;
-                }
-                throw $e;
-            }
+        $this-&gt;onShutdown($this, $e);
+        throw $e;
+    }
+}
+</code></pre>
+<p>Pro přehlednost to ještě zjednoduším a vyhodím vše, co pro samotné spuštění aplikace není nezbytně nutné:</p>
+<pre><code class=\\"lang-php\\">public function run()
+{
+    try {
+        $this-&gt;processRequest($this-&gt;createInitialRequest());
+    } catch (\\\\Exception $e) {
+        if ($this-&gt;catchExceptions &amp;&amp; $this-&gt;errorPresenter) {
+            $this-&gt;processException($e);
+            return;
         }
-        </code></pre>
-        <p>Moc toho opět nezbylo. Vlastně se zde dějí jen tři věci. Prvně <a href=\\"https://api.nette.org/2.3.7/source-Application.Application.php.html#102-124\\">createInitialRequest</a>. Tato metoda vrátí (jak už název napovídá) tzv. aplikační request. To je objekt, který pak putuje celou aplikací a nese si informaci o tom co vlastně uživatel chce. Vzpomínáte si na článek o <a href=\\"dynamicke-routovani-url-adres\\">dynamickém routování URL adres</a>? Tam jsem ukazoval, jak se HTTP request změní právě na aplikační a zpět. Celá sranda se tedy odehrává někde v RouterFactory (zatím to platí, do budoucna ale <a href=\\"https://github.com/nette/routing/commit/e802a85e96f5814ddf1a16ea1517398eb560bab6\\">nebude</a>). Samotný HTTP request se pak dostane do <code>Application</code> díky DI. Už v <code>createInitialRequest</code> je tedy jasné, jestli je možné požadavek přeložit, nebo 404. Pokud 404, tak konec, resp. <code>processException</code> pokud je to v configu zapnuté (což jinými slovy znamená forward na error presenter):</p>
-        <pre><code class=\\"lang-neon\\">application:
-            catchExceptions: yes
-        </code></pre>
-        <p>Pokud se však povede získat aplikační request, nastupuje funkce <code>processRequest</code>. Mrkněte na <a href=\\"https://api.nette.org/2.3.7/source-Application.Application.php.html#127-150\\">implementaci</a>. Opět se nejedná o nic složitého. Jde zde vlastně jen o jedinou věc. Získat presenter a zavolat nad ním <code>run</code>. Proč <code>run</code>? Presenter totiž není potomek <code>\\\\Nette\\\\Application\\\\UI\\\\Presenter</code> jak si pamatují skoro všichni, ale spíše objekt, který implementuje interface <code>\\\\Nette\\\\Application\\\\IPresenter</code> jehož jedinou metodou je právě <code>run</code> do které se jako jediný parametr předává již zmíněný aplikační request. Zároveň musí tato metoda vracet <code>\\\\Nette\\\\Application\\\\IResponse</code>.</p>
-        <p>Z toho plyne, že pokud potřebujeme velmi jednoduchý presenter (který skoro nic neumí, ale je rychlý), stačí si implementovat <code>IPresenter</code> rozhraní a hotovo:</p>
-        <pre><code class=\\"lang-php\\">class NanoPresenter extends Nette\\\\Object implements Nette\\\\Application\\\\IPresenter
-        {
-        
-            public function run(Nette\\\\Application\\\\Request $appRequest)
-            {
-                return new Nette\\\\Application\\\\Responses\\\\TextResponse(&#39;It works!&#39;);
-            }
-        
-        }
-        </code></pre>
-        <p>V běžném presenteru se toho však děje samozřejmě mnohem více. Právě v metodě <code>run</code> se schovává celý dobře známý životní cyklus presenteru. Než se však dostanu k reálnému příkladu, začnu na tomto jednoduchém. <code>NanoPresenter</code> vrací pouze <code>TextResponse</code> s obyčejným textem. Tato odpověď je předána zpět do <code>processRequest</code> a následně je hned zavoláno <code>\\\\Nette\\\\Application\\\\IResponse::send</code> což v tomto konkrétním případě vyústí v obyčejné echo. Co se však děje v běžném presenteru?</p>
-        <h2 id=\\"vykreslen-ablony\\">Vykreslení šablony <a href=\\"#vykreslen-ablony\\">#</a></h2><p>Presenter, který dědí od <code>\\\\Nette\\\\Application\\\\UI\\\\Presenter</code> dělá téměř to samé. Jediný rozdíl je v tom, že presenter vlastně vykreslitelná komponenta, takže si vezme šablonu a předá ji stejně jako v předchozím případě do <code>TextResponse</code>. Zde je oproti mému <code>NanoPresenter</code> příkladu malý implementační rozdíl, ale ve výsledku presenter tak jako tak <code>TextResponse</code> vrátí zpět <code>Application</code> objektu do <code>processRequest</code> metody. Dále se opět zavolá <code>\\\\Nette\\\\Application\\\\Responses\\\\TextResponse::send</code>, tentokrát však nedojde k obyčejnému echu, ale spustí se renderování předané šablony (<code>\\\\Nette\\\\Application\\\\UI\\\\ITemplate</code>). Většinou to tedy propadne na Latte, ale to samozřejmě není podmínkou.</p>
-        <pre><code class=\\"lang-php\\">public function send(Nette\\\\Http\\\\IRequest $httpRequest, Nette\\\\Http\\\\IResponse $httpResponse)
-        {
-            if ($this-&gt;source instanceof Nette\\\\Application\\\\UI\\\\ITemplate) {
-                $this-&gt;source-&gt;render();
-            } else {
-                echo $this-&gt;source;
-            }
-        }
-        </code></pre>
-        <p>Z předchozího textu by mělo být zřejmé, kudy požadavek putuje. Když si prohlédnete detailněji to co jsem zde popsal, mělo by být jasné, že se interně používá <code>\\\\Nette\\\\Application\\\\AbortException</code> a proto je nebezpečné v presenterech chytat bezmyšlenkovitě všechny výjimky. Nikdo pak nechce řešit &quot;proč to Nette zase nepřesměrovává&quot;.</p>
-        <p>Tento text by měl překlenout tu temnou propast mezi <code>index.php</code> a akcí v presenteru. Příště už se snad vrhnu na něco zajímavějšího... :)</p>
-        ",
+        throw $e;
+    }
+}
+</code></pre>
+<p>Moc toho opět nezbylo. Vlastně se zde dějí jen tři věci. Prvně <a href=\\"https://api.nette.org/2.3.7/source-Application.Application.php.html#102-124\\">createInitialRequest</a>. Tato metoda vrátí (jak už název napovídá) tzv. aplikační request. To je objekt, který pak putuje celou aplikací a nese si informaci o tom co vlastně uživatel chce. Vzpomínáte si na článek o <a href=\\"dynamicke-routovani-url-adres\\">dynamickém routování URL adres</a>? Tam jsem ukazoval, jak se HTTP request změní právě na aplikační a zpět. Celá sranda se tedy odehrává někde v RouterFactory (zatím to platí, do budoucna ale <a href=\\"https://github.com/nette/routing/commit/e802a85e96f5814ddf1a16ea1517398eb560bab6\\">nebude</a>). Samotný HTTP request se pak dostane do <code>Application</code> díky DI. Už v <code>createInitialRequest</code> je tedy jasné, jestli je možné požadavek přeložit, nebo 404. Pokud 404, tak konec, resp. <code>processException</code> pokud je to v configu zapnuté (což jinými slovy znamená forward na error presenter):</p>
+<pre><code class=\\"lang-neon\\">application:
+    catchExceptions: yes
+</code></pre>
+<p>Pokud se však povede získat aplikační request, nastupuje funkce <code>processRequest</code>. Mrkněte na <a href=\\"https://api.nette.org/2.3.7/source-Application.Application.php.html#127-150\\">implementaci</a>. Opět se nejedná o nic složitého. Jde zde vlastně jen o jedinou věc. Získat presenter a zavolat nad ním <code>run</code>. Proč <code>run</code>? Presenter totiž není potomek <code>\\\\Nette\\\\Application\\\\UI\\\\Presenter</code> jak si pamatují skoro všichni, ale spíše objekt, který implementuje interface <code>\\\\Nette\\\\Application\\\\IPresenter</code> jehož jedinou metodou je právě <code>run</code> do které se jako jediný parametr předává již zmíněný aplikační request. Zároveň musí tato metoda vracet <code>\\\\Nette\\\\Application\\\\IResponse</code>.</p>
+<p>Z toho plyne, že pokud potřebujeme velmi jednoduchý presenter (který skoro nic neumí, ale je rychlý), stačí si implementovat <code>IPresenter</code> rozhraní a hotovo:</p>
+<pre><code class=\\"lang-php\\">class NanoPresenter extends Nette\\\\Object implements Nette\\\\Application\\\\IPresenter
+{
+
+    public function run(Nette\\\\Application\\\\Request $appRequest)
+    {
+        return new Nette\\\\Application\\\\Responses\\\\TextResponse(&#39;It works!&#39;);
+    }
+
+}
+</code></pre>
+<p>V běžném presenteru se toho však děje samozřejmě mnohem více. Právě v metodě <code>run</code> se schovává celý dobře známý životní cyklus presenteru. Než se však dostanu k reálnému příkladu, začnu na tomto jednoduchém. <code>NanoPresenter</code> vrací pouze <code>TextResponse</code> s obyčejným textem. Tato odpověď je předána zpět do <code>processRequest</code> a následně je hned zavoláno <code>\\\\Nette\\\\Application\\\\IResponse::send</code> což v tomto konkrétním případě vyústí v obyčejné echo. Co se však děje v běžném presenteru?</p>
+<h2 id=\\"vykreslen-ablony\\">Vykreslení šablony <a href=\\"#vykreslen-ablony\\">#</a></h2><p>Presenter, který dědí od <code>\\\\Nette\\\\Application\\\\UI\\\\Presenter</code> dělá téměř to samé. Jediný rozdíl je v tom, že presenter vlastně vykreslitelná komponenta, takže si vezme šablonu a předá ji stejně jako v předchozím případě do <code>TextResponse</code>. Zde je oproti mému <code>NanoPresenter</code> příkladu malý implementační rozdíl, ale ve výsledku presenter tak jako tak <code>TextResponse</code> vrátí zpět <code>Application</code> objektu do <code>processRequest</code> metody. Dále se opět zavolá <code>\\\\Nette\\\\Application\\\\Responses\\\\TextResponse::send</code>, tentokrát však nedojde k obyčejnému echu, ale spustí se renderování předané šablony (<code>\\\\Nette\\\\Application\\\\UI\\\\ITemplate</code>). Většinou to tedy propadne na Latte, ale to samozřejmě není podmínkou.</p>
+<pre><code class=\\"lang-php\\">public function send(Nette\\\\Http\\\\IRequest $httpRequest, Nette\\\\Http\\\\IResponse $httpResponse)
+{
+    if ($this-&gt;source instanceof Nette\\\\Application\\\\UI\\\\ITemplate) {
+        $this-&gt;source-&gt;render();
+    } else {
+        echo $this-&gt;source;
+    }
+}
+</code></pre>
+<p>Z předchozího textu by mělo být zřejmé, kudy požadavek putuje. Když si prohlédnete detailněji to co jsem zde popsal, mělo by být jasné, že se interně používá <code>\\\\Nette\\\\Application\\\\AbortException</code> a proto je nebezpečné v presenterech chytat bezmyšlenkovitě všechny výjimky. Nikdo pak nechce řešit &quot;proč to Nette zase nepřesměrovává&quot;.</p>
+<p>Tento text by měl překlenout tu temnou propast mezi <code>index.php</code> a akcí v presenteru. Příště už se snad vrhnu na něco zajímavějšího... :)</p>
+",
         }
       }
     />

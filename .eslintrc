@@ -41,7 +41,6 @@
       "always", {
         "annotationStyle": "line"
       }
-    ],
-    "react/react-in-jsx-scope": "off",
+    ]
   }
 }

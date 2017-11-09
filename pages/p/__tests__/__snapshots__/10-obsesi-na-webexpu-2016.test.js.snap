@@ -62,40 +62,40 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p><strong>Obsese</strong> ž. <em>kniž.</em> chorobně utkvělá představa, myšlenka; <em>med.</em> nutkavé jevy, nejčastěji myšlenky, popudy k jednání apod., jež jsou nesmyslné a bezdůvodně ovládají mysl nemocného, ačkoliv se je snaží potlačit</p>
-        <p><strong>Obsession</strong> it&#39;s kind of like a passion for something that crosses the line into crazy territory (<a href=\\"https://www.vocabulary.com/dictionary/obsession\\">source</a>)</p>
-        <p>Trpíte nějakou obsesí? Letošní WebExpo nabízí lék ve formě přednášek, které jsou rozděleny do deseti okruhů - <a href=\\"https://webexpo.cz/praha2016/obsessions/\\">obsesí</a> - po vzoru zahraničního magazínu <a href=\\"http://qz.com/obsessions\\">Quartz</a>. Hlavním cílem je lépe uspořádat jednotlivá témata podle společných problémů, takže si každý snadno najde co jej zajímá. Zároveň každou obsesi zosobňuje celá řada (většinou) světově známých jmen, takže je na co se těšit.</p>
-        <p><em>&quot;Vyhledejte odbornou pomoc dříve, než vám obsese přerostou přes hlavu!&quot;</em> .{font-size:140%; color:gray}</p>
-        <p>Proč se vlastně tak snažím chodit na nějaké takové akce a namotivovat i další lidi? Kdo neviděl, mrkněte se na následující video. Zejména kolem času 15:08 mluví Honza Černý o tom, v čem to celé vězí. <em>&quot;Existují dvě skupiny lidí. Lidi kteří se chtějí vzdělávat (a vzdělavají se) a pak ta druhá skupina lidí, kterým to je jedno...&quot;</em></p>
-        <iframe width=\\"560\\" height=\\"315\\" src=\\"https://www.youtube.com/embed/1BjVVGmSdCw?list=PLqRXa8pInSUqxMhNhzJsV-1_FZ-YsrSYM\\" frameborder=\\"0\\" allowfullscreen></iframe>
-        
-        <p>Lidi typu <em>&quot;je mi to jedno&quot;</em> (sem tam) potkávám a je mi z toho občas tak smutno, až jsem si vytvořil vnitřní potřebu vzdělávat se - nezakrnět. A těžko budu hledat lepší akci při boji se zakrněností, než je největší webová konference ve Střední Evropě - WebExpo. Vždyť je tolik důležité zažívat onen známý <a href=\\"http://www.commitstrip.com/en/2016/04/26/the-just-got-back-from-a-conference-effect/\\">The &#39;Just-got-back-from-a-conference&#39; effect</a>... :)</p>
-        <p>Druhou stránkou věci je potom potkávat lidi. To jsem se asi nejvíc naučil na PoSobotách. A ačkoliv s tím mám trošku introvertní problém, tak si musím přiznat, že právě ostatní lidé (netrpící krněním) nejvíce motivují a posouvají. Zvučných jmen je WebExpo plné. Jmenovitě například:</p>
-        <ul>
-        <li>Michael Lopp (<a href=\\"https://webexpo.cz/praha2016/prednaska/stables-and-volatiles-how-to-get-different-types-of-humans-to-work-together/\\">Stables and Volatiles – how to get different types of humans to work together</a>) - pracovně původně Apple, Pinterest a současně Slack</li>
-        <li>Harry Roberts (<a href=\\"https://webexpo.cz/praha2016/prednaska/refactoring-css-without-losing-your-mind/\\">Refactoring CSS Without Losing Your Mind</a>) - klienty například Google, Unilever nebo BBC</li>
-        <li>Peter Morville (<a href=\\"https://webexpo.cz/praha2016/prednaska/the-architecture-of-understanding/\\">The Architecture of Understanding</a>) - Semantic Studios</li>
-        <li>Mark Boulton (<a href=\\"https://webexpo.cz/praha2016/prednaska/design-systems-in-difficult-places/\\">Design systems in difficult places</a>) - Monotype</li>
-        <li>Rachel Andrew (<a href=\\"https://webexpo.cz/praha2016/prednaska/the-right-layout-tool-for-the-job/\\">The right layout tool for the job</a>) - Perch CMS</li>
-        <li>Marco Pivetta (<a href=\\"https://webexpo.cz/praha2016/prednaska/extremely-defensive-php/\\">Extremely defensive PHP</a>) - Roave (you know Doctrine right?)</li>
-        </ul>
-        <p>Řečníků je samozřejmě <a href=\\"https://webexpo.cz/praha2016/recnici/\\">mnohem více</a> (70). Je asi zřejmé, že se nejvíce těším na technické přednášky, tedy obsese <a href=\\"https://webexpo.cz/praha2016/obsessions/#creative-technology\\">Creative Technology</a> <span class=\\"label label-success\\">TIP</span>. Tím spíše na Marco Pivettu, kterého jistě dobře znáte jako <a href=\\"https://twitter.com/Ocramius\\">Ocramiuse</a>, protože si jej vážím jako velmi zkušeného programátora a většinu jeho věcí přijímám s němým úžasem. Na výběr jsou však další obsese:</p>
-        <ul>
-        <li>Thinking &amp; Doing (<a href=\\"https://webexpo.cz/prague2016/obsessions/#thinking-doing\\">link</a>) <span class=\\"label label-success\\">TIP</span> - design</li>
-        <li>Understanding Communication (<a href=\\"https://webexpo.cz/prague2016/obsessions/#understanding-communication\\">link</a>) - reklama</li>
-        <li>Visual Inventions (<a href=\\"https://webexpo.cz/prague2016/obsessions/#visual-inventions\\">link</a>) - grafika</li>
-        <li>Touch and Move (<a href=\\"https://webexpo.cz/prague2016/obsessions/#touch-and-move\\">link</a>) - interakce</li>
-        <li>Data Crunching (<a href=\\"https://webexpo.cz/prague2016/obsessions/#data-crunching\\">link</a>) - zpracování dat</li>
-        <li>Machine Brains (<a href=\\"https://webexpo.cz/prague2016/obsessions/#machine-brains\\">link</a>) - práce s daty</li>
-        <li>Monetizing Eyeballs (<a href=\\"https://webexpo.cz/prague2016/obsessions/#monetizing-eyeballs\\">link</a>) - business</li>
-        <li>Beyond The Screens (<a href=\\"https://webexpo.cz/prague2016/obsessions/#beyond-the-screens\\">link</a>)</li>
-        <li>A-Team (<a href=\\"https://webexpo.cz/prague2016/obsessions/#a-team\\">link</a>) <span class=\\"label label-success\\">TIP</span> - týmová spolupráce</li>
-        </ul>
-        <p>A osobně chci navštívit nejen technické přednášky, ale podívat se i na přednášky z úplně jiných oborů, protože 1) nikdy to není z úplně jiného oboru a 2) rozšířit si obzory nikdy neuškodí. Přednášky jsou v jednotlivých obsesích rozděleny na tři bloky: development (zelené přednášky), business (oranžové), design (fialové). Skvělé je, že <a href=\\"https://webexpo.cz/praha2016/program/\\">program</a> na tyto barvy myslí a tak <em>téměř</em> nikdy neběží souběžně dvě stejné kategorie. A teď pozor - vstupenky jsou <a href=\\"https://webexpo.cz/praha2016/vstupenky/\\">za zvýhodněnou cenu</a> pouze do konce tohoto měsíce.</p>
-        <p>Akce proběhne 23. — 24. září 2016 v Praze konkrétně v <a href=\\"http://www.lucerna.cz/cz/\\">Paláci Lucerna</a> a očekávaná návštěvnost je 2000 offline lidí. Pro více informací doporučuji sledovat blog <a href=\\"https://medium.com/webexpo\\">WebExpo píše</a>, kde jsou někteří řečníci představeni podrobně.</p>
-        <p>Tak WebExpojď... ;)</p>
-        <p>Btw - akce trvá dva dny, což znamená 3 party. Warm Up ve čtvrtek <a href=\\"https://www.laloca.cz/en\\">tady</a>, páteční <a href=\\"http://www.skautskyinstitut.cz/staromak\\">tady</a> a After Party <a href=\\"http://www.prague.eu/en/object/places/63/lucerna-palace-great-hall-palac-lucerna-velky-sal\\">tady</a>.</p>
-        <p><a href=\\"https://webexpo.cz/prague2016/\\"><img src=\\"http://s2.quickmeme.com/img/e9/e9b82533f50538f4d36656f24bf2afb39642223033cd19d52ef1eea5b03ab1bf.jpg\\" alt=\\"\\"></a></p>
-        ",
+<p><strong>Obsession</strong> it&#39;s kind of like a passion for something that crosses the line into crazy territory (<a href=\\"https://www.vocabulary.com/dictionary/obsession\\">source</a>)</p>
+<p>Trpíte nějakou obsesí? Letošní WebExpo nabízí lék ve formě přednášek, které jsou rozděleny do deseti okruhů - <a href=\\"https://webexpo.cz/praha2016/obsessions/\\">obsesí</a> - po vzoru zahraničního magazínu <a href=\\"http://qz.com/obsessions\\">Quartz</a>. Hlavním cílem je lépe uspořádat jednotlivá témata podle společných problémů, takže si každý snadno najde co jej zajímá. Zároveň každou obsesi zosobňuje celá řada (většinou) světově známých jmen, takže je na co se těšit.</p>
+<p><em>&quot;Vyhledejte odbornou pomoc dříve, než vám obsese přerostou přes hlavu!&quot;</em> .{font-size:140%; color:gray}</p>
+<p>Proč se vlastně tak snažím chodit na nějaké takové akce a namotivovat i další lidi? Kdo neviděl, mrkněte se na následující video. Zejména kolem času 15:08 mluví Honza Černý o tom, v čem to celé vězí. <em>&quot;Existují dvě skupiny lidí. Lidi kteří se chtějí vzdělávat (a vzdělavají se) a pak ta druhá skupina lidí, kterým to je jedno...&quot;</em></p>
+<iframe width=\\"560\\" height=\\"315\\" src=\\"https://www.youtube.com/embed/1BjVVGmSdCw?list=PLqRXa8pInSUqxMhNhzJsV-1_FZ-YsrSYM\\" frameborder=\\"0\\" allowfullscreen></iframe>
+
+<p>Lidi typu <em>&quot;je mi to jedno&quot;</em> (sem tam) potkávám a je mi z toho občas tak smutno, až jsem si vytvořil vnitřní potřebu vzdělávat se - nezakrnět. A těžko budu hledat lepší akci při boji se zakrněností, než je největší webová konference ve Střední Evropě - WebExpo. Vždyť je tolik důležité zažívat onen známý <a href=\\"http://www.commitstrip.com/en/2016/04/26/the-just-got-back-from-a-conference-effect/\\">The &#39;Just-got-back-from-a-conference&#39; effect</a>... :)</p>
+<p>Druhou stránkou věci je potom potkávat lidi. To jsem se asi nejvíc naučil na PoSobotách. A ačkoliv s tím mám trošku introvertní problém, tak si musím přiznat, že právě ostatní lidé (netrpící krněním) nejvíce motivují a posouvají. Zvučných jmen je WebExpo plné. Jmenovitě například:</p>
+<ul>
+<li>Michael Lopp (<a href=\\"https://webexpo.cz/praha2016/prednaska/stables-and-volatiles-how-to-get-different-types-of-humans-to-work-together/\\">Stables and Volatiles – how to get different types of humans to work together</a>) - pracovně původně Apple, Pinterest a současně Slack</li>
+<li>Harry Roberts (<a href=\\"https://webexpo.cz/praha2016/prednaska/refactoring-css-without-losing-your-mind/\\">Refactoring CSS Without Losing Your Mind</a>) - klienty například Google, Unilever nebo BBC</li>
+<li>Peter Morville (<a href=\\"https://webexpo.cz/praha2016/prednaska/the-architecture-of-understanding/\\">The Architecture of Understanding</a>) - Semantic Studios</li>
+<li>Mark Boulton (<a href=\\"https://webexpo.cz/praha2016/prednaska/design-systems-in-difficult-places/\\">Design systems in difficult places</a>) - Monotype</li>
+<li>Rachel Andrew (<a href=\\"https://webexpo.cz/praha2016/prednaska/the-right-layout-tool-for-the-job/\\">The right layout tool for the job</a>) - Perch CMS</li>
+<li>Marco Pivetta (<a href=\\"https://webexpo.cz/praha2016/prednaska/extremely-defensive-php/\\">Extremely defensive PHP</a>) - Roave (you know Doctrine right?)</li>
+</ul>
+<p>Řečníků je samozřejmě <a href=\\"https://webexpo.cz/praha2016/recnici/\\">mnohem více</a> (70). Je asi zřejmé, že se nejvíce těším na technické přednášky, tedy obsese <a href=\\"https://webexpo.cz/praha2016/obsessions/#creative-technology\\">Creative Technology</a> <span class=\\"label label-success\\">TIP</span>. Tím spíše na Marco Pivettu, kterého jistě dobře znáte jako <a href=\\"https://twitter.com/Ocramius\\">Ocramiuse</a>, protože si jej vážím jako velmi zkušeného programátora a většinu jeho věcí přijímám s němým úžasem. Na výběr jsou však další obsese:</p>
+<ul>
+<li>Thinking &amp; Doing (<a href=\\"https://webexpo.cz/prague2016/obsessions/#thinking-doing\\">link</a>) <span class=\\"label label-success\\">TIP</span> - design</li>
+<li>Understanding Communication (<a href=\\"https://webexpo.cz/prague2016/obsessions/#understanding-communication\\">link</a>) - reklama</li>
+<li>Visual Inventions (<a href=\\"https://webexpo.cz/prague2016/obsessions/#visual-inventions\\">link</a>) - grafika</li>
+<li>Touch and Move (<a href=\\"https://webexpo.cz/prague2016/obsessions/#touch-and-move\\">link</a>) - interakce</li>
+<li>Data Crunching (<a href=\\"https://webexpo.cz/prague2016/obsessions/#data-crunching\\">link</a>) - zpracování dat</li>
+<li>Machine Brains (<a href=\\"https://webexpo.cz/prague2016/obsessions/#machine-brains\\">link</a>) - práce s daty</li>
+<li>Monetizing Eyeballs (<a href=\\"https://webexpo.cz/prague2016/obsessions/#monetizing-eyeballs\\">link</a>) - business</li>
+<li>Beyond The Screens (<a href=\\"https://webexpo.cz/prague2016/obsessions/#beyond-the-screens\\">link</a>)</li>
+<li>A-Team (<a href=\\"https://webexpo.cz/prague2016/obsessions/#a-team\\">link</a>) <span class=\\"label label-success\\">TIP</span> - týmová spolupráce</li>
+</ul>
+<p>A osobně chci navštívit nejen technické přednášky, ale podívat se i na přednášky z úplně jiných oborů, protože 1) nikdy to není z úplně jiného oboru a 2) rozšířit si obzory nikdy neuškodí. Přednášky jsou v jednotlivých obsesích rozděleny na tři bloky: development (zelené přednášky), business (oranžové), design (fialové). Skvělé je, že <a href=\\"https://webexpo.cz/praha2016/program/\\">program</a> na tyto barvy myslí a tak <em>téměř</em> nikdy neběží souběžně dvě stejné kategorie. A teď pozor - vstupenky jsou <a href=\\"https://webexpo.cz/praha2016/vstupenky/\\">za zvýhodněnou cenu</a> pouze do konce tohoto měsíce.</p>
+<p>Akce proběhne 23. — 24. září 2016 v Praze konkrétně v <a href=\\"http://www.lucerna.cz/cz/\\">Paláci Lucerna</a> a očekávaná návštěvnost je 2000 offline lidí. Pro více informací doporučuji sledovat blog <a href=\\"https://medium.com/webexpo\\">WebExpo píše</a>, kde jsou někteří řečníci představeni podrobně.</p>
+<p>Tak WebExpojď... ;)</p>
+<p>Btw - akce trvá dva dny, což znamená 3 party. Warm Up ve čtvrtek <a href=\\"https://www.laloca.cz/en\\">tady</a>, páteční <a href=\\"http://www.skautskyinstitut.cz/staromak\\">tady</a> a After Party <a href=\\"http://www.prague.eu/en/object/places/63/lucerna-palace-great-hall-palac-lucerna-velky-sal\\">tady</a>.</p>
+<p><a href=\\"https://webexpo.cz/prague2016/\\"><img src=\\"http://s2.quickmeme.com/img/e9/e9b82533f50538f4d36656f24bf2afb39642223033cd19d52ef1eea5b03ab1bf.jpg\\" alt=\\"\\"></a></p>
+",
         }
       }
     />

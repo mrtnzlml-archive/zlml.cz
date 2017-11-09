@@ -62,80 +62,80 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p><a href=\\"ajax-upload-souboru-v-nette-pomoci-fine-uploaderu\\">Dříve</a> jsem psal o tom, jak použít Fine Uploader jakožto nástroj pro AJAXové nahrávání souborů na server. Původní článek však platí pouze pro verzi <code>3.*</code>, která je dnes již zastaralá. Pojďme si dnes ukázat v podstatě to samé, ale pro novější verzi <code>4.3+</code>, která se v učitých směrech poměrně zásadně liší od svého předchůdce. Tentokrát se to však pokusím vyřešit co nejjednodušeji.</p>
-        <p>Začátek je vlastně úplně stejný. Musíme nalinkovat javascriptové soubory:</p>
-        <pre><code class=\\"lang-html\\">&lt;!-- jQuery --&gt;
-        &lt;script src=&quot;{$basePath}/js/jquery.fineuploader-4.3.1.min.js&quot;&gt;&lt;/script&gt;
-        &lt;script src=&quot;{$basePath}/js/nette.ajax.js&quot;&gt;&lt;/script&gt;
-        &lt;script src=&quot;{$basePath}/js/main.js&quot;&gt;&lt;/script&gt;
-        </code></pre>
-        <p>Použití je úplně jednoduché, ve zjednodušené formě:</p>
-        <pre><code class=\\"lang-html\\">&lt;div id=&quot;image-uploader&quot;&gt;&lt;/div&gt;
-        </code></pre>
-        <p>Snažím se ukázat opravdu jen kritické minimum, protože ty základní věci jsou stejné, případně dohledatelné v dokumentaci, takže se dají oba dva návody z velké části doplnit. Minule jsem však zatáhl do ukázek i poměrně hodně balastu, takže ten u staré verze nechám, ale bude následovat opravdu jen to nejnutnější.</p>
-        <p>Stejně tedy jako v předchozí verzi následuje javascriptový spouštěcí kód. Zde již vznikají určité odlišnosti:</p>
-        <pre><code class=\\"lang-javascript\\">$(function () {
-            $(&#39;#image-uploader&#39;).fineUploader({
-                debug: true, //hodí se pro lazení
-                request: {
-                    endpoint: &#39;pictures?do=uploadPicture&#39;
-                },
-                retry: {
-                    enableAuto: true
-                }
-            });
-        });
-        </code></pre>
-        <p>Použití je tedy téměř stejné, až na to, že jsem úplně vypustil překlad textů. V této nové verzi jsou totiž novinkou šablony (ostatně proto také nové číslo verze). Uživatel-programátor má tak více pod kontrolou výsledný vzhled uploaderu:</p>
-        <pre><code class=\\"lang-html\\">&lt;script type=&quot;text/template&quot; id=&quot;qq-template&quot;&gt;
-            &lt;div class=&quot;qq-uploader-selector qq-uploader&quot;&gt;
-                &lt;div class=&quot;qq-upload-drop-area-selector qq-upload-drop-area&quot; qq-hide-dropzone&gt;
-                    &lt;span&gt;Přetáhněte soubory sem&lt;/span&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;qq-upload-button-selector qq-upload-button&quot;&gt;
-                    &lt;div&gt;Klikněte, nebo přetáhněte obrázky&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;span class=&quot;qq-drop-processing-selector qq-drop-processing&quot;&gt;
-                   &lt;span&gt;Zpracovávám přetažené soubory...&lt;/span&gt;
-                   &lt;span class=&quot;qq-drop-processing-spinner-selector qq-drop-processing-spinner&quot;&gt;&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;ul class=&quot;qq-upload-list-selector qq-upload-list&quot;&gt;
-                    &lt;li&gt;
-                        &lt;div class=&quot;qq-progress-bar-container-selector&quot;&gt;
-                            &lt;div class=&quot;qq-progress-bar-selector qq-progress-bar&quot;&gt;&lt;/div&gt;
-                        &lt;/div&gt;
-                        &lt;span class=&quot;qq-upload-spinner-selector qq-upload-spinner&quot;&gt;&lt;/span&gt;
-                        &lt;img class=&quot;qq-thumbnail-selector&quot; qq-max-size=&quot;100&quot; qq-server-scale&gt;
-                        &lt;span class=&quot;qq-edit-filename-icon-selector qq-edit-filename-icon&quot;&gt;&lt;/span&gt;
-                        &lt;span class=&quot;qq-upload-file-selector qq-upload-file&quot;&gt;&lt;/span&gt;
-                        &lt;input class=&quot;qq-edit-filename-selector qq-edit-filename&quot; tabindex=&quot;0&quot; type=&quot;text&quot;&gt;
-                        &lt;span class=&quot;qq-upload-size-selector qq-upload-size&quot;&gt;&lt;/span&gt;
-                        &lt;a class=&quot;qq-upload-cancel-selector qq-upload-cancel&quot; href=&quot;#&quot;&gt;Zrušit&lt;/a&gt;
-                        &lt;a class=&quot;qq-upload-retry-selector qq-upload-retry&quot; href=&quot;#&quot;&gt;Opakovat&lt;/a&gt;
-                        &lt;a class=&quot;qq-upload-delete-selector qq-upload-delete&quot; href=&quot;#&quot;&gt;Smazat&lt;/a&gt;
-                        &lt;span class=&quot;qq-upload-status-text-selector qq-upload-status-text&quot;&gt;&lt;/span&gt;
-                    &lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        &lt;/script&gt;
-        </code></pre>
-        <p>A opět následuje zpracování v handleru:</p>
-        <pre><code class=\\"lang-php\\">public function handleUploadPicture() {
-            $uploader = new \\\\UploadHandler();
-            $uploader-&gt;allowedExtensions = array(&quot;jpeg&quot;, &quot;jpg&quot;, &quot;png&quot;, &quot;gif&quot;);
-            $result = $uploader-&gt;handleUpload(__DIR__ . &#39;/../../www/uploads&#39;);
-            $this-&gt;sendResponse(new Nette\\\\Application\\\\Responses\\\\JsonResponse($result));
+<p>Začátek je vlastně úplně stejný. Musíme nalinkovat javascriptové soubory:</p>
+<pre><code class=\\"lang-html\\">&lt;!-- jQuery --&gt;
+&lt;script src=&quot;{$basePath}/js/jquery.fineuploader-4.3.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;{$basePath}/js/nette.ajax.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;{$basePath}/js/main.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Použití je úplně jednoduché, ve zjednodušené formě:</p>
+<pre><code class=\\"lang-html\\">&lt;div id=&quot;image-uploader&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>Snažím se ukázat opravdu jen kritické minimum, protože ty základní věci jsou stejné, případně dohledatelné v dokumentaci, takže se dají oba dva návody z velké části doplnit. Minule jsem však zatáhl do ukázek i poměrně hodně balastu, takže ten u staré verze nechám, ale bude následovat opravdu jen to nejnutnější.</p>
+<p>Stejně tedy jako v předchozí verzi následuje javascriptový spouštěcí kód. Zde již vznikají určité odlišnosti:</p>
+<pre><code class=\\"lang-javascript\\">$(function () {
+    $(&#39;#image-uploader&#39;).fineUploader({
+        debug: true, //hodí se pro lazení
+        request: {
+            endpoint: &#39;pictures?do=uploadPicture&#39;
+        },
+        retry: {
+            enableAuto: true
         }
-        </code></pre>
-        <p>Zde celkem není co pokazit, ale pokud by bylo potřeba vrátit chybu, provede se to opět pomocí <code>JsonResponse</code>:</p>
-        <pre><code class=\\"lang-php\\">$this-&gt;sendResponse(new Nette\\\\Application\\\\Responses\\\\JsonResponse(array(
-                &#39;error&#39; =&gt; $exc-&gt;getMessage(),
-        )));
-        </code></pre>
-        <p>Samotná třída <code>UploadHandler</code> je pak opět k nalezení na <a href=\\"https://github.com/Widen/fine-uploader-server/blob/master/php/traditional/handler.php\\">GitHubu</a>. Tento návod tedy mohu zakončit vlastní citací:</p>
-        <blockquote>
-        <p>A to je vlastně úplně celé. Stačí tedy spustit Fine Uploader na straně klienta například podle oficiálních návodů, endpoint nastavit na nějaký handle v aplikaci a ten správně použit. To konkrétně obnáší odeslání JSON odpovědi o úspěšném zpracování obrázku.</p>
-        </blockquote>
-        ",
+    });
+});
+</code></pre>
+<p>Použití je tedy téměř stejné, až na to, že jsem úplně vypustil překlad textů. V této nové verzi jsou totiž novinkou šablony (ostatně proto také nové číslo verze). Uživatel-programátor má tak více pod kontrolou výsledný vzhled uploaderu:</p>
+<pre><code class=\\"lang-html\\">&lt;script type=&quot;text/template&quot; id=&quot;qq-template&quot;&gt;
+    &lt;div class=&quot;qq-uploader-selector qq-uploader&quot;&gt;
+        &lt;div class=&quot;qq-upload-drop-area-selector qq-upload-drop-area&quot; qq-hide-dropzone&gt;
+            &lt;span&gt;Přetáhněte soubory sem&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;qq-upload-button-selector qq-upload-button&quot;&gt;
+            &lt;div&gt;Klikněte, nebo přetáhněte obrázky&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;qq-drop-processing-selector qq-drop-processing&quot;&gt;
+           &lt;span&gt;Zpracovávám přetažené soubory...&lt;/span&gt;
+           &lt;span class=&quot;qq-drop-processing-spinner-selector qq-drop-processing-spinner&quot;&gt;&lt;/span&gt;
+        &lt;/span&gt;
+        &lt;ul class=&quot;qq-upload-list-selector qq-upload-list&quot;&gt;
+            &lt;li&gt;
+                &lt;div class=&quot;qq-progress-bar-container-selector&quot;&gt;
+                    &lt;div class=&quot;qq-progress-bar-selector qq-progress-bar&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;span class=&quot;qq-upload-spinner-selector qq-upload-spinner&quot;&gt;&lt;/span&gt;
+                &lt;img class=&quot;qq-thumbnail-selector&quot; qq-max-size=&quot;100&quot; qq-server-scale&gt;
+                &lt;span class=&quot;qq-edit-filename-icon-selector qq-edit-filename-icon&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;qq-upload-file-selector qq-upload-file&quot;&gt;&lt;/span&gt;
+                &lt;input class=&quot;qq-edit-filename-selector qq-edit-filename&quot; tabindex=&quot;0&quot; type=&quot;text&quot;&gt;
+                &lt;span class=&quot;qq-upload-size-selector qq-upload-size&quot;&gt;&lt;/span&gt;
+                &lt;a class=&quot;qq-upload-cancel-selector qq-upload-cancel&quot; href=&quot;#&quot;&gt;Zrušit&lt;/a&gt;
+                &lt;a class=&quot;qq-upload-retry-selector qq-upload-retry&quot; href=&quot;#&quot;&gt;Opakovat&lt;/a&gt;
+                &lt;a class=&quot;qq-upload-delete-selector qq-upload-delete&quot; href=&quot;#&quot;&gt;Smazat&lt;/a&gt;
+                &lt;span class=&quot;qq-upload-status-text-selector qq-upload-status-text&quot;&gt;&lt;/span&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+</code></pre>
+<p>A opět následuje zpracování v handleru:</p>
+<pre><code class=\\"lang-php\\">public function handleUploadPicture() {
+    $uploader = new \\\\UploadHandler();
+    $uploader-&gt;allowedExtensions = array(&quot;jpeg&quot;, &quot;jpg&quot;, &quot;png&quot;, &quot;gif&quot;);
+    $result = $uploader-&gt;handleUpload(__DIR__ . &#39;/../../www/uploads&#39;);
+    $this-&gt;sendResponse(new Nette\\\\Application\\\\Responses\\\\JsonResponse($result));
+}
+</code></pre>
+<p>Zde celkem není co pokazit, ale pokud by bylo potřeba vrátit chybu, provede se to opět pomocí <code>JsonResponse</code>:</p>
+<pre><code class=\\"lang-php\\">$this-&gt;sendResponse(new Nette\\\\Application\\\\Responses\\\\JsonResponse(array(
+        &#39;error&#39; =&gt; $exc-&gt;getMessage(),
+)));
+</code></pre>
+<p>Samotná třída <code>UploadHandler</code> je pak opět k nalezení na <a href=\\"https://github.com/Widen/fine-uploader-server/blob/master/php/traditional/handler.php\\">GitHubu</a>. Tento návod tedy mohu zakončit vlastní citací:</p>
+<blockquote>
+<p>A to je vlastně úplně celé. Stačí tedy spustit Fine Uploader na straně klienta například podle oficiálních návodů, endpoint nastavit na nějaký handle v aplikaci a ten správně použit. To konkrétně obnáší odeslání JSON odpovědi o úspěšném zpracování obrázku.</p>
+</blockquote>
+",
         }
       }
     />

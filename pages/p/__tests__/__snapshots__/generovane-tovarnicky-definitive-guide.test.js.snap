@@ -62,154 +62,154 @@ exports[`renders correctly 1`] = `
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>No dobře, možná ne úplně definitivní, ale užitečná příručka snad. Pokusím se zde rozebrat všechny potřebné stavy generovaných továrniček, které považuji za důležité a jejich co nejjednodušší zápis v configu. Jedná se hlavně o pohled z hlediska předávání parametrů. Doufám, že to ještě někdo doplní o nějaké vylepšení, nebo další příklad, abych mohl tento seznam rozšířit. To je jeden ze dvou důvodů tohoto typu článků. Ten druhý je, abych měl kam odkazovat, až se mě někdo bude opět ptát.</p>
-        <p>Celkem rozebírám tyto jednotlivé případy:</p>
-        <ul>
-        <li><a href=\\"#toc-predani-parametru-z-presenteru\\">Předání parametru z presenteru</a></li>
-        <li><a href=\\"#toc-predani-parametru-z-konfiguracniho-souboru\\">Předání parametru z konfiguračního souboru</a><ul>
-        <li>Metodou &quot;create&quot;</li>
-        <li>Metodou &quot;arguments&quot;</li>
-        </ul>
-        </li>
-        <li><a href=\\"#toc-all-in-one\\">All in One</a></li>
-        </ul>
-        <h2 id=\\"p-ed-n-parametru-z-presenteru\\">Předání parametru z presenteru <a href=\\"#p-ed-n-parametru-z-presenteru\\">#</a></h2><p>Toto považuji za asi úplně nejčastější požadavek. Komponenta je jednoduchá:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        class ParameterComponent extends Nette\\\\Application\\\\UI\\\\Control {
-            public function __construct(array $xxx) {}
-        }
-        
-        interface IParameterComponentFactory {
-        
-            /** @return ParameterComponent */
-            function create(array $xxx);
-        
-        }
-        </code></pre>
-        <p>Důležité je, že jak datový typ, tak název proměnné se musí shodovat. Config pak není o nic složitější:</p>
-        <pre><code class=\\"lang-neon\\">services:
-            - IParameterComponentFactory
-        </code></pre>
-        <p>Kontejner se potom vygeneruje dle očekávání:</p>
-        <pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IParameterComponentFactoryImpl_28_IParameterComponentFactory implements IParameterComponentFactory {
-        
-            private $container;
-        
-            public function __construct(Container_59ca411ae5 $container) {
-                $this-&gt;container = $container;
-            }
-        
-            public function create(array $xxx) {
-                $service = new ParameterComponent($xxx);
-                return $service;
-            }
-        
-        }
-        </code></pre>
-        <p>Samotné použití je velmi jednoduché. Stačí si nechat v presenteru předat interface <code>IParameterComponentFactory</code> například pomocí anotace <code>@inject</code> a nad ním volat metodu <code>create</code>. Fígl je právě v tom, že vygenerovaný kód v kontejneru tento interface implementuje a odvádí tak zbytečnou práci za vás. Bez dalších změn lze využít autowire zaregistrovaných služeb. Předání parametru z configu a zároveň získání další závislosti pak může vypadat třeba takto (pouze upravená předchozí komponenta):</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        class ParameterComponent extends Nette\\\\Application\\\\UI\\\\Control {
-            public function __construct(array $xxx, App\\\\Model\\\\UserManager $userManager) {}
-        }
-        </code></pre>
-        <h2 id=\\"p-ed-n-parametru-z-konfigura-n-ho-souboru\\">Předání parametru z konfiguračního souboru <a href=\\"#p-ed-n-parametru-z-konfigura-n-ho-souboru\\">#</a></h2><p>Toto je trošku horší, ale pořád snadno pochopitelné. Kód komponenty bude opět podobný:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        class ConfigComponent extends Nette\\\\Application\\\\UI\\\\Control {
-            public function __construct($configParam) {}
-        }
-        
-        interface IConfigComponentFactory {
-            function create();
-        }
-        </code></pre>
-        <p>Všimněte si, že je v tomto případě úplně zbytečná <code>@return</code> anotace. Co má factory vytvářet lze totiž specifikovat v configu:</p>
-        <pre><code class=\\"lang-neon\\">parameters:
-            testkey1: testvalue1
-        
-        services:
-            - implement: IConfigComponentFactory
-              create: ConfigComponent(%testkey1%)
-        </code></pre>
-        <p>Zde by skoro šlo přestat interface úplně psát. To ale není v současné době možné a vygenerovaný kód je pak přesně takový, jaký by měl být:</p>
-        <pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IConfigComponentFactoryImpl_33 implements IConfigComponentFactory {
-        
-            private $container;
-        
-            public function __construct(Container_59ca411ae5 $container) {
-                $this-&gt;container = $container;
-            }
-        
-            public function create() {
-                $service = new ConfigComponent(&#39;testvalue1&#39;);
-                return $service;
-            }
-        
-        }
-        </code></pre>
-        <p>Alternativně lze zvolit populárnější způsob a upravit konfigurační soubor takto:</p>
-        <pre><code class=\\"lang-neon\\">parameters:
-            testkey1: testvalue1
-        
-        services:
-            - implement: IConfigComponentFactory
-              arguments: [%testkey1%]
-        </code></pre>
-        <p>Vygenerovaný výsledek je stejný. V tomto případě je však nutné dát pozor na to, že při psaní interface je nutné psát jej i s <code>@return</code> anotací.</p>
-        <p>Ok, toto je snad jasné. Co to trošku zkomplikovat?</p>
-        <h2 id=\\"all-in-one\\">All in One <a href=\\"#all-in-one\\">#</a></h2><p>Toto snad bude dostatečně krajní případ. Pokusíme se vytvořit továrničku pro komponentu, která bude ke svému vytvoření vyžadovat parametr z configu, parametr z presenteru, službu a opět parametr z configu - vše přesně v tomto pořadí. A nebudu se v tom snažit hledat závislosti. Je vyžadováno něco takového:</p>
-        <pre><code class=\\"lang-php\\">&lt;?php
-        
-        class AllInComponent extends Nette\\\\Application\\\\UI\\\\Control {
-        
-            public function __construct($configParam1, array $userParam, App\\\\Model\\\\UserManager $userManager, $configParam2) {}
-        
-        }
-        
-        interface IAllInComponentFactory {
-        
-            /** @return AllInComponent */
-            function create(array $userParam);
-        
-        }
-        </code></pre>
-        <p>Je tedy jasné, že musím vytvořit <code>create</code> metodu s parametrem, který naplním v presenteru. Zde by opět <code>@return</code> anotace nemusela být. Je úplně zbytečná. A jak na ty parametry z configu? To už je přece vyřešené viz dřívější ukázky:</p>
-        <pre><code class=\\"lang-neon\\">parameters:
-            testkey1: testvalue1
-            testkey2: testvalue2
-        
-        services:
-            - implement: IAllInComponentFactory
-              create: AllInComponent(configParam2: %testkey2%, configParam1: %testkey1%)
-        </code></pre>
-        <p>Zde jsem si to ještě zkomplikoval tím, že jsem zadal parametry v obráceném pořadí (což by přesně takto fungovalo). Abych docílil správného pořadí, musím parametry správně pojmenovat (shodně s konstruktorem komponenty). A vygenerovaný kód? Radost pohledět:</p>
-        <pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IAllInComponentFactoryImpl_32 implements IAllInComponentFactory {
-        
-            private $container;
-        
-            public function __construct(Container_59ca411ae5 $container) {
-                $this-&gt;container = $container;
-            }
-        
-            public function create(array $userParam) {
-                $service = new AllInComponent(&#39;testvalue1&#39;, $userParam, $this-&gt;container-&gt;getService(&#39;27_App_Model_UserManager&#39;), &#39;testvalue2&#39;);
-                return $service;
-            }
-        
-        }
-        </code></pre>
-        <p>I v tomto případě je možné zvolit jiný (úspornější) zápis v konfiguračním souboru. Vygenerovaný výstup je opět stejný:</p>
-        <pre><code class=\\"lang-neon\\">parameters:
-            testkey1: testvalue1
-            testkey2: testvalue2
-        
-        services:
-            - implement: IAllInComponentFactory
-              arguments: [configParam2: %testkey2%, configParam1: %testkey1%]
-        </code></pre>
-        <p>Teď mě nenapadá, jestli je někdy (běžně) potřeba ještě něco složitějšího. Toto jsou však dva základní přístupy zkombinované do jedné ukázky. Podívejte se na všechny tyto <a href=\\"https://github.com/mrtnzlml/generated-factories\\">příklady podrobněji na GitHubu</a>.</p>
-        ",
+<p>Celkem rozebírám tyto jednotlivé případy:</p>
+<ul>
+<li><a href=\\"#toc-predani-parametru-z-presenteru\\">Předání parametru z presenteru</a></li>
+<li><a href=\\"#toc-predani-parametru-z-konfiguracniho-souboru\\">Předání parametru z konfiguračního souboru</a><ul>
+<li>Metodou &quot;create&quot;</li>
+<li>Metodou &quot;arguments&quot;</li>
+</ul>
+</li>
+<li><a href=\\"#toc-all-in-one\\">All in One</a></li>
+</ul>
+<h2 id=\\"p-ed-n-parametru-z-presenteru\\">Předání parametru z presenteru <a href=\\"#p-ed-n-parametru-z-presenteru\\">#</a></h2><p>Toto považuji za asi úplně nejčastější požadavek. Komponenta je jednoduchá:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+class ParameterComponent extends Nette\\\\Application\\\\UI\\\\Control {
+    public function __construct(array $xxx) {}
+}
+
+interface IParameterComponentFactory {
+
+    /** @return ParameterComponent */
+    function create(array $xxx);
+
+}
+</code></pre>
+<p>Důležité je, že jak datový typ, tak název proměnné se musí shodovat. Config pak není o nic složitější:</p>
+<pre><code class=\\"lang-neon\\">services:
+    - IParameterComponentFactory
+</code></pre>
+<p>Kontejner se potom vygeneruje dle očekávání:</p>
+<pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IParameterComponentFactoryImpl_28_IParameterComponentFactory implements IParameterComponentFactory {
+
+    private $container;
+
+    public function __construct(Container_59ca411ae5 $container) {
+        $this-&gt;container = $container;
+    }
+
+    public function create(array $xxx) {
+        $service = new ParameterComponent($xxx);
+        return $service;
+    }
+
+}
+</code></pre>
+<p>Samotné použití je velmi jednoduché. Stačí si nechat v presenteru předat interface <code>IParameterComponentFactory</code> například pomocí anotace <code>@inject</code> a nad ním volat metodu <code>create</code>. Fígl je právě v tom, že vygenerovaný kód v kontejneru tento interface implementuje a odvádí tak zbytečnou práci za vás. Bez dalších změn lze využít autowire zaregistrovaných služeb. Předání parametru z configu a zároveň získání další závislosti pak může vypadat třeba takto (pouze upravená předchozí komponenta):</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+class ParameterComponent extends Nette\\\\Application\\\\UI\\\\Control {
+    public function __construct(array $xxx, App\\\\Model\\\\UserManager $userManager) {}
+}
+</code></pre>
+<h2 id=\\"p-ed-n-parametru-z-konfigura-n-ho-souboru\\">Předání parametru z konfiguračního souboru <a href=\\"#p-ed-n-parametru-z-konfigura-n-ho-souboru\\">#</a></h2><p>Toto je trošku horší, ale pořád snadno pochopitelné. Kód komponenty bude opět podobný:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+class ConfigComponent extends Nette\\\\Application\\\\UI\\\\Control {
+    public function __construct($configParam) {}
+}
+
+interface IConfigComponentFactory {
+    function create();
+}
+</code></pre>
+<p>Všimněte si, že je v tomto případě úplně zbytečná <code>@return</code> anotace. Co má factory vytvářet lze totiž specifikovat v configu:</p>
+<pre><code class=\\"lang-neon\\">parameters:
+    testkey1: testvalue1
+
+services:
+    - implement: IConfigComponentFactory
+      create: ConfigComponent(%testkey1%)
+</code></pre>
+<p>Zde by skoro šlo přestat interface úplně psát. To ale není v současné době možné a vygenerovaný kód je pak přesně takový, jaký by měl být:</p>
+<pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IConfigComponentFactoryImpl_33 implements IConfigComponentFactory {
+
+    private $container;
+
+    public function __construct(Container_59ca411ae5 $container) {
+        $this-&gt;container = $container;
+    }
+
+    public function create() {
+        $service = new ConfigComponent(&#39;testvalue1&#39;);
+        return $service;
+    }
+
+}
+</code></pre>
+<p>Alternativně lze zvolit populárnější způsob a upravit konfigurační soubor takto:</p>
+<pre><code class=\\"lang-neon\\">parameters:
+    testkey1: testvalue1
+
+services:
+    - implement: IConfigComponentFactory
+      arguments: [%testkey1%]
+</code></pre>
+<p>Vygenerovaný výsledek je stejný. V tomto případě je však nutné dát pozor na to, že při psaní interface je nutné psát jej i s <code>@return</code> anotací.</p>
+<p>Ok, toto je snad jasné. Co to trošku zkomplikovat?</p>
+<h2 id=\\"all-in-one\\">All in One <a href=\\"#all-in-one\\">#</a></h2><p>Toto snad bude dostatečně krajní případ. Pokusíme se vytvořit továrničku pro komponentu, která bude ke svému vytvoření vyžadovat parametr z configu, parametr z presenteru, službu a opět parametr z configu - vše přesně v tomto pořadí. A nebudu se v tom snažit hledat závislosti. Je vyžadováno něco takového:</p>
+<pre><code class=\\"lang-php\\">&lt;?php
+
+class AllInComponent extends Nette\\\\Application\\\\UI\\\\Control {
+
+    public function __construct($configParam1, array $userParam, App\\\\Model\\\\UserManager $userManager, $configParam2) {}
+
+}
+
+interface IAllInComponentFactory {
+
+    /** @return AllInComponent */
+    function create(array $userParam);
+
+}
+</code></pre>
+<p>Je tedy jasné, že musím vytvořit <code>create</code> metodu s parametrem, který naplním v presenteru. Zde by opět <code>@return</code> anotace nemusela být. Je úplně zbytečná. A jak na ty parametry z configu? To už je přece vyřešené viz dřívější ukázky:</p>
+<pre><code class=\\"lang-neon\\">parameters:
+    testkey1: testvalue1
+    testkey2: testvalue2
+
+services:
+    - implement: IAllInComponentFactory
+      create: AllInComponent(configParam2: %testkey2%, configParam1: %testkey1%)
+</code></pre>
+<p>Zde jsem si to ještě zkomplikoval tím, že jsem zadal parametry v obráceném pořadí (což by přesně takto fungovalo). Abych docílil správného pořadí, musím parametry správně pojmenovat (shodně s konstruktorem komponenty). A vygenerovaný kód? Radost pohledět:</p>
+<pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IAllInComponentFactoryImpl_32 implements IAllInComponentFactory {
+
+    private $container;
+
+    public function __construct(Container_59ca411ae5 $container) {
+        $this-&gt;container = $container;
+    }
+
+    public function create(array $userParam) {
+        $service = new AllInComponent(&#39;testvalue1&#39;, $userParam, $this-&gt;container-&gt;getService(&#39;27_App_Model_UserManager&#39;), &#39;testvalue2&#39;);
+        return $service;
+    }
+
+}
+</code></pre>
+<p>I v tomto případě je možné zvolit jiný (úspornější) zápis v konfiguračním souboru. Vygenerovaný výstup je opět stejný:</p>
+<pre><code class=\\"lang-neon\\">parameters:
+    testkey1: testvalue1
+    testkey2: testvalue2
+
+services:
+    - implement: IAllInComponentFactory
+      arguments: [configParam2: %testkey2%, configParam1: %testkey1%]
+</code></pre>
+<p>Teď mě nenapadá, jestli je někdy (běžně) potřeba ještě něco složitějšího. Toto jsou však dva základní přístupy zkombinované do jedné ukázky. Podívejte se na všechny tyto <a href=\\"https://github.com/mrtnzlml/generated-factories\\">příklady podrobněji na GitHubu</a>.</p>
+",
         }
       }
     />
