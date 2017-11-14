@@ -1,5 +1,11 @@
 [
   {
+    "timestamp": 1510619991384,
+    "title": "Persist your GraphQL queries!",
+    "slug": "persist-your-graphql-queries",
+    "preview": "GraphQL is very powerful and I really love it. But it&#39;s not really production ready by default. There is a lot of things you need to prepare and o..."
+  },
+  {
     "timestamp": 1509494028280,
     "title": "GraphQL Summit 2017 - San Francisco",
     "slug": "graphql-summit-2017-san-francisco",
