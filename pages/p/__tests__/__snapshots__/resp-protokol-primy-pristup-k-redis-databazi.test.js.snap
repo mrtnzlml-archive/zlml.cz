@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       RESP protokol - přímý přístup k Redis databázi
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p><img src=\\"*RESP*\\" alt=\\"\\">(<a href=\\"http://redis.io/topics/protocol\\">http://redis.io/topics/protocol</a>) (<strong>RE</strong>dis <strong>S</strong>erialization <strong>P</strong>rotocol) je něco, s čím se asi většina lidí nepotká. Důvod je prostý. Tento protokol je většinou zabalen hluboko v knihovně, která pracuje s Redis databází. Existují však situace, kdy se tento protokol hodí. Jednou ze situací je stav, kdy potřebujete předat, nebo naopak získat z Redisu nějaká data a všechno ostatní vyjma RESP komunikace je zbytečné zdržování (u mě třeba sypání dat z procesoru přímo do Redisu). Druhý případ nastane v okamžiku, kdy potřebujete zajistit komunikaci klient-server a potřebujete zvolit vhodný formát přenosu informací. Jedná se tedy o použití tohoto protokolu úplně mimo Redis. Důvodů může být celá řada, nejhlavnější by však byl asi ten, že se s RESP formátem dat dá snadno pracovat, protože používá prefixový zápis.</p>
@@ -85,7 +85,7 @@ key\\\\r</code> (první je délka pole, následuje kombinace předchozích)</li>
 </ul>
 <p>To je celé, žádná věda v tom není. Je to skutečně jednoduchý protokol a to je super, protože se s ním dá snadno pracovat. Navíc lze poslat celý dlouhý text obsahující více příkazů v jednom spojení.</p>
 <h2 id=\\"implementace-v-node-js\\">Implementace v Node.js <a href=\\"#implementace-v-node-js\\">#</a></h2><p>V Node.js by teď měla být realizace velmi jednoduchá. Napíšeme si krátký TCP client, který se nám napojí na Redis databázi (většinou port 6379) a budeme posílat/přijímat data:</p>
-<pre><code class=\\"lang-javascript\\">var net = require(&#39;net&#39;);
+<pre><code class=\\"hljs lang-javascript\\">var net = require(&#39;net&#39;);
 
 var client = net.connect({port: 6379}, function() {
     console.log(&#39;Connected to the Redis server.&#39;);
@@ -145,7 +145,7 @@ client.on(&#39;end&#39;, function() {
 <p><span style=\\"color:green\\">Ještě jednu poznámku, kterou jsem do původního článku nezahrnul. Proč jsou udesílaná data zabalena v RESP poli? Vychází to z toho, že podle dokumentace, by klient měl posílat na server pole bulk stringů. Nicméně dobře funkční a validní zápis je i bez pole (<code>client.write(&#39;GET key\\\\r
 &#39;);</code>) jen musí být opět ukončen pomocí CRLF.</span></p>
 <p>Odesíláme do Redis databáze celkem 6 příkazů. První je obyčejný <code>PING</code>, následuje <code>SET</code> a <code>GET</code> klíče, <code>PFADD</code> a <code>PFCOUNT</code> z HyperLogLog datového dypu a nakonec jen smazání databáze. Co bude výstupem?</p>
-<pre><code>+PONG
+<pre><code class=\\"hljs\\">+PONG
 +OK
 $5
 xxxxx
@@ -153,13 +153,13 @@ xxxxx
 :3
 +OK
 </code></pre><p>Jak je možné, že server vrátil 7 odpovědí? Je to prosté, upravíme si datový callback ať je zřejmé, co skutečně dostáváme za data:</p>
-<pre><code class=\\"lang-javascript\\">client.on(&#39;data&#39;, function(data) {
-    console.log(JSON.stringify(data.toString()));
+<pre><code class=\\"hljs lang-javascript\\">client.on(<span class=\\"hljs-string\\">'data'</span>, <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span>(<span class=\\"hljs-params\\">data</span>) </span>{
+    <span class=\\"hljs-built_in\\">console</span>.log(<span class=\\"hljs-built_in\\">JSON</span>.stringify(data.toString()));
     client.end();
 });
 </code></pre>
 <p>Teď už bude výstup o něco jiný:</p>
-<pre><code>&quot;+PONG\\\\r
+<pre><code class=\\"hljs\\">&quot;+PONG\\\\r
 +OK\\\\r
 $5\\\\r
 xxxxx\\\\r
@@ -169,7 +169,7 @@ xxxxx\\\\r
 &quot;
 </code></pre><p>A vše již dává smysl. První odpověď je <code>PONG</code> (na <code>PING</code>), následuje reakce <code>OK</code> na nastavení klíče, odpověď ve formě bulk stringu, který má dvě části - délku a samotnou textovou odpověď (proto to odřádkování navíc), následuje odpověď z <code>PFADD</code> (0 nebo 1 podle situace) a také odpověď z <code>PFCOUNT</code> (mohutnost množiny v HyperLogLog). Poslední <code>OK</code> je reakce na <code>FLUSHDB</code>. Jak je vidět, tak i v odpovědi je prvním znakem formát dat dané odpovědi.</p>
 <p>Takto jsem to celkem zbytečně (ale pro přehlednost) rozepisoval. Celá komunikace směrem k serveru by se dala napsat do jednoho požadavku:</p>
-<pre><code>*1\\\\r
+<pre><code class=\\"hljs\\">*1\\\\r
 $4\\\\r
 PING\\\\r
 *3\\\\r

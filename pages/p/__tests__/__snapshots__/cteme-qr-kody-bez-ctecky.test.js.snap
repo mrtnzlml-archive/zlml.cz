@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Čteme QR kódy bez čtečky
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p><img src=\\"https://zlmlcz-media.s3-eu-west-1.amazonaws.com/2139a61c-efc4-4e3c-b630-5c3cbf9258df/qrcode-ahoj.png\\" alt=\\"\\"></p>
@@ -66,7 +66,7 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"trocha-nezbytn-teorie\\">Trocha nezbytné teorie <a href=\\"#trocha-nezbytn-teorie\\">#</a></h2><p><img src=\\"https://zlmlcz-media.s3-eu-west-1.amazonaws.com/312d5904-ab94-4877-9743-8ec902fbc50a/qrcode-parts.png\\" alt=\\"\\"></p>
 <p>QR kód asi viděl každý. Stejně tak předpokládám, že spoustu lidí tuší, že QR kód dodržuji určitá pravidla, aby jej šlo přečíst strojově. Jedná se zejména o &quot;finder pattern&quot;, tedy ty velké čtverce, které slouží k zaměření čtečky a určení orientace kódu. Díky tomu, že jsou tři, tak lze QR kód přečíst i pokud je vzhůru nohama. Dalším významným prvkem jsou separátory, které obklopují právě tyto čtverce a slouží k oddělení zaměřovačů od zbytku kódu. Žlutě jsem zvýraznil tzv. &quot;timing patterns&quot;. Ty se táhnout z rohu do rohu zaměřovacích čtverců, kdy se celou dobu střídá černá a bílá barva a slouží opět pro čtečky například k určení velikosti celého kódu. Na takto malém kódu nejsou žádní informace i verzi, ani korekční body.</p>
 <p>Nejdůležitější jsou však červené a zelené části. Zde jsou uloženy informace i formátu, které následně také využijeme. Je zajímavé, že se jak červená část, tak zelená část na kódu vždy dvakrát opakuje. Informace je očíslována čísly 1-15 s tím, že kolem levého horního zaměřovače je informace celá a ta samá informace je ještě rozdělena a umístěna kolem zbylých dvou zaměřovačů. Je zde ještě jedna zajímavost. V levém dolním rohu nad číslem 9 je černé místo, tzv. &quot;dark module&quot;. Toto místo by mělo být na všech kódech černé. Jedná se přebytečné místo, které vzniká při zdvojování informace o formátu. Podle specifikace by to tak mělo být, ale ne vždy to platí. Pro nás je však zajímavá jediná část z celé 15 bitů dlouhé informace a to konkrétně bity umístněné na pozici 11, 12 a 13, tedy v zelené části. Právě ty si nesou tu nejdůležitější informaci o masce. Všechny ostatní části informace slouží ke korekci chyb. Celkově se ve výsledku ukáže, že kromě samotné informace je v QR kódu sloustu &quot;zbytečných&quot; věcí, které informaci nenesou. V mašem případě je tedy maska <code>111</code> (černé místo je 1 a bílé 0). Tuto informaci je však ještě potřeba dekódovat pomocí XOR součtu přičtením hodnoty <code>101</code>, tedy:</p>
-<pre><code>111
+<pre><code class=\\"hljs\\">111
 101 /XOR
 ---
 010
@@ -117,11 +117,11 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"hrajeme-si-na-te-ku\\">Hrajeme si na čtečku <a href=\\"#hrajeme-si-na-te-ku\\">#</a></h2><p><img src=\\"https://zlmlcz-media.s3-eu-west-1.amazonaws.com/0ed74ba7-ddec-40da-ab12-4e6b8d82103c/qrcode-decode.png\\" alt=\\"\\"></p>
 <p>Předchozí část byla možná trošku složitější, ale když se na to podíváte zpětně je to vlastně velice jednoduché. Stačí přečíst 3 bity z celého kódu, provést jednoduchý XOR a jak se ukáže dále, tak stačí invertovat pouze jeden sloupec, protože více jich není potřeba.</p>
 <p>Podívejte se nyní na levý obrázek. Ten ukazuje, jak budeme číst uloženou informaci. Barevně znázorněná část je kompletní informace. Zbytek kódu je pro nás v tuto chvíli jen odpad. Barevně zvýrazněná část se ještě dělí na tři podčásti. Červená oblast obsahuje informaci o módu. Bity čteme vždy podle čísel a šipek. Tento QR kód je tedy v módu <code>0100</code> což je mód &quot;BYTE&quot;. Data tedy budeme rozdělovat tak, aby měla každý část 1 byte, tedy 8 bitů. Tyto módy a další informace jsou velmi podrobně popsány v oficiální dokumentaci. Modrá část nám ještě prozrazuje informaci o délce, binárně tedy <code>00000100</code> což je v desítkové soustavě číslo 4. Takže informace v tomto QR kódu má délku 4 znaky. Opíšeme si tedy řadu bitů:</p>
-<pre><code>01100001 01101000 01101111 01101010
+<pre><code class=\\"hljs\\">01100001 01101000 01101111 01101010
 </code></pre><p>Zde by mohl být trošku zádrhel pro lidi, co neumí ASCII tabulku. Prozradím tedy malý fígl. Pokud binární čásla prevedeme do decimální soustavy, což je velmi jednoduché, získáme následující zápis:</p>
-<pre><code>97 104 111 106
+<pre><code class=\\"hljs\\">97 104 111 106
 </code></pre><p>A teď už je to jen posunutá abeceda, protože číslo 97 je malé <strong>a</strong>. Výsledkem je tedy po chvilce abecedování:</p>
-<pre><code>a h o j
+<pre><code class=\\"hljs\\">a h o j
 </code></pre><p>To nebylo tak těžké, že? Je to sice absurdní a pravděpodobně nikdy nikoho neuvidím s tužkou a papírem před QR kódem, ale i tak si myslím, že je dobré tyto věci vědět, když už se QR kód používá tak často. Doporučuji všem přečíst si dokument <em>ISO/IEC 18004:2006</em>, který řeší právě QR kódy. Je to nesmírně zajímavý dokument plný obrázků a úplných popisků, ačkoliv je i v tomto dokumentu pár drobných chyb.</p>
 ",
         }

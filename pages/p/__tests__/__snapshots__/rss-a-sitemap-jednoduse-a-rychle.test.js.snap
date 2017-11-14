@@ -53,106 +53,106 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       RSS a Sitemap jednoduše a rychle
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Pár článků zpět jsem ukazoval několik příkladů, jak tvořit různé routy. Ukazoval jsem routy pro RSS i sitemap.xml. Nikde jsem však zatím neukazoval jak je to jednoduše realizovatelné. Dokonce tak jednoduše, že je škoda tyto soubory nevyužít na jakémkoliv webu, protože mají poměrně velký potenciál.</p>
 <p>Začněme HomepagePresenterem (DEV Nette):</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-class HomepagePresenter extends BasePresenter {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">HomepagePresenter</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">BasePresenter</span> </span>{
 
-    /** @var \\\\Model\\\\Posts @inject */
-    public $posts;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@var</span> \\\\Model\\\\Posts <span class=\\"hljs-doctag\\">@inject</span> */</span>
+    <span class=\\"hljs-keyword\\">public</span> $posts;
 
-    public function renderRss() {
-        $this-&gt;template-&gt;posts = $this-&gt;posts-&gt;getAllPosts()-&gt;order(&#39;date DESC&#39;)-&gt;limit(50);
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">renderRss</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;template-&gt;posts = <span class=\\"hljs-keyword\\">$this</span>-&gt;posts-&gt;getAllPosts()-&gt;order(<span class=\\"hljs-string\\">'date DESC'</span>)-&gt;limit(<span class=\\"hljs-number\\">50</span>);
     }
 
-    public function renderSitemap() {
-        $this-&gt;template-&gt;sitemap = $this-&gt;posts-&gt;getAllPosts();
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">renderSitemap</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;template-&gt;sitemap = <span class=\\"hljs-keyword\\">$this</span>-&gt;posts-&gt;getAllPosts();
     }
 
 }
 </code></pre>
 <p>Tímto říkám, že do šablon <code>rss.latte</code> a <code>sitemap.latte</code> předávám všechny články, nebo jen některé, protože nechci dělat dump celé databáze pro RSS.</p>
 <p>Pro úplnost ještě \\\\Model\\\\Posts:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-namespace Model;
+<span class=\\"hljs-keyword\\">namespace</span> <span class=\\"hljs-title\\">Model</span>;
 
-class Posts extends \\\\Nette\\\\Object {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Posts</span> <span class=\\"hljs-keyword\\">extends</span> \\\\<span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Object</span> </span>{
 
-    /** @var \\\\Nette\\\\Database\\\\SelectionFactory @inject */
-    public $sf;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@var</span> \\\\Nette\\\\Database\\\\SelectionFactory <span class=\\"hljs-doctag\\">@inject</span> */</span>
+    <span class=\\"hljs-keyword\\">public</span> $sf;
 
-    /**
-     * @return Nette\\\\Database\\\\Table\\\\Selection
-     */
-    public function getAllPosts() {
-        return $this-&gt;sf-&gt;table(&#39;posts&#39;);
+    <span class=\\"hljs-comment\\">/**
+     * <span class=\\"hljs-doctag\\">@return</span> Nette\\\\Database\\\\Table\\\\Selection
+     */</span>
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getAllPosts</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;sf-&gt;table(<span class=\\"hljs-string\\">'posts'</span>);
     }
 
 }
 </code></pre>
 <p>A následují samotné šablony, které musí dodržovat určitý formát, takže se lehce odlišují od normálních šablon. Sitemap.latte:</p>
-<pre><code class=\\"lang-html\\">{contentType application/xml}
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class=\\"hljs lang-html\\">{contentType application/xml}
+<span class=\\"php\\"><span class=\\"hljs-meta\\">&lt;?</span>xml version=<span class=\\"hljs-string\\">\\"1.0\\"</span> encoding=<span class=\\"hljs-string\\">\\"UTF-8\\"</span><span class=\\"hljs-meta\\">?&gt;</span></span>
 
-&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">urlset</span> <span class=\\"hljs-attr\\">xmlns</span>=<span class=\\"hljs-string\\">\\"http://www.sitemaps.org/schemas/sitemap/0.9\\"</span>&gt;</span>
     {foreach $sitemap as $s}
-        &lt;url&gt;
-            &lt;loc&gt;{link //Single:article $s-&gt;id}&lt;/loc&gt;
-        &lt;/url&gt;
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">url</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">loc</span>&gt;</span>{link //Single:article $s-&gt;id}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">loc</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">url</span>&gt;</span>
     {/foreach}
-&lt;/urlset&gt;
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">urlset</span>&gt;</span>
 </code></pre>
 <p>Rss.latte:</p>
-<pre><code class=\\"lang-html\\">{contentType application/xml}
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class=\\"hljs lang-html\\">{contentType application/xml}
+<span class=\\"php\\"><span class=\\"hljs-meta\\">&lt;?</span>xml version=<span class=\\"hljs-string\\">\\"1.0\\"</span> encoding=<span class=\\"hljs-string\\">\\"UTF-8\\"</span><span class=\\"hljs-meta\\">?&gt;</span></span>
 
-&lt;rss version=&quot;2.0&quot;&gt;
-    &lt;channel&gt;
-        &lt;title&gt;Martin Zlámal [BLOG]&lt;/title&gt;
-        &lt;link&gt;{link //:Homepage:default}&lt;/link&gt;
-        &lt;description&gt;Nejnovější články na blogu.&lt;/description&gt;
-        &lt;language&gt;cs&lt;/language&gt;
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">rss</span> <span class=\\"hljs-attr\\">version</span>=<span class=\\"hljs-string\\">\\"2.0\\"</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">channel</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">title</span>&gt;</span>Martin Zlámal [BLOG]<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">title</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">link</span>&gt;</span>{link //:Homepage:default}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">link</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">description</span>&gt;</span>Nejnovější články na blogu.<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">description</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">language</span>&gt;</span>cs<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">language</span>&gt;</span>
 
-        &lt;item n:foreach=&quot;$posts as $post&quot;&gt;
-            &lt;title&gt;{$post-&gt;title}&lt;/title&gt;
-            &lt;link&gt;{link //:Single:article $post-&gt;id}&lt;/link&gt;
-            &lt;description&gt;{$post-&gt;body|texy|striptags}&lt;/description&gt;
-        &lt;/item&gt;
-    &lt;/channel&gt;
-&lt;/rss&gt;
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">item</span> <span class=\\"hljs-attr\\">n:foreach</span>=<span class=\\"hljs-string\\">\\"$posts as $post\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">title</span>&gt;</span>{$post-&gt;title}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">title</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">link</span>&gt;</span>{link //:Single:article $post-&gt;id}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">link</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">description</span>&gt;</span>{$post-&gt;body|texy|striptags}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">description</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">item</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">channel</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">rss</span>&gt;</span>
 </code></pre>
 <p>A pro úplnou úplnost i router:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-namespace App;
-use Nette;
-use Nette\\\\Application\\\\Routers\\\\Route;
-use Nette\\\\Application\\\\Routers\\\\RouteList;
-use Nette\\\\Application\\\\Routers\\\\SimpleRouter;
+<span class=\\"hljs-keyword\\">namespace</span> <span class=\\"hljs-title\\">App</span>;
+<span class=\\"hljs-keyword\\">use</span> <span class=\\"hljs-title\\">Nette</span>;
+<span class=\\"hljs-keyword\\">use</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Application</span>\\\\<span class=\\"hljs-title\\">Routers</span>\\\\<span class=\\"hljs-title\\">Route</span>;
+<span class=\\"hljs-keyword\\">use</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Application</span>\\\\<span class=\\"hljs-title\\">Routers</span>\\\\<span class=\\"hljs-title\\">RouteList</span>;
+<span class=\\"hljs-keyword\\">use</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Application</span>\\\\<span class=\\"hljs-title\\">Routers</span>\\\\<span class=\\"hljs-title\\">SimpleRouter</span>;
 
-class RouterFactory {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">RouterFactory</span> </span>{
 
-    /**
-     * @return \\\\Nette\\\\Application\\\\IRouter
-     */
-    public function createRouter() {
-        $router = new RouteList();
-        $router[] = new Route(&#39;sitemap.xml&#39;, &#39;Homepage:sitemap&#39;);
-        // na RSS se dá odkazovat normálně bez routeru, nebo:
-        $router[] = new Route(&#39;rss.xml&#39;, &#39;Homepage:rss&#39;);
-        //...
-        $router[] = new Route(&#39;&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, &#39;Homepage:default&#39;);
-        return $router;
+    <span class=\\"hljs-comment\\">/**
+     * <span class=\\"hljs-doctag\\">@return</span> \\\\Nette\\\\Application\\\\IRouter
+     */</span>
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">createRouter</span><span class=\\"hljs-params\\">()</span> </span>{
+        $router = <span class=\\"hljs-keyword\\">new</span> RouteList();
+        $router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'sitemap.xml'</span>, <span class=\\"hljs-string\\">'Homepage:sitemap'</span>);
+        <span class=\\"hljs-comment\\">// na RSS se dá odkazovat normálně bez routeru, nebo:</span>
+        $router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'rss.xml'</span>, <span class=\\"hljs-string\\">'Homepage:rss'</span>);
+        <span class=\\"hljs-comment\\">//...</span>
+        $router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]'</span>, <span class=\\"hljs-string\\">'Homepage:default'</span>);
+        <span class=\\"hljs-keyword\\">return</span> $router;
     }
 
 }

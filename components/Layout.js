@@ -62,6 +62,11 @@ class Layout extends React.Component<Props> {
             `}
           </style>
           <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/static/highlightjs.css"
+          />
         </Head>
 
         <Wrapper>{this.props.children}</Wrapper>

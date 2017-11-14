@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Výpočet mediánu
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<h2 id=\\"zad-n-\\">Zadání <a href=\\"#zad-n-\\">#</a></h2><p>Najděte v dostupné literatuře nebo vymyslete co nejlepší algoritmus pro výpočet mediánu.

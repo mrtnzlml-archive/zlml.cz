@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Přednáška z Nette na ZČU
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Dnes jsem měl tu čest přednášet na ZČU studentům předmětu KIV/WEB - Webové aplikace.

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Důležitost titulku podruhé (a naposled)
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Také bych mohl začít slovy: &quot;Jsem to ale trouba.&quot; V následujících několika odstavcích bych rád navázal na článek, kde jsem upozorňoval na to, jak je <code>title</code> tag důležitý (<a href=\\"http://zlml.cz/portal-zcu-docasne-mimo-provoz\\">http://zlml.cz/portal-zcu-docasne-mimo-provoz</a>). Což jsem si ostatně nechtěně vyzkoušel.</p>

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       ZČU - Nette je fajn, ale máme raději Javu
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p><img src=\\"https://zlmlcz-media.s3-eu-west-1.amazonaws.com/dd9f40eb-4a68-4b9d-9b09-e59a6beec7c8/screenshot-from-2015-12-09-17-54-49.png\\" alt=\\"\\"></p>

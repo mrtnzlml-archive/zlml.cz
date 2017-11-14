@@ -53,24 +53,24 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Tester: vlastní Output Handler
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Output Handler umožňuje změnit finální podobu výstupu z Nette Testeru. Výstup může <a href=\\"https://travis-ci.org/adeira/connector/jobs/173698139\\">vypadat například takto</a>. Osobně se mi tento výstup líbí víc, protože místo teček rovnou vidím co se skutečně spouští. Může se to hodit a sám jsem se přistil, že občas spouštím testy takto:</p>
-<pre><code>vendor/bin/run-tests -o tap
+<pre><code class=\\"hljs\\">vendor/bin/run-tests -o tap
 </code></pre><p>A to jen proto, abych viděl co se zrovna testuje (TAP). Napsat si vlastní výstupní handler je jednoduché. Jen je třeba dávat pozor na to, co je <a href=\\"https://tester.nette.org/#toc-setup-path\\">napsáno v dokumentaci</a>, protože to <a href=\\"https://github.com/nette/web-content/pull/473\\">nemusí být dobře</a>... :)</p>
 <p>Stačí Tester spouštět s přepínačem <code>--setup</code>:</p>
-<pre><code>vendor/bin/tester --setup tests/runner-setup.php
+<pre><code class=\\"hljs\\">vendor/bin/tester --setup tests/runner-setup.php
 
 # or Testbench edition:
 vendor/bin/run-tests --setup tests/runner-setup.php
 </code></pre><p>Skript <code>runner-setup.php</code> potom obsahuje samotný handler který může vypadat třeba takto (PHP 7):</p>
-<pre><code class=\\"lang-php\\">&lt;?php declare(strict_types = 1);
+<pre><code class=\\"hljs lang-php\\">&lt;?php declare(strict_types = 1);
 
 use Tester\\\\Dumper;
 use Tester\\\\Runner\\\\Runner;
@@ -84,19 +84,19 @@ $runner-&gt;outputHandlers[] = new class ($runner) extends \\\\Tester\\\\Runner\
     {
         ob_start();
         parent::begin();
-        echo rtrim(ob_get_clean()) . &#39; | &#39; . getenv(&#39;BOOTSTRAP&#39;) . &quot;
+        echo rtrim(ob_get_clean()) . ' | ' . getenv('BOOTSTRAP') . \\"
 
-&quot;;
+\\";
     }
 
     public function result($testName, $result, $message)
     {
         $outputs = [
-            Runner::PASSED =&gt; Dumper::color(&#39;green&#39;, &#39;✔ &#39; . $testName),
-            Runner::SKIPPED =&gt; Dumper::color(&#39;olive&#39;, &#39;s &#39; . $testName) . &quot;($message)&quot;,
-            Runner::FAILED =&gt; Dumper::color(&#39;red&#39;, &#39;✖ &#39; . $testName) . &quot;
-&quot; . $this-&gt;indent($message, 3) . &quot;
-&quot;,
+            Runner::PASSED =&gt; Dumper::color('green', '✔ ' . $testName),
+            Runner::SKIPPED =&gt; Dumper::color('olive', 's ' . $testName) . \\"($message)\\",
+            Runner::FAILED =&gt; Dumper::color('red', '✖ ' . $testName) . \\"
+\\" . $this-&gt;indent($message, 3) . \\"
+\\",
         ];
         echo $this-&gt;indent($outputs[$result], 2) . PHP_EOL;
     }
@@ -105,17 +105,17 @@ $runner-&gt;outputHandlers[] = new class ($runner) extends \\\\Tester\\\\Runner\
     {
         ob_start();
         parent::end();
-        echo &quot;
-&quot; . trim(ob_get_clean()) . &quot;
-&quot;;
+        echo \\"
+\\" . trim(ob_get_clean()) . \\"
+\\";
     }
 
     private function indent($message, $spaces)
     {
         if ($message) {
-            $result = &#39;&#39;;
+            $result = '';
             foreach (explode(PHP_EOL, $message) as $line) {
-                $result .= str_repeat(&#39; &#39;, $spaces) . $line . PHP_EOL;
+                $result .= str_repeat(' ', $spaces) . $line . PHP_EOL;
             }
             return rtrim($result, PHP_EOL);
         }
@@ -126,12 +126,12 @@ $runner-&gt;outputHandlers[] = new class ($runner) extends \\\\Tester\\\\Runner\
 </code></pre>
 <p>Je to vlastně jen o třech metodách. Začátek <code>begin</code> a konec <code>end</code> slouží jen k ořezání mezer popř. k doplnění dodatečných informací. Nejzajímavější je metoda <code>result</code>, která velmi mění způsob vykreslení jednotlivých řádek. Bohužel Tester sám od sebe ořezává výstupní texty a podle toho jak jsem to rychle prohlížel, tak s tím nejde nic moc udělat. Představoval bych si, že výstupní texty budou trošku lepší, ale to bez PR do <code>Nette\\\\Testr</code>u asi nepůjde...</p>
 <p>To by bylo. Pozornější čtenáři kódu mohou mít teď otázku co je to <code>getenv(&#39;BOOTSTRAP&#39;)</code>? Dlouze jsem řešil jak psát testy s ohledem na to, že se mi nechce pořád dělat require <code>bootstrap.php</code>, protože mám testy hodně zanořené a cesty k tomutou souboru bývají hodně dlouhé. Navíc je to nesmírně limitující, protože nelze jednoduše bez úpravy testů měnit adresářovou strukturu. Řešením je trošku to obejít:</p>
-<pre><code class=\\"lang-php\\">require getenv(&#39;BOOTSTRAP&#39;);
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">require</span> getenv(<span class=\\"hljs-string\\">'BOOTSTRAP'</span>);
 </code></pre>
 <p>Existuje <a href=\\"https://github.com/nette/tester/issues/275\\">více řešení</a>, ale toto mi sedělo nejlépe. Užitečné je pak napsat si vlastní skript <code>tests/run</code> a všechno to spojit:</p>
-<pre><code class=\\"lang-bash\\">#!/usr/bin/env bash
-
-BOOTSTRAP=$(pwd)/tests/bootstrap.php vendor/bin/run-tests --setup tests/runner-setup.php
+<pre><code class=\\"hljs lang-bash\\"><span class=\\"hljs-meta\\">#!/usr/bin/env bash
+</span>
+BOOTSTRAP=$(<span class=\\"hljs-built_in\\">pwd</span>)/tests/bootstrap.php vendor/bin/run-tests --setup tests/runner-setup.php
 </code></pre>
 <p>Spuštění je tak jednoduché, jako je jednoduché napsat <code>tests/run</code>. Pokud by si to chtěl někdo prohlédnout více detailně a popř. si s tím pohrát, tak je vše zde popisované implementováno v projektu <a href=\\"https://github.com/adeira/connector\\">Adeira\\\\Connector na GitHubu</a>.</p>
 <p>:)</p>

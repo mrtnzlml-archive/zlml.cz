@@ -53,17 +53,17 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Testování korelací v MATLABu
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Čím více mi proteklo kódu pod prsty, tím více mě testování baví. Nebaví mě psát super skvělé testy, ale baví mě brát testy jako součást vývoje. Mnohdy je to dokonce nejpohodlnější způsob. Na následujících řádcích ukážu jak se dá napsat algoritmus pro <a href=\\"https://en.wikipedia.org/wiki/Correlation_and_dependence\\">korelaci velkého množství dat</a> a hlavně <strong>jak jej otestovat</strong>. Konkrétně půjde o Pearsonův korelační koeficient.</p>
 <p>Pearsonův korelační koeficient lze popsat velmi jednoduchým vzorcem (podíl kovariance a směrodatných odchylek souborů dat - viz wiki). Implementace tohoto vzorce v MATLABu může vypadat třeba takto:</p>
-<pre><code>function rho = pearson(obj, X, Y)
+<pre><code class=\\"hljs\\">function rho = pearson(obj, X, Y)
     X = X(:);
     Y = Y(:);
     covariance = cov(X, Y);
@@ -73,13 +73,13 @@ exports[`renders correctly 1`] = `
     end
 end
 </code></pre><p>Tento vzorec vrací číslo v intervalu od -1 do +1, které charakterizuje míru závislosti Y na X. Jak toto chování otestovat? V MATLABu existuje připravený <a href=\\"https://www.mathworks.com/help/matlab/ref/matlab.unittest.testcase-class.html\\">TestCase</a> (od verze R2013a), takže pokud znáte TestCase třeba z Nette\\\\Testeru, tak je to velmi jednoduché (čti skoro stejné). Připravíme si samotnou testovací třídu:</p>
-<pre><code>classdef CorrelationTest &lt; matlab.unittest.TestCase
+<pre><code class=\\"hljs\\">classdef CorrelationTest &lt; matlab.unittest.TestCase
     methods (Test)
         % TODO - test methods
     end
 end
 </code></pre><p>A zbývá pouze doplnit pár základních testů. Zde bude vidět, že se vyplatí mít korelace implementované v rámci nějaké třídy. První test by mohl kontrolovat perfektní lineární závislost:</p>
-<pre><code>function testPearsonCorrelated(testCase)
+<pre><code class=\\"hljs\\">function testPearsonCorrelated(testCase)
     % actual, expected, ...
     X1 = [1 2 3 4]; Y1 = [1 2 3 4];
     X2 = [1 2 3 4]; Y2 = [1 3 5 7];
@@ -89,7 +89,7 @@ end
     testCase.verifyEqual(pearson(Correlation, X3, Y3), 1.0, &#39;AbsTol&#39;, 1e-15);
 end
 </code></pre><p>Testo test otestuje tři různě strmé lineární závislosti. Pearson by neměl na strmost reagovat - vždy by tento test měl vyjít +1. Pokud by se někomu nelíbilo opakování verify metod, lze přepsat tento test trošku chytřeji:</p>
-<pre><code>function testPearsonCorrelated(testCase)
+<pre><code class=\\"hljs\\">function testPearsonCorrelated(testCase)
     assert = @(x, y) testCase.verifyEqual(pearson(Correlation, x, y), 1.0, &#39;AbsTol&#39;, 1e-15);
     assert([1 2 3 4], [1 2 3 4]);
     assert([1 2 3 4], [1 3 5 7]);
@@ -97,7 +97,7 @@ end
 end
 </code></pre><p>Výsledek je stejný jen s pomocí <a href=\\"https://www.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html\\">anonymní funkce</a>. Důležitá je v tomto testu pouze metoda <code>verifyEqual</code>, která dělá přesně to co říká s tím, že se v tomto testu ignoruje zaokrouhlovací chybu (velmi malá absolutní tolerance).</p>
 <p>Tímto způsobem lze jednoduše Pearson metodu pořádně otestovat. Celá implementace i s testy je <a href=\\"https://gist.github.com/mrtnzlml/d12a93d0ce5bced2900dfbaee003c796\\">k dispozici online</a> (včetně Spearmanova algoritmu). Poslední test který ukážu je <a href=\\"https://en.wikipedia.org/wiki/Anscombe%27s_quartet\\">Anscombe&#39;s quartet</a> test. Zde je k dispozici sada hodnot, která vždy vytvoří jinou grafickou reprezentaci dat, ale Pearsonův korelační koeficient je pořád stejný. Opět mohu s výhodou využít anonymní funkci:</p>
-<pre><code>function testAnscombesQuartet(testCase)
+<pre><code class=\\"hljs\\">function testAnscombesQuartet(testCase)
     c = Correlation(false);
     test = @(x, y) testCase.verifyEqual(pearson(c, x, y), 0.816, &#39;RelTol&#39;, 0.001);
     X1 = [10 8 13 9 11 14 6 4 12 7 5];
@@ -114,7 +114,7 @@ end
     test(X4, Y4);
 end
 </code></pre><p>Každá sada bodů vyjde vždy 0.816 s relativní tolerancí 0.001. A konečně spuštění této sady testů:</p>
-<pre><code>&gt;&gt; run(CorrelationTest)
+<pre><code class=\\"hljs\\">&gt;&gt; run(CorrelationTest)
 Running CorrelationTest
 .........
 Done CorrelationTest

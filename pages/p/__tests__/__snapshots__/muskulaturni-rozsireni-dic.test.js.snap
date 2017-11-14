@@ -53,17 +53,17 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Muskulaturní rozšíření DIC
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>K čemu je DI rozšíření v Nette a jak se takové rozšíření píše <a href=\\"http://zlml.cz/rozsireni-pro-dic\\">už víme</a>. Teď se podíváme na způsob, jak pracovat s takovým rozšířením na úplně nové úrovni. Tento článek velké spoustě lidí změní způsob práce a aplikace budou najednou o level výš. Jak řekl jeden z účastníků školení: tak to je geniální... :)</p>
 <h2 id=\\"jak-strukturovat-aplikaci-\\">Jak strukturovat aplikaci? <a href=\\"#jak-strukturovat-aplikaci-\\">#</a></h2><p>O tom už jsem se párkrát rozepsal a ještě se také minimálně jednou rozepíšu. Proteď jen rychlý úvod. Za tu dobu co dělám s frameworky jsem došel k tomu, že nemám žádnou složku s názvem <code>app</code>. Například struktura <a href=\\"https://github.com/adeira/connector\\">tohoto projektu</a> vypadá (zjednodušeně) takto:</p>
-<pre><code>.
+<pre><code class=\\"hljs\\">.
 ├── bin
 │   └── console
 ├── config
@@ -84,7 +84,7 @@ exports[`renders correctly 1`] = `
 ├── vendor
 └── www
 </code></pre><p>Na tom není vůbec nic převratného. Důležitý je však způsob jakým se pracuje se službami (services). Pokud se totiž podíváme na obsah souboru <code>services.neon</code>, tak zjistíme, že je téměř prázdný:</p>
-<pre><code class=\\"lang-neon\\">services:
+<pre><code class=\\"hljs lang-neon\\">services:
     migrations.codeStyle: Adeira\\\\Connector\\\\Migrations\\\\CodeStyle
     router: Adeira\\\\Connector\\\\Routing\\\\RouterFactory::createRouter
 
@@ -94,7 +94,7 @@ exports[`renders correctly 1`] = `
         autowired: no
 </code></pre>
 <p>Přitom celý projekt má v tuto dobu zhruba 80 služeb, které je potřeba zaregistrovat. Kde je tedy ta magie? Asi je zřejmé kam mířím. O vše se starají rozšíření dependency injection kontejneru. Ty jsou zaregistrovány v <code>extensions.neon</code>:</p>
-<pre><code class=\\"lang-neon\\">extensions:
+<pre><code class=\\"hljs lang-neon\\">extensions:
     - Arachne\\\\ContainerAdapter\\\\DI\\\\ContainerAdapterExtension # because of migrations
     - Arachne\\\\EventDispatcher\\\\DI\\\\EventDispatcherExtension # because of migrations
     authentication: Adeira\\\\Connector\\\\Authentication\\\\Infrastructure\\\\DI\\\\Nette\\\\Extension
@@ -109,35 +109,35 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"roz-en-bez-znalosti-nette-di\\">Rozšíření bez znalosti Nette\\\\DI <a href=\\"#roz-en-bez-znalosti-nette-di\\">#</a></h2><p>Psaní rozšíření pro DIC v Nette může být (a je) poměrně složité. Trošku to chce vědět, jak Nette funguje uvnitř. To samozřejmě dává do rukou obrovský nástroj, ale současně to také klade obrovskou překážku. Přesně z tohoto důvodu vznikl balíček <a href=\\"https://github.com/adeira/compiler-extension\\">adeira/compiler-extension</a>, který jsem napsal pro lidi ve firmách, kteří se Nette teprve učí, chtějí psát aplikace tak jako já a na prozkoumávání Nette\\\\DI není čas. Záběr tohoto balíčku není jen zde. Sám jsem si ho moc oblíbil a dnes tak píšu rozšíření také (ne vždy, ale dost často).</p>
 <p>Myšlenka je taková, že NEON formát umí každý. Pokud ne, tak si stačí prohlédnout <a href=\\"https://ne-on.org/\\">tuto stránku</a> a je to všem jasné (používám velmi úspěšně na školeních a přednáškách). Zároveň je snadné naučit o čem je DI, proč se musí v Nette registrovat služby v konfiguračním souboru a jak funguje autowiring. To v zásadě stačí k tomu, aby člověk začal psát aplikace mnohem lépe než dříve. Jenže pokud chce někdo strukturovat aplikaci tak jak to dělám já, tak musí registrovat všechny služby do souboru <code>services.neon</code> a těch je desítky až stovky (ne-li tisíce). Navíc je to nesmysl - proč by si takový balíček nemohl nést všechno s sebou (včetně konfigurací)?</p>
 <p>Ale on může! Podívejte se, jak vypadá takové rozšíření <code>Authentication</code> balíčku:</p>
-<pre><code class=\\"lang-php\\">&lt;?php declare(strict_types = 1);
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span> <span class=\\"hljs-keyword\\">declare</span>(strict_types = <span class=\\"hljs-number\\">1</span>);
 
-namespace Adeira\\\\Connector\\\\Authentication\\\\Infrastructure\\\\DI\\\\Nette;
+<span class=\\"hljs-keyword\\">namespace</span> <span class=\\"hljs-title\\">Adeira</span>\\\\<span class=\\"hljs-title\\">Connector</span>\\\\<span class=\\"hljs-title\\">Authentication</span>\\\\<span class=\\"hljs-title\\">Infrastructure</span>\\\\<span class=\\"hljs-title\\">DI</span>\\\\<span class=\\"hljs-title\\">Nette</span>;
 
-use Adeira\\\\Connector\\\\Doctrine\\\\ORM;
+<span class=\\"hljs-keyword\\">use</span> <span class=\\"hljs-title\\">Adeira</span>\\\\<span class=\\"hljs-title\\">Connector</span>\\\\<span class=\\"hljs-title\\">Doctrine</span>\\\\<span class=\\"hljs-title\\">ORM</span>;
 
-class Extension extends \\\\Adeira\\\\CompilerExtension implements ORM\\\\DI\\\\IMappingFilesPathsProvider
-{
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Extension</span> <span class=\\"hljs-keyword\\">extends</span> \\\\<span class=\\"hljs-title\\">Adeira</span>\\\\<span class=\\"hljs-title\\">CompilerExtension</span> <span class=\\"hljs-keyword\\">implements</span> <span class=\\"hljs-title\\">ORM</span>\\\\<span class=\\"hljs-title\\">DI</span>\\\\<span class=\\"hljs-title\\">IMappingFilesPathsProvider</span>
+</span>{
 
-    public function provideConfig(): string
-    {
-        return __DIR__ . &#39;/config.neon&#39;;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">provideConfig</span><span class=\\"hljs-params\\">()</span>: <span class=\\"hljs-title\\">string</span>
+    </span>{
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">__DIR__</span> . <span class=\\"hljs-string\\">'/config.neon'</span>;
     }
 
-    public function getMappingFilesPaths(): array
-    {
-        return [__DIR__ . &#39;/../../Persistence/Doctrine/Mapping&#39;];
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getMappingFilesPaths</span><span class=\\"hljs-params\\">()</span>: <span class=\\"hljs-title\\">array</span>
+    </span>{
+        <span class=\\"hljs-keyword\\">return</span> [<span class=\\"hljs-keyword\\">__DIR__</span> . <span class=\\"hljs-string\\">'/../../Persistence/Doctrine/Mapping'</span>];
     }
 
 }
 </code></pre>
 <p>Důležitá je metoda <code>provideConfig</code>, která slouží pouze k tomu, aby rozšíření prozradilo, kde je jeho konfigurační soubor. A tato konfigurace může být <a href=\\"https://raw.githubusercontent.com/adeira/connector/03be1b949a0eb0c2f75c90ba3da5fca2ef8b2979/src/Authentication/Infrastructure/DI/Nette/config.neon\\">pěkně bohatá</a>. Takovou nutnou prerekvizitou k tomu aby vše fungovalo je nahrazení výchozího <code>ExtensionsExtension</code> za novou implementaci, který toto chování umoňuje:</p>
-<pre><code class=\\"lang-php\\">$configurator = new Nette\\\\Configurator;
-$configurator-&gt;defaultExtensions[&#39;extensions&#39;] = \\\\Adeira\\\\ConfigurableExtensionsExtension::class;
+<pre><code class=\\"hljs lang-php\\">$configurator = <span class=\\"hljs-keyword\\">new</span> Nette\\\\Configurator;
+$configurator-&gt;defaultExtensions[<span class=\\"hljs-string\\">'extensions'</span>] = \\\\Adeira\\\\ConfigurableExtensionsExtension::class;
 </code></pre>
 <p>Tuto jednu řádku je nutné umístit třeba do souboru <code>bootstrap.php</code> kde se vytváří DI kontejner. Od teď bude toto chování fungovat &quot;by default&quot; a vlastní DI rozšíření dokonce může dědit od <code>Nette\\\\DI\\\\CompilerExtension</code>. <strong>Není tedy potřeba dělat žádné úpravy ve stávajících rozšířeních.</strong> A to je vždy super! Pokud bude rozšíření dědit od <code>Adeira\\\\CompilerExtension</code>, budete mít k dispozici ještě pomocnou metodu <code>setMapping</code>, která se hodí pro mapování presenterů. Není to však nutná podmínka.</p>
 <p>To ale není všechno!</p>
 <h2 id=\\"jak-se-chovaj-konfigurace-bal-k-\\">Jak se chovají konfigurace balíčků <a href=\\"#jak-se-chovaj-konfigurace-bal-k-\\">#</a></h2><p>Asi nejzajímavější na návrhu dependency injection je to, že je možné jednoduše vyměňovat implementace bez zásahu do kódu. Jak se tímto pracuje balíček <a href=\\"https://github.com/adeira/compiler-extension\\">adeira/compiler-extension</a>? Představte si, že máte hlavní konfigurační soubor s tímto obsahem:</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     key1: value1
     key2: value2
 
@@ -157,7 +157,7 @@ application:
         *: *
 </code></pre>
 <p>A teď přidáte nový balíček, který si nese vlastní konfigurační soubor a pomocí metody <code>provideConfig</code> jej dává k dispozici. Jeho obsah je takovýto:</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     key2: overridden
     key3: value3
 
@@ -174,13 +174,13 @@ latte:
         - App\\\\Grid\\\\Latte\\\\Macros
 </code></pre>
 <p>Jaký je výsledek? V aplikaci budou k dispozici najednou tři parametry (obdobně pro <code>ext2</code> parametry):</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     key1: value1
     key2: overridden
     key3: value3
 </code></pre>
 <p>Podobně se to chová i u služeb:</p>
-<pre><code class=\\"lang-neon\\">services:
+<pre><code class=\\"hljs lang-neon\\">services:
     - DefaultService
     named: Service2 # přepsat lze pouze pojmenovanou službu
     - Tests\\\\TestService
@@ -188,7 +188,7 @@ latte:
 <p>Navíc se zaregistruje Latte makro. Ačkoliv toto chování funguje dobře, doporučuji jej spíše nevyužívat k přepisování globální konfigurace. Mnohem vhodnější je využívat tyto konfigurace k <strong>přidávání</strong> funkčností z balíčků. Tedy registrace nových služeb, přidávání commandů do konzole, registrace nových typů v Doctrine a podobně. V takovém případě se bude rozšíření chovat naprosto očekávaně. Vyhnete se tak tomu, že dva balíčky nastavují jeden parametr a záleží tam na pořadí. Je to nástroj - užijte jej s rozumem.</p>
 <p>To ale pořád není všechno!</p>
 <h2 id=\\"mal-pozl-tko-na-z-v-r\\">Malé pozlátko na závěr <a href=\\"#mal-pozl-tko-na-z-v-r\\">#</a></h2><p>Tento balíček přidává ještě jednu funkci, kterou považuji také za velmi užitečnou. Jak jistě víte, tak rozšíření se dá zaregistrovat pomocí sekce <code>extensions</code> a pokud rozšíření zaregistrujete pod nějakým jménem, je možné jej konfigurovat. To ostatně bylo vidět před malou chvílí:</p>
-<pre><code class=\\"lang-neon\\">extensions:
+<pre><code class=\\"hljs lang-neon\\">extensions:
     ext2: CustomExtension2
 
 ext2:
@@ -196,11 +196,11 @@ ext2:
     ext_key2: ext_value2
 </code></pre>
 <p>V tomto případě budou klíče <code>ext_key1</code> a <code>ext_key2</code> k dispozici v samotném rozšíření. To se potom používá k různým úpravám chování samotného balíčku. Co když však nepíšete vlastní PHP kód, ale chcete jen předat tyto parametry do nějaké služby, kterou ono rozšíření registruje? K tomu slouží zvláštní zápis pomocí <code>%%</code>. V tomto konkrétním případě řekněme, že <code>CustomExtension2</code> má vlastní konfigurační soubor s tímto obsahem:</p>
-<pre><code>services:
+<pre><code class=\\"hljs\\">services:
     - Tests\\\\TestService(%%ext_key2%%)
 </code></pre><p>Jak je vidět, tak si může vzít hodnotu <code>ext_key2</code> rovnou z konfigurace. Důležité je si uvědomit, že zatímco <code>%aaa%</code> bere parametr <code>aaa</code> ze sekce <code>parameters</code>, tak <code>%%aaa%%</code> bere konfiguraci <strong>pouze</strong> ze sekce, pod kterou je rozšíření zaregistrované. Chová se to tedy úplně stejně jako <code>$this-&gt;getConfig()</code> uvnitř rozšíření... :)</p>
 <p>Dejte <a href=\\"https://github.com/adeira/compiler-extension\\">tomuto rozšíření</a> šanci (nebo hvězdičku). Z praxe mohu říci, že se s ním pracuje skutečně dobře a pokud narazíte na to, že potřebujete udělat něco složitého - není problém pokračovat v psaní DI rozšíření v PHP zároveň s tímto. Uvítám také nápady na zlepšení a různé postřehy. Přecijen chvíli mi trvalo, než jsem přišel na ten správný způsob jak to uchopit.</p>
-<pre><code>composer require adeira/compiler-extension
+<pre><code class=\\"hljs\\">composer require adeira/compiler-extension
 </code></pre><p>Instalace je jednoduchá... :)</p>
 ",
         }

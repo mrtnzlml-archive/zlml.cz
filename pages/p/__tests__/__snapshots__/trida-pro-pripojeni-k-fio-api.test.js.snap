@@ -53,173 +53,173 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Třída pro připojení k FIO API
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Další užitečný úryvek, který je škoda nechat ležet v Git repozitářích.
 A opět uzpůsobený pro používání s Nette FW.</p>
 <p>Nedávno jsem psal o tom, jak používat CLI router v Nette (<a href=\\"http://zlml.cz/nette-2-1-dev-clirouter\\">http://zlml.cz/nette-2-1-dev-clirouter</a>).
 Právě pomocí tohoto routeru je vhodné kontrolovat bankovní výpisy - například pomocí cronu:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-namespace App\\\\CliModule;
+<span class=\\"hljs-keyword\\">namespace</span> <span class=\\"hljs-title\\">App</span>\\\\<span class=\\"hljs-title\\">CliModule</span>;
 
-use Nette;
-use Nette\\\\Diagnostics\\\\Debugger;
+<span class=\\"hljs-keyword\\">use</span> <span class=\\"hljs-title\\">Nette</span>;
+<span class=\\"hljs-keyword\\">use</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Diagnostics</span>\\\\<span class=\\"hljs-title\\">Debugger</span>;
 
-/**
+<span class=\\"hljs-comment\\">/**
  * Class CliPresenter
- * @package App\\\\CliModule
- */
-class CliPresenter extends BasePresenter {
+ * <span class=\\"hljs-doctag\\">@package</span> App\\\\CliModule
+ */</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">CliPresenter</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">BasePresenter</span> </span>{
 
-        /** @var \\\\Fio @inject */
-        public $fio;
+        <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@var</span> \\\\Fio <span class=\\"hljs-doctag\\">@inject</span> */</span>
+        <span class=\\"hljs-keyword\\">public</span> $fio;
         ...
 
-        public function actionCron() {
-                $this-&gt;checkFio(); // FIO vs. nezaplacené objednávky
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">actionCron</span><span class=\\"hljs-params\\">()</span> </span>{
+                <span class=\\"hljs-keyword\\">$this</span>-&gt;checkFio(); <span class=\\"hljs-comment\\">// FIO vs. nezaplacené objednávky</span>
                 ...
-                $this-&gt;terminate();
+                <span class=\\"hljs-keyword\\">$this</span>-&gt;terminate();
         }
 
-        /**
+        <span class=\\"hljs-comment\\">/**
          * Zkontroluje bankovní účet, porovná s databází a zaplacené objednávky změní na status PAID.
-         */
-        private function checkFio() {
-                try {
-                        $transactions = $this-&gt;fio-&gt;transactions();
-                        $unpaid = $this-&gt;orders-&gt;selectUnpaidOrders(); //získání nezaplacených objednávek
-                        //array_intersect() - zde samotné zpracování
+         */</span>
+        <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">checkFio</span><span class=\\"hljs-params\\">()</span> </span>{
+                <span class=\\"hljs-keyword\\">try</span> {
+                        $transactions = <span class=\\"hljs-keyword\\">$this</span>-&gt;fio-&gt;transactions();
+                        $unpaid = <span class=\\"hljs-keyword\\">$this</span>-&gt;orders-&gt;selectUnpaidOrders(); <span class=\\"hljs-comment\\">//získání nezaplacených objednávek</span>
+                        <span class=\\"hljs-comment\\">//array_intersect() - zde samotné zpracování</span>
                         ...
-                } catch (\\\\Exception $exc) {
-                        Debugger::log($exc-&gt;getMessage() . &#39; FILE: &#39; . $exc-&gt;getFile() . &#39; on line: &#39; . $exc-&gt;getLine(), Debugger::WARNING);
-                        echo $exc-&gt;getMessage() . EOL;
+                } <span class=\\"hljs-keyword\\">catch</span> (\\\\<span class=\\"hljs-keyword\\">Exception</span> $exc) {
+                        Debugger::log($exc-&gt;getMessage() . <span class=\\"hljs-string\\">' FILE: '</span> . $exc-&gt;getFile() . <span class=\\"hljs-string\\">' on line: '</span> . $exc-&gt;getLine(), Debugger::WARNING);
+                        <span class=\\"hljs-keyword\\">echo</span> $exc-&gt;getMessage() . EOL;
                 }
         }
 }
 </code></pre>
 <p>K tomu se hodí právě následující třída:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-/**
+<span class=\\"hljs-comment\\">/**
  * Class Fio
- */
-class Fio extends \\\\Nette\\\\Object {
+ */</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Fio</span> <span class=\\"hljs-keyword\\">extends</span> \\\\<span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Object</span> </span>{
 
-        private $token;
-        private $rest_url = &#39;https://www.fio.cz/ib_api/rest/&#39;;
+        <span class=\\"hljs-keyword\\">private</span> $token;
+        <span class=\\"hljs-keyword\\">private</span> $rest_url = <span class=\\"hljs-string\\">'https://www.fio.cz/ib_api/rest/'</span>;
 
-        /**
-         * @param string $token SECURE
-         */
-        public function __construct($token) {
-                $this-&gt;token = $token;
+        <span class=\\"hljs-comment\\">/**
+         * <span class=\\"hljs-doctag\\">@param</span> string $token SECURE
+         */</span>
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">($token)</span> </span>{
+                <span class=\\"hljs-keyword\\">$this</span>-&gt;token = $token;
         }
 
-        /**
+        <span class=\\"hljs-comment\\">/**
          * Pohyby na účtu za určené období.
          * JSON only!
-         * @param string $from
-         * @param string $to
-         * @return array|mixed
-         */
-        public function transactions($from = &#39;-1 month&#39;, $to = &#39;now&#39;) {
-                $from = \\\\Nette\\\\DateTime::from($from)-&gt;format(&#39;Y-m-d&#39;);
-                $to = \\\\Nette\\\\DateTime::from($to)-&gt;format(&#39;Y-m-d&#39;);
-                $url = $this-&gt;rest_url . &#39;periods/&#39; . $this-&gt;token . &#39;/&#39; . $from . &#39;/&#39; . $to . &#39;/transactions.json&#39;;
-                return $this-&gt;parseJSON($this-&gt;download($url));
+         * <span class=\\"hljs-doctag\\">@param</span> string $from
+         * <span class=\\"hljs-doctag\\">@param</span> string $to
+         * <span class=\\"hljs-doctag\\">@return</span> array|mixed
+         */</span>
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">transactions</span><span class=\\"hljs-params\\">($from = <span class=\\"hljs-string\\">'-1 month'</span>, $to = <span class=\\"hljs-string\\">'now'</span>)</span> </span>{
+                $from = \\\\Nette\\\\DateTime::from($from)-&gt;format(<span class=\\"hljs-string\\">'Y-m-d'</span>);
+                $to = \\\\Nette\\\\DateTime::from($to)-&gt;format(<span class=\\"hljs-string\\">'Y-m-d'</span>);
+                $url = <span class=\\"hljs-keyword\\">$this</span>-&gt;rest_url . <span class=\\"hljs-string\\">'periods/'</span> . <span class=\\"hljs-keyword\\">$this</span>-&gt;token . <span class=\\"hljs-string\\">'/'</span> . $from . <span class=\\"hljs-string\\">'/'</span> . $to . <span class=\\"hljs-string\\">'/transactions.json'</span>;
+                <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;parseJSON(<span class=\\"hljs-keyword\\">$this</span>-&gt;download($url));
         }
 
-        /**
+        <span class=\\"hljs-comment\\">/**
          * Oficiální výpisy pohybů z účtu.
          * JSON only!
-         * @param $id
-         * @param null $year
-         * @return array|mixed
-         */
-        public function transactionsByID($id, $year = NULL) {
-                if ($year === NULL) {
-                        $year = date(&#39;Y&#39;);
+         * <span class=\\"hljs-doctag\\">@param</span> $id
+         * <span class=\\"hljs-doctag\\">@param</span> null $year
+         * <span class=\\"hljs-doctag\\">@return</span> array|mixed
+         */</span>
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">transactionsByID</span><span class=\\"hljs-params\\">($id, $year = NULL)</span> </span>{
+                <span class=\\"hljs-keyword\\">if</span> ($year === <span class=\\"hljs-keyword\\">NULL</span>) {
+                        $year = date(<span class=\\"hljs-string\\">'Y'</span>);
                 }
-                $url = $this-&gt;rest_url . &#39;by-id/&#39; . $this-&gt;token . &#39;/&#39; . $year . &#39;/&#39; . $id . &#39;/transactions.json&#39;;
-                return $this-&gt;parseJSON($this-&gt;download($url));
+                $url = <span class=\\"hljs-keyword\\">$this</span>-&gt;rest_url . <span class=\\"hljs-string\\">'by-id/'</span> . <span class=\\"hljs-keyword\\">$this</span>-&gt;token . <span class=\\"hljs-string\\">'/'</span> . $year . <span class=\\"hljs-string\\">'/'</span> . $id . <span class=\\"hljs-string\\">'/transactions.json'</span>;
+                <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;parseJSON(<span class=\\"hljs-keyword\\">$this</span>-&gt;download($url));
         }
 
-        /**
+        <span class=\\"hljs-comment\\">/**
          * Pohyby na účtu od posledního stažení.
          * JSON only!
-         * @return array|mixed
-         */
-        public function transactionsLast() {
-                $url = $this-&gt;rest_url . &#39;last/&#39; . $this-&gt;token . &#39;/transactions.json&#39;;
-                return $this-&gt;parseJSON($this-&gt;download($url));
+         * <span class=\\"hljs-doctag\\">@return</span> array|mixed
+         */</span>
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">transactionsLast</span><span class=\\"hljs-params\\">()</span> </span>{
+                $url = <span class=\\"hljs-keyword\\">$this</span>-&gt;rest_url . <span class=\\"hljs-string\\">'last/'</span> . <span class=\\"hljs-keyword\\">$this</span>-&gt;token . <span class=\\"hljs-string\\">'/transactions.json'</span>;
+                <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;parseJSON(<span class=\\"hljs-keyword\\">$this</span>-&gt;download($url));
         }
 
-        /**
-         * @param $url
-         * @return mixed
-         * @throws \\\\Exception
-         */
-        private function download($url) {
-                if (!extension_loaded(&#39;curl&#39;)) {
-                        throw new \\\\Exception(&#39;Curl extension, does\\\\&#39;t loaded.&#39;);
+        <span class=\\"hljs-comment\\">/**
+         * <span class=\\"hljs-doctag\\">@param</span> $url
+         * <span class=\\"hljs-doctag\\">@return</span> mixed
+         * <span class=\\"hljs-doctag\\">@throws</span> \\\\Exception
+         */</span>
+        <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">download</span><span class=\\"hljs-params\\">($url)</span> </span>{
+                <span class=\\"hljs-keyword\\">if</span> (!extension_loaded(<span class=\\"hljs-string\\">'curl'</span>)) {
+                        <span class=\\"hljs-keyword\\">throw</span> <span class=\\"hljs-keyword\\">new</span> \\\\<span class=\\"hljs-keyword\\">Exception</span>(<span class=\\"hljs-string\\">'Curl extension, does\\\\'t loaded.'</span>);
                 }
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);
-                curl_setopt($curl, CURLOPT_HEADER, FALSE);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+                curl_setopt($curl, CURLOPT_HEADER, <span class=\\"hljs-keyword\\">FALSE</span>);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class=\\"hljs-keyword\\">TRUE</span>);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class=\\"hljs-keyword\\">FALSE</span>);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, <span class=\\"hljs-keyword\\">FALSE</span>);
                 $result = curl_exec($curl);
-                return $result;
-                //return file_get_contents($url); //ALTERNATIVE
+                <span class=\\"hljs-keyword\\">return</span> $result;
+                <span class=\\"hljs-comment\\">//return file_get_contents($url); //ALTERNATIVE</span>
         }
 
-        /**
-         * @param $data
-         * @return array|mixed
-         */
-        private function parseJSON($data) {
+        <span class=\\"hljs-comment\\">/**
+         * <span class=\\"hljs-doctag\\">@param</span> $data
+         * <span class=\\"hljs-doctag\\">@return</span> array|mixed
+         */</span>
+        <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">parseJSON</span><span class=\\"hljs-params\\">($data)</span> </span>{
                 $json = json_decode($data);
-                if($json === NULL) {
-                        //Moc ryhlé požadavky na Fio API
-                        throw new \\\\Exception(&#39;Fio API overheated. Please wait...&#39;);
-                        //Když se posílá stále moc požadavků, tak se to z Exception nikdy nevyhrabe. Musí se opravdu počkat.
+                <span class=\\"hljs-keyword\\">if</span>($json === <span class=\\"hljs-keyword\\">NULL</span>) {
+                        <span class=\\"hljs-comment\\">//Moc ryhlé požadavky na Fio API</span>
+                        <span class=\\"hljs-keyword\\">throw</span> <span class=\\"hljs-keyword\\">new</span> \\\\<span class=\\"hljs-keyword\\">Exception</span>(<span class=\\"hljs-string\\">'Fio API overheated. Please wait...'</span>);
+                        <span class=\\"hljs-comment\\">//Když se posílá stále moc požadavků, tak se to z Exception nikdy nevyhrabe. Musí se opravdu počkat.</span>
                 }
-                if(!$json-&gt;accountStatement-&gt;transactionList) {
-                        return $json; // There are no transactions (header only)
+                <span class=\\"hljs-keyword\\">if</span>(!$json-&gt;accountStatement-&gt;transactionList) {
+                        <span class=\\"hljs-keyword\\">return</span> $json; <span class=\\"hljs-comment\\">// There are no transactions (header only)</span>
                 }
-                $payments = array();
-                foreach ($json-&gt;accountStatement-&gt;transactionList-&gt;transaction as $row) {
-                        $out = array();
-                        foreach ($row as $column) {
-                                if ($column) {
-                                        $out[$column-&gt;id] = $column-&gt;value; //v $column-&gt;name je název položky
-                                        /*
+                $payments = <span class=\\"hljs-keyword\\">array</span>();
+                <span class=\\"hljs-keyword\\">foreach</span> ($json-&gt;accountStatement-&gt;transactionList-&gt;transaction <span class=\\"hljs-keyword\\">as</span> $row) {
+                        $out = <span class=\\"hljs-keyword\\">array</span>();
+                        <span class=\\"hljs-keyword\\">foreach</span> ($row <span class=\\"hljs-keyword\\">as</span> $column) {
+                                <span class=\\"hljs-keyword\\">if</span> ($column) {
+                                        $out[$column-&gt;id] = $column-&gt;value; <span class=\\"hljs-comment\\">//v $column-&gt;name je název položky</span>
+                                        <span class=\\"hljs-comment\\">/*
                                          * 0  - Datum
                                          * 1  - Částka (!)
                                          * 5  - Variabilní symbol (!)
                                          * 14 - Měna (!)
                                          * Hodnoty (!) se musí použít ke kontrole správnosti...
-                                         */
+                                         */</span>
                                 }
                         }
                         array_push($payments, $out);
                 }
-                return $payments;
+                <span class=\\"hljs-keyword\\">return</span> $payments;
         }
 
 }
 </code></pre>
 <p>S tím, že je zapotřebí předat FIO klíč z neonu. FIO třída se automaticky injectuje, tzn. že i konstruktor
 této třídy bude doplněn automaticky. Je jen zapotřebí přidat do neonu onu konfiguraci:</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     fio_token: &#39;&#39; #token pro přístup do FIO banky
 
 ...

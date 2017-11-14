@@ -53,17 +53,17 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Ještě lepší struktura Nette aplikace
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Každý, kdo postavil pár aplikací, musel vždy řešit ten samý problém. Jakou strukturu by měla aplikace mít? A co když se začne projekt rozrůstat? Měl bych se držet toho jak to dělá <a href=\\"https://github.com/nette/sandbox\\">sandbox</a> (resp. <a href=\\"https://github.com/nette/web-project\\">web-project</a>)? Postupem času jsem dokonvergoval k relativně přijatelnému výsledku a vzhledem k tomu, že projekt na kterém jsem to poprvé pořádně rozjel byl ukočen, <a href=\\"https://github.com/mrtnzlml/CMS-lite\\">rozhodl jsem se jej zveřejnit</a>. Už je to sice nějaký čas, ale v době největšího vrcholu tohoto projektu jsem jej považoval za takovou osobní špičku. A to hned z několika důvodů. K tomu se ale dostanu postupně. A vezmu to pěkně od těch nejmenších částí.</p>
 <h2 id=\\"presentery-a-komponenty\\">Presentery a komponenty <a href=\\"#presentery-a-komponenty\\">#</a></h2><p>U presenterů se mi vlastně docela líbí jak to dělá sandbox. Ve složce presenterů jsou logicky presentery a také složka <code>templates</code>, která obsahuje šablony právě k těmto presenterům:</p>
-<pre><code>presenters/
+<pre><code class=\\"hljs\\">presenters/
     templates/
         Homepage/
             default.latte
@@ -72,11 +72,11 @@ exports[`renders correctly 1`] = `
     HomepagePresenter.php
 </code></pre><p>Dříve to bylo jinak. Šablony a presentery měl dříve sandbox na stejné úrovni, ale souhlasím s tím, že šablony patří spíše (a poměrně úzce) k presenterům. Je tedy nutné zmínit, že díky tomu jak je Nette framework chytrý, tak je v podstatě jedno jakou bude mít projekt strukturu, protože bude fungovat vše. Za chvíli se však začne vše nabalovat a bude třeba neustále udržovat pořádek. Proto je nutné mít jasno i v takto triviálních otázkách.</p>
 <p>Komponenty se od presenterů tolik neliší. Spíše naopak. Komponenty mohou být poměrně komplikované, ale rád je dělám co nejjednodušší. U komponent používám několik návrhů. Pro velmi triviální komponenty zachovávám plochou strukturu:</p>
-<pre><code>ContactForm/
+<pre><code class=\\"hljs\\">ContactForm/
     ContactForm.latte
     ContactForm.php
 </code></pre><p>Je totiž otrava vytvářet spoustu zbytečných složek. To platí i pro soubory. Proto jsou generované továrničky vždy k nalezení pod třídou komponenty v jednom a tom samém souboru. Jakmile se však komponenta jen o trošku zkomplikuje, automaticky přepínám do klasického presenterového stylu:</p>
-<pre><code>ContactForm/
+<pre><code class=\\"hljs\\">ContactForm/
     providers/
         IContactFormTemplateProvider.php
     templates/
@@ -84,7 +84,7 @@ exports[`renders correctly 1`] = `
     ContactForm.php
 </code></pre><p>Dobře, základní stavební kameny jsou položeny. Co by však mělo být okolo. A kde jsou vlastně položeny? Inu pojďme na to opět postupně.</p>
 <h2 id=\\"supercore-v-ci\\">Supercore věci <a href=\\"#supercore-v-ci\\">#</a></h2><p>Fakt nevím jak to nazvat jinak, protože ke core záležitostem se ještě dostanu. O co tedy jde? Jedná se o části aplikace, které tvoří to nejzákladnější jádro. Jádro, na které je pak možné napojovat další věci. Tuto část aplikace nechávám ve složce <code>app</code>:</p>
-<pre><code>app/
+<pre><code class=\\"hljs\\">app/
     AdminModule/
         presenters/ &lt;-- viz první ukázka (je zde jen BasePresenter)
     AuthModule/
@@ -99,21 +99,21 @@ exports[`renders correctly 1`] = `
     bootstrap.php
 </code></pre><p>Jak je vidět, tak všechny moduly obsahují jen kritický základ. Žádné další presentery. Tak kde je zbytek? Zbytek se nechází v rootu aplikace, konkrétně ve složkách <code>custom</code> a <code>src</code>. Je celkem jedno jaký je název těchto složek, vtip je v tom nějaké mít a vše sem přesunout. Důvod proč jsou dvě je prostý. Zatímco v <code>src</code> jsou části aplikace, které tvoří jádro (tedy spoustu funkčnosti), v <code>custom</code> jsou velmi podobné částí aplikace, bez kterých lze však žít. Původní myšlenka byla taková, že se pak custom složka zruší a vše v ní se velmi elegantně rozpadne na composer balíčky. Obě složky jsou však strukturálně stejné, proto budeu řešit jen <code>custom</code>.</p>
 <h2 id=\\"business-logika\\">Business logika <a href=\\"#business-logika\\">#</a></h2><p>Ok, to jsem také nazval pěkně debilně. Alespoň však vysvětlím jednu důležitou věc, se kterou jsem v začátcích bojoval a kterou je potřeba se odnaučit. Sadbox vždy totiž vedl k takovéto podobné struktuře:</p>
-<pre><code>app/
+<pre><code class=\\"hljs\\">app/
     config/
     forms/
     presenters/
     model/
     router/
 </code></pre><p>To nikomu nemám za zlé. Je to jednoduše pochopitelné a to je dobře. Takže s tím vlastně spíš souhlasím. Problém je v tom, že u rozrůstající aplikace už to začíná být děsný mrdník, protože <code>presenters</code> najednou obsahují všechny presentery a <code>model</code> obsahuje všechnu logiku. Ale v tom aby se prase vyznalo. Tento efekt se nechá trošku umírnit rozdělením aplikace na moduly a s tím už jsem byl (a vlastně do dneška jsem) spokojen. Jenže co s tím modelem? Fuck model! Rozdělte si model podle logických částí, které na sobě nejsou závislé a vše oddělte. Třeba takto:</p>
-<pre><code>custom/
+<pre><code class=\\"hljs\\">custom/
     Error/
     Eshop/
     Files/
     Notes/
     Pages/
 </code></pre><p>Jak řekl kdosi moudrý, existují dva nejnáročnější problémy v programování a to správná invalidace cache a pojmenovávání věcí. Naprosot s tím souhlasím. Moc mi to nejde, ale mělo by být zřejmé, že jsou zde části, které se starají (výhradně) o eshop, o poznámky, stránky atd. Pojďme se tedy zanořit hlouběji:</p>
-<pre><code>Pages/
+<pre><code class=\\"hljs\\">Pages/
     AdminModule/
         presenters/
             CategoryPresenter.php

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       GraphQL
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Z <a href=\\"1-od-komponent-zpet-ke-komponentam\\">minulého dílu</a> by mělo být všem jasné, jak jsem se dostal až sem. Od PHP komponent k webovým komponentám, které vlastně nejsou skutečné webové komponenty, ale jen kus JS kódu, který implementuje vlastní způsob webových komponent - React. Jsem přesvědčen o tom, že pro další pokračování je nutné vysvětlit, jak taková aplikace funguje. Takže...</p>
@@ -72,7 +72,7 @@ exports[`renders correctly 1`] = `
 <p>No a jak už titulek tohoto článku napovídá, tak mnou navrhovaný způsob je právě <strong>GraphQL</strong> (<a href=\\"http://graphql.org/\\">link</a>).</p>
 <h2 id=\\"graphql-queries\\">GraphQL queries <a href=\\"#graphql-queries\\">#</a></h2><p>GraphQL je nesmírně chytrý způsob jak se ptát API a přitom je to tak jednoduché, až mi přijde hloupé o tom psát. Pomocí GraphQL se lze serveru zeptat přímo na konkrétní věci. Tedy jako když se ptáte REST API, ale s tím rozdílem, že součástí požadavku je i informace o tom, co má API vrátit. Je dokonce možné zeptat se i více &quot;endpointů&quot; najednou. Zkuste si toto v REST API... :) Naopak GraphQL vyžaduje explicitní vyjmenování toho co chcete, takže jednoduše (pokud vím) nelze napsat dotaz, který by vrátil vše co daný endpoint umí.</p>
 <p>Pojďme si to trošku vyzkoušet. Jako dobré hřiště pro dotazy poslouží <a href=\\"http://graphql-swapi.parseapp.com/\\">tato online aplikace</a>. Dotazy se vždy posílají na jednu adresu (vetšinou <code>/graphql</code>) s tím, že se mění pouze obsah zprávy, který putuje v POST. To je velký rozdíl oproti REST API. Zde je jen jedna adresa, ale memí se obsah dotazu. Právě to přidává na dynamice dotazování - nejsme limitování na URL adresy. Takže když chceme vytáhnout z API např. všechny filmy, pošleme tento dotaz:</p>
-<pre><code>{
+<pre><code class=\\"hljs\\">{
   allFilms {
     totalCount
     films {
@@ -83,15 +83,15 @@ exports[`renders correctly 1`] = `
   }
 }
 </code></pre><p>Tento zvláštní zápis říká, že se ptám na všechny filmy (<code>allFilms</code>) a zajímá mě kolik jich je. Zároveň chci u jednotlivých filmů vrátit jejich ID, název a režiséra. API mi pak vrátí dlouhý JSON:</p>
-<pre><code class=\\"lang-js\\">{
-  &quot;data&quot;: {
-    &quot;allFilms&quot;: {
-      &quot;totalCount&quot;: 6,
-      &quot;films&quot;: [
+<pre><code class=\\"hljs lang-js\\">{
+  <span class=\\"hljs-string\\">\\"data\\"</span>: {
+    <span class=\\"hljs-string\\">\\"allFilms\\"</span>: {
+      <span class=\\"hljs-string\\">\\"totalCount\\"</span>: <span class=\\"hljs-number\\">6</span>,
+      <span class=\\"hljs-string\\">\\"films\\"</span>: [
         {
-          &quot;id&quot;: &quot;ZmlsbXM6MQ==&quot;,
-          &quot;title&quot;: &quot;A New Hope&quot;,
-          &quot;director&quot;: &quot;George Lucas&quot;
+          <span class=\\"hljs-string\\">\\"id\\"</span>: <span class=\\"hljs-string\\">\\"ZmlsbXM6MQ==\\"</span>,
+          <span class=\\"hljs-string\\">\\"title\\"</span>: <span class=\\"hljs-string\\">\\"A New Hope\\"</span>,
+          <span class=\\"hljs-string\\">\\"director\\"</span>: <span class=\\"hljs-string\\">\\"George Lucas\\"</span>
         },
         ...
       ]
@@ -100,7 +100,7 @@ exports[`renders correctly 1`] = `
 }
 </code></pre>
 <p><a href=\\"http://graphql-swapi.parseapp.com/?query=%7B%0A%20%20allFilms%20%7B%0A%20%20%20%20totalCount%0A%20%20%20%20films%20%7B%0A%20%20%20%20%20%20id%0A%20%20%20%20%20%20title%0A%20%20%20%20%20%20director%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A&amp;operationName=null\\">Vyzkoušejte si to</a>. Chtěl bych ještě vědět jaké planety jsou ve filmu? Stačí rozšířit dotaz:</p>
-<pre><code>{
+<pre><code class=\\"hljs\\">{
   allFilms {
     totalCount
     films {
@@ -116,18 +116,18 @@ exports[`renders correctly 1`] = `
   }
 }
 </code></pre><p>API vrátí ještě delší JSON. Vyzkoušejme jiný příklad. Co když mám k dispozici ID filmu, jak se zeptám pouze na ten konkrétní film? Pošleme ID filmu jako paramter dotazu:</p>
-<pre><code class=\\"lang-js\\">{
-  film(id: &quot;ZmlsbXM6MQ==&quot;) {
+<pre><code class=\\"hljs lang-js\\">{
+  film(id: <span class=\\"hljs-string\\">\\"ZmlsbXM6MQ==\\"</span>) {
     title
   }
 }
 </code></pre>
 <p>A teď ta nejvíce úžasná část. Chci si jedním šmahem vytáhnout film, člověka a všechny planety? Easy:</p>
-<pre><code class=\\"lang-js\\">{
-  film(id: &quot;ZmlsbXM6MQ==&quot;) {
+<pre><code class=\\"hljs lang-js\\">{
+  film(id: <span class=\\"hljs-string\\">\\"ZmlsbXM6MQ==\\"</span>) {
     title
   }
-  person(id: &quot;cGVvcGxlOjE=&quot;) {
+  person(id: <span class=\\"hljs-string\\">\\"cGVvcGxlOjE=\\"</span>) {
     name
   }
   allPlanets {
@@ -138,21 +138,21 @@ exports[`renders correctly 1`] = `
 }
 </code></pre>
 <p>A výsledek? Ultra dlouhý JSON:</p>
-<pre><code class=\\"lang-js\\">{
-  &quot;data&quot;: {
-    &quot;film&quot;: {
-      &quot;title&quot;: &quot;A New Hope&quot;
+<pre><code class=\\"hljs lang-js\\">{
+  <span class=\\"hljs-string\\">\\"data\\"</span>: {
+    <span class=\\"hljs-string\\">\\"film\\"</span>: {
+      <span class=\\"hljs-string\\">\\"title\\"</span>: <span class=\\"hljs-string\\">\\"A New Hope\\"</span>
     },
-    &quot;person&quot;: {
-      &quot;name&quot;: &quot;Luke Skywalker&quot;
+    <span class=\\"hljs-string\\">\\"person\\"</span>: {
+      <span class=\\"hljs-string\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Luke Skywalker\\"</span>
     },
-    &quot;allPlanets&quot;: {
-      &quot;planets&quot;: [
+    <span class=\\"hljs-string\\">\\"allPlanets\\"</span>: {
+      <span class=\\"hljs-string\\">\\"planets\\"</span>: [
         {
-          &quot;name&quot;: &quot;Tatooine&quot;
+          <span class=\\"hljs-string\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Tatooine\\"</span>
         },
         {
-          &quot;name&quot;: &quot;Alderaan&quot;
+          <span class=\\"hljs-string\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Alderaan\\"</span>
         },
         ...
       ]
@@ -162,15 +162,15 @@ exports[`renders correctly 1`] = `
 </code></pre>
 <p>Asi nemá smysl zanořovat se hlouběji. Princip by měl být jasný a samotné API je do jisté míry ovlivněno jeho návrhem (zde stránkováním). Jednoduše mohu jedním POST dotazem (což je ten zvláštní řetězec vypadající jako zjednodušený JSON) získat z API informace, které přesně moje React komponenta potřebuje. Toho některé knihovny silně využívají a vrácený výsledek posílají v properties přímo komponentě, který se stará <strong>pouze</strong> o vykreslování. Uvedu zde pouze krátký příklad toho co tím myslím (podrobněji to můžeme řešit později).</p>
 <p><code>DataSourcesContainer</code> je komponenta, která využívá <a href=\\"http://dev.apollodata.com/react/\\">Apollo</a> a cíl této komponenty je pouze vytáhnout data a vykresení delegovat někam dál (<code>Row</code>).</p>
-<pre><code class=\\"lang-js\\">const DataSourcesContainer = (props) =&gt; {
-    let {data: {loading, devices}} = props;
-    return loading ? null :
-        &lt;div&gt;
-            &lt;h2&gt;Data Sources&lt;/h2&gt;
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-keyword\\">const</span> DataSourcesContainer = <span class=\\"hljs-function\\">(<span class=\\"hljs-params\\">props</span>) =&gt;</span> {
+    <span class=\\"hljs-keyword\\">let</span> {<span class=\\"hljs-attr\\">data</span>: {loading, devices}} = props;
+    <span class=\\"hljs-keyword\\">return</span> loading ? <span class=\\"hljs-literal\\">null</span> :
+        <span class=\\"xml\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">h2</span>&gt;</span>Data Sources<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">h2</span>&gt;</span>
             {devices.map(dataSource =&gt;
-                &lt;Row key={dataSource.id} dataSource={dataSource}/&gt;
+                <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">Row</span> <span class=\\"hljs-attr\\">key</span>=<span class=\\"hljs-string\\">{dataSource.id}</span> <span class=\\"hljs-attr\\">dataSource</span>=<span class=\\"hljs-string\\">{dataSource}/</span>&gt;</span>
             )}
-        &lt;/div&gt;;
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span>;
 };
 
 export default graphql(gql\`
@@ -181,55 +181,55 @@ export default graphql(gql\`
       records
     }
   }
-\`)(DataSourcesContainer);
+\`)(DataSourcesContainer);</span>
 </code></pre>
 <p>Až teprve <code>Row</code> se stará o vykreslení, ale už nikdy nikdy nepošle dotaz na API:</p>
-<pre><code class=\\"lang-js\\">const Row = (props) =&gt; {
-    let ds = props.dataSource;
-    return &lt;div&gt;{ds.name} &lt;Link to={\`/data-sources/\${ds.id}\`}&gt;{ds.id}&lt;/Link&gt; ({ds.records.length} records available)
-    &lt;/div&gt;;
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-keyword\\">const</span> Row = <span class=\\"hljs-function\\">(<span class=\\"hljs-params\\">props</span>) =&gt;</span> {
+    <span class=\\"hljs-keyword\\">let</span> ds = props.dataSource;
+    <span class=\\"hljs-keyword\\">return</span> <span class=\\"xml\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span>&gt;</span>{ds.name} <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">Link</span> <span class=\\"hljs-attr\\">to</span>=<span class=\\"hljs-string\\">{</span>\`/<span class=\\"hljs-attr\\">data-sources</span>/\${<span class=\\"hljs-attr\\">ds.id</span>}\`}&gt;</span>{ds.id}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">Link</span>&gt;</span> ({ds.records.length} records available)
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span></span>;
 };
 
 Row.propTypes = {
-    dataSource: React.PropTypes.shape({
-        id: React.PropTypes.string,
-        name: React.PropTypes.string,
-        records: React.PropTypes.arrayOf(React.PropTypes.string)
+    <span class=\\"hljs-attr\\">dataSource</span>: React.PropTypes.shape({
+        <span class=\\"hljs-attr\\">id</span>: React.PropTypes.string,
+        <span class=\\"hljs-attr\\">name</span>: React.PropTypes.string,
+        <span class=\\"hljs-attr\\">records</span>: React.PropTypes.arrayOf(React.PropTypes.string)
     }).isRequired,
 };
 
-export default Row;
+<span class=\\"hljs-keyword\\">export</span> <span class=\\"hljs-keyword\\">default</span> Row;
 </code></pre>
 <p>Nechápu proč si někdo říká React programátor... :))</p>
 <h2 id=\\"graphql-mutations\\">GraphQL mutations <a href=\\"#graphql-mutations\\">#</a></h2><p>Dobré API však potřebuje ještě minimálně jedu věc - možnost modifikace dat. K tomu slouží mutace. Zde opět musí aplikace (Nette) nadefinovat jaké jsou &quot;endpointy&quot; a jaké mají parametry. Taková mutace potom může vrátit nějaký datový typ a zde se to chová úplně stejně jako <em>queries</em>.</p>
 <p>Tak kupříkladu přihlášení. Z mého pohledu je to mutace, protože měním stav aplikace a proto má moje aplikace připravenou tuto mutaci (toto je skutečný příklad z projektu <a href=\\"https://github.com/adeira/connector\\">adeira/connector</a> pokud se chcete šťourat v kódu):</p>
-<pre><code>type Mutation {
+<pre><code class=\\"hljs\\">type Mutation {
   login(username: String!, password: String!): User
 }
 </code></pre><p>Tzn. že pokud pošlu dotaz na to správné místo, tak mi API vratí uživatele, nebo mě odmítne. Využijeme CURL:</p>
-<pre><code>curl -XPOST -H &quot;Content-Type:application/graphql&quot; -d &#39;{&quot;query&quot;: &quot;mutation {login(username:\\\\&quot;test\\\\&quot;,password:\\\\&quot;test\\\\&quot;){id,token}}&quot;}&#39; http://connector.adeira.localhost/graphql | jq .
+<pre><code class=\\"hljs\\">curl -XPOST -H &quot;Content-Type:application/graphql&quot; -d &#39;{&quot;query&quot;: &quot;mutation {login(username:\\\\&quot;test\\\\&quot;,password:\\\\&quot;test\\\\&quot;){id,token}}&quot;}&#39; http://connector.adeira.localhost/graphql | jq .
 </code></pre><p>A protože jsem zadal správné přihlašovacé údaje, tak mi API vrátí ID a <a href=\\"https://jwt.io/\\">JWT token</a>, protože o to jsem si v dotazu řekl:</p>
-<pre><code class=\\"lang-js\\">{
-  &quot;data&quot;: {
-    &quot;login&quot;: {
-      &quot;id&quot;: &quot;4ff2f293-9d21-4407-a6af-08f766e06cb3&quot;,
-      &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE0ODMxODE3OTksImV4cCI6MTQ4MzE4NTM5OSwidXVpZCI6IjRmZjJmMjkzLTlkMjEtNDQwNy1hNmFmLTA4Zjc2NmUwNmNiMyJ9.o2aHdbjgtg80e_yXdFJSy4gCTb-4exEbNQbaOK9xa7nyiLpfvYe0FBPizz0XUVrE1JDzkW9m3QnupiVtTDyZ2g&quot;
+<pre><code class=\\"hljs lang-js\\">{
+  <span class=\\"hljs-string\\">\\"data\\"</span>: {
+    <span class=\\"hljs-string\\">\\"login\\"</span>: {
+      <span class=\\"hljs-string\\">\\"id\\"</span>: <span class=\\"hljs-string\\">\\"4ff2f293-9d21-4407-a6af-08f766e06cb3\\"</span>,
+      <span class=\\"hljs-string\\">\\"token\\"</span>: <span class=\\"hljs-string\\">\\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE0ODMxODE3OTksImV4cCI6MTQ4MzE4NTM5OSwidXVpZCI6IjRmZjJmMjkzLTlkMjEtNDQwNy1hNmFmLTA4Zjc2NmUwNmNiMyJ9.o2aHdbjgtg80e_yXdFJSy4gCTb-4exEbNQbaOK9xa7nyiLpfvYe0FBPizz0XUVrE1JDzkW9m3QnupiVtTDyZ2g\\"</span>
     }
   }
 }
 </code></pre>
 <p>Zde je nutné zdůraznit, že je naprosto zásadní, aby aplikace používala HTTPS. Co když zadám špatné heslo? API samozřejmě náležitě odpoví (včetně správného HTTP kódu):</p>
-<pre><code class=\\"lang-js\\">{
-  &quot;data&quot;: {
-    &quot;login&quot;: null
+<pre><code class=\\"hljs lang-js\\">{
+  <span class=\\"hljs-string\\">\\"data\\"</span>: {
+    <span class=\\"hljs-string\\">\\"login\\"</span>: <span class=\\"hljs-literal\\">null</span>
   },
-  &quot;errors&quot;: [
+  <span class=\\"hljs-string\\">\\"errors\\"</span>: [
     {
-      &quot;message&quot;: &quot;The password is incorrect.&quot;,
-      &quot;locations&quot;: [
+      <span class=\\"hljs-string\\">\\"message\\"</span>: <span class=\\"hljs-string\\">\\"The password is incorrect.\\"</span>,
+      <span class=\\"hljs-string\\">\\"locations\\"</span>: [
         {
-          &quot;line&quot;: 1,
-          &quot;column&quot;: 11
+          <span class=\\"hljs-string\\">\\"line\\"</span>: <span class=\\"hljs-number\\">1</span>,
+          <span class=\\"hljs-string\\">\\"column\\"</span>: <span class=\\"hljs-number\\">11</span>
         }
       ]
     }

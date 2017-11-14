@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Plzeňský Barcamp - láska na první pohled
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Ačkoliv jsem z dřívějších barcampů sledoval záznamy, tak jsem byl fakticky na barcampu úplně poprvé a rovnou jsem měl tu čest přednášet. Než se však dostanu k samotné přednášce, rád bych zde napsal nějaký feedback. Celkově jsem z Plzeňského Barcampu skutečně nadšen. Skvělá atmosféra, fajn lidi, spoustu jídla, alkoholu možná až moc... :-))</p>

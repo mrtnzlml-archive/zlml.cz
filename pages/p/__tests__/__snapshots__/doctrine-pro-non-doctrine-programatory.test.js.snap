@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Doctrine pro non-doctrine programátory
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>A také o tom proč jsem se ptal kdo studoval, studuje, nebo bude studovat elektrotechnickou fakultu a proč jsem si až pak uvědomil, že jsem se vlastně zeptal úplně blbě.</p>

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Get rid of GraphQLNonNull
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>I mean not all of the occurrences but at least in GraphQL fields. This is exactly what we did in <a href=\\"https://www.kiwi.com/us/\\">Kiwi.com</a> while working on GraphQL API.</p>
@@ -66,7 +66,7 @@ exports[`renders correctly 1`] = `
 <p>There are several reasons for it. Firstly it&#39;s prepared for the future (in terms of backward compatibility). This means that if you want to make field non-nullable you can do it anytime you want. But you cannot do the same thing vice versa because it&#39;s huge BC break for consumers of your API.</p>
 <p>But more importantly, it has a more practical reason. As you probably know the graph in GraphQL consists of a lot of complicated paths and leaves. And every leaf can have different resolver function. In extreme situation, each resolver may be some kind of microservice and this microservice may fail unexpectedly. It&#39;s very wrong to let the whole node of the graph fail. And that&#39;s exactly what happens if you don&#39;t satisfy the non-null rule.</p>
 <p>For example, let&#39;s run this query:</p>
-<pre><code class=\\"lang-graphql\\">{
+<pre><code class=\\"hljs lang-graphql\\">{
   allLocations(term: &quot;PRG&quot;) {
     edges {
       node {
@@ -79,23 +79,23 @@ exports[`renders correctly 1`] = `
 }
 </code></pre>
 <p>This query returns an array of all locations related to the search term sorted starting with the best result:</p>
-<pre><code class=\\"lang-javascript\\">{
-  &quot;data&quot;: {
-    &quot;allLocations&quot;: {
-      &quot;edges&quot;: [
+<pre><code class=\\"hljs lang-javascript\\">{
+  <span class=\\"hljs-string\\">\\"data\\"</span>: {
+    <span class=\\"hljs-string\\">\\"allLocations\\"</span>: {
+      <span class=\\"hljs-string\\">\\"edges\\"</span>: [
         {
-          &quot;node&quot;: {
-            &quot;type&quot;: &quot;airport&quot;,
-            &quot;name&quot;: &quot;Václav Havel Airport Prague&quot;
+          <span class=\\"hljs-string\\">\\"node\\"</span>: {
+            <span class=\\"hljs-string\\">\\"type\\"</span>: <span class=\\"hljs-string\\">\\"airport\\"</span>,
+            <span class=\\"hljs-string\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Václav Havel Airport Prague\\"</span>
           },
-          &quot;cursor&quot;: &quot;YXJyYXljb25uZWN0aW9uOjA=&quot;
+          <span class=\\"hljs-string\\">\\"cursor\\"</span>: <span class=\\"hljs-string\\">\\"YXJyYXljb25uZWN0aW9uOjA=\\"</span>
         },
         {
-          &quot;node&quot;: {
-            &quot;type&quot;: &quot;city&quot;,
-            &quot;name&quot;: &quot;Prague&quot;
+          <span class=\\"hljs-string\\">\\"node\\"</span>: {
+            <span class=\\"hljs-string\\">\\"type\\"</span>: <span class=\\"hljs-string\\">\\"city\\"</span>,
+            <span class=\\"hljs-string\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Prague\\"</span>
           },
-          &quot;cursor&quot;: &quot;YXJyYXljb25uZWN0aW9uOjE=&quot;
+          <span class=\\"hljs-string\\">\\"cursor\\"</span>: <span class=\\"hljs-string\\">\\"YXJyYXljb25uZWN0aW9uOjE=\\"</span>
         },
         ...
       ]
@@ -104,49 +104,49 @@ exports[`renders correctly 1`] = `
 }
 </code></pre>
 <p>Now let&#39;s say that the field <code>name</code> is required (means non-nullable). Therefore server MUST return this field. But what happens if resolver for this field for some reason fails?</p>
-<pre><code class=\\"lang-javascript\\">{
-  &quot;data&quot;: {
-    &quot;allLocations&quot;: {
-      &quot;edges&quot;: [
+<pre><code class=\\"hljs lang-javascript\\">{
+  <span class=\\"hljs-string\\">\\"data\\"</span>: {
+    <span class=\\"hljs-string\\">\\"allLocations\\"</span>: {
+      <span class=\\"hljs-string\\">\\"edges\\"</span>: [
         {
-          &quot;node&quot;: null,
-          &quot;cursor&quot;: &quot;YXJyYXljb25uZWN0aW9uOjA=&quot;
+          <span class=\\"hljs-string\\">\\"node\\"</span>: <span class=\\"hljs-literal\\">null</span>,
+          <span class=\\"hljs-string\\">\\"cursor\\"</span>: <span class=\\"hljs-string\\">\\"YXJyYXljb25uZWN0aW9uOjA=\\"</span>
         },
         {
-          &quot;node&quot;: null,
-          &quot;cursor&quot;: &quot;YXJyYXljb25uZWN0aW9uOjE=&quot;
+          <span class=\\"hljs-string\\">\\"node\\"</span>: <span class=\\"hljs-literal\\">null</span>,
+          <span class=\\"hljs-string\\">\\"cursor\\"</span>: <span class=\\"hljs-string\\">\\"YXJyYXljb25uZWN0aW9uOjE=\\"</span>
         }
       ]
     }
   },
-  &quot;errors&quot;: [
+  <span class=\\"hljs-string\\">\\"errors\\"</span>: [
     {
-      &quot;message&quot;: &quot;Cannot return null for non-nullable field Location.name.&quot;,
-      &quot;locations&quot;: ...,
-      &quot;path&quot;: ...
+      <span class=\\"hljs-string\\">\\"message\\"</span>: <span class=\\"hljs-string\\">\\"Cannot return null for non-nullable field Location.name.\\"</span>,
+      <span class=\\"hljs-string\\">\\"locations\\"</span>: ...,
+      <span class=\\"hljs-string\\">\\"path\\"</span>: ...
     },
     ...
   ]
 }
 </code></pre>
 <p>This is not very nice. Especially if we know that the <code>type</code> field did not fail. This is why we prefer to write all fields as nullable. The result is much better in this case:</p>
-<pre><code class=\\"lang-javascript\\">{
-  &quot;data&quot;: {
-    &quot;allLocations&quot;: {
-      &quot;edges&quot;: [
+<pre><code class=\\"hljs lang-javascript\\">{
+  <span class=\\"hljs-string\\">\\"data\\"</span>: {
+    <span class=\\"hljs-string\\">\\"allLocations\\"</span>: {
+      <span class=\\"hljs-string\\">\\"edges\\"</span>: [
         {
-          &quot;node&quot;: {
-            &quot;type&quot;: &quot;airport&quot;,
-            &quot;name&quot;: null
+          <span class=\\"hljs-string\\">\\"node\\"</span>: {
+            <span class=\\"hljs-string\\">\\"type\\"</span>: <span class=\\"hljs-string\\">\\"airport\\"</span>,
+            <span class=\\"hljs-string\\">\\"name\\"</span>: <span class=\\"hljs-literal\\">null</span>
           },
-          &quot;cursor&quot;: &quot;YXJyYXljb25uZWN0aW9uOjA=&quot;
+          <span class=\\"hljs-string\\">\\"cursor\\"</span>: <span class=\\"hljs-string\\">\\"YXJyYXljb25uZWN0aW9uOjA=\\"</span>
         },
         {
-          &quot;node&quot;: {
-            &quot;type&quot;: &quot;city&quot;,
-            &quot;name&quot;: null
+          <span class=\\"hljs-string\\">\\"node\\"</span>: {
+            <span class=\\"hljs-string\\">\\"type\\"</span>: <span class=\\"hljs-string\\">\\"city\\"</span>,
+            <span class=\\"hljs-string\\">\\"name\\"</span>: <span class=\\"hljs-literal\\">null</span>
           },
-          &quot;cursor&quot;: &quot;YXJyYXljb25uZWN0aW9uOjE=&quot;
+          <span class=\\"hljs-string\\">\\"cursor\\"</span>: <span class=\\"hljs-string\\">\\"YXJyYXljb25uZWN0aW9uOjE=\\"</span>
         }
       ]
     }

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       React + Redux - Apollo =  FapFap
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Na konci minulého roku jsem začal něco jako virtuální seriál o React vs. PHP aplikaci. Včera jsem na Poslední sobotě byl upozorněn na to, že už asi nepokračuju. To není pravda - pouze jsem je přestal číslovat... :) Po <a href=\\"2-graphql\\">GraphQL</a>, vyřešení <a href=\\"reseni-n-1-problemu-v-graphql\\">N+1 problému</a>, <a href=\\"hexagonalni-architektura\\">architektuře serverové části</a> a <a href=\\"jak-na-lokalni-css-pro-react\\">omezení CSS kontextu</a> v React komponentách je čas podívat se podrobněji na komunikaci se serverem.</p>
@@ -66,34 +66,34 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"klientsk-komponenty\\">Klientské komponenty <a href=\\"#klientsk-komponenty\\">#</a></h2><p>Až do nedávné chvíle jsem na straně webového prohlížeče používal pro komunikaci se serverem knihovnu Apollo. Interně Apollo využívá Redux store a já začal hodně vážně zvažovat, že začnu Redux store využívat mnohem více. V tu chvíli už nedávalo moc velký smysl používat Apollo a přišlo mi zajímavější starat se o Redux store sám.</p>
 <p>Dříve jsem Apollo používal tak, že existovala vždy nějaká nadřazená komponenta, která se dotazovala serveru a předávala data jiné komponentě. Takže jsem měl komponenty, kterým se říká kontejnery (pouze tahají data) a předávají data pro vykreslení tzv. prezentačním komponentám (pouze vykreslují, ale netahají data).</p>
 <p>Myšlenka kontejnerů a prezentačních komponent pořád zůstává. Rozdíl je teď v tom, že místo toho, aby kontejner získával data prostřednictvím Apolla, tak je připojen k Redux úložišti a v okamžiku připojení komponenty do DOMu se spustí Redux akce pro načtení dat:</p>
-<pre><code class=\\"lang-javascript\\">export const AllCamerasContainer = class extends React.Component {
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-keyword\\">export</span> <span class=\\"hljs-keyword\\">const</span> AllCamerasContainer = <span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">React</span>.<span class=\\"hljs-title\\">Component</span> </span>{
 
   componentWillMount() {
-    this.props.dispatch(loadAllCameras());
+    <span class=\\"hljs-keyword\\">this</span>.props.dispatch(loadAllCameras());
   }
 
-  render = () =&gt; { /* ... */ }
+  render = <span class=\\"hljs-function\\"><span class=\\"hljs-params\\">()</span> =&gt;</span> { <span class=\\"hljs-comment\\">/* ... */</span> }
 
 };
 
-export default connect()(AllCamerasContainer);
+<span class=\\"hljs-keyword\\">export</span> <span class=\\"hljs-keyword\\">default</span> connect()(AllCamerasContainer);
 </code></pre>
 <p>Funkce <code>this.props.dispatch</code> je k dispozici díky nadřazené komponentě, která se vytváří pripojením k Redux úložišti pomocí <code>connect()</code>.</p>
 <p>Redux funguje tak, že se pomocí funkce <code>dispatch</code> vyvolá nějaká akce/příkaz (zde načtení všech kamer), ta prolítne reducerama což jsou úplně obyčejné funkce, které umí měnit podobu stavu Redux úložiště a následně se tento nový stav uloží a komponenta se automaticky překreslí. Důležité je, že Redux si vlastně drží stav všech komponent u sebe v jednom velkém globálním úložišti a akce resp. reducery slouží pro alespoň trošku rozumné ovládání jeho obsahu. Zároveň Redux úložiště nemá z hlediska kódu <strong>nic společného s Reactem</strong>. Redux je ke komponentě nějak napojen, ale může fungovat úplně bez Reactu.</p>
 <p>Funkce <code>loadAllCameras</code> slouží pro vytvoření objektu reprezentující nějakou akci. Ta se potom spouští pomocí <code>dispatch</code>. Akce je obyčejný JS objekt, který si nese informaci o typu akce + nějaká další dodatečná data. Pokud však chci data teprve načíst, je nutné vytvářet místo objektu funkci, která tak učiní:</p>
-<pre><code class=\\"lang-javascript\\">// relies on Redux Thunk middleware
-export const loadAllCameras = () =&gt; {
-  return dispatch =&gt; {
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-comment\\">// relies on Redux Thunk middleware</span>
+<span class=\\"hljs-keyword\\">export</span> <span class=\\"hljs-keyword\\">const</span> loadAllCameras = <span class=\\"hljs-function\\"><span class=\\"hljs-params\\">()</span> =&gt;</span> {
+  <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-function\\"><span class=\\"hljs-params\\">dispatch</span> =&gt;</span> {
 
-    dispatch({ // spuštění akce (což je jen obyčejný objekt) uvnitř jiné akce
+    dispatch({ <span class=\\"hljs-comment\\">// spuštění akce (což je jen obyčejný objekt) uvnitř jiné akce</span>
       type: ALL_CAMERAS_LOADING,
     });
 
-    fetch(allCamerasQuery).then(({data}) =&gt; { // funkce pro získání dat (kvůli tomu je nutný Thunk)
+    fetch(allCamerasQuery).then(<span class=\\"hljs-function\\">(<span class=\\"hljs-params\\">{data}</span>) =&gt;</span> { <span class=\\"hljs-comment\\">// funkce pro získání dat (kvůli tomu je nutný Thunk)</span>
 
-      dispatch({ // opět jen obyčejná akce spuštěná uvnitř jiné akce
+      dispatch({ <span class=\\"hljs-comment\\">// opět jen obyčejná akce spuštěná uvnitř jiné akce</span>
         type: ALL_CAMERAS_LOAD_SUCCESS,
-        cameras: data.allCameras,
+        <span class=\\"hljs-attr\\">cameras</span>: data.allCameras,
       });
 
     });
@@ -102,26 +102,26 @@ export const loadAllCameras = () =&gt; {
 </code></pre>
 <p>Zde začíná být vidět důvod, proč jsem opustil Apollo. Díky tomu, že mám teď v ruce veškeré akce a reducery, tak mohu pohodlně spouštět a řetězit akce jak se mi zachce. Až Redux spustí tuto akci (resp. <a href=\\"https://github.com/gaearon/redux-thunk\\">Redux Thunk</a>), tak si jen najde ten správný reducer (podle typu <code>ALL_CAMERAS_LOADING</code> resp. <code>ALL_CAMERAS_LOAD_SUCCESS</code>), ten upraví obsah Redux úložiště a protože máme deklarativní React, tak se data automaticky překreslí.</p>
 <h2 id=\\"server-fetcher\\">Server Fetcher <a href=\\"#server-fetcher\\">#</a></h2><p>V předchozí akci bylo vidět, že se volá funkce <code>fetch</code>. To je úplně jednoduchá funkce, která pošle na server GraphQL dotaz a vrátí odpověď (resp. Promise). Vlastně dělá jen to, že pomocí <a href=\\"https://github.com/matthew-andrews/isomorphic-fetch\\">isomorphic-fetch</a> položí dotaz ve správném formátu:</p>
-<pre><code class=\\"lang-javascript\\">return fetch(config.apiAddress, {
-  method: &#39;POST&#39;,
-  body: JSON.stringify({
-    query: graphQuery, // přichází jako argument fetcheru
-    variables: variables, // dtto
-    operationName: operationName // dtto
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-keyword\\">return</span> fetch(config.apiAddress, {
+  <span class=\\"hljs-attr\\">method</span>: <span class=\\"hljs-string\\">'POST'</span>,
+  <span class=\\"hljs-attr\\">body</span>: <span class=\\"hljs-built_in\\">JSON</span>.stringify({
+    <span class=\\"hljs-attr\\">query</span>: graphQuery, <span class=\\"hljs-comment\\">// přichází jako argument fetcheru</span>
+    variables: variables, <span class=\\"hljs-comment\\">// dtto</span>
+    operationName: operationName <span class=\\"hljs-comment\\">// dtto</span>
   }),
   headers
-}).then(response =&gt; response.json())
-  .then(json =&gt; {
-    return json; // zde budou příchozí data z API
+}).then(<span class=\\"hljs-function\\"><span class=\\"hljs-params\\">response</span> =&gt;</span> response.json())
+  .then(<span class=\\"hljs-function\\"><span class=\\"hljs-params\\">json</span> =&gt;</span> {
+    <span class=\\"hljs-keyword\\">return</span> json; <span class=\\"hljs-comment\\">// zde budou příchozí data z API</span>
   });
 </code></pre>
 <p>Poskládat potřebné hlavičky je otázkou několika málo sekund:</p>
-<pre><code class=\\"lang-javascript\\">let headers = {
-  Accept: &#39;*/*&#39;,
-  &#39;Content-Type&#39;: &#39;application/json&#39;
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-keyword\\">let</span> headers = {
+  <span class=\\"hljs-attr\\">Accept</span>: <span class=\\"hljs-string\\">'*/*'</span>,
+  <span class=\\"hljs-string\\">'Content-Type'</span>: <span class=\\"hljs-string\\">'application/json'</span>
 };
-let token = Authenticator.getToken(); // localStorage
-if (token !== null) {
+<span class=\\"hljs-keyword\\">let</span> token = Authenticator.getToken(); <span class=\\"hljs-comment\\">// localStorage</span>
+<span class=\\"hljs-keyword\\">if</span> (token !== <span class=\\"hljs-literal\\">null</span>) {
   headers.authorization = token;
 }
 </code></pre>
@@ -137,46 +137,46 @@ if (token !== null) {
 OK? Možná to bylo rychlé, ale <a href=\\"https://github.com/adeira/connector-frontend\\">mrkněte na kód</a> a popř. si to vyzkoušejte. Nic složitého... :)</li>
 </ul>
 <h2 id=\\"p-ijet-po-adavku-na-php-serveru\\">Přijetí požadavku na PHP serveru <a href=\\"#p-ijet-po-adavku-na-php-serveru\\">#</a></h2><p>Dostáváme se do oblasti, ve které <a href=\\"https://forum.nette.org/cs/28370-data-z-post-request-body-reactjs-appka-se-po-ceste-do-php-ztrati\\">se vypastí</a> překvapivě hodně lidí. Na straně serveru je třeba přistupovat k POST datům <a href=\\"https://github.com/adeira/connector/blob/c501227a4429dba493624ca9fa85745fb5f1839c/instances/Connector/Infrastructure/Delivery/Http/GraphqlEndpoint.php#L62\\">trošku jinak</a>, než by mohlo být zřejmé. K této trošce teorie bude potřeba následující PHP kód:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
 var_dump(
   $_POST,
-  file_get_contents(&#39;php://input&#39;)
+  file_get_contents(<span class=\\"hljs-string\\">'php://input'</span>)
 );
 </code></pre>
 <p>Co se stane, pokud odešleme POST požadavek obsahující JSON třeba pomocí konzole v prohlížeči?</p>
-<pre><code class=\\"lang-javascript\\">var xhr = new XMLHttpRequest();
-xhr.open(&quot;POST&quot;, &quot;test.php&quot;, true);
-xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;);
-xhr.send(&quot;{a:&#39;b&#39;}&quot;);
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-keyword\\">var</span> xhr = <span class=\\"hljs-keyword\\">new</span> XMLHttpRequest();
+xhr.open(<span class=\\"hljs-string\\">\\"POST\\"</span>, <span class=\\"hljs-string\\">\\"test.php\\"</span>, <span class=\\"hljs-literal\\">true</span>);
+xhr.setRequestHeader(<span class=\\"hljs-string\\">\\"Content-Type\\"</span>, <span class=\\"hljs-string\\">\\"application/x-www-form-urlencoded; charset=UTF-8\\"</span>);
+xhr.send(<span class=\\"hljs-string\\">\\"{a:'b'}\\"</span>);
 </code></pre>
 <p>Vrátí se tato odpoveď:</p>
-<pre><code>array(1) {
-  [&quot;{a:&#39;b&#39;}&quot;]=&gt;
-  string(0) &quot;&quot;
+<pre><code class=\\"hljs\\">array(1) {
+  [\\"{a:'b'}\\"]=&gt;
+  string(0) \\"\\"
 }
-string(7) &quot;{a:&#39;b&#39;}&quot;
+string(7) \\"{a:'b'}\\"
 </code></pre><p>Obsah <code>$_POST</code> pole může být zvláštní, ale s tím by se dalo žít. Vzhledem k tomu, že se požadavek posílá jako formulář, tak se očekává trošku jiný formát dat:</p>
-<pre><code class=\\"lang-javascript\\">xhr.send(&quot;a=1&amp;b=2&quot;);
+<pre><code class=\\"hljs lang-javascript\\">xhr.send(<span class=\\"hljs-string\\">\\"a=1&amp;b=2\\"</span>);
 </code></pre>
 <p>V tomto případě pole pěkně expanduje:</p>
-<pre><code>array(2) {
-  [&quot;a&quot;]=&gt;
-  string(1) &quot;1&quot;
-  [&quot;b&quot;]=&gt;
-  string(1) &quot;2&quot;
+<pre><code class=\\"hljs\\">array(2) {
+  [\\"a\\"]=&gt;
+  string(1) \\"1\\"
+  [\\"b\\"]=&gt;
+  string(1) \\"2\\"
 }
-string(7) &quot;a=1&amp;b=2&quot;
+string(7) \\"a=1&amp;b=2\\"
 </code></pre><p>Co se však stane, pokud změníme hlavičku požadavku <code>Content-Type</code>?</p>
-<pre><code class=\\"lang-javascript\\">var xhr = new XMLHttpRequest();
-xhr.open(&quot;POST&quot;, &quot;test.php&quot;, true);
-xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/json; charset=UTF-8&quot;);
-xhr.send(&quot;a=1&amp;b=2&quot;);
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-keyword\\">var</span> xhr = <span class=\\"hljs-keyword\\">new</span> XMLHttpRequest();
+xhr.open(<span class=\\"hljs-string\\">\\"POST\\"</span>, <span class=\\"hljs-string\\">\\"test.php\\"</span>, <span class=\\"hljs-literal\\">true</span>);
+xhr.setRequestHeader(<span class=\\"hljs-string\\">\\"Content-Type\\"</span>, <span class=\\"hljs-string\\">\\"application/json; charset=UTF-8\\"</span>);
+xhr.send(<span class=\\"hljs-string\\">\\"a=1&amp;b=2\\"</span>);
 </code></pre>
 <p>POST pole bude zcela prázdné! (nikoliv však <code>php://input</code>)</p>
-<pre><code>array(0) {
+<pre><code class=\\"hljs\\">array(0) {
 }
-string(7) &quot;a=1&amp;b=2&quot;
+string(7) \\"a=1&amp;b=2\\"
 </code></pre><p>Jak je totiž psáno v dokumentaci, tak <code>$_POST</code> neobsahuje všechna data, která jsou na server odeslána jako POST, nýbrž:</p>
 <blockquote>
 <p>An associative array of variables passed to the current script via the HTTP POST method <strong>when using application/x-www-form-urlencoded or multipart/form-data as the HTTP Content-Type</strong> in the request.</p>

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       GraphQL Summit 2017 - San Francisco
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>GraphQL Summit was really a great eye-opener. I never thought about GraphQL in this way and I never realized how is the company I am working for falling behind with this progressive technology. You will have the opportunity to watch all talks on <a href=\\"https://www.youtube.com/channel/UC0pEW_GOrMJ23l8QcrGdKSw/feed\\">Apollo GraphQL YouTube channel</a> or you can read quite comprehensive reviews of each GraphQL talk <a href=\\"https://about.sourcegraph.com/graphql/\\">on this blog</a>. But what you cannot is to feel the atmosphere of the summit and you cannot talk with GraphQL creators from Facebook to discover how to use it properly. So I will try to give you sneak peek preview of the feature... :)</p>
@@ -75,7 +75,7 @@ exports[`renders correctly 1`] = `
 <p>To be fair - Air France doesn&#39;t use this approach. It&#39;s because their architecture is a little bit different (4 independent applications in one application) and one proxy for schema stitching is considered a single point of failure. So it&#39;s not really silver bullet but it makes sense for most applications (or you think that IBM is small?) and even Air France could build it like IBM. From what I understand their decision was based solely on the scare.</p>
 <h2 id=\\"some-errors-are-not-errors-at-all\\">Some errors are not errors at all <a href=\\"#some-errors-are-not-errors-at-all\\">#</a></h2><p>One of the most often asked questions while building GraphQL API for frontend is: &quot;How do we handle form and application errors?&quot; And one of the first designs from newbies would be to extend <code>errors</code> field in the response. But this is not very flexible because suddenly you introduced tight coupling with UI (e.g. what field errored) and even though it&#39;s true that &quot;your API is a user interface&quot; - you should not take this literally.</p>
 <p>Instead what about thinking about errors little bit differently. What if some errors are not errors at all? What if <strong>errors are actually data</strong>? What if you could provide all necessary information in the response like this?</p>
-<pre><code class=\\"lang-graphql\\">mutation createUser {
+<pre><code class=\\"hljs lang-graphql\\">mutation createUser {
   createUser(email: &quot;test@example.com&quot;) {
     user { id, email }
     wasSuccessful
@@ -87,7 +87,7 @@ exports[`renders correctly 1`] = `
 </code></pre>
 <p>Think about it. <a href=\\"https://about.sourcegraph.com/graphql/what-went-wrong-best-practices-for-surfacing-error-messages-in-a-graphql-api/\\">Read about it</a>. Be open-minded... :)</p>
 <h2 id=\\"graphql-is-starting-to-be-weird\\">GraphQL is starting to be weird <a href=\\"#graphql-is-starting-to-be-weird\\">#</a></h2><p>The GraphQL specification is very benevolent. And that&#39;s great. But it also means that you can do really weird stuff with it. For example:</p>
-<pre><code class=\\"lang-graphql\\">query GetUserData($email: String!) {
+<pre><code class=\\"hljs lang-graphql\\">query GetUserData($email: String!) {
   user(email: $email) @rest(route: &quot;/users/email/:email&quot;, email: $email) {
     id, firstName
     deviceType @client

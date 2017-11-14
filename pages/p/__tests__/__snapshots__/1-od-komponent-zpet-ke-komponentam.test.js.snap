@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Od komponent zpět ke komponentám
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>On: <em>A budeš o tom psát nějaké články?</em><br>
@@ -68,29 +68,29 @@ Já: <em>No tak jako mohl bych... :)</em></p>
 <p>Systém komponent má však v Nette celou řadu úskalí a temných zákoutí. Jedním z největších problémů považuji to, že si komponenta nenese vše s sebou. Zejména pak styly a javascript. Ačkoliv jsem tento problém řešil pokaždé a vždy nějakým jiným originálním způsobem, vždy jsem došel ke stavu aplikace, který se mi z nějakého důvodu moc nelíbil.</p>
 <p>Začal jsem tedy hledat jiné řešení. A než ukážu výsledek, je nutné pochopit kudy jsem šel a kde jsem se cestou popálil...</p>
 <h2 id=\\"webcomponents\\">WebComponents <a href=\\"#webcomponents\\">#</a></h2><p><a href=\\"http://webcomponents.org/\\">Webové komponenty</a> jsou přesně to co jsem hledal. Webová komponenta slouží k rozšíření DOMu o vlastní HTML prvky (stejně tak jako funguje např. <code>&lt;video&gt;</code> tag). Pokud chcete vidět obsah takového tagu, doporučuji v Chrome zapnout &quot;Show user agent shadow DOM&quot;. Přirozeně jsem šel hned za Polymerem, protože jej již nějaký čas znám. Nikdy jsem si ho však nevyzkoušel na reálném projektu. Minimální definice Polymer elementu vypadá takto:</p>
-<pre><code class=\\"lang-html\\">&lt;dom-module id=&quot;element-name&quot;&gt;
-  &lt;template&gt;
-    &lt;style&gt;/* ... */&lt;/style&gt;
-  &lt;/template&gt;
-  &lt;script&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">dom-module</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"element-name\\"</span>&gt;</span>
+  <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">template</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">style</span>&gt;</span><span class=\\"css\\"><span class=\\"hljs-comment\\">/* ... */</span></span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">style</span>&gt;</span>
+  <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">template</span>&gt;</span>
+  <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">script</span>&gt;</span><span class=\\"actionscript\\">
     Polymer({
-      is: &#39;element-name&#39;,
+      <span class=\\"hljs-keyword\\">is</span>: <span class=\\"hljs-string\\">'element-name'</span>,
     });
-  &lt;/script&gt;
-&lt;/dom-module&gt;
+  </span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">script</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">dom-module</span>&gt;</span>
 </code></pre>
 <p>K dispozici tedy budu mít v HTML element <code>&lt;element-name/&gt;</code> (pozor: název musí obsahovat pomlčku). Následně bude mít komponenta definovaný způsob vykreslování, vlastní styly i vlastní JS chování. Super. Pokud chcete něco takového implementovat pomocí Nette komponent - vzdejte to rovnou. Neříkám, že by to nešlo, ale jednak je to složité a jednak bude supersložité řešit věci jako je <a href=\\"https://www.polymer-project.org/1.0/docs/tools/optimize-for-production\\">vulkanizace a použití Crisperu</a>. Rychle jsem tedy opustil cestu vytváření komponent na straně serveru a vše jsem předal javascriptu.</p>
 <p>Bylo to super a pak jsem <strong>po několika měsících práce s Polymerem celou aplikaci rozerval na kousky a přepsal ji do něčeho jiného</strong>. Nikdy jsem nezažil nic tak vyčerpávajícího jako práci s Polymerem. HTML se totiž bohužel chová tak, že pokud nějaký element nezná, tak jej ignoruje. A prakticky jakákoliv chyba typu &quot;proč to nejde&quot; byla způsobena práce tímto. Každý element je třeba importovat a ačkoliv IDE dokáže hodně pomoci, tak existují případy, kdy to prostě nefunguje a jen kvůli tomu, že jsem si prvek nenaimportoval...</p>
-<pre><code class=\\"lang-html\\">&lt;input is=&quot;my-input&quot;&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">input</span> <span class=\\"hljs-attr\\">is</span>=<span class=\\"hljs-string\\">\\"my-input\\"</span>&gt;</span>
 </code></pre>
 <p>Toto je přesně případ se kterým si třeba WebStorm nedokáže poradit. Takže fakticky je to moje chyba, že jsem nepozorný, ale o to více potřebuji, aby když něco udělám blbě, tak mi to pořádně nafackovalo a já hned věděl. Proto jsem Polymer opustil (ano to je jediný důvod) a ačkoliv si myslím, že je to skvělý nápad a webovým komponentám hodně fandím, vydal jsem se o kousek dál.</p>
 <h2 id=\\"react\\">React <a href=\\"#react\\">#</a></h2><p>Stejně tak jako všichni, tak i já jsem skončil u Reactu. A stydím se za to. Nechci jej používat jen proto, že je to cool. Ale dal jsem mu poprvé velkou šanci i tak (už jej znám dlouho, ale nikdy jsem nepotřeboval). Z mého pohledu: zatímco Polymer umí by default úplně <a href=\\"https://beta.webcomponents.org/collection/Polymer/elements\\">neuvěřitelně vymakané frontend prostředí</a>, React neumí nic než pracovat s daty. Ale jeden ze zásadních rozdílů je v tom, že je striktní. Takže moje problémy s neexistujícími emlementy řeší JSX by design (kdo zná XHP, tak ví). Vzdal jsem se tedy úžasného nástroje a přešel jsem na něco, co umí v základu jen chytře aktualizovat DOM a vykreslit <code>div</code> (takto vypadá nejmenší komponenta, kterou lze v Reactu napsat - ES6):</p>
-<pre><code class=\\"lang-js\\">import React from &#39;react&#39;;
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-keyword\\">import</span> React <span class=\\"hljs-keyword\\">from</span> <span class=\\"hljs-string\\">'react'</span>;
 
-export default () =&gt; &lt;div&gt;Alenka&lt;/div&gt;
+<span class=\\"hljs-keyword\\">export</span> <span class=\\"hljs-keyword\\">default</span> () =&gt; <span class=\\"xml\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span>&gt;</span>Alenka<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span></span>
 </code></pre>
 <p>V Reactu jsou dva druhy komponent - tzv. kontejnery a samotné prezentační komponenty. Toto rozdělení mi také vyhovuje, protože se hezky separují závislosti (kontejner pouze tahá data a prezentační komponenta pouze vykresluje vytažená data). Navíc si taková komponenta nese i vlastní styly (což se ne všem líbí, ale já tleskám):</p>
-<pre><code class=\\"lang-js\\">import &#39;./AuthorizedBase.css&#39;;
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-keyword\\">import</span> <span class=\\"hljs-string\\">'./AuthorizedBase.css'</span>;
 </code></pre>
 <p>Podobně je možné importovat i obrázky a další zdroje díky Webpacku (neuvěřitelně WTF WOW nástroj). Webpack je právě nástroj, který řeší většinu bolístek, které jsem řešil složitě u Nette komponent.</p>
 <p>Ačkoliv zrovna v mém případě React docela dává smysl, protože se bude hodně pracovat s daty, použil bych je i na místě, kde to totálně nedává smysl (tedy třeba na blog). Je to totiž způsob jak pracovat s frontendem takovým způsobem, jaký jsem dlouho hledal (navíc je React jednoduchý). Má to však jedno velké ALE.</p>

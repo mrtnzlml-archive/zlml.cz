@@ -53,142 +53,142 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Sbohem NDBT, vítej Doctrine
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Byl jsem požádán, abych napsal nejenom důvod přechodu z Nette Database na Doctrine, ale obecně co mě k tomu vedlo a jak takový přechod vlastně učinit. Na úvod bych však chtěl zdůraznit, že nejsem žádný extra programátor, vlastně to ani nestuduji, takže vše co budu ukazovat a vysvětlovat je tedy z mého pohledu a lecjakého OOP znalce by tento text mohl pobouřit... (-:</p>
 <p>Následující text používá <a href=\\"https://github.com/Kdyby/Doctrine\\">Kdyby\\\\Doctrine</a>, nevidím důvod proč ve spojení s Nette používat něco jiného. Je to dobrá knihovna.</p>
 <h2 id=\\"sbohem-ndbt\\">Sbohem NDBT <a href=\\"#sbohem-ndbt\\">#</a></h2><p>Nette Database Table a obecně celé Nette Database je úžasná část frameworku a spokojeně jsem ji používal po velmi dlouhou dobu. Nikdy jsem neholdoval pokřikům, že je NDBT zabugované (jako někteří) a i když jsem vyzkoušel i jiné alternativy, vždy jsem se spokojeně vracel právě k NDBT. Použití je velice intuitivní a dobře se s tím zachází:</p>
 <p>Model:</p>
-<pre><code class=\\"lang-php\\">class Posts extends Nette\\\\Object {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Posts</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Object</span> </span>{
 
-    /** @var \\\\Nette\\\\Database\\\\Context */
-    private $database;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@var</span> \\\\Nette\\\\Database\\\\Context */</span>
+    <span class=\\"hljs-keyword\\">private</span> $database;
 
-    public function __construct(Nette\\\\Database\\\\Context $context) {
-        $this-&gt;database = $context;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">(Nette\\\\Database\\\\Context $context)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;database = $context;
     }
 
-    public function getAllPosts() {
-        return $this-&gt;database-&gt;table(&#39;posts&#39;)-&gt;where(&#39;release_date &lt; NOW()&#39;);
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getAllPosts</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;database-&gt;table(<span class=\\"hljs-string\\">'posts'</span>)-&gt;where(<span class=\\"hljs-string\\">'release_date &lt; NOW()'</span>);
     }
 
 }
 </code></pre>
 <p>Presenter:</p>
-<pre><code class=\\"lang-php\\">class HomepagePresenter extends BasePresenter {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">HomepagePresenter</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">BasePresenter</span> </span>{
 
-    /** @var \\\\Posts @inject */
-    public $posts;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@var</span> \\\\Posts <span class=\\"hljs-doctag\\">@inject</span> */</span>
+    <span class=\\"hljs-keyword\\">public</span> $posts;
 
-    public function renderDefault() {
-        $this-&gt;template-&gt;posts = $this-&gt;posts-&gt;getAllPosts();
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">renderDefault</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;template-&gt;posts = <span class=\\"hljs-keyword\\">$this</span>-&gt;posts-&gt;getAllPosts();
     }
 
 }
 </code></pre>
 <p>Je to jednoduché a jasné. Takové věci mám prostě rád. V modelové třídě mám jak select metody, tak insert metody, takže bych tomu správně neměl říkat repository, ale abych byl upřímný, tak je mi toto názvosloví celkem volné. Do takové objektu si prostě dám to co chci (tak jak mi to dává smysl). Nepřijde mi to vůbec podstatné. Tahání dat z databáze má však ještě jednu vrstvu a tou je vykreslování.</p>
-<pre><code class=\\"lang-html\\">{foreach $posts as $post}
-    &lt;h3&gt;&lt;a n:href=&quot;:Single:article $post-&gt;slug&quot;&gt;{$post-&gt;title|vlna}&lt;/a&gt;&lt;/h3&gt;
-    &lt;p&gt;
-        {foreach $post-&gt;related(&#39;posts_tags&#39;)-&gt;order(&#39;tag_id ASC&#39;) as $post_tag}
-            &lt;a n:href=&quot;Tag:default, $post_tag-&gt;tag-&gt;name&quot;&gt;
-                &lt;span style=&quot;background: #{$post_tag-&gt;tag-&gt;color}&quot;&gt;{$post_tag-&gt;tag-&gt;name}&lt;/span&gt;
-            &lt;/a&gt;
+<pre><code class=\\"hljs lang-html\\">{foreach $posts as $post}
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">h3</span>&gt;</span><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">a</span> <span class=\\"hljs-attr\\">n:href</span>=<span class=\\"hljs-string\\">\\":Single:article $post-&gt;slug\\"</span>&gt;</span>{$post-&gt;title|vlna}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">a</span>&gt;</span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">h3</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">p</span>&gt;</span>
+        {foreach $post-&gt;related('posts_tags')-&gt;order('tag_id ASC') as $post_tag}
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">a</span> <span class=\\"hljs-attr\\">n:href</span>=<span class=\\"hljs-string\\">\\"Tag:default, $post_tag-&gt;tag-&gt;name\\"</span>&gt;</span>
+                <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">span</span> <span class=\\"hljs-attr\\">style</span>=<span class=\\"hljs-string\\">\\"background: #{$post_tag-&gt;tag-&gt;color}\\"</span>&gt;</span>{$post_tag-&gt;tag-&gt;name}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">span</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">a</span>&gt;</span>
         {/foreach}
         {$post-&gt;body|truncate:450}
-    &lt;/p&gt;
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">p</span>&gt;</span>
 {/foreach}
 </code></pre>
 <p>A to je věc, která mě dlouhou dobu trápila. Dá se čekat, že když v databázi existuje jakási vazba mezi příspěvkem a tagem, tak že tuto vazbu budu chtít nějak využít. A to pokud možno co nejvíce pohodlně. A co nejvíce pohodlně znamená, že v okamžik, kdy budu pracovat s příspěvkem a vzpomenu si, že potřebuji také tagy, tak tyto tagy také dostanu. Bohužel musím znát také spojovací tabulku, která nemá (minimálně v tomto případě) žádný faktický smysl a celkově práce s takto &quot;dopřivázanou&quot; tabulkou není vůbec pohodlná a už vůbec ne intuitivní. Dává to smysl a asi to tak být musí, takže proti NDBT žádná, ale tak nějak vnitřně jsem hledal něco lepšího (čti více vyhovujícího mým požadavkům).</p>
 <h2 id=\\"v-tej-doctrine\\">Vítej Doctrine <a href=\\"#v-tej-doctrine\\">#</a></h2><p>Schválně se snažím vše popisovat podle mých myšlenkových pochodů, proto i nadále budu řešit úplně ten samý problém, jen s použitím Doctrine. Nutno ještě dodat, že Doctrine rozhodně nebyla jasná volba. Opět mi dlouho trvalo, než jsem obecně ORM přišel na chuť. Ještě před Doctrine jsem nějakou dobu experimentoval s <a href=\\"http://www.leanmapper.com/\\">Lean Mapperem</a> od Vojtěcha Kohouta (Tharos). Malou nevýhodou je, že téměř veškerá dokumentace je v brutálně dlouhém vláknu na Nette fóru, které má v tuto chvíli <strong>1023 příspěvků</strong>, takže je to občas dřina, ale myslím si, že je to skutečně povedená knihovna. Vojtěch Kohout má skutečně dobré myšlenky. Nicméně jsem prostě chtěl přijít Doctrine na chuť, takže jsem i Lean Mapper opustil. Občas dělám radikální změny, pokud by však někdo vyloženě potřeboval důvod k tomu začít s Doctrine (alespoň dočasně), pak tedy jeden mohu nabídnout. A bude velmi krátký. Vidíte někdy jako požadavek na zaměstnance znalost Lean Mapperu, nebo ActiveRow? Pokud ne, tak začněte s tím co se tam ukazuje často. Doctrine.</p>
 <p>Ale zpět k tématu. Pojďme si ukázat modelovou část podle mě:</p>
-<pre><code class=\\"lang-php\\">class Posts extends Nette\\\\Object {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Posts</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Object</span> </span>{
 
-    /** @var \\\\Kdyby\\\\Doctrine\\\\EntityDao */
-    private $dao;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@var</span> \\\\Kdyby\\\\Doctrine\\\\EntityDao */</span>
+    <span class=\\"hljs-keyword\\">private</span> $dao;
 
-    public function __construct(Kdyby\\\\Doctrine\\\\EntityDao $dao) {
-        $this-&gt;dao = $dao;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">(Kdyby\\\\Doctrine\\\\EntityDao $dao)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;dao = $dao;
     }
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
-        return $this-&gt;dao-&gt;findBy($criteria, $orderBy, $limit, $offset);
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">findBy</span><span class=\\"hljs-params\\">(array $criteria, array $orderBy = null, $limit = null, $offset = null)</span> </span>{
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;dao-&gt;findBy($criteria, $orderBy, $limit, $offset);
     }
 
 }
 </code></pre>
 <p>Velmi podobné jako u předchozího modelu. Asi by šlo si napsat nějakou <code>__call</code> metodu, protože se dost často volá to co už je v DAO objektu (viz níže), ale kdo si to jak poslepuje, tak to bude mít... A co prezentační vrstva?</p>
-<pre><code class=\\"lang-php\\">class HomepagePresenter extends BasePresenter {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">HomepagePresenter</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">BasePresenter</span> </span>{
 
-    /** @var \\\\Posts @inject */
-    public $posts;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@var</span> \\\\Posts <span class=\\"hljs-doctag\\">@inject</span> */</span>
+    <span class=\\"hljs-keyword\\">public</span> $posts;
 
-    public function renderDefault() {
-        $posts = $this-&gt;posts-&gt;findBy(array());
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">renderDefault</span><span class=\\"hljs-params\\">()</span> </span>{
+        $posts = <span class=\\"hljs-keyword\\">$this</span>-&gt;posts-&gt;findBy(<span class=\\"hljs-keyword\\">array</span>());
     }
 
 }
 </code></pre>
 <p>To je také dost podobné. Pole kritérií potom slouží k dodatečnému filtrování ve tvaru např. <code>[&#39;id&#39; =&gt; 21]</code>, tedy předává se to, co se má použít i v SQL WHERE klauzuli. Tento zápis je mi poměrně blízký, protože jsem ho používal při komunikaci s jedním SOAP serverem. Ok, co na to šablona?</p>
-<pre><code class=\\"lang-html\\">{foreach $posts as $post}
-    &lt;h3&gt;&lt;a n:href=&quot;:Single:article $post-&gt;slug&quot;&gt;{$post-&gt;title|vlna}&lt;/a&gt;&lt;/h3&gt;
-    &lt;p&gt;
+<pre><code class=\\"hljs lang-html\\">{foreach $posts as $post}
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">h3</span>&gt;</span><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">a</span> <span class=\\"hljs-attr\\">n:href</span>=<span class=\\"hljs-string\\">\\":Single:article $post-&gt;slug\\"</span>&gt;</span>{$post-&gt;title|vlna}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">a</span>&gt;</span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">h3</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">p</span>&gt;</span>
         {foreach $post-&gt;tags as $tag}
-            &lt;a n:href=&quot;Search:default, $tag-&gt;name&quot;&gt;
-                &lt;span style=&quot;background: #{$tag-&gt;color}&quot;&gt;{$tag-&gt;name}&lt;/span&gt;
-            &lt;/a&gt;
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">a</span> <span class=\\"hljs-attr\\">n:href</span>=<span class=\\"hljs-string\\">\\"Search:default, $tag-&gt;name\\"</span>&gt;</span>
+                <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">span</span> <span class=\\"hljs-attr\\">style</span>=<span class=\\"hljs-string\\">\\"background: #{$tag-&gt;color}\\"</span>&gt;</span>{$tag-&gt;name}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">span</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">a</span>&gt;</span>
         {/foreach}
         {$post-&gt;body|truncate:450}
-    &lt;/p&gt;
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">p</span>&gt;</span>
 {/foreach}
 </code></pre>
 <p>Tak to je podle mě úplně super výsledek. Maximálně intuitivní a nic víc splňuje to má očekávání. Je však asi zřejmé, že jsem úplně vypustil jakoukoliv informaci o spojovací tabulce. A také jsem ještě neřekl, co je to <code>EntityDao</code>, se kterým se pracuje v modelu. Vlastně je to úplně jednoduché. V konfiguračním souboru definuji, že chci pracovat s jakýmsi DAO objektem, tedy objektem, který oproti repository umožňuje data nejen číst, ale také ukládat (opět pouze OOP slovíčkaření).</p>
-<pre><code class=\\"lang-neon\\">services:
+<pre><code class=\\"hljs lang-neon\\">services:
     - App\\\\Pictures(@doctrine.dao(Entity\\\\Picture))
     - App\\\\Posts(@doctrine.dao(Entity\\\\Post))
     - App\\\\Tags(@doctrine.dao(Entity\\\\Tag))
     - App\\\\Users(@doctrine.dao(Entity\\\\User))
 </code></pre>
 <p>Fajn, teď mám tedy v každé modelové třídě DAO objekt. Ten obsahuje několik metod, které výrazně usnadňují práci s Doctrine (<a href=\\"https://github.com/Kdyby/Doctrine/blob/master/src/Kdyby/Doctrine/EntityDao.php\\">source</a>). Do tohoto objektu předávám jakousi entitu. To je objekt, který reprezentuje strukturu databázové tabulky. To možná není napsáno úplně šťastně, ale prakticky to tak skutečně většinou je. Taková entita může vypadat například takto:</p>
-<pre><code class=\\"lang-php\\">namespace Entity;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">namespace</span> <span class=\\"hljs-title\\">Entity</span>;
 
-/**
- * @ORM\\\\Entity
- * @ORM\\\\Table(name=&quot;posts&quot;)
- */
-class Post extends Doctrine\\\\Entities\\\\BaseEntity {
+<span class=\\"hljs-comment\\">/**
+ * <span class=\\"hljs-doctag\\">@ORM</span>\\\\Entity
+ * <span class=\\"hljs-doctag\\">@ORM</span>\\\\Table(name=\\"posts\\")
+ */</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Post</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Doctrine</span>\\\\<span class=\\"hljs-title\\">Entities</span>\\\\<span class=\\"hljs-title\\">BaseEntity</span> </span>{
 
-    /**
-     * @ORM\\\\ManyToMany(targetEntity=&quot;Tag&quot;, inversedBy=&quot;posts&quot;, cascade={&quot;persist&quot;})
-     * @ORM\\\\JoinTable(name=&quot;posts_tags&quot;)
-     * @ORM\\\\OrderBy({&quot;name&quot; = &quot;ASC&quot;})
-     */
-    protected $tags;
+    <span class=\\"hljs-comment\\">/**
+     * <span class=\\"hljs-doctag\\">@ORM</span>\\\\ManyToMany(targetEntity=\\"Tag\\", inversedBy=\\"posts\\", cascade={\\"persist\\"})
+     * <span class=\\"hljs-doctag\\">@ORM</span>\\\\JoinTable(name=\\"posts_tags\\")
+     * <span class=\\"hljs-doctag\\">@ORM</span>\\\\OrderBy({\\"name\\" = \\"ASC\\"})
+     */</span>
+    <span class=\\"hljs-keyword\\">protected</span> $tags;
 
-    /**
-     * @ORM\\\\Id
-     * @ORM\\\\Column(type=&quot;integer&quot;)
-     * @ORM\\\\GeneratedValue
-     */
-    protected $id;
+    <span class=\\"hljs-comment\\">/**
+     * <span class=\\"hljs-doctag\\">@ORM</span>\\\\Id
+     * <span class=\\"hljs-doctag\\">@ORM</span>\\\\Column(type=\\"integer\\")
+     * <span class=\\"hljs-doctag\\">@ORM</span>\\\\GeneratedValue
+     */</span>
+    <span class=\\"hljs-keyword\\">protected</span> $id;
 
-    /** @ORM\\\\Column(type=&quot;text&quot;) */
-    protected $title;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@ORM</span>\\\\Column(type=\\"text\\") */</span>
+    <span class=\\"hljs-keyword\\">protected</span> $title;
 
-    /** @ORM\\\\Column(type=&quot;text&quot;) */
-    protected $slug;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@ORM</span>\\\\Column(type=\\"text\\") */</span>
+    <span class=\\"hljs-keyword\\">protected</span> $slug;
 
-    /** @ORM\\\\Column(type=&quot;text&quot;) */
-    protected $body;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@ORM</span>\\\\Column(type=\\"text\\") */</span>
+    <span class=\\"hljs-keyword\\">protected</span> $body;
 
-    /** @ORM\\\\Column(type=&quot;datetime&quot;) */
-    protected $date;
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@ORM</span>\\\\Column(type=\\"datetime\\") */</span>
+    <span class=\\"hljs-keyword\\">protected</span> $date;
 
 }
 </code></pre>

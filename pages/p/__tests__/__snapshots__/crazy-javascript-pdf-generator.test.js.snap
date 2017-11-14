@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Crazy JavaScript PDF generator
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Kdysi mi někdo řekl, že správný programátor by měl být tak trošku děvka pro všechno. Nestačí jen umět PHP. Nestačí jen umět JavaScript. S tímto názorem jsem od samého začátku souhlasil. Ostatně je to jeden z důvodů, proč se občas zajímám i o věci, které v nejbližší době nevyužiju a zase tolik jim nerozumím (také to podle toho pak vypadá). Jednou z takových věcí je <a href=\\"http://facebook.github.io/react/index.html\\">React</a>. Nedávno jsem si hrál také s <a href=\\"http://phantomjs.org/\\">PhantomJS</a> a když už jsme u toho, tak ani <a href=\\"http://www.slideshare.net/MartinZlmal/nodejs-42314371\\">NodeJS mi není cizí</a>. A co se stane, když se jednoho večera rozhodnete spojit všechno dohromady? Něco šíleného... (-:</p>
@@ -70,43 +70,43 @@ exports[`renders correctly 1`] = `
 <p>To je tak když se sejde několik věcí najednou. Vytvořit si faktury, otestovat aplikaci, neustálý přirozený hlad po NodeJS. A pak to přišlo. Co si tak vytvořit <a href=\\"https://github.com/mrtnzlml/js-invoice-generator\\">generátor faktur</a>, který bude samotnou fakturu stavět pomocí Reactu, server bude tvořit NodeJS a PDF budu generovat tak, že si tu stránku otevřu v PhantomJS a uložím (čímž snad získám velmi přesný výsledek)? Samozřejmě jsem se pokukoval i po již hotových řešeních jako je třeba <a href=\\"https://www.fakturoid.cz/\\">Fakturiod</a>. A kdybych byl jen o kousek línější, tak bych asi nic takového netvořil. Nakonec jsem se však pouze inspiroval <a href=\\"https://www.fakturoid.cz/blog/2015/08/25/nova-verejna-stranka-faktury\\">peckovým designem jedné z jejich faktur</a> (protože k designu mám asi tak daleko jako k Praze z Azor) s tím, že jí komplet napíšu znova pomocí komponent v Reactu a budu se modlit, aby to nikoho z Fakturoidu (až si tento článek přečte) neurazilo... (-:</p>
 <p>Prvním krokem bylo <a href=\\"https://github.com/mrtnzlml/js-invoice-generator/blob/master/run.js\\">naškytnout samotný server</a>. Zde bylo potřeba nastartovat ještě samotný PhantomJS pomocí <a href=\\"https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options\\">child_process</a>. Mohl jsem to udělaj jakkoliv jinak, ale takovou opičárnu jsem si vždy chtěl vyzkoušet. Samotná příprava stránky pro PhantomJS je pak <a href=\\"https://github.com/mrtnzlml/js-invoice-generator/blob/master/invoice.js\\">jednoduchá</a>. Takže server funguje a PhantomJS běží. Co dál?</p>
 <p>Chtělo by to něco co by šlo renderovat. Takové minimální rozumné HTML může vypadat fakt jednoduše:</p>
-<pre><code class=\\"lang-html\\">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;/&gt;
-    &lt;script src=&quot;react.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div id=&quot;react-root&quot;&gt;&lt;/div&gt;
-    &lt;script src=&quot;build/index.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"hljs-meta\\">&lt;!DOCTYPE html&gt;</span>
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">html</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">head</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">meta</span> <span class=\\"hljs-attr\\">charset</span>=<span class=\\"hljs-string\\">\\"UTF-8\\"</span>/&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">script</span> <span class=\\"hljs-attr\\">src</span>=<span class=\\"hljs-string\\">\\"react.js\\"</span>&gt;</span><span class=\\"undefined\\"></span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">script</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">head</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">body</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"react-root\\"</span>&gt;</span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">script</span> <span class=\\"hljs-attr\\">src</span>=<span class=\\"hljs-string\\">\\"build/index.js\\"</span>&gt;</span><span class=\\"undefined\\"></span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">script</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">body</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">html</span>&gt;</span>
 </code></pre>
 <p>Kde <code>react.js</code> je samotný React a <code>build/index.js</code> obsahuje definici komponent:</p>
-<pre><code class=\\"lang-jsx\\">var LikeButton = React.createClass({
-    render: function () {
-        return (
-            &lt;button&gt;LikeButton&lt;/button&gt;
+<pre><code class=\\"hljs lang-jsx\\"><span class=\\"hljs-keyword\\">var</span> LikeButton = React.createClass({
+    <span class=\\"hljs-attr\\">render</span>: <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\"></span>) </span>{
+        <span class=\\"hljs-keyword\\">return</span> (
+            <span class=\\"xml\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">button</span>&gt;</span>LikeButton<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">button</span>&gt;</span></span>
         );
     }
 });
 
-React.render(&lt;LikeButton /&gt;, document.getElementById(&#39;react-root&#39;));
+React.render(<span class=\\"xml\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">LikeButton</span> /&gt;</span>, document.getElementById('react-root'));</span>
 </code></pre>
 <p>Je to fakt minimální, ale funkční kód, takže si to může vyzkoušet každý. Přechozí zápis samozřejmě není JavaScript, ale <a href=\\"https://facebook.github.io/jsx/\\">JSX</a>, takže je třeba jej ještě přeložit (<code>jsx --watch src/ build/</code>). Výsledný kód je pak v tomto konkrétním jednoduchém případě velmi podobný:</p>
-<pre><code class=\\"lang-javascript\\">var LikeButton = React.createClass({displayName: &quot;LikeButton&quot;,
-    render: function () {
-        return (
-            React.createElement(&quot;button&quot;, null, &quot;LikeButton&quot;)
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-keyword\\">var</span> LikeButton = React.createClass({<span class=\\"hljs-attr\\">displayName</span>: <span class=\\"hljs-string\\">\\"LikeButton\\"</span>,
+    <span class=\\"hljs-attr\\">render</span>: <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\"></span>) </span>{
+        <span class=\\"hljs-keyword\\">return</span> (
+            React.createElement(<span class=\\"hljs-string\\">\\"button\\"</span>, <span class=\\"hljs-literal\\">null</span>, <span class=\\"hljs-string\\">\\"LikeButton\\"</span>)
         );
     }
 });
 
-React.render(React.createElement(LikeButton, null), document.getElementById(&#39;react-root&#39;));
+React.render(React.createElement(LikeButton, <span class=\\"hljs-literal\\">null</span>), <span class=\\"hljs-built_in\\">document</span>.getElementById(<span class=\\"hljs-string\\">'react-root'</span>));
 </code></pre>
 <p>Pokud se vrátím zpět k faktuře, tak její HTML <a href=\\"https://github.com/mrtnzlml/js-invoice-generator/blob/master/invoice.html\\">je také velmi jednoduché</a> a celá sranda se odehrává <a href=\\"https://github.com/mrtnzlml/js-invoice-generator/blob/master/src/react-invoice.js\\">zde</a>. Zde jsem si také schválně chtěl vyzkoušet, jak reálně funguje <a href=\\"https://facebook.github.io/react/tips/inline-styles.html\\">Inline Styles</a>. Samotná faktura je tedy tvořena pouze krátkým HTML a pěknou kopou JavaScriptu. Žádné CSS. Abych řekl pravdu, tak se mi s tím moc dobře nepracuje, ale to je dáno spíše tím, že zase až tolik CSS nehovím a proto bylo místy komplikované přemýšlet nad tím jak funguje React a zároveň držet v hlavě to, jak má faktura nakonec vypadat. Koukal jsem se, jak se to řeší na jiných webech jedoucích na Reactu a asi se o zase až tak nepoužívá. Ale konec naříkání. Podívejte se <a href=\\"https://github.com/mrtnzlml/js-invoice-generator/blob/master/invoice.pdf\\">na výsledek</a>.</p>
 <h2 id=\\"qr-k-d\\">QR kód <a href=\\"#qr-k-d\\">#</a></h2><p>Ještě bych se rád zaměřil na samotný QR kód, který je na faktuře (<a href=\\"https://github.com/mrtnzlml/js-invoice-generator/blob/master/src/react-invoice.js#L246-L269\\">komponenta</a>). Použil jsem <a href=\\"https://larsjung.de/jquery-qrcode/\\">stejnou knihovnu</a>, kterou používám zde na blogu v záhlaví (nejlepší). Protože se jedná o QR, tak se nedá čekat, že by obsahoval něco složitého (<a href=\\"http://qr-platba.cz/pro-vyvojare/specifikace-formatu/\\">podrobný popis formátu</a>):</p>
-<pre><code>SPD*1.0*ACC:CZ4101000000123456789101+KOMBCZPPXXX*AM:2750.00*CC:CZK*MSG:PLATBA FAKTURY 2015-0001*X-VS:20150001
+<pre><code class=\\"hljs\\">SPD*1.0*ACC:CZ4101000000123456789101+KOMBCZPPXXX*AM:2750.00*CC:CZK*MSG:PLATBA FAKTURY 2015-0001*X-VS:20150001
 </code></pre><p>Je to takový hloupý <a href=\\"http://redis.io/topics/protocol\\">RESP</a>. Řetězec začíná označením formátu <code>SPD*1.0*</code> a následuje vždy výčet položek <code>klíč:hodnota*</code>, které chceme do QR kódu dostat. Povinný je pouze <code>ACC</code>, což je IBAN, popř. IBAN+BIC. Následuje částka, měna, zpráva pro příjemce a variabilní symbol.</p>
 <p>Takže úkol někdy na příště. Přepsat <strong>V</strong> u blogu do Reactu? (-:</p>
 ",

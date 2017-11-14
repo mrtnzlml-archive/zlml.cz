@@ -53,16 +53,16 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Hexagonální architektura
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Struktura webových aplikací je něco, co se neustále mění a stejně s programátorem i zdokonaluje. Před více než rokem jsem se o jedné z možných struktur PHP aplikace <a href=\\"jeste-lepsi-struktura-nette-aplikace\\">trošku rozepsal</a>. A teď si ukážeme další alternativu, která je <a href=\\"https://github.com/adeira/connector/tree/2169296c8da4a50bf4f928e94e756f3b23afea24\\">k proklikání zde</a>. Nejedná se o nic převratného. Tento přístup mě však v poslední době hodně baví a dá se na něm naučit zase něco nového. Jedná se vlastně o tento adresářový strom (zjednodušeně):</p>
-<pre><code>.
+<pre><code class=\\"hljs\\">.
 ├── bin/            ...  pomocné SH skripty
 ├── config/         ...  globální konfigurace aplikace
 ├── migrations/     ...  dopředné DB migrace
@@ -78,7 +78,7 @@ exports[`renders correctly 1`] = `
 └── README.md
 </code></pre><p>Na první pohled je asi vše jasné. Struktura je téměř identická s tím, co je běžné u začínajících Nette projektů (Nette zde však není vůbec důležité). Za povšimnutí stojí pouze to, že <code>bootstrap.php</code> a globální konfigurace jsou na úrovni kořenového adresáře, takže neexistuje žádná složka <code>app</code>. Zůstává tedy otázka - kde jsou veškeré kódy a jak je aplikace členěna?</p>
 <h2 id=\\"kontexty\\">Kontexty <a href=\\"#kontexty\\">#</a></h2><p>Veškerá zábava je právě ve složce <code>src</code> (jak se asi dalo čekat):</p>
-<pre><code>src/
+<pre><code class=\\"hljs\\">src/
 ├── Authentication/
 ├── Common/
 ├── Devices/
@@ -87,7 +87,7 @@ exports[`renders correctly 1`] = `
 </code></pre><p>Osobně mám pořád problém s pojmenováváním věcí, takže mám pořád takový pocit, že jednotlivé kontexty nejsou dobře zaškatulkované. To ale není zase až tak důležité. Důležitá je následující myšlenka: každá tato podsložka (kontext) se stará o úplně všechno. Od konfigurací, přes presentery až po business logiku. Uvnitř kontextu nejsou pouze balíčky třetích stran a testy (ty jsou v <code>tests</code>, ale mají úplně stejnou adresářovou strukturu - ne nutně soubory).</p>
 <p>Je třeba trošku se pozastavit nad konfigurací. Každý balíček si s stebou nese vlastní konfigurační soubory, které potřebuje k životu. Ty většinou velmi úzce souvisejí např. s konfigurací DI kontejneru. Ale pouze pro potřeby daného kontextu! Pokud je třeba tento balíček konfigurovat na globální úrovni celé aplikace, pak je tento balíček zaregistrován jako DI rozšíření. Tato úprava myšlení nad konfigurací je možná díky balíčku <a href=\\"https://github.com/adeira/compiler-extension\\">adeira/compiler-extension</a>. Doporučuji alespoň přečíst a doufat, že to bude fungovat i v Nette 3 (<a href=\\"https://github.com/nette/di/issues/143\\">Proč by nemohlo?</a>).</p>
 <p>Samostatná interní konfigurace kontextu je asi to nejdůležitější pro pokračování (může být také pěkně <a href=\\"https://github.com/adeira/connector/blob/2169296c8da4a50bf4f928e94e756f3b23afea24/src/Devices/Infrastructure/DI/Nette/config.neon\\">dlouhá a komplikovaná</a>). Co obsahuje takový kontext (balíček)?</p>
-<pre><code>src/Devices/
+<pre><code class=\\"hljs\\">src/Devices/
 ├── Application/
 │   ├── Exceptions/
 │   └── Service/
@@ -100,7 +100,7 @@ exports[`renders correctly 1`] = `
     └── Persistence/
 </code></pre><p>To už je o něco zajímavější a také řádově komplikovanější na pochopení. Dále se totiž dělí aplikace na tři důležité části, kde každá má jiný význam a každá si tedy zaslouží krátký komentář. Začněme pěkně uprostřed.</p>
 <h2 id=\\"dom-nov-vrstva\\">Doménová vrstva <a href=\\"#dom-nov-vrstva\\">#</a></h2><p>V doménové vrstvě je pouze obyčejné PHP. Myšlenka je taková, že se zde budu soustředit pouze na návrh modelu v čistém PHP a nebudu to nijak komplikovat zanášením jakýchkoliv frameworků či jiných externích knihoven:</p>
-<pre><code>src/Devices/DomainModel/
+<pre><code class=\\"hljs\\">src/Devices/DomainModel/
 ├── WeatherStation
 │   ├── IAllWeatherStationRecords.php
 │   ├── IFileLoader.php
@@ -114,7 +114,7 @@ exports[`renders correctly 1`] = `
 </code></pre><p>Nikde zde nenajdete v kódu slovo Nette, Symfony nebo třeba Doctrine (<em>ve skutečnosti to tam je, ale to je chyba</em>). Jsou to prostě úplně obyčejné objekty, které mají za úkol řešit nějaký konkrétní problém onoho konkrétního kontextu a nic víc. Díky tomu je psaní testů na tuto část aplikace naprosto triviální. Když někde existuje nějaká závislost, tak je zprostředkována pomocí rozhraní, takže vyměnit implementaci v testech je díky tomuto striktnímu rozdělení opravdu hračka.</p>
 <p>Takto by však aplikace sama o sobě nefungovala. Je potřeba mít zde vazbu na konkrétní implementaci, na konkrétní framework či knihovnu. Od toho slouží další vrstva.</p>
 <h2 id=\\"infrastrukturn-vrstva\\">Infrastrukturní vrstva <a href=\\"#infrastrukturn-vrstva\\">#</a></h2><p>Zde není nic jiného, než implementace (implementační detaily). Většinou se jedná o třídy, které nemají žádnou zvláštní nebo složitou logiku. Slouží pouze jako napojení na framework a jako implementace rozhraní z domménové vrstvy. To se silně projeví ve struktuře:</p>
-<pre><code>src/Devices/Infrastructure/
+<pre><code class=\\"hljs\\">src/Devices/Infrastructure/
 ├── Delivery/
 │   ├── API/
 │   │   └── GraphQL/
@@ -142,22 +142,22 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"aplika-n-vrstva\\">Aplikační vrstva <a href=\\"#aplika-n-vrstva\\">#</a></h2><p>Mít takto myšlenkově oddělené závislosti jednotlivých částí aplikace má spoustu výhod. Důležité je zeptat se: jak budeme tento model ovládat? Odpovědí je právě aplikační vrstva. Ta má za úkol pouze jednu věc. Zpřístupnit doménovou vrstvu širokému okolí. Pokud tedy presenter chce komunikovat s doménovou vrstvou, musí prostřednictvím aplikační vrstvy. Proč musí? Nestačilo by rovnou používat nějaký interface pro repozitář? Stačilo, ale to není dobrý nápad!</p>
 <p>Rovnou pracovat s repozitáři není rozumné, protože ty maximálně tahají data z úložiště. To je jejich zodpovědnost, ale co třeba oprávnění a transakce? O to se právě stará aplikační vrstva. Jako příklad budeme chtít vytvořit záznam pro novou meteostanici. Zde konkrétně využívám přístup CQS (Command-Query Separation). Zde existují dva způsoby jak komunikovat. Pomocí dotazů, kdy každý dotaz vrací požadovanou informaci, ale <strong>nemodifikuje data</strong> a pomocí příkazů, které data modifikují, ale <strong>nevrací žádná data zpět</strong>.</p>
 <p>Takový příklaz by se mohl jmenovat <code>CreateWeatherStation</code> a jedná se pouze o obyčejný DTO objekt, který nemá žádnou logiku a měl by být tak jednoduchý, že jej není třeba testovat (pokud nechcete). Je to fakt jenom přepravka na data. Tento příkaz má svého parťáka, který jej umí zpracovat. Příkaz odesílám pomocí sběrnice třeba z API:</p>
-<pre><code class=\\"lang-php\\">$this-&gt;commandBus-&gt;dispatch(new CreateWeatherStation(
-    WeatherStationId::create(), // ID nové stanice
-    $args[&#39;name&#39;], // název stanice
-    $context-&gt;userId() // ID uživatele, který vytváří stanici
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">$this</span>-&gt;commandBus-&gt;dispatch(<span class=\\"hljs-keyword\\">new</span> CreateWeatherStation(
+    WeatherStationId::create(), <span class=\\"hljs-comment\\">// ID nové stanice</span>
+    $args[<span class=\\"hljs-string\\">'name'</span>], <span class=\\"hljs-comment\\">// název stanice</span>
+    $context-&gt;userId() <span class=\\"hljs-comment\\">// ID uživatele, který vytváří stanici</span>
 ));
 </code></pre>
 <p>Tato sběrnice jednak doručí příkaz na to správné místo pro zpracování, ale také obstará databázové transakce, prokud je to nutné. Tento příkaz se zpracuje v <code>handleru</code>, který implementuje metodu <code>__invoke</code> (nebo cokoliv jiného co je <code>callable</code>):</p>
-<pre><code class=\\"lang-php\\">public function __invoke(CreateWeatherStation $aCommand)
-{
-    $owner = $this-&gt;ownerService-&gt;existingOwner($aCommand-&gt;userId());
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__invoke</span><span class=\\"hljs-params\\">(CreateWeatherStation $aCommand)</span>
+</span>{
+    $owner = <span class=\\"hljs-keyword\\">$this</span>-&gt;ownerService-&gt;existingOwner($aCommand-&gt;userId());
 
-    $this-&gt;weatherStationRepository-&gt;add(new WeatherStation(
+    <span class=\\"hljs-keyword\\">$this</span>-&gt;weatherStationRepository-&gt;add(<span class=\\"hljs-keyword\\">new</span> WeatherStation(
         $aCommand-&gt;stationId(),
         $owner,
         $aCommand-&gt;name(),
-        new \\\\DateTimeImmutable(&#39;now&#39;)
+        <span class=\\"hljs-keyword\\">new</span> \\\\DateTimeImmutable(<span class=\\"hljs-string\\">'now'</span>)
     ));
 }
 </code></pre>

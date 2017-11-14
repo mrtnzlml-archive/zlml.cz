@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Barák budoucnosti
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Aneb jak jsem poprvé a naposledy přešlápl. Je to jednoduché, nebudeme si nic nalhávat. Ještě jsem nepochopil smysl Barcampu. A tak se stalo, že jsem si připravil povídání o něčem, co nikdo moc nechápal. Jistě že mě to trošku mrzí, zároveň mi však přijde absurdní, že někdo přijde na přednášku, kde jsem upozorňoval v anotaci na použité technologie, které budou ve vyprávění zahrnuty a pak jsem slyšel, že někdo vůbec nevěděl o čem je řeč. To je ale kapitola sama pro sebe... (-:</p>

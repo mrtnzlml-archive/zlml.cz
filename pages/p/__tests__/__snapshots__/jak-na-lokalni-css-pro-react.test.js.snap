@@ -53,61 +53,61 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Jak na lokální CSS pro React
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Když jsem opouštěl koncept <a href=\\"1-od-komponent-zpet-ke-komponentam\\">webových komponent</a> a přecházel jsem k Reactu, tak mě nejvíce mrzelo, že přijdu o všechny zajímavé vlastnosti shadow DOMu. Ve webových komponentách se to má tak, že jak JS tak CSS jsou součástí jedné šablony a neovlivňují globální prostor. To je u Reactu bez problému z pohledu JS. Z pohledu CSS je to však jiná pohádka. Jakýkoliv styl definovaný v rámci komponenty se definuje pro celou aplikaci. Příklad jednoduché hlavičky:</p>
-<pre><code class=\\"lang-js\\">import React from &#39;react&#39;;
-import &#39;./Header.css&#39;;
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-keyword\\">import</span> React <span class=\\"hljs-keyword\\">from</span> <span class=\\"hljs-string\\">'react'</span>;
+<span class=\\"hljs-keyword\\">import</span> <span class=\\"hljs-string\\">'./Header.css'</span>;
 
-export default () =&gt;
-  &lt;div className=&quot;header&quot;&gt;
+<span class=\\"hljs-keyword\\">export</span> <span class=\\"hljs-keyword\\">default</span> () =&gt;
+  <span class=\\"xml\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span> <span class=\\"hljs-attr\\">className</span>=<span class=\\"hljs-string\\">\\"header\\"</span>&gt;</span>
       {/* další JSX hlavičky */}
-  &lt;/div&gt;
+  <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span></span>
 </code></pre>
 <p>Kdy CSS soubor obsahuje styly pro header:</p>
-<pre><code class=\\"lang-css\\">.header {
-  /* nějaké ty styly */
+<pre><code class=\\"hljs lang-css\\"><span class=\\"hljs-selector-class\\">.header</span> {
+  <span class=\\"hljs-comment\\">/* nějaké ty styly */</span>
 }
 </code></pre>
 <p>Díky Webpacku je možné takto načítat CSS styly v komponentě, ale <code>.header</code> je k dispozici v celé aplikaci (pokud je tam komponenta použita). Pak ale komponenty trošku postrádají smysl a mohl bych to klidně zase patlat v jednom hlavním CSS souboru. Vlastně jsem vůbec nic nezískal a musím si dávat velký pozor na to, co dělám.</p>
 <p>Naštěstí existuje jednoduché řešení a tím jsou <a href=\\"https://github.com/css-modules/css-modules\\">CSS moduly</a>. Stačí pouze trošku změnit Webpack nastavení a chování CSS se kompletně změní. Zatímco původní nastavení bylo takové:</p>
-<pre><code class=\\"lang-js\\">module.exports = {
-  module: {
-    rules: [
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-built_in\\">module</span>.exports = {
+  <span class=\\"hljs-attr\\">module</span>: {
+    <span class=\\"hljs-attr\\">rules</span>: [
       {
-        test: /\\\\.css$/,
-        loader: &#39;style-loader!css-loader?importLoaders=1!postcss-loader&#39;
+        <span class=\\"hljs-attr\\">test</span>: <span class=\\"hljs-regexp\\">/\\\\.css$/</span>,
+        <span class=\\"hljs-attr\\">loader</span>: <span class=\\"hljs-string\\">'style-loader!css-loader?importLoaders=1!postcss-loader'</span>
       }
     ]
   }
 }
 </code></pre>
 <p>Tak nové bude vypadat takto:</p>
-<pre><code class=\\"lang-js\\">module.exports = {
-  module: {
-    rules: [
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-built_in\\">module</span>.exports = {
+  <span class=\\"hljs-attr\\">module</span>: {
+    <span class=\\"hljs-attr\\">rules</span>: [
       {
-        test: /\\\\.css$/,
-        use: [
+        <span class=\\"hljs-attr\\">test</span>: <span class=\\"hljs-regexp\\">/\\\\.css$/</span>,
+        <span class=\\"hljs-attr\\">use</span>: [
           {
-            loader: &#39;style-loader&#39;
+            <span class=\\"hljs-attr\\">loader</span>: <span class=\\"hljs-string\\">'style-loader'</span>
           },
           {
-            loader: &#39;css-loader&#39;,
-            options: {
-              importLoaders: 1,
-              modules: true, // Enable/Disable CSS Modules
-              localIdentName: &#39;[name]__[local]--[hash:base64:5]&#39;,
+            <span class=\\"hljs-attr\\">loader</span>: <span class=\\"hljs-string\\">'css-loader'</span>,
+            <span class=\\"hljs-attr\\">options</span>: {
+              <span class=\\"hljs-attr\\">importLoaders</span>: <span class=\\"hljs-number\\">1</span>,
+              <span class=\\"hljs-attr\\">modules</span>: <span class=\\"hljs-literal\\">true</span>, <span class=\\"hljs-comment\\">// Enable/Disable CSS Modules</span>
+              localIdentName: <span class=\\"hljs-string\\">'[name]__[local]--[hash:base64:5]'</span>,
             }
           },
           {
-            loader: &#39;postcss-loader&#39;
+            <span class=\\"hljs-attr\\">loader</span>: <span class=\\"hljs-string\\">'postcss-loader'</span>
           }
         ]
       }
@@ -116,34 +116,34 @@ export default () =&gt;
 }
 </code></pre>
 <p>Je to vlastně ta samá konfigurace, jen jsem zapnul CSS moduly. Od této chvíle se veškeré CSS chovají lokálně pouze pro danou komponentu. Je třeba jen upravit použití těchto nových stylů v komponentě:</p>
-<pre><code class=\\"lang-js\\">import React from &#39;react&#39;;
-import styles from &#39;./Header.css&#39;;
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-keyword\\">import</span> React <span class=\\"hljs-keyword\\">from</span> <span class=\\"hljs-string\\">'react'</span>;
+<span class=\\"hljs-keyword\\">import</span> styles <span class=\\"hljs-keyword\\">from</span> <span class=\\"hljs-string\\">'./Header.css'</span>;
 
-export default () =&gt;
-  &lt;div className={styles.header}&gt;
+<span class=\\"hljs-keyword\\">export</span> <span class=\\"hljs-keyword\\">default</span> () =&gt;
+  <span class=\\"xml\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span> <span class=\\"hljs-attr\\">className</span>=<span class=\\"hljs-string\\">{styles.header}</span>&gt;</span>
       {/* další JSX hlavičky */}
-  &lt;/div&gt;
+  <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span></span>
 </code></pre>
 <p>Co se stane s výstupem? Místo CSS třídy se budou generovat (+-) unikátní idenfikátory (s nějakou nápovědou pro development):</p>
-<pre><code class=\\"lang-html\\">&lt;div class=&quot;Header__header--3dxwh&quot;&gt;
-  &lt;!-- další HTML hlavičky --&gt;
-&lt;/div&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span> <span class=\\"hljs-attr\\">class</span>=<span class=\\"hljs-string\\">\\"Header__header--3dxwh\\"</span>&gt;</span>
+  <span class=\\"hljs-comment\\">&lt;!-- další HTML hlavičky --&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span>
 </code></pre>
 <p>Resp. na produkci kde není nastaveno <code>localIdentName</code> takto:</p>
-<pre><code class=\\"lang-html\\">&lt;div class=&quot;_3dxwhqIVz2ZHHrfQ6crpKp&quot;&gt;
-  &lt;!-- další HTML hlavičky --&gt;
-&lt;/div&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">div</span> <span class=\\"hljs-attr\\">class</span>=<span class=\\"hljs-string\\">\\"_3dxwhqIVz2ZHHrfQ6crpKp\\"</span>&gt;</span>
+  <span class=\\"hljs-comment\\">&lt;!-- další HTML hlavičky --&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">div</span>&gt;</span>
 </code></pre>
 <p>Tím se zajistí, že CSS bude fungovat jen v rámci jedné komponenty. Jenže to není úplně ultimátní řešení. Některé styly je dobré mít dostupné v celé aplikaci. No tak třeba styly základních HTML elementů jsou stále definovány jako globální. Pokud však potřebujeme nějakou CSS třídu, tak je to možné pomocí <code>:global</code> prefixu:</p>
-<pre><code class=\\"lang-css\\">:global .clearfix:after {
-  content: &quot;&quot;;
-  display: table;
-  clear: both;
+<pre><code class=\\"hljs lang-css\\"><span class=\\"hljs-selector-pseudo\\">:global</span> <span class=\\"hljs-selector-class\\">.clearfix</span><span class=\\"hljs-selector-pseudo\\">:after</span> {
+  <span class=\\"hljs-attribute\\">content</span>: <span class=\\"hljs-string\\">\\"\\"</span>;
+  <span class=\\"hljs-attribute\\">display</span>: table;
+  <span class=\\"hljs-attribute\\">clear</span>: both;
 }
 
-:global .wrapper--fluid {
-  margin-left: 5rem;
-  margin-right: 5rem;
+<span class=\\"hljs-selector-pseudo\\">:global</span> <span class=\\"hljs-selector-class\\">.wrapper--fluid</span> {
+  <span class=\\"hljs-attribute\\">margin-left</span>: <span class=\\"hljs-number\\">5rem</span>;
+  <span class=\\"hljs-attribute\\">margin-right</span>: <span class=\\"hljs-number\\">5rem</span>;
 }
 </code></pre>
 <p>Ačkoliv je z tohoto útržku vidět pozůstatek BEM zápisu, tak už to prakticky není potřeba.</p>

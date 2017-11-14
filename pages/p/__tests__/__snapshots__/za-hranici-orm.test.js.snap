@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Za hranicí ORM
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Již mnohokrát jsem slyšel, že je ORM <a href=\\"http://www.zdrojak.cz/clanky/orm-je-antipattern/\\">antipattern</a>. Já si to nemyslím. Je to hloupý a uspěchaný názor. V dnešním článku však nechci rozebírat co je a co není antipattern. To je jen zbytečnou ztrátou času. Rád bych ukázal použití jednoho ORM systému, který mě naprosto uchvátil.</p>
@@ -67,80 +67,80 @@ exports[`renders correctly 1`] = `
 <p>Nechci však psát návod na to, jak si takový modul naprogramovat. O tom třeba někdy příště. Pojďme se raději podívat na to, jak téměř celé Odoo funguje, protože je to skutečně pozoruhodné. Bez kódů to však nepůjde.</p>
 <h2 id=\\"z-plava-tabulek\\">Záplava tabulek <a href=\\"#z-plava-tabulek\\">#</a></h2><p>Abych byl upřímný, tak jsem se ještě nikdy nesetkal s tím, aby byl <strong>každý</strong> objekt v projektu skutečně realizován tabulkou v databázi. Nebo o tom alespoň nevím. Je to v podstatě jako když máte entity a ty jsou pak skutečně v databázi. Rozdíl je však v tom, že zde je v &quot;entitě&quot; i celá potřebná logika (které většinou moc není) a hlavně žádné jiné objekty nejsou potřeba.</p>
 <p>V nejprostším tvaru může tedy třída modulu vypadat skutečně pouze jako entita:</p>
-<pre><code class=\\"lang-python\\">class project_wkf_activity(osv.osv):
-    _name = &#39;project.wkf.activity&#39;
+<pre><code class=\\"hljs lang-python\\"><span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">project_wkf_activity</span><span class=\\"hljs-params\\">(osv.osv)</span>:</span>
+    _name = <span class=\\"hljs-string\\">'project.wkf.activity'</span>
     _columns = {
-        &#39;sequence&#39;: fields.integer(&#39;Sequence&#39;),
-        &#39;name&#39;: fields.char(&#39;Workflow Activity Name&#39;, required=True, size=64, translate=True),
-        &#39;type&#39;: fields.many2one(&#39;project.wkf.type&#39;, &#39;Workflow Type&#39;),
-        &#39;fold&#39;: fields.boolean(&#39;Folded in Kanban View&#39;),
+        <span class=\\"hljs-string\\">'sequence'</span>: fields.integer(<span class=\\"hljs-string\\">'Sequence'</span>),
+        <span class=\\"hljs-string\\">'name'</span>: fields.char(<span class=\\"hljs-string\\">'Workflow Activity Name'</span>, required=<span class=\\"hljs-keyword\\">True</span>, size=<span class=\\"hljs-number\\">64</span>, translate=<span class=\\"hljs-keyword\\">True</span>),
+        <span class=\\"hljs-string\\">'type'</span>: fields.many2one(<span class=\\"hljs-string\\">'project.wkf.type'</span>, <span class=\\"hljs-string\\">'Workflow Type'</span>),
+        <span class=\\"hljs-string\\">'fold'</span>: fields.boolean(<span class=\\"hljs-string\\">'Folded in Kanban View'</span>),
     }
-    # ...
-    def jumptoseq(self, cr, uid, ids, sequence, context=None):
-        #...
+    <span class=\\"hljs-comment\\"># ...</span>
+    <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">def</span> <span class=\\"hljs-title\\">jumptoseq</span><span class=\\"hljs-params\\">(self, cr, uid, ids, sequence, context=None)</span>:</span>
+        <span class=\\"hljs-comment\\">#...</span>
 </code></pre>
 <p>Při programování modulů toto vede k extrémní explozi tabulek v databázi. 500 tabulek uděláte v databázi jako nic. Stačí nainstalovat pár modulů. A to už mi přijde dost netradiční. Kromě modulových tabulek je v základní instalaci asi 100 tabulek, které v sobě drží vše možné, mimo jiné také informace o workflow. A právě definice workflow je to nejzajímavější. Veškerá sranda se totiž odehrává v XML souborech. Ve výsledku stačí pro napsání složitého workflow včetně veškeré logiky pouze XML...</p>
 <h2 id=\\"xml-programov-n-\\">XML programování (-: <a href=\\"#xml-programov-n-\\">#</a></h2><p>Když jsem toto poprvé viděl, párkrát jsem se zastavil a přemýšlel jsem, jak to vlastně může fungovat. Je to však velmi jednoduché. V inicializačním souboru modulu si stačí nadefinovat jaké XML soubory se mají načítat. Následuje definice workflow. Žádné psaní okolo. Prostě to hned funguje. Začátek takového workflow může vypadat například takto:</p>
-<pre><code class=\\"lang-html\\">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;openerp&gt;
-    &lt;data noupdate=&quot;0&quot;&gt;
-        &lt;record id=&quot;wkf1&quot; model=&quot;workflow&quot;&gt;
-            &lt;field name=&quot;name&quot;&gt;project.wkf1&lt;/field&gt;
-            &lt;field name=&quot;osv&quot;&gt;project.project&lt;/field&gt;
-            &lt;field name=&quot;on_create&quot;&gt;True&lt;/field&gt;
-        &lt;/record&gt;
-    &lt;/data&gt;
-&lt;/openerp&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"php\\"><span class=\\"hljs-meta\\">&lt;?</span>xml version=<span class=\\"hljs-string\\">\\"1.0\\"</span> encoding=<span class=\\"hljs-string\\">\\"utf-8\\"</span><span class=\\"hljs-meta\\">?&gt;</span></span>
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">openerp</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">data</span> <span class=\\"hljs-attr\\">noupdate</span>=<span class=\\"hljs-string\\">\\"0\\"</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">record</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"wkf1\\"</span> <span class=\\"hljs-attr\\">model</span>=<span class=\\"hljs-string\\">\\"workflow\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"name\\"</span>&gt;</span>project.wkf1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"osv\\"</span>&gt;</span>project.project<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"on_create\\"</span>&gt;</span>True<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">record</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">data</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">openerp</span>&gt;</span>
 </code></pre>
 <p>Tím je workflow založeno a při spuštění převedeno do databáze. Jádro má pak za úkol se těchto tabulek chytit a pracovat s nimi. Jsou jasně daná pravidla, takže s tím není žádný problém. Následuje definice akcí (to jsou ty bubliny na obrázku):</p>
-<pre><code class=\\"lang-html\\">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;openerp&gt;
-    &lt;data noupdate=&quot;0&quot;&gt;
-        &lt;!-- viz definice workflow --&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"php\\"><span class=\\"hljs-meta\\">&lt;?</span>xml version=<span class=\\"hljs-string\\">\\"1.0\\"</span> encoding=<span class=\\"hljs-string\\">\\"utf-8\\"</span><span class=\\"hljs-meta\\">?&gt;</span></span>
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">openerp</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">data</span> <span class=\\"hljs-attr\\">noupdate</span>=<span class=\\"hljs-string\\">\\"0\\"</span>&gt;</span>
+        <span class=\\"hljs-comment\\">&lt;!-- viz definice workflow --&gt;</span>
 
-        &lt;record id=&quot;a_1_0&quot; model=&quot;workflow.activity&quot;&gt;
-            &lt;field name=&quot;wkf_id&quot; ref=&quot;wkf1&quot;/&gt;
-            &lt;field name=&quot;flow_start&quot;&gt;True&lt;/field&gt;
-            &lt;field name=&quot;name&quot;&gt;start-wkf1&lt;/field&gt;
-            &lt;field name=&quot;kind&quot;&gt;dummy&lt;/field&gt;
-        &lt;/record&gt;
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">record</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"a_1_0\\"</span> <span class=\\"hljs-attr\\">model</span>=<span class=\\"hljs-string\\">\\"workflow.activity\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"wkf_id\\"</span> <span class=\\"hljs-attr\\">ref</span>=<span class=\\"hljs-string\\">\\"wkf1\\"</span>/&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"flow_start\\"</span>&gt;</span>True<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"name\\"</span>&gt;</span>start-wkf1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"kind\\"</span>&gt;</span>dummy<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">record</span>&gt;</span>
 
-        &lt;record id=&quot;a_1_10&quot; model=&quot;workflow.activity&quot;&gt;
-            &lt;field name=&quot;wkf_id&quot; ref=&quot;wkf1&quot;/&gt;
-            &lt;field name=&quot;name&quot;&gt;nazev-activity&lt;/field&gt;
-            &lt;field name=&quot;kind&quot;&gt;function&lt;/field&gt;
-            &lt;field name=&quot;action&quot;&gt;jumptoseq(10)&lt;/field&gt;
-        &lt;/record&gt;
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">record</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"a_1_10\\"</span> <span class=\\"hljs-attr\\">model</span>=<span class=\\"hljs-string\\">\\"workflow.activity\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"wkf_id\\"</span> <span class=\\"hljs-attr\\">ref</span>=<span class=\\"hljs-string\\">\\"wkf1\\"</span>/&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"name\\"</span>&gt;</span>nazev-activity<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"kind\\"</span>&gt;</span>function<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"action\\"</span>&gt;</span>jumptoseq(10)<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">record</span>&gt;</span>
 
-        &lt;record id=&quot;a_1_500&quot; model=&quot;workflow.activity&quot;&gt;
-            &lt;field name=&quot;wkf_id&quot; ref=&quot;wkf1&quot;/&gt;
-            &lt;field name=&quot;flow_stop&quot;&gt;True&lt;/field&gt;
-            &lt;field name=&quot;name&quot;&gt;end&lt;/field&gt;
-            &lt;field name=&quot;kind&quot;&gt;function&lt;/field&gt;
-            &lt;field name=&quot;action&quot;&gt;orgis_close()&lt;/field&gt;
-        &lt;/record&gt;
-    &lt;/data&gt;
-&lt;/openerp&gt;
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">record</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"a_1_500\\"</span> <span class=\\"hljs-attr\\">model</span>=<span class=\\"hljs-string\\">\\"workflow.activity\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"wkf_id\\"</span> <span class=\\"hljs-attr\\">ref</span>=<span class=\\"hljs-string\\">\\"wkf1\\"</span>/&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"flow_stop\\"</span>&gt;</span>True<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"name\\"</span>&gt;</span>end<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"kind\\"</span>&gt;</span>function<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"action\\"</span>&gt;</span>orgis_close()<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">record</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">data</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">openerp</span>&gt;</span>
 </code></pre>
 <p>A následuje definice transitions (spojení na obrázku):</p>
-<pre><code class=\\"lang-html\\">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;openerp&gt;
-    &lt;data noupdate=&quot;0&quot;&gt;
-        &lt;!-- viz definice workflow --&gt;
-        &lt;!-- viz definice aktivit --&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"php\\"><span class=\\"hljs-meta\\">&lt;?</span>xml version=<span class=\\"hljs-string\\">\\"1.0\\"</span> encoding=<span class=\\"hljs-string\\">\\"utf-8\\"</span><span class=\\"hljs-meta\\">?&gt;</span></span>
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">openerp</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">data</span> <span class=\\"hljs-attr\\">noupdate</span>=<span class=\\"hljs-string\\">\\"0\\"</span>&gt;</span>
+        <span class=\\"hljs-comment\\">&lt;!-- viz definice workflow --&gt;</span>
+        <span class=\\"hljs-comment\\">&lt;!-- viz definice aktivit --&gt;</span>
 
-        &lt;record id=&quot;t_1_9&quot; model=&quot;workflow.transition&quot;&gt;
-            &lt;field name=&quot;act_from&quot; ref=&quot;a_1_40&quot;/&gt;
-            &lt;field name=&quot;act_to&quot; ref=&quot;a_1_50&quot;/&gt;
-            &lt;field name=&quot;signal&quot;&gt;a_1_40toa_1_50&lt;/field&gt;
-        &lt;/record&gt;
-        &lt;record id=&quot;c_1_7&quot; model=&quot;workflow.transition&quot;&gt;
-            &lt;field name=&quot;act_from&quot; ref=&quot;a_1_36&quot;/&gt;
-            &lt;field name=&quot;act_to&quot; ref=&quot;a_1_500&quot;/&gt;
-            &lt;field name=&quot;signal&quot;&gt;close_wkf&lt;/field&gt;
-        &lt;/record&gt;
-    &lt;/data&gt;
-&lt;/openerp&gt;
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">record</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"t_1_9\\"</span> <span class=\\"hljs-attr\\">model</span>=<span class=\\"hljs-string\\">\\"workflow.transition\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"act_from\\"</span> <span class=\\"hljs-attr\\">ref</span>=<span class=\\"hljs-string\\">\\"a_1_40\\"</span>/&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"act_to\\"</span> <span class=\\"hljs-attr\\">ref</span>=<span class=\\"hljs-string\\">\\"a_1_50\\"</span>/&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"signal\\"</span>&gt;</span>a_1_40toa_1_50<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">record</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">record</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"c_1_7\\"</span> <span class=\\"hljs-attr\\">model</span>=<span class=\\"hljs-string\\">\\"workflow.transition\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"act_from\\"</span> <span class=\\"hljs-attr\\">ref</span>=<span class=\\"hljs-string\\">\\"a_1_36\\"</span>/&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"act_to\\"</span> <span class=\\"hljs-attr\\">ref</span>=<span class=\\"hljs-string\\">\\"a_1_500\\"</span>/&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">field</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"signal\\"</span>&gt;</span>close_wkf<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">field</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">record</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">data</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">openerp</span>&gt;</span>
 </code></pre>
 <p>Ukázky jsou nekompletní, protože by se to sem všechno ani náhodou nevešlo. Výsledný XML soubor vlastně stačí k tomu, aby celé workflow fungovalo. Stačí nadefinovat funkce v příslušných třídách viz například volání <code>jumptoseq</code>.</p>
 <p>Dost často je také zapotřebí definovat tlačítka pro view, což se dělá také pomocí XML kde je opět originálně vyřešeno přepisování defaultní šablony. Tlačítka mají vždy nějakou akci, která zajistí, že se posuneme ve workflow dále. Na takové workflow lze pověsit úplně všechno. Poslání emailů, vygenerování faktur, založení akce v kalendáři atd. Pokud se jedná o vyloženě automatické kroky, akce se na tlačítku nemusí definovat a pak systém celé workflow proskáče a spustí všechny akce popořadě sám. Zajímavé je však to, že se po spuštění všechno nahrne do databáze a jádro Odoo se strará pouze o to, aby tento interně složitý systém fungoval správně. Všem lidem, kteří nadávají na ORM bych tedy položil následující otázku. Jak uděláte takto sofistikovaný systém bez ORM? Nebo že toto snad není ORM? A uvědomte si, jak jsem se strašně rychle dokázal dostat z ORM až na celý komplexní systém workflow. Je to proto, že jsem vůbec neuvažoval něco jako je ActiveRow... (-: I když z velké části je to spíše plnění tabulek.</p>

@@ -53,40 +53,40 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Dependent select box
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Občas je v Nette zapotřebí vyřešit dependent select box. Je to relativně málo častý požadavek a o to méně se o něm dá najít, když je to zrovna potřeba. V zásadě existují dvě řešení. Nudné - poctivé a pak zábavné - špinavé. Podívejme se na to, jak se dá takový dependent select box jednoduše vyřešit.</p>
 <h2 id=\\"-ist-e-en-\\">Čisté řešení <a href=\\"#-ist-e-en-\\">#</a></h2><p><img src=\\"https://zlmlcz-media.s3-eu-west-1.amazonaws.com/51d212f2-5aa9-44b9-9085-f6267e1974e9/vystrizek.png\\" alt=\\"\\">
 Toto řešení ukazuje jak by se takový problém měl zhruba řešit. Myšlenka je velmi jednoduchá. Prvně potřebujeme data do závislého select boxu. Ty se normálně vyřeší prostřednistvím databáze, v našem případě postačí jednoduché pole.</p>
-<pre><code class=\\"lang-php\\">private $database = [
-    [1 =&gt; &#39;2&#39;, &#39;4&#39;, &#39;9&#39;],
-    [4 =&gt; &#39;.&#39;, &#39;∴&#39;, &#39;…&#39;],
-    [5 =&gt; &#39;π&#39;, &#39;€&#39;, &#39;©&#39;],
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">private</span> $database = [
+    [<span class=\\"hljs-number\\">1</span> =&gt; <span class=\\"hljs-string\\">'2'</span>, <span class=\\"hljs-string\\">'4'</span>, <span class=\\"hljs-string\\">'9'</span>],
+    [<span class=\\"hljs-number\\">4</span> =&gt; <span class=\\"hljs-string\\">'.'</span>, <span class=\\"hljs-string\\">'∴'</span>, <span class=\\"hljs-string\\">'…'</span>],
+    [<span class=\\"hljs-number\\">5</span> =&gt; <span class=\\"hljs-string\\">'π'</span>, <span class=\\"hljs-string\\">'€'</span>, <span class=\\"hljs-string\\">'©'</span>],
 ];
 </code></pre>
 <p>Následně je potřeba vytvořit samotný formulář:</p>
-<pre><code class=\\"lang-php\\">protected function createComponentForm($name) {
-    $form = new UI\\\\Form;
-    $this[$name] = $form; // &lt;- Zde je celý fígl
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">protected</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">createComponentForm</span><span class=\\"hljs-params\\">($name)</span> </span>{
+    $form = <span class=\\"hljs-keyword\\">new</span> UI\\\\Form;
+    <span class=\\"hljs-keyword\\">$this</span>[$name] = $form; <span class=\\"hljs-comment\\">// &lt;- Zde je celý fígl</span>
 
-    $form-&gt;addSelect(&#39;one&#39;, &#39;One&#39;, [&#39;Čísla&#39;, &#39;Tečky&#39;, &#39;Symboly&#39;])-&gt;setDefaultValue(1);
-    //dump($form[&#39;one&#39;]-&gt;value);
+    $form-&gt;addSelect(<span class=\\"hljs-string\\">'one'</span>, <span class=\\"hljs-string\\">'One'</span>, [<span class=\\"hljs-string\\">'Čísla'</span>, <span class=\\"hljs-string\\">'Tečky'</span>, <span class=\\"hljs-string\\">'Symboly'</span>])-&gt;setDefaultValue(<span class=\\"hljs-number\\">1</span>);
+    <span class=\\"hljs-comment\\">//dump($form['one']-&gt;value);</span>
 
-    $form-&gt;addSelect(&#39;two&#39;, &#39;Two&#39;, $this-&gt;database[$form[&#39;one&#39;]-&gt;value]);
+    $form-&gt;addSelect(<span class=\\"hljs-string\\">'two'</span>, <span class=\\"hljs-string\\">'Two'</span>, <span class=\\"hljs-keyword\\">$this</span>-&gt;database[$form[<span class=\\"hljs-string\\">'one'</span>]-&gt;value]);
 
-    $form-&gt;addSubmit(&#39;send&#39;, &#39;Odeslat&#39;);
-    $form-&gt;onSuccess[] = $this-&gt;success;
-    return $form;
+    $form-&gt;addSubmit(<span class=\\"hljs-string\\">'send'</span>, <span class=\\"hljs-string\\">'Odeslat'</span>);
+    $form-&gt;onSuccess[] = <span class=\\"hljs-keyword\\">$this</span>-&gt;success;
+    <span class=\\"hljs-keyword\\">return</span> $form;
 }
 </code></pre>
 <p>A k formuláři také šablonu:</p>
-<pre><code class=\\"lang-html\\">{form form}
+<pre><code class=\\"hljs lang-html\\">{form form}
     {input one, size =&gt; 3}
     {snippet two}
         {input two, size =&gt; 3}
@@ -95,71 +95,71 @@ Toto řešení ukazuje jak by se takový problém měl zhruba řešit. Myšlenka
 {/form}
 </code></pre>
 <p>Aby šlo použít snippet uvnitř formulářového makra, budeme muset udělat malý workaround:</p>
-<pre><code class=\\"lang-php\\">public function beforeRender() {
-    parent::beforeRender();
-    $this-&gt;template-&gt;_form = $this[&#39;form&#39;]; // form {snippet} workaround
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">beforeRender</span><span class=\\"hljs-params\\">()</span> </span>{
+    <span class=\\"hljs-keyword\\">parent</span>::beforeRender();
+    <span class=\\"hljs-keyword\\">$this</span>-&gt;template-&gt;_form = <span class=\\"hljs-keyword\\">$this</span>[<span class=\\"hljs-string\\">'form'</span>]; <span class=\\"hljs-comment\\">// form {snippet} workaround</span>
 }
 </code></pre>
 <p>Snippet je však možné zatím úplně vynechat, protože bude potřeba až při ajaxifikaci.</p>
 <p>Celý fígl je v tom, že musíme zajistit, aby se hodnota druhého select boxu nastavovala podle hodnoty prvního. V tomto stavu je již možné formulář spustit. Po vybrání v prvním select boxu a odeslání formuláře se vybraná hodnota následně projeví v druhém select boxu. Celé kouzlo je pouze v té druhé řádce formulářové továrničky, který mi umožní přistoupit k hodnotám prvků. Je samozřejmě nesmysl odesílat celý formulář pro získání obsahu druhého select boxu, proto si napíšeme krátký javascriptový kód, který to za nás vyřeší (nette.ajax.js):</p>
-<pre><code class=\\"lang-javascript\\">$(function(){
+<pre><code class=\\"hljs lang-javascript\\">$(<span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span>(<span class=\\"hljs-params\\"></span>)</span>{
     $.nette.init();
 
-    $(&#39;select[name=one]&#39;).change(function () {
+    $(<span class=\\"hljs-string\\">'select[name=one]'</span>).change(<span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\"></span>) </span>{
         $.nette.ajax({
-            url: {link invalidate!},
-            data: {
-                &#39;value&#39;: $(&#39;select[name=one]&#39;).val(),
+            <span class=\\"hljs-attr\\">url</span>: {link invalidate!},
+            <span class=\\"hljs-attr\\">data</span>: {
+                <span class=\\"hljs-string\\">'value'</span>: $(<span class=\\"hljs-string\\">'select[name=one]'</span>).val(),
             }
         });
     });
 });
 </code></pre>
 <p>Jakmile se změní hodnota prvního select boxu, zavoláme si handler a předáme mu novou hodnotu. Tento handler bude mít za úkol nastavit hodnoty druhého select boxu a pouze tento prvek invalidovat:</p>
-<pre><code class=\\"lang-php\\">public function handleInvalidate($value) {
-    $this[&#39;form&#39;][&#39;two&#39;]-&gt;setItems($this-&gt;database[$value]);
-    $this-&gt;redrawControl(&#39;two&#39;);
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">handleInvalidate</span><span class=\\"hljs-params\\">($value)</span> </span>{
+    <span class=\\"hljs-keyword\\">$this</span>[<span class=\\"hljs-string\\">'form'</span>][<span class=\\"hljs-string\\">'two'</span>]-&gt;setItems(<span class=\\"hljs-keyword\\">$this</span>-&gt;database[$value]);
+    <span class=\\"hljs-keyword\\">$this</span>-&gt;redrawControl(<span class=\\"hljs-string\\">'two'</span>);
 }
 </code></pre>
 <p>Tím je vlastně hotovo. Čistotu řešení ověříme tím, že si vyzkoušíme dump vybraných položek po odeslání formuláře:</p>
-<pre><code class=\\"lang-php\\">public function success(UI\\\\Form $form, $vals) {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">success</span><span class=\\"hljs-params\\">(UI\\\\Form $form, $vals)</span> </span>{
     dump($vals);
 }
 </code></pre>
 <p>Čistota spočívá v tom, že požadované hodnoty skutečně získáme. To není úplně samozřejmé, protože v Nette existuje bezpečnostní obranný mechanismus, který zabraňuje odeslání hodnot v select boxu, které na začátku neobsahoval. Pokud něco takového uděláme třeba javascriptem, zíkáme <code>NULL</code>. Aby se toto nedělo, musíme takto relativně složitě vyřešit továrničku pro formulář.</p>
 <h2 id=\\"-pinav-e-en-\\">Špinavé řešení <a href=\\"#-pinav-e-en-\\">#</a></h2><p>Špinavé řešení se od toho čisté o moc neliší. Myšlenka je pořád stejná, tentokrát však stojíme před jiným úkolem. Vezměme si příklad, kdy nám zase až tolik nezáleží na tom, jaké získáme v select boxu hodnoty a chceme ho používat spíše jako text input, kdy nabídneme uživateli nějaký vstup. Typický příklad je text input pro URL adresu API, kdy po zadání kontaktujeme nějaké API a nabídneme v selectu vrácené hodnoty tak, aby je uživatel nemusel psát. Netvrdím, že by to nešlo vyřešit čistě, ale špinavé řešení je v tomto případě pohodlnější, rychlejší a mohu na něm ukázat i něco jiného. Tentokrát si vytvoříme úplně obyčejný formulář, tak jako již mnohokrát. Není potřeba žádného fíglu. Opět si připravíme šablonu pro formulář obdobně jako v předchozím případě. A obdobně doplníme nějaký ten javascript. Zde bych klidně mohl formulář upravit javascriptově, ale mě se hodí zavolat si (po napsání URL adresy) handler, v něm vyřešit vše potřebné a invalidovat část formuláře.</p>
-<pre><code class=\\"lang-javascript\\">var timer = null;
-$(&#39;input[name=url]&#39;).live(&#39;keyup&#39;, function () {
-    if (timer) {
+<pre><code class=\\"hljs lang-javascript\\"><span class=\\"hljs-keyword\\">var</span> timer = <span class=\\"hljs-literal\\">null</span>;
+$(<span class=\\"hljs-string\\">'input[name=url]'</span>).live(<span class=\\"hljs-string\\">'keyup'</span>, <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\"></span>) </span>{
+    <span class=\\"hljs-keyword\\">if</span> (timer) {
         clearTimeout(timer);
     }
-    timer = setTimeout(function () {
-        timer = null;
+    timer = setTimeout(<span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\"></span>) </span>{
+        timer = <span class=\\"hljs-literal\\">null</span>;
         $.nette.ajax({
-            url: {link checkErp!},
-            type: &#39;POST&#39;,
-            data: {
-                &quot;erpForm-url&quot;: $(&#39;input[name=url]&#39;).val()
+            <span class=\\"hljs-attr\\">url</span>: {link checkErp!},
+            <span class=\\"hljs-attr\\">type</span>: <span class=\\"hljs-string\\">'POST'</span>,
+            <span class=\\"hljs-attr\\">data</span>: {
+                <span class=\\"hljs-string\\">\\"erpForm-url\\"</span>: $(<span class=\\"hljs-string\\">'input[name=url]'</span>).val()
             }
         });
-    }, 250);
+    }, <span class=\\"hljs-number\\">250</span>);
 });
 </code></pre>
 <p>Handler nemá smysl uvádět. Jednoduše v něm vykonám nějakou logiku, vrátím data a invaliduji šablonu. Pozor na to, že předchozí javascriptová ukázka je tentokrát ze separátní komponenty.</p>
 <p>Zbývá nám vyřešit pouze odeslání a zpracování formuláře. Jelikož jsem byl teď líný programátor a select v tomto případě beru spíše jako text input, nemohu získat hodnotu select boxu ve <code>$form-&gt;getValues()</code>, resp. v druhém parametru succeeded metody. Musím proto použít metodu <code>getHttpData</code>, která mi umožní získat jakákoliv data a zároveň mám jistotu, že jsou data ošetřena:</p>
-<pre><code class=\\"lang-php\\">public function erpFormSucceeded(UI\\\\Form $form, Nette\\\\Utils\\\\ArrayHash $values) {
-    try {
-        $this-&gt;erpSystems-&gt;create([
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">erpFormSucceeded</span><span class=\\"hljs-params\\">(UI\\\\Form $form, Nette\\\\Utils\\\\ArrayHash $values)</span> </span>{
+    <span class=\\"hljs-keyword\\">try</span> {
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;erpSystems-&gt;create([
             ErpSystems::COLUMN_URL =&gt; $values-&gt;url,
-            ErpSystems::COLUMN_DATABASE =&gt; $form-&gt;getHttpData(UI\\\\Form::DATA_LINE, &#39;database&#39;), // &lt;- náš select
+            ErpSystems::COLUMN_DATABASE =&gt; $form-&gt;getHttpData(UI\\\\Form::DATA_LINE, <span class=\\"hljs-string\\">'database'</span>), <span class=\\"hljs-comment\\">// &lt;- náš select</span>
             ErpSystems::COLUMN_USER =&gt; $values-&gt;username,
             ErpSystems::COLUMN_TOKEN =&gt; $values-&gt;password,
         ]);
-        //...
-    } catch (\\\\PDOException $exc) {
-        //...
+        <span class=\\"hljs-comment\\">//...</span>
+    } <span class=\\"hljs-keyword\\">catch</span> (\\\\PDOException $exc) {
+        <span class=\\"hljs-comment\\">//...</span>
     }
-    //...
+    <span class=\\"hljs-comment\\">//...</span>
 }
 </code></pre>
 <p>V tomto špinavém řešení je však zapotřebí myslet na to, že v selectu může přijít naprosto cokoliv. To by však nikoho nemělo převapit. Ostatně i při vytváření formuláře stačí vytvořit select box prázdný, protože žádná vstupní data ani neexistují.</p>

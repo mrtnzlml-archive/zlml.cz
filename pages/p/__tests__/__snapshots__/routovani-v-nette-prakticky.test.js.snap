@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Routování v Nette - prakticky
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<div class=\\"alert alert-success\\">Tento článek byl naposledy revidován, aktualizován a rozšířen <strong>27. června 2014</strong>...</div>
@@ -72,7 +72,7 @@ Začíná přehlídka několika možných rout. Myslím si, že celá řada př�
 <p>Základ všeho je porozumět tomu, jak se v Nette vytváří <a href=\\"http://doc.nette.org/cs/presenters#toc-vytvareni-odkazu\\">odkazy</a>.
 Od toho se velmi podobně sestavují obecné routy tak, aby alespoň jedna seděla svým tvarem na daný odkaz.</p>
 <h2 id=\\"prvn-kroky\\">První kroky <a href=\\"#prvn-kroky\\">#</a></h2><p>Začněme jednoduchou statickou stránkou, která má tuto jednoduchou adresářovou strukturu:</p>
-<pre><code>app/
+<pre><code class=\\"hljs\\">app/
 ├─── config/
 ├─── model/
 ├─── presenters/
@@ -88,97 +88,97 @@ Od toho se velmi podobně sestavují obecné routy tak, aby alespoň jedna sedě
 └─── bootstrap.php
 </code></pre><p>To znamená, že ne každou stránku se budu odkazovat přibližně jako <code>Homepage:kontakt</code>. Samozřejmě 
 vždy se záměnou šablony (v tomto případě kontakt - kontakt.latte). To je dost triviální a stačilo by například:</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, &#39;Homepage:default&#39;);
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]'</span>, <span class=\\"hljs-string\\">'Homepage:default'</span>);
 </code></pre>
 <p>To je sice funkční, bohužel je to spíše teoretická routa, protože výsledek je otřesný:</p>
-<pre><code>http://zlml.cz/homepage/kontakt
+<pre><code class=\\"hljs\\">http://zlml.cz/homepage/kontakt
 </code></pre><p>Tuto routu píšu téměř všude. Je to routa velmi obecná a říká přibližně následující:
 Bude-li se někdo odkazovat v obecném tvaru <code>Presenter:view</code>, pochop <code>Presenter</code> jako název presenteru (např. <strong>Homepage</strong>Presenter) a hledej tedy soubor <code>HomepagePresenter.php</code>
 a <code>view</code> bude šablona presenteru, hledej ji tedy ve složce <code>Presenter/view.latte</code> a sestav URL která bude přesně v tomto tvaru.
 Homepage:default pouze říká co je výchozí hodnota a co se má hledat, pokud nebude specifikována konkrétní šablona.</p>
 <p>Pro takto malý web je mnohem lepší specifikovat konkrétnější routu, která přijde <strong>před</strong> onu obecnou:</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;&lt;action&gt;&#39;, &#39;Homepage:default&#39;);
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;action&gt;'</span>, <span class=\\"hljs-string\\">'Homepage:default'</span>);
 </code></pre>
 <p>Což udělá téměř to samé, jen vypustí z URL nadbytečnou informaci o presenteru. Vždy používáme HomepagePresenter, jen
 se mění cílová šablona podle URL:</p>
-<pre><code>http://zlml.cz/kontakt
+<pre><code class=\\"hljs\\">http://zlml.cz/kontakt
 </code></pre><p>Výsledná sada rout pro takovouto malou statickou stránku by tedy mohla vypadat takto:</p>
-<pre><code class=\\"lang-php\\">public function createRouter() {
-    $router = new RouteList();
-    $router[] = new Route(&#39;&lt;action&gt;&#39;, &#39;Homepage:default&#39;);
-    $router[] = new Route(&#39;&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, &#39;Homepage:default&#39;);
-    return $router;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">createRouter</span><span class=\\"hljs-params\\">()</span> </span>{
+    $router = <span class=\\"hljs-keyword\\">new</span> RouteList();
+    $router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;action&gt;'</span>, <span class=\\"hljs-string\\">'Homepage:default'</span>);
+    $router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]'</span>, <span class=\\"hljs-string\\">'Homepage:default'</span>);
+    <span class=\\"hljs-keyword\\">return</span> $router;
 }
 </code></pre>
 <p>Dále je vhodné používat např. soubor <code>sitemap.xml</code>. Pokud ho také umístím do stejného adresáře jako šablony, routa je opět jednoduchá:</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;sitemap.xml&#39;, &#39;Homepage:sitemap&#39;);
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'sitemap.xml'</span>, <span class=\\"hljs-string\\">'Homepage:sitemap'</span>);
 </code></pre>
 <p>Hledá se šablona <code>sitemap.latte</code>. Přečtěte si jak vytvořit tuto šablonu v článku <a href=\\"rss-a-sitemap-jednoduse-a-rychle\\">RSS a Sitemap jednoduše a rychle</a>. Výsledná URL je tak jak má být:</p>
-<pre><code>http://zlml.cz/sitemap.xml
+<pre><code class=\\"hljs\\">http://zlml.cz/sitemap.xml
 </code></pre><p>To samé lze udělal pro RSS.</p>
 <h2 id=\\"jdeme-do-hloubky\\">Jdeme do hloubky <a href=\\"#jdeme-do-hloubky\\">#</a></h2><p>Trošku složitější routování přichází vždy když chcete udělat něco speciálního.
 Například to, aby číslo za URL udávalo číslo stránky v paginatoru:</p>
-<pre><code>http://zlml.cz/2
-</code></pre><pre><code class=\\"lang-php\\">$router[] = new Route(&quot;[&lt;paginator-page [1](2)&gt;]&quot;, array(
-    &#39;presenter&#39; =&gt; &#39;Homepage&#39;,
-    &#39;action&#39; =&gt; &#39;default&#39;,
-    &#39;paginator-page&#39; =&gt; 1
+<pre><code class=\\"hljs\\">http://zlml.cz/2
+</code></pre><pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">\\"[&lt;paginator-page [1](2)&gt;]\\"</span>, <span class=\\"hljs-keyword\\">array</span>(
+    <span class=\\"hljs-string\\">'presenter'</span> =&gt; <span class=\\"hljs-string\\">'Homepage'</span>,
+    <span class=\\"hljs-string\\">'action'</span> =&gt; <span class=\\"hljs-string\\">'default'</span>,
+    <span class=\\"hljs-string\\">'paginator-page'</span> =&gt; <span class=\\"hljs-number\\">1</span>
 ));
 </code></pre>
 <p>Zde už je nutné druhý parametr rozepsat a více specifikovat. Toto akceptuje pouze konkrétní čísla.
 a jako druhou specialitu lze napsat takovou routu, která bude tvořit URL z názvů článků:</p>
-<pre><code>http://zlml.cz/using-fulltext-searching-with-innodb
-</code></pre><pre><code class=\\"lang-php\\">$router[] = new Route(&#39;&lt;id&gt;&#39;, array(
-    &#39;presenter&#39; =&gt; &#39;Single&#39;,
-    &#39;action&#39; =&gt; &#39;article&#39;,
-    &#39;id&#39; =&gt; array(
-        Route::FILTER_IN =&gt; function ($url) {
-            return $this-&gt;posts-&gt;getIdByUrl($url);
+<pre><code class=\\"hljs\\">http://zlml.cz/using-fulltext-searching-with-innodb
+</code></pre><pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;id&gt;'</span>, <span class=\\"hljs-keyword\\">array</span>(
+    <span class=\\"hljs-string\\">'presenter'</span> =&gt; <span class=\\"hljs-string\\">'Single'</span>,
+    <span class=\\"hljs-string\\">'action'</span> =&gt; <span class=\\"hljs-string\\">'article'</span>,
+    <span class=\\"hljs-string\\">'id'</span> =&gt; <span class=\\"hljs-keyword\\">array</span>(
+        Route::FILTER_IN =&gt; <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-params\\">($url)</span> </span>{
+            <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;posts-&gt;getIdByUrl($url);
         },
-        Route::FILTER_OUT =&gt; function ($id) {
-            return $this-&gt;posts-&gt;getUrlById($id);
+        Route::FILTER_OUT =&gt; <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-params\\">($id)</span> </span>{
+            <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">$this</span>-&gt;posts-&gt;getUrlById($id);
         },
     ),
 ));
 </code></pre>
 <p>A není úplně na škodu vytvořit routu, která bude řešit napríklad vyhledávání:</p>
-<pre><code>http://zlml.cz/search/fio%20api
-</code></pre><pre><code class=\\"lang-php\\">$router[] = new Route(&#39;search[/&lt;search&gt;]&#39;, &#39;Search:default&#39;);
+<pre><code class=\\"hljs\\">http://zlml.cz/search/fio%20api
+</code></pre><pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'search[/&lt;search&gt;]'</span>, <span class=\\"hljs-string\\">'Search:default'</span>);
 </code></pre>
 <p>Toto jsou jednoduché routy pro jednoduchou adresářovou strukturu. Lehce složitější jsou pro
 modulární strukturu, kdy je zapotřebí specifikovat modul:</p>
-<pre><code>http://zlml.cz/rss.xml
-</code></pre><pre><code class=\\"lang-php\\">$router[] = new Route(&#39;rss.xml&#39;, &#39;Front:Blog:rss&#39;);
+<pre><code class=\\"hljs\\">http://zlml.cz/rss.xml
+</code></pre><pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'rss.xml'</span>, <span class=\\"hljs-string\\">'Front:Blog:rss'</span>);
 </code></pre>
 <p>Chová se to stejně jako u předchozího příkladu se <code>sitemap.xml</code>, v tomto příkladu však routa hledá <code>BlogPresenter.php</code> ve složce <code>FrontModule</code> a šablonu <code>rss.latte</code>, také v tomto modulu. U rout pro modulární aplikace již raději rozepisuji druhý parametr, protože je to přehlednější. Následující routa zvládne jazykové mutace pro FrontModul, jinak je to opět ta nejobecnější routa vůbec:</p>
-<pre><code>http://zlml.cz/en/site/kontakt
-</code></pre><pre><code class=\\"lang-php\\">$router[] = new Route(&#39;[&lt;lang cs|sk|en&gt;/]&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, array(
-    &#39;module&#39; =&gt; &#39;Front&#39;,
-    &#39;presenter&#39; =&gt; &#39;Homepage&#39;,
-    &#39;action&#39; =&gt; &#39;default&#39;,
+<pre><code class=\\"hljs\\">http://zlml.cz/en/site/kontakt
+</code></pre><pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'[&lt;lang cs|sk|en&gt;/]&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]'</span>, <span class=\\"hljs-keyword\\">array</span>(
+    <span class=\\"hljs-string\\">'module'</span> =&gt; <span class=\\"hljs-string\\">'Front'</span>,
+    <span class=\\"hljs-string\\">'presenter'</span> =&gt; <span class=\\"hljs-string\\">'Homepage'</span>,
+    <span class=\\"hljs-string\\">'action'</span> =&gt; <span class=\\"hljs-string\\">'default'</span>,
 ));
 </code></pre>
 <p>To samé, ale opět o trošku náročnější. Tentokrát pro UserModule, který je na jiné URL, než FrontModule:</p>
-<pre><code>http://zlml.cz/user/en/setting/password
-</code></pre><pre><code class=\\"lang-php\\">$router[] = new Route(&#39;user/[&lt;lang cs|sk|en&gt;/]&lt;presenter&gt;/&lt;action&gt;[/&lt;id [0-9]+&gt;]&#39;, array(
-    &#39;module&#39; =&gt; &#39;User&#39;,
-    &#39;presenter&#39; =&gt; &#39;Board&#39;,
-    &#39;action&#39; =&gt; &#39;default&#39;,
+<pre><code class=\\"hljs\\">http://zlml.cz/user/en/setting/password
+</code></pre><pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'user/[&lt;lang cs|sk|en&gt;/]&lt;presenter&gt;/&lt;action&gt;[/&lt;id [0-9]+&gt;]'</span>, <span class=\\"hljs-keyword\\">array</span>(
+    <span class=\\"hljs-string\\">'module'</span> =&gt; <span class=\\"hljs-string\\">'User'</span>,
+    <span class=\\"hljs-string\\">'presenter'</span> =&gt; <span class=\\"hljs-string\\">'Board'</span>,
+    <span class=\\"hljs-string\\">'action'</span> =&gt; <span class=\\"hljs-string\\">'default'</span>,
 ));
 </code></pre>
 <p>A na závěr ještě poslední přehled možných rout jako příklady toho co je možné.</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;sitemap.xml&#39;, &#39;Front:Export:sitemap&#39;);
-$router[] = new Route(&#39;kategorie/&lt;category&gt;&#39;, &#39;Front:Product:default&#39;);
-$router[] = new Route(&#39;produkt/&lt;product&gt;&#39;, &#39;Front:Product:detail&#39;);
-$router[] = new Route(&#39;&#39;, &#39;Front:Product:default&#39;);
-$router[] = new Route(&#39;admin/sign-&lt;action&gt;&#39;, &#39;Admin:Sign:&#39;);
-$router[] = new Route(&#39;registrace/&#39;, &#39;Front:Register:new&#39;);
-$router[] = new Route(&#39;index.php&#39;, &#39;Homepage:default&#39;, Route::ONE_WAY);
-$router[] = new CliRouter(array(&#39;action&#39; =&gt; &#39;Cli:Cli:cron&#39;));
-$router[] = new \\\\App\\\\RestRouter(&#39;api[/&lt;presenter&gt;[/&lt;id&gt;]]&#39;, array( //vyžaduje speciální objekt (není součástí Nette)
-    &#39;module&#39; =&gt; &#39;Rest&#39;,
-    &#39;presenter&#39; =&gt; &#39;Resource&#39;,
-    &#39;action&#39; =&gt; &#39;get&#39;,
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'sitemap.xml'</span>, <span class=\\"hljs-string\\">'Front:Export:sitemap'</span>);
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'kategorie/&lt;category&gt;'</span>, <span class=\\"hljs-string\\">'Front:Product:default'</span>);
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'produkt/&lt;product&gt;'</span>, <span class=\\"hljs-string\\">'Front:Product:detail'</span>);
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">''</span>, <span class=\\"hljs-string\\">'Front:Product:default'</span>);
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'admin/sign-&lt;action&gt;'</span>, <span class=\\"hljs-string\\">'Admin:Sign:'</span>);
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'registrace/'</span>, <span class=\\"hljs-string\\">'Front:Register:new'</span>);
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'index.php'</span>, <span class=\\"hljs-string\\">'Homepage:default'</span>, Route::ONE_WAY);
+$router[] = <span class=\\"hljs-keyword\\">new</span> CliRouter(<span class=\\"hljs-keyword\\">array</span>(<span class=\\"hljs-string\\">'action'</span> =&gt; <span class=\\"hljs-string\\">'Cli:Cli:cron'</span>));
+$router[] = <span class=\\"hljs-keyword\\">new</span> \\\\App\\\\RestRouter(<span class=\\"hljs-string\\">'api[/&lt;presenter&gt;[/&lt;id&gt;]]'</span>, <span class=\\"hljs-keyword\\">array</span>( <span class=\\"hljs-comment\\">//vyžaduje speciální objekt (není součástí Nette)</span>
+    <span class=\\"hljs-string\\">'module'</span> =&gt; <span class=\\"hljs-string\\">'Rest'</span>,
+    <span class=\\"hljs-string\\">'presenter'</span> =&gt; <span class=\\"hljs-string\\">'Resource'</span>,
+    <span class=\\"hljs-string\\">'action'</span> =&gt; <span class=\\"hljs-string\\">'get'</span>,
 ), \\\\App\\\\RestRouter::RESTFUL);
 </code></pre>
 <p>Je zcela zřejmé, že se všechny konstrukce stále opakují, proto považuji za opravdu důležité

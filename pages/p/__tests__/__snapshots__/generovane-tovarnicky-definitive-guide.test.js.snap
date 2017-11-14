@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Generované továrničky - definitive guide
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>No dobře, možná ne úplně definitivní, ale užitečná příručka snad. Pokusím se zde rozebrat všechny potřebné stavy generovaných továrniček, které považuji za důležité a jejich co nejjednodušší zápis v configu. Jedná se hlavně o pohled z hlediska předávání parametrů. Doufám, že to ještě někdo doplní o nějaké vylepšení, nebo další příklad, abych mohl tento seznam rozšířit. To je jeden ze dvou důvodů tohoto typu článků. Ten druhý je, abych měl kam odkazovat, až se mě někdo bude opět ptát.</p>
@@ -73,59 +73,59 @@ exports[`renders correctly 1`] = `
 <li><a href=\\"#toc-all-in-one\\">All in One</a></li>
 </ul>
 <h2 id=\\"p-ed-n-parametru-z-presenteru\\">Předání parametru z presenteru <a href=\\"#p-ed-n-parametru-z-presenteru\\">#</a></h2><p>Toto považuji za asi úplně nejčastější požadavek. Komponenta je jednoduchá:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-class ParameterComponent extends Nette\\\\Application\\\\UI\\\\Control {
-    public function __construct(array $xxx) {}
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">ParameterComponent</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Application</span>\\\\<span class=\\"hljs-title\\">UI</span>\\\\<span class=\\"hljs-title\\">Control</span> </span>{
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">(array $xxx)</span> </span>{}
 }
 
-interface IParameterComponentFactory {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">interface</span> <span class=\\"hljs-title\\">IParameterComponentFactory</span> </span>{
 
-    /** @return ParameterComponent */
-    function create(array $xxx);
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@return</span> ParameterComponent */</span>
+    <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">create</span><span class=\\"hljs-params\\">(array $xxx)</span></span>;
 
 }
 </code></pre>
 <p>Důležité je, že jak datový typ, tak název proměnné se musí shodovat. Config pak není o nic složitější:</p>
-<pre><code class=\\"lang-neon\\">services:
+<pre><code class=\\"hljs lang-neon\\">services:
     - IParameterComponentFactory
 </code></pre>
 <p>Kontejner se potom vygeneruje dle očekávání:</p>
-<pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IParameterComponentFactoryImpl_28_IParameterComponentFactory implements IParameterComponentFactory {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">final</span> <span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Container_59ca411ae5_IParameterComponentFactoryImpl_28_IParameterComponentFactory</span> <span class=\\"hljs-keyword\\">implements</span> <span class=\\"hljs-title\\">IParameterComponentFactory</span> </span>{
 
-    private $container;
+    <span class=\\"hljs-keyword\\">private</span> $container;
 
-    public function __construct(Container_59ca411ae5 $container) {
-        $this-&gt;container = $container;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">(Container_59ca411ae5 $container)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;container = $container;
     }
 
-    public function create(array $xxx) {
-        $service = new ParameterComponent($xxx);
-        return $service;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">create</span><span class=\\"hljs-params\\">(array $xxx)</span> </span>{
+        $service = <span class=\\"hljs-keyword\\">new</span> ParameterComponent($xxx);
+        <span class=\\"hljs-keyword\\">return</span> $service;
     }
 
 }
 </code></pre>
 <p>Samotné použití je velmi jednoduché. Stačí si nechat v presenteru předat interface <code>IParameterComponentFactory</code> například pomocí anotace <code>@inject</code> a nad ním volat metodu <code>create</code>. Fígl je právě v tom, že vygenerovaný kód v kontejneru tento interface implementuje a odvádí tak zbytečnou práci za vás. Bez dalších změn lze využít autowire zaregistrovaných služeb. Předání parametru z configu a zároveň získání další závislosti pak může vypadat třeba takto (pouze upravená předchozí komponenta):</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-class ParameterComponent extends Nette\\\\Application\\\\UI\\\\Control {
-    public function __construct(array $xxx, App\\\\Model\\\\UserManager $userManager) {}
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">ParameterComponent</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Application</span>\\\\<span class=\\"hljs-title\\">UI</span>\\\\<span class=\\"hljs-title\\">Control</span> </span>{
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">(array $xxx, App\\\\Model\\\\UserManager $userManager)</span> </span>{}
 }
 </code></pre>
 <h2 id=\\"p-ed-n-parametru-z-konfigura-n-ho-souboru\\">Předání parametru z konfiguračního souboru <a href=\\"#p-ed-n-parametru-z-konfigura-n-ho-souboru\\">#</a></h2><p>Toto je trošku horší, ale pořád snadno pochopitelné. Kód komponenty bude opět podobný:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-class ConfigComponent extends Nette\\\\Application\\\\UI\\\\Control {
-    public function __construct($configParam) {}
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">ConfigComponent</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Application</span>\\\\<span class=\\"hljs-title\\">UI</span>\\\\<span class=\\"hljs-title\\">Control</span> </span>{
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">($configParam)</span> </span>{}
 }
 
-interface IConfigComponentFactory {
-    function create();
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">interface</span> <span class=\\"hljs-title\\">IConfigComponentFactory</span> </span>{
+    <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">create</span><span class=\\"hljs-params\\">()</span></span>;
 }
 </code></pre>
 <p>Všimněte si, že je v tomto případě úplně zbytečná <code>@return</code> anotace. Co má factory vytvářet lze totiž specifikovat v configu:</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     testkey1: testvalue1
 
 services:
@@ -133,23 +133,23 @@ services:
       create: ConfigComponent(%testkey1%)
 </code></pre>
 <p>Zde by skoro šlo přestat interface úplně psát. To ale není v současné době možné a vygenerovaný kód je pak přesně takový, jaký by měl být:</p>
-<pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IConfigComponentFactoryImpl_33 implements IConfigComponentFactory {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">final</span> <span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Container_59ca411ae5_IConfigComponentFactoryImpl_33</span> <span class=\\"hljs-keyword\\">implements</span> <span class=\\"hljs-title\\">IConfigComponentFactory</span> </span>{
 
-    private $container;
+    <span class=\\"hljs-keyword\\">private</span> $container;
 
-    public function __construct(Container_59ca411ae5 $container) {
-        $this-&gt;container = $container;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">(Container_59ca411ae5 $container)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;container = $container;
     }
 
-    public function create() {
-        $service = new ConfigComponent(&#39;testvalue1&#39;);
-        return $service;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">create</span><span class=\\"hljs-params\\">()</span> </span>{
+        $service = <span class=\\"hljs-keyword\\">new</span> ConfigComponent(<span class=\\"hljs-string\\">'testvalue1'</span>);
+        <span class=\\"hljs-keyword\\">return</span> $service;
     }
 
 }
 </code></pre>
 <p>Alternativně lze zvolit populárnější způsob a upravit konfigurační soubor takto:</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     testkey1: testvalue1
 
 services:
@@ -159,23 +159,23 @@ services:
 <p>Vygenerovaný výsledek je stejný. V tomto případě je však nutné dát pozor na to, že při psaní interface je nutné psát jej i s <code>@return</code> anotací.</p>
 <p>Ok, toto je snad jasné. Co to trošku zkomplikovat?</p>
 <h2 id=\\"all-in-one\\">All in One <a href=\\"#all-in-one\\">#</a></h2><p>Toto snad bude dostatečně krajní případ. Pokusíme se vytvořit továrničku pro komponentu, která bude ke svému vytvoření vyžadovat parametr z configu, parametr z presenteru, službu a opět parametr z configu - vše přesně v tomto pořadí. A nebudu se v tom snažit hledat závislosti. Je vyžadováno něco takového:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-class AllInComponent extends Nette\\\\Application\\\\UI\\\\Control {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">AllInComponent</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Application</span>\\\\<span class=\\"hljs-title\\">UI</span>\\\\<span class=\\"hljs-title\\">Control</span> </span>{
 
-    public function __construct($configParam1, array $userParam, App\\\\Model\\\\UserManager $userManager, $configParam2) {}
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">($configParam1, array $userParam, App\\\\Model\\\\UserManager $userManager, $configParam2)</span> </span>{}
 
 }
 
-interface IAllInComponentFactory {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">interface</span> <span class=\\"hljs-title\\">IAllInComponentFactory</span> </span>{
 
-    /** @return AllInComponent */
-    function create(array $userParam);
+    <span class=\\"hljs-comment\\">/** <span class=\\"hljs-doctag\\">@return</span> AllInComponent */</span>
+    <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">create</span><span class=\\"hljs-params\\">(array $userParam)</span></span>;
 
 }
 </code></pre>
 <p>Je tedy jasné, že musím vytvořit <code>create</code> metodu s parametrem, který naplním v presenteru. Zde by opět <code>@return</code> anotace nemusela být. Je úplně zbytečná. A jak na ty parametry z configu? To už je přece vyřešené viz dřívější ukázky:</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     testkey1: testvalue1
     testkey2: testvalue2
 
@@ -184,23 +184,23 @@ services:
       create: AllInComponent(configParam2: %testkey2%, configParam1: %testkey1%)
 </code></pre>
 <p>Zde jsem si to ještě zkomplikoval tím, že jsem zadal parametry v obráceném pořadí (což by přesně takto fungovalo). Abych docílil správného pořadí, musím parametry správně pojmenovat (shodně s konstruktorem komponenty). A vygenerovaný kód? Radost pohledět:</p>
-<pre><code class=\\"lang-php\\">final class Container_59ca411ae5_IAllInComponentFactoryImpl_32 implements IAllInComponentFactory {
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">final</span> <span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Container_59ca411ae5_IAllInComponentFactoryImpl_32</span> <span class=\\"hljs-keyword\\">implements</span> <span class=\\"hljs-title\\">IAllInComponentFactory</span> </span>{
 
-    private $container;
+    <span class=\\"hljs-keyword\\">private</span> $container;
 
-    public function __construct(Container_59ca411ae5 $container) {
-        $this-&gt;container = $container;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">(Container_59ca411ae5 $container)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;container = $container;
     }
 
-    public function create(array $userParam) {
-        $service = new AllInComponent(&#39;testvalue1&#39;, $userParam, $this-&gt;container-&gt;getService(&#39;27_App_Model_UserManager&#39;), &#39;testvalue2&#39;);
-        return $service;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">create</span><span class=\\"hljs-params\\">(array $userParam)</span> </span>{
+        $service = <span class=\\"hljs-keyword\\">new</span> AllInComponent(<span class=\\"hljs-string\\">'testvalue1'</span>, $userParam, <span class=\\"hljs-keyword\\">$this</span>-&gt;container-&gt;getService(<span class=\\"hljs-string\\">'27_App_Model_UserManager'</span>), <span class=\\"hljs-string\\">'testvalue2'</span>);
+        <span class=\\"hljs-keyword\\">return</span> $service;
     }
 
 }
 </code></pre>
 <p>I v tomto případě je možné zvolit jiný (úspornější) zápis v konfiguračním souboru. Vygenerovaný výstup je opět stejný:</p>
-<pre><code class=\\"lang-neon\\">parameters:
+<pre><code class=\\"hljs lang-neon\\">parameters:
     testkey1: testvalue1
     testkey2: testvalue2
 

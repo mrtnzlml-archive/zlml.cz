@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       CRON validátor
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>A jak už to tak bývá, tak opět ohnutý pro Nette. Tentokráte inspirovaný řešením ISPConfigu.</p>
@@ -76,121 +76,121 @@ exports[`renders correctly 1`] = `
 <p>To je myslím slušný výčet pravidel pro zvalidování jednoho příkazu.
 Úkolem tohoto článku není ukázat jak tvořit a zpracovávat formulář, ale bude vhodné
 umístit sem celý kód alespoň vytvoření:</p>
-<pre><code class=\\"lang-php\\">/**
-  * @return Nette\\\\Application\\\\UI\\\\Form
-  */
-protected function createComponentAddCron() {
-    $form = new Nette\\\\Application\\\\UI\\\\Form;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-comment\\">/**
+  * <span class=\\"hljs-doctag\\">@return</span> Nette\\\\Application\\\\UI\\\\Form
+  */</span>
+<span class=\\"hljs-keyword\\">protected</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">createComponentAddCron</span><span class=\\"hljs-params\\">()</span> </span>{
+    $form = <span class=\\"hljs-keyword\\">new</span> Nette\\\\Application\\\\UI\\\\Form;
     $form-&gt;addProtection();
-    $form-&gt;addText(&#39;minutes&#39;, &#39;Minuty:&#39;)
-        -&gt;addRule(\\\\Fresh\\\\ValidateCron::MINUTES, &#39;Nevalidní CRON zápis - minuty.&#39;);
-    $form-&gt;addText(&#39;hours&#39;, &#39;Hodiny:&#39;)
-        -&gt;addRule(\\\\Fresh\\\\ValidateCron::HOURS, &#39;Nevalidní CRON zápis - hodiny.&#39;);
-    $form-&gt;addText(&#39;mdays&#39;, &#39;Dny měsíce:&#39;)
-        -&gt;addRule(\\\\Fresh\\\\ValidateCron::MDAYS, &#39;Nevalidní CRON zápis - mdays.&#39;);
-    $form-&gt;addText(&#39;months&#39;, &#39;Měsíce:&#39;)
-        -&gt;addRule(\\\\Fresh\\\\ValidateCron::MONTHS, &#39;Nevalidní CRON zápis - měsíce.&#39;);
-    $form-&gt;addText(&#39;wdays&#39;, &#39;Dny v týdnu:&#39;)
-        -&gt;addRule(\\\\Fresh\\\\ValidateCron::WDAYS, &#39;Nevalidní CRON zápis - wdays.&#39;);
-    $form-&gt;addText(&#39;command&#39;, &#39;Příkaz:&#39;)
-        -&gt;setRequired(&#39;Vyplňte prosím příkaz, který bude CRON spouštět.&#39;);
-    $form-&gt;addSubmit(&#39;save&#39;, &#39;Přidat nový CRON&#39;);
-    $form-&gt;onSuccess[] = $this-&gt;addCronSucceeded;
-    return $form;
+    $form-&gt;addText(<span class=\\"hljs-string\\">'minutes'</span>, <span class=\\"hljs-string\\">'Minuty:'</span>)
+        -&gt;addRule(\\\\Fresh\\\\ValidateCron::MINUTES, <span class=\\"hljs-string\\">'Nevalidní CRON zápis - minuty.'</span>);
+    $form-&gt;addText(<span class=\\"hljs-string\\">'hours'</span>, <span class=\\"hljs-string\\">'Hodiny:'</span>)
+        -&gt;addRule(\\\\Fresh\\\\ValidateCron::HOURS, <span class=\\"hljs-string\\">'Nevalidní CRON zápis - hodiny.'</span>);
+    $form-&gt;addText(<span class=\\"hljs-string\\">'mdays'</span>, <span class=\\"hljs-string\\">'Dny měsíce:'</span>)
+        -&gt;addRule(\\\\Fresh\\\\ValidateCron::MDAYS, <span class=\\"hljs-string\\">'Nevalidní CRON zápis - mdays.'</span>);
+    $form-&gt;addText(<span class=\\"hljs-string\\">'months'</span>, <span class=\\"hljs-string\\">'Měsíce:'</span>)
+        -&gt;addRule(\\\\Fresh\\\\ValidateCron::MONTHS, <span class=\\"hljs-string\\">'Nevalidní CRON zápis - měsíce.'</span>);
+    $form-&gt;addText(<span class=\\"hljs-string\\">'wdays'</span>, <span class=\\"hljs-string\\">'Dny v týdnu:'</span>)
+        -&gt;addRule(\\\\Fresh\\\\ValidateCron::WDAYS, <span class=\\"hljs-string\\">'Nevalidní CRON zápis - wdays.'</span>);
+    $form-&gt;addText(<span class=\\"hljs-string\\">'command'</span>, <span class=\\"hljs-string\\">'Příkaz:'</span>)
+        -&gt;setRequired(<span class=\\"hljs-string\\">'Vyplňte prosím příkaz, který bude CRON spouštět.'</span>);
+    $form-&gt;addSubmit(<span class=\\"hljs-string\\">'save'</span>, <span class=\\"hljs-string\\">'Přidat nový CRON'</span>);
+    $form-&gt;onSuccess[] = <span class=\\"hljs-keyword\\">$this</span>-&gt;addCronSucceeded;
+    <span class=\\"hljs-keyword\\">return</span> $form;
 }
 </code></pre>
 <p>A rovnou bez hloupých povídání celý validátor:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-namespace Fresh;
+<span class=\\"hljs-keyword\\">namespace</span> <span class=\\"hljs-title\\">Fresh</span>;
 
-/**
+<span class=\\"hljs-comment\\">/**
  * Class ValidateCron - inspired by ISPConfig
- * @package Fresh
- */
-class ValidateCron extends \\\\Nette\\\\Object {
+ * <span class=\\"hljs-doctag\\">@package</span> Fresh
+ */</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">ValidateCron</span> <span class=\\"hljs-keyword\\">extends</span> \\\\<span class=\\"hljs-title\\">Nette</span>\\\\<span class=\\"hljs-title\\">Object</span> </span>{
 
-        const MINUTES = &#39;\\\\Fresh\\\\ValidateCron::validateMinutes&#39;;
-        const HOURS = &#39;\\\\Fresh\\\\ValidateCron::validateHours&#39;;
-        const MDAYS = &#39;\\\\Fresh\\\\ValidateCron::validateMdays&#39;;
-        const MONTHS = &#39;\\\\Fresh\\\\ValidateCron::validateMonths&#39;;
-        const WDAYS = &#39;\\\\Fresh\\\\ValidateCron::validateWdays&#39;;
+        <span class=\\"hljs-keyword\\">const</span> MINUTES = <span class=\\"hljs-string\\">'\\\\Fresh\\\\ValidateCron::validateMinutes'</span>;
+        <span class=\\"hljs-keyword\\">const</span> HOURS = <span class=\\"hljs-string\\">'\\\\Fresh\\\\ValidateCron::validateHours'</span>;
+        <span class=\\"hljs-keyword\\">const</span> MDAYS = <span class=\\"hljs-string\\">'\\\\Fresh\\\\ValidateCron::validateMdays'</span>;
+        <span class=\\"hljs-keyword\\">const</span> MONTHS = <span class=\\"hljs-string\\">'\\\\Fresh\\\\ValidateCron::validateMonths'</span>;
+        <span class=\\"hljs-keyword\\">const</span> WDAYS = <span class=\\"hljs-string\\">'\\\\Fresh\\\\ValidateCron::validateWdays'</span>;
 
-        public static function validateMinutes(\\\\Nette\\\\Forms\\\\IControl $control) {
-                return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 0, 59);
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">validateMinutes</span><span class=\\"hljs-params\\">(\\\\Nette\\\\Forms\\\\IControl $control)</span> </span>{
+                <span class=\\"hljs-keyword\\">return</span> \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), <span class=\\"hljs-number\\">0</span>, <span class=\\"hljs-number\\">59</span>);
         }
 
-        public static function validateHours(\\\\Nette\\\\Forms\\\\IControl $control) {
-                return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 0, 23);
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">validateHours</span><span class=\\"hljs-params\\">(\\\\Nette\\\\Forms\\\\IControl $control)</span> </span>{
+                <span class=\\"hljs-keyword\\">return</span> \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), <span class=\\"hljs-number\\">0</span>, <span class=\\"hljs-number\\">23</span>);
         }
 
-        public static function validateMdays(\\\\Nette\\\\Forms\\\\IControl $control) {
-                return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 1, 31);
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">validateMdays</span><span class=\\"hljs-params\\">(\\\\Nette\\\\Forms\\\\IControl $control)</span> </span>{
+                <span class=\\"hljs-keyword\\">return</span> \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), <span class=\\"hljs-number\\">1</span>, <span class=\\"hljs-number\\">31</span>);
         }
 
-        public static function validateMonths(\\\\Nette\\\\Forms\\\\IControl $control) {
-                if($control-&gt;getValue() != &#39;@reboot&#39;) { // allow value @reboot in month field
-                        return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 1, 12);
-                } else {
-                        return TRUE;
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">validateMonths</span><span class=\\"hljs-params\\">(\\\\Nette\\\\Forms\\\\IControl $control)</span> </span>{
+                <span class=\\"hljs-keyword\\">if</span>($control-&gt;getValue() != <span class=\\"hljs-string\\">'@reboot'</span>) { <span class=\\"hljs-comment\\">// allow value @reboot in month field</span>
+                        <span class=\\"hljs-keyword\\">return</span> \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), <span class=\\"hljs-number\\">1</span>, <span class=\\"hljs-number\\">12</span>);
+                } <span class=\\"hljs-keyword\\">else</span> {
+                        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">TRUE</span>;
                 }
         }
 
-        public static function validateWdays(\\\\Nette\\\\Forms\\\\IControl $control) {
-                return \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), 0, 6);
+        <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">validateWdays</span><span class=\\"hljs-params\\">(\\\\Nette\\\\Forms\\\\IControl $control)</span> </span>{
+                <span class=\\"hljs-keyword\\">return</span> \\\\Fresh\\\\ValidateCron::validateTimeFormat($control-&gt;getValue(), <span class=\\"hljs-number\\">0</span>, <span class=\\"hljs-number\\">6</span>);
         }
 
-        private static function validateTimeFormat($value, $min_entry = 0, $max_entry = 0) {
-                if (preg_match(&quot;&#39;^[0-9\\\\-\\\\,\\\\/\\\\*]+$&#39;&quot;, $value) == false) { // allowed characters are 0-9, comma, *, -, /
-                        return FALSE;
-                } elseif (preg_match(&quot;&#39;[\\\\-\\\\,\\\\/][\\\\-\\\\,\\\\/]&#39;&quot;, $value) == true) { // comma, - and / never stand together
-                        return FALSE;
+        <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">validateTimeFormat</span><span class=\\"hljs-params\\">($value, $min_entry = <span class=\\"hljs-number\\">0</span>, $max_entry = <span class=\\"hljs-number\\">0</span>)</span> </span>{
+                <span class=\\"hljs-keyword\\">if</span> (preg_match(<span class=\\"hljs-string\\">\\"'^[0-9\\\\-\\\\,\\\\/\\\\*]+$'\\"</span>, $value) == <span class=\\"hljs-keyword\\">false</span>) { <span class=\\"hljs-comment\\">// allowed characters are 0-9, comma, *, -, /</span>
+                        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">FALSE</span>;
+                } <span class=\\"hljs-keyword\\">elseif</span> (preg_match(<span class=\\"hljs-string\\">\\"'[\\\\-\\\\,\\\\/][\\\\-\\\\,\\\\/]'\\"</span>, $value) == <span class=\\"hljs-keyword\\">true</span>) { <span class=\\"hljs-comment\\">// comma, - and / never stand together</span>
+                        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">FALSE</span>;
                 }
-                $time_list = explode(&quot;,&quot;, $value);
-                foreach ($time_list as $entry) {
-                        // possible value combinations:
-                        // x               =&gt;      ^(\\\\d+)$
-                        // x-y             =&gt;      ^(\\\\d+)\\\\-(\\\\d+)$
-                        // x/y             =&gt;      ^(\\\\d+)\\\\/([1-9]\\\\d*)$
-                        // x-y/z           =&gt;      ^(\\\\d+)\\\\-(\\\\d+)\\\\/([1-9]\\\\d*)$
-                        // */x             =&gt;      ^\\\\*\\\\/([1-9]\\\\d*)$
-                        // combined regex  =&gt;      ^(\\\\d+|\\\\*)(\\\\-(\\\\d+))?(\\\\/([1-9]\\\\d*))?$
-                        if (preg_match(&quot;&#39;^(((\\\\d+)(\\\\-(\\\\d+))?)|\\\\*)(\\\\/([1-9]\\\\d*))?$&#39;&quot;, $entry, $matches) == false) {
-                                return FALSE;
+                $time_list = explode(<span class=\\"hljs-string\\">\\",\\"</span>, $value);
+                <span class=\\"hljs-keyword\\">foreach</span> ($time_list <span class=\\"hljs-keyword\\">as</span> $entry) {
+                        <span class=\\"hljs-comment\\">// possible value combinations:</span>
+                        <span class=\\"hljs-comment\\">// x               =&gt;      ^(\\\\d+)$</span>
+                        <span class=\\"hljs-comment\\">// x-y             =&gt;      ^(\\\\d+)\\\\-(\\\\d+)$</span>
+                        <span class=\\"hljs-comment\\">// x/y             =&gt;      ^(\\\\d+)\\\\/([1-9]\\\\d*)$</span>
+                        <span class=\\"hljs-comment\\">// x-y/z           =&gt;      ^(\\\\d+)\\\\-(\\\\d+)\\\\/([1-9]\\\\d*)$</span>
+                        <span class=\\"hljs-comment\\">// */x             =&gt;      ^\\\\*\\\\/([1-9]\\\\d*)$</span>
+                        <span class=\\"hljs-comment\\">// combined regex  =&gt;      ^(\\\\d+|\\\\*)(\\\\-(\\\\d+))?(\\\\/([1-9]\\\\d*))?$</span>
+                        <span class=\\"hljs-keyword\\">if</span> (preg_match(<span class=\\"hljs-string\\">\\"'^(((\\\\d+)(\\\\-(\\\\d+))?)|\\\\*)(\\\\/([1-9]\\\\d*))?$'\\"</span>, $entry, $matches) == <span class=\\"hljs-keyword\\">false</span>) {
+                                <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">FALSE</span>;
                         }
-                        // matches contains:
-                        // 1       =&gt;      * or value or x-y range
-                        // 2       =&gt;      unused
-                        // 3       =&gt;      value if [1] != *
-                        // 4       =&gt;      empty if no range was used
-                        // 5       =&gt;      2nd value of range if [1] != * and range was used
-                        // 6       =&gt;      empty if step was not used
-                        // 7       =&gt;      step
-                        if ($matches[1] == &quot;*&quot;) {
-                                // not to check
-                        } else {
-                                if ($matches[3] &lt; $min_entry || $matches[3] &gt; $max_entry) { // check if value is in allowed range
-                                        return FALSE;
-                                } elseif (isset($matches[4]) &amp;&amp; ($matches[5] &lt; $min_entry || $matches[5] &gt; $max_entry || $matches[5] &lt;= $matches[3])) {
-                                        // check if value is in allowed range and not less or equal to first value
-                                        return FALSE;
+                        <span class=\\"hljs-comment\\">// matches contains:</span>
+                        <span class=\\"hljs-comment\\">// 1       =&gt;      * or value or x-y range</span>
+                        <span class=\\"hljs-comment\\">// 2       =&gt;      unused</span>
+                        <span class=\\"hljs-comment\\">// 3       =&gt;      value if [1] != *</span>
+                        <span class=\\"hljs-comment\\">// 4       =&gt;      empty if no range was used</span>
+                        <span class=\\"hljs-comment\\">// 5       =&gt;      2nd value of range if [1] != * and range was used</span>
+                        <span class=\\"hljs-comment\\">// 6       =&gt;      empty if step was not used</span>
+                        <span class=\\"hljs-comment\\">// 7       =&gt;      step</span>
+                        <span class=\\"hljs-keyword\\">if</span> ($matches[<span class=\\"hljs-number\\">1</span>] == <span class=\\"hljs-string\\">\\"*\\"</span>) {
+                                <span class=\\"hljs-comment\\">// not to check</span>
+                        } <span class=\\"hljs-keyword\\">else</span> {
+                                <span class=\\"hljs-keyword\\">if</span> ($matches[<span class=\\"hljs-number\\">3</span>] &lt; $min_entry || $matches[<span class=\\"hljs-number\\">3</span>] &gt; $max_entry) { <span class=\\"hljs-comment\\">// check if value is in allowed range</span>
+                                        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">FALSE</span>;
+                                } <span class=\\"hljs-keyword\\">elseif</span> (<span class=\\"hljs-keyword\\">isset</span>($matches[<span class=\\"hljs-number\\">4</span>]) &amp;&amp; ($matches[<span class=\\"hljs-number\\">5</span>] &lt; $min_entry || $matches[<span class=\\"hljs-number\\">5</span>] &gt; $max_entry || $matches[<span class=\\"hljs-number\\">5</span>] &lt;= $matches[<span class=\\"hljs-number\\">3</span>])) {
+                                        <span class=\\"hljs-comment\\">// check if value is in allowed range and not less or equal to first value</span>
+                                        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">FALSE</span>;
                                 }
                         }
-                        if (isset($matches[6]) &amp;&amp; ($matches[7] &lt; 2 || $matches[7] &gt; $max_entry - 1)) { // check if step value is valid
-                                return FALSE;
+                        <span class=\\"hljs-keyword\\">if</span> (<span class=\\"hljs-keyword\\">isset</span>($matches[<span class=\\"hljs-number\\">6</span>]) &amp;&amp; ($matches[<span class=\\"hljs-number\\">7</span>] &lt; <span class=\\"hljs-number\\">2</span> || $matches[<span class=\\"hljs-number\\">7</span>] &gt; $max_entry - <span class=\\"hljs-number\\">1</span>)) { <span class=\\"hljs-comment\\">// check if step value is valid</span>
+                                <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">FALSE</span>;
                         }
-                } // end foreach entry loop
-                return TRUE;
+                } <span class=\\"hljs-comment\\">// end foreach entry loop</span>
+                <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">TRUE</span>;
         }
 
 }
 </code></pre>
 <p>Validátorem navrácené errory lze vykreslit například takto ručně (nově v DEV Nette):</p>
-<pre><code class=\\"lang-html\\">{form $form}
+<pre><code class=\\"hljs lang-html\\">{form $form}
 
-&lt;ul class=&quot;error&quot; n:if=&quot;$form-&gt;allErrors&quot;&gt;
-        &lt;li n:foreach=&quot;$form-&gt;allErrors as $error&quot;&gt;{$error}&lt;/li&gt;
-&lt;/ul&gt;
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">ul</span> <span class=\\"hljs-attr\\">class</span>=<span class=\\"hljs-string\\">\\"error\\"</span> <span class=\\"hljs-attr\\">n:if</span>=<span class=\\"hljs-string\\">\\"$form-&gt;allErrors\\"</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">li</span> <span class=\\"hljs-attr\\">n:foreach</span>=<span class=\\"hljs-string\\">\\"$form-&gt;allErrors as $error\\"</span>&gt;</span>{$error}<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">li</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">ul</span>&gt;</span>
 
 ...
 

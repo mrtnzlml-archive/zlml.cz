@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Vzhůru dolů! A pak zase nahoru...
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Na relativně dlouhou dobu jsem se teď odmlčel. Psal jsem totiž někam jinam než na blog a svůj příděl písmenek na měsíc jsem odevzdával právě tam. Ale stálo to za to. Totiž jak se to vezme. Projděme si sled událostí. Událost první. Poprvé jsem <a href=\\"http://www.slideshare.net/MartinZlmal/nodejs-42314371\\">představil</a> svůj projekt na FAV, kde studenty zaujal a na konci přednášky se kolem samotného projektu utvořil hlouček zvědavců toužící prohlédnout si zařízení lépe. Událost druhá. Představil jsem tento projekt <a href=\\"http://www.slideshare.net/MartinZlmal/barcamp2015\\">širší veřejnosti</a> na Barcampu v Plzni a získal jsem velkou spoustu negativních reakcí. Samotná zadávající firma se dále přestala o tento projekt více zajímat a musel jsem se s tím chvíli pasovat, abych věděl na čem jsem. Událost třetí. I když mi to chvíli trvalo, tak jsem se vzpamatoval, implementoval jsem ještě několik cool věcí a tento projekt uvedl do finální fáze, kdy bych byl ochoten se s ním pochlubit před odborným publikem. Tak jsem také u SZZ udělal a práci úspěšně obhájil. Událost čtvrtá a poslední. Tato práce <a href=\\"http://www.abb.cz/cawp/seitp202/67b19426a3ab3b8fc1257e6e004f2d33.aspx\\">vyhrála soutěž</a> ABB University Award 2015 - soutěž o nejlepší technicky zaměřenou vysokoškolskou práci v ČR.</p>

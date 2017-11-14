@@ -53,19 +53,19 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       I deleted PHP
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>The most expensive server is the one doing nothing. And that was basically happening with this blog. I always had some kind of shared hosting or VPS but it doesn&#39;t really make sense. It&#39;s just a blog and - let&#39;s be honest - not that popular. How expensive is to take care of such a website? Well, currently I pay about $7 USD (basically only AWS Lightsail + VAT + S3 backups) per month.</p>
 <p>But not anymore! I rewrited this blog from old and not very flexible PHP code to new and modern JS code with great focus on serverless technologies. This is how I reduced the expenses to zero USD. And also - I deleted my last project written in PHP running in production. Now I am completely JS guy... :D</p>
 <h2 id=\\"technologies-behind\\">Technologies behind <a href=\\"#technologies-behind\\">#</a></h2><p>This blog runs on <a href=\\"https://zeit.co/blog/next4\\">Next.js 4</a> with React 16. I could write it in pure JS - sure. But first of all I don&#39;t want to invest to much money and my time into this website and second of all. Next.js is just awesome. Really. Probably the best thing about this framework is server side rendering (SSR) by default. And this is huge for me. It basically means that this blog <strong>works even with JS disabled in browser</strong> because it&#39;s prerendered on server.</p>
 <p>Another quite cool thing is link prefetch. This is one of the things I always missed in PHP. You have great website, you already know where will user most probably click but it&#39;s super hard to prefetch this page. But not with Next.js. With this framework it&#39;s just one word in the link - <code>prefetch</code>:</p>
-<pre><code class=\\"lang-js\\">&lt;Link prefetch href=&quot;/archive&quot;&gt;blog&lt;/Link&gt;
+<pre><code class=\\"hljs lang-js\\">&lt;Link prefetch href=<span class=\\"hljs-string\\">\\"/archive\\"</span>&gt;blog&lt;<span class=\\"hljs-regexp\\">/Link&gt;</span>
 </code></pre>
 <p>Just try it. Delete all the cache, go to the homepage and click on the word &quot;blog&quot; in the text. Immediate response. Not even blink. Wow. Now in the archive click on the fist highlighted article. Bam - immediate response. This is because it&#39;s already downloaded and browser just replaces the DOM with new page. Amazing.</p>
 <p>And that&#39;s it. No database, no servers, just JS.</p>

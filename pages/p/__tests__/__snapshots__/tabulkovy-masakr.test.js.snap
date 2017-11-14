@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Tabulkový masakr
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Určitě znáte HTML a tím pádem znáte i tabulky. Pro jistotu připomenutí.
@@ -84,24 +84,24 @@ Tabulka se v HTML tvoří párovým tagem <code>&lt;table&gt;&lt;/table&gt;</cod
 </table>
 
 <p>Zde je vidět co se stane, když roztáhneme buňku <strong>A2</strong> na tři řádky a zároveň roztáhneme buňku <strong>B1</strong> na tři sloupce podle následujícího kódu:</p>
-<pre><code class=\\"lang-html\\">&lt;table border=&quot;1&quot; cellpadding=&quot;6&quot; cellspacing=&quot;2&quot; width=&quot;400&quot;&gt;
-    &lt;tr&gt;
-        &lt;td width=&quot;33%&quot;&gt;A1&lt;/td&gt;
-        &lt;td width=&quot;33%&quot; rowspan=&quot;4&quot;&gt;A2&lt;/td&gt;
-        &lt;td width=&quot;33%&quot;&gt;A3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td colspan=&quot;3&quot;&gt;B1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;C1&lt;/td&gt;
-        &lt;td&gt;C3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;D1&lt;/td&gt;
-        &lt;td&gt;D3&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">table</span> <span class=\\"hljs-attr\\">border</span>=<span class=\\"hljs-string\\">\\"1\\"</span> <span class=\\"hljs-attr\\">cellpadding</span>=<span class=\\"hljs-string\\">\\"6\\"</span> <span class=\\"hljs-attr\\">cellspacing</span>=<span class=\\"hljs-string\\">\\"2\\"</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"400\\"</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"33%\\"</span>&gt;</span>A1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"33%\\"</span> <span class=\\"hljs-attr\\">rowspan</span>=<span class=\\"hljs-string\\">\\"4\\"</span>&gt;</span>A2<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"33%\\"</span>&gt;</span>A3<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">colspan</span>=<span class=\\"hljs-string\\">\\"3\\"</span>&gt;</span>B1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span>&gt;</span>C1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span>&gt;</span>C3<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span>&gt;</span>D1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span>&gt;</span>D3<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">table</span>&gt;</span>
 </code></pre>
 <p>Tam kde by měla být buňka <strong>B2</strong> vzniká krásné okénko do Narnie, které je společné jako pro druhý sloupec, tak pro druhý řádek.</p>
 <p>Důsledkem neopatrného zacházení se spojováním sloupců může být výsledek viditelný ve druhé ukázce:</p>
@@ -190,12 +190,12 @@ Tabulka se v HTML tvoří párovým tagem <code>&lt;table&gt;&lt;/table&gt;</cod
 
 <p>Za domácí úkol se pokuste napsat alespoň jednu podobnou tabulku bez nahlédnutí do zdrojového kódu... :-)</p>
 <p>A poslední perlička vyvracející tvrzení, že párový element <code>&lt;tr&gt;&lt;/tr&gt;</code> vytváří v tabulce novou řádku. Podívejte se na následující kód. Hádám, že už je vám jasné co se stane.</p>
-<pre><code class=\\"lang-html\\">&lt;table border=&quot;1&quot; cellpadding=&quot;6&quot; cellspacing=&quot;2&quot; width=&quot;400&quot;&gt;
-    &lt;tr&gt;&lt;td width=&quot;33%&quot; rowspan=&quot;4&quot;&gt;Řádka_1&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td width=&quot;33%&quot; rowspan=&quot;3&quot;&gt;Řádka_1&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td width=&quot;33%&quot; rowspan=&quot;2&quot;&gt;Řádka_1&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td width=&quot;33%&quot; rowspan=&quot;1&quot;&gt;Řádka_1&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">table</span> <span class=\\"hljs-attr\\">border</span>=<span class=\\"hljs-string\\">\\"1\\"</span> <span class=\\"hljs-attr\\">cellpadding</span>=<span class=\\"hljs-string\\">\\"6\\"</span> <span class=\\"hljs-attr\\">cellspacing</span>=<span class=\\"hljs-string\\">\\"2\\"</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"400\\"</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"33%\\"</span> <span class=\\"hljs-attr\\">rowspan</span>=<span class=\\"hljs-string\\">\\"4\\"</span>&gt;</span>Řádka_1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"33%\\"</span> <span class=\\"hljs-attr\\">rowspan</span>=<span class=\\"hljs-string\\">\\"3\\"</span>&gt;</span>Řádka_1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"33%\\"</span> <span class=\\"hljs-attr\\">rowspan</span>=<span class=\\"hljs-string\\">\\"2\\"</span>&gt;</span>Řádka_1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">tr</span>&gt;</span><span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">td</span> <span class=\\"hljs-attr\\">width</span>=<span class=\\"hljs-string\\">\\"33%\\"</span> <span class=\\"hljs-attr\\">rowspan</span>=<span class=\\"hljs-string\\">\\"1\\"</span>&gt;</span>Řádka_1<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">td</span>&gt;</span><span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">tr</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">table</span>&gt;</span>
 </code></pre>
 <p>Výsledek je vidět ve třetí ukázce:</p>
 <table border=\\"1\\" cellpadding=\\"6\\" cellspacing=\\"2\\" width=\\"400\\">

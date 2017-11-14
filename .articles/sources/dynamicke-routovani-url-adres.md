@@ -6,11 +6,11 @@ slug: dynamicke-routovani-url-adres
 A když říkám dynamické, tak tím myslím opravdu kompletně. Jinými slovy to znamená, že chceme jakoukoliv cestu za doménou přeložit na jakýkoliv interní požadavek ([Application\Request](http://api.nette.org/2.3.3/Nette.Application.Request.html)). Kousek routovací tabulky tedy může vypadat následovně:
 
 ```
-/						=> 	Front:Homepage:default
-/neco.html				=> 	Front:Page:default
-/neco-jineho-8			=> 	Front:Page:default(id=56)
-/neco/treba/takoveho	=> 	Front:Page:default(id=96)
-/a/b/c/d/e/f 			=> 	Admin:Dashboard:new
+/                      => Front:Homepage:default
+/neco.html             => Front:Page:default
+/neco-jineho-8         => Front:Page:default(id=56)
+/neco/treba/takoveho   => Front:Page:default(id=96)
+/a/b/c/d/e/f           => Admin:Dashboard:new
 ...
 ```
 

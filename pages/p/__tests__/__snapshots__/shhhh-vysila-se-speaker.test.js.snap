@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Shhhh - vysílá se speaker
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Takové bylo téma celého Webexpa 2016 - shhhh. Nebo alespoň páteční části. Pro ty nejlepší a nejzajímavější řečníky byl totiž připraven velký sál, kam se podle cedulek na dveřích vejde až 2500 lidí. A nápad to byl zcela zajisté skvělý. Ovšem jen do chvíle, než začala první přednáška. V davu lidí totiž existuje efekt, kdy pokud něco říkám a jsem špatně slyšet - začnu mluvit více nahlas. A tak to udělá každý. Takže to byl první den <strong>megašrumec</strong>. A do toho přednášky. Úplně si dovedu představit, že to byla pro přednášející jedna z nejnáročnějších přednášek vůbec. I ze strany posluchače to bylo náročné - dokonce jsem párkrát přestal vnímat přednášku, protože to bylo fakt maso. Nechtělo se mi vracet se do toho sálu zpět na další skvělé přednášky. V sobotu už to bylo relativně ok.</p>

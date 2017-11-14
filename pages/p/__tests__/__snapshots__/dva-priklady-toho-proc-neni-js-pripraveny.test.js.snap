@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Dva příklady toho, proč není JS připravený
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Tento článek nastartoval jeden hloupý tweet. Měl jsem jej na &quot;to do&quot; listu již nějaký čas, ale čekal jsem až to někdo tweetne... (-:</p>
@@ -68,26 +68,26 @@ exports[`renders correctly 1`] = `
 <p>Nebudu řešit jak je hloupý. Neznám totiž žádnou objektivní stupnici kam bych jej mohl zařadit. Pomůže mi však oprášit pár věcí, které mě štvou a třeba se ukáže, že to dělám úplně špatně. Poslední dobou totiž kopu za <a href=\\"http://nodejs.org/\\">Node.js</a> (potažmo <a href=\\"http://expressjs.com/\\">Express.js</a>), C i <a href=\\"http://nette.org/\\">Nette</a> tábor. Vše v jednom projektu. Nicméně jsem odkojen na Nette a tak některé věci řeším v jiném frameworku téměř až se slzou v oku.</p>
 <p>Rád bych upozornil na to, že nejsem žádný superprogramátor, takže je skutečně možné, že k problému přistupuji špatně. Proto bych byl rád za rozumné podněty a připomínky, nikoliv osobní výstřednosti v komentářích...</p>
 <h2 id=\\"1-odkazy\\">1. Odkazy <a href=\\"#1-odkazy\\">#</a></h2><p>A hned pěkně z ostra. Jak jsem již zmínil, jsem odkojen na Nette a proto jsem náležitě rozmazlen. Ale rozmazlen v dobrém slova smyslu. Považuji totiž framework za věc, která mi má pomoci. Nikoliv házet klacky pod nohy. Jednou z takových věcí je tvorba odkazů. Jak by to mělo být správně? Přesně tak jak je to v Nette, čili je zapotřebí najký systém, který mi umožní stavět odkazy a zároveň mi umožní je kdykoliv změnit bez zásahu do šablon. Jak je tomu v takovém Exresss.js, webovém frameworku pro Node.js? V Express.js je defaultně šablonovací systém <a href=\\"http://jade-lang.com/\\">Jade</a>. Nemluvě o tom, jaký je to nešťastný systém, odkazy se v něm vytvářejí zhruba takto:</p>
-<pre><code class=\\"lang-html\\">a(href=&#39;/&#39;) Home
+<pre><code class=\\"hljs lang-html\\">a(href=&#39;/&#39;) Home
 a(href=&#39;/about&#39;) About
 </code></pre>
 <p>Už asi tušíte kam mířím a proč je to podle mého soudu fatální. Takový hard-code odkazů je totiž perfektně pomalá cesta do blázince. Ve skutečnosti je však mnohem větší anekdota označování aktivních odkazů. Podívejte se na <a href=\\"http://stackoverflow.com/questions/10713923/node-js-jade-express-how-can-i-create-a-navigation-that-will-set-class-acti\\">6 WTF rad</a>, jak tento triviální problém vyřešit. Celý princip spočívá v tom použít hard-code odkazů na více místech v šabloně:</p>
-<pre><code class=\\"lang-html\\">ul.nav.navbar-nav
+<pre><code class=\\"hljs lang-html\\">ul.nav.navbar-nav
     li(class=path == &#39;/&#39; ? &#39;active&#39; : undefined)
         a(href=&#39;/&#39;) Home
     li(class=path == &#39;/about&#39; ? &#39;active&#39; : undefined)
         a(href=&#39;/about&#39;) About
 </code></pre>
 <p>Kde se bere <code>path</code>? Ten si musíte předat v routeru, např.:</p>
-<pre><code class=\\"lang-js\\">router.get(&#39;/&#39;, function (req, res) {
-    res.render(&#39;homepage&#39;, {
-        path: &#39;/&#39;
+<pre><code class=\\"hljs lang-js\\">router.get(<span class=\\"hljs-string\\">'/'</span>, <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\">req, res</span>) </span>{
+    res.render(<span class=\\"hljs-string\\">'homepage'</span>, {
+        <span class=\\"hljs-attr\\">path</span>: <span class=\\"hljs-string\\">'/'</span>
     });
 });
 </code></pre>
 <p>Tak to máme celkem 4 místa kde je to pěkně natvrďáka. Proč ne? <strong>Proč jo?</strong> Jistě, existuje možnost jak si to naprogramovat lépe, jinak, znova. Jen si říkám, kde se stala chyba a proč to framework nezvládá nějak lépe?</p>
 <h2 id=\\"2-formul-e\\">2. Formuláře <a href=\\"#2-formul-e\\">#</a></h2><p>Jedna z věcí, která se v tomto světě řeší poněkud laxně jsou formuláře. Na to nejsem zvyklý a trošku mě to děsí. Funguje to zhruba tak, že vytvoříte v šabloně formulář:</p>
-<pre><code class=\\"lang-html\\">form(id=&#39;save-form&#39;, method=&#39;POST&#39;, action=&#39;/save&#39;)
+<pre><code class=\\"hljs lang-html\\">form(id=&#39;save-form&#39;, method=&#39;POST&#39;, action=&#39;/save&#39;)
     .form-group
         label(for=&#39;xxx&#39;) XXX
         input(type=&#39;text&#39;, name=&#39;xxx&#39;, class=&#39;form-control&#39;, id=&#39;xxx&#39;, placeholder=&#39;xxx&#39;, required)
@@ -95,10 +95,10 @@ a(href=&#39;/about&#39;) About
         button.btn.btn-default Odeslat
 </code></pre>
 <p>A následně se napíše router pro zpracování dat:</p>
-<pre><code class=\\"lang-js\\">router.post(&#39;/save&#39;, function (req, res) {
-    console.log(req.body.xxx); // &lt;&lt;&lt; !
-    res.render(&#39;save&#39;, {
-        path: &#39;/save&#39;
+<pre><code class=\\"hljs lang-js\\">router.post(<span class=\\"hljs-string\\">'/save'</span>, <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\">req, res</span>) </span>{
+    <span class=\\"hljs-built_in\\">console</span>.log(req.body.xxx); <span class=\\"hljs-comment\\">// &lt;&lt;&lt; !</span>
+    res.render(<span class=\\"hljs-string\\">'save'</span>, {
+        <span class=\\"hljs-attr\\">path</span>: <span class=\\"hljs-string\\">'/save'</span>
     });
 });
 </code></pre>

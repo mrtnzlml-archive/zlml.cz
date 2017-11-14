@@ -53,187 +53,187 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Použití Texy s FSHL
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Někdy (hodně dávno) jsem kdesi našel poměrně hezký a jednoduchý postup jak implementovat <a href=\\"http://texy.info/\\">Texy .{target:_blank}</a> s použitím <a href=\\"http://fshl.kukulich.cz/\\">FSHL .{target:_blank}</a> na webu. Rád bych se zde podělil o postup, který používám již na řadě projektů, které potřebují zvýrazňování syntaxe.</p>
 <h2 id=\\"pou-it-samotn-ho-texy\\">Použití samotného Texy <a href=\\"#pou-it-samotn-ho-texy\\">#</a></h2><p>Běžně by se Texy zaregistrovalo do šablony jako helper:</p>
-<pre><code class=\\"lang-php\\">/**
- * @param null $class
- * @return Nette\\\\Templating\\\\ITemplate
- */
-protected function createTemplate($class = NULL) {
-    $template = parent::createTemplate($class);
-    $texy = new \\\\Texy();
-    $template-&gt;registerHelper(&#39;texy&#39;, callback($texy, &#39;process&#39;));
-    return $template;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-comment\\">/**
+ * <span class=\\"hljs-doctag\\">@param</span> null $class
+ * <span class=\\"hljs-doctag\\">@return</span> Nette\\\\Templating\\\\ITemplate
+ */</span>
+<span class=\\"hljs-keyword\\">protected</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">createTemplate</span><span class=\\"hljs-params\\">($class = NULL)</span> </span>{
+    $template = <span class=\\"hljs-keyword\\">parent</span>::createTemplate($class);
+    $texy = <span class=\\"hljs-keyword\\">new</span> \\\\Texy();
+    $template-&gt;registerHelper(<span class=\\"hljs-string\\">'texy'</span>, callback($texy, <span class=\\"hljs-string\\">'process'</span>));
+    <span class=\\"hljs-keyword\\">return</span> $template;
 }
 </code></pre>
 <p>Tento helper lze i nadále používat. Hodě se například pokud je potřeba Texy prvky naopak escapovat:</p>
-<pre><code>{$post-&gt;body|texy|striptags}
+<pre><code class=\\"hljs\\">{$post-&gt;body|texy|striptags}
 </code></pre><h2 id=\\"pou-it-texy-s-fshl\\">Použití Texy s FSHL <a href=\\"#pou-it-texy-s-fshl\\">#</a></h2><p>Samotné texy je sice geniální nástroj. Pro samotné zpracování se zvýrazněním se však hodí funkcionalitu Texy rozšířit, jelikož je potřeba zpracovat vstupující text a ty správná místa prohnat také tím správným lexxerem ve FSHL. K tomu dobře poslouží následující třída, která dědí právě od Texy:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-class fshlTexy extends Texy {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">fshlTexy</span> <span class=\\"hljs-keyword\\">extends</span> <span class=\\"hljs-title\\">Texy</span> </span>{
 
-    public function blockHandler($invocation, $blocktype, $content, $lang, $modifier) {
-        if ($blocktype !== &#39;block/code&#39;) {
-            return $invocation-&gt;proceed(); //vstup se nebude zpracovavat
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">blockHandler</span><span class=\\"hljs-params\\">($invocation, $blocktype, $content, $lang, $modifier)</span> </span>{
+        <span class=\\"hljs-keyword\\">if</span> ($blocktype !== <span class=\\"hljs-string\\">'block/code'</span>) {
+            <span class=\\"hljs-keyword\\">return</span> $invocation-&gt;proceed(); <span class=\\"hljs-comment\\">//vstup se nebude zpracovavat</span>
         }
 
-        $highlighter = new \\\\FSHL\\\\Highlighter(
-            new \\\\FSHL\\\\Output\\\\Html(),
+        $highlighter = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Highlighter(
+            <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Output\\\\Html(),
             \\\\FSHL\\\\Highlighter::OPTION_TAB_INDENT | \\\\FSHL\\\\Highlighter::OPTION_LINE_COUNTER
         );
 
         $texy = $invocation-&gt;getTexy();
         $content = Texy::outdent($content);
 
-        //Set correct lexer:
-        switch(strtoupper($lang)) {
-            case &#39;CPP&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Cpp(); break;
-            case &#39;CSS&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Css(); break;
-            case &#39;HTML&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Html(); break;
-            case &#39;JAVA&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Java(); break;
-            case &#39;JAVASCRIPT&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Javascript(); break;
-            case &#39;NEON&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Neon(); break;
-            case &#39;PHP&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Php(); break;
-            case &#39;PYTHON&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Python(); break;
-            case &#39;SQL&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Sql(); break;
-            case &#39;TEX&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Tex(); break; //WARNING: vlastní výroba!
-            case &#39;TEXY&#39;: $lexer = new \\\\FSHL\\\\Lexer\\\\Texy(); break;
-            default: $lexer = new \\\\FSHL\\\\Lexer\\\\Minimal();
+        <span class=\\"hljs-comment\\">//Set correct lexer:</span>
+        <span class=\\"hljs-keyword\\">switch</span>(strtoupper($lang)) {
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'CPP'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Cpp(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'CSS'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Css(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'HTML'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Html(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'JAVA'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Java(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'JAVASCRIPT'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Javascript(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'NEON'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Neon(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'PHP'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Php(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'PYTHON'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Python(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'SQL'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Sql(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'TEX'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Tex(); <span class=\\"hljs-keyword\\">break</span>; <span class=\\"hljs-comment\\">//WARNING: vlastní výroba!</span>
+            <span class=\\"hljs-keyword\\">case</span> <span class=\\"hljs-string\\">'TEXY'</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Texy(); <span class=\\"hljs-keyword\\">break</span>;
+            <span class=\\"hljs-keyword\\">default</span>: $lexer = <span class=\\"hljs-keyword\\">new</span> \\\\FSHL\\\\Lexer\\\\Minimal();
         }
 
         $content = $highlighter-&gt;highlight($content, $lexer);
         $content = $texy-&gt;protect($content, Texy::CONTENT_BLOCK);
 
-        $elPre = TexyHtml::el(&#39;pre&#39;);
-        if ($modifier) {
+        $elPre = TexyHtml::el(<span class=\\"hljs-string\\">'pre'</span>);
+        <span class=\\"hljs-keyword\\">if</span> ($modifier) {
             $modifier-&gt;decorate($texy, $elPre);
         }
-        $elPre-&gt;attrs[&#39;class&#39;] = strtolower($lang);
+        $elPre-&gt;attrs[<span class=\\"hljs-string\\">'class'</span>] = strtolower($lang);
 
-        $elCode = $elPre-&gt;create(&#39;code&#39;, $content);
+        $elCode = $elPre-&gt;create(<span class=\\"hljs-string\\">'code'</span>, $content);
 
-        return $elPre;
+        <span class=\\"hljs-keyword\\">return</span> $elPre;
     }
 
 }
 </code></pre>
 <p>Tato třída při správném použití zajistí, že se použije ten správný lexer a ještě na úrovni PHP zajistí změnu výstupu. Konkrétně obalí určitá klíčová slova (v závislosti na kontextu) tagem <code>&lt;span&gt;</code> se zvláštní třídou. Toho se následně lze chytit v CSS a HTML výstup obarvit. Použití této třídy například v metodě <code>render*()</code>:</p>
-<pre><code class=\\"lang-php\\">$texy = new \\\\fshlTexy();
-//registrace handleru z nové třídy:
-$texy-&gt;addHandler(&#39;block&#39;, array($texy, &#39;blockHandler&#39;));
-//dále stejně jako klasické použití Texy:
-$texy-&gt;tabWidth = 4;
-$texy-&gt;headingModule-&gt;top = 3; //start at H3
-$this-&gt;template-&gt;body = $texy-&gt;process($post-&gt;body);
+<pre><code class=\\"hljs lang-php\\">$texy = <span class=\\"hljs-keyword\\">new</span> \\\\fshlTexy();
+<span class=\\"hljs-comment\\">//registrace handleru z nové třídy:</span>
+$texy-&gt;addHandler(<span class=\\"hljs-string\\">'block'</span>, <span class=\\"hljs-keyword\\">array</span>($texy, <span class=\\"hljs-string\\">'blockHandler'</span>));
+<span class=\\"hljs-comment\\">//dále stejně jako klasické použití Texy:</span>
+$texy-&gt;tabWidth = <span class=\\"hljs-number\\">4</span>;
+$texy-&gt;headingModule-&gt;top = <span class=\\"hljs-number\\">3</span>; <span class=\\"hljs-comment\\">//start at H3</span>
+<span class=\\"hljs-keyword\\">$this</span>-&gt;template-&gt;body = $texy-&gt;process($post-&gt;body);
 </code></pre>
 <p>Výstup lze pak v Latte lehce podchytit a zobrazit:</p>
-<pre><code>{$body|noescape}
+<pre><code class=\\"hljs\\">{$body|noescape}
 </code></pre><h2 id=\\"barvy-barvy-barvi-ky\\">Barvy, barvy, barvičky <a href=\\"#barvy-barvy-barvi-ky\\">#</a></h2><p>Programově je sice tělo dokumentu vypsáno s tagy <code>&lt;span&gt;</code> s příslušnou třídou. To se však nijak viditelně neprojeví. Celou krásu udělá teprve CSS. Lze použít výchozí hodoty FSHL a vložit je do vlastního souboru stylů:</p>
-<pre><code class=\\"lang-css\\">/* Common */
-.xlang { color: #ff0000; font-weight: bold; }
-.line { color: #888888; background-color: #ffffff; }
+<pre><code class=\\"hljs lang-css\\"><span class=\\"hljs-comment\\">/* Common */</span>
+<span class=\\"hljs-selector-class\\">.xlang</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ff0000</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold; }
+<span class=\\"hljs-selector-class\\">.line</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#888888</span>; <span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#ffffff</span>; }
 
-/* CSS */
-.css-at-rule { color: #004a80; font-weight: bold; }
-.css-tag { color: #004a80; }
-.css-id { color: #7da7d9; font-weight: bold; }
-.css-class { color: #004a80; }
-.css-pseudo { color: #004a80; }
-.css-property { color: #003663; font-weight: bold; }
-.css-value { color: #448ccb; }
-.css-func { color: #448ccb; font-weight: bold; }
-.css-color { color: #0076a3; }
-.css-comment { background-color: #e5f8ff; color: #999999; }
+<span class=\\"hljs-comment\\">/* CSS */</span>
+<span class=\\"hljs-selector-class\\">.css-at-rule</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#004a80</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold; }
+<span class=\\"hljs-selector-class\\">.css-tag</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#004a80</span>; }
+<span class=\\"hljs-selector-class\\">.css-id</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#7da7d9</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold; }
+<span class=\\"hljs-selector-class\\">.css-class</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#004a80</span>; }
+<span class=\\"hljs-selector-class\\">.css-pseudo</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#004a80</span>; }
+<span class=\\"hljs-selector-class\\">.css-property</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#003663</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold; }
+<span class=\\"hljs-selector-class\\">.css-value</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#448ccb</span>; }
+<span class=\\"hljs-selector-class\\">.css-func</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#448ccb</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold; }
+<span class=\\"hljs-selector-class\\">.css-color</span> { <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#0076a3</span>; }
+<span class=\\"hljs-selector-class\\">.css-comment</span> { <span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#e5f8ff</span>; <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#999999</span>; }
 
-/* CPP */
-.cpp-keywords1 {color: #0000ff; font-weight: bold;}
-.cpp-num {color: #ff0000;}
-.cpp-quote {color: #a52a2a; font-weight: bold;}
-.cpp-comment {color: #00ff00;}
-.cpp-preproc {color: #c0c0c0;}
+<span class=\\"hljs-comment\\">/* CPP */</span>
+<span class=\\"hljs-selector-class\\">.cpp-keywords1</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#0000ff</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.cpp-num</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ff0000</span>;}
+<span class=\\"hljs-selector-class\\">.cpp-quote</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#a52a2a</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.cpp-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#00ff00</span>;}
+<span class=\\"hljs-selector-class\\">.cpp-preproc</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#c0c0c0</span>;}
 
-/* HTML */
-.html-tag {color: #598527; font-weight: bold;}
-.html-tagin {color: #89a315}
-.html-quote {color: #598527; font-weight: bold;}
-.html-comment {color: #999999; background-color: #f1fae4;}
-.html-entity {color: #89a315;}
+<span class=\\"hljs-comment\\">/* HTML */</span>
+<span class=\\"hljs-selector-class\\">.html-tag</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#598527</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.html-tagin</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#89a315</span>}
+<span class=\\"hljs-selector-class\\">.html-quote</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#598527</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.html-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#999999</span>; <span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#f1fae4</span>;}
+<span class=\\"hljs-selector-class\\">.html-entity</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#89a315</span>;}
 
-/* Java */
-.java-keywords1 {color: #0000ff; font-weight: bold;}
-.java-num {color: #ff0000;}
-.java-quote {color: #a52a2a; font-weight: bold;}
-.java-comment {color: #009900;}
-.java-preproc {color: #c0c0c0;}
+<span class=\\"hljs-comment\\">/* Java */</span>
+<span class=\\"hljs-selector-class\\">.java-keywords1</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#0000ff</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.java-num</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ff0000</span>;}
+<span class=\\"hljs-selector-class\\">.java-quote</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#a52a2a</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.java-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#009900</span>;}
+<span class=\\"hljs-selector-class\\">.java-preproc</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#c0c0c0</span>;}
 
-/* Javascript */
-.js-out {color: #898993;}
-.js-keywords1 {color: #575757; font-weight: bold;}
-.js-num {color: #575757;}
-.js-quote {color: #575757; font-weight: bold;}
-.js-comment {color: #898993; background-color: #f4f4f4;}
+<span class=\\"hljs-comment\\">/* Javascript */</span>
+<span class=\\"hljs-selector-class\\">.js-out</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#898993</span>;}
+<span class=\\"hljs-selector-class\\">.js-keywords1</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#575757</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.js-num</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#575757</span>;}
+<span class=\\"hljs-selector-class\\">.js-quote</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#575757</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.js-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#898993</span>; <span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#f4f4f4</span>;}
 
-/* Neon */
-.neon-section {color: #598527;}
-.neon-sep {color: #ff0000;}
-.neon-key {color: #0000ff;}
-.neon-comment {color: #999999;}
-.neon-value {color: #000000;}
-.neon-quote {color: #884433;}
-.neon-num {color: #448ccb;}
-.neon-var {color: #ffaa00;}
-.neon-ref {color: #884433;}
+<span class=\\"hljs-comment\\">/* Neon */</span>
+<span class=\\"hljs-selector-class\\">.neon-section</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#598527</span>;}
+<span class=\\"hljs-selector-class\\">.neon-sep</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ff0000</span>;}
+<span class=\\"hljs-selector-class\\">.neon-key</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#0000ff</span>;}
+<span class=\\"hljs-selector-class\\">.neon-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#999999</span>;}
+<span class=\\"hljs-selector-class\\">.neon-value</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#000000</span>;}
+<span class=\\"hljs-selector-class\\">.neon-quote</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#884433</span>;}
+<span class=\\"hljs-selector-class\\">.neon-num</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#448ccb</span>;}
+<span class=\\"hljs-selector-class\\">.neon-var</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ffaa00</span>;}
+<span class=\\"hljs-selector-class\\">.neon-ref</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#884433</span>;}
 
-/* PHP */
-.php-keyword1 {color: #dd2244; font-weight: bold;}
-.php-keyword2 {color: #dd2244;}
-.php-var {color: #ffaa00; font-weight: bold;}
-.php-num {color: #ff0000;}
-.php-quote {color: #884433; font-weight: bold;}
-.php-comment {color: #999999; background-color: #ffffee;}
+<span class=\\"hljs-comment\\">/* PHP */</span>
+<span class=\\"hljs-selector-class\\">.php-keyword1</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#dd2244</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.php-keyword2</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#dd2244</span>;}
+<span class=\\"hljs-selector-class\\">.php-var</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ffaa00</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.php-num</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ff0000</span>;}
+<span class=\\"hljs-selector-class\\">.php-quote</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#884433</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.php-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#999999</span>; <span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#ffffee</span>;}
 
-/* Python */
-.py-keyword1 {color: #0033cc; font-weight: bold;}
-.py-keyword2 {color: #ce3333; font-weight: bold;}
-.py-keyword3 {color: #660066; font-weight: bold;}
-.py-num {color: #993300;}
-.py-docstring {color: #e86a18;}
-.py-quote {color: #878787; font-weight: bold;}
-.py-comment {color: #009900; font-style: italic;}
+<span class=\\"hljs-comment\\">/* Python */</span>
+<span class=\\"hljs-selector-class\\">.py-keyword1</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#0033cc</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.py-keyword2</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ce3333</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.py-keyword3</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#660066</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.py-num</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#993300</span>;}
+<span class=\\"hljs-selector-class\\">.py-docstring</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#e86a18</span>;}
+<span class=\\"hljs-selector-class\\">.py-quote</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#878787</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.py-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#009900</span>; <span class=\\"hljs-attribute\\">font-style</span>: italic;}
 
-/* SQL */
-.sql-keyword1 {color: #dd0000; font-weight: bold;}
-.sql-keyword2 {color: #dd2222;}
-.sql-keyword3 {color: #0000ff; font-weight: bold;}
-.sql-value {color: #5674b9;}
-.sql-comment {color: #ffaa00;}
-.sql-num {color: #ff0000;}
-.sql-option {color: #004a80; font-weight: bold;}
+<span class=\\"hljs-comment\\">/* SQL */</span>
+<span class=\\"hljs-selector-class\\">.sql-keyword1</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#dd0000</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.sql-keyword2</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#dd2222</span>;}
+<span class=\\"hljs-selector-class\\">.sql-keyword3</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#0000ff</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.sql-value</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#5674b9</span>;}
+<span class=\\"hljs-selector-class\\">.sql-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ffaa00</span>;}
+<span class=\\"hljs-selector-class\\">.sql-num</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ff0000</span>;}
+<span class=\\"hljs-selector-class\\">.sql-option</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#004a80</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
 
-/* Tex */
-.tex-func {color: #ffaa00; font-weight: bold;}
-.tex-comment {color: #999999; background-color: #ffffee;}
-.tex-attr1 {color: #dd2222;}
-.tex-attr2 {color: #0000ff; font-weight: bold;}
-.tex-math {color: #00AA00; font-weight: bold;}
+<span class=\\"hljs-comment\\">/* Tex */</span>
+<span class=\\"hljs-selector-class\\">.tex-func</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ffaa00</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.tex-comment</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#999999</span>; <span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#ffffee</span>;}
+<span class=\\"hljs-selector-class\\">.tex-attr1</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#dd2222</span>;}
+<span class=\\"hljs-selector-class\\">.tex-attr2</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#0000ff</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.tex-math</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#00AA00</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
 
-/* Texy */
-.texy-hlead {color: #4444bb; font-weight: bold;}
-.texy-hbody {background-color: #eeeeff; color: #4444bb;}
-.texy-hr {color: #bb4444;}
-.texy-code {color: #666666;}
-.texy-html {color: #66aa66;}
-.texy-text {color: #6666aa;}
-.texy-err {background-color: #ff0000; color: #ffffff;}
+<span class=\\"hljs-comment\\">/* Texy */</span>
+<span class=\\"hljs-selector-class\\">.texy-hlead</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#4444bb</span>; <span class=\\"hljs-attribute\\">font-weight</span>: bold;}
+<span class=\\"hljs-selector-class\\">.texy-hbody</span> {<span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#eeeeff</span>; <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#4444bb</span>;}
+<span class=\\"hljs-selector-class\\">.texy-hr</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#bb4444</span>;}
+<span class=\\"hljs-selector-class\\">.texy-code</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#666666</span>;}
+<span class=\\"hljs-selector-class\\">.texy-html</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#66aa66</span>;}
+<span class=\\"hljs-selector-class\\">.texy-text</span> {<span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#6666aa</span>;}
+<span class=\\"hljs-selector-class\\">.texy-err</span> {<span class=\\"hljs-attribute\\">background-color</span>: <span class=\\"hljs-number\\">#ff0000</span>; <span class=\\"hljs-attribute\\">color</span>: <span class=\\"hljs-number\\">#ffffff</span>;}
 </code></pre>
 <p>Celá krása tohoto řešení spočívá v tom, že nepoužívám žádné javascriptové knihovny, ale vše se provede pěkně na úrovni PHP a bude to tedy fungovat vždy, stejně tak jako Texy... (-:</p>
 ",

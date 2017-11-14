@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Using fulltext searching with InnoDB
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Sometimes is quite useful to use InnoDB engine. 
@@ -69,47 +69,47 @@ Let me show you how to search via fulltext on InnoDB tables.</p>
 <p>In fact it&#39;s not possible to use fulltext index on InnoDB tables, 
 but there is possible workaround. At first you need a classic InnoDB structure. 
 For example database of  blog:</p>
-<pre><code class=\\"lang-sql\\">SET NAMES utf8;
-SET foreign_key_checks = 0;
-SET time_zone = &#39;SYSTEM&#39;;
-SET sql_mode = &#39;NO_AUTO_VALUE_ON_ZERO&#39;;
+<pre><code class=\\"hljs lang-sql\\"><span class=\\"hljs-keyword\\">SET</span> <span class=\\"hljs-keyword\\">NAMES</span> utf8;
+<span class=\\"hljs-keyword\\">SET</span> foreign_key_checks = <span class=\\"hljs-number\\">0</span>;
+<span class=\\"hljs-keyword\\">SET</span> <span class=\\"hljs-keyword\\">time_zone</span> = <span class=\\"hljs-string\\">'SYSTEM'</span>;
+<span class=\\"hljs-keyword\\">SET</span> sql_mode = <span class=\\"hljs-string\\">'NO_AUTO_VALUE_ON_ZERO'</span>;
 
-DROP TABLE IF EXISTS \`posts\`;
-CREATE TABLE \`posts\` (
-  \`id\` int(11) NOT NULL AUTO_INCREMENT,
-  \`title\` text NOT NULL,
-  \`body\` text NOT NULL,
-  \`date\` datetime NOT NULL,
-  \`release_date\` datetime NOT NULL,
-  PRIMARY KEY (\`id\`),
-  UNIQUE KEY \`title_3\` (\`title\`(200))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+<span class=\\"hljs-keyword\\">DROP</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-keyword\\">IF</span> <span class=\\"hljs-keyword\\">EXISTS</span> <span class=\\"hljs-string\\">\`posts\`</span>;
+<span class=\\"hljs-keyword\\">CREATE</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-string\\">\`posts\`</span> (
+  <span class=\\"hljs-string\\">\`id\`</span> <span class=\\"hljs-built_in\\">int</span>(<span class=\\"hljs-number\\">11</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span> AUTO_INCREMENT,
+  <span class=\\"hljs-string\\">\`title\`</span> <span class=\\"hljs-built_in\\">text</span> <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  <span class=\\"hljs-string\\">\`body\`</span> <span class=\\"hljs-built_in\\">text</span> <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  <span class=\\"hljs-string\\">\`date\`</span> datetime <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  <span class=\\"hljs-string\\">\`release_date\`</span> datetime <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  PRIMARY <span class=\\"hljs-keyword\\">KEY</span> (<span class=\\"hljs-string\\">\`id\`</span>),
+  <span class=\\"hljs-keyword\\">UNIQUE</span> <span class=\\"hljs-keyword\\">KEY</span> <span class=\\"hljs-string\\">\`title_3\`</span> (<span class=\\"hljs-string\\">\`title\`</span>(<span class=\\"hljs-number\\">200</span>))
+) <span class=\\"hljs-keyword\\">ENGINE</span>=<span class=\\"hljs-keyword\\">InnoDB</span> <span class=\\"hljs-keyword\\">DEFAULT</span> <span class=\\"hljs-keyword\\">CHARSET</span>=utf8;
 
-DROP TABLE IF EXISTS \`tags\`;
-CREATE TABLE \`tags\` (
-  \`id\` int(11) NOT NULL AUTO_INCREMENT,
-  \`name\` varchar(50) NOT NULL,
-  \`color\` varchar(6) NOT NULL,
-  PRIMARY KEY (\`id\`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+<span class=\\"hljs-keyword\\">DROP</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-keyword\\">IF</span> <span class=\\"hljs-keyword\\">EXISTS</span> <span class=\\"hljs-string\\">\`tags\`</span>;
+<span class=\\"hljs-keyword\\">CREATE</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-string\\">\`tags\`</span> (
+  <span class=\\"hljs-string\\">\`id\`</span> <span class=\\"hljs-built_in\\">int</span>(<span class=\\"hljs-number\\">11</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span> AUTO_INCREMENT,
+  <span class=\\"hljs-string\\">\`name\`</span> <span class=\\"hljs-built_in\\">varchar</span>(<span class=\\"hljs-number\\">50</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  <span class=\\"hljs-string\\">\`color\`</span> <span class=\\"hljs-built_in\\">varchar</span>(<span class=\\"hljs-number\\">6</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  PRIMARY <span class=\\"hljs-keyword\\">KEY</span> (<span class=\\"hljs-string\\">\`id\`</span>)
+) <span class=\\"hljs-keyword\\">ENGINE</span>=<span class=\\"hljs-keyword\\">InnoDB</span> <span class=\\"hljs-keyword\\">DEFAULT</span> <span class=\\"hljs-keyword\\">CHARSET</span>=utf8;
 
-DROP TABLE IF EXISTS \`posts_tags\`;
-CREATE TABLE \`posts_tags\` (
-  \`id\` int(11) NOT NULL AUTO_INCREMENT,
-  \`tag_id\` int(11) NOT NULL,
-  \`post_id\` int(11) NOT NULL,
-  PRIMARY KEY (\`id\`),
-  KEY \`tag_id\` (\`tag_id\`),
-  KEY \`post_id\` (\`post_id\`),
-  CONSTRAINT \`posts_tags_ibfk_1\` FOREIGN KEY (\`tag_id\`) REFERENCES \`tags\` (\`id\`),
-  CONSTRAINT \`posts_tags_ibfk_2\` FOREIGN KEY (\`post_id\`) REFERENCES \`posts\` (\`id\`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+<span class=\\"hljs-keyword\\">DROP</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-keyword\\">IF</span> <span class=\\"hljs-keyword\\">EXISTS</span> <span class=\\"hljs-string\\">\`posts_tags\`</span>;
+<span class=\\"hljs-keyword\\">CREATE</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-string\\">\`posts_tags\`</span> (
+  <span class=\\"hljs-string\\">\`id\`</span> <span class=\\"hljs-built_in\\">int</span>(<span class=\\"hljs-number\\">11</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span> AUTO_INCREMENT,
+  <span class=\\"hljs-string\\">\`tag_id\`</span> <span class=\\"hljs-built_in\\">int</span>(<span class=\\"hljs-number\\">11</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  <span class=\\"hljs-string\\">\`post_id\`</span> <span class=\\"hljs-built_in\\">int</span>(<span class=\\"hljs-number\\">11</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  PRIMARY <span class=\\"hljs-keyword\\">KEY</span> (<span class=\\"hljs-string\\">\`id\`</span>),
+  <span class=\\"hljs-keyword\\">KEY</span> <span class=\\"hljs-string\\">\`tag_id\`</span> (<span class=\\"hljs-string\\">\`tag_id\`</span>),
+  <span class=\\"hljs-keyword\\">KEY</span> <span class=\\"hljs-string\\">\`post_id\`</span> (<span class=\\"hljs-string\\">\`post_id\`</span>),
+  <span class=\\"hljs-keyword\\">CONSTRAINT</span> <span class=\\"hljs-string\\">\`posts_tags_ibfk_1\`</span> FOREIGN <span class=\\"hljs-keyword\\">KEY</span> (<span class=\\"hljs-string\\">\`tag_id\`</span>) <span class=\\"hljs-keyword\\">REFERENCES</span> <span class=\\"hljs-string\\">\`tags\`</span> (<span class=\\"hljs-string\\">\`id\`</span>),
+  <span class=\\"hljs-keyword\\">CONSTRAINT</span> <span class=\\"hljs-string\\">\`posts_tags_ibfk_2\`</span> FOREIGN <span class=\\"hljs-keyword\\">KEY</span> (<span class=\\"hljs-string\\">\`post_id\`</span>) <span class=\\"hljs-keyword\\">REFERENCES</span> <span class=\\"hljs-string\\">\`posts\`</span> (<span class=\\"hljs-string\\">\`id\`</span>)
+) <span class=\\"hljs-keyword\\">ENGINE</span>=<span class=\\"hljs-keyword\\">InnoDB</span> <span class=\\"hljs-keyword\\">DEFAULT</span> <span class=\\"hljs-keyword\\">CHARSET</span>=utf8;
 </code></pre>
 <p>Now we have pretty simple database structure with InnoDB tables with foreign keys. 
 It would be nice to be able search on database table <strong>posts</strong> using fulltext search:</p>
-<pre><code class=\\"lang-sql\\">SELECT *
-FROM posts
-WHERE MATCH(title, body) AGAINST (&#39;something&#39; IN BOOLEAN MODE);
+<pre><code class=\\"hljs lang-sql\\"><span class=\\"hljs-keyword\\">SELECT</span> *
+<span class=\\"hljs-keyword\\">FROM</span> posts
+<span class=\\"hljs-keyword\\">WHERE</span> <span class=\\"hljs-keyword\\">MATCH</span>(title, <span class=\\"hljs-keyword\\">body</span>) AGAINST (<span class=\\"hljs-string\\">'something'</span> <span class=\\"hljs-keyword\\">IN</span> <span class=\\"hljs-built_in\\">BOOLEAN</span> <span class=\\"hljs-keyword\\">MODE</span>);
 </code></pre>
 <p>But it is not possible. It returns something like:</p>
 <blockquote>
@@ -117,39 +117,39 @@ WHERE MATCH(title, body) AGAINST (&#39;something&#39; IN BOOLEAN MODE);
 </blockquote>
 <p>Let&#39;s create another one table with triggers and fulltext indexes. 
 We need to create mirror table. For example:</p>
-<pre><code class=\\"lang-sql\\">DROP TABLE IF EXISTS \`mirror_posts\`;
-CREATE TABLE \`mirror_posts\` (
-  \`id\` int(11) NOT NULL AUTO_INCREMENT,
-  \`title\` text NOT NULL,
-  \`body\` text NOT NULL,
-  PRIMARY KEY (\`id\`),
-  FULLTEXT KEY \`title_body\` (\`title\`,\`body\`),
-  FULLTEXT KEY \`title\` (\`title\`),
-  FULLTEXT KEY \`body\` (\`body\`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+<pre><code class=\\"hljs lang-sql\\"><span class=\\"hljs-keyword\\">DROP</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-keyword\\">IF</span> <span class=\\"hljs-keyword\\">EXISTS</span> <span class=\\"hljs-string\\">\`mirror_posts\`</span>;
+<span class=\\"hljs-keyword\\">CREATE</span> <span class=\\"hljs-keyword\\">TABLE</span> <span class=\\"hljs-string\\">\`mirror_posts\`</span> (
+  <span class=\\"hljs-string\\">\`id\`</span> <span class=\\"hljs-built_in\\">int</span>(<span class=\\"hljs-number\\">11</span>) <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span> AUTO_INCREMENT,
+  <span class=\\"hljs-string\\">\`title\`</span> <span class=\\"hljs-built_in\\">text</span> <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  <span class=\\"hljs-string\\">\`body\`</span> <span class=\\"hljs-built_in\\">text</span> <span class=\\"hljs-keyword\\">NOT</span> <span class=\\"hljs-literal\\">NULL</span>,
+  PRIMARY <span class=\\"hljs-keyword\\">KEY</span> (<span class=\\"hljs-string\\">\`id\`</span>),
+  FULLTEXT <span class=\\"hljs-keyword\\">KEY</span> <span class=\\"hljs-string\\">\`title_body\`</span> (<span class=\\"hljs-string\\">\`title\`</span>,<span class=\\"hljs-string\\">\`body\`</span>),
+  FULLTEXT <span class=\\"hljs-keyword\\">KEY</span> <span class=\\"hljs-string\\">\`title\`</span> (<span class=\\"hljs-string\\">\`title\`</span>),
+  FULLTEXT <span class=\\"hljs-keyword\\">KEY</span> <span class=\\"hljs-string\\">\`body\`</span> (<span class=\\"hljs-string\\">\`body\`</span>)
+) <span class=\\"hljs-keyword\\">ENGINE</span>=MyISAM <span class=\\"hljs-keyword\\">DEFAULT</span> <span class=\\"hljs-keyword\\">CHARSET</span>=utf8;
 </code></pre>
 <p>And than we need to create triggers:</p>
-<pre><code class=\\"lang-sql\\">DELIMITER ;;
+<pre><code class=\\"hljs lang-sql\\">DELIMITER ;;
 
-CREATE TRIGGER \`insert_posts\` AFTER INSERT ON \`posts\` FOR EACH ROW
-INSERT INTO mirror_posts VALUES (NEW.id, NEW.title, NEW.body);;
+<span class=\\"hljs-keyword\\">CREATE</span> <span class=\\"hljs-keyword\\">TRIGGER</span> <span class=\\"hljs-string\\">\`insert_posts\`</span> <span class=\\"hljs-keyword\\">AFTER</span> <span class=\\"hljs-keyword\\">INSERT</span> <span class=\\"hljs-keyword\\">ON</span> <span class=\\"hljs-string\\">\`posts\`</span> <span class=\\"hljs-keyword\\">FOR</span> <span class=\\"hljs-keyword\\">EACH</span> <span class=\\"hljs-keyword\\">ROW</span>
+<span class=\\"hljs-keyword\\">INSERT</span> <span class=\\"hljs-keyword\\">INTO</span> mirror_posts <span class=\\"hljs-keyword\\">VALUES</span> (NEW.id, NEW.title, NEW.body);;
 
-CREATE TRIGGER \`update_posts\` AFTER UPDATE ON \`posts\` FOR EACH ROW
-UPDATE mirror_posts SET
-    id = NEW.id,
+<span class=\\"hljs-keyword\\">CREATE</span> <span class=\\"hljs-keyword\\">TRIGGER</span> <span class=\\"hljs-string\\">\`update_posts\`</span> <span class=\\"hljs-keyword\\">AFTER</span> <span class=\\"hljs-keyword\\">UPDATE</span> <span class=\\"hljs-keyword\\">ON</span> <span class=\\"hljs-string\\">\`posts\`</span> <span class=\\"hljs-keyword\\">FOR</span> <span class=\\"hljs-keyword\\">EACH</span> <span class=\\"hljs-keyword\\">ROW</span>
+<span class=\\"hljs-keyword\\">UPDATE</span> mirror_posts <span class=\\"hljs-keyword\\">SET</span>
+    <span class=\\"hljs-keyword\\">id</span> = NEW.id,
     title = NEW.title,
-    body = NEW.body
-WHERE id = OLD.id;;
+    <span class=\\"hljs-keyword\\">body</span> = NEW.body
+<span class=\\"hljs-keyword\\">WHERE</span> <span class=\\"hljs-keyword\\">id</span> = OLD.id;;
 
-CREATE TRIGGER \`delete_posts\` AFTER DELETE ON \`posts\` FOR EACH ROW
-DELETE FROM mirror_posts WHERE id = OLD.id;;
+<span class=\\"hljs-keyword\\">CREATE</span> <span class=\\"hljs-keyword\\">TRIGGER</span> <span class=\\"hljs-string\\">\`delete_posts\`</span> <span class=\\"hljs-keyword\\">AFTER</span> <span class=\\"hljs-keyword\\">DELETE</span> <span class=\\"hljs-keyword\\">ON</span> <span class=\\"hljs-string\\">\`posts\`</span> <span class=\\"hljs-keyword\\">FOR</span> <span class=\\"hljs-keyword\\">EACH</span> <span class=\\"hljs-keyword\\">ROW</span>
+<span class=\\"hljs-keyword\\">DELETE</span> <span class=\\"hljs-keyword\\">FROM</span> mirror_posts <span class=\\"hljs-keyword\\">WHERE</span> <span class=\\"hljs-keyword\\">id</span> = OLD.id;;
 </code></pre>
 <p>It means, that we copy all of events and data from table <strong>posts</strong> to the table <strong>mirror_posts</strong>.
 Finally we can use more complex fulltext search feature:</p>
-<pre><code class=\\"lang-sql\\">SELECT *
-FROM mirror_posts
-WHERE MATCH(title, body) AGAINST (&#39;something&#39; IN BOOLEAN MODE)
-ORDER BY 5 * MATCH(title) AGAINST (&#39;something&#39;) + MATCH(body) AGAINST (&#39;something&#39;) DESC;
+<pre><code class=\\"hljs lang-sql\\"><span class=\\"hljs-keyword\\">SELECT</span> *
+<span class=\\"hljs-keyword\\">FROM</span> mirror_posts
+<span class=\\"hljs-keyword\\">WHERE</span> <span class=\\"hljs-keyword\\">MATCH</span>(title, <span class=\\"hljs-keyword\\">body</span>) AGAINST (<span class=\\"hljs-string\\">'something'</span> <span class=\\"hljs-keyword\\">IN</span> <span class=\\"hljs-built_in\\">BOOLEAN</span> <span class=\\"hljs-keyword\\">MODE</span>)
+<span class=\\"hljs-keyword\\">ORDER</span> <span class=\\"hljs-keyword\\">BY</span> <span class=\\"hljs-number\\">5</span> * <span class=\\"hljs-keyword\\">MATCH</span>(title) AGAINST (<span class=\\"hljs-string\\">'something'</span>) + <span class=\\"hljs-keyword\\">MATCH</span>(<span class=\\"hljs-keyword\\">body</span>) AGAINST (<span class=\\"hljs-string\\">'something'</span>) <span class=\\"hljs-keyword\\">DESC</span>;
 </code></pre>
 <p>As I said, this is just workaround, not solution. 
 Sometimes it&#39;s bad practice, because you need copy of indexed columns. 

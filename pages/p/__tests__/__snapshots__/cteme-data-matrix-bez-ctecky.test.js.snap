@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Čteme Data Matrix bez čtečky
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p><img src=\\"https://zlmlcz-media.s3-eu-west-1.amazonaws.com/1fc11f25-abc2-453e-abb4-adb31d0ccf17/datamatrix.png\\" alt=\\"\\"></p>
@@ -71,11 +71,11 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"hrajeme-si-na-te-ku\\">Hrajeme si na čtečku <a href=\\"#hrajeme-si-na-te-ku\\">#</a></h2><p>Přečíst zprávu v takto teoreticky rozebraném kódu už je otázka chvilky. Najdříve si vytáhneme všechny potřebné části. V tomto případě je zbytečné řešit pátý člen, jelikož se jedná o poslední ukončovací. Jeho hodnota je 129 v desítkové soustavě. Získané útvary jsou vidět na obrázku níže.</p>
 <p><img src=\\"https://zlmlcz-media.s3-eu-west-1.amazonaws.com/76028c59-4e5f-42f4-a411-3452844a30d2/last.png\\" alt=\\"\\"></p>
 <p>Čísla určují pozici bitů v binárním čísle. Po přepsání do binární podoby mají znaky následující hodnoty:</p>
-<pre><code>01100010 01101001 01110000 01101011
+<pre><code class=\\"hljs\\">01100010 01101001 01110000 01101011
 </code></pre><p>V desítkové podobě jsou to tedy čísla:</p>
-<pre><code>98 105 112 107
+<pre><code class=\\"hljs\\">98 105 112 107
 </code></pre><p>Následně je zapotřebí od těchto čísel odečíst jednotku. Abych řekl pravdu, tak jsem po dlouhém uvažování nedokázal přijít s rozumným vysvětlením proč se to tak dělá. Původně mě napadadlo, že je to kvůli lepšímu rozložení bitů ve výsledném obrazci. Stejně tak jako se u QR kódů bity ještě maskují. To ale nedává smysl. Je to jen posunutí o jedna. Nic víc... Nicméně je zřejmé, že spousta věcí je v takovýchto kódech minimálně na zamyšlení. Ale zpět k poslednímu kroku. Z předchozího článku již všichni vědí, že číslo 97 je v ASCII tabulce hodnota znaku <strong>a</strong>, takže po odečtení jednotky a přepsání do čitelné podoby získáváme řešení:</p>
-<pre><code>97 104 111 106
+<pre><code class=\\"hljs\\">97 104 111 106
 a  h   o   j
 </code></pre><p>Tento kód je pro čtení bez čtečky daleko snadnější, komplikuje to jen nezvyklé uspořádání bitů. Jaký další kód bych měl dostat pod drobnohled? Snad to půjde. Mám zde totiž rozpracovaný ještě jiný a nemohu k němu sehnat normu pro nahlédnutí, takže jsem se zatím zasekl... (-:</p>
 ",

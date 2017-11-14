@@ -53,73 +53,73 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Fluent interface a PCRE
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Na následujících řádcích předvedu dvě věci. První je úžasný nápad jak vytvářet regulární výrazy pomocí fluent zápisu (<a href=\\"https://github.com/VerbalExpressions/PHPVerbalExpressions/blob/master/VerbalExpressions.php\\">inspirace .{target:_blank}</a>), což je druhá věc o které bych se rád zmínil.</p>
 <h2 id=\\"regul-rn-v-razy-jsou-peklo\\">Regulární výrazy jsou peklo <a href=\\"#regul-rn-v-razy-jsou-peklo\\">#</a></h2><p>Ačkoliv znám pár lidí, které regulární výrazy umí, je jich opravdu pár. A nikdo z nich o sobě neřekne, že je umí. Následuje příklad velmi triviálního výrazu, který je ovšem dosti špatný, což je dobře, protože se k tomu vrátím později:</p>
-<pre><code>/^(http)(s)?(\\\\:\\\\/\\\\/)(www\\\\.)?([^ ]*)(\\\\.)([^ ]*)(\\\\/)?$/
+<pre><code class=\\"hljs\\">/^(http)(s)?(\\\\:\\\\/\\\\/)(www\\\\.)?([^ ]*)(\\\\.)([^ ]*)(\\\\/)?$/
 </code></pre><p>Tento výraz akceptuje přibližně tvar URL. Je však zřejmé, že je to zápis, který je nesmírně náročný na vymyšlení a extrémně náchylný ke tvoření chyb. Proto je vhodné si jeho tvorbu zjednodušit například nějakou třídou:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-class Regexp {
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Regexp</span> </span>{
 
-    private $regexp = &#39;&#39;;
+    <span class=\\"hljs-keyword\\">private</span> $regexp = <span class=\\"hljs-string\\">''</span>;
 
-    public function has($value) {
-        $this-&gt;regexp .= &quot;(&quot; . preg_quote($value, &#39;/&#39;) . &quot;)&quot;;
-        //return $this;   -   potřebné pro fluent interface
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">has</span><span class=\\"hljs-params\\">($value)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;regexp .= <span class=\\"hljs-string\\">\\"(\\"</span> . preg_quote($value, <span class=\\"hljs-string\\">'/'</span>) . <span class=\\"hljs-string\\">\\")\\"</span>;
+        <span class=\\"hljs-comment\\">//return $this;   -   potřebné pro fluent interface</span>
     }
 
-    public function maybe($value) {
-        $this-&gt;regexp .= &quot;(&quot; . preg_quote($value, &#39;/&#39;) . &quot;)?&quot;;
-        //return $this;   -   potřebné pro fluent interface
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">maybe</span><span class=\\"hljs-params\\">($value)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;regexp .= <span class=\\"hljs-string\\">\\"(\\"</span> . preg_quote($value, <span class=\\"hljs-string\\">'/'</span>) . <span class=\\"hljs-string\\">\\")?\\"</span>;
+        <span class=\\"hljs-comment\\">//return $this;   -   potřebné pro fluent interface</span>
     }
 
-    public function anythingBut($value) {
-        $this-&gt;regexp .= &quot;([^&quot; . preg_quote($value, &#39;/&#39;) . &quot;]*)&quot;;
-        //return $this;   -   potřebné pro fluent interface
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">anythingBut</span><span class=\\"hljs-params\\">($value)</span> </span>{
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;regexp .= <span class=\\"hljs-string\\">\\"([^\\"</span> . preg_quote($value, <span class=\\"hljs-string\\">'/'</span>) . <span class=\\"hljs-string\\">\\"]*)\\"</span>;
+        <span class=\\"hljs-comment\\">//return $this;   -   potřebné pro fluent interface</span>
     }
 
-    public function __toString() {
-        return &quot;/^$this-&gt;regexp$/&quot;;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__toString</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-string\\">\\"/^$this-&gt;regexp$/\\"</span>;
     }
 
 }
 </code></pre>
 <p>S tím, že její použití je prosté:</p>
-<pre><code class=\\"lang-php\\">$regexp = new Regexp();
-$regexp-&gt;then(&#39;http&#39;);
-$regexp-&gt;maybe(&#39;s&#39;);
-$regexp-&gt;then(&#39;://&#39;);
-$regexp-&gt;maybe(&#39;www.&#39;);
-$regexp-&gt;anythingBut(&#39; &#39;);
-$regexp-&gt;then(&#39;.&#39;);
-$regexp-&gt;anythingBut(&#39; &#39;);
-$regexp-&gt;maybe(&#39;/&#39;);
-echo $regexp . &#39;&lt;br&gt;&#39;;
-echo preg_match($regexp, &#39;http://zlml.cz/&#39;) ? &#39;P&#39; : &#39;F&#39;;
-echo preg_match($regexp, &#39;https://zlml.cz/&#39;) ? &#39;P&#39; : &#39;F&#39;;
+<pre><code class=\\"hljs lang-php\\">$regexp = <span class=\\"hljs-keyword\\">new</span> Regexp();
+$regexp-&gt;then(<span class=\\"hljs-string\\">'http'</span>);
+$regexp-&gt;maybe(<span class=\\"hljs-string\\">'s'</span>);
+$regexp-&gt;then(<span class=\\"hljs-string\\">'://'</span>);
+$regexp-&gt;maybe(<span class=\\"hljs-string\\">'www.'</span>);
+$regexp-&gt;anythingBut(<span class=\\"hljs-string\\">' '</span>);
+$regexp-&gt;then(<span class=\\"hljs-string\\">'.'</span>);
+$regexp-&gt;anythingBut(<span class=\\"hljs-string\\">' '</span>);
+$regexp-&gt;maybe(<span class=\\"hljs-string\\">'/'</span>);
+<span class=\\"hljs-keyword\\">echo</span> $regexp . <span class=\\"hljs-string\\">'&lt;br&gt;'</span>;
+<span class=\\"hljs-keyword\\">echo</span> preg_match($regexp, <span class=\\"hljs-string\\">'http://zlml.cz/'</span>) ? <span class=\\"hljs-string\\">'P'</span> : <span class=\\"hljs-string\\">'F'</span>;
+<span class=\\"hljs-keyword\\">echo</span> preg_match($regexp, <span class=\\"hljs-string\\">'https://zlml.cz/'</span>) ? <span class=\\"hljs-string\\">'P'</span> : <span class=\\"hljs-string\\">'F'</span>;
 </code></pre>
 <p>Nemusím však říkat, že to minimálně vypadá naprosto otřesně. Spousta psaní, až moc objektové chování. Elegantnější řešení přináší právě fluent interface.</p>
 <h2 id=\\"fluent-interfaces-regul-rn-peklo-chladne\\">Fluent interfaces, regulární peklo chladne <a href=\\"#fluent-interfaces-regul-rn-peklo-chladne\\">#</a></h2><p>Fluent interface je způsob jak řetězit metody za sebe. Používá se poměrně často, ušetří spoustu zbytečného psaní a velmi prospívá srozumitelnosti kódu. Nevýhodou je, že se musí v každé metodě vrátit objekt <code>return $this;</code>, na což se nesmí zapomenout. Každopádně výsledek je skvostný:</p>
-<pre><code class=\\"lang-php\\">$regexp = new Regexp();
-$regexp-&gt;then(&#39;http&#39;)
-        -&gt;maybe(&#39;s&#39;)
-        -&gt;then(&#39;://&#39;)
-        -&gt;maybe(&#39;www.&#39;)
-        -&gt;anythingBut(&#39; &#39;)
-        -&gt;then(&#39;.&#39;)
-        -&gt;anythingBut(&#39; &#39;)
-        -&gt;maybe(&#39;/&#39;);
-echo $regexp . &#39;&lt;br&gt;&#39;;
-echo preg_match($regexp, &#39;http://zlml.cz/&#39;) ? &#39;P&#39; : &#39;F&#39;;
-echo preg_match($regexp, &#39;https://zlml.cz/&#39;) ? &#39;P&#39; : &#39;F&#39;;
+<pre><code class=\\"hljs lang-php\\">$regexp = <span class=\\"hljs-keyword\\">new</span> Regexp();
+$regexp-&gt;then(<span class=\\"hljs-string\\">'http'</span>)
+        -&gt;maybe(<span class=\\"hljs-string\\">'s'</span>)
+        -&gt;then(<span class=\\"hljs-string\\">'://'</span>)
+        -&gt;maybe(<span class=\\"hljs-string\\">'www.'</span>)
+        -&gt;anythingBut(<span class=\\"hljs-string\\">' '</span>)
+        -&gt;then(<span class=\\"hljs-string\\">'.'</span>)
+        -&gt;anythingBut(<span class=\\"hljs-string\\">' '</span>)
+        -&gt;maybe(<span class=\\"hljs-string\\">'/'</span>);
+<span class=\\"hljs-keyword\\">echo</span> $regexp . <span class=\\"hljs-string\\">'&lt;br&gt;'</span>;
+<span class=\\"hljs-keyword\\">echo</span> preg_match($regexp, <span class=\\"hljs-string\\">'http://zlml.cz/'</span>) ? <span class=\\"hljs-string\\">'P'</span> : <span class=\\"hljs-string\\">'F'</span>;
+<span class=\\"hljs-keyword\\">echo</span> preg_match($regexp, <span class=\\"hljs-string\\">'https://zlml.cz/'</span>) ? <span class=\\"hljs-string\\">'P'</span> : <span class=\\"hljs-string\\">'F'</span>;
 </code></pre>
 <p>Teprve zde vynikne to, jak je důležité správně (čti stručně a jasně) pojmenovávat metody. Díky fluent interfaces lze programovat téměř ve větách, které jsou naprosto srozumitelné.</p>
 <h2 id=\\"ne-peklo-je-op-t-peklem\\">Ne, peklo je opět peklem <a href=\\"#ne-peklo-je-op-t-peklem\\">#</a></h2><p>Ačkoliv by se mohlo zdát, že díky objektu, který pomáhá tvořit regulární výrazy je jejich kompozice jednoduchou záležitostí, není tomu tak. Vrátím se k původnímu výrazu, který není dobrý. Proč? V reálném světě je kontrola, resp. předpis, který musí daná adresa mít daleko složitější. Například <code>http</code> nemusí být vůbec přítomno, pokud však je, musí následovat možná <code>s</code> a zcela určitě <code>://</code>. To samé s doménou. Ta může být jen určitý počet znaků dlouhá, může obsahovat tečky (ale ne neomezené množství), samotná TLD má také určitá pravidla (minimálně co se týče délky) a to nemluvím o parametrech za adresou, které jsou téměř bez limitu.</p>

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Hledá se obchodník
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Tentokrát nebudu psát o ničem technickém, ale vezmu to hned od druhé věty vážně. Do <a href=\\"http://www.orgis.cz/\\">Orgis IT</a> scháníme obchodníka primárně pro Prahu / Plzeň pro rozšíření obchodního teamu. Po dlouhém rozmýšlení máme jasno co požadujeme. Nejedná se o nic zvláštního. Klasicky vyžadujeme samostatnost, pružnost a spolehlivost. To jsou celkem běžné požadavky, takže nemá smysl je zde řešit. Má však smysl řešit obchodní náplň. Jelikož se jedná o IT firmu, byl by vhodný alespoň základní přehled o tom co Orgis IT nabízí. Primárně se teď zaměřujeme na serverová řešení (opravdu velká) a vnitropodnikové ERP systémy o které je největší zájem. Jelikož se jedná o místy dost kompikovanou záležitost na pochopení, obchodník projde odborným zaškolením a i po zaškolení bude obchodník úzce spolupracovat se silnou technickou podporou a s lidmi z technické specifikace.</p>

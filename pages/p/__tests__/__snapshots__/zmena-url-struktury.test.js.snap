@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Změna URL struktury
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Rád bych tímto upozornil na změny URL adres na tomto webu. A zároveň k technické povaze tohoto webu
@@ -72,21 +72,21 @@ prozradím i bližší informace ze zákulisí.</p>
 RSS je nyní na adrese <a href=\\"http://zlml.cz/rss\\">http://zlml.cz/rss</a>. Původně bylo na adrese <a href=\\"http://zlml.cz/homepage/rss\\">http://zlml.cz/homepage/rss</a>.
 Obě dvě adresy fungují stále, rozdíl je v tom, že homepage/rss nyní přesměrovává pomocí 301 na */rss.
 Toho se dalo docílit velice jednoduše:</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;rss&#39;, &#39;Homepage:rss&#39;); //nová routa
-$router[] = new Route(&#39;&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]&#39;, &#39;Homepage:default&#39;); //původní
-//záleží na pořadí!
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'rss'</span>, <span class=\\"hljs-string\\">'Homepage:rss'</span>); <span class=\\"hljs-comment\\">//nová routa</span>
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;presenter&gt;/&lt;action&gt;[/&lt;id&gt;]'</span>, <span class=\\"hljs-string\\">'Homepage:default'</span>); <span class=\\"hljs-comment\\">//původní</span>
+<span class=\\"hljs-comment\\">//záleží na pořadí!</span>
 </code></pre>
 <p>Ačkoliv je teď druhá routa zbytečná, nechal jsem jí pro případ, že bych měl nějakou URL nezachycenou.
 V tom případě ji zachytí tato obecná.</p>
 <h2 id=\\"zp-tn-kompatibilita\\">Zpětná kompatibilita <a href=\\"#zp-tn-kompatibilita\\">#</a></h2><p>Stejně tak jako změna adresy RSS, tak si i ostatní adresy musí zachovat stejné vlastnosti viz první bod.
 A vzhledem k tomu, že jsem se rozhodl změnit adresu vyhledávání a tagů, nezbývalo, než další
 dvě routy přidat. Opět záleží na pořadí:</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;s[/&lt;search&gt;]&#39;, &#39;Search:default&#39;); //nová
-$router[] = new Route(&#39;t[/&lt;search&gt;]&#39;, &#39;Tag:default&#39;); //nová
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'s[/&lt;search&gt;]'</span>, <span class=\\"hljs-string\\">'Search:default'</span>); <span class=\\"hljs-comment\\">//nová</span>
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'t[/&lt;search&gt;]'</span>, <span class=\\"hljs-string\\">'Tag:default'</span>); <span class=\\"hljs-comment\\">//nová</span>
 
-//tyto routy (až uznám za vhodné) mohu smazat:
-$router[] = new Route(&#39;search[/&lt;search&gt;]&#39;, &#39;Search:default&#39;, Route::ONE_WAY); //původní
-$router[] = new Route(&#39;tag[/&lt;search&gt;]&#39;, &#39;Tag:default&#39;, Route::ONE_WAY); //původní
+<span class=\\"hljs-comment\\">//tyto routy (až uznám za vhodné) mohu smazat:</span>
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'search[/&lt;search&gt;]'</span>, <span class=\\"hljs-string\\">'Search:default'</span>, Route::ONE_WAY); <span class=\\"hljs-comment\\">//původní</span>
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'tag[/&lt;search&gt;]'</span>, <span class=\\"hljs-string\\">'Tag:default'</span>, Route::ONE_WAY); <span class=\\"hljs-comment\\">//původní</span>
 </code></pre>
 <p>Opět platí, že funguje jak stará adresa <a href=\\"http://zlml.cz/search/nette\\">http://zlml.cz/search/nette</a> s přesměrováním 301, tak i nová 
 <a href=\\"http://zlml.cz/s/nette\\">http://zlml.cz/s/nette</a>. Obdobně je tomu u tagů.</p>
@@ -96,15 +96,15 @@ adresáři. Tedy aby článek měl adresu <a href=\\"http://zlml.cz/lovec-matema
 Zde jsem se však vždy dostával do velkého problému. Jak rozlišit a nabídnout z databáze článek a 
 jak poznat, kdy naopak nabídnout stránku například s referencemi?</p>
 <p>No, tak nejdříve je zapotřebí routa pro články:</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;&lt;slug&gt;&#39;, &#39;Single:article&#39;);
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;slug&gt;'</span>, <span class=\\"hljs-string\\">'Single:article'</span>);
 </code></pre>
 <p>Kdy v presenteru tahám články z databáze podle slugu:</p>
-<pre><code class=\\"lang-php\\">public function renderArticle($slug) {
-    $post = $this-&gt;posts-&gt;getBySlug($slug)-&gt;fetch(); //načetní článku podle slugu
-    if (!$post) { //článek neexistuje (db vrací FALSE)
-        $this-&gt;forward($slug); //nabídni statickou šablonu
-    } else { // zobrazení článku
-        //...
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">renderArticle</span><span class=\\"hljs-params\\">($slug)</span> </span>{
+    $post = <span class=\\"hljs-keyword\\">$this</span>-&gt;posts-&gt;getBySlug($slug)-&gt;fetch(); <span class=\\"hljs-comment\\">//načetní článku podle slugu</span>
+    <span class=\\"hljs-keyword\\">if</span> (!$post) { <span class=\\"hljs-comment\\">//článek neexistuje (db vrací FALSE)</span>
+        <span class=\\"hljs-keyword\\">$this</span>-&gt;forward($slug); <span class=\\"hljs-comment\\">//nabídni statickou šablonu</span>
+    } <span class=\\"hljs-keyword\\">else</span> { <span class=\\"hljs-comment\\">// zobrazení článku</span>
+        <span class=\\"hljs-comment\\">//...</span>
     }
 }
 </code></pre>
@@ -112,18 +112,18 @@ jak poznat, kdy naopak nabídnout stránku například s referencemi?</p>
 z databáze a když se to nepodaří, nabídnu nějaký latte soubor, pokud existuje. Pokud neexistuje, 
 tak ErrorPresenter již obstará vrácení 404, což je správně, protože není co nabídnout...</p>
 <p>Ještě je zapotřebí vytvořit jednu routu:</p>
-<pre><code class=\\"lang-php\\">$router[] = new Route(&#39;&lt;action&gt;&#39;, &#39;Single:article&#39;);
+<pre><code class=\\"hljs lang-php\\">$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">'&lt;action&gt;'</span>, <span class=\\"hljs-string\\">'Single:article'</span>);
 </code></pre>
 <p>Bez této routy by to také fungovalo, ale latte ony latte soubory (action) bych našel na dvou URL
 adresách, což nechci. Takže se z původního <a href=\\"http://zlml.cz/single/about\\">http://zlml.cz/single/about</a> dostanu na <a href=\\"http://zlml.cz/about\\">http://zlml.cz/about</a>, 
 což je cool a splňuji tak druhý požadavek.</p>
 <p>Poslední routa, která stojí za zmíňku pak zajišťuje stránkování. Pouze rozpoznává čísla podle
 regulárního výrazu a podle toho stránkuje:</p>
-<pre><code class=\\"lang-php\\">$regex = &#39;1|2|3&#39;; //zjednodušeně
-$router[] = new Route(&quot;[&lt;paginator-page [$regex]&gt;]&quot;, array(
-    &#39;presenter&#39; =&gt; &#39;Homepage&#39;,
-    &#39;action&#39; =&gt; &#39;default&#39;,
-    &#39;paginator-page&#39; =&gt; 1
+<pre><code class=\\"hljs lang-php\\">$regex = <span class=\\"hljs-string\\">'1|2|3'</span>; <span class=\\"hljs-comment\\">//zjednodušeně</span>
+$router[] = <span class=\\"hljs-keyword\\">new</span> Route(<span class=\\"hljs-string\\">\\"[&lt;paginator-page [$regex]&gt;]\\"</span>, <span class=\\"hljs-keyword\\">array</span>(
+    <span class=\\"hljs-string\\">'presenter'</span> =&gt; <span class=\\"hljs-string\\">'Homepage'</span>,
+    <span class=\\"hljs-string\\">'action'</span> =&gt; <span class=\\"hljs-string\\">'default'</span>,
+    <span class=\\"hljs-string\\">'paginator-page'</span> =&gt; <span class=\\"hljs-number\\">1</span>
 ));
 </code></pre>
 <p>Ostatně to jak mám v době psaní tohoto článku router vytvořený můžete zjistit na <a href=\\"https://bitbucket.org/mrtnzlml/zlml.cz/src/0580e2e9f0e4edb162fe97ad563cfef766bea625/app/router/RouterFactory.php\\">bitbucketu</a>.</p>

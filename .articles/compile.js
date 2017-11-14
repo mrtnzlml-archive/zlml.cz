@@ -1,12 +1,51 @@
 const fs = require('fs');
 const fm = require('front-matter');
 const marked = require('marked');
+const hljs = require('highlight.js');
+
+/**
+ * Copy-pasted from Marked.
+ */
+function escape(html, encode) {
+  return html
+    .replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 const renderer = new marked.Renderer();
 renderer.heading = function(text, level) {
   const actualLevel = level + 1;
   const escapedHeading = text.toLowerCase().replace(/[^\w]+/g, '-');
-  return `<h${actualLevel} id="${escapedHeading}">${text} <a href="#${escapedHeading}">#</a></h${actualLevel}>`;
+  return `<h${actualLevel} id="${escapedHeading}">${text} <a href="#${
+    escapedHeading
+  }">#</a></h${actualLevel}>`;
+};
+renderer.code = function(code, lang, escaped) {
+  const out = this.options.highlight(code, lang);
+  if (out != null && out !== code) {
+    escaped = true;
+    code = out;
+  }
+
+  if (!lang) {
+    return (
+      '<pre><code class="hljs">' +
+      (escaped ? code : escape(code, true)) +
+      '\n</code></pre>'
+    );
+  }
+
+  return (
+    '<pre><code class="hljs ' +
+    this.options.langPrefix +
+    escape(lang, true) +
+    '">' +
+    (escaped ? code : escape(code, true)) +
+    '\n</code></pre>\n'
+  );
 };
 
 let allArticleTitles = [];
@@ -27,6 +66,9 @@ fs.readdirSync(sourcesDirectory).forEach(function(filename) {
       sanitize: false,
       smartLists: true,
       smartypants: false,
+      highlight: function(code, lang) {
+        return hljs.highlightAuto(code, [lang]).value;
+      },
     });
 
     allArticleTitles.push(

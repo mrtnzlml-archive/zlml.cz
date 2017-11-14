@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Jaký email je nejvíce využívaný?
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Včera jsem psal o bezpečnostní chybě, která umožňuje získat podle mého názoru nezanedbatelně velký vzorek emailových adres. Krom toho, že bych byl rád, aby byla tato chyba opravena, nemám co jiného s touto kolekcí adres dělat. Tak jsem se rozhodl vytvořit nějakou statistiku. Svým způsobem se totiž jedná o dosti specifické uživatele, protože se pravděpodobně jedná z naprosté většiny pouze o ČR a SK uživatele, takže kdo čeká, že bude např. gmail umístěn nějak dobře, možná bude překvapen.</p>

@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Nadvláda inteligentních procesorů
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Pár dní zpátky jsem tweetoval o tom, nad čím právě teď trávím asi nejvíce času. Cílem celého mého snažení je dostat data z procesoru, který obsluhuje různé periferie na základní desce až do webového prohlížeče a zpět - vše v reálném čase. Právě dnes jsem dosáhl prvního milníku, tedy dostal jsem nějaká skutečně smysluplná data do prohlížeče a rád bych zde nastínil jak jsem postupoval a jaké technologie jsem volil. Již dříve se totiž ukázalo, že některé reakce na mé články jsou skutečně konstruktivní a tedy i velmi přínosné... (-:</p>
@@ -67,7 +67,7 @@ exports[`renders correctly 1`] = `
 
 <h2 id=\\"n-kolik-slep-ch-uli-ek\\">Několik slepých uliček <a href=\\"#n-kolik-slep-ch-uli-ek\\">#</a></h2><p>Původně byl celý nápad úplně jiný a rozhodně ne real-time. A stejně jako je teď velký trend stavět vše pomocí <em>Raspberry Pi</em> nebo pomocí <em>Arduino</em>, tak i já jsem tak chtěl učinit. Důvod je jednoduchý. Napsat se s pomocí těchto desek dá všelicos velmi rychle a nestojí to moc námahy. Navíc jsem chtěl více času věnovat webové aplikaci, než nějakému mikročipu. Postupem času a po několika vážných rozhovorech jsem začal přemýšlet nad real-time přenosem informace v obou směrech. Takže bylo zapotřebí najít vhodnou desku. Jenže na real-time už jsem si jen s <em>Raspberry</em> nevěřil a proto jsem hledal nějakou lepší desku na kterou bych nahodil nějaký velmi lehký Linux a NodeJS. Po dalších vážných rozhovorech jsem však i z této cesty ustoupil a zvolil jsem něco, co jsem ze začátku vůbec neuvažoval. Chtěl jsem zvolit desky od ST z řady <a href=\\"www.st.com/stm32nucleo\\">Nucleo</a>, ale tyto desky nemají ethernet a tak bylo lehčí vypůjčit si <a href=\\"www.st.com/stm3220g-eval\\">eval-boardy</a>. Tyto desky mají stejné procesory, ale více periferií okamžitě k dispozici. Jenže to znamená, že musím opustit všechno hraní si a hluboce se ponořit do <strong>C</strong>čka...</p>
 <h2 id=\\"spr-vn-uli-ka-\\">Správná ulička? <a href=\\"#spr-vn-uli-ka-\\">#</a></h2><p>Desky a procesory jsou tedy jasné. Co dál? Nezbývá než stanovit, jak se bude informace přenášet až do prohlížeče. Zde je zřejmě jasná věc to, že mezi procesorem a prohlížečem musí být nějaký mezičlen. Ten u mě tvoří <a href=\\"http://nodejs.org/\\">NodeJS</a> server v kombinaci s <a href=\\"http://redis.io/\\">Redis</a> databází zhruba tak, jak je znázorněno na <a href=\\"http://cs.wikipedia.org/wiki/ASCII_art\\">ASCII artu</a> níže:</p>
-<pre><code>------------      ----------      -----------
+<pre><code class=\\"hljs\\">------------      ----------      -----------
 | Procesor | ---&gt; | NodeJS | ---&gt; | Browser |
 ------------      ----------      -----------
         |             ^

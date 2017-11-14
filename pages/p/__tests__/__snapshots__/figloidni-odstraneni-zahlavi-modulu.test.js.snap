@@ -53,12 +53,12 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Fígloidní odstranění záhlaví modulu
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Dnešní článek bude spíše zápisek, protože jsem řešení tohoto problému hledal neskutečně dlouho a jak se později ukázalo, tak řešení je sice jednoduché, ale je zakořeněné hluboko v jádru Odoo ERP systému. O co jde. Občas je potřeba schovat záhlaví (viz obrázek) u některých modulů.</p>
@@ -67,55 +67,55 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"jak-na-to\\">Jak na to <a href=\\"#jak-na-to\\">#</a></h2><p>Asi úplně nejjasnější bude, když popíšu posloupnost kroků, které vedou ke správnému řešení. Nejedná se o nic kompikovaného. Všechny níže uváděné postupy jsou klasické postupy při vývoji modulu. Jen je (do teď) pravděpodobně nikde nenajdete, nebo nad tím zbytečně vytuhnete na zoufale dlouhou dobu. Ostatně <a href=\\"https://searchcode.com/?q=views_switcher%20lang:Javascript\\">podívejte se</a>, jak je výskyt tohoto kousku užitečného kódu <a href=\\"https://github.com/odoo/odoo/search?l=javascript&amp;q=views_switcher&amp;type=Code&amp;utf8=%E2%9C%93\\">používaný</a> v public repozitářích... :-)</p>
 <p><span style=\\"font-size:2em\\">1.</span> Registrace XML definice v <code>__openerp__.conf</code></p>
 <p>Tato záležitost je asi celkem jasná. Jednoduše musíme definovat, že se má při compile-time brát ohled na XML soubor, ve kterém zaregistrujeme JS soubor viz další bod.</p>
-<pre><code class=\\"lang-python\\">{
-    #...
+<pre><code class=\\"hljs lang-python\\">{
+    <span class=\\"hljs-comment\\">#...</span>
 
-    &#39;data&#39;: [
-        &#39;views/header.xml&#39;,
+    <span class=\\"hljs-string\\">'data'</span>: [
+        <span class=\\"hljs-string\\">'views/header.xml'</span>,
     ],
 
-    #...
+    <span class=\\"hljs-comment\\">#...</span>
 }
 </code></pre>
 <p><span style=\\"font-size:2em\\">2.</span> Registrace JS souboru</p>
 <p>To jsem to ale nazval blbě... (-: V předchozím bodě je tedy definovanám soubor v podadresáři <code>views</code>, jehož obsah je např. takovýto:</p>
-<pre><code class=\\"lang-html\\">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;openerp&gt;
-    &lt;data&gt;
-        &lt;template id=&quot;assets_backend&quot; name=&quot;queue assets&quot; inherit_id=&quot;web.assets_backend&quot;&gt;
-            &lt;xpath expr=&quot;.&quot; position=&quot;inside&quot;&gt;
-                &lt;script type=&quot;text/javascript&quot; src=&quot;/module_name/static/src/js/header.js&quot;/&gt;
-            &lt;/xpath&gt;
-        &lt;/template&gt;
-    &lt;/data&gt;
-&lt;/openerp&gt;
+<pre><code class=\\"hljs lang-html\\"><span class=\\"php\\"><span class=\\"hljs-meta\\">&lt;?</span>xml version=<span class=\\"hljs-string\\">\\"1.0\\"</span> encoding=<span class=\\"hljs-string\\">\\"utf-8\\"</span><span class=\\"hljs-meta\\">?&gt;</span></span>
+<span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">openerp</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">data</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">template</span> <span class=\\"hljs-attr\\">id</span>=<span class=\\"hljs-string\\">\\"assets_backend\\"</span> <span class=\\"hljs-attr\\">name</span>=<span class=\\"hljs-string\\">\\"queue assets\\"</span> <span class=\\"hljs-attr\\">inherit_id</span>=<span class=\\"hljs-string\\">\\"web.assets_backend\\"</span>&gt;</span>
+            <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">xpath</span> <span class=\\"hljs-attr\\">expr</span>=<span class=\\"hljs-string\\">\\".\\"</span> <span class=\\"hljs-attr\\">position</span>=<span class=\\"hljs-string\\">\\"inside\\"</span>&gt;</span>
+                <span class=\\"hljs-tag\\">&lt;<span class=\\"hljs-name\\">script</span> <span class=\\"hljs-attr\\">type</span>=<span class=\\"hljs-string\\">\\"text/javascript\\"</span> <span class=\\"hljs-attr\\">src</span>=<span class=\\"hljs-string\\">\\"/module_name/static/src/js/header.js\\"</span>/&gt;</span><span class=\\"handlebars\\"><span class=\\"xml\\">
+            <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">xpath</span>&gt;</span>
+        <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">template</span>&gt;</span>
+    <span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">data</span>&gt;</span>
+<span class=\\"hljs-tag\\">&lt;/<span class=\\"hljs-name\\">openerp</span>&gt;</span></span></span>
 </code></pre>
 <p>Tato registrace je naprosto běžná. ERP se k tomu pak staví poměrně chytře, takže když je ERP v <code>?debug=</code> módu, tak souboru vrací tak jak jsou, jinak je všechny skládá do jednoho a provádí minimalizaci. V tomto případě je rozdíl signifikantní.</p>
 <p><span style=\\"font-size:2em\\">3.</span> Javascript definice</p>
 <p>Je známá věc, že si toto ERP bez JS ani neuprdne. Na jednu stranu mě to trošku štve, na druhou stranu to nemá vůbec smysl řešit. Dalším krokem proto bude definice na straně JS, která zakáže tomuto konkrétnímu view vykreslení headeru:</p>
-<pre><code class=\\"lang-javascript\\">openerp.module_name = function (instance) {
-    //var QWeb = instance.web.qweb;
-    if (!instance.module_name) {
+<pre><code class=\\"hljs lang-javascript\\">openerp.module_name = <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> (<span class=\\"hljs-params\\">instance</span>) </span>{
+    <span class=\\"hljs-comment\\">//var QWeb = instance.web.qweb;</span>
+    <span class=\\"hljs-keyword\\">if</span> (!instance.module_name) {
         instance.module_name = {};
     }
 
-    //zde navíc např. definice pro instance.web.qweb
+    <span class=\\"hljs-comment\\">//zde navíc např. definice pro instance.web.qweb</span>
 
     instance.web.ViewManagerAction.include({
-        init: function(parent, action) {
-            var flags = action.flags || {};
-            if (action.res_model == &#39;module_model&#39; &amp;&amp; action.view_mode === &#39;form&#39;) {
+        <span class=\\"hljs-attr\\">init</span>: <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span>(<span class=\\"hljs-params\\">parent, action</span>) </span>{
+            <span class=\\"hljs-keyword\\">var</span> flags = action.flags || {};
+            <span class=\\"hljs-keyword\\">if</span> (action.res_model == <span class=\\"hljs-string\\">'module_model'</span> &amp;&amp; action.view_mode === <span class=\\"hljs-string\\">'form'</span>) {
                 _.extend(flags, {
-                    views_switcher : false,
-                    display_title : false,
-                    search_view : false,
-                    pager : false,
-                    sidebar : false,
-                    action_buttons : false
+                    <span class=\\"hljs-attr\\">views_switcher</span> : <span class=\\"hljs-literal\\">false</span>,
+                    <span class=\\"hljs-attr\\">display_title</span> : <span class=\\"hljs-literal\\">false</span>,
+                    <span class=\\"hljs-attr\\">search_view</span> : <span class=\\"hljs-literal\\">false</span>,
+                    <span class=\\"hljs-attr\\">pager</span> : <span class=\\"hljs-literal\\">false</span>,
+                    <span class=\\"hljs-attr\\">sidebar</span> : <span class=\\"hljs-literal\\">false</span>,
+                    <span class=\\"hljs-attr\\">action_buttons</span> : <span class=\\"hljs-literal\\">false</span>
                 });
             }
             action.flags = flags
-            this._super(parent, action);
+            <span class=\\"hljs-keyword\\">this</span>._super(parent, action);
         },
     });
 }

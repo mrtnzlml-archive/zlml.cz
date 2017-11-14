@@ -53,125 +53,125 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Návrhový vzor Singleton
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Návrhový vzor Singleton je velmi známý. Má za úkol zajistit, že bude z určité třídy existovat pouze jedna instance. K této instanci poskytne globální přístupový bod. Jednoduché zadání, ale samotná implementace může být v PHP zákeřná. Proč? Tak prvně záleží na tom, jak budeme u návrhu striktní.</p>
-<pre><code class=\\"lang-php\\">&lt;?php
-class Object {
-    private static $instance = null;
-    public static function getInstance() {
-        if(self::$instance === null) {
-            self::$instance = new self;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Object</span> </span>{
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-keyword\\">static</span> $instance = <span class=\\"hljs-keyword\\">null</span>;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getInstance</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">if</span>(<span class=\\"hljs-keyword\\">self</span>::$instance === <span class=\\"hljs-keyword\\">null</span>) {
+            <span class=\\"hljs-keyword\\">self</span>::$instance = <span class=\\"hljs-keyword\\">new</span> <span class=\\"hljs-keyword\\">self</span>;
         }
-        return self::$instance;
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">self</span>::$instance;
     }
 }
 </code></pre>
 <p>Takovouto třídu lze totiž rovnou prohlásit za návrhový vzor Singleton. Dává to smysl, protože můžeme zavolat:</p>
-<pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
+<pre><code class=\\"hljs lang-php\\">$obj1 = Object::getInstance();
 $obj2 = Object::getInstance();
 </code></pre>
 <p>Tím se pokusíme vytvořit dvě instance této třídy, ve skutečnosti se však vytvoří jen jedna. Tyto objekty jsou identické, což lze dokázat jednoduchou zkouškou:</p>
-<pre><code class=\\"lang-php\\">if($obj1 === $obj2) {
-    echo &#39;$obj1 === $obj2&#39;; //TRUE
-} else {
-    echo &#39;$obj1 !== $obj2&#39;;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-keyword\\">if</span>($obj1 === $obj2) {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 === $obj2'</span>; <span class=\\"hljs-comment\\">//TRUE</span>
+} <span class=\\"hljs-keyword\\">else</span> {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 !== $obj2'</span>;
 }
 </code></pre>
 <p>Singleton to je a nikdo nemůže říct ne. Jak jsem však již psal, záleží na tom, jak budeme u návrhu striktní, protože by to nebylo PHP, kdyby neexistovalo několik otazníků a háčků. Pravděpodobně spoustu lidí totiž napadne, že metoda <code>getInstance()</code> je sice hezká, ale vůbec ji nemusím použít. V takovém případě celý princip Singletona padá.</p>
-<pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
-$obj2 = new Object();
+<pre><code class=\\"hljs lang-php\\">$obj1 = Object::getInstance();
+$obj2 = <span class=\\"hljs-keyword\\">new</span> Object();
 
-if($obj1 === $obj2) {
-    echo &#39;$obj1 === $obj2&#39;;
-} else {
-    echo &#39;$obj1 !== $obj2&#39;; //TRUE
+<span class=\\"hljs-keyword\\">if</span>($obj1 === $obj2) {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 === $obj2'</span>;
+} <span class=\\"hljs-keyword\\">else</span> {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 !== $obj2'</span>; <span class=\\"hljs-comment\\">//TRUE</span>
 }
 </code></pre>
 <p>To je jasné, zatím ve třídě neexistuje žádný mechanismus, který by zakázal používání konstruktoru. K tomu je potřeba pouze malá úprava třídy.</p>
-<pre><code class=\\"lang-php\\">&lt;?php
-class Object {
-    private static $instance = null;
-    public static function getInstance() {
-        if(self::$instance === null) {
-            self::$instance = new self;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Object</span> </span>{
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-keyword\\">static</span> $instance = <span class=\\"hljs-keyword\\">null</span>;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getInstance</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">if</span>(<span class=\\"hljs-keyword\\">self</span>::$instance === <span class=\\"hljs-keyword\\">null</span>) {
+            <span class=\\"hljs-keyword\\">self</span>::$instance = <span class=\\"hljs-keyword\\">new</span> <span class=\\"hljs-keyword\\">self</span>;
         }
-        return self::$instance;
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">self</span>::$instance;
     }
-    protected function __construct() {}
+    <span class=\\"hljs-keyword\\">protected</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">()</span> </span>{}
 }
 </code></pre>
 <p>V tento moment již nepůjde objekt vytvořit pomocí operátoru <code>new</code>. Případný pokus skončí fatální chybou. Nebylo by to však PHP, kdyby neexistovalo několik dalších otazníků a háčků. S ledovým klidem si totiž mohu první vytvořený objekt naklonovat a tím opět získám dvě nezávislé instance jedné třídy. Ale to jsem přece nechtěl!</p>
-<pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
-$obj2 = clone $obj1;
+<pre><code class=\\"hljs lang-php\\">$obj1 = Object::getInstance();
+$obj2 = <span class=\\"hljs-keyword\\">clone</span> $obj1;
 
-if($obj1 === $obj2) {
-    echo &#39;$obj1 === $obj2&#39;;
-} else {
-    echo &#39;$obj1 !== $obj2&#39;; //TRUE
+<span class=\\"hljs-keyword\\">if</span>($obj1 === $obj2) {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 === $obj2'</span>;
+} <span class=\\"hljs-keyword\\">else</span> {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 !== $obj2'</span>; <span class=\\"hljs-comment\\">//TRUE</span>
 }
 </code></pre>
 <p>Proti tomuto postupu se mohu bránit opět podobným způsobem jako u konstruktoru.</p>
-<pre><code class=\\"lang-php\\">&lt;?php
-class Object {
-    private static $instance = null;
-    public static function getInstance() {
-        if(self::$instance === null) {
-            self::$instance = new self;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Object</span> </span>{
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-keyword\\">static</span> $instance = <span class=\\"hljs-keyword\\">null</span>;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getInstance</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">if</span>(<span class=\\"hljs-keyword\\">self</span>::$instance === <span class=\\"hljs-keyword\\">null</span>) {
+            <span class=\\"hljs-keyword\\">self</span>::$instance = <span class=\\"hljs-keyword\\">new</span> <span class=\\"hljs-keyword\\">self</span>;
         }
-        return self::$instance;
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">self</span>::$instance;
     }
-    protected function __construct() {}
-    private function __clone() {}
+    <span class=\\"hljs-keyword\\">protected</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">()</span> </span>{}
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__clone</span><span class=\\"hljs-params\\">()</span> </span>{}
 }
 </code></pre>
 <p>Pokus o naklonování již vytvořené instance pomocí metody <code>getInstance()</code> skončí opět fatální chybou. Jenže nebylo by to PHP, kdyby... Co se stane, když vytoření objekt serializuji a pak ho zase deserializuji?</p>
-<pre><code class=\\"lang-php\\">$obj1 = Object::getInstance();
+<pre><code class=\\"hljs lang-php\\">$obj1 = Object::getInstance();
 $obj2 = unserialize(serialize($obj1));
 
-if($obj1 === $obj2) {
-    echo &#39;$obj1 === $obj2&#39;;
-} else {
-    echo &#39;$obj1 !== $obj2&#39;; //TRUE
+<span class=\\"hljs-keyword\\">if</span>($obj1 === $obj2) {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 === $obj2'</span>;
+} <span class=\\"hljs-keyword\\">else</span> {
+    <span class=\\"hljs-keyword\\">echo</span> <span class=\\"hljs-string\\">'$obj1 !== $obj2'</span>; <span class=\\"hljs-comment\\">//TRUE</span>
 }
 </code></pre>
 <p>To už začíná být poněkud otravné. Ale tak dobře, i to se dá ošéfovat.</p>
-<pre><code class=\\"lang-php\\">&lt;?php
-class Object {
-    private static $instance = null;
-    public static function getInstance() {
-        if(self::$instance === null) {
-            self::$instance = new self;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Object</span> </span>{
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-keyword\\">static</span> $instance = <span class=\\"hljs-keyword\\">null</span>;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getInstance</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">if</span>(<span class=\\"hljs-keyword\\">self</span>::$instance === <span class=\\"hljs-keyword\\">null</span>) {
+            <span class=\\"hljs-keyword\\">self</span>::$instance = <span class=\\"hljs-keyword\\">new</span> <span class=\\"hljs-keyword\\">self</span>;
         }
-        return self::$instance;
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">self</span>::$instance;
     }
-    protected function __construct() {}
-    private function __clone() {}
-    private function __wakeup() {}
+    <span class=\\"hljs-keyword\\">protected</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">()</span> </span>{}
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__clone</span><span class=\\"hljs-params\\">()</span> </span>{}
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__wakeup</span><span class=\\"hljs-params\\">()</span> </span>{}
 }
 </code></pre>
 <p>Toto už sice vrátí jen warning, ale víme o tom. Schválně jsem nepsal, že se to vše dá ošetřit, protože je to spíše zákaz (popř. upozornění). Je samozřejmě možné (lepší) vracet různé vyjímky atd. Stejně tak je spousta variant jak psát přítupové modifikátory k metodám. To jednoduše vše zaleží na tom, co od Singleton objektu očekáváme a kdo objekt používá, protože jak jsem již psal, úplně klidně stačí Singleton s jednou metodou <code>getInstance()</code>. Svoji funkci plní, tečka.</p>
-<pre><code class=\\"lang-php\\">&lt;?php
-class Object {
-    private static $instance = null;
-    public static function getInstance() {
-        if(self::$instance === null) {
-            self::$instance = new self;
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
+<span class=\\"hljs-class\\"><span class=\\"hljs-keyword\\">class</span> <span class=\\"hljs-title\\">Object</span> </span>{
+    <span class=\\"hljs-keyword\\">private</span> <span class=\\"hljs-keyword\\">static</span> $instance = <span class=\\"hljs-keyword\\">null</span>;
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">static</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">getInstance</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">if</span>(<span class=\\"hljs-keyword\\">self</span>::$instance === <span class=\\"hljs-keyword\\">null</span>) {
+            <span class=\\"hljs-keyword\\">self</span>::$instance = <span class=\\"hljs-keyword\\">new</span> <span class=\\"hljs-keyword\\">self</span>;
         }
-        return self::$instance;
+        <span class=\\"hljs-keyword\\">return</span> <span class=\\"hljs-keyword\\">self</span>::$instance;
     }
-    protected function __construct() {}
-    public final function __clone() {
-        throw new Exception(&#39;Objekt nelze klonovat!&#39;);
+    <span class=\\"hljs-keyword\\">protected</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__construct</span><span class=\\"hljs-params\\">()</span> </span>{}
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">final</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__clone</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">throw</span> <span class=\\"hljs-keyword\\">new</span> <span class=\\"hljs-keyword\\">Exception</span>(<span class=\\"hljs-string\\">'Objekt nelze klonovat!'</span>);
     }
-    public final function __wakeup() {
-        throw new Exception(&#39;Objekt nelze deserializovat!&#39;);
+    <span class=\\"hljs-keyword\\">public</span> <span class=\\"hljs-keyword\\">final</span> <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-title\\">__wakeup</span><span class=\\"hljs-params\\">()</span> </span>{
+        <span class=\\"hljs-keyword\\">throw</span> <span class=\\"hljs-keyword\\">new</span> <span class=\\"hljs-keyword\\">Exception</span>(<span class=\\"hljs-string\\">'Objekt nelze deserializovat!'</span>);
     }
 }
 </code></pre>

@@ -42,14 +42,6 @@ export default function WithPost(options: Props) {
               hyphens: auto;
               text-align: justify;
             }
-            .article pre {
-              overflow-y: auto;
-              line-height: 1.2;
-              padding: 1.5rem;
-              background-color: #f7f7f7;
-              overflow-x: auto;
-              border-left: 1px dashed #ddd;
-            }
           `}</style>
           <LinkBack />
           <h1>{options.attributes.title}</h1>

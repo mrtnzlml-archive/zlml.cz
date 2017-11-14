@@ -53,33 +53,33 @@ exports[`renders correctly 1`] = `
       </span>
     </p>
     <h1
-      className="jsx-1056554702"
+      className="jsx-764030434"
     >
       Testbench 2.3 is out (finally)
     </h1>
     <div
-      className="jsx-1056554702 article"
+      className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Yeah, you heard that correctly. Testbench 2.3 has been released and it brings a lot of new features. I don&#39;t want to write about small bugfixes but about real improvements in testing environment. There was always one important mission in Testbench - to make testing easier for newcomers. And I am happy to show you biggest feature in this release: <strong>scaffold</strong>.</p>
 <p>Imagine you have your own application but without tests (this is the best situation for scaffolding). Now you can generate whole testing environment using this single command:</p>
-<pre><code>vendor/bin/run-tests --scaffold tests/bootstrap.php
+<pre><code class=\\"hljs\\">vendor/bin/run-tests --scaffold tests/bootstrap.php
 </code></pre><p>As you can see, you have to prepare <code>bootstrap.php</code> before scaffold. You can find default one in <a href=\\"https://github.com/mrtnzlml/testbench/blob/master/readme.md\\">readme</a>. Content of this file can be very simple:</p>
-<pre><code class=\\"lang-php\\">&lt;?php
+<pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-meta\\">&lt;?php</span>
 
-require __DIR__ . &#39;/../vendor/autoload.php&#39;;
+<span class=\\"hljs-keyword\\">require</span> <span class=\\"hljs-keyword\\">__DIR__</span> . <span class=\\"hljs-string\\">'/../vendor/autoload.php'</span>;
 
-Testbench\\\\Bootstrap::setup(__DIR__ . &#39;/_temp&#39;, function (\\\\Nette\\\\Configurator $configurator) {
+Testbench\\\\Bootstrap::setup(<span class=\\"hljs-keyword\\">__DIR__</span> . <span class=\\"hljs-string\\">'/_temp'</span>, <span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">function</span> <span class=\\"hljs-params\\">(\\\\Nette\\\\Configurator $configurator)</span> </span>{
     $configurator-&gt;createRobotLoader()-&gt;addDirectory([
-        __DIR__ . &#39;/../app&#39;,
+        <span class=\\"hljs-keyword\\">__DIR__</span> . <span class=\\"hljs-string\\">'/../app'</span>,
     ])-&gt;register();
 
     $configurator-&gt;addParameters([
-        &#39;appDir&#39; =&gt; __DIR__ . &#39;/../app&#39;,
+        <span class=\\"hljs-string\\">'appDir'</span> =&gt; <span class=\\"hljs-keyword\\">__DIR__</span> . <span class=\\"hljs-string\\">'/../app'</span>,
     ]);
 
-    $configurator-&gt;addConfig(__DIR__ . &#39;/../app/config/config.neon&#39;);
-    //$configurator-&gt;addConfig(__DIR__ . &#39;/tests.neon&#39;);
+    $configurator-&gt;addConfig(<span class=\\"hljs-keyword\\">__DIR__</span> . <span class=\\"hljs-string\\">'/../app/config/config.neon'</span>);
+    <span class=\\"hljs-comment\\">//$configurator-&gt;addConfig(__DIR__ . '/tests.neon');</span>
 });
 </code></pre>
 <p>Just remember, that it has to be possible to run application using this bootstrap in test environment. Look at this video where you can see how to use it:</p>
@@ -90,7 +90,7 @@ Testbench\\\\Bootstrap::setup(__DIR__ . &#39;/_temp&#39;, function (\\\\Nette\\\
 <h2 id=\\"another-improvements-and-news\\">Another improvements and news <a href=\\"#another-improvements-and-news\\">#</a></h2><p>I dropped support for PHP 5.4 and 5.5 because <a href=\\"http://php.net/supported-versions.php\\">they are dead</a>. Currently supported PHP versions are only PHP 5.6 (LTS) and PHP 7.0 until 31 Dec 2018 and 3 Dec 2018 respectively. Deal with it if you are running older PHP. You shouldn&#39;t do that anyway.</p>
 <p>Another big change has been introduced to the database behavior during tests. Now every single request to the database is going to the fake clean database even if you are not using TDoctrine or TNetteDatabase trait. At the very begining it was expected behavior to create databases only if you are using those traits, but it wasn&#39;t programmer friendly and sometimes it causes weird situations. I am working on another completely different transactional approach in <a href=\\"https://github.com/mrtnzlml/testbench/tree/transactional-db-tests\\">this branch</a>, but it&#39;s going to be in next release (maybe). </p>
 <p>There is another improvement in database testing. Testbench now supports <strong>Doctrine migrations</strong>! If you have migrations configured in your project, you can enable them in Testbench config like this:</p>
-<pre><code class=\\"lang-neon\\">testbench
+<pre><code class=\\"hljs lang-neon\\">testbench
     migrations: yes
     sqls:
         - %testsDir%/_helpers/sqls/mysql_1.sql
@@ -98,9 +98,9 @@ Testbench\\\\Bootstrap::setup(__DIR__ . &#39;/_temp&#39;, function (\\\\Nette\\\
 </code></pre>
 <p>Testbench will load SQLs and then it will run migrations to the latest version.</p>
 <p>The last but not least important note is, that Testbench is at this moment using <code>dev-master</code> of Nette\\\\Tester. Mostly because of new awesome <code>-C</code> switch in command line. But this means that if you want to use Testbench 2.3, you have to omit Nette\\\\Tester version in <code>composer.json</code>, or use something line this:</p>
-<pre><code class=\\"lang-js\\">&quot;require-dev&quot;: {
-    &quot;nette/tester&quot;: &quot;2.0.x-dev as v1.7&quot;,
-    &quot;mrtnzlml/testbench&quot;: &quot;^2.3&quot;
+<pre><code class=\\"hljs lang-js\\"><span class=\\"hljs-string\\">\\"require-dev\\"</span>: {
+    <span class=\\"hljs-string\\">\\"nette/tester\\"</span>: <span class=\\"hljs-string\\">\\"2.0.x-dev as v1.7\\"</span>,
+    <span class=\\"hljs-string\\">\\"mrtnzlml/testbench\\"</span>: <span class=\\"hljs-string\\">\\"^2.3\\"</span>
 },
 </code></pre>
 <p>Please <a href=\\"https://github.com/mrtnzlml/testbench/releases/tag/v2.3\\">read release notes</a> for further details. I hope you&#39;ll enjoy this release and Testbench becomes much more useful and powerful tool for testing thanks to you - Testbench user.</p>
