@@ -5,7 +5,8 @@
 .*/tests?/.*
 
 [lints]
-all=error
+all=warn
+sketchy-null=error
 
 [include]
 
@@ -13,6 +14,7 @@ all=error
 ./config/flow-typed
 
 [options]
+include_warnings=true
 module.ignore_non_literal_requires=true
 module.name_mapper='^../.articles/.[a-zA-Z]+.json$' -> '<PROJECT_ROOT>/config/stub/GeneralArrayStub.js'
 suppress_comment= \\(.\\|\n\\)*\\$FlowAllowNextLineInThisTest\\:\\s?.+
