@@ -10,7 +10,11 @@ import Strong from '../components/markup/Strong';
 import ArticlesDatabase from '../.articles/archive.json';
 
 type Props = {
-  articles: Array<Object>,
+  articles: Array<{|
+    title: string,
+    slug: string,
+    date: string,
+  |}>,
 };
 
 const Archive = ({ articles }: Props) => (
@@ -36,7 +40,7 @@ const Archive = ({ articles }: Props) => (
   </Layout>
 );
 
-Archive.getInitialProps = async function() {
+Archive.getInitialProps = async function(): Promise<Props> {
   const articles = [];
   for (const article of ArticlesDatabase) {
     articles.push({
