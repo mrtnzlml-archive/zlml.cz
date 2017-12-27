@@ -1,6 +1,6 @@
 // @flow
 
-import _ from 'lodash';
+import _escape from 'lodash/escape';
 
 import ArticlesDatabase from '../.articles/archive.json';
 
@@ -18,7 +18,7 @@ Rss.getInitialProps = ({ res }) => {
     articles.push({
       title: article.title,
       link: `https://zlml.cz/${article.slug}`,
-      description: _.escape(article.preview),
+      description: _escape(article.preview),
     });
   }
 
