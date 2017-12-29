@@ -2,11 +2,15 @@ language: node_js
 node_js:
   - "6"
 
+before_script: greenkeeper-lockfile-update
+
 script:
   - yarn install
   - yarn test-ci
   - yarn build
 #  - NODE_ENV=production node -e 'require("./services/Lambda.js").handler({}, { succeed: ()=>{} })' || exit 1
+
+after_script: greenkeeper-lockfile-upload
 
 deploy:
   skip_cleanup: true # keep build
