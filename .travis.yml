@@ -8,12 +8,12 @@ script:
   - yarn build
 #  - NODE_ENV=production node -e 'require("./services/Lambda.js").handler({}, { succeed: ()=>{} })' || exit 1
 
-after_success:
-  # TODO: master only
-  - yarn install --production
-  - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
-  - serverless deploy --verbose
-  - curl -s --head  --request GET https://zlml.cz | grep "200 OK" > /dev/null || exit 1
+deploy:
+  skip_cleanup: true # keep build
+  provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: master
 
 cache:
   yarn: true
