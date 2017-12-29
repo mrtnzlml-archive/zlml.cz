@@ -15,7 +15,7 @@ after_script: greenkeeper-lockfile-upload
 deploy:
   skip_cleanup: true # keep build
   provider: script
-  script: scripts/deploy.sh
+  script: sh scripts/deploy.sh
   on:
     branch: master
 
