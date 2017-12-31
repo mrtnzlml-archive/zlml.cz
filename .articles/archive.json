@@ -249,7 +249,7 @@
     "timestamp": 1419375234000,
     "title": "RESP protokol - přímý přístup k Redis databázi",
     "slug": "resp-protokol-primy-pristup-k-redis-databazi",
-    "preview": "(http://redis.io/topics/protocol) (REdis Serialization Protocol) je něco, s čím se asi většina lidí nepotká. Důvod je prostý. Tento protokol je většin..."
+    "preview": "RESP (REdis Serialization Protocol) je něco, s čím se asi většina lidí nepotká. Důvod je prostý. Tento protokol je většinou zabalen hluboko v knihovně..."
   },
   {
     "timestamp": 1418241190000,
