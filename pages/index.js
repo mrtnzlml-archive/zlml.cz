@@ -46,8 +46,7 @@ function Homepage() {
       <Paragraph>
         I&apos;ve started as a PHP programmer {new Date().getFullYear() - 2011}{' '}
         years ago and even though I love PHP (and Hack) so much, I do enjoy
-        modern JS environment much more. It&apos;s probably because it&apos;s so
-        dynamic.
+        modern JS environment much more&hellip;
       </Paragraph>
 
       <SectionHeading>What I love</SectionHeading>
@@ -56,8 +55,8 @@ function Homepage() {
         open-source and testable code. Have a look{' '}
         <Link href="https://github.com/mrtnzlml/">at my work</Link>{' '}
         (unfortunately most of my work is in private <Strong>Kiwi.com</Strong>{' '}
-        Gitlab). This is why <Strong>I am not looking for a new job</Strong> - I
-        love Kiwi.com.
+        GitLab). This is why <Strong>I am not looking for a new job</Strong> - I
+        work for Kiwi.com.
       </Paragraph>
       <Paragraph>
         After my studies I decided to travel. You can probably find me{' '}
@@ -80,9 +79,6 @@ function Homepage() {
             style={{ verticalAlign: 'text-top' }}
           />
         </Link>
-      </Paragraph>
-      <Paragraph>
-        <Link href="https://zlml.cz/rss">Blog RSS</Link>
       </Paragraph>
     </Layout>
   );

@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import Logo from '../components/Logo';
 import Link from '../components/markup/Link';
 import Strong from '../components/markup/Strong';
+import Paragraph from '../components/markup/Paragraph';
 
 import ArticlesDatabase from '../.articles/archive.json';
 
@@ -21,6 +22,10 @@ const Archive = ({ articles }: Props) => (
   <Layout title="Archive">
     <Logo />
 
+    <Paragraph>
+      <Strong>🚶 This blog has been discontinued!</Strong>
+    </Paragraph>
+
     {articles.map((article, index) => {
       return (
         <div key={article.slug}>
@@ -32,7 +37,7 @@ const Archive = ({ articles }: Props) => (
             as={article.slug}
             prefetch={index === 0} // prefetch first article
           >
-            {index === 0 ? <Strong>{article.title}</Strong> : article.title}
+            {article.title}
           </Link>
         </div>
       );

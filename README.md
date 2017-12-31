@@ -1,7 +1,4 @@
-# Source code of zlml.cz
-
 [![Build Status](https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master)](https://travis-ci.org/mrtnzlml/zlml.cz)
-
 [![Greenkeeper badge](https://badges.greenkeeper.io/mrtnzlml/zlml.cz.svg)](https://greenkeeper.io/)
 
 # Install
@@ -17,16 +14,6 @@ And run it in development mode:
 ```
 yarn dev
 ```
-
-# Publish article
-
-Create new MD file in `.articles/sources` with appropriate file headers and the article content. After finishing just run this command:
-
-```
-yarn run publish
-```
-
-It will generate new page with tests in `pages/p` folder. Now just push it to the Git and that's it...
 
 # What's inside
 
