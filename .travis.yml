@@ -12,12 +12,12 @@ script:
 
 after_script: greenkeeper-lockfile-upload
 
-#deploy:
-#  skip_cleanup: true # keep build
-#  provider: script
-#  script: sh scripts/deploy.sh
-#  on:
-#    branch: master
+deploy:
+  skip_cleanup: true # keep build
+  provider: script
+  script: sh scripts/deploy.sh
+  on:
+    branch: master
 
 cache:
   yarn: true
