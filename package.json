@@ -34,7 +34,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "flow-bin": "^0.63.1",
     "greenkeeper-lockfile": "^1.13.0",
-    "jest": "^22.0.1",
+    "jest": "^22.1.4",
     "prettier": "^1.5.3",
     "react-test-renderer": "^16.1.0",
     "serverless-offline": "^3.15.3",
