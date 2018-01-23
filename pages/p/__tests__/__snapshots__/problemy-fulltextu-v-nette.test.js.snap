@@ -63,7 +63,7 @@ exports[`renders correctly 1`] = `
         Object {
           "__html": "<p>Nedávno jsem psal o tom, jak využívat fulltext indexy na InnoDB tabulkách (<a href=\\"http://zlml.cz/using-fulltext-searching-with-innodb\\">http://zlml.cz/using-fulltext-searching-with-innodb</a>).
 Není to nic převratného, ale každý den se to také nedělá. Zmínil jsem také, jak vyhledávat, což
-bylo řešení <a href=\\"http://php.vrana.cz/fulltextove-vyhledavani-v-mysql.php\\">Jakuba Vrány .{target:_blank}</a>.</p>
+bylo řešení <a href=\\"http://php.vrana.cz/fulltextove-vyhledavani-v-mysql.php\\">Jakuba Vrány</a>.</p>
 <p>V diskusi pod článkem zmíňka o tom, jak ošetřit případ, kdy databáze nevrací výsledky pro slova,
 která jsou kratší než je hodnota <strong>ft_min_word_len</strong>. Implementace pro Nette nebude nijak zvlášť
 rozdílná, avšak i zde existuje minimálně jedna zrádnost.</p>

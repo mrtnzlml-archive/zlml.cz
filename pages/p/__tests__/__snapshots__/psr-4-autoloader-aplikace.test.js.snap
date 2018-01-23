@@ -80,7 +80,7 @@ exports[`renders correctly 1`] = `
 </code></pre>
 <p>Může se stát, že to nebude hned fungovat, pak stačí spustit příkaz <code>composer dump-autoload</code> a Composer si přegeneruje autoloading pravidla. Teď nám však web-project vrátí toto:</p>
 <blockquote>
-<p><em>RobotLoader is required to find presenters, install package <code>nette/robot-loader</code> or disable option application.scanDirs: false</em> .{color:red}</p>
+<p><em>RobotLoader is required to find presenters, install package <code>nette/robot-loader</code> or disable option application.scanDirs: false</em></p>
 </blockquote>
 <p>Dobře, tak zakážeme prohledávání vendoru za účelem nalezení presenterů ve vendoru. Stejně to teď nepotřebujeme:</p>
 <pre><code class=\\"hljs lang-neon\\">application:

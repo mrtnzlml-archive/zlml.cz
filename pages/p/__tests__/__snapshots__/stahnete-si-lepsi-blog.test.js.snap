@@ -65,11 +65,11 @@ exports[`renders correctly 1`] = `
 <h2 id=\\"kdokoliv-cokoliv\\">Kdokoliv cokoliv <a href=\\"#kdokoliv-cokoliv\\">#</a></h2><p>K dispozici je pro nahlédnutí tento blog. A nejen k nahlédnutí, ale také k <a href=\\"develop\\">volnému používání</a>.
 Na pozadí běží hned několik technologií, které si můžete prakticky osahat:</p>
 <ul>
-<li>Nette Framework (<a href=\\"http://nette.org/\\">nette.org .{target:_blank}</a>)</li>
-<li>Nette Tester (<a href=\\"http://tester.nette.org/\\">tester.nette.org .{target:_blank}</a>)</li>
-<li>Texy <em>(je sexy)</em> (<a href=\\"http://texy.info/\\">texy.info .{target:_blank}</a>)</li>
-<li>FSHL (<a href=\\"http://fshl.kukulich.cz/\\">fshl.kukulich.cz .{target:_blank}</a>)</li>
-<li>Webloader (<a href=\\"http://addons.nette.org/janmarek/webloader\\">addons.nette.org .{target:_blank}</a>)</li>
+<li>Nette Framework (<a href=\\"http://nette.org/\\">nette.org</a>)</li>
+<li>Nette Tester (<a href=\\"http://tester.nette.org/\\">tester.nette.org</a>)</li>
+<li>Texy <em>(je sexy)</em> (<a href=\\"http://texy.info/\\">texy.info</a>)</li>
+<li>FSHL (<a href=\\"http://fshl.kukulich.cz/\\">fshl.kukulich.cz</a>)</li>
+<li>Webloader (<a href=\\"http://addons.nette.org/janmarek/webloader\\">addons.nette.org</a>)</li>
 <li>Kdyby\\\\Doctrine 2 (<a href=\\"https://github.com/Kdyby/Doctrine\\">GitHub</a>)</li>
 </ul>
 <p>K dispozici je i databáze, protože si myslím, že bych se i s únikem databáze neměl nijak ohrozit... :-) Účelem tohoto nápadu a následně rozhodnutí je poskytnout pokud možno funkční a aktivní projekt, který staví právě na těchto technologiích. Důvodem je pak moje zkušenost s tvrdým začátkem. Mám příležitost občas pracovat s někým kdo se přesně toto chce naučit, bohužel pár lidí už to prostě vzdalo, protože je toho <em>moc</em> a není mnoho lidí kteří skutečně pomohou (rozhodně ne na fóru). Snažím se tedy zaplnit toto prázdné místo a nabídnout tento blog jako jeden z možných začátků. Mimochodem neříkám, že moje řešení je nejlepší, nebo správné. Je jedno z možných a funkčních. Stáhnout si jej můžete ze své oblíbené verzovací služby:</p>

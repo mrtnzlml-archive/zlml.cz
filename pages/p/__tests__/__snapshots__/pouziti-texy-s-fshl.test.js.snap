@@ -61,7 +61,7 @@ exports[`renders correctly 1`] = `
       className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "<p>Někdy (hodně dávno) jsem kdesi našel poměrně hezký a jednoduchý postup jak implementovat <a href=\\"http://texy.info/\\">Texy .{target:_blank}</a> s použitím <a href=\\"http://fshl.kukulich.cz/\\">FSHL .{target:_blank}</a> na webu. Rád bych se zde podělil o postup, který používám již na řadě projektů, které potřebují zvýrazňování syntaxe.</p>
+          "__html": "<p>Někdy (hodně dávno) jsem kdesi našel poměrně hezký a jednoduchý postup jak implementovat <a href=\\"http://texy.info/\\">Texy</a> s použitím <a href=\\"http://fshl.kukulich.cz/\\">FSHL</a> na webu. Rád bych se zde podělil o postup, který používám již na řadě projektů, které potřebují zvýrazňování syntaxe.</p>
 <h2 id=\\"pou-it-samotn-ho-texy\\">Použití samotného Texy <a href=\\"#pou-it-samotn-ho-texy\\">#</a></h2><p>Běžně by se Texy zaregistrovalo do šablony jako helper:</p>
 <pre><code class=\\"hljs lang-php\\"><span class=\\"hljs-comment\\">/**
  * <span class=\\"hljs-doctag\\">@param</span> null $class

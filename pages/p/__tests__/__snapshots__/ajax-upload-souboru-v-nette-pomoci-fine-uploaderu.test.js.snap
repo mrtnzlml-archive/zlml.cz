@@ -64,7 +64,7 @@ exports[`renders correctly 1`] = `
           "__html": "<div class=\\"alert alert-danger\\">Následující text řeší starší verzi FineUploaderu <code>3.*</code>, nikoliv nejnovější. Hledáte-li aktuálnější návod, přečtěte si prosím <a href=\\"http://zlml.cz/ajax-upload-souboru-v-nette-pomoci-fine-uploaderu-2\\">http://zlml.cz/ajax-upload-souboru-v-nette-pomoci-fine-uploaderu-2</a>...</div>
 
 <p>A je zde další ukázka vlastní práce, která se může hodit i někomu dalšímu. Tentokrát půjde o ajaxové
-nahrávání souborů v Nette pomocí <a href=\\"http://fineuploader.com/\\">Fine Uploaderu .{target:_blank}</a>.
+nahrávání souborů v Nette pomocí <a href=\\"http://fineuploader.com/\\">Fine Uploaderu</a>.
 Obecně to není moc jednoduchá sranda, ale uvidíte, že to zase není taková věda...</p>
 <p>A jak už to tak dělávám, lepší než spoustu povídání je spousta ukázek. Prvně je potřeba nalinkovat
 soubory Fine Uploaderu, nette.ajaxu a vlastního javascriptového souboru:</p>
@@ -139,7 +139,7 @@ Ten může vypadat například takto:</p>
 připravenou handle metodu, která převezme například ID, důležité však je, že spouští metodu handleUpload()
 a odesílá JSON odpověď a to jak errorovou, tak normální, což je následně na straně klienta vyhodnoceno
 jako úspěšný upload.</p>
-<p>V kódu je zmíněna také třída qqFileUploader. Tu naleznete například na <a href=\\"https://github.com/Widen/fine-uploader-server\\">GitHubu .{target:_blank}</a> a nejenom pro PHP. Já jsem si tuto třídu obohatil pouze
+<p>V kódu je zmíněna také třída qqFileUploader. Tu naleznete například na <a href=\\"https://github.com/Widen/fine-uploader-server\\">GitHubu</a> a nejenom pro PHP. Já jsem si tuto třídu obohatil pouze
 o webalize názvů souborů.</p>
 <p>A to je vlastně úplně celé. Stačí tedy spustit Fine Uploader na straně klienta například
 podle oficiálních návodů, endpoint nastavit na nějaký handle v aplikaci a ten správně použít.

@@ -61,7 +61,7 @@ exports[`renders correctly 1`] = `
       className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "<p>Na následujících řádcích předvedu dvě věci. První je úžasný nápad jak vytvářet regulární výrazy pomocí fluent zápisu (<a href=\\"https://github.com/VerbalExpressions/PHPVerbalExpressions/blob/master/VerbalExpressions.php\\">inspirace .{target:_blank}</a>), což je druhá věc o které bych se rád zmínil.</p>
+          "__html": "<p>Na následujících řádcích předvedu dvě věci. První je úžasný nápad jak vytvářet regulární výrazy pomocí fluent zápisu (<a href=\\"https://github.com/VerbalExpressions/PHPVerbalExpressions/blob/master/VerbalExpressions.php\\">inspirace</a>), což je druhá věc o které bych se rád zmínil.</p>
 <h2 id=\\"regul-rn-v-razy-jsou-peklo\\">Regulární výrazy jsou peklo <a href=\\"#regul-rn-v-razy-jsou-peklo\\">#</a></h2><p>Ačkoliv znám pár lidí, které regulární výrazy umí, je jich opravdu pár. A nikdo z nich o sobě neřekne, že je umí. Následuje příklad velmi triviálního výrazu, který je ovšem dosti špatný, což je dobře, protože se k tomu vrátím později:</p>
 <pre><code class=\\"hljs\\">/^(http)(s)?(\\\\:\\\\/\\\\/)(www\\\\.)?([^ ]*)(\\\\.)([^ ]*)(\\\\/)?$/
 </code></pre><p>Tento výraz akceptuje přibližně tvar URL. Je však zřejmé, že je to zápis, který je nesmírně náročný na vymyšlení a extrémně náchylný ke tvoření chyb. Proto je vhodné si jeho tvorbu zjednodušit například nějakou třídou:</p>
