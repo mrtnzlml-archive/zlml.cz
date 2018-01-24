@@ -30,7 +30,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
-    "flow-bin": "^0.63.1",
+    "flow-bin": "^0.64.0",
     "greenkeeper-lockfile": "^1.13.0",
     "jest": "^22.1.4",
     "prettier": "^1.5.3",
