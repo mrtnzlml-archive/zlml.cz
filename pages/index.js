@@ -39,7 +39,7 @@ function Homepage() {
         also very interested in <Strong>serverless technologies</Strong> and
         that&apos;s why this{' '}
         <Link prefetch href="/archive">
-          <Strong>blog</Strong>
+          blog
         </Link>{' '}
         runs on <Strong>AWS Lambda</Strong> environment.
       </Paragraph>
