@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`sends expected headers to the client 1`] = `
-Object {
-  "Content-Type": "application/xml; charset=utf-8",
-}
-`;

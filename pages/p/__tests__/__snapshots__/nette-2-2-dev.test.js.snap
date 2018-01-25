@@ -61,7 +61,7 @@ exports[`renders correctly 1`] = `
       className="jsx-764030434 article"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "<p>Nedávno byla změněna vývojová verze Nette Frameworku na 2.2-dev (<a href=\\"https://github.com/nette/nette/commit/3a426255084163ec1a2f324ea0d3e9b3139adccc\\">https://github.com/nette/nette/commit/3a426255084163ec1a2f324ea0d3e9b3139adccc</a>).
+          "__html": "<p>Nedávno byla změněna vývojová verze Nette Frameworku na 2.2-dev (<a href=\\"https://github.com/nette/nette/commit/3a426255084163ec1a2f324ea0d3e9b3139adccc\\">zde</a>).
 Tato změna s sebou přinesla explozi změn. Na následujících řádcích bych rád přiblížil
 některé zásadní změny, které se odehrály a je zapotřebí je upravit, aby bylo možné z verze 2.1-dev
 přejít právě na verzi 2.2-dev.</p>
