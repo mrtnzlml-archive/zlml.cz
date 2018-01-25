@@ -84,9 +84,7 @@ $runner-&gt;outputHandlers[] = new class ($runner) extends \\\\Tester\\\\Runner\
     {
         ob_start();
         parent::begin();
-        echo rtrim(ob_get_clean()) . ' | ' . getenv('BOOTSTRAP') . \\"
-
-\\";
+        echo rtrim(ob_get_clean()) . ' | ' . getenv('BOOTSTRAP') . \\"\\\\n\\\\n\\";
     }
 
     public function result($testName, $result, $message)
@@ -94,9 +92,7 @@ $runner-&gt;outputHandlers[] = new class ($runner) extends \\\\Tester\\\\Runner\
         $outputs = [
             Runner::PASSED =&gt; Dumper::color('green', '✔ ' . $testName),
             Runner::SKIPPED =&gt; Dumper::color('olive', 's ' . $testName) . \\"($message)\\",
-            Runner::FAILED =&gt; Dumper::color('red', '✖ ' . $testName) . \\"
-\\" . $this-&gt;indent($message, 3) . \\"
-\\",
+            Runner::FAILED =&gt; Dumper::color('red', '✖ ' . $testName) . \\"\\\\n\\" . $this-&gt;indent($message, 3) . \\"\\\\n\\",
         ];
         echo $this-&gt;indent($outputs[$result], 2) . PHP_EOL;
     }
@@ -105,9 +101,7 @@ $runner-&gt;outputHandlers[] = new class ($runner) extends \\\\Tester\\\\Runner\
     {
         ob_start();
         parent::end();
-        echo \\"
-\\" . trim(ob_get_clean()) . \\"
-\\";
+        echo \\"\\\\n\\" . trim(ob_get_clean()) . \\"\\\\n\\";
     }
 
     private function indent($message, $spaces)
