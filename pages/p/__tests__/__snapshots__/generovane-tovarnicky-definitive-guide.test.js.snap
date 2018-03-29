@@ -17,13 +17,13 @@ exports[`renders correctly 1`] = `
       ¡Hola! My name is
     </p>
     <h1
-      className="jsx-2345896288"
+      className="jsx-2279252371"
     >
       <span
-        className="jsx-3140515621"
+        className="jsx-3168189516"
       >
         <a
-          className="jsx-3140515621"
+          className="jsx-3168189516"
           href="/"
           onClick={[Function]}
         >
@@ -41,10 +41,10 @@ exports[`renders correctly 1`] = `
       }
     >
       <span
-        className="jsx-3140515621"
+        className="jsx-3168189516"
       >
         <a
-          className="jsx-3140515621"
+          className="jsx-3168189516"
           href="/archive"
           onClick={[Function]}
         >
@@ -226,10 +226,10 @@ services:
         Do you have any comments? That's great!
          
         <span
-          className="jsx-3140515621"
+          className="jsx-3168189516"
         >
           <a
-            className="jsx-3140515621 "
+            className="jsx-3168189516 "
             href="https://twitter.com/home?status=https%3A%2F%2Fzlml.cz%2Fgenerovane-tovarnicky-definitive-guide%20cc%20%40mrtnzlml"
           >
             Tweet them
@@ -249,10 +249,10 @@ services:
       }
     >
       <span
-        className="jsx-3140515621"
+        className="jsx-3168189516"
       >
         <a
-          className="jsx-3140515621"
+          className="jsx-3168189516"
           href="/archive"
           onClick={[Function]}
         >
