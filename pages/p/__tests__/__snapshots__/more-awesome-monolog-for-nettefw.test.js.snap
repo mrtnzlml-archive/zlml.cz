@@ -55,7 +55,7 @@ exports[`renders correctly 1`] = `
     <h1
       className="jsx-764030434"
     >
-      More awesome Monolog for
+      More awesome Monolog for #nettefw
     </h1>
     <div
       className="jsx-764030434 article"
