@@ -27,7 +27,7 @@ SectionHeading.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-function Homepage() {
+export default function Homepage() {
   return (
     <Layout>
       <Logo />
@@ -37,11 +37,8 @@ function Homepage() {
         <Strong>ES2017+</Strong> (and <Strong>Flow</Strong> and{' '}
         <Strong>GraphQL</Strong>) on a daily basis and I really enjoy it. I am
         also very interested in <Strong>serverless technologies</Strong> and
-        that&apos;s why this{' '}
-        <Link prefetch href="/archive">
-          blog
-        </Link>{' '}
-        runs on <Strong>AWS Lambda</Strong> environment.
+        that&apos;s why this website runs on <Strong>AWS Lambda</Strong>{' '}
+        environment.
       </Paragraph>
       <Paragraph>
         I&apos;ve started as a PHP programmer {new Date().getFullYear() - 2011}{' '}
@@ -53,35 +50,20 @@ function Homepage() {
       <Paragraph>
         My <Strong style={{ color: Colors.red }}>&hearts;</Strong> beats for
         open-source and testable code. Have a look{' '}
-        <Link href="https://github.com/mrtnzlml/">at my work</Link>{' '}
-        (unfortunately most of my work is in private <Strong>Kiwi.com</Strong>{' '}
-        GitLab). This is why <Strong>I am not looking for a new job</Strong> - I
-        work for Kiwi.com.
+        <Link href="https://github.com/mrtnzlml/">at my work</Link>. This is why{' '}
+        <Strong>I am not looking for a new job</Strong> - I work for{' '}
+        <Link href="https://www.kiwi.com/">Kiwi.com</Link>.
       </Paragraph>
       <Paragraph>
         After my studies I decided to travel. You can probably find me{' '}
         <Link href="https://nomadlist.com/@mrtnzlml">
           somewhere on this planet
         </Link>. Do you want to stay in touch with me? That&apos;s great and I
-        really appreciate it!{' '}
-        <Link href="https://twitter.com/mrtnzlml">
-          Here is my Twitter account
-        </Link>{' '}
-        so you can follow my journeys.
+        really appreciate it! You can write me an email:{' '}
       </Paragraph>
       <Paragraph>
-        By the way - this website is also{' '}
-        <Link href="https://github.com/mrtnzlml/zlml.cz">open-sourced</Link> and
-        properly tested{' '}
-        <Link href="https://travis-ci.org/mrtnzlml/zlml.cz">
-          <img
-            src="https://travis-ci.org/mrtnzlml/zlml.cz.svg?branch=master"
-            style={{ verticalAlign: 'text-top' }}
-          />
-        </Link>
+        <code>mrtnzlml+readme@gmail.com</code>
       </Paragraph>
     </Layout>
   );
 }
-
-export default Homepage;
