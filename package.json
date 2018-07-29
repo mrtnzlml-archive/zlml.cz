@@ -33,7 +33,7 @@
     "flow-bin": "^0.77.0",
     "greenkeeper-lockfile": "^1.15.1",
     "jest": "^23.1.0",
-    "prettier": "^1.13.4",
+    "prettier": "1.13.7",
     "react-test-renderer": "^16.4.0",
     "serverless-offline": "^3.25.1",
     "webpack-bundle-analyzer": "^2.13.1"
